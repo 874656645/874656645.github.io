@@ -130,12 +130,15 @@
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
           Commands 初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick.github.io.git  添加远程仓库名称和网址 git remote add blog https://github.com/874656645/rick.github.io.git
+删除配置的远程仓库 git remote remove blog
 添加文件 git add -A
+删除文件 git rm *
 更新远程仓库代码到本地 git pull blog master
 删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot;
 *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 提交到远程仓库 git commit -m &quot;delete all files&quot;
-push更改到远程仓库 查看所有分支 git branch -a
+push更改到远程仓库 git push blog master
+查看所有分支 git branch -a
 删除远程分支 git push blog --delete name
 解决failed to push some refs to git git pull --rebase blog master
         </div>
