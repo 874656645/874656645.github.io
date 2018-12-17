@@ -29,15 +29,14 @@
     
 
     <meta property="og:title" content="Git Commond" />
-<meta property="og:description" content="Commands 初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick.github.io.git  添加远程仓库名称和网址 git remote add blog https://github.com/874656645/rick.github.io.git
-删除配置的远程仓库 git remote remove blog
+<meta property="og:description" content="Commands 初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick  更新远程仓库代码到本地 git pull blog master
+将变化提交到本地仓库 git commit -m &quot;delete all files&quot;
+push推送到远程仓库 git push blog master
+添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
+删除配置的远程仓库别名 git remote remove blog
 添加文件 git add -A
 删除文件 git rm *
-更新远程仓库代码到本地 git pull blog master
-删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot;
-*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
-提交到远程仓库 git commit -m &quot;delete all files&quot;
-push更改到远程仓库 git push blog master
+删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot; *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 查看所有分支 git branch -a
 删除远程分支 git push blog --delete name
 解决failed to push some refs to git git pull --rebase blog master" />
@@ -46,15 +45,14 @@ push更改到远程仓库 git push blog master
 <meta property="article:modified_time" content="2018-12-15T22:45:47&#43;08:00"/>
 
 <meta itemprop="name" content="Git Commond">
-<meta itemprop="description" content="Commands 初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick.github.io.git  添加远程仓库名称和网址 git remote add blog https://github.com/874656645/rick.github.io.git
-删除配置的远程仓库 git remote remove blog
+<meta itemprop="description" content="Commands 初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick  更新远程仓库代码到本地 git pull blog master
+将变化提交到本地仓库 git commit -m &quot;delete all files&quot;
+push推送到远程仓库 git push blog master
+添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
+删除配置的远程仓库别名 git remote remove blog
 添加文件 git add -A
 删除文件 git rm *
-更新远程仓库代码到本地 git pull blog master
-删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot;
-*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
-提交到远程仓库 git commit -m &quot;delete all files&quot;
-push更改到远程仓库 git push blog master
+删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot; *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 查看所有分支 git branch -a
 删除远程分支 git push blog --delete name
 解决failed to push some refs to git git pull --rebase blog master">
@@ -69,15 +67,14 @@ push更改到远程仓库 git push blog master
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Git Commond"/>
-<meta name="twitter:description" content="Commands 初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick.github.io.git  添加远程仓库名称和网址 git remote add blog https://github.com/874656645/rick.github.io.git
-删除配置的远程仓库 git remote remove blog
+<meta name="twitter:description" content="Commands 初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick  更新远程仓库代码到本地 git pull blog master
+将变化提交到本地仓库 git commit -m &quot;delete all files&quot;
+push推送到远程仓库 git push blog master
+添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
+删除配置的远程仓库别名 git remote remove blog
 添加文件 git add -A
 删除文件 git rm *
-更新远程仓库代码到本地 git pull blog master
-删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot;
-*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
-提交到远程仓库 git commit -m &quot;delete all files&quot;
-push更改到远程仓库 git push blog master
+删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot; *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 查看所有分支 git branch -a
 删除远程分支 git push blog --delete name
 解决failed to push some refs to git git pull --rebase blog master"/>
@@ -148,14 +145,26 @@ push更改到远程仓库 git push blog master
 
 <pre><code>cd public
 git init
-git remote add blog https://github.com/874656645/rick.github.io.git
+git remote add blog https://github.com/874656645/rick
 </code></pre>
 
-<h2 id="添加远程仓库名称和网址">添加远程仓库名称和网址</h2>
+<h2 id="更新远程仓库代码到本地">更新远程仓库代码到本地</h2>
 
-<p><code>git remote add blog https://github.com/874656645/rick.github.io.git</code></p>
+<p><code>git pull blog master</code></p>
 
-<h2 id="删除配置的远程仓库">删除配置的远程仓库</h2>
+<h2 id="将变化提交到本地仓库">将变化提交到本地仓库</h2>
+
+<p><code>git commit -m &quot;delete all files&quot;</code></p>
+
+<h2 id="push推送到远程仓库">push推送到远程仓库</h2>
+
+<p><code>git push blog master</code></p>
+
+<h2 id="添加远程仓库别名和网址">添加远程仓库别名和网址</h2>
+
+<p><code>git remote add blog https://github.com/874656645/rick</code></p>
+
+<h2 id="删除配置的远程仓库别名">删除配置的远程仓库别名</h2>
 
 <p><code>git remote remove blog</code></p>
 
@@ -167,23 +176,10 @@ git remote add blog https://github.com/874656645/rick.github.io.git
 
 <p><code>git rm *</code></p>
 
-<h2 id="更新远程仓库代码到本地">更新远程仓库代码到本地</h2>
-
-<p><code>git pull blog master</code></p>
-
 <h2 id="删除远程仓库中的文件-文件夹">删除远程仓库中的文件、文件夹</h2>
 
-<p><code>git rm -r --cached &quot;*.*&quot;</code></p>
-
-<p><p>*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了</P></p>
-
-<h2 id="提交到远程仓库">提交到远程仓库</h2>
-
-<p><code>git commit -m &quot;delete all files&quot;</code></p>
-
-<h2 id="push更改到远程仓库">push更改到远程仓库</h2>
-
-<p><code>git push blog master</code></p>
+<p><code>git rm -r --cached &quot;*.*&quot;</code>
+<p>*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了</P></p>
 
 <h2 id="查看所有分支">查看所有分支</h2>
 

@@ -6,19 +6,10 @@
     <description>Recent content in Posts on Welcome to Rick&#39;s Page</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 16 Dec 2018 12:20:59 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 15 Dec 2018 22:45:47 +0800</lastBuildDate>
     
 	<atom:link href="https://874656645.github.io/rick/posts/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Test Draft</title>
-      <link>https://874656645.github.io/rick/posts/test-draft/</link>
-      <pubDate>Sun, 16 Dec 2018 12:20:59 +0800</pubDate>
-      
-      <guid>https://874656645.github.io/rick/posts/test-draft/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Git Commond</title>
@@ -26,15 +17,14 @@
       <pubDate>Sat, 15 Dec 2018 22:45:47 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/git-commond/</guid>
-      <description>Commands 初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick.github.io.git  添加远程仓库名称和网址 git remote add blog https://github.com/874656645/rick.github.io.git
-删除配置的远程仓库 git remote remove blog
+      <description>Commands 初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick  更新远程仓库代码到本地 git pull blog master
+将变化提交到本地仓库 git commit -m &amp;quot;delete all files&amp;quot;
+push推送到远程仓库 git push blog master
+添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
+删除配置的远程仓库别名 git remote remove blog
 添加文件 git add -A
 删除文件 git rm *
-更新远程仓库代码到本地 git pull blog master
-删除远程仓库中的文件、文件夹 git rm -r --cached &amp;quot;*.*&amp;quot;
-*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
-提交到远程仓库 git commit -m &amp;quot;delete all files&amp;quot;
-push更改到远程仓库 git push blog master
+删除远程仓库中的文件、文件夹 git rm -r --cached &amp;quot;*.*&amp;quot; *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 查看所有分支 git branch -a
 删除远程分支 git push blog --delete name
 解决failed to push some refs to git git pull --rebase blog master</description>
@@ -47,10 +37,12 @@ push更改到远程仓库 git push blog master
       
       <guid>https://874656645.github.io/rick/posts/create-a-new-site/</guid>
       <description>创建站点 Step1：创建站点 进入到 E:/Hugo/Sites文件夹 hugo new site HugoLearning.com
-Step2：添加样式主题 cd HugoLearning.com git init git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke  编辑 config.toml 配置文件 最后一行添加 theme = &amp;quot;ananke&amp;quot; 或者 echo &#39;theme = &amp;quot;ananke&amp;quot;&#39; &amp;gt;&amp;gt; config.toml
+Step2：添加样式主题 cd HugoLearning.com git init git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke  编辑 config.toml 配置文件 最后一行添加 theme = &amp;quot;ananke&amp;quot; 或者在命令行执行 echo &#39;theme = &amp;quot;ananke&amp;quot;&#39; &amp;gt;&amp;gt; config.toml
 Step3：添加markdown文件内容 hugo new posts/Hello-Hugo.md
 Step4: 启动网站 hugo server -D 
-然后输入网址 http://localhost:1313/</description>
+然后输入网址 http://localhost:1313/
+Step5：生成网站 命令行执行 hugo，在网站目录生成public文件夹，发布的网站文件都在这个文件中 * 注意：如果看不到内容，将md文件中的draft设置为false
+Step5：将网站发布到 git 使用git工具将文件上传到远程仓库就可以了，仓库还需要做一些设置；</description>
     </item>
     
     <item>
