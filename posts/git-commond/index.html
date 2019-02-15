@@ -60,7 +60,7 @@ push推送到远程仓库 git push blog master
 
 <meta itemprop="datePublished" content="2018-12-15T22:45:47&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-15T22:45:47&#43;08:00" />
-<meta itemprop="wordCount" content="76">
+<meta itemprop="wordCount" content="92">
 
 
 
@@ -192,6 +192,17 @@ git remote add blog https://github.com/874656645/rick
 <h2 id="解决failed-to-push-some-refs-to-git">解决failed to push some refs to git</h2>
 
 <p><code>git pull --rebase blog master</code></p>
+
+<h2 id="不需验证用户名和密码">不需验证用户名和密码</h2>
+
+<p>第一步：在 <strong>.gitconfig</strong> 同级目录下添加文件 <strong>.git-credentials</strong> <br/>
+第二步：执行如下命令 <br/>
+<code>git config --global credential.helper store</code> <br/>
+<em>此命令会在<strong>.gitconfig</strong>文件中添加如下文本</em></p>
+
+<pre><code>[credential]
+    helper = store
+</code></pre>
 <ul class="pa0">
   
 </ul>
