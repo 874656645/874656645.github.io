@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Welcome to Rick&#39;s Page  | Netstat</title>
+    <title>Welcome to Rick&#39;s Page  | ArcGIS 字段计算（自增、随机数）</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -28,32 +28,32 @@
 
     
 
-    <meta property="og:title" content="Netstat" />
-<meta property="og:description" content="win10查看端口使用情况 1. 产看所有已使用的端口 netstat -ano
-2. 查看特定端口的使用 netstat -ano|findstr &quot;443&quot;
-3. 查看占用端口的进程PID tasklist|findstr &quot;7648&quot;" />
+    <meta property="og:title" content="ArcGIS 字段计算（自增、随机数）" />
+<meta property="og:description" content=" ArcGIS 字段计算（自增、随机数） 1、随机数 python 脚本
+import random def randNum(): res = random.randint(1, 7) return res  2、自增 python 脚本
+total = 0 def accumulate(increment): global total if total: total &#43;= increment else: total = increment return total  " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/netstat/" /><meta property="article:published_time" content="2018-12-28T16:10:00&#43;08:00"/>
-<meta property="article:modified_time" content="2018-12-28T16:10:00&#43;08:00"/>
+<meta property="og:url" content="https://874656645.github.io/rick/posts/arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/" /><meta property="article:published_time" content="2021-11-25T11:36:19&#43;08:00"/>
+<meta property="article:modified_time" content="2021-11-25T11:36:19&#43;08:00"/>
 
-<meta itemprop="name" content="Netstat">
-<meta itemprop="description" content="win10查看端口使用情况 1. 产看所有已使用的端口 netstat -ano
-2. 查看特定端口的使用 netstat -ano|findstr &quot;443&quot;
-3. 查看占用端口的进程PID tasklist|findstr &quot;7648&quot;">
+<meta itemprop="name" content="ArcGIS 字段计算（自增、随机数）">
+<meta itemprop="description" content=" ArcGIS 字段计算（自增、随机数） 1、随机数 python 脚本
+import random def randNum(): res = random.randint(1, 7) return res  2、自增 python 脚本
+total = 0 def accumulate(increment): global total if total: total &#43;= increment else: total = increment return total  ">
 
 
-<meta itemprop="datePublished" content="2018-12-28T16:10:00&#43;08:00" />
-<meta itemprop="dateModified" content="2018-12-28T16:10:00&#43;08:00" />
-<meta itemprop="wordCount" content="14">
+<meta itemprop="datePublished" content="2021-11-25T11:36:19&#43;08:00" />
+<meta itemprop="dateModified" content="2021-11-25T11:36:19&#43;08:00" />
+<meta itemprop="wordCount" content="36">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Netstat"/>
-<meta name="twitter:description" content="win10查看端口使用情况 1. 产看所有已使用的端口 netstat -ano
-2. 查看特定端口的使用 netstat -ano|findstr &quot;443&quot;
-3. 查看占用端口的进程PID tasklist|findstr &quot;7648&quot;"/>
+<meta name="twitter:title" content="ArcGIS 字段计算（自增、随机数）"/>
+<meta name="twitter:description" content=" ArcGIS 字段计算（自增、随机数） 1、随机数 python 脚本
+import random def randNum(): res = random.randint(1, 7) return res  2、自增 python 脚本
+total = 0 def accumulate(increment): global total if total: total &#43;= increment else: total = increment return total  "/>
 
   </head>
 
@@ -106,28 +106,40 @@
           
         POSTS
       </p>
-      <h1 class="f1 athelas mb1">Netstat</h1>
+      <h1 class="f1 athelas mb1">ArcGIS 字段计算（自增、随机数）</h1>
       
-      <time class="f6 mv4 dib tracked" datetime="2018-12-28T16:10:00&#43;08:00">December 28, 2018</time>      
+      <time class="f6 mv4 dib tracked" datetime="2021-11-25T11:36:19&#43;08:00">November 25, 2021</time>      
       
       
     </header>
 
     <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-<h1 id="win10查看端口使用情况">win10查看端口使用情况</h1>
+<h1 id="arcgis-字段计算-自增-随机数">ArcGIS 字段计算（自增、随机数）</h1>
 
-<h3 id="1-产看所有已使用的端口">1. 产看所有已使用的端口</h3>
+<h2 id="1-随机数">1、随机数</h2>
 
-<p><code>netstat -ano</code></p>
+<p>python 脚本</p>
 
-<h3 id="2-查看特定端口的使用">2. 查看特定端口的使用</h3>
+<pre><code class="language-python">import random
+def randNum():
+    res = random.randint(1, 7)
+    return res
+</code></pre>
 
-<p><code>netstat -ano|findstr &quot;443&quot;</code></p>
+<h2 id="2-自增">2、自增</h2>
 
-<h3 id="3-查看占用端口的进程pid">3. 查看占用端口的进程PID</h3>
+<p>python 脚本</p>
 
-<p><code>tasklist|findstr &quot;7648&quot;</code></p>
+<pre><code class="language-python">total = 0
+def accumulate(increment):
+    global total
+    if total:
+        total += increment
+    else:
+        total = increment
+    return total
+</code></pre>
 <ul class="pa0">
   
 </ul>
