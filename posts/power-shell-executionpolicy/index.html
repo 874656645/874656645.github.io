@@ -31,7 +31,10 @@
     <meta property="og:title" content="Power Shell ExecutionPolicy" />
 <meta property="og:description" content="Power shell执行策略 原文网址
 1、查看当前的安全策略 Get-ExecutionPolicy
-2、修改执行策略 ps:这种方法会将执行策略保存到注册表  Set-ExecutionPolicy UnRestricted  or  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+2、修改执行策略 ps:这种方法会将执行策略保存到注册表
+Set-ExecutionPolicy UnRestricted
+or
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
 4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
 6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned" />
@@ -42,7 +45,10 @@
 <meta itemprop="name" content="Power Shell ExecutionPolicy">
 <meta itemprop="description" content="Power shell执行策略 原文网址
 1、查看当前的安全策略 Get-ExecutionPolicy
-2、修改执行策略 ps:这种方法会将执行策略保存到注册表  Set-ExecutionPolicy UnRestricted  or  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+2、修改执行策略 ps:这种方法会将执行策略保存到注册表
+Set-ExecutionPolicy UnRestricted
+or
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
 4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
 6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned">
@@ -59,7 +65,10 @@
 <meta name="twitter:title" content="Power Shell ExecutionPolicy"/>
 <meta name="twitter:description" content="Power shell执行策略 原文网址
 1、查看当前的安全策略 Get-ExecutionPolicy
-2、修改执行策略 ps:这种方法会将执行策略保存到注册表  Set-ExecutionPolicy UnRestricted  or  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+2、修改执行策略 ps:这种方法会将执行策略保存到注册表
+Set-ExecutionPolicy UnRestricted
+or
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
 4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
 6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned"/>
@@ -124,30 +133,31 @@
 
     <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-<h1 id="power-shell执行策略">Power shell执行策略</h1>
+<h2 id="power-shell执行策略">Power shell执行策略</h2>
 
 <p><a href="https://docs.microsoft.com/zh-cn/previous-versions/windows/powershell-scripting/hh847748(v=wps.640)">原文网址</a></p>
 
-<h2 id="1-查看当前的安全策略">1、查看当前的安全策略</h2>
+<h3 id="1-查看当前的安全策略">1、查看当前的安全策略</h3>
 
 <p><code>Get-ExecutionPolicy</code></p>
 
-<h2 id="2-修改执行策略">2、修改执行策略</h2>
+<h3 id="2-修改执行策略">2、修改执行策略</h3>
 
-<p><em>ps:这种方法会将执行策略保存到注册表</em> <br/>
-<code>Set-ExecutionPolicy UnRestricted</code> <br/>
-or <br/>
+<p><em>ps:这种方法会将执行策略保存到注册表</em></p>
+
+<p><code>Set-ExecutionPolicy UnRestricted</code><br />
+or<br />
 <code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned</code></p>
 
-<h2 id="3-查看所有支持的执行策略">3、查看所有支持的执行策略</h2>
+<h3 id="3-查看所有支持的执行策略">3、查看所有支持的执行策略</h3>
 
 <p><code>[System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])</code></p>
 
-<h2 id="4-获取影响当前会话的所有执行策略">4、获取影响当前会话的所有执行策略</h2>
+<h3 id="4-获取影响当前会话的所有执行策略">4、获取影响当前会话的所有执行策略</h3>
 
 <p><code>Get-ExecutionPolicy -List</code></p>
 
-<h2 id="6-为当前-windows-powershell-会话设置执行策略">6、为当前 Windows PowerShell 会话设置执行策略</h2>
+<h3 id="6-为当前-windows-powershell-会话设置执行策略">6、为当前 Windows PowerShell 会话设置执行策略</h3>
 
 <p><code>PowerShell.exe -ExecutionPolicy RemoteSigned</code></p>
 <ul class="pa0">

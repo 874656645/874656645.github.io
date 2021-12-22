@@ -112,13 +112,13 @@
 
     <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-<h1 id="查看库的版本-win32-or-64">查看库的版本（win32 or 64）</h1>
+<h2 id="查看库的版本-win32-or-64">查看库的版本（win32 or 64）</h2>
 
-<h2 id="1-通过-vs-自带工具-dumpbin-exe">1、通过 <strong><em>vs</em></strong> 自带工具 <strong><em>dumpbin.exe</em></strong></h2>
+<h3 id="1-通过-vs-自带工具-dumpbin-exe">1、通过 <strong><em>vs</em></strong> 自带工具 <strong><em>dumpbin.exe</em></strong></h3>
 
 <p><code>dumpbin.exe   /headers   dll文件路径</code></p>
 
-<h2 id="2-使用-notepad">2、使用 <strong><em>notepad++</em></strong></h2>
+<h3 id="2-使用-notepad">2、使用 <strong><em>notepad++</em></strong></h3>
 
 <p>直接用 <strong><em>记事本</em></strong> 或者 <strong><em>notepad++</em></strong> 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 <strong><em>PE</em></strong> 两个字母，在其后的不远出会出现d 或者L。<strong>若是d，则证明该程序是64位</strong>；若是<strong>L，则证明是32位</strong>。</p>
 <ul class="pa0">

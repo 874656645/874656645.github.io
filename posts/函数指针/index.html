@@ -31,15 +31,15 @@
     <meta property="og:title" content="函数指针" />
 <meta property="og:description" content=" 函数指针 #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; }  Start 10 10 20 30 0 Finish  " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" /><meta property="article:published_time" content="2018-12-14T22:34:27&#43;08:00"/>
-<meta property="article:modified_time" content="2018-12-14T22:34:27&#43;08:00"/>
+<meta property="og:url" content="https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" /><meta property="article:published_time" content="2021-12-16T14:34:27&#43;08:00"/>
+<meta property="article:modified_time" content="2021-12-16T14:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="函数指针">
 <meta itemprop="description" content=" 函数指针 #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; }  Start 10 10 20 30 0 Finish  ">
 
 
-<meta itemprop="datePublished" content="2018-12-14T22:34:27&#43;08:00" />
-<meta itemprop="dateModified" content="2018-12-14T22:34:27&#43;08:00" />
+<meta itemprop="datePublished" content="2021-12-16T14:34:27&#43;08:00" />
+<meta itemprop="dateModified" content="2021-12-16T14:34:27&#43;08:00" />
 <meta itemprop="wordCount" content="73">
 
 
@@ -102,14 +102,14 @@
       </p>
       <h1 class="f1 athelas mb1">函数指针</h1>
       
-      <time class="f6 mv4 dib tracked" datetime="2018-12-14T22:34:27&#43;08:00">December 14, 2018</time>      
+      <time class="f6 mv4 dib tracked" datetime="2021-12-16T14:34:27&#43;08:00">December 16, 2021</time>      
       
       
     </header>
 
     <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-<h1 id="函数指针">函数指针</h1>
+<h2 id="函数指针">函数指针</h2>
 
 <pre><code class="language-C++">#include &lt;iostream&gt;
 #include &lt;cstdlib&gt;

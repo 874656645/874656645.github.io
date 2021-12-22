@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>Welcome to Rick&#39;s Page  | Hello Hugo</title>
+    <title>Welcome to Rick&#39;s Page  | C&#43;&#43; 字符串常量存储</title>
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
 
@@ -28,28 +28,28 @@
 
     
 
-    <meta property="og:title" content="Hello Hugo" />
-<meta property="og:description" content="常量存储在哪里 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+    <meta property="og:title" content="C&#43;&#43; 字符串常量存储" />
+<meta property="og:description" content="C&#43;&#43; 字符串常量存储 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
  局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &quot;qqq&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 char p[]=&quot;Hello world!&quot;; char* p2 = &quot;w&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 printf(&quot;in s1 p=%p\n&quot;, p); printf(&quot;in s1 p1=%p\n&quot;, p1); printf(&quot;in s1: string&#39;s address: %p\n&quot;, &amp;(&quot;Hello world!&quot;)); printf(&quot;in s1 p2=%p\n&quot;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&quot;Hello world!" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/" /><meta property="article:published_time" content="2021-12-13T12:34:27&#43;08:00"/>
 <meta property="article:modified_time" content="2021-12-13T12:34:27&#43;08:00"/>
 
-<meta itemprop="name" content="Hello Hugo">
-<meta itemprop="description" content="常量存储在哪里 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+<meta itemprop="name" content="C&#43;&#43; 字符串常量存储">
+<meta itemprop="description" content="C&#43;&#43; 字符串常量存储 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
  局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &quot;qqq&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 char p[]=&quot;Hello world!&quot;; char* p2 = &quot;w&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 printf(&quot;in s1 p=%p\n&quot;, p); printf(&quot;in s1 p1=%p\n&quot;, p1); printf(&quot;in s1: string&#39;s address: %p\n&quot;, &amp;(&quot;Hello world!&quot;)); printf(&quot;in s1 p2=%p\n&quot;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&quot;Hello world!">
 
 
 <meta itemprop="datePublished" content="2021-12-13T12:34:27&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-13T12:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="233">
+<meta itemprop="wordCount" content="230">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Hello Hugo"/>
-<meta name="twitter:description" content="常量存储在哪里 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+<meta name="twitter:title" content="C&#43;&#43; 字符串常量存储"/>
+<meta name="twitter:description" content="C&#43;&#43; 字符串常量存储 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
  局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &quot;qqq&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 char p[]=&quot;Hello world!&quot;; char* p2 = &quot;w&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 printf(&quot;in s1 p=%p\n&quot;, p); printf(&quot;in s1 p1=%p\n&quot;, p1); printf(&quot;in s1: string&#39;s address: %p\n&quot;, &amp;(&quot;Hello world!&quot;)); printf(&quot;in s1 p2=%p\n&quot;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&quot;Hello world!"/>
 
   </head>
@@ -103,7 +103,7 @@
           
         POSTS
       </p>
-      <h1 class="f1 athelas mb1">Hello Hugo</h1>
+      <h1 class="f1 athelas mb1">C&#43;&#43; 字符串常量存储</h1>
       
       <time class="f6 mv4 dib tracked" datetime="2021-12-13T12:34:27&#43;08:00">December 13, 2021</time>      
       
@@ -112,7 +112,7 @@
 
     <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-<h1 id="常量存储在哪里">常量存储在哪里</h1>
+<h2 id="c-字符串常量存储">C++ 字符串常量存储</h2>
 
 <p>局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区</p>
 
@@ -231,11 +231,6 @@ int main()
 0
 Finish
 </code></pre>
-
-<p>作者：肖浩呗
-链接：<a href="https://www.jianshu.com/p/21b5b720fb75">https://www.jianshu.com/p/21b5b720fb75</a>
-来源：简书
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <ul class="pa0">
   
 </ul>

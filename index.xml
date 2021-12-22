@@ -6,10 +6,43 @@
     <description>Recent content on Welcome to Rick&#39;s Page</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Dec 2021 09:34:27 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 22 Dec 2021 15:34:27 +0800</lastBuildDate>
     
 	<atom:link href="https://874656645.github.io/rick/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>函数形参从右到左入栈</title>
+      <link>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</link>
+      <pubDate>Wed, 22 Dec 2021 15:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</guid>
+      <description>函数形参从右到左入栈 int add(int count, ...) { int inc = sizeof(int*) / 4; // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节） int sum = 0; // cout &amp;lt;&amp;lt; &amp;amp;count &amp;lt;&amp;lt; endl; int *p = &amp;amp;count + inc; // cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; for (int i = 0; i &amp;lt; count; ++i) { sum += *p; cout &amp;lt;&amp;lt; *p &amp;lt;&amp;lt; endl; p += inc; } return sum; } int main() { cout &amp;lt;&amp;lt; add(3, 1, 2, 3) &amp;lt;&amp;lt; endl; return 0; }  输出：</description>
+    </item>
+    
+    <item>
+      <title>指针 &#43; 1</title>
+      <link>https://874656645.github.io/rick/posts/%E6%8C%87%E9%92%88-&#43;-1/</link>
+      <pubDate>Wed, 22 Dec 2021 15:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/%E6%8C%87%E9%92%88-&#43;-1/</guid>
+      <description> 1. *32*位和64`位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
+2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
+int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]； // &amp;amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int） // 但是prt与(&amp;amp;a+1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int) int *ptr = (int*)(&amp;amp;a + 1); cout &amp;lt;&amp;lt; *(a + 1) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; *(ptr - 1) &amp;lt;&amp;lt; endl; return 0; }  输出：
+1 2 3 6  注： a，&amp;amp;a的地址是一样的，但意思不一样：
+ a是数组首地址，也就是a[0]的地址，a+1是数组下一元素的地址，即a[1]
+ &amp;amp;a是对象（整个数组作为一个对象）首地址，而&amp;amp;a+1是下一个对象的地址，即a[5].  </description>
+    </item>
+    
+    <item>
+      <title>模板类</title>
+      <link>https://874656645.github.io/rick/posts/%E6%A8%A1%E6%9D%BF%E7%B1%BB/</link>
+      <pubDate>Wed, 22 Dec 2021 10:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/%E6%A8%A1%E6%9D%BF%E7%B1%BB/</guid>
+      <description> 模板类 template&amp;lt;class T&amp;gt; class Test { public: Test(T t){ m_t = t;}; // explicit Test(T t){ m_t = t;}; T getValue(){ return m_t; }; private: T m_t; }; int main() { Test&amp;lt;int&amp;gt; tInt(1); cout &amp;lt;&amp;lt; tInt.getValue() &amp;lt;&amp;lt; endl; Test&amp;lt;double&amp;gt; tD(1.15); cout &amp;lt;&amp;lt; tD.getValue() &amp;lt;&amp;lt; endl; Test&amp;lt;float&amp;gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换 cout &amp;lt;&amp;lt; tF.getValue() &amp;lt;&amp;lt; endl; return 0; }  输出：
+Start 1 1.15 1.3 0 Finish  </description>
+    </item>
     
     <item>
       <title>模板函数</title>
@@ -40,6 +73,15 @@ ArcMap WMTS</description>
     </item>
     
     <item>
+      <title>函数指针</title>
+      <link>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
+      <pubDate>Thu, 16 Dec 2021 14:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
+      <description> 函数指针 #include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdlib&amp;gt; using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &amp;lt;&amp;lt; f(v) &amp;lt;&amp;lt; endl; }; int main() { fn = cal; cout &amp;lt;&amp;lt; (*fn)(10) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; fn(10) &amp;lt;&amp;lt; endl; Fn f1 = cal; cout &amp;lt;&amp;lt; (*f1)(20) &amp;lt;&amp;lt; endl; proc(30, cal); return 0; }  Start 10 10 20 30 0 Finish  </description>
+    </item>
+    
+    <item>
       <title>指针函数和函数指针</title>
       <link>https://874656645.github.io/rick/posts/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
       <pubDate>Thu, 16 Dec 2021 12:34:27 +0800</pubDate>
@@ -60,17 +102,17 @@ ArcMap WMTS</description>
     </item>
     
     <item>
-      <title>Hello Hugo</title>
+      <title>C&#43;&#43; 字符串常量存储</title>
       <link>https://874656645.github.io/rick/posts/c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</link>
       <pubDate>Mon, 13 Dec 2021 12:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</guid>
-      <description>常量存储在哪里 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+      <description>C++ 字符串常量存储 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
  局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdlib&amp;gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &amp;quot;qqq&amp;quot;;//为了测试‘char p[]=&amp;quot;Hello world!&amp;quot;’中的字符串在静态存储区是否也有一份拷贝 char p[]=&amp;quot;Hello world!&amp;quot;; char* p2 = &amp;quot;w&amp;quot;;//为了测试‘char p[]=&amp;quot;Hello world!&amp;quot;’中的字符串在静态存储区是否也有一份拷贝 printf(&amp;quot;in s1 p=%p\n&amp;quot;, p); printf(&amp;quot;in s1 p1=%p\n&amp;quot;, p1); printf(&amp;quot;in s1: string&#39;s address: %p\n&amp;quot;, &amp;amp;(&amp;quot;Hello world!&amp;quot;)); printf(&amp;quot;in s1 p2=%p\n&amp;quot;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&amp;quot;Hello world!</description>
     </item>
     
     <item>
-      <title>const C&#43;&#43;</title>
+      <title>const 修饰符</title>
       <link>https://874656645.github.io/rick/posts/const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
       <pubDate>Fri, 10 Dec 2021 12:34:27 +0800</pubDate>
       
@@ -89,7 +131,8 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
       
       <guid>https://874656645.github.io/rick/posts/qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/</guid>
       <description>QProcess使用  路径中有空格  m_process-&amp;gt;startDetached(strAppDir + &amp;quot;/ThreeDScreen.exe&amp;quot;, QStringList())
- 杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&amp;quot;taskkill -t -f /IM iexplore.exe&amp;quot;);</description>
+ 杀死一个进程（注：-t 参数会将创建的子进程一起杀死）
+  QProcess::startDetached(&amp;quot;taskkill -t -f /IM iexplore.exe&amp;quot;);</description>
     </item>
     
     <item>
@@ -98,9 +141,13 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
       <pubDate>Mon, 06 Dec 2021 11:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</guid>
-      <description>QString中文乱码  QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&amp;quot;This is a debug message at 中文&amp;quot;);
- 以QString做为形参变量传递  qDebug(msg.toUtf8());
- QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;amp;logFileName, const QString &amp;amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;amp;file); text_stream &amp;lt;&amp;lt; logMsg &amp;lt;&amp;lt; &amp;quot;\r\n&amp;quot;; file.flush(); file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码 QString message, text, fileName = strAppDir + &amp;quot;/Log/&amp;quot;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹 bool ismkdir = dir.</description>
+      <description>QString中文乱码  QString使用的是UTF-8编码
+ 从字符常量中获取中文
+  QString msg = QString::fromLocal8Bit(&amp;quot;This is a debug message at 中文&amp;quot;);
+ 以QString做为形参变量传递
+  qDebug(msg.toUtf8());
+ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）
+  void QtLog::WriteLine(const QString &amp;amp;logFileName, const QString &amp;amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;amp;file); text_stream &amp;lt;&amp;lt; logMsg &amp;lt;&amp;lt; &amp;quot;\r\n&amp;quot;; file.flush(); file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码 QString message, text, fileName = strAppDir + &amp;quot;/Log/&amp;quot;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹 bool ismkdir = dir.</description>
     </item>
     
     <item>
@@ -109,7 +156,10 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
       <pubDate>Sat, 04 Dec 2021 11:36:17 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/</guid>
-      <description> IE 64位插件 1、设置IE为单进程模式  64位操作系统的 IE 默认每个 Tab 页都是一个进程，并且 Tab 页的进程是 32 位的，主进程是 64 位的，如下图所示  修改 IE 的注册表，使 IE 变成单进程 在HKEY_CURRENT_USER/SOFTWARE/Microsoft/Internet Explorer/Main下添加TabProcGrowth 值为0时是单进程模式，1是多进程
+      <description> IE 64位插件 1、设置IE为单进程模式  64位操作系统的 IE 默认每个 Tab 页都是一个进程，并且 Tab 页的进程是 32 位的，主进程是 64 位的，如下图所示
+ 修改 IE 的注册表，使 IE 变成单进程
+在HKEY_CURRENT_USER/SOFTWARE/Microsoft/Internet Explorer/Main下添加TabProcGrowth
+值为0时是单进程模式，1是多进程
   </description>
     </item>
     
@@ -135,7 +185,7 @@ total = 0 def accumulate(increment): global total if total: total += increment e
     </item>
     
     <item>
-      <title>ArcGIS 字段计算（自增、随机数）</title>
+      <title>Sqlite 随机数</title>
       <link>https://874656645.github.io/rick/posts/sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
       <pubDate>Thu, 25 Nov 2021 11:36:17 +0800</pubDate>
       
@@ -160,12 +210,14 @@ update &amp;quot;CYBuildings2&amp;quot; set &amp;quot;imgIndex&amp;quot; = FLOOR
       <pubDate>Tue, 04 Jun 2019 10:16:11 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/conda-learn/</guid>
-      <description>miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32  set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
+      <description>miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
+set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
 1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes  执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
 2、搜索某个库的所有版本 conda search gdal
 3、查看当前环境下已安装的包 conda list
 4、创建一个虚拟环境 conda create --name python34 python=3.4
-5、激活某个环境 activate python34 // for windows  source activate python34 // for Linux &amp;amp; Mac</description>
+5、激活某个环境 activate python34 // for windows
+source activate python34 // for Linux &amp;amp; Mac</description>
     </item>
     
     <item>
@@ -174,7 +226,9 @@ update &amp;quot;CYBuildings2&amp;quot; set &amp;quot;imgIndex&amp;quot; = FLOOR
       <pubDate>Tue, 09 Apr 2019 10:35:41 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/restart-cortana/</guid>
-      <description>win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;  2.在其中输入下列命令，重新注册激活小娜  Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &amp;quot;$($_.InstallLocation)\AppXManifest.xml&amp;quot;}</description>
+      <description>win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
+2.在其中输入下列命令，重新注册激活小娜
+Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &amp;quot;$($_.InstallLocation)\AppXManifest.xml&amp;quot;}</description>
     </item>
     
     <item>
@@ -184,7 +238,8 @@ update &amp;quot;CYBuildings2&amp;quot; set &amp;quot;imgIndex&amp;quot; = FLOOR
       
       <guid>https://874656645.github.io/rick/posts/cmake-learn/</guid>
       <description>cmake命令
-1、生成 VS 2015 win64 版本的解决方案 注：下面的命令要在cmd下使用，power shell不可以  cmake -H. -B./cmk_build/Win64 -G &amp;quot;Visual Studio 15 2017 Win64&amp;quot;
+1、生成 VS 2015 win64 版本的解决方案 注：下面的命令要在cmd下使用，power shell不可以
+cmake -H. -B./cmk_build/Win64 -G &amp;quot;Visual Studio 15 2017 Win64&amp;quot;
 2、指定目标版本 cmake -D CMAKE_SYSTEM_VERSION=8.1 -H. -B./cmk_build/Win64 -G &amp;quot;Visual Studio 15 2017 Win64&amp;quot;
 3、使用 MinGW 编译器 cmake -H. -B./cmk_build/MinGW -G &amp;quot;MinGW Makefiles&amp;quot;</description>
     </item>
@@ -209,7 +264,10 @@ update &amp;quot;CYBuildings2&amp;quot; set &amp;quot;imgIndex&amp;quot; = FLOOR
       <guid>https://874656645.github.io/rick/posts/power-shell-executionpolicy/</guid>
       <description>Power shell执行策略 原文网址
 1、查看当前的安全策略 Get-ExecutionPolicy
-2、修改执行策略 ps:这种方法会将执行策略保存到注册表  Set-ExecutionPolicy UnRestricted  or  Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+2、修改执行策略 ps:这种方法会将执行策略保存到注册表
+Set-ExecutionPolicy UnRestricted
+or
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
 4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
 6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned</description>
@@ -233,7 +291,10 @@ update &amp;quot;CYBuildings2&amp;quot; set &amp;quot;imgIndex&amp;quot; = FLOOR
       <description> 原文网址
 在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell
 1、使用pip安装 pip install virtualenv
-2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv  3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env  或者  virtualenv env  此命令会在当前目录下创建一个env目录
+2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv  3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env
+或者
+virtualenv env
+此命令会在当前目录下创建一个env目录
 4、启动虚拟环境 env\Scripts\activate
 5、离开虚拟环境 deactivate
 6、删除env文件夹即可 </description>
@@ -246,9 +307,10 @@ update &amp;quot;CYBuildings2&amp;quot; set &amp;quot;imgIndex&amp;quot; = FLOOR
       
       <guid>https://874656645.github.io/rick/posts/scrapy_learn/</guid>
       <description>原文网址
-Using a virtual environment (recommended) pip install virtualenv  详细操作
-Creating a new Scrapy project scrapy startproject tutorial
-Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named _quotesspider.py under the tutorial/spiders directory in your project:
+1. Using a virtual environment (recommended) pip install virtualenv
+详细操作
+2. Creating a new Scrapy project scrapy startproject tutorial
+3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named _quotesspider.py under the tutorial/spiders directory in your project:
 import scrapy class QuotesSpider(scrapy.Spider): name = &amp;quot;quotes&amp;quot; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy.</description>
     </item>
     
@@ -258,10 +320,10 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &amp;quot;quotes&amp;quo
       <pubDate>Thu, 31 Jan 2019 17:36:00 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/npm-commond-learning/</guid>
-      <description>配置npm镜像源 临时使用 npm --registry https://registry.npm.taobao.org install --save-dev electron
-持久使用 npm config set registry https://registry.npm.taobao.org
-配置后可通过下面方式来验证是否成功 npm config get registry 或 npm info electron  通过cnpm使用 npm install -g cnpm --registry=https://registry.npm.taobao.org
-使用 cnpm install express</description>
+      <description>1. 配置npm镜像源 1.1 临时使用 npm --registry https://registry.npm.taobao.org install --save-dev electron
+1.2 持久使用 npm config set registry https://registry.npm.taobao.org
+1.3 配置后可通过下面方式来验证是否成功 npm config get registry 或 npm info electron  1.4 通过cnpm使用 npm install -g cnpm --registry=https://registry.npm.taobao.org
+1.5 使用 cnpm install express</description>
     </item>
     
     <item>
@@ -270,14 +332,17 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &amp;quot;quotes&amp;quo
       <pubDate>Thu, 31 Jan 2019 15:44:09 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/learn-electron/</guid>
-      <description>Use npm run example Clone repository git clone https://github.com/electron/electron-quick-start
-Go into the repository cd electron-quick-start
-Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源 ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install  或者是  npm install --registry=https://registry.npm.taobao.org
-Run the app npm start
-Use yarn create a electron program Create a program folder md electron-yarn-cz  进入项目文件夹  cd electron-yarn-cz
-Create a program config file yarn init
-Instal electron environment yarn add electron --dev --registry=https://registry.npm.taobao.org
-Add main.js and index.html Edit package.</description>
+      <description>1. Use npm run example 1.1 Clone repository git clone https://github.com/electron/electron-quick-start
+1.2 Go into the repository cd electron-quick-start
+1.3 Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源 ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install
+或者是
+npm install --registry=https://registry.npm.taobao.org
+1.4 Run the app npm start
+2. Use yarn create a electron program 2.1 Create a program folder md electron-yarn-cz
+进入项目文件夹
+cd electron-yarn-cz
+2.2 Create a program config file yarn init
+2.3 Instal electron environment yarn add electron --dev --registry=https://registry.npm.taobao.org</description>
     </item>
     
     <item>
@@ -304,29 +369,33 @@ Add main.js and index.html Edit package.</description>
 6、删除配置的远程仓库别名 git remote remove blog
 7、添加文件 git add -A
 8、删除文件 git rm *
-9、删除远程仓库中的文件、文件夹 git rm -r --cached &amp;quot;*.*&amp;quot; *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
+9、删除远程仓库中的文件、文件夹 git rm -r --cached &amp;quot;*.*&amp;quot;
+*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 10、查看所有分支 git branch -a
 11、删除远程分支 git push blog --delete name
 12、解决failed to push some refs to git git pull --rebase blog master</description>
     </item>
     
     <item>
-      <title>Create a New Site by Hugo</title>
-      <link>https://874656645.github.io/rick/posts/create-a-new-site/</link>
+      <title>Hugo Create a New Site by Hugo</title>
+      <link>https://874656645.github.io/rick/posts/hugo-create-a-new-site/</link>
       <pubDate>Fri, 14 Dec 2018 22:40:04 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/create-a-new-site/</guid>
-      <description>创建站点 Step1：创建站点 进入到 E:/Hugo/Sites文件夹 hugo new site HugoLearning.com  cd HugoLearning.com  git init 
+      <guid>https://874656645.github.io/rick/posts/hugo-create-a-new-site/</guid>
+      <description>创建站点 Step1：创建站点 进入到 E:/Hugo/Sites文件夹
+hugo new site HugoLearning.com
+cd HugoLearning.com
+git init
 Step2：添加样式主题 在皮肤列表挑选一个心仪的皮肤，找到相关的 GitHub 地址，创建目录 themes，在 themes 目录里把皮肤 git clone 下来
- git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke  
+ git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke 
 编辑 config.toml 配置文件
 最后一行添加 theme = &amp;quot;ananke&amp;quot;
 或者在命令行执行 echo &#39;theme = &amp;quot;ananke&amp;quot;&#39; &amp;gt;&amp;gt; config.toml
 Step3：添加markdown文件内容 hugo new posts/Hello-Hugo.md
-Step4: 启动网站 hugo server -D 
+Step4: 启动网站 hugo server -D
 然后输入网址 http://localhost:1313/
-Step5：生成网站 命令行执行 hugo，在网站目录生成public文件夹，发布的网站文件都在这个文件中 * 注意：如果看不到内容，将md文件中的draft设置为false
-Step5：将网站发布到 git 使用git工具将文件上传到远程仓库就可以了，仓库还需要做一些设置；</description>
+Step5：生成网站 命令行执行 hugo，在网站目录生成public文件夹，发布的网站文件都在这个文件中
+ 注意：如果看不到内容，将md文件中的draft设置为false  Step5：将网站发布到 git 使用git工具将文件上传到远程仓库就可以了，仓库还需要做一些设置；</description>
     </item>
     
     <item>
@@ -336,15 +405,6 @@ Step5：将网站发布到 git 使用git工具将文件上传到远程仓库就�
       
       <guid>https://874656645.github.io/rick/posts/hello-hugo/</guid>
       <description> Hello Hugo </description>
-    </item>
-    
-    <item>
-      <title>函数指针</title>
-      <link>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
-      <pubDate>Fri, 14 Dec 2018 22:34:27 +0800</pubDate>
-      
-      <guid>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
-      <description> 函数指针 #include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdlib&amp;gt; using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &amp;lt;&amp;lt; f(v) &amp;lt;&amp;lt; endl; }; int main() { fn = cal; cout &amp;lt;&amp;lt; (*fn)(10) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; fn(10) &amp;lt;&amp;lt; endl; Fn f1 = cal; cout &amp;lt;&amp;lt; (*f1)(20) &amp;lt;&amp;lt; endl; proc(30, cal); return 0; }  Start 10 10 20 30 0 Finish  </description>
     </item>
     
   </channel>

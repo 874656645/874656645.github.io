@@ -36,7 +36,8 @@
 6、删除配置的远程仓库别名 git remote remove blog
 7、添加文件 git add -A
 8、删除文件 git rm *
-9、删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot; *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
+9、删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot;
+*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 10、查看所有分支 git branch -a
 11、删除远程分支 git push blog --delete name
 12、解决failed to push some refs to git git pull --rebase blog master" />
@@ -52,7 +53,8 @@
 6、删除配置的远程仓库别名 git remote remove blog
 7、添加文件 git add -A
 8、删除文件 git rm *
-9、删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot; *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
+9、删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot;
+*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 10、查看所有分支 git branch -a
 11、删除远程分支 git push blog --delete name
 12、解决failed to push some refs to git git pull --rebase blog master">
@@ -74,7 +76,8 @@
 6、删除配置的远程仓库别名 git remote remove blog
 7、添加文件 git add -A
 8、删除文件 git rm *
-9、删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot; *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
+9、删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot;
+*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 10、查看所有分支 git branch -a
 11、删除远程分支 git push blog --delete name
 12、解决failed to push some refs to git git pull --rebase blog master"/>
@@ -139,76 +142,76 @@
 
     <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
 
-<h1 id="commands">Commands</h1>
+<h2 id="commands">Commands</h2>
 
-<h2 id="1-初始化本地仓库">1、初始化本地仓库</h2>
+<h3 id="1-初始化本地仓库">1、初始化本地仓库</h3>
 
-<pre><code>cd public
+<pre><code class="language-text">cd public
 git init
 git remote add blog https://github.com/874656645/rick
 </code></pre>
 
-<h2 id="2-更新远程仓库代码到本地">2、更新远程仓库代码到本地</h2>
+<h3 id="2-更新远程仓库代码到本地">2、更新远程仓库代码到本地</h3>
 
 <p><code>git pull blog master</code></p>
 
-<h2 id="3-将变化提交到本地仓库">3、将变化提交到本地仓库</h2>
+<h3 id="3-将变化提交到本地仓库">3、将变化提交到本地仓库</h3>
 
 <p><code>git commit -m &quot;delete all files&quot;</code></p>
 
-<h2 id="4-push推送到远程仓库">4、push推送到远程仓库</h2>
+<h3 id="4-push推送到远程仓库">4、push推送到远程仓库</h3>
 
 <p><code>git push blog master</code></p>
 
-<h2 id="5-添加远程仓库别名和网址">5、添加远程仓库别名和网址</h2>
+<h3 id="5-添加远程仓库别名和网址">5、添加远程仓库别名和网址</h3>
 
 <p><code>git remote add blog https://github.com/874656645/rick</code></p>
 
-<h2 id="6-删除配置的远程仓库别名">6、删除配置的远程仓库别名</h2>
+<h3 id="6-删除配置的远程仓库别名">6、删除配置的远程仓库别名</h3>
 
 <p><code>git remote remove blog</code></p>
 
-<h2 id="7-添加文件">7、添加文件</h2>
+<h3 id="7-添加文件">7、添加文件</h3>
 
 <p><code>git add -A</code></p>
 
-<h2 id="8-删除文件">8、删除文件</h2>
+<h3 id="8-删除文件">8、删除文件</h3>
 
 <p><code>git rm *</code></p>
 
-<h2 id="9-删除远程仓库中的文件-文件夹">9、删除远程仓库中的文件、文件夹</h2>
+<h3 id="9-删除远程仓库中的文件-文件夹">9、删除远程仓库中的文件、文件夹</h3>
 
-<p><code>git rm -r --cached &quot;*.*&quot;</code>
-<p>*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了</P></p>
+<p><code>git rm -r --cached &quot;*.*&quot;</code><br />
+*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了</p>
 
-<h2 id="10-查看所有分支">10、查看所有分支</h2>
+<h3 id="10-查看所有分支">10、查看所有分支</h3>
 
 <p><code>git branch -a</code></p>
 
-<h2 id="11-删除远程分支">11、删除远程分支</h2>
+<h3 id="11-删除远程分支">11、删除远程分支</h3>
 
 <p><code>git push blog --delete name</code></p>
 
-<h2 id="12-解决failed-to-push-some-refs-to-git">12、解决failed to push some refs to git</h2>
+<h3 id="12-解决failed-to-push-some-refs-to-git">12、解决failed to push some refs to git</h3>
 
 <p><code>git pull --rebase blog master</code></p>
 
-<h2 id="13-不需验证用户名和密码">13、不需验证用户名和密码</h2>
+<h3 id="13-不需验证用户名和密码">13、不需验证用户名和密码</h3>
 
-<p>执行如下命令 <br/>
-<code>git config --global credential.helper store</code> <br/>
-<em>此命令会在 <strong>.gitconfig</strong> 文件中添加如下文本</em> <br/></p>
+<p>执行如下命令<br />
+<code>git config --global credential.helper store</code><br />
+<em>此命令会在 <strong>.gitconfig</strong> 文件中添加如下文本</em></p>
 
-<pre><code>[credential]
+<pre><code class="language-text">[credential]
     helper = store
 </code></pre>
 
-<h2 id="14-重新输入用户名和密码">14、重新输入用户名和密码</h2>
+<h3 id="14-重新输入用户名和密码">14、重新输入用户名和密码</h3>
 
-<p><code>git config --system --unset credential.helper</code> <br/>
+<p><code>git config --system --unset credential.helper</code><br />
 或者把上面文件中的 <strong>store</strong> 删掉</p>
 
-<h2 id="14-常用命令">14、常用命令</h2>
+<h3 id="14-常用命令">14、常用命令</h3>
 
 <p><img src="https://github.com/DickyQie/Tool-use/blob/git-learning-document/Git%E5%91%BD%E4%BB%A4.jpg?raw=true" alt="Git 常用命令" /></p>
 <ul class="pa0">

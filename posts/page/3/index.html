@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2019-02-15T15:40:48&#43;08:00"/>
+<meta property="og:updated_time" content="2019-03-22T11:06:01&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
@@ -98,15 +98,96 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/rick/posts/vcpkg-learn/" class="link black dim">
+        Vcpkg Learn
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      vcpkg安装及使用
+注意：需要安装vs的英文语言包
+1、指定 vcpkg 中 msvc 的编译版本 在 vcpkg/triplets/文件夹下的所有cmake文件中添加代码 set(VCPKG_PLATFORM_TOOLSET v140)
+如果同时安装了vs2017，需要确保安装vs2017的英文语言包
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/power-shell-executionpolicy/" class="link black dim">
+        Power Shell ExecutionPolicy
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      Power shell执行策略 原文网址
+1、查看当前的安全策略 Get-ExecutionPolicy
+2、修改执行策略 ps:这种方法会将执行策略保存到注册表
+Set-ExecutionPolicy UnRestricted
+or
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
+4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
+6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/crawl-pictures-from-website/" class="link black dim">
+        Crawl Pictures From Website
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &quot;dmd&quot; save_path = 'E:/python/manhuadao/pics/' __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36'} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath('//div[@class=&quot;read-bottom&quot;]//a[@class=&quot;next&quot;]/@href') # print(next) for href in next_urls: nexturl = href.
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/python-virtualenv/" class="link black dim">
+        Python Virtualenv
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       原文网址
+在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell
+1、使用pip安装 pip install virtualenv
+2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv  3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env
+或者
+virtualenv env
+此命令会在当前目录下创建一个env目录
+4、启动虚拟环境 env\Scripts\activate
+5、离开虚拟环境 deactivate
+6、删除env文件夹即可 
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/rick/posts/scrapy_learn/" class="link black dim">
         Scrapy_Learn
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       原文网址
-Using a virtual environment (recommended) pip install virtualenv  详细操作
-Creating a new Scrapy project scrapy startproject tutorial
-Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named _quotesspider.py under the tutorial/spiders directory in your project:
+1. Using a virtual environment (recommended) pip install virtualenv
+详细操作
+2. Creating a new Scrapy project scrapy startproject tutorial
+3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named _quotesspider.py under the tutorial/spiders directory in your project:
 import scrapy class QuotesSpider(scrapy.Spider): name = &quot;quotes&quot; def start_requests(self): urls = [ 'http://quotes.toscrape.com/page/1/', 'http://quotes.toscrape.com/page/2/', ] for url in urls: yield scrapy.
     </div>
   </div>
@@ -122,10 +203,10 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &quot;quotes&quot; def s
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      配置npm镜像源 临时使用 npm --registry https://registry.npm.taobao.org install --save-dev electron
-持久使用 npm config set registry https://registry.npm.taobao.org
-配置后可通过下面方式来验证是否成功 npm config get registry 或 npm info electron  通过cnpm使用 npm install -g cnpm --registry=https://registry.npm.taobao.org
-使用 cnpm install express
+      1. 配置npm镜像源 1.1 临时使用 npm --registry https://registry.npm.taobao.org install --save-dev electron
+1.2 持久使用 npm config set registry https://registry.npm.taobao.org
+1.3 配置后可通过下面方式来验证是否成功 npm config get registry 或 npm info electron  1.4 通过cnpm使用 npm install -g cnpm --registry=https://registry.npm.taobao.org
+1.5 使用 cnpm install express
     </div>
   </div>
 </div>
@@ -140,14 +221,17 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &quot;quotes&quot; def s
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      Use npm run example Clone repository git clone https://github.com/electron/electron-quick-start
-Go into the repository cd electron-quick-start
-Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源 ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install  或者是  npm install --registry=https://registry.npm.taobao.org
-Run the app npm start
-Use yarn create a electron program Create a program folder md electron-yarn-cz  进入项目文件夹  cd electron-yarn-cz
-Create a program config file yarn init
-Instal electron environment yarn add electron --dev --registry=https://registry.npm.taobao.org
-Add main.js and index.html Edit package.
+      1. Use npm run example 1.1 Clone repository git clone https://github.com/electron/electron-quick-start
+1.2 Go into the repository cd electron-quick-start
+1.3 Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源 ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install
+或者是
+npm install --registry=https://registry.npm.taobao.org
+1.4 Run the app npm start
+2. Use yarn create a electron program 2.1 Create a program folder md electron-yarn-cz
+进入项目文件夹
+cd electron-yarn-cz
+2.2 Create a program config file yarn init
+2.3 Instal electron environment yarn add electron --dev --registry=https://registry.npm.taobao.org
     </div>
   </div>
 </div>
@@ -186,7 +270,8 @@ Add main.js and index.html Edit package.
 6、删除配置的远程仓库别名 git remote remove blog
 7、添加文件 git add -A
 8、删除文件 git rm *
-9、删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot; *.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
+9、删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot;
+*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
 10、查看所有分支 git branch -a
 11、删除远程分支 git push blog --delete name
 12、解决failed to push some refs to git git pull --rebase blog master
@@ -199,52 +284,25 @@ Add main.js and index.html Edit package.
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/create-a-new-site/" class="link black dim">
-        Create a New Site by Hugo
+      <a href="/rick/posts/hugo-create-a-new-site/" class="link black dim">
+        Hugo Create a New Site by Hugo
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      创建站点 Step1：创建站点 进入到 E:/Hugo/Sites文件夹 hugo new site HugoLearning.com  cd HugoLearning.com  git init 
+      创建站点 Step1：创建站点 进入到 E:/Hugo/Sites文件夹
+hugo new site HugoLearning.com
+cd HugoLearning.com
+git init
 Step2：添加样式主题 在皮肤列表挑选一个心仪的皮肤，找到相关的 GitHub 地址，创建目录 themes，在 themes 目录里把皮肤 git clone 下来
- git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke  
+ git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke 
 编辑 config.toml 配置文件
 最后一行添加 theme = &quot;ananke&quot;
 或者在命令行执行 echo 'theme = &quot;ananke&quot;' &gt;&gt; config.toml
 Step3：添加markdown文件内容 hugo new posts/Hello-Hugo.md
-Step4: 启动网站 hugo server -D 
+Step4: 启动网站 hugo server -D
 然后输入网址 http://localhost:1313/
-Step5：生成网站 命令行执行 hugo，在网站目录生成public文件夹，发布的网站文件都在这个文件中 * 注意：如果看不到内容，将md文件中的draft设置为false
-Step5：将网站发布到 git 使用git工具将文件上传到远程仓库就可以了，仓库还需要做一些设置；
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/hello-hugo/" class="link black dim">
-        Hello Hugo
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       Hello Hugo 
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="link black dim">
-        函数指针
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       函数指针 #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; }  Start 10 10 20 30 0 Finish  
+Step5：生成网站 命令行执行 hugo，在网站目录生成public文件夹，发布的网站文件都在这个文件中
+ 注意：如果看不到内容，将md文件中的draft设置为false  Step5：将网站发布到 git 使用git工具将文件上传到远程仓库就可以了，仓库还需要做一些设置；
     </div>
   </div>
 </div>
@@ -296,12 +354,23 @@ Step5：将网站发布到 git 使用git工具将文件上传到远程仓库就�
     <li class="page-item active"><a class="page-link" href="/rick/posts/page/3/">3</a></li>
     
     
-    <li class="page-item disabled">
-    <a href="" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/rick/posts/page/4/">4</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/rick/posts/page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
     <li class="page-item">
-        <a href="/rick/posts/page/3/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/rick/posts/page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
