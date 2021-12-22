@@ -6,10 +6,81 @@
     <description>Recent content on Welcome to Rick&#39;s Page</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 06 Dec 2021 12:34:27 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 22 Dec 2021 09:34:27 +0800</lastBuildDate>
     
 	<atom:link href="https://874656645.github.io/rick/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>模板函数</title>
+      <link>https://874656645.github.io/rick/posts/%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Wed, 22 Dec 2021 09:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</guid>
+      <description>模板函数 template &amp;lt;typename T&amp;gt; inline const T&amp;amp; Max (const T&amp;amp; a, const T&amp;amp; b) { return a &amp;lt; b ? b:a; }; int main() { int i = 39; int j = 20; cout &amp;lt;&amp;lt; &amp;quot;Max(i, j): &amp;quot; &amp;lt;&amp;lt; Max(i, j) &amp;lt;&amp;lt; endl; double f1 = 13.5; double f2 = 20.7; cout &amp;lt;&amp;lt; &amp;quot;Max(f1, f2): &amp;quot; &amp;lt;&amp;lt; Max(f1, f2) &amp;lt;&amp;lt; endl; string s1 = &amp;quot;Hello&amp;quot;; string s2 = &amp;quot;World&amp;quot;; cout &amp;lt;&amp;lt; &amp;quot;Max(s1, s2): &amp;quot; &amp;lt;&amp;lt; Max(s1, s2) &amp;lt;&amp;lt; endl; return 0; }  输出：</description>
+    </item>
+    
+    <item>
+      <title>ArcMap加载天地图服务</title>
+      <link>https://874656645.github.io/rick/posts/arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</link>
+      <pubDate>Fri, 17 Dec 2021 22:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</guid>
+      <description>ArcMap加载天地图服务  注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是OGC标准，会导致 ArcMap 加载后坐标不对  影像底图：
+http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
+http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
+http://t0.tianditu.com/img_w/esri/wmts 天地图影像（墨卡托，WGS1984）
+http://t0.tianditu.com/cia_w/esri/wmts 天地图影像注记（墨卡托，WGS1984）
+矢量底图：
+http://t0.tianditu.com/vec_c/esri/wmts 天地图矢量（经纬度，CGCS2000）
+http://t0.tianditu.com/cva_c/esri/wmts 天地图矢量注记（经纬度，CGCS2000）
+http://t0.tianditu.com/vec_w/esri/wmts 天地图矢量（墨卡托，WGS1984）
+http://t0.tianditu.com/cva_w/esri/wmts 天地图矢量注记（墨卡托，WGS1984）
+ArcMap WMTS</description>
+    </item>
+    
+    <item>
+      <title>指针函数和函数指针</title>
+      <link>https://874656645.github.io/rick/posts/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
+      <pubDate>Thu, 16 Dec 2021 12:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
+      <description> 指针函数和函数指针  指针函数本质是一个函数，返回值是一个指针；
+ 函数指针是指向函数的一个指针变量；
+  #include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdlib&amp;gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &amp;lt;&amp;lt; &amp;quot;fun: &amp;quot; &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun pf(&amp;quot;Hello&amp;quot;); return 0; }  </description>
+    </item>
+    
+    <item>
+      <title>explicit（显式）关键字</title>
+      <link>https://874656645.github.io/rick/posts/explicit%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <pubDate>Wed, 15 Dec 2021 12:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/explicit%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <description> explicit（显式）关键字  修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化 B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化 B b3{ 1 }; // OK：直接列表初始化 B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化 B b5 = (B)1; // OK：允许 static_cast 的显式转换 if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换 bool b8 = static_cast&amp;lt;bool&amp;gt;(b1); // OK：static_cast 进行直接初始化 return 0; }  </description>
+    </item>
+    
+    <item>
+      <title>Hello Hugo</title>
+      <link>https://874656645.github.io/rick/posts/c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</link>
+      <pubDate>Mon, 13 Dec 2021 12:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</guid>
+      <description>常量存储在哪里 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+ 局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdlib&amp;gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &amp;quot;qqq&amp;quot;;//为了测试‘char p[]=&amp;quot;Hello world!&amp;quot;’中的字符串在静态存储区是否也有一份拷贝 char p[]=&amp;quot;Hello world!&amp;quot;; char* p2 = &amp;quot;w&amp;quot;;//为了测试‘char p[]=&amp;quot;Hello world!&amp;quot;’中的字符串在静态存储区是否也有一份拷贝 printf(&amp;quot;in s1 p=%p\n&amp;quot;, p); printf(&amp;quot;in s1 p1=%p\n&amp;quot;, p1); printf(&amp;quot;in s1: string&#39;s address: %p\n&amp;quot;, &amp;amp;(&amp;quot;Hello world!&amp;quot;)); printf(&amp;quot;in s1 p2=%p\n&amp;quot;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&amp;quot;Hello world!</description>
+    </item>
+    
+    <item>
+      <title>const C&#43;&#43;</title>
+      <link>https://874656645.github.io/rick/posts/const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
+      <pubDate>Fri, 10 Dec 2021 12:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
+      <description> const C++ 1、const 修饰指针和引用 常对象：只能调用 const 成员函数
+常量指针：所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改
+常量引用：相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;amp;myA; // 常量指针 ClassA * const b = &amp;amp;myA; // 指针常量 const ClassA &amp;amp;bb = myB; // 常量引用 b = &amp;amp;myB; // 合法（可以指向其它对象） b-&amp;gt;setA(10); // 错误（只读） bb.setA(100); // 错误（只读） bb = myA; // 错误（不可指向其它对象）  char greet[] = &amp;quot;Hello&amp;quot;, w[] = &amp;quot;World&amp;quot;; const char * p = greet; char * const pp = greet; cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; *p = &#39;W&#39;; //error: assignment of read-only location &#39;* p&#39; // *p = &#39;W&#39;; p = w; // 合法（常量指针可以改变指向，不能改变存储的内容） pp = w; //error: assignment of read-only variable &#39;pp&#39; // pp = w; *pp = &#39;W&#39;; // 合法（指针常量可以改变存储的内容，不能改变指向） cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; w &amp;lt;&amp;lt; endl; return 0;  2、const变量存放位置  局部变量存放在栈区 对于全局对象，编译期一般不分配内存，放在符号表中以提高访问效率 对于字面值常量，存放在常量存储区  </description>
+    </item>
     
     <item>
       <title>QProcess路径中有空格</title>
@@ -264,7 +335,16 @@ Step5：将网站发布到 git 使用git工具将文件上传到远程仓库就�
       <pubDate>Fri, 14 Dec 2018 22:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/hello-hugo/</guid>
-      <description></description>
+      <description> Hello Hugo </description>
+    </item>
+    
+    <item>
+      <title>函数指针</title>
+      <link>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
+      <pubDate>Fri, 14 Dec 2018 22:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
+      <description> 函数指针 #include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdlib&amp;gt; using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &amp;lt;&amp;lt; f(v) &amp;lt;&amp;lt; endl; }; int main() { fn = cal; cout &amp;lt;&amp;lt; (*fn)(10) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; fn(10) &amp;lt;&amp;lt; endl; Fn f1 = cal; cout &amp;lt;&amp;lt; (*f1)(20) &amp;lt;&amp;lt; endl; proc(30, cal); return 0; }  Start 10 10 20 30 0 Finish  </description>
     </item>
     
   </channel>

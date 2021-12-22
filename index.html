@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/" />
-<meta property="og:updated_time" content="2021-12-06T12:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-22T09:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Welcome to Rick&#39;s Page">
 <meta itemprop="description" content="">
@@ -124,15 +124,14 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/rick/posts/qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/" class="color-inherit dim link">
-            QProcess路径中有空格
+          <a href="/rick/posts/%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/" class="color-inherit dim link">
+            模板函数
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          QProcess使用  路径中有空格  m_process-&gt;startDetached(strAppDir + &quot;/ThreeDScreen.exe&quot;, QStringList())
- 杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);
+          模板函数 template &lt;typename T&gt; inline const T&amp; Max (const T&amp; a, const T&amp; b) { return a &lt; b ? b:a; }; int main() { int i = 39; int j = 20; cout &lt;&lt; &quot;Max(i, j): &quot; &lt;&lt; Max(i, j) &lt;&lt; endl; double f1 = 13.5; double f2 = 20.7; cout &lt;&lt; &quot;Max(f1, f2): &quot; &lt;&lt; Max(f1, f2) &lt;&lt; endl; string s1 = &quot;Hello&quot;; string s2 = &quot;World&quot;; cout &lt;&lt; &quot;Max(s1, s2): &quot; &lt;&lt; Max(s1, s2) &lt;&lt; endl; return 0; }  输出：
         </div>
-          <a href="/rick/posts/qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+          <a href="/rick/posts/%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
       </div>
     </div>
@@ -149,16 +148,24 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/rick/posts/qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="color-inherit dim link">
-            QString中文乱码
+          <a href="/rick/posts/arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/" class="color-inherit dim link">
+            ArcMap加载天地图服务
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          QString中文乱码  QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&quot;This is a debug message at 中文&quot;);
- 以QString做为形参变量传递  qDebug(msg.toUtf8());
- QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &quot;\r\n&quot;; file.flush(); file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码 QString message, text, fileName = strAppDir + &quot;/Log/&quot;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹 bool ismkdir = dir.
+          ArcMap加载天地图服务  注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是OGC标准，会导致 ArcMap 加载后坐标不对  影像底图：
+http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
+http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
+http://t0.tianditu.com/img_w/esri/wmts 天地图影像（墨卡托，WGS1984）
+http://t0.tianditu.com/cia_w/esri/wmts 天地图影像注记（墨卡托，WGS1984）
+矢量底图：
+http://t0.tianditu.com/vec_c/esri/wmts 天地图矢量（经纬度，CGCS2000）
+http://t0.tianditu.com/cva_c/esri/wmts 天地图矢量注记（经纬度，CGCS2000）
+http://t0.tianditu.com/vec_w/esri/wmts 天地图矢量（墨卡托，WGS1984）
+http://t0.tianditu.com/cva_w/esri/wmts 天地图矢量注记（墨卡托，WGS1984）
+ArcMap WMTS
         </div>
-          <a href="/rick/posts/qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+          <a href="/rick/posts/arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
       </div>
     </div>
@@ -175,15 +182,16 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/rick/posts/ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/" class="color-inherit dim link">
-            IE 64位插件
+          <a href="/rick/posts/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="color-inherit dim link">
+            指针函数和函数指针
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-           IE 64位插件 1、设置IE为单进程模式  64位操作系统的 IE 默认每个 Tab 页都是一个进程，并且 Tab 页的进程是 32 位的，主进程是 64 位的，如下图所示  修改 IE 的注册表，使 IE 变成单进程 在HKEY_CURRENT_USER/SOFTWARE/Microsoft/Internet Explorer/Main下添加TabProcGrowth 值为0时是单进程模式，1是多进程
-  
+           指针函数和函数指针  指针函数本质是一个函数，返回值是一个指针；
+ 函数指针是指向函数的一个指针变量；
+  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &quot;fun: &quot; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun pf(&quot;Hello&quot;); return 0; }  
         </div>
-          <a href="/rick/posts/ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+          <a href="/rick/posts/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
       </div>
     </div>
@@ -200,26 +208,26 @@
         
         
           <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/rick/posts/3dmax%E6%93%8D%E4%BD%9C/" class="link black dim">
-              3DMax 操作
+            <a href="/rick/posts/explicit%E5%85%B3%E9%94%AE%E5%AD%97/" class="link black dim">
+              explicit（显式）关键字
             </a>
           </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/rick/posts/arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="link black dim">
-              ArcGIS 字段计算（自增、随机数）
+            <a href="/rick/posts/c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/" class="link black dim">
+              Hello Hugo
             </a>
           </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/rick/posts/sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="link black dim">
-              ArcGIS 字段计算（自增、随机数）
+            <a href="/rick/posts/const%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="link black dim">
+              const C&#43;&#43;
             </a>
           </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/rick/posts/%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/" class="link black dim">
-              查看dll版本
+            <a href="/rick/posts/qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/" class="link black dim">
+              QProcess路径中有空格
             </a>
           </h2>
         

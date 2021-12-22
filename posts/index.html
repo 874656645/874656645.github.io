@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2021-12-06T12:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-22T09:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
@@ -98,6 +98,113 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
+      <a href="/rick/posts/%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/" class="link black dim">
+        模板函数
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      模板函数 template &lt;typename T&gt; inline const T&amp; Max (const T&amp; a, const T&amp; b) { return a &lt; b ? b:a; }; int main() { int i = 39; int j = 20; cout &lt;&lt; &quot;Max(i, j): &quot; &lt;&lt; Max(i, j) &lt;&lt; endl; double f1 = 13.5; double f2 = 20.7; cout &lt;&lt; &quot;Max(f1, f2): &quot; &lt;&lt; Max(f1, f2) &lt;&lt; endl; string s1 = &quot;Hello&quot;; string s2 = &quot;World&quot;; cout &lt;&lt; &quot;Max(s1, s2): &quot; &lt;&lt; Max(s1, s2) &lt;&lt; endl; return 0; }  输出：
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/" class="link black dim">
+        ArcMap加载天地图服务
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      ArcMap加载天地图服务  注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是OGC标准，会导致 ArcMap 加载后坐标不对  影像底图：
+http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
+http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
+http://t0.tianditu.com/img_w/esri/wmts 天地图影像（墨卡托，WGS1984）
+http://t0.tianditu.com/cia_w/esri/wmts 天地图影像注记（墨卡托，WGS1984）
+矢量底图：
+http://t0.tianditu.com/vec_c/esri/wmts 天地图矢量（经纬度，CGCS2000）
+http://t0.tianditu.com/cva_c/esri/wmts 天地图矢量注记（经纬度，CGCS2000）
+http://t0.tianditu.com/vec_w/esri/wmts 天地图矢量（墨卡托，WGS1984）
+http://t0.tianditu.com/cva_w/esri/wmts 天地图矢量注记（墨卡托，WGS1984）
+ArcMap WMTS
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="link black dim">
+        指针函数和函数指针
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       指针函数和函数指针  指针函数本质是一个函数，返回值是一个指针；
+ 函数指针是指向函数的一个指针变量；
+  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &quot;fun: &quot; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun pf(&quot;Hello&quot;); return 0; }  
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/explicit%E5%85%B3%E9%94%AE%E5%AD%97/" class="link black dim">
+        explicit（显式）关键字
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       explicit（显式）关键字  修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化 B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化 B b3{ 1 }; // OK：直接列表初始化 B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化 B b5 = (B)1; // OK：允许 static_cast 的显式转换 if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换 bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化 return 0; }  
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/" class="link black dim">
+        Hello Hugo
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      常量存储在哪里 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+ 局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &quot;qqq&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 char p[]=&quot;Hello world!&quot;; char* p2 = &quot;w&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 printf(&quot;in s1 p=%p\n&quot;, p); printf(&quot;in s1 p1=%p\n&quot;, p1); printf(&quot;in s1: string's address: %p\n&quot;, &amp;(&quot;Hello world!&quot;)); printf(&quot;in s1 p2=%p\n&quot;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&quot;Hello world!
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/const%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="link black dim">
+        const C&#43;&#43;
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       const C++ 1、const 修饰指针和引用 常对象：只能调用 const 成员函数
+常量指针：所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改
+常量引用：相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb.setA(100); // 错误（只读） bb = myA; // 错误（不可指向其它对象）  char greet[] = &quot;Hello&quot;, w[] = &quot;World&quot;; const char * p = greet; char * const pp = greet; cout &lt;&lt; p &lt;&lt; endl; *p = 'W'; //error: assignment of read-only location '* p' // *p = 'W'; p = w; // 合法（常量指针可以改变指向，不能改变存储的内容） pp = w; //error: assignment of read-only variable 'pp' // pp = w; *pp = 'W'; // 合法（指针常量可以改变存储的内容，不能改变指向） cout &lt;&lt; p &lt;&lt; endl; cout &lt;&lt; w &lt;&lt; endl; return 0;  2、const变量存放位置  局部变量存放在栈区 对于全局对象，编译期一般不分配内存，放在符号表中以提高访问效率 对于字面值常量，存放在常量存储区  
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
       <a href="/rick/posts/qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/" class="link black dim">
         QProcess路径中有空格
       </a>
@@ -154,108 +261,6 @@
     <div class="nested-links f5 lh-copy nested-copy-line-height">
        3DMax 操作 1、查看纹理 渲染——材质编辑器——精简材质编辑器
 2、合并Mesh——附加 
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="link black dim">
-        ArcGIS 字段计算（自增、随机数）
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       ArcGIS 字段计算（自增、随机数） 1、随机数 python 脚本
-import random def randNum(): res = random.randint(1, 7) return res  2、自增 python 脚本
-total = 0 def accumulate(increment): global total if total: total += increment else: total = increment return total  
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="link black dim">
-        ArcGIS 字段计算（自增、随机数）
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       Sqlite 随机数 1、随机数 SQL 脚本
-update &quot;CYBuildings2&quot; set &quot;imgIndex&quot; = FLOOR(1 + (RANDOM()+9223372036854775808)/2.0/9223372036854775808 * 7);  
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/" class="link black dim">
-        查看dll版本
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
-2、使用 notepad++ 直接用 记事本 或者 notepad++ 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/conda-learn/" class="link black dim">
-        Conda Learn
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32  set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
-1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes  执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
-2、搜索某个库的所有版本 conda search gdal
-3、查看当前环境下已安装的包 conda list
-4、创建一个虚拟环境 conda create --name python34 python=3.4
-5、激活某个环境 activate python34 // for windows  source activate python34 // for Linux &amp; Mac
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/restart-cortana/" class="link black dim">
-        Restart Cortana
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;  2.在其中输入下列命令，重新注册激活小娜  Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &quot;$($_.InstallLocation)\AppXManifest.xml&quot;}
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/cmake-learn/" class="link black dim">
-        Cmake Learn
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      cmake命令
-1、生成 VS 2015 win64 版本的解决方案 注：下面的命令要在cmd下使用，power shell不可以  cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
-2、指定目标版本 cmake -D CMAKE_SYSTEM_VERSION=8.1 -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
-3、使用 MinGW 编译器 cmake -H. -B./cmk_build/MinGW -G &quot;MinGW Makefiles&quot;
     </div>
   </div>
 </div>
