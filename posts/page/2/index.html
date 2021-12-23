@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2021-12-06T12:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-10T12:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
@@ -93,6 +93,25 @@
   <article class="pa3 pa4-ns nested-copy-line-height nested-img">
   <main class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></main>
     <section class="flex-ns flex-wrap justify-around mt5">
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/const%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="link black dim">
+        const 修饰符
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       const C++ 1、const 修饰指针和引用 常对象：只能调用 const 成员函数
+常量指针：所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改
+常量引用：相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb.setA(100); // 错误（只读） bb = myA; // 错误（不可指向其它对象）  char greet[] = &quot;Hello&quot;, w[] = &quot;World&quot;; const char * p = greet; char * const pp = greet; cout &lt;&lt; p &lt;&lt; endl; *p = 'W'; //error: assignment of read-only location '* p' // *p = 'W'; p = w; // 合法（常量指针可以改变指向，不能改变存储的内容） pp = w; //error: assignment of read-only variable 'pp' // pp = w; *pp = 'W'; // 合法（指针常量可以改变存储的内容，不能改变指向） cout &lt;&lt; p &lt;&lt; endl; cout &lt;&lt; w &lt;&lt; endl; return 0;  2、const变量存放位置  局部变量存放在栈区 对于全局对象，编译期一般不分配内存，放在符号表中以提高访问效率 对于字面值常量，存放在常量存储区  
+    </div>
+  </div>
+</div>
+</div>
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
@@ -250,25 +269,6 @@ source activate python34 // for Linux &amp; Mac
       win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
 2.在其中输入下列命令，重新注册激活小娜
 Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &quot;$($_.InstallLocation)\AppXManifest.xml&quot;}
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/cmake-learn/" class="link black dim">
-        Cmake Learn
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      cmake命令
-1、生成 VS 2015 win64 版本的解决方案 注：下面的命令要在cmd下使用，power shell不可以
-cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
-2、指定目标版本 cmake -D CMAKE_SYSTEM_VERSION=8.1 -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
-3、使用 MinGW 编译器 cmake -H. -B./cmk_build/MinGW -G &quot;MinGW Makefiles&quot;
     </div>
   </div>
 </div>
