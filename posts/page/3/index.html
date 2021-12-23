@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2019-03-22T11:34:12&#43;08:00"/>
+<meta property="og:updated_time" content="2021-11-25T11:36:17&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
@@ -98,7 +98,78 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/cmake-learn/" class="link black dim">
+      <a href="/rick/posts/16-sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="link black dim">
+        Sqlite 随机数
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       Sqlite 随机数 1、随机数 SQL 脚本
+update &quot;CYBuildings2&quot; set &quot;imgIndex&quot; = FLOOR(1 + (RANDOM()+9223372036854775808)/2.0/9223372036854775808 * 7);  
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/15-%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/" class="link black dim">
+        查看dll版本
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
+2、使用 notepad++ 直接用 记事本 或者 notepad++ 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/14-conda-learn/" class="link black dim">
+        Conda Learn
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
+set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
+1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes  执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
+2、搜索某个库的所有版本 conda search gdal
+3、查看当前环境下已安装的包 conda list
+4、创建一个虚拟环境 conda create --name python34 python=3.4
+5、激活某个环境 activate python34 // for windows
+source activate python34 // for Linux &amp; Mac
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/13-restart-cortana/" class="link black dim">
+        Restart Cortana
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
+2.在其中输入下列命令，重新注册激活小娜
+Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &quot;$($_.InstallLocation)\AppXManifest.xml&quot;}
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/12-cmake-learn/" class="link black dim">
         Cmake Learn
       </a>
     </h1>
@@ -117,7 +188,7 @@ cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/vcpkg-learn/" class="link black dim">
+      <a href="/rick/posts/11-vcpkg-learn/" class="link black dim">
         Vcpkg Learn
       </a>
     </h1>
@@ -135,7 +206,7 @@ cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/power-shell-executionpolicy/" class="link black dim">
+      <a href="/rick/posts/10-power-shell-executionpolicy/" class="link black dim">
         Power Shell ExecutionPolicy
       </a>
     </h1>
@@ -158,7 +229,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/crawl-pictures-from-website/" class="link black dim">
+      <a href="/rick/posts/9-crawl-pictures-from-website/" class="link black dim">
         Crawl Pictures From Website
       </a>
     </h1>
@@ -173,7 +244,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/python-virtualenv/" class="link black dim">
+      <a href="/rick/posts/8-python-virtualenv/" class="link black dim">
         Python Virtualenv
       </a>
     </h1>
@@ -197,8 +268,8 @@ virtualenv env
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/scrapy_learn/" class="link black dim">
-        Scrapy_Learn
+      <a href="/rick/posts/7-scrapy-learn/" class="link black dim">
+        Scrapy Learn
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
@@ -208,92 +279,6 @@ virtualenv env
 2. Creating a new Scrapy project scrapy startproject tutorial
 3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named _quotesspider.py under the tutorial/spiders directory in your project:
 import scrapy class QuotesSpider(scrapy.Spider): name = &quot;quotes&quot; def start_requests(self): urls = [ 'http://quotes.toscrape.com/page/1/', 'http://quotes.toscrape.com/page/2/', ] for url in urls: yield scrapy.
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/npm-commond-learning/" class="link black dim">
-        Npm Commond Learning
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      1. 配置npm镜像源 1.1 临时使用 npm --registry https://registry.npm.taobao.org install --save-dev electron
-1.2 持久使用 npm config set registry https://registry.npm.taobao.org
-1.3 配置后可通过下面方式来验证是否成功 npm config get registry 或 npm info electron  1.4 通过cnpm使用 npm install -g cnpm --registry=https://registry.npm.taobao.org
-1.5 使用 cnpm install express
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/learn-electron/" class="link black dim">
-        Learn Electron
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      1. Use npm run example 1.1 Clone repository git clone https://github.com/electron/electron-quick-start
-1.2 Go into the repository cd electron-quick-start
-1.3 Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源 ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install
-或者是
-npm install --registry=https://registry.npm.taobao.org
-1.4 Run the app npm start
-2. Use yarn create a electron program 2.1 Create a program folder md electron-yarn-cz
-进入项目文件夹
-cd electron-yarn-cz
-2.2 Create a program config file yarn init
-2.3 Instal electron environment yarn add electron --dev --registry=https://registry.npm.taobao.org
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/netstat/" class="link black dim">
-        Netstat
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      win10查看端口使用情况 1. 产看所有已使用的端口 netstat -ano
-2. 查看特定端口的使用 netstat -ano|findstr &quot;443&quot;
-3. 查看占用端口的进程PID tasklist|findstr &quot;7648&quot;
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/git-commond/" class="link black dim">
-        Git Commond
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      Commands 1、初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick  2、更新远程仓库代码到本地 git pull blog master
-3、将变化提交到本地仓库 git commit -m &quot;delete all files&quot;
-4、push推送到远程仓库 git push blog master
-5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
-6、删除配置的远程仓库别名 git remote remove blog
-7、添加文件 git add -A
-8、删除文件 git rm *
-9、删除远程仓库中的文件、文件夹 git rm -r --cached &quot;*.*&quot;
-*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
-10、查看所有分支 git branch -a
-11、删除远程分支 git push blog --delete name
-12、解决failed to push some refs to git git pull --rebase blog master
     </div>
   </div>
 </div>

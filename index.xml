@@ -6,36 +6,77 @@
     <description>Recent content on Welcome to Rick&#39;s Page</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Dec 2021 22:34:27 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Dec 2021 14:34:27 +0800</lastBuildDate>
     
 	<atom:link href="https://874656645.github.io/rick/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>拷贝构造、赋值构造</title>
+      <link>https://874656645.github.io/rick/posts/36-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/</link>
+      <pubDate>Thu, 23 Dec 2021 14:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/36-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/</guid>
+      <description>拷贝构造、赋值构造 结论：
+ 拷贝构造函数是函数，赋值运算符是运算符的重载； 拷贝构造函数会生成新的类对象，赋值运算符不会； 拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值; 若接受返回值的对象已经初始化过，则会调用赋值构造函数，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值构造函数，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。  测试类 class A { public: A(){ cout &amp;lt;&amp;lt; &amp;quot;default constructor&amp;quot; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;quot;adrres: &amp;quot; &amp;lt;&amp;lt; this &amp;lt;&amp;lt; &amp;quot;\t point x: &amp;quot; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &amp;quot;\t y: &amp;quot; &amp;lt;&amp;lt; y &amp;lt;&amp;lt; endl; } A(int t){ x = new int(0); y = t; cout &amp;lt;&amp;lt; &amp;quot;second constructor&amp;quot; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;quot;adrres: &amp;quot; &amp;lt;&amp;lt; this &amp;lt;&amp;lt; &amp;quot;\t point x: &amp;quot; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &amp;quot;\t y: &amp;quot; &amp;lt;&amp;lt; y &amp;lt;&amp;lt; endl; } A(const A &amp;amp;a){ cout &amp;lt;&amp;lt; &amp;quot;const copy constructor&amp;quot; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;quot;adrres: &amp;quot; &amp;lt;&amp;lt; this &amp;lt;&amp;lt; &amp;quot;\t point x: &amp;quot; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &amp;quot;\t y: &amp;quot; &amp;lt;&amp;lt; y &amp;lt;&amp;lt; endl; this-&amp;gt;x = a.</description>
+    </item>
+    
+    <item>
+      <title>函数重载、重写、隐藏、模板</title>
+      <link>https://874656645.github.io/rick/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/</link>
+      <pubDate>Thu, 23 Dec 2021 12:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/</guid>
+      <description> 函数重载、重写、隐藏、模板  重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写； 隐藏： 派生类中函数与基类中的函数同名，但是这个函数在基类中并没有被定义为虚函数，此时基类的函数会被隐藏； 模板： 模板函数是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载，但是可被重写。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  </description>
+    </item>
+    
+    <item>
+      <title>inline 内联函数</title>
+      <link>https://874656645.github.io/rick/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Thu, 23 Dec 2021 11:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/</guid>
+      <description> inline 内联函数 当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
+ 内联函数中不可以出现循环、递归或开关操作 内联函数的定义必须出现在内联函数的第一次调用前 在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数 虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联  优点：
+ 内联函数在被调用处进行代码展开，省去了参数压栈、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度； 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会； 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能； 内联函数在运行时可调试，而宏定义不可以。  缺点：
+ 代码膨胀，消耗了更多的内存空间； inline 函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像 non-inline 可以直接链接； 内联函数其实是不可控的，它只是对编译器的建议，是否对函数内联，决定权在于编译器;  </description>
+    </item>
+    
+    <item>
+      <title>fork Unix</title>
+      <link>https://874656645.github.io/rick/posts/33-fork-unix/</link>
+      <pubDate>Thu, 23 Dec 2021 10:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/33-fork-unix/</guid>
+      <description>fork Unix fork函数可以创建一个和当前映像一样的子进程，这个函数会返回两个值：从子进程返回0，从父进程返回子进程的PID；
+ 1）在父进程中，fork返回新创建子进程的进程ID； 2）在子进程中，fork返回0； 3）如果出现错误，fork返回一个负值；  #include &amp;lt;iostream&amp;gt; #include &amp;lt;unistd.h&amp;gt; using namespace std; int main() { pid_t fpid; //fpid表示fork函数返回的值 int count = 0; cout &amp;lt;&amp;lt; &amp;amp;count &amp;lt;&amp;lt; endl; fpid = fork(); if (fpid &amp;lt; 0) printf(&amp;quot;error in fork!\n&amp;quot;); else if (fpid == 0) { printf(&amp;quot;i am the child process, my process id is %d\n&amp;quot;,getpid()); cout &amp;lt;&amp;lt; &amp;amp;count &amp;lt;&amp;lt; endl; count++; } else { printf(&amp;quot;i am the parent process, my process id is %d\n&amp;quot;,getpid()); cout &amp;lt;&amp;lt; &amp;amp;count &amp;lt;&amp;lt; endl; count++; } printf(&amp;quot;统计结果是: %d\n&amp;quot;,count); return 0; }  输出：</description>
+    </item>
+    
+    <item>
       <title>C 与 C&#43;&#43; 的差异</title>
-      <link>https://874656645.github.io/rick/posts/c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</link>
+      <link>https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</link>
       <pubDate>Wed, 22 Dec 2021 22:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</guid>
+      <guid>https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</guid>
       <description>C 与 C++ 的差异 1. C++ 是 C 的超集和增强，但是校验更加严格 1.1 新增命名空间 1.2 C++ 变量不必都声明在函数顶部，可以随使用随定义 1.3 变量检测增强 C 全局变量重复定义，C++不可以，全局变量检测增强
-int g_val; // bss段 int g_val = 10; // data段  1.4 struct 结构体增强 struct student s;  student s;  1.5 函数形参个数和函数返回值增强 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40) // 可编译通过，但是有警告  1.6 新增 bool 关键字 C 用 0 表示 false，非 0 表示 true C++ 中 bool 为1个字节</description>
+// C 语言 int g_val; // bss段 int g_val = 10; // data段  1.4 struct 结构体增强 // C 语言声明结构体变量 struct Student s;  // C++ 语言声明结构体变量 Student s;  1.5 函数形参个数和函数返回值增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40) // 可编译通过，但是有警告  1.</description>
     </item>
     
     <item>
       <title>函数形参从右到左入栈</title>
-      <link>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</link>
+      <link>https://874656645.github.io/rick/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</link>
       <pubDate>Wed, 22 Dec 2021 15:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</guid>
-      <description>函数形参从右到左入栈 int add(int count, ...) { int inc = sizeof(int*) / 4; // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节） int sum = 0; // cout &amp;lt;&amp;lt; &amp;amp;count &amp;lt;&amp;lt; endl; int *p = &amp;amp;count + inc; // cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; for (int i = 0; i &amp;lt; count; ++i) { sum += *p; cout &amp;lt;&amp;lt; *p &amp;lt;&amp;lt; endl; p += inc; } return sum; } int main() { cout &amp;lt;&amp;lt; add(3, 1, 2, 3) &amp;lt;&amp;lt; endl; return 0; }  输出：</description>
+      <guid>https://874656645.github.io/rick/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</guid>
+      <description>函数形参从右到左入栈 int add(int count, ...) { // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节） int intSize = sizeof(int*) / sizeof(int); int sum = 0; // cout &amp;lt;&amp;lt; &amp;amp;count &amp;lt;&amp;lt; endl; int *p = &amp;amp;count + intSize; // cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; for (int i = 0; i &amp;lt; count; ++i) { sum += *p; cout &amp;lt;&amp;lt; *p &amp;lt;&amp;lt; endl; p += intSize; } return sum; } int main() { cout &amp;lt;&amp;lt; add(3, 1, 2, 3) &amp;lt;&amp;lt; endl; return 0; }  输出：</description>
     </item>
     
     <item>
       <title>指针 &#43; 1</title>
-      <link>https://874656645.github.io/rick/posts/%E6%8C%87%E9%92%88-&#43;-1/</link>
+      <link>https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;-1/</link>
       <pubDate>Wed, 22 Dec 2021 15:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/%E6%8C%87%E9%92%88-&#43;-1/</guid>
+      <guid>https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;-1/</guid>
       <description> 1. *32*位和64`位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
 2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
 int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]； // &amp;amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int） // 但是prt与(&amp;amp;a+1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int) int *ptr = (int*)(&amp;amp;a + 1); cout &amp;lt;&amp;lt; *(a + 1) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; *(ptr - 1) &amp;lt;&amp;lt; endl; return 0; }  输出：
@@ -46,29 +87,29 @@ int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;amp;a是数组指针，其类型
     
     <item>
       <title>模板类</title>
-      <link>https://874656645.github.io/rick/posts/%E6%A8%A1%E6%9D%BF%E7%B1%BB/</link>
+      <link>https://874656645.github.io/rick/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/</link>
       <pubDate>Wed, 22 Dec 2021 10:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/%E6%A8%A1%E6%9D%BF%E7%B1%BB/</guid>
+      <guid>https://874656645.github.io/rick/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/</guid>
       <description> 模板类 template&amp;lt;class T&amp;gt; class Test { public: Test(T t){ m_t = t;}; // explicit Test(T t){ m_t = t;}; T getValue(){ return m_t; }; private: T m_t; }; int main() { Test&amp;lt;int&amp;gt; tInt(1); cout &amp;lt;&amp;lt; tInt.getValue() &amp;lt;&amp;lt; endl; Test&amp;lt;double&amp;gt; tD(1.15); cout &amp;lt;&amp;lt; tD.getValue() &amp;lt;&amp;lt; endl; Test&amp;lt;float&amp;gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换 cout &amp;lt;&amp;lt; tF.getValue() &amp;lt;&amp;lt; endl; return 0; }  输出：
 Start 1 1.15 1.3 0 Finish  </description>
     </item>
     
     <item>
       <title>模板函数</title>
-      <link>https://874656645.github.io/rick/posts/%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</link>
+      <link>https://874656645.github.io/rick/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</link>
       <pubDate>Wed, 22 Dec 2021 09:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/rick/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</guid>
       <description>模板函数 template &amp;lt;typename T&amp;gt; inline const T&amp;amp; Max (const T&amp;amp; a, const T&amp;amp; b) { return a &amp;lt; b ? b:a; }; int main() { int i = 39; int j = 20; cout &amp;lt;&amp;lt; &amp;quot;Max(i, j): &amp;quot; &amp;lt;&amp;lt; Max(i, j) &amp;lt;&amp;lt; endl; double f1 = 13.5; double f2 = 20.7; cout &amp;lt;&amp;lt; &amp;quot;Max(f1, f2): &amp;quot; &amp;lt;&amp;lt; Max(f1, f2) &amp;lt;&amp;lt; endl; string s1 = &amp;quot;Hello&amp;quot;; string s2 = &amp;quot;World&amp;quot;; cout &amp;lt;&amp;lt; &amp;quot;Max(s1, s2): &amp;quot; &amp;lt;&amp;lt; Max(s1, s2) &amp;lt;&amp;lt; endl; return 0; }  输出：</description>
     </item>
     
     <item>
       <title>ArcMap加载天地图服务</title>
-      <link>https://874656645.github.io/rick/posts/arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</link>
+      <link>https://874656645.github.io/rick/posts/27-arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</link>
       <pubDate>Fri, 17 Dec 2021 22:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>https://874656645.github.io/rick/posts/27-arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</guid>
       <description>ArcMap加载天地图服务  注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是OGC标准，会导致 ArcMap 加载后坐标不对  影像底图：
 http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
 http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
@@ -84,19 +125,19 @@ ArcMap WMTS</description>
     
     <item>
       <title>函数指针</title>
-      <link>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
+      <link>https://874656645.github.io/rick/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
       <pubDate>Thu, 16 Dec 2021 14:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
+      <guid>https://874656645.github.io/rick/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
       <description> 函数指针 #include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdlib&amp;gt; using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &amp;lt;&amp;lt; f(v) &amp;lt;&amp;lt; endl; }; int main() { fn = cal; cout &amp;lt;&amp;lt; (*fn)(10) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; fn(10) &amp;lt;&amp;lt; endl; Fn f1 = cal; cout &amp;lt;&amp;lt; (*f1)(20) &amp;lt;&amp;lt; endl; proc(30, cal); return 0; }  Start 10 10 20 30 0 Finish  </description>
     </item>
     
     <item>
       <title>指针函数和函数指针</title>
-      <link>https://874656645.github.io/rick/posts/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
+      <link>https://874656645.github.io/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
       <pubDate>Thu, 16 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
+      <guid>https://874656645.github.io/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
       <description> 指针函数和函数指针  指针函数本质是一个函数，返回值是一个指针；
  函数指针是指向函数的一个指针变量；
   #include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdlib&amp;gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &amp;lt;&amp;lt; &amp;quot;fun: &amp;quot; &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun pf(&amp;quot;Hello&amp;quot;); return 0; }  </description>
@@ -104,29 +145,29 @@ ArcMap WMTS</description>
     
     <item>
       <title>explicit（显式）关键字</title>
-      <link>https://874656645.github.io/rick/posts/explicit%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <link>https://874656645.github.io/rick/posts/24-explicit%E5%85%B3%E9%94%AE%E5%AD%97/</link>
       <pubDate>Wed, 15 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/explicit%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <guid>https://874656645.github.io/rick/posts/24-explicit%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
       <description> explicit（显式）关键字  修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化 B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化 B b3{ 1 }; // OK：直接列表初始化 B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化 B b5 = (B)1; // OK：允许 static_cast 的显式转换 if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换 bool b8 = static_cast&amp;lt;bool&amp;gt;(b1); // OK：static_cast 进行直接初始化 return 0; }  </description>
     </item>
     
     <item>
       <title>C&#43;&#43; 字符串常量存储</title>
-      <link>https://874656645.github.io/rick/posts/c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</link>
+      <link>https://874656645.github.io/rick/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</link>
       <pubDate>Mon, 13 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</guid>
+      <guid>https://874656645.github.io/rick/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</guid>
       <description>C++ 字符串常量存储 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
  局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &amp;lt;iostream&amp;gt; #include &amp;lt;cstdlib&amp;gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &amp;quot;qqq&amp;quot;;//为了测试‘char p[]=&amp;quot;Hello world!&amp;quot;’中的字符串在静态存储区是否也有一份拷贝 char p[]=&amp;quot;Hello world!&amp;quot;; char* p2 = &amp;quot;w&amp;quot;;//为了测试‘char p[]=&amp;quot;Hello world!&amp;quot;’中的字符串在静态存储区是否也有一份拷贝 printf(&amp;quot;in s1 p=%p\n&amp;quot;, p); printf(&amp;quot;in s1 p1=%p\n&amp;quot;, p1); printf(&amp;quot;in s1: string&#39;s address: %p\n&amp;quot;, &amp;amp;(&amp;quot;Hello world!&amp;quot;)); printf(&amp;quot;in s1 p2=%p\n&amp;quot;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&amp;quot;Hello world!</description>
     </item>
     
     <item>
       <title>const 修饰符</title>
-      <link>https://874656645.github.io/rick/posts/const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
+      <link>https://874656645.github.io/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
       <pubDate>Fri, 10 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
+      <guid>https://874656645.github.io/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
       <description> const C++ 1、const 修饰指针和引用 常对象：只能调用 const 成员函数
 常量指针：所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
 指针常量：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改
@@ -136,10 +177,10 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
     
     <item>
       <title>QProcess路径中有空格</title>
-      <link>https://874656645.github.io/rick/posts/qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/</link>
+      <link>https://874656645.github.io/rick/posts/21-qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/</link>
       <pubDate>Mon, 06 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/</guid>
+      <guid>https://874656645.github.io/rick/posts/21-qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/</guid>
       <description>QProcess使用  路径中有空格  m_process-&amp;gt;startDetached(strAppDir + &amp;quot;/ThreeDScreen.exe&amp;quot;, QStringList())
  杀死一个进程（注：-t 参数会将创建的子进程一起杀死）
   QProcess::startDetached(&amp;quot;taskkill -t -f /IM iexplore.exe&amp;quot;);</description>
@@ -147,10 +188,10 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
     
     <item>
       <title>QString中文乱码</title>
-      <link>https://874656645.github.io/rick/posts/qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</link>
+      <link>https://874656645.github.io/rick/posts/20-qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</link>
       <pubDate>Mon, 06 Dec 2021 11:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</guid>
+      <guid>https://874656645.github.io/rick/posts/20-qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</guid>
       <description>QString中文乱码  QString使用的是UTF-8编码
  从字符常量中获取中文
   QString msg = QString::fromLocal8Bit(&amp;quot;This is a debug message at 中文&amp;quot;);
@@ -162,10 +203,10 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
     
     <item>
       <title>IE 64位插件</title>
-      <link>https://874656645.github.io/rick/posts/ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/</link>
+      <link>https://874656645.github.io/rick/posts/19-ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/</link>
       <pubDate>Sat, 04 Dec 2021 11:36:17 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/</guid>
+      <guid>https://874656645.github.io/rick/posts/19-ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/</guid>
       <description> IE 64位插件 1、设置IE为单进程模式  64位操作系统的 IE 默认每个 Tab 页都是一个进程，并且 Tab 页的进程是 32 位的，主进程是 64 位的，如下图所示
  修改 IE 的注册表，使 IE 变成单进程
 在HKEY_CURRENT_USER/SOFTWARE/Microsoft/Internet Explorer/Main下添加TabProcGrowth
@@ -175,20 +216,20 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
     
     <item>
       <title>3DMax 操作</title>
-      <link>https://874656645.github.io/rick/posts/3dmax%E6%93%8D%E4%BD%9C/</link>
+      <link>https://874656645.github.io/rick/posts/18-3dmax%E6%93%8D%E4%BD%9C/</link>
       <pubDate>Thu, 25 Nov 2021 11:36:19 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/3dmax%E6%93%8D%E4%BD%9C/</guid>
+      <guid>https://874656645.github.io/rick/posts/18-3dmax%E6%93%8D%E4%BD%9C/</guid>
       <description> 3DMax 操作 1、查看纹理 渲染——材质编辑器——精简材质编辑器
 2、合并Mesh——附加 </description>
     </item>
     
     <item>
       <title>ArcGIS 字段计算（自增、随机数）</title>
-      <link>https://874656645.github.io/rick/posts/arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
+      <link>https://874656645.github.io/rick/posts/17-arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
       <pubDate>Thu, 25 Nov 2021 11:36:19 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/rick/posts/17-arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
       <description> ArcGIS 字段计算（自增、随机数） 1、随机数 python 脚本
 import random def randNum(): res = random.randint(1, 7) return res  2、自增 python 脚本
 total = 0 def accumulate(increment): global total if total: total += increment else: total = increment return total  </description>
@@ -196,30 +237,30 @@ total = 0 def accumulate(increment): global total if total: total += increment e
     
     <item>
       <title>Sqlite 随机数</title>
-      <link>https://874656645.github.io/rick/posts/sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
+      <link>https://874656645.github.io/rick/posts/16-sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
       <pubDate>Thu, 25 Nov 2021 11:36:17 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/rick/posts/16-sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
       <description> Sqlite 随机数 1、随机数 SQL 脚本
 update &amp;quot;CYBuildings2&amp;quot; set &amp;quot;imgIndex&amp;quot; = FLOOR(1 + (RANDOM()+9223372036854775808)/2.0/9223372036854775808 * 7);  </description>
     </item>
     
     <item>
       <title>查看dll版本</title>
-      <link>https://874656645.github.io/rick/posts/%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/</link>
+      <link>https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/</link>
       <pubDate>Wed, 05 Jun 2019 11:36:19 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/</guid>
+      <guid>https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/</guid>
       <description>查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
 2、使用 notepad++ 直接用 记事本 或者 notepad++ 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。</description>
     </item>
     
     <item>
       <title>Conda Learn</title>
-      <link>https://874656645.github.io/rick/posts/conda-learn/</link>
+      <link>https://874656645.github.io/rick/posts/14-conda-learn/</link>
       <pubDate>Tue, 04 Jun 2019 10:16:11 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/conda-learn/</guid>
+      <guid>https://874656645.github.io/rick/posts/14-conda-learn/</guid>
       <description>miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
 set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
 1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes  执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
@@ -232,10 +273,10 @@ source activate python34 // for Linux &amp;amp; Mac</description>
     
     <item>
       <title>Restart Cortana</title>
-      <link>https://874656645.github.io/rick/posts/restart-cortana/</link>
+      <link>https://874656645.github.io/rick/posts/13-restart-cortana/</link>
       <pubDate>Tue, 09 Apr 2019 10:35:41 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/restart-cortana/</guid>
+      <guid>https://874656645.github.io/rick/posts/13-restart-cortana/</guid>
       <description>win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
 2.在其中输入下列命令，重新注册激活小娜
 Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &amp;quot;$($_.InstallLocation)\AppXManifest.xml&amp;quot;}</description>
@@ -243,10 +284,10 @@ Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -Disa
     
     <item>
       <title>Cmake Learn</title>
-      <link>https://874656645.github.io/rick/posts/cmake-learn/</link>
+      <link>https://874656645.github.io/rick/posts/12-cmake-learn/</link>
       <pubDate>Fri, 22 Mar 2019 11:34:12 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/cmake-learn/</guid>
+      <guid>https://874656645.github.io/rick/posts/12-cmake-learn/</guid>
       <description>cmake命令
 1、生成 VS 2015 win64 版本的解决方案 注：下面的命令要在cmd下使用，power shell不可以
 cmake -H. -B./cmk_build/Win64 -G &amp;quot;Visual Studio 15 2017 Win64&amp;quot;
@@ -256,10 +297,10 @@ cmake -H. -B./cmk_build/Win64 -G &amp;quot;Visual Studio 15 2017 Win64&amp;quot;
     
     <item>
       <title>Vcpkg Learn</title>
-      <link>https://874656645.github.io/rick/posts/vcpkg-learn/</link>
+      <link>https://874656645.github.io/rick/posts/11-vcpkg-learn/</link>
       <pubDate>Fri, 22 Mar 2019 11:06:01 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/vcpkg-learn/</guid>
+      <guid>https://874656645.github.io/rick/posts/11-vcpkg-learn/</guid>
       <description>vcpkg安装及使用
 注意：需要安装vs的英文语言包
 1、指定 vcpkg 中 msvc 的编译版本 在 vcpkg/triplets/文件夹下的所有cmake文件中添加代码 set(VCPKG_PLATFORM_TOOLSET v140)
@@ -268,10 +309,10 @@ cmake -H. -B./cmk_build/Win64 -G &amp;quot;Visual Studio 15 2017 Win64&amp;quot;
     
     <item>
       <title>Power Shell ExecutionPolicy</title>
-      <link>https://874656645.github.io/rick/posts/power-shell-executionpolicy/</link>
+      <link>https://874656645.github.io/rick/posts/10-power-shell-executionpolicy/</link>
       <pubDate>Thu, 28 Feb 2019 17:01:31 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/power-shell-executionpolicy/</guid>
+      <guid>https://874656645.github.io/rick/posts/10-power-shell-executionpolicy/</guid>
       <description>Power shell执行策略 原文网址
 1、查看当前的安全策略 Get-ExecutionPolicy
 2、修改执行策略 ps:这种方法会将执行策略保存到注册表
@@ -285,19 +326,19 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
     
     <item>
       <title>Crawl Pictures From Website</title>
-      <link>https://874656645.github.io/rick/posts/crawl-pictures-from-website/</link>
+      <link>https://874656645.github.io/rick/posts/9-crawl-pictures-from-website/</link>
       <pubDate>Thu, 28 Feb 2019 15:00:16 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/crawl-pictures-from-website/</guid>
+      <guid>https://874656645.github.io/rick/posts/9-crawl-pictures-from-website/</guid>
       <description>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &amp;quot;dmd&amp;quot; save_path = &#39;E:/python/manhuadao/pics/&#39; __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#39;} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath(&#39;//div[@class=&amp;quot;read-bottom&amp;quot;]//a[@class=&amp;quot;next&amp;quot;]/@href&#39;) # print(next) for href in next_urls: nexturl = href.</description>
     </item>
     
     <item>
       <title>Python Virtualenv</title>
-      <link>https://874656645.github.io/rick/posts/python-virtualenv/</link>
+      <link>https://874656645.github.io/rick/posts/8-python-virtualenv/</link>
       <pubDate>Sat, 16 Feb 2019 11:20:20 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/python-virtualenv/</guid>
+      <guid>https://874656645.github.io/rick/posts/8-python-virtualenv/</guid>
       <description> 原文网址
 在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell
 1、使用pip安装 pip install virtualenv
@@ -311,11 +352,11 @@ virtualenv env
     </item>
     
     <item>
-      <title>Scrapy_Learn</title>
-      <link>https://874656645.github.io/rick/posts/scrapy_learn/</link>
+      <title>Scrapy Learn</title>
+      <link>https://874656645.github.io/rick/posts/7-scrapy-learn/</link>
       <pubDate>Fri, 15 Feb 2019 15:40:48 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/scrapy_learn/</guid>
+      <guid>https://874656645.github.io/rick/posts/7-scrapy-learn/</guid>
       <description>原文网址
 1. Using a virtual environment (recommended) pip install virtualenv
 详细操作
@@ -326,10 +367,10 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &amp;quot;quotes&amp;quo
     
     <item>
       <title>Npm Commond Learning</title>
-      <link>https://874656645.github.io/rick/posts/npm-commond-learning/</link>
+      <link>https://874656645.github.io/rick/posts/6-npm-commond-learning/</link>
       <pubDate>Thu, 31 Jan 2019 17:36:00 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/npm-commond-learning/</guid>
+      <guid>https://874656645.github.io/rick/posts/6-npm-commond-learning/</guid>
       <description>1. 配置npm镜像源 1.1 临时使用 npm --registry https://registry.npm.taobao.org install --save-dev electron
 1.2 持久使用 npm config set registry https://registry.npm.taobao.org
 1.3 配置后可通过下面方式来验证是否成功 npm config get registry 或 npm info electron  1.4 通过cnpm使用 npm install -g cnpm --registry=https://registry.npm.taobao.org
@@ -338,10 +379,10 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &amp;quot;quotes&amp;quo
     
     <item>
       <title>Learn Electron</title>
-      <link>https://874656645.github.io/rick/posts/learn-electron/</link>
+      <link>https://874656645.github.io/rick/posts/5-learn-electron/</link>
       <pubDate>Thu, 31 Jan 2019 15:44:09 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/learn-electron/</guid>
+      <guid>https://874656645.github.io/rick/posts/5-learn-electron/</guid>
       <description>1. Use npm run example 1.1 Clone repository git clone https://github.com/electron/electron-quick-start
 1.2 Go into the repository cd electron-quick-start
 1.3 Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源 ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install
@@ -357,10 +398,10 @@ cd electron-yarn-cz
     
     <item>
       <title>Netstat</title>
-      <link>https://874656645.github.io/rick/posts/netstat/</link>
+      <link>https://874656645.github.io/rick/posts/4-netstat/</link>
       <pubDate>Fri, 28 Dec 2018 16:10:00 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/netstat/</guid>
+      <guid>https://874656645.github.io/rick/posts/4-netstat/</guid>
       <description>win10查看端口使用情况 1. 产看所有已使用的端口 netstat -ano
 2. 查看特定端口的使用 netstat -ano|findstr &amp;quot;443&amp;quot;
 3. 查看占用端口的进程PID tasklist|findstr &amp;quot;7648&amp;quot;</description>
@@ -368,10 +409,10 @@ cd electron-yarn-cz
     
     <item>
       <title>Git Commond</title>
-      <link>https://874656645.github.io/rick/posts/git-commond/</link>
+      <link>https://874656645.github.io/rick/posts/3-git-commond/</link>
       <pubDate>Sat, 15 Dec 2018 22:45:47 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/git-commond/</guid>
+      <guid>https://874656645.github.io/rick/posts/3-git-commond/</guid>
       <description>Commands 1、初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick  2、更新远程仓库代码到本地 git pull blog master
 3、将变化提交到本地仓库 git commit -m &amp;quot;delete all files&amp;quot;
 4、push推送到远程仓库 git push blog master
@@ -388,10 +429,10 @@ cd electron-yarn-cz
     
     <item>
       <title>Hugo Create a New Site by Hugo</title>
-      <link>https://874656645.github.io/rick/posts/hugo-create-a-new-site/</link>
+      <link>https://874656645.github.io/rick/posts/2-hugo-create-a-new-site/</link>
       <pubDate>Fri, 14 Dec 2018 22:40:04 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/hugo-create-a-new-site/</guid>
+      <guid>https://874656645.github.io/rick/posts/2-hugo-create-a-new-site/</guid>
       <description>创建站点 Step1：创建站点 进入到 E:/Hugo/Sites文件夹
 hugo new site HugoLearning.com
 cd HugoLearning.com
@@ -410,10 +451,10 @@ Step5：生成网站 命令行执行 hugo，在网站目录生成public文件夹
     
     <item>
       <title>Hello Hugo</title>
-      <link>https://874656645.github.io/rick/posts/hello-hugo/</link>
+      <link>https://874656645.github.io/rick/posts/1-hello-hugo/</link>
       <pubDate>Fri, 14 Dec 2018 22:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/hello-hugo/</guid>
+      <guid>https://874656645.github.io/rick/posts/1-hello-hugo/</guid>
       <description> Hello Hugo </description>
     </item>
     

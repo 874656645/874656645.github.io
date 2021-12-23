@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Welcome to Rick&#39;s Page  | 拷贝构造、赋值构造</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.52" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/rick/dist/css/app.955516233bcafa4d2a1c13cea63c7b50.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="拷贝构造、赋值构造" />
+<meta property="og:description" content="拷贝构造、赋值构造 结论：
+ 拷贝构造函数是函数，赋值运算符是运算符的重载； 拷贝构造函数会生成新的类对象，赋值运算符不会； 拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值; 若接受返回值的对象已经初始化过，则会调用赋值构造函数，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值构造函数，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。  测试类 class A { public: A(){ cout &lt;&lt; &quot;default constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; } A(int t){ x = new int(0); y = t; cout &lt;&lt; &quot;second constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; } A(const A &amp;a){ cout &lt;&lt; &quot;const copy constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; this-&gt;x = a." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/36-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/" /><meta property="article:published_time" content="2021-12-23T14:34:27&#43;08:00"/>
+<meta property="article:modified_time" content="2021-12-23T14:34:27&#43;08:00"/>
+
+<meta itemprop="name" content="拷贝构造、赋值构造">
+<meta itemprop="description" content="拷贝构造、赋值构造 结论：
+ 拷贝构造函数是函数，赋值运算符是运算符的重载； 拷贝构造函数会生成新的类对象，赋值运算符不会； 拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值; 若接受返回值的对象已经初始化过，则会调用赋值构造函数，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值构造函数，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。  测试类 class A { public: A(){ cout &lt;&lt; &quot;default constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; } A(int t){ x = new int(0); y = t; cout &lt;&lt; &quot;second constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; } A(const A &amp;a){ cout &lt;&lt; &quot;const copy constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; this-&gt;x = a.">
+
+
+<meta itemprop="datePublished" content="2021-12-23T14:34:27&#43;08:00" />
+<meta itemprop="dateModified" content="2021-12-23T14:34:27&#43;08:00" />
+<meta itemprop="wordCount" content="625">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="拷贝构造、赋值构造"/>
+<meta name="twitter:description" content="拷贝构造、赋值构造 结论：
+ 拷贝构造函数是函数，赋值运算符是运算符的重载； 拷贝构造函数会生成新的类对象，赋值运算符不会； 拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值; 若接受返回值的对象已经初始化过，则会调用赋值构造函数，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值构造函数，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。  测试类 class A { public: A(){ cout &lt;&lt; &quot;default constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; } A(int t){ x = new int(0); y = t; cout &lt;&lt; &quot;second constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; } A(const A &amp;a){ cout &lt;&lt; &quot;const copy constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; this-&gt;x = a."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://874656645.github.io/rick/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Welcome to Rick&#39;s Page
+    </a>
+    <div class="flex-l items-center">
+      
+      
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">拷贝构造、赋值构造</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2021-12-23T14:34:27&#43;08:00">December 23, 2021</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h2 id="拷贝构造-赋值构造">拷贝构造、赋值构造</h2>
+
+<p><strong>结论：</strong></p>
+
+<ol>
+<li>拷贝构造函数是函数，赋值运算符是运算符的重载；</li>
+<li>拷贝构造函数会生成新的类对象，赋值运算符不会；</li>
+<li>拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值;</li>
+<li>若接受返回值的对象已经初始化过，则会调用赋值构造函数，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值构造函数，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。</li>
+</ol>
+
+<h2 id="测试类">测试类</h2>
+
+<pre><code class="language-C++">class A
+{
+public:
+    A(){
+        cout &lt;&lt; &quot;default constructor&quot; &lt;&lt; endl;
+        cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl;
+    }
+    A(int t){
+        x = new int(0);
+        y = t;
+        cout &lt;&lt; &quot;second constructor&quot; &lt;&lt; endl;
+        cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl;
+    }
+    A(const A &amp;a){
+        cout &lt;&lt; &quot;const copy constructor&quot; &lt;&lt; endl;
+        cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl;
+        this-&gt;x = a.x;
+        this-&gt;y = a.y;
+    }
+    
+    A&amp; operator = (const A &amp;a){
+        cout &lt;&lt; &quot;const assignment constructor&quot; &lt;&lt; endl;
+        this-&gt;x = a.x;
+        this-&gt;y = a.y;   
+        return *this;
+    }
+    ~A(){
+        cout &lt;&lt; &quot;destructor delete &quot; &lt;&lt; this &lt;&lt; endl;
+        delete x;
+    }
+    
+public:
+    int * x {nullptr};
+    int y{0};
+};
+
+A f(){
+    A ret(3);
+    cout &lt;&lt; &quot;stack f adrres: &quot; &lt;&lt; &amp;ret &lt;&lt; &quot;\t point x: &quot; &lt;&lt; ret.x &lt;&lt; &quot;\t y: &quot; &lt;&lt; ret.y &lt;&lt; endl;
+    return ret;
+}
+</code></pre>
+
+<h2 id="一-拷贝构造">一、拷贝构造</h2>
+
+<h3 id="1-对象需要通过另外一个对象进行初始化">1. 对象需要通过另外一个对象进行初始化</h3>
+
+<pre><code class="language-C++">int main()
+{
+    A a(1);
+    A c = a;
+    cout &lt;&lt; &quot;global adrres: &quot; &lt;&lt; &amp;c &lt;&lt; &quot;\t point x: &quot; &lt;&lt; c.x &lt;&lt; &quot;\t y: &quot; &lt;&lt; c.y &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code class="language-text">Start
+second constructor
+adrres: 0x7ffdf2cf5cc0	 point x: 0x1e9db20	 y: 1
+const copy constructor
+adrres: 0x7ffdf2cf5cb0	 point x: 0	 y: 0
+global adrres: 0x7ffdf2cf5cb0	 point x: 0x1e9db20	 y: 1
+destructor delete 0x7ffdf2cf5cb0
+destructor delete 0x7ffdf2cf5cc0
+0
+Finish
+</code></pre>
+
+<h3 id="2-对象通过值传递方式进入函数">2. 对象通过值传递方式进入函数</h3>
+
+<pre><code class="language-C++">void g(A a){
+    cout &lt;&lt; &quot;stack g adrres: &quot; &lt;&lt; &amp;a &lt;&lt; &quot;\t point x: &quot; &lt;&lt; a.x &lt;&lt; &quot;\t y: &quot; &lt;&lt; a.y &lt;&lt; endl;
+}
+int main()
+{
+    A a(1);
+    g(a);
+    
+    return 0;
+}
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code class="language-text">Start
+second constructor
+adrres: 0x7ffddc160510	 point x: 0x2448b20	 y: 1
+const copy constructor
+adrres: 0x7ffddc160520	 point x: 0	 y: 0
+stack g adrres: 0x7ffddc160520	 point x: 0x2448b20	 y: 1
+destructor delete 0x7ffddc160520
+destructor delete 0x7ffddc160510
+0
+Finish
+</code></pre>
+
+<h3 id="3-当对象以值传递的方式从函数返回">3. 当对象以值传递的方式从函数返回</h3>
+
+<pre><code class="language-C++">class A
+{
+    //注意把拷贝构造设为禁止使用，否则看不到效果
+    A(const A &amp;a) = delete;
+}
+int main()
+{
+    A c = f();
+    cout &lt;&lt; &quot;global adrres: &quot; &lt;&lt; &amp;c &lt;&lt; &quot;\t point x: &quot; &lt;&lt; c.x &lt;&lt; &quot;\t y: &quot; &lt;&lt; c.y &lt;&lt; endl;
+    
+    return 0;
+}
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code class="language-text">Start
+prog.cc: In function 'A f()':
+prog.cc:40:12: error: use of deleted function 'A::A(const A&amp;)'
+   40 |     return ret;
+      |            ^~~
+prog.cc:20:5: note: declared here
+   20 |     A(const A &amp;a) = delete;
+      |     ^
+1
+Finish
+</code></pre>
+
+<p>正常输出：虽然没有输出调用拷贝构造的信息，但确实有关系</p>
+
+<pre><code class="language-text">Start
+second constructor
+adrres: 0x7fff0f7062d0	 point x: 0x127eb20	 y: 3
+stack f adrres: 0x7fff0f7062d0	 point x: 0x127eb20	 y: 3
+global adrres: 0x7fff0f7062d0	 point x: 0x127eb20	 y: 3
+destructor delete 0x7fff0f7062d0
+0
+Finish
+</code></pre>
+
+<h2 id="二-赋值构造">二、赋值构造</h2>
+
+<ul>
+<li><strong>注意：拷贝构造不能是 <code>delete</code> 的</strong></li>
+</ul>
+
+<h3 id="1-对象直接赋值给另一个对象-且接受值的对象-已经初始化过">1. 对象直接赋值给另一个对象，且接受值的对象<strong>已经初始化过</strong></h3>
+
+<pre><code class="language-C++">int main()
+{
+    A a(1);
+    A c;
+    c = a;
+    cout &lt;&lt; &quot;global adrres: &quot; &lt;&lt; &amp;c &lt;&lt; &quot;\t point x: &quot; &lt;&lt; c.x &lt;&lt; &quot;\t y: &quot; &lt;&lt; c.y &lt;&lt; endl;
+
+    return 0;
+}
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code class="language-text">Start
+second constructor
+adrres: 0x7ffee27a6fa0	 point x: 0xcdeb20	 y: 1
+default constructor
+adrres: 0x7ffee27a6f90	 point x: 0	 y: 0
+const assignment constructor
+global adrres: 0x7ffee27a6f90	 point x: 0xcdeb20	 y: 1
+destructor delete 0x7ffee27a6f90
+destructor delete 0x7ffee27a6fa0
+0
+Finish
+</code></pre>
+
+<h3 id="2-对象以值传递方式从函数返回-且接受返回值的对象已经初始化过">2. 对象以值传递方式从函数返回，且接受返回值的对象已经初始化过</h3>
+
+<ul>
+<li>注意：返回函数调用后，会调用析构，如果对象中包含指针时，会使该指针失效</li>
+</ul>
+
+<pre><code class="language-C++">int main()
+{
+    A c;
+    c = f();
+    // 此时调用指针会出错，f()结束，调用对象析构，对象中的指针被 delete 掉了
+    // cout &lt;&lt; *c.x &lt;&lt; endl;
+    cout &lt;&lt; &quot;global adrres: &quot; &lt;&lt; &amp;c &lt;&lt; &quot;\t point x: &quot; &lt;&lt; c.x &lt;&lt; &quot;\t y: &quot; &lt;&lt; c.y &lt;&lt; endl;
+    
+    return 0;
+}
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code class="language-text">Start
+default constructor
+adrres: 0x7ffd3aed2be0	 point x: 0	 y: 0
+second constructor
+adrres: 0x7ffd3aed2bf0	 point x: 0x1475b20	 y: 3
+stack f adrres: 0x7ffd3aed2bf0	 point x: 0x1475b20	 y: 3
+const assignment constructor
+destructor delete 0x7ffd3aed2bf0
+global adrres: 0x7ffd3aed2be0	 point x: 0x1475b20	 y: 3
+destructor delete 0x7ffd3aed2be0
+0
+Finish
+</code></pre>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://874656645.github.io/rick/" >
+    &copy; 2021 Welcome to Rick&#39;s Page
+  </a>
+    <div>
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/rick/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

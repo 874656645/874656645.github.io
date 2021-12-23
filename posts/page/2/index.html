@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2021-12-10T12:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-16T14:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
@@ -98,7 +98,70 @@
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/const%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="link black dim">
+      <a href="/rick/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="link black dim">
+        函数指针
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       函数指针 #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; }  Start 10 10 20 30 0 Finish  
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="link black dim">
+        指针函数和函数指针
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       指针函数和函数指针  指针函数本质是一个函数，返回值是一个指针；
+ 函数指针是指向函数的一个指针变量；
+  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &quot;fun: &quot; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun pf(&quot;Hello&quot;); return 0; }  
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/24-explicit%E5%85%B3%E9%94%AE%E5%AD%97/" class="link black dim">
+        explicit（显式）关键字
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       explicit（显式）关键字  修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化 B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化 B b3{ 1 }; // OK：直接列表初始化 B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化 B b5 = (B)1; // OK：允许 static_cast 的显式转换 if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换 bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化 return 0; }  
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/" class="link black dim">
+        C&#43;&#43; 字符串常量存储
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      C++ 字符串常量存储 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+ 局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &quot;qqq&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 char p[]=&quot;Hello world!&quot;; char* p2 = &quot;w&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 printf(&quot;in s1 p=%p\n&quot;, p); printf(&quot;in s1 p1=%p\n&quot;, p1); printf(&quot;in s1: string's address: %p\n&quot;, &amp;(&quot;Hello world!&quot;)); printf(&quot;in s1 p2=%p\n&quot;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&quot;Hello world!
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="link black dim">
         const 修饰符
       </a>
     </h1>
@@ -117,7 +180,7 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/" class="link black dim">
+      <a href="/rick/posts/21-qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/" class="link black dim">
         QProcess路径中有空格
       </a>
     </h1>
@@ -134,7 +197,7 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="link black dim">
+      <a href="/rick/posts/20-qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="link black dim">
         QString中文乱码
       </a>
     </h1>
@@ -155,7 +218,7 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/" class="link black dim">
+      <a href="/rick/posts/19-ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/" class="link black dim">
         IE 64位插件
       </a>
     </h1>
@@ -174,7 +237,7 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/3dmax%E6%93%8D%E4%BD%9C/" class="link black dim">
+      <a href="/rick/posts/18-3dmax%E6%93%8D%E4%BD%9C/" class="link black dim">
         3DMax 操作
       </a>
     </h1>
@@ -190,7 +253,7 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
   <div class="bg-white mb3 pa4 gray overflow-hidden">
     <span class="f6 db">Posts</span>
     <h1 class="f3 near-black">
-      <a href="/rick/posts/arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="link black dim">
+      <a href="/rick/posts/17-arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="link black dim">
         ArcGIS 字段计算（自增、随机数）
       </a>
     </h1>
@@ -198,77 +261,6 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
        ArcGIS 字段计算（自增、随机数） 1、随机数 python 脚本
 import random def randNum(): res = random.randint(1, 7) return res  2、自增 python 脚本
 total = 0 def accumulate(increment): global total if total: total += increment else: total = increment return total  
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="link black dim">
-        Sqlite 随机数
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       Sqlite 随机数 1、随机数 SQL 脚本
-update &quot;CYBuildings2&quot; set &quot;imgIndex&quot; = FLOOR(1 + (RANDOM()+9223372036854775808)/2.0/9223372036854775808 * 7);  
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/" class="link black dim">
-        查看dll版本
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
-2、使用 notepad++ 直接用 记事本 或者 notepad++ 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/conda-learn/" class="link black dim">
-        Conda Learn
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
-set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
-1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes  执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
-2、搜索某个库的所有版本 conda search gdal
-3、查看当前环境下已安装的包 conda list
-4、创建一个虚拟环境 conda create --name python34 python=3.4
-5、激活某个环境 activate python34 // for windows
-source activate python34 // for Linux &amp; Mac
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/restart-cortana/" class="link black dim">
-        Restart Cortana
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
-2.在其中输入下列命令，重新注册激活小娜
-Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &quot;$($_.InstallLocation)\AppXManifest.xml&quot;}
     </div>
   </div>
 </div>
