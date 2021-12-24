@@ -6,10 +6,46 @@
     <description>Recent content on Welcome to Rick&#39;s Page</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Dec 2021 14:34:27 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 24 Dec 2021 15:34:27 +0800</lastBuildDate>
     
 	<atom:link href="https://874656645.github.io/rick/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>抽象、封装、继承、多态</title>
+      <link>https://874656645.github.io/rick/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/</link>
+      <pubDate>Fri, 24 Dec 2021 15:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/</guid>
+      <description>一、抽象、封装 数据抽象：是一种仅向用户暴露接口而把具体的实现细节隐藏起来的机制，是一种依赖于接口实现分离的设计技术
+数据封装：是一种把数据和操作数据的函数捆绑在一起的机制
+好处  类的内部受到保护，不会因无意的用户级错误导致对象状态受损 类实现可能随着时间的推移而发生变化，数据抽象可以更好的应对不断变化的需求  策略  通常情况下，我们都会设置类成员状态为私有（private），除非我们真的需要将其暴露，这样才能保证良好的封装性。 抽象把代码分离为接口和实现。所以在设计组件时，必须保持接口独立于实现，这样，如果改变底层实现，接口也将保持不变。在这种情况下，不管任何程序使用接口，接口都不会受到影响，只需要将最新的实现重新编译即可  接口 接口描述了类的行为和功能，而不需要完成类的特定实现。如果类中至少有一个函数被声明为纯虚函数，则这个类就是抽象类
+设计抽象类（通常称为 ABC）的目的，是为了给其他类提供一个可以继承的适当的基类。抽象类不能被用于实例化对象，它只能作为接口使用。因此，如果一个 ABC 的子类需要被实例化，则必须实现每个虚函数，如果没有在派生类中重写纯虚函数，就尝试实例化该类的对象，会导致编译错误。
+可用于实例化对象的类被称为具体类
+二、继承 继承代表了 is a 关系。例如，哺乳动物是动物，狗是哺乳动物，因此，狗是动物，等等。一个类可以派生自多个类，这意味着，它可以从多个基类继承数据和函数。类派生列表以一个或多个基类命名
+派生类可以访问基类中所有的非私有成员，同时，一个派生类继承了所有的基类方法，但下列情况除外：
+ 基类的构造函数、析构函数和拷贝构造函数 基类的重载运算符 基类的友元函数  三、多态 虚函数：虚函数是在基类中使用关键字 virtual 声明的函数。在派生类中重新定义基类中定义的虚函数时，会告诉编译器不要静态链接到该函数。我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为动态链接，或后期绑定。
+ 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
+// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &amp;lt;&amp;lt; &amp;quot;Shape deconstructor&amp;quot; &amp;lt;&amp;lt; endl; } // pure virtual function virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &amp;lt;&amp;lt; &amp;quot;PaintCost: &amp;quot; &amp;lt;&amp;lt; res &amp;lt;&amp;lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &amp;lt;&amp;lt; &amp;quot;Rectangle deconstructor&amp;quot; &amp;lt;&amp;lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员） cout &amp;lt;&amp;lt; &amp;quot;width: &amp;quot; &amp;lt;&amp;lt; width &amp;lt;&amp;lt; &amp;quot;\theight: &amp;quot; &amp;lt;&amp;lt; height &amp;lt;&amp;lt; endl; } int area () { auto area = width * height; cout &amp;lt;&amp;lt; &amp;quot;Rectangle class area: &amp;quot; &amp;lt;&amp;lt; area &amp;lt;&amp;lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &amp;lt;&amp;lt; &amp;quot;Triangle deconstructor&amp;quot; &amp;lt;&amp;lt; endl; } int area () { auto area = width * height / 2; cout &amp;lt;&amp;lt; &amp;quot;Triangle class area: &amp;quot; &amp;lt;&amp;lt; area &amp;lt;&amp;lt;endl; return area; } };  多继承：</description>
+    </item>
+    
+    <item>
+      <title>类的静态成员</title>
+      <link>https://874656645.github.io/rick/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/</link>
+      <pubDate>Fri, 24 Dec 2021 13:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/</guid>
+      <description>类的静态成员  使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A { string name {&amp;quot;C++&amp;quot;}; int id {1024}; static int objCount; public: A(); friend void printA(const A &amp;amp;a); void printA(); static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){ objCount++; } void A::printA(){ cout &amp;lt;&amp;lt; &amp;quot;objCount = &amp;quot; &amp;lt;&amp;lt; this-&amp;gt;objCount &amp;lt;&amp;lt; &amp;quot;\tname = &amp;quot; &amp;lt;&amp;lt; this-&amp;gt;name &amp;lt;&amp;lt; &amp;quot;\tid = &amp;quot; &amp;lt;&amp;lt; this-&amp;gt;id &amp;lt;&amp;lt; endl; } void A::printC(){ // 静态函数内没有this指针 cout &amp;lt;&amp;lt; &amp;quot;objCount = &amp;quot; &amp;lt;&amp;lt; objCount &amp;lt;&amp;lt; endl; // error: &#39;this&#39; is unavailable for static member functions // cout &amp;lt;&amp;lt; &amp;quot;objCount = &amp;quot; &amp;lt;&amp;lt; this-&amp;gt;objCount &amp;lt;&amp;lt; endl; } void printA(const A &amp;amp;a){ cout &amp;lt;&amp;lt; &amp;quot;objCount = &amp;quot; &amp;lt;&amp;lt; a.</description>
+    </item>
+    
+    <item>
+      <title>友元函数</title>
+      <link>https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Fri, 24 Dec 2021 12:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/</guid>
+      <description>友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  class A { string name {&amp;quot;C++&amp;quot;}; int id {1024}; public: friend void printA(const A &amp;amp;a); void printA(); }; void A::printA(){ cout &amp;lt;&amp;lt; &amp;quot;name = &amp;quot; &amp;lt;&amp;lt; this-&amp;gt;name &amp;lt;&amp;lt; &amp;quot;\t id = &amp;quot; &amp;lt;&amp;lt; this-&amp;gt;id &amp;lt;&amp;lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;amp;a){ cout &amp;lt;&amp;lt; &amp;quot;name = &amp;quot; &amp;lt;&amp;lt; a.name &amp;lt;&amp;lt; &amp;quot;\t id = &amp;quot; &amp;lt;&amp;lt; a.</description>
+    </item>
     
     <item>
       <title>拷贝构造、赋值构造</title>
@@ -58,8 +94,9 @@
       <pubDate>Wed, 22 Dec 2021 22:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</guid>
-      <description>C 与 C++ 的差异 1. C++ 是 C 的超集和增强，但是校验更加严格 1.1 新增命名空间 1.2 C++ 变量不必都声明在函数顶部，可以随使用随定义 1.3 变量检测增强 C 全局变量重复定义，C++不可以，全局变量检测增强
-// C 语言 int g_val; // bss段 int g_val = 10; // data段  1.4 struct 结构体增强 // C 语言声明结构体变量 struct Student s;  // C++ 语言声明结构体变量 Student s;  1.5 函数形参个数和函数返回值增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40) // 可编译通过，但是有警告  1.</description>
+      <description>C 与 C++ 的差异 C++ 是 C 的超集和增强，校验更加严格
+1 新增命名空间  给{}作用域起了个名称，后面不用加分号;  namespace X { }  2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
+故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp;amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C++ 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C++ 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段  6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告  7 struct 结构体增强 // C 语言声明结构体变量 struct Student s;  // C++ 语言声明结构体变量 Student s;  8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C++ 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &amp;lt; b) ?</description>
     </item>
     
     <item>
