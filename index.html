@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/" />
-<meta property="og:updated_time" content="2021-12-24T15:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-25T21:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Welcome to Rick&#39;s Page">
 <meta itemprop="description" content="">
@@ -124,6 +124,31 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
+          <a href="/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/" class="color-inherit dim link">
+            指针引用
+            </a>
+        </h1>
+        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
+          指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是指针地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;test:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &quot;main point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; return 0; }  输出：
+        </div>
+          <a href="/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+        
+      </div>
+    </div>
+  </div>
+</article>
+
+          </div>
+        
+          <div class="relative w-100 mb4">
+            
+<article class="bb b--black-10">
+  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
+    <div class="flex flex-column flex-row-ns">
+      
+      <div class="blah w-100">
+        <h1 class="f3 fw1 athelas mt0 lh-title">
           <a href="/rick/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/" class="color-inherit dim link">
             抽象、封装、继承、多态
             </a>
@@ -173,36 +198,18 @@
 
           </div>
         
-          <div class="relative w-100 mb4">
-            
-<article class="bb b--black-10">
-  <div class="db pv4 ph3 ph0-l no-underline dark-gray">
-    <div class="flex flex-column flex-row-ns">
-      
-      <div class="blah w-100">
-        <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/" class="color-inherit dim link">
-            友元函数
-            </a>
-        </h1>
-        <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  class A { string name {&quot;C++&quot;}; int id {1024}; public: friend void printA(const A &amp;a); void printA(); }; void A::printA(){ cout &lt;&lt; &quot;name = &quot; &lt;&lt; this-&gt;name &lt;&lt; &quot;\t id = &quot; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &quot;name = &quot; &lt;&lt; a.name &lt;&lt; &quot;\t id = &quot; &lt;&lt; a.
-        </div>
-          <a href="/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
-        
-      </div>
-    </div>
-  </div>
-</article>
-
-          </div>
-        
       </section>
 
       
       <section class="w-100">
         <h1 class="f3">More</h1>
         
+        
+          <h2 class="f5 fw4 mb4 dib mr3">
+            <a href="/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/" class="link black dim">
+              友元函数
+            </a>
+          </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="/rick/posts/36-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/" class="link black dim">
@@ -219,12 +226,6 @@
           <h2 class="f5 fw4 mb4 dib mr3">
             <a href="/rick/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/" class="link black dim">
               inline 内联函数
-            </a>
-          </h2>
-        
-          <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/rick/posts/33-fork-unix/" class="link black dim">
-              fork Unix
             </a>
           </h2>
         

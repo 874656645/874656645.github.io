@@ -6,10 +6,20 @@
     <description>Recent content on Welcome to Rick&#39;s Page</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Dec 2021 15:34:27 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Dec 2021 21:34:27 +0800</lastBuildDate>
     
 	<atom:link href="https://874656645.github.io/rick/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>指针引用</title>
+      <link>https://874656645.github.io/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/</link>
+      <pubDate>Sat, 25 Dec 2021 21:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/</guid>
+      <description>指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是指针地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+void test(int * a){ a = new int(20); //*a = 20; cout &amp;lt;&amp;lt; &amp;quot;test point a = &amp;quot; &amp;lt;&amp;lt; &amp;amp;a &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;quot;test:&amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;quot;\ta = &amp;quot; &amp;lt;&amp;lt; *a &amp;lt;&amp;lt; endl; } int main() { int *a = new int(10); cout &amp;lt;&amp;lt; &amp;quot;main point a = &amp;quot; &amp;lt;&amp;lt; &amp;amp;a &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;quot;main:&amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;quot;\ta = &amp;quot; &amp;lt;&amp;lt; *a &amp;lt;&amp;lt; endl; test(a); cout &amp;lt;&amp;lt; &amp;quot;main:&amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;quot;\ta = &amp;quot; &amp;lt;&amp;lt; *a &amp;lt;&amp;lt; endl; return 0; }  输出：</description>
+    </item>
     
     <item>
       <title>抽象、封装、继承、多态</title>
@@ -95,7 +105,7 @@
       
       <guid>https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</guid>
       <description>C 与 C++ 的差异 C++ 是 C 的超集和增强，校验更加严格
-1 新增命名空间  给{}作用域起了个名称，后面不用加分号;  namespace X { }  2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
+1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } }  2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
 故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp;amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C++ 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C++ 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段  6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告  7 struct 结构体增强 // C 语言声明结构体变量 struct Student s;  // C++ 语言声明结构体变量 Student s;  8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C++ 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &amp;lt; b) ?</description>
     </item>
     
@@ -205,11 +215,13 @@ ArcMap WMTS</description>
       <pubDate>Fri, 10 Dec 2021 12:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
-      <description> const C++ 1、const 修饰指针和引用 常对象：只能调用 const 成员函数
-常量指针：所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
-指针常量：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改
-常量引用：相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
-ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;amp;myA; // 常量指针 ClassA * const b = &amp;amp;myA; // 指针常量 const ClassA &amp;amp;bb = myB; // 常量引用 b = &amp;amp;myB; // 合法（可以指向其它对象） b-&amp;gt;setA(10); // 错误（只读） bb.setA(100); // 错误（只读） bb = myA; // 错误（不可指向其它对象）  char greet[] = &amp;quot;Hello&amp;quot;, w[] = &amp;quot;World&amp;quot;; const char * p = greet; char * const pp = greet; cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; *p = &#39;W&#39;; //error: assignment of read-only location &#39;* p&#39; // *p = &#39;W&#39;; p = w; // 合法（常量指针可以改变指向，不能改变存储的内容） pp = w; //error: assignment of read-only variable &#39;pp&#39; // pp = w; *pp = &#39;W&#39;; // 合法（指针常量可以改变存储的内容，不能改变指向） cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; w &amp;lt;&amp;lt; endl; return 0;  2、const变量存放位置  局部变量存放在栈区 对于全局对象，编译期一般不分配内存，放在符号表中以提高访问效率 对于字面值常量，存放在常量存储区  </description>
+      <description>const C++ 1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
+常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：int * const 指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改，与引用变量效果类似
+常量引用：const int &amp;amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+const int &amp;amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
+const int &amp;amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;amp;myA; // 常量指针 ClassA * const b = &amp;amp;myA; // 指针常量 const ClassA &amp;amp;bb = myB; // 常量引用 b = &amp;amp;myB; // 合法（可以指向其它对象） b-&amp;gt;setA(10); // 错误（只读） bb.</description>
     </item>
     
     <item>

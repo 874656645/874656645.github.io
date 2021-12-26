@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2021-12-22T10:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-22T15:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
@@ -93,6 +93,26 @@
   <article class="pa3 pa4-ns nested-copy-line-height nested-img">
   <main class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></main>
     <section class="flex-ns flex-wrap justify-around mt5">
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/30-%E6%8C%87%E9%92%88-&#43;-1/" class="link black dim">
+        指针 &#43; 1
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       1. *32*位和64`位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
+2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
+int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]； // &amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int） // 但是prt与(&amp;a+1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int) int *ptr = (int*)(&amp;a + 1); cout &lt;&lt; *(a + 1) &lt;&lt; endl; cout &lt;&lt; *(ptr - 1) &lt;&lt; endl; return 0; }  输出：
+1 2 3 6  注： a，&amp;a的地址是一样的，但意思不一样：
+ a是数组首地址，也就是a[0]的地址，a+1是数组下一元素的地址，即a[1]
+ &amp;a是对象（整个数组作为一个对象）首地址，而&amp;a+1是下一个对象的地址，即a[5].  
+    </div>
+  </div>
+</div>
+</div>
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
@@ -222,11 +242,13 @@ ArcMap WMTS
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-       const C++ 1、const 修饰指针和引用 常对象：只能调用 const 成员函数
-常量指针：所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
-指针常量：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改
-常量引用：相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
-ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb.setA(100); // 错误（只读） bb = myA; // 错误（不可指向其它对象）  char greet[] = &quot;Hello&quot;, w[] = &quot;World&quot;; const char * p = greet; char * const pp = greet; cout &lt;&lt; p &lt;&lt; endl; *p = 'W'; //error: assignment of read-only location '* p' // *p = 'W'; p = w; // 合法（常量指针可以改变指向，不能改变存储的内容） pp = w; //error: assignment of read-only variable 'pp' // pp = w; *pp = 'W'; // 合法（指针常量可以改变存储的内容，不能改变指向） cout &lt;&lt; p &lt;&lt; endl; cout &lt;&lt; w &lt;&lt; endl; return 0;  2、const变量存放位置  局部变量存放在栈区 对于全局对象，编译期一般不分配内存，放在符号表中以提高访问效率 对于字面值常量，存放在常量存储区  
+      const C++ 1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
+常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：int * const 指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改，与引用变量效果类似
+常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
+const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb.
     </div>
   </div>
 </div>
@@ -244,27 +266,6 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
       QProcess使用  路径中有空格  m_process-&gt;startDetached(strAppDir + &quot;/ThreeDScreen.exe&quot;, QStringList())
  杀死一个进程（注：-t 参数会将创建的子进程一起杀死）
   QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/20-qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" class="link black dim">
-        QString中文乱码
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      QString中文乱码  QString使用的是UTF-8编码
- 从字符常量中获取中文
-  QString msg = QString::fromLocal8Bit(&quot;This is a debug message at 中文&quot;);
- 以QString做为形参变量传递
-  qDebug(msg.toUtf8());
- QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）
-  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &quot;\r\n&quot;; file.flush(); file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码 QString message, text, fileName = strAppDir + &quot;/Log/&quot;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹 bool ismkdir = dir.
     </div>
   </div>
 </div>

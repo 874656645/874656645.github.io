@@ -29,37 +29,43 @@
     
 
     <meta property="og:title" content="const 修饰符" />
-<meta property="og:description" content=" const C&#43;&#43; 1、const 修饰指针和引用 常对象：只能调用 const 成员函数
-常量指针：所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
-指针常量：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改
-常量引用：相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
-ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb.setA(100); // 错误（只读） bb = myA; // 错误（不可指向其它对象）  char greet[] = &quot;Hello&quot;, w[] = &quot;World&quot;; const char * p = greet; char * const pp = greet; cout &lt;&lt; p &lt;&lt; endl; *p = &#39;W&#39;; //error: assignment of read-only location &#39;* p&#39; // *p = &#39;W&#39;; p = w; // 合法（常量指针可以改变指向，不能改变存储的内容） pp = w; //error: assignment of read-only variable &#39;pp&#39; // pp = w; *pp = &#39;W&#39;; // 合法（指针常量可以改变存储的内容，不能改变指向） cout &lt;&lt; p &lt;&lt; endl; cout &lt;&lt; w &lt;&lt; endl; return 0;  2、const变量存放位置  局部变量存放在栈区 对于全局对象，编译期一般不分配内存，放在符号表中以提高访问效率 对于字面值常量，存放在常量存储区  " />
+<meta property="og:description" content="const C&#43;&#43; 1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
+常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：int * const 指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改，与引用变量效果类似
+常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
+const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/" /><meta property="article:published_time" content="2021-12-10T12:34:27&#43;08:00"/>
 <meta property="article:modified_time" content="2021-12-10T12:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="const 修饰符">
-<meta itemprop="description" content=" const C&#43;&#43; 1、const 修饰指针和引用 常对象：只能调用 const 成员函数
-常量指针：所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
-指针常量：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改
-常量引用：相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
-ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb.setA(100); // 错误（只读） bb = myA; // 错误（不可指向其它对象）  char greet[] = &quot;Hello&quot;, w[] = &quot;World&quot;; const char * p = greet; char * const pp = greet; cout &lt;&lt; p &lt;&lt; endl; *p = &#39;W&#39;; //error: assignment of read-only location &#39;* p&#39; // *p = &#39;W&#39;; p = w; // 合法（常量指针可以改变指向，不能改变存储的内容） pp = w; //error: assignment of read-only variable &#39;pp&#39; // pp = w; *pp = &#39;W&#39;; // 合法（指针常量可以改变存储的内容，不能改变指向） cout &lt;&lt; p &lt;&lt; endl; cout &lt;&lt; w &lt;&lt; endl; return 0;  2、const变量存放位置  局部变量存放在栈区 对于全局对象，编译期一般不分配内存，放在符号表中以提高访问效率 对于字面值常量，存放在常量存储区  ">
+<meta itemprop="description" content="const C&#43;&#43; 1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
+常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：int * const 指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改，与引用变量效果类似
+常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
+const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb.">
 
 
 <meta itemprop="datePublished" content="2021-12-10T12:34:27&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-10T12:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="136">
+<meta itemprop="wordCount" content="174">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="const 修饰符"/>
-<meta name="twitter:description" content=" const C&#43;&#43; 1、const 修饰指针和引用 常对象：只能调用 const 成员函数
-常量指针：所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
-指针常量：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改
-常量引用：相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
-ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb.setA(100); // 错误（只读） bb = myA; // 错误（不可指向其它对象）  char greet[] = &quot;Hello&quot;, w[] = &quot;World&quot;; const char * p = greet; char * const pp = greet; cout &lt;&lt; p &lt;&lt; endl; *p = &#39;W&#39;; //error: assignment of read-only location &#39;* p&#39; // *p = &#39;W&#39;; p = w; // 合法（常量指针可以改变指向，不能改变存储的内容） pp = w; //error: assignment of read-only variable &#39;pp&#39; // pp = w; *pp = &#39;W&#39;; // 合法（指针常量可以改变存储的内容，不能改变指向） cout &lt;&lt; p &lt;&lt; endl; cout &lt;&lt; w &lt;&lt; endl; return 0;  2、const变量存放位置  局部变量存放在栈区 对于全局对象，编译期一般不分配内存，放在符号表中以提高访问效率 对于字面值常量，存放在常量存储区  "/>
+<meta name="twitter:description" content="const C&#43;&#43; 1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
+常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：int * const 指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改，与引用变量效果类似
+常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
+const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb."/>
 
   </head>
 
@@ -125,13 +131,16 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
 
 <h3 id="1-const-修饰指针和引用">1、const 修饰指针和引用</h3>
 
-<p><strong>常对象</strong>：只能调用 const 成员函数</p>
+<p><strong>常对象</strong>：<code>const Class A</code> 只能调用 const 成员函数</p>
 
-<p><strong>常量指针</strong>：所指的地址内容为 <span style="border-bottom:2px dashed yellow;"><strong><em>常量只读</em></strong></span>，但是可指向其它对象的地址（可以重指向）</p>
+<p><strong>常量指针</strong>：<code>const int *</code> 所指的地址内容为 <span style="border-bottom:2px dashed yellow;"><strong><em>常量只读</em></strong></span>，但是可指向其它对象的地址（可以重指向）</p>
 
-<p><strong>指针常量</strong>：指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改</p>
+<p><strong>指针常量</strong>：<code>int * const</code> 指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改，<strong>与引用变量效果类似</strong></p>
 
-<p><strong>常量引用</strong>：相当于是对象的一个别名，对象内容为 <span style="border-bottom:2px dashed yellow;"><strong><em>只读</em></strong></span>，并且不能指向其它对象</p>
+<p><strong>常量引用</strong>：<code>const int &amp;</code> 相当于是对象的一个别名，对象内容为 <span style="border-bottom:2px dashed yellow;"><strong><em>只读</em></strong></span>，并且不能指向其它对象</p>
+
+<p><code>const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明</code><br />
+<code>const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）</code></p>
 
 <pre><code class="language-C++">ClassA myA(10), myB(-10);
 const ClassA a;             // 常对象（只能调用常成员函数）

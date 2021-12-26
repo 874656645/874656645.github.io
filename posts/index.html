@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2021-12-24T15:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-25T21:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
@@ -93,6 +93,22 @@
   <article class="pa3 pa4-ns nested-copy-line-height nested-img">
   <main class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></main>
     <section class="flex-ns flex-wrap justify-around mt5">
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/" class="link black dim">
+        指针引用
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是指针地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;test:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &quot;main point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; return 0; }  输出：
+    </div>
+  </div>
+</div>
+</div>
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
@@ -223,7 +239,7 @@
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       C 与 C++ 的差异 C++ 是 C 的超集和增强，校验更加严格
-1 新增命名空间  给{}作用域起了个名称，后面不用加分号;  namespace X { }  2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
+1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } }  2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
 故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C++ 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C++ 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段  6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告  7 struct 结构体增强 // C 语言声明结构体变量 struct Student s;  // C++ 语言声明结构体变量 Student s;  8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C++ 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?
     </div>
   </div>
@@ -240,26 +256,6 @@
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       函数形参从右到左入栈 int add(int count, ...) { // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节） int intSize = sizeof(int*) / sizeof(int); int sum = 0; // cout &lt;&lt; &amp;count &lt;&lt; endl; int *p = &amp;count + intSize; // cout &lt;&lt; p &lt;&lt; endl; for (int i = 0; i &lt; count; ++i) { sum += *p; cout &lt;&lt; *p &lt;&lt; endl; p += intSize; } return sum; } int main() { cout &lt;&lt; add(3, 1, 2, 3) &lt;&lt; endl; return 0; }  输出：
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/30-%E6%8C%87%E9%92%88-&#43;-1/" class="link black dim">
-        指针 &#43; 1
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       1. *32*位和64`位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
-2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
-int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]； // &amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int） // 但是prt与(&amp;a+1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int) int *ptr = (int*)(&amp;a + 1); cout &lt;&lt; *(a + 1) &lt;&lt; endl; cout &lt;&lt; *(ptr - 1) &lt;&lt; endl; return 0; }  输出：
-1 2 3 6  注： a，&amp;a的地址是一样的，但意思不一样：
- a是数组首地址，也就是a[0]的地址，a+1是数组下一元素的地址，即a[1]
- &amp;a是对象（整个数组作为一个对象）首地址，而&amp;a+1是下一个对象的地址，即a[5].  
     </div>
   </div>
 </div>
