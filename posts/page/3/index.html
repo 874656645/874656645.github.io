@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2021-12-06T11:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-15T12:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
@@ -93,6 +93,75 @@
   <article class="pa3 pa4-ns nested-copy-line-height nested-img">
   <main class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></main>
     <section class="flex-ns flex-wrap justify-around mt5">
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/24-explicit%E5%85%B3%E9%94%AE%E5%AD%97/" class="link black dim">
+        explicit（显式）关键字
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       explicit（显式）关键字  修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化 B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化 B b3{ 1 }; // OK：直接列表初始化 B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化 B b5 = (B)1; // OK：允许 static_cast 的显式转换 if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换 bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换 bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化 return 0; }  
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/" class="link black dim">
+        C&#43;&#43; 字符串常量存储
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      C++ 字符串常量存储 局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+ 局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &quot;qqq&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 char p[]=&quot;Hello world!&quot;; char* p2 = &quot;w&quot;;//为了测试‘char p[]=&quot;Hello world!&quot;’中的字符串在静态存储区是否也有一份拷贝 printf(&quot;in s1 p=%p\n&quot;, p); printf(&quot;in s1 p1=%p\n&quot;, p1); printf(&quot;in s1: string's address: %p\n&quot;, &amp;(&quot;Hello world!&quot;)); printf(&quot;in s1 p2=%p\n&quot;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&quot;Hello world!
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/" class="link black dim">
+        const 修饰符
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      const C++ 1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
+常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：int * const 指针所指的地址不能变（*不可以重指向*），但地址的内容可以被修改，与引用变量效果类似
+常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
+const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用 b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb.
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/21-qprocess%E8%B7%AF%E5%BE%84%E4%B8%AD%E6%9C%89%E7%A9%BA%E6%A0%BC/" class="link black dim">
+        QProcess路径中有空格
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      QProcess使用  路径中有空格  m_process-&gt;startDetached(strAppDir + &quot;/ThreeDScreen.exe&quot;, QStringList())
+ 杀死一个进程（注：-t 参数会将创建的子进程一起杀死）
+  QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);
+    </div>
+  </div>
+</div>
+</div>
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
@@ -199,82 +268,6 @@ update &quot;CYBuildings2&quot; set &quot;imgIndex&quot; = FLOOR(1 + (RANDOM()+9
 </div>
 </div>
       
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/14-conda-learn/" class="link black dim">
-        Conda Learn
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
-set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
-1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes  执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
-2、搜索某个库的所有版本 conda search gdal
-3、查看当前环境下已安装的包 conda list
-4、创建一个虚拟环境 conda create --name python34 python=3.4
-5、激活某个环境 activate python34 // for windows
-source activate python34 // for Linux &amp; Mac
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/13-restart-cortana/" class="link black dim">
-        Restart Cortana
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
-2.在其中输入下列命令，重新注册激活小娜
-Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &quot;$($_.InstallLocation)\AppXManifest.xml&quot;}
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/12-cmake-learn/" class="link black dim">
-        Cmake Learn
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      cmake命令
-1、生成 VS 2015 win64 版本的解决方案 注：下面的命令要在cmd下使用，power shell不可以
-cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
-2、指定目标版本 cmake -D CMAKE_SYSTEM_VERSION=8.1 -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
-3、使用 MinGW 编译器 cmake -H. -B./cmk_build/MinGW -G &quot;MinGW Makefiles&quot;
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/11-vcpkg-learn/" class="link black dim">
-        Vcpkg Learn
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      vcpkg安装及使用
-注意：需要安装vs的英文语言包
-1、指定 vcpkg 中 msvc 的编译版本 在 vcpkg/triplets/文件夹下的所有cmake文件中添加代码 set(VCPKG_PLATFORM_TOOLSET v140)
-如果同时安装了vs2017，需要确保安装vs2017的英文语言包
-    </div>
-  </div>
-</div>
-</div>
-      
     </section>
 
 <ul class="pagination">
@@ -332,12 +325,23 @@ cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
     <li class="page-item"><a class="page-link" href="/rick/posts/page/4/">4</a></li>
     
     
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/rick/posts/page/5/">5</a></li>
+    
+    
     <li class="page-item">
     <a href="/rick/posts/page/4/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
     <li class="page-item">
-        <a href="/rick/posts/page/4/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/rick/posts/page/5/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>

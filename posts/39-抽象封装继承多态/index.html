@@ -37,8 +37,8 @@
 二、继承 继承代表了 is a 关系。例如，哺乳动物是动物，狗是哺乳动物，因此，狗是动物，等等。一个类可以派生自多个类，这意味着，它可以从多个基类继承数据和函数。类派生列表以一个或多个基类命名
 派生类可以访问基类中所有的非私有成员，同时，一个派生类继承了所有的基类方法，但下列情况除外：
  基类的构造函数、析构函数和拷贝构造函数 基类的重载运算符 基类的友元函数  三、多态 虚函数：虚函数是在基类中使用关键字 virtual 声明的函数。在派生类中重新定义基类中定义的虚函数时，会告诉编译器不要静态链接到该函数。我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为动态链接，或后期绑定。
- 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
-// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &quot;Shape deconstructor&quot; &lt;&lt; endl; } // pure virtual function virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &quot;PaintCost: &quot; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &quot;Rectangle deconstructor&quot; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员） cout &lt;&lt; &quot;width: &quot; &lt;&lt; width &lt;&lt; &quot;\theight: &quot; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &quot;Rectangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &quot;Triangle deconstructor&quot; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &quot;Triangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } };  多继承：" />
+ 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 类析构顺序：1）派生类本身的析构函数；2）对象成员析构函数；3）基类析构函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
+// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &quot;Shape destructor&quot; &lt;&lt; endl; } // pure virtual function virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &quot;PaintCost: &quot; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &quot;Rectangle destructor&quot; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员） cout &lt;&lt; &quot;width: &quot; &lt;&lt; width &lt;&lt; &quot;\theight: &quot; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &quot;Rectangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &quot;Triangle destructor&quot; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &quot;Triangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } };  多继承：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/" /><meta property="article:published_time" content="2021-12-24T15:34:27&#43;08:00"/>
 <meta property="article:modified_time" content="2021-12-24T15:34:27&#43;08:00"/>
@@ -52,13 +52,13 @@
 二、继承 继承代表了 is a 关系。例如，哺乳动物是动物，狗是哺乳动物，因此，狗是动物，等等。一个类可以派生自多个类，这意味着，它可以从多个基类继承数据和函数。类派生列表以一个或多个基类命名
 派生类可以访问基类中所有的非私有成员，同时，一个派生类继承了所有的基类方法，但下列情况除外：
  基类的构造函数、析构函数和拷贝构造函数 基类的重载运算符 基类的友元函数  三、多态 虚函数：虚函数是在基类中使用关键字 virtual 声明的函数。在派生类中重新定义基类中定义的虚函数时，会告诉编译器不要静态链接到该函数。我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为动态链接，或后期绑定。
- 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
-// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &quot;Shape deconstructor&quot; &lt;&lt; endl; } // pure virtual function virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &quot;PaintCost: &quot; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &quot;Rectangle deconstructor&quot; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员） cout &lt;&lt; &quot;width: &quot; &lt;&lt; width &lt;&lt; &quot;\theight: &quot; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &quot;Rectangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &quot;Triangle deconstructor&quot; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &quot;Triangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } };  多继承：">
+ 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 类析构顺序：1）派生类本身的析构函数；2）对象成员析构函数；3）基类析构函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
+// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &quot;Shape destructor&quot; &lt;&lt; endl; } // pure virtual function virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &quot;PaintCost: &quot; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &quot;Rectangle destructor&quot; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员） cout &lt;&lt; &quot;width: &quot; &lt;&lt; width &lt;&lt; &quot;\theight: &quot; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &quot;Rectangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &quot;Triangle destructor&quot; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &quot;Triangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } };  多继承：">
 
 
 <meta itemprop="datePublished" content="2021-12-24T15:34:27&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-24T15:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="315">
+<meta itemprop="wordCount" content="316">
 
 
 
@@ -73,8 +73,8 @@
 二、继承 继承代表了 is a 关系。例如，哺乳动物是动物，狗是哺乳动物，因此，狗是动物，等等。一个类可以派生自多个类，这意味着，它可以从多个基类继承数据和函数。类派生列表以一个或多个基类命名
 派生类可以访问基类中所有的非私有成员，同时，一个派生类继承了所有的基类方法，但下列情况除外：
  基类的构造函数、析构函数和拷贝构造函数 基类的重载运算符 基类的友元函数  三、多态 虚函数：虚函数是在基类中使用关键字 virtual 声明的函数。在派生类中重新定义基类中定义的虚函数时，会告诉编译器不要静态链接到该函数。我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为动态链接，或后期绑定。
- 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
-// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &quot;Shape deconstructor&quot; &lt;&lt; endl; } // pure virtual function virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &quot;PaintCost: &quot; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &quot;Rectangle deconstructor&quot; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员） cout &lt;&lt; &quot;width: &quot; &lt;&lt; width &lt;&lt; &quot;\theight: &quot; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &quot;Rectangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &quot;Triangle deconstructor&quot; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &quot;Triangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } };  多继承："/>
+ 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 类析构顺序：1）派生类本身的析构函数；2）对象成员析构函数；3）基类析构函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
+// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &quot;Shape destructor&quot; &lt;&lt; endl; } // pure virtual function virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &quot;PaintCost: &quot; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &quot;Rectangle destructor&quot; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员） cout &lt;&lt; &quot;width: &quot; &lt;&lt; width &lt;&lt; &quot;\theight: &quot; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &quot;Rectangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &quot;Triangle destructor&quot; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &quot;Triangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } };  多继承："/>
 
   </head>
 
@@ -180,6 +180,7 @@
 <ul>
 <li>多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数</li>
 <li>一般情况是<strong>将析构函数设置为虚函数</strong></li>
+<li>类析构顺序：1）派生类本身的析构函数；2）<strong>对象成员析构函数</strong>；3）基类析构函数</li>
 <li>若在基类中不能对虚函数给出有意义的实现，这个时候就会用到<strong>纯虚函数，在函数参数后直接加 <code>= 0</code> 告诉编译器，函数没有主体</strong>，这种虚函数即是纯虚函数</li>
 </ul>
 
@@ -198,7 +199,7 @@ public:
     }
     virtual ~Shape()
     {
-        cout &lt;&lt; &quot;Shape deconstructor&quot; &lt;&lt; endl;
+        cout &lt;&lt; &quot;Shape destructor&quot; &lt;&lt; endl;
     }
     
     // pure virtual function
@@ -222,7 +223,7 @@ public:
     { }
     ~Rectangle()
     {    
-        cout &lt;&lt; &quot;Rectangle deconstructor&quot; &lt;&lt; endl;
+        cout &lt;&lt; &quot;Rectangle destructor&quot; &lt;&lt; endl;
     }
     void printPro()
     {
@@ -243,7 +244,7 @@ public:
     { }
     ~Triangle()
     {    
-        cout &lt;&lt; &quot;Triangle deconstructor&quot; &lt;&lt; endl;
+        cout &lt;&lt; &quot;Triangle destructor&quot; &lt;&lt; endl;
     }
     int area ()
     { 
@@ -271,8 +272,8 @@ public:
 <pre><code class="language-text">Start
 width: 10	height: 20
 PaintCost: 700
-Rectangle deconstructor
-Shape deconstructor
+Rectangle destructor
+Shape destructor
 0
 Finish
 </code></pre>
@@ -298,11 +299,11 @@ Finish
 
 <pre><code class="language-text">Start
 Rectangle class area: 70
-Rectangle deconstructor
-Shape deconstructor
+Rectangle destructor
+Shape destructor
 Triangle class area: 25
-Triangle deconstructor
-Shape deconstructor
+Triangle destructor
+Shape destructor
 0
 Finish
 </code></pre>
