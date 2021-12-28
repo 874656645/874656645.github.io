@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Welcome to Rick&#39;s Page  | 父类指针和子类指针</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.52" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/rick/dist/css/app.955516233bcafa4d2a1c13cea63c7b50.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="父类指针和子类指针" />
+<meta property="og:description" content="父类指针和子类指针  父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将父类对象赋值给子类指针，虚函数执行的是父类的，也可以调用子类函数（？） 将子类对象赋值给父类指针，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
+Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
+Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &lt;&lt; &quot;printA()&quot; &lt;&lt; endl; } virtual void print(){ cout &lt;&lt; &quot;A::print()&quot; &lt;&lt; endl; } }; class B:public A{ public: void printB(){ cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } virtual void print() override{ cout &lt;&lt; &quot;B::print() b = &quot; &lt;&lt; b &lt;&lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针） A *a = new A; // 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/48-%E7%88%B6%E7%B1%BB%E6%8C%87%E9%92%88%E5%92%8C%E5%AD%90%E7%B1%BB%E6%8C%87%E9%92%88/" /><meta property="article:published_time" content="2021-12-28T11:34:27&#43;08:00"/>
+<meta property="article:modified_time" content="2021-12-28T11:34:27&#43;08:00"/>
+
+<meta itemprop="name" content="父类指针和子类指针">
+<meta itemprop="description" content="父类指针和子类指针  父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将父类对象赋值给子类指针，虚函数执行的是父类的，也可以调用子类函数（？） 将子类对象赋值给父类指针，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
+Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
+Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &lt;&lt; &quot;printA()&quot; &lt;&lt; endl; } virtual void print(){ cout &lt;&lt; &quot;A::print()&quot; &lt;&lt; endl; } }; class B:public A{ public: void printB(){ cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } virtual void print() override{ cout &lt;&lt; &quot;B::print() b = &quot; &lt;&lt; b &lt;&lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针） A *a = new A; // 1.">
+
+
+<meta itemprop="datePublished" content="2021-12-28T11:34:27&#43;08:00" />
+<meta itemprop="dateModified" content="2021-12-28T11:34:27&#43;08:00" />
+<meta itemprop="wordCount" content="206">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="父类指针和子类指针"/>
+<meta name="twitter:description" content="父类指针和子类指针  父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将父类对象赋值给子类指针，虚函数执行的是父类的，也可以调用子类函数（？） 将子类对象赋值给父类指针，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
+Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
+Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &lt;&lt; &quot;printA()&quot; &lt;&lt; endl; } virtual void print(){ cout &lt;&lt; &quot;A::print()&quot; &lt;&lt; endl; } }; class B:public A{ public: void printB(){ cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } virtual void print() override{ cout &lt;&lt; &quot;B::print() b = &quot; &lt;&lt; b &lt;&lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针） A *a = new A; // 1."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://874656645.github.io/rick/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Welcome to Rick&#39;s Page
+    </a>
+    <div class="flex-l items-center">
+      
+      
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">父类指针和子类指针</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2021-12-28T11:34:27&#43;08:00">December 28, 2021</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h2 id="父类指针和子类指针">父类指针和子类指针</h2>
+
+<ol>
+<li>父类指针可以<code>new</code>子类对象，子类指针不可以<code>new</code>父类对象，但是可以接收<strong>强转的已经存在的父类指针</strong></li>
+<li>父类指针指向本类对象，调用的虚函数和普通函数都是自己的</li>
+<li>将父类对象赋值给子类指针，虚函数执行的是父类的，也<strong>可以调用子类函数</strong>（？）</li>
+<li>将子类对象赋值给父类指针，虚函数执行的是子类的，并且<strong>不能调用子类的函数</strong></li>
+<li>父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝<br />
+<code>Father *f = (Father*)Child *</code> 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去<br />
+<code>Child *c = (Child*)new Father</code>父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针</li>
+</ol>
+
+<pre><code class="language-C++">class A{
+public:
+    void printA(){
+        cout &lt;&lt; &quot;printA()&quot; &lt;&lt; endl;
+    }
+    virtual void print(){
+        cout &lt;&lt; &quot;A::print()&quot; &lt;&lt; endl;
+    }
+};
+class B:public A{
+public:
+    void printB(){
+        cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl;
+    }
+    virtual void print() override{
+        cout &lt;&lt; &quot;B::print() b = &quot; &lt;&lt; b &lt;&lt; endl;
+    }
+    
+private:
+    int b;
+};
+int main( )
+{
+    // 1、指向自己的类对象（将父类对象赋值给父类指针）
+    A *a = new A;
+    // 1.1 调用自己的函数
+    a-&gt;printA();        // printA()
+    // 1.2 调用虚函数
+    a-&gt;print();         // A::print()
+    
+    // 2、将指向父类的父类指针强转为子类指针（将父类对象赋值给子类指针）
+    // b = new A;       // error: incompatible pointer types assigning to 'B *' from 'A *'
+    B *b = (B*)new A;
+    // 2.1 调用父类函数
+    b-&gt;printA();        // printA()
+    // 2.2 调用虚函数（执行父类的）
+    b-&gt;print();         // A::print()   调用父类的
+    // 2.3 可以调用子类函数
+    b-&gt;printB();        // printB() b = 0
+    
+    // 3、将子类对象赋值给父类指针
+    a = new B;
+    // 3.1 调用父类函数
+    a-&gt;printA();        // printA()
+    // 3.2 调用子类的函数
+    // a-&gt;printB();     // error: no member named 'printB' in 'A'; did you mean 'printA'?
+    // 3.3 调用虚函数（执行子类的）
+    a-&gt;print();         // B::print() b = 0
+    
+    // 4、指向子类对象的子类指针强转为父类指针（效果等同情况3）
+    b = new B;
+    a = (A*)b;
+    a-&gt;printA();        // printA()
+    //a-&gt;printB();      // error: no member named 'printB' in 'A'
+    a-&gt;print();         // B::print() b = 0
+    
+    return 0;
+}
+</code></pre>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://874656645.github.io/rick/" >
+    &copy; 2021 Welcome to Rick&#39;s Page
+  </a>
+    <div>
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/rick/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Welcome to Rick&#39;s Page  | 抽象类、接口类、聚合类</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.52" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/rick/dist/css/app.955516233bcafa4d2a1c13cea63c7b50.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="抽象类、接口类、聚合类" />
+<meta property="og:description" content="抽象类、接口类、聚合类  抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+1）所有成员都是 public，没有私有和受保护的非静态成员；
+2）没有定义任何构造函数；
+3）没有类内初始化；
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数 void printA() override { cout &lt;&lt; &quot;class AA printA()&quot; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数 void printAA() override { cout &lt;&lt; &quot;class B printAA()&quot; &lt;&lt; endl; } void printB() { cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y &lt;&lt; &quot;, z = &quot; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; endl; c." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/" /><meta property="article:published_time" content="2021-12-27T16:34:27&#43;08:00"/>
+<meta property="article:modified_time" content="2021-12-27T16:34:27&#43;08:00"/>
+
+<meta itemprop="name" content="抽象类、接口类、聚合类">
+<meta itemprop="description" content="抽象类、接口类、聚合类  抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+1）所有成员都是 public，没有私有和受保护的非静态成员；
+2）没有定义任何构造函数；
+3）没有类内初始化；
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数 void printA() override { cout &lt;&lt; &quot;class AA printA()&quot; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数 void printAA() override { cout &lt;&lt; &quot;class B printAA()&quot; &lt;&lt; endl; } void printB() { cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y &lt;&lt; &quot;, z = &quot; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; endl; c.">
+
+
+<meta itemprop="datePublished" content="2021-12-27T16:34:27&#43;08:00" />
+<meta itemprop="dateModified" content="2021-12-27T16:34:27&#43;08:00" />
+<meta itemprop="wordCount" content="209">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="抽象类、接口类、聚合类"/>
+<meta name="twitter:description" content="抽象类、接口类、聚合类  抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+1）所有成员都是 public，没有私有和受保护的非静态成员；
+2）没有定义任何构造函数；
+3）没有类内初始化；
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数 void printA() override { cout &lt;&lt; &quot;class AA printA()&quot; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数 void printAA() override { cout &lt;&lt; &quot;class B printAA()&quot; &lt;&lt; endl; } void printB() { cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y &lt;&lt; &quot;, z = &quot; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; endl; c."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="https://874656645.github.io/rick/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Welcome to Rick&#39;s Page
+    </a>
+    <div class="flex-l items-center">
+      
+      
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">抽象类、接口类、聚合类</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2021-12-27T16:34:27&#43;08:00">December 27, 2021</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h2 id="抽象类-接口类-聚合类">抽象类、接口类、聚合类</h2>
+
+<ol>
+<li>抽象类：含有纯虚函数的类，<strong>不能实例化对象</strong></li>
+<li>接口类：仅含有纯虚函数的抽象类</li>
+<li>聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：<br />
+1）所有成员都是 public，没有私有和受保护的非静态成员；<br />
+2）没有定义任何构造函数；<br />
+3）没有类内初始化；<br />
+4）没有基类，也没有 virtual 函数</li>
+</ol>
+
+<pre><code class="language-C++">// 接口类
+class A
+{
+    virtual void printA() = 0;   // 纯虚函数
+};
+// 抽象类
+class AA:public A
+{
+public:
+    // 覆写接口类的纯虚函数
+    void printA() override
+    {
+        cout &lt;&lt; &quot;class AA printA()&quot; &lt;&lt; endl;
+    } 
+    virtual void printAA() = 0;
+};
+// 可实例化的类
+class B:public AA
+{
+public:
+    // 覆写父类（抽象类）的纯虚函数
+    void printAA() override
+    {
+        cout &lt;&lt; &quot;class B printAA()&quot; &lt;&lt; endl;
+    }
+    void printB()
+    {
+        cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl;
+    }
+};
+// 聚合类
+class C
+{
+public:
+    int x;
+    int y;
+    void print(){
+        cc();
+    }
+
+private:
+    void cc(){
+        cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y &lt;&lt; &quot;, z = &quot; &lt;&lt; z &lt;&lt; endl;       
+    }
+    static int z;
+};
+int C::z = 0;
+class D
+{
+public:
+    int a;
+    int b;
+    C c;
+    
+    void print(){
+        cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; endl;
+        c.print();
+    }
+};
+int main( )
+{
+    B b;
+    b.printA();
+    b.printB();
+    // 初始化聚合类
+    D d = {1, 2, {3, 4}};
+    d.print();
+    return 0;
+}
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code class="language-text">Start
+class AA printA()
+class B printAA()
+printB()
+a = 1, b = 2
+x = 3, y = 4, z = 0
+0
+Finish
+</code></pre>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://874656645.github.io/rick/" >
+    &copy; 2021 Welcome to Rick&#39;s Page
+  </a>
+    <div>
+<div hidden>
+  <span id="new-window-0">Opens in a new window</span>
+  <span id="new-window-1">Opens an external site</span>
+  <span id="new-window-2">Opens an external site in a new window</span>
+</div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/rick/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

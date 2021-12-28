@@ -6,10 +6,79 @@
     <description>Recent content on Welcome to Rick&#39;s Page</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Dec 2021 13:34:27 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 28 Dec 2021 17:34:27 +0800</lastBuildDate>
     
 	<atom:link href="https://874656645.github.io/rick/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>类其它总结</title>
+      <link>https://874656645.github.io/rick/posts/50-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Tue, 28 Dec 2021 17:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/50-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</guid>
+      <description>类其它总结 1. this指针 this 指针是一个隐含于每一个非静态成员函数中的特殊指针，它指向调用该成员函数的对象的首地址
+ 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 this 指针，然后调用成员函数，每次成员函数存取数据成员时，都隐式使用 this 指针 this 指针被隐含地声明为: ClassName *const this，这意味着不能给 this 指针赋值 this 是个右值，所以不能取 this 的地址  2. delete this  类的成员函数中可以调用 delete this，但是在释放后，对象后续调用的方法不能再用到 this 指针 delete this 释放了类对象的内存空间，但是内存空间却并不是马上被回收到系统中，此时其中的值是不确定的 delete 的本质是为将被释放的内存调用一个或多个析构函数，如果在类的析构函数中调用 delete this，会陷入无限递归，造成栈溢出  3. 一个空类class中有什么？ 构造函数、拷贝构造函数、析构函数、赋值运算符重载、取地址操作符重载、被 const 修饰的取地址操作符重载
+4. C++ 计算一个类的 sizeof  一个空的类 sizeof 返回 *1*，因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址 类内的普通成员函数不参与 sizeof 的统计，因为 sizeof 是针对实例的，而普通成员函数，是针对类体的 一个类如果含有虚函数，则这个类中有一个指向虚函数表的指针（虚函数指针），32位程序占4个字节，64位程序占8个字节 静态成员不影响类的大小，被编译器放在程序的数据段中 普通继承的类sizeof，会得到基类的大小加上派生类自身成员的大小 当存在虚拟继承时，派生类中会有一个指向虚基类表的指针。所以其大小应为普通继承的大小，再加上虚基类表的指针大小  5. 构造函数和析构函数能被继承吗? 不能。构造函数和析构函数是用来处理对象的创建和析构的，它们只知道对在它们的特殊层次的对象做什么
+6. 构造函数能不能是虚函数？ 不能。虚函数对应一个虚函数表，可是这个虚函数表存储在对象的内存空间的。问题就在于，如果构造函数是虚的，就需要通过 虚函数表来调用，可是对象还没有实例化，也就是内存空间还没有，就不会有虚函数表</description>
+    </item>
+    
+    <item>
+      <title>类的成员函数作为回调函数</title>
+      <link>https://874656645.github.io/rick/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Tue, 28 Dec 2021 14:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</guid>
+      <description>类的成员函数作为回调函数 思路是借助类的静态成员函数
+方式一：
+class A{ public: A(int a){ m_a = a; } void print(){ cout &amp;lt;&amp;lt; &amp;quot;a = &amp;quot; &amp;lt;&amp;lt; m_a &amp;lt;&amp;lt; endl; } void setCur(){ s_curA = this; } static void callback_s(){ s_curA-&amp;gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback_s); b.setCur(); Handle(A::callback_s); return 0; }  方式二：</description>
+    </item>
+    
+    <item>
+      <title>父类指针和子类指针</title>
+      <link>https://874656645.github.io/rick/posts/48-%E7%88%B6%E7%B1%BB%E6%8C%87%E9%92%88%E5%92%8C%E5%AD%90%E7%B1%BB%E6%8C%87%E9%92%88/</link>
+      <pubDate>Tue, 28 Dec 2021 11:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/48-%E7%88%B6%E7%B1%BB%E6%8C%87%E9%92%88%E5%92%8C%E5%AD%90%E7%B1%BB%E6%8C%87%E9%92%88/</guid>
+      <description>父类指针和子类指针  父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将父类对象赋值给子类指针，虚函数执行的是父类的，也可以调用子类函数（？） 将子类对象赋值给父类指针，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
+Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
+Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &amp;lt;&amp;lt; &amp;quot;printA()&amp;quot; &amp;lt;&amp;lt; endl; } virtual void print(){ cout &amp;lt;&amp;lt; &amp;quot;A::print()&amp;quot; &amp;lt;&amp;lt; endl; } }; class B:public A{ public: void printB(){ cout &amp;lt;&amp;lt; &amp;quot;printB()&amp;quot; &amp;lt;&amp;lt; endl; } virtual void print() override{ cout &amp;lt;&amp;lt; &amp;quot;B::print() b = &amp;quot; &amp;lt;&amp;lt; b &amp;lt;&amp;lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针） A *a = new A; // 1.</description>
+    </item>
+    
+    <item>
+      <title>构造函数私有</title>
+      <link>https://874656645.github.io/rick/posts/47-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%A7%81%E6%9C%89/</link>
+      <pubDate>Tue, 28 Dec 2021 10:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/47-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%A7%81%E6%9C%89/</guid>
+      <description>构造函数私有  如果类的内部没有专门创建实例的代码，则是无法创建任何实例的 如果父类构造函数设置成了私有的，则子类无法编译，因为在初始化子类时会先执行父类的构造  class A{ public: private: A(int ){ } }; class B:public A{ public: int x; }; int main( ) { B b; b.x = 0; return 0; }  输出：
+Start prog.cc:19:7: error: call to implicitly-deleted default constructor of &#39;B&#39; B b; ^ prog.cc:13:9: note: default constructor of &#39;B&#39; is implicitly deleted because base class &#39;A&#39; has an inaccessible default constructor class B:public A{ ^ 1 error generated.</description>
+    </item>
+    
+    <item>
+      <title>定义一个只能在堆上（栈上）生成对象的类</title>
+      <link>https://874656645.github.io/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/</link>
+      <pubDate>Mon, 27 Dec 2021 17:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/</guid>
+      <description>定义一个只能在堆上（栈上）生成对象的类 一、只能在堆上 方法：将析构函数设置为私有
+原因：C++ 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象
+class Test { public: void printT(){ cout &amp;lt;&amp;lt; &amp;quot;printT&amp;quot; &amp;lt;&amp;lt; endl; } void freeT(){ delete this; } private: ~Test(){ cout &amp;lt;&amp;lt; &amp;quot;~Test()&amp;quot; &amp;lt;&amp;lt; endl; } }; int main( ) { // 不能在栈上创建对象 //Test t; // prog.cc:25:10: error: variable of type &#39;Test&#39; has private destructor // 只能在堆上创建对象 Test *t = new Test; t-&amp;gt;printT(); // 销毁对象 t-&amp;gt;freeT(); return 0; }  输出：
+Start printT ~Test() 0 Finish  二、只能在栈上 方法：将 new 和 delete 重载为私有</description>
+    </item>
+    
+    <item>
+      <title>抽象类、接口类、聚合类</title>
+      <link>https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/</link>
+      <pubDate>Mon, 27 Dec 2021 16:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/</guid>
+      <description>抽象类、接口类、聚合类  抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+1）所有成员都是 public，没有私有和受保护的非静态成员；
+2）没有定义任何构造函数；
+3）没有类内初始化；
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数 void printA() override { cout &amp;lt;&amp;lt; &amp;quot;class AA printA()&amp;quot; &amp;lt;&amp;lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数 void printAA() override { cout &amp;lt;&amp;lt; &amp;quot;class B printAA()&amp;quot; &amp;lt;&amp;lt; endl; } void printB() { cout &amp;lt;&amp;lt; &amp;quot;printB()&amp;quot; &amp;lt;&amp;lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &amp;lt;&amp;lt; &amp;quot;x = &amp;quot; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &amp;quot;, y = &amp;quot; &amp;lt;&amp;lt; y &amp;lt;&amp;lt; &amp;quot;, z = &amp;quot; &amp;lt;&amp;lt; z &amp;lt;&amp;lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &amp;lt;&amp;lt; &amp;quot;a = &amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;quot;, b = &amp;quot; &amp;lt;&amp;lt; b &amp;lt;&amp;lt; endl; c.</description>
+    </item>
     
     <item>
       <title>虚继承和虚基类</title>
@@ -18,10 +87,10 @@
       
       <guid>https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/</guid>
       <description>虚继承和虚基类 参考
-微软的Visual Studio提供给用户显示C++对象在内存中的布局的选项cl [filename].cpp /d1 reportSingleClassLayout[className]
- 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  一般继承：
+ 在C++中，在定义公共基类A的派生类B、C&amp;hellip;的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C&amp;hellip;的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C++对象在内存中的布局的选项cl [filename].cpp /d1 reportSingleClassLayout[className]
+一般继承：
 class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; };  输出：
-class D size(20): +--- 0 | +--- (base class B) 0 | | +--- (base class A) 0 | | | dataA | | +--- 4 | | dataB | +--- 8 | +--- (base class C) 8 | | +--- (base class A) 8 | | | dataA | | +--- 12 | | dataC | +--- 16 | dataD +---  虚继承：</description>
+class D size(20): +--- 0 | +--- (base class B) 0 | | +--- (base class A) 0 | | | dataA | | +--- 4 | | dataB | +--- 8 | +--- (base class C) 8 | | +--- (base class A) 8 | | | dataA | | +--- 12 | | dataC | +--- 16 | dataD +---  调用：</description>
     </item>
     
     <item>
@@ -30,7 +99,7 @@ class D size(20): +--- 0 | +--- (base class B) 0 | | +--- (base class A) 0 | | |
       <pubDate>Mon, 27 Dec 2021 10:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/</guid>
-      <description>多态总结 C++ 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态） 参数多态（Parametric Polymorphism，编译期）：类模板、函数模板 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建  class Shape { public: virtual ~Shape(){ cout &amp;lt;&amp;lt; &amp;quot;~Shape()&amp;quot; &amp;lt;&amp;lt; endl; } }; class Point { public: ~Point(){ cout &amp;lt;&amp;lt; &amp;quot;~Point()&amp;quot; &amp;lt;&amp;lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &amp;lt;&amp;lt; &amp;quot;~Circle()&amp;quot; &amp;lt;&amp;lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针 cout &amp;lt;&amp;lt; sizeof(Shape) &amp;lt;&amp;lt; endl; // 16 类中存有指向虚函数表的指针 // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1 // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &amp;lt;alignment member&amp;gt; (size=7)) cout &amp;lt;&amp;lt; sizeof(Circle) &amp;lt;&amp;lt; endl; // 8 类中的int占4个字节，char占1个字节 // 但每次扩增的最小数值是4(&amp;lt;alignment member&amp;gt; (size=3)) cout &amp;lt;&amp;lt; sizeof(Point) &amp;lt;&amp;lt; endl; Circle c; return 0; }  Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish  Shape 类</description>
+      <description>多态总结 C++ 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态） 参数多态（Parametric Polymorphism，编译期）：类模板、函数模板 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &amp;lt;&amp;lt; &amp;quot;~Shape()&amp;quot; &amp;lt;&amp;lt; endl; } }; class Point { public: ~Point(){ cout &amp;lt;&amp;lt; &amp;quot;~Point()&amp;quot; &amp;lt;&amp;lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &amp;lt;&amp;lt; &amp;quot;~Circle()&amp;quot; &amp;lt;&amp;lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针 cout &amp;lt;&amp;lt; sizeof(Shape) &amp;lt;&amp;lt; endl; // 16 类中存有指向虚函数表的指针 // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1 // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &amp;lt;alignment member&amp;gt; (size=7)) cout &amp;lt;&amp;lt; sizeof(Circle) &amp;lt;&amp;lt; endl; // 8 类中的int占4个字节，char占1个字节 // 但每次扩增的最小数值是4(&amp;lt;alignment member&amp;gt; (size=3)) cout &amp;lt;&amp;lt; sizeof(Point) &amp;lt;&amp;lt; endl; Circle c; return 0; }  Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish  Shape 类</description>
     </item>
     
     <item>
@@ -59,7 +128,7 @@ int fun(int, char, double) =&amp;gt; fun_icd  重载函数匹配顺序  如果�
       <pubDate>Sat, 25 Dec 2021 21:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/</guid>
-      <description>指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是指针地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+      <description>指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
 void test(int * a){ a = new int(20); //*a = 20; cout &amp;lt;&amp;lt; &amp;quot;test point a = &amp;quot; &amp;lt;&amp;lt; &amp;amp;a &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;quot;test:&amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;quot;\ta = &amp;quot; &amp;lt;&amp;lt; *a &amp;lt;&amp;lt; endl; } int main() { int *a = new int(10); cout &amp;lt;&amp;lt; &amp;quot;main point a = &amp;quot; &amp;lt;&amp;lt; &amp;amp;a &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;quot;main:&amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;quot;\ta = &amp;quot; &amp;lt;&amp;lt; *a &amp;lt;&amp;lt; endl; test(a); cout &amp;lt;&amp;lt; &amp;quot;main:&amp;quot; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;quot;\ta = &amp;quot; &amp;lt;&amp;lt; *a &amp;lt;&amp;lt; endl; return 0; }  输出：</description>
     </item>
     

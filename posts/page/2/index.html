@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2021-12-23T11:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-25T21:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
 <meta itemprop="description" content="">
@@ -93,6 +93,107 @@
   <article class="pa3 pa4-ns nested-copy-line-height nested-img">
   <main class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray"></main>
     <section class="flex-ns flex-wrap justify-around mt5">
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/" class="link black dim">
+        指针引用
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;test:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &quot;main point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; return 0; }  输出：
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/" class="link black dim">
+        抽象、封装、继承、多态
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      一、抽象、封装 数据抽象：是一种仅向用户暴露接口而把具体的实现细节隐藏起来的机制，是一种依赖于接口实现分离的设计技术
+数据封装：是一种把数据和操作数据的函数捆绑在一起的机制
+好处  类的内部受到保护，不会因无意的用户级错误导致对象状态受损 类实现可能随着时间的推移而发生变化，数据抽象可以更好的应对不断变化的需求  策略  通常情况下，我们都会设置类成员状态为私有（private），除非我们真的需要将其暴露，这样才能保证良好的封装性。 抽象把代码分离为接口和实现。所以在设计组件时，必须保持接口独立于实现，这样，如果改变底层实现，接口也将保持不变。在这种情况下，不管任何程序使用接口，接口都不会受到影响，只需要将最新的实现重新编译即可  接口 接口描述了类的行为和功能，而不需要完成类的特定实现。如果类中至少有一个函数被声明为纯虚函数，则这个类就是抽象类
+设计抽象类（通常称为 ABC）的目的，是为了给其他类提供一个可以继承的适当的基类。抽象类不能被用于实例化对象，它只能作为接口使用。因此，如果一个 ABC 的子类需要被实例化，则必须实现每个虚函数，如果没有在派生类中重写纯虚函数，就尝试实例化该类的对象，会导致编译错误。
+可用于实例化对象的类被称为具体类
+二、继承 继承代表了 is a 关系。例如，哺乳动物是动物，狗是哺乳动物，因此，狗是动物，等等。一个类可以派生自多个类，这意味着，它可以从多个基类继承数据和函数。类派生列表以一个或多个基类命名
+派生类可以访问基类中所有的非私有成员，同时，一个派生类继承了所有的基类方法，但下列情况除外：
+ 基类的构造函数、析构函数和拷贝构造函数 基类的重载运算符 基类的友元函数  三、多态 虚函数：虚函数是在基类中使用关键字 virtual 声明的函数。在派生类中重新定义基类中定义的虚函数时，会告诉编译器不要静态链接到该函数。我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为动态链接，或后期绑定。
+ 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 类析构顺序：1）派生类本身的析构函数；2）对象成员析构函数；3）基类析构函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
+// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &quot;Shape destructor&quot; &lt;&lt; endl; } // pure virtual function virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &quot;PaintCost: &quot; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &quot;Rectangle destructor&quot; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员） cout &lt;&lt; &quot;width: &quot; &lt;&lt; width &lt;&lt; &quot;\theight: &quot; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &quot;Rectangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &quot;Triangle destructor&quot; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &quot;Triangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } };  多继承：
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/" class="link black dim">
+        类的静态成员
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      类的静态成员  使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A { string name {&quot;C++&quot;}; int id {1024}; static int objCount; public: A(); friend void printA(const A &amp;a); void printA(); static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){ objCount++; } void A::printA(){ cout &lt;&lt; &quot;objCount = &quot; &lt;&lt; this-&gt;objCount &lt;&lt; &quot;\tname = &quot; &lt;&lt; this-&gt;name &lt;&lt; &quot;\tid = &quot; &lt;&lt; this-&gt;id &lt;&lt; endl; } void A::printC(){ // 静态函数内没有this指针 cout &lt;&lt; &quot;objCount = &quot; &lt;&lt; objCount &lt;&lt; endl; // error: 'this' is unavailable for static member functions // cout &lt;&lt; &quot;objCount = &quot; &lt;&lt; this-&gt;objCount &lt;&lt; endl; } void printA(const A &amp;a){ cout &lt;&lt; &quot;objCount = &quot; &lt;&lt; a.
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/" class="link black dim">
+        友元函数
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  class A { string name {&quot;C++&quot;}; int id {1024}; public: friend void printA(const A &amp;a); void printA(); }; void A::printA(){ cout &lt;&lt; &quot;name = &quot; &lt;&lt; this-&gt;name &lt;&lt; &quot;\t id = &quot; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &quot;name = &quot; &lt;&lt; a.name &lt;&lt; &quot;\t id = &quot; &lt;&lt; a.
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/36-%E6%9E%84%E9%80%A0%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/" class="link black dim">
+        构造、拷贝构造、赋值构造
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+      构造、拷贝构造、赋值构造 结论：
+ 拷贝构造函数是函数，赋值运算符是运算符的重载； 拷贝构造函数会生成新的类对象，赋值运算符不会； 拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值; 若接受返回值的对象已经初始化过，则会调用赋值构造函数，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值构造函数，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。 当没有显式的构造函数和拷贝构造时，系统才会提供默认的无参构造  成员初始化列表  使用初始化列表，少了一次调用默认构造函数的过程，提高效率 常量成员，因为常量只能初始化不能赋值，所以必须放在初始化列表里面 引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面  测试类 class A { public: A(){ cout &lt;&lt; &quot;default constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; } A(int t){ x = new int(0); y = t; cout &lt;&lt; &quot;second constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; } A(const A &amp;a){ cout &lt;&lt; &quot;const copy constructor&quot; &lt;&lt; endl; cout &lt;&lt; &quot;adrres: &quot; &lt;&lt; this &lt;&lt; &quot;\t point x: &quot; &lt;&lt; x &lt;&lt; &quot;\t y: &quot; &lt;&lt; y &lt;&lt; endl; this-&gt;x = a.
+    </div>
+  </div>
+</div>
+</div>
+      
+        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
+  <div class="bg-white mb3 pa4 gray overflow-hidden">
+    <span class="f6 db">Posts</span>
+    <h1 class="f3 near-black">
+      <a href="/rick/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/" class="link black dim">
+        函数重载、重写、隐藏、模板
+      </a>
+    </h1>
+    <div class="nested-links f5 lh-copy nested-copy-line-height">
+       函数重载、重写、隐藏、模板  重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写； 隐藏： 派生类中函数与基类中的函数同名，但是这个函数在基类中并没有被定义为虚函数，此时基类的函数会被隐藏； 模板： 模板函数是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载，但是可被重写。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  
+    </div>
+  </div>
+</div>
+</div>
       
         <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
   <div class="bg-white mb3 pa4 gray overflow-hidden">
@@ -156,114 +257,6 @@ C 主要是面向过程，C++ 是面向对象，面向过程是函数驱动，�
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       函数形参从右到左入栈 int add(int count, ...) { // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节） int intSize = sizeof(int*) / sizeof(int); int sum = 0; // cout &lt;&lt; &amp;count &lt;&lt; endl; int *p = &amp;count + intSize; // cout &lt;&lt; p &lt;&lt; endl; for (int i = 0; i &lt; count; ++i) { sum += *p; cout &lt;&lt; *p &lt;&lt; endl; p += intSize; } return sum; } int main() { cout &lt;&lt; add(3, 1, 2, 3) &lt;&lt; endl; return 0; }  输出：
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/30-%E6%8C%87%E9%92%88-&#43;-1/" class="link black dim">
-        指针 &#43; 1
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       1. *32*位和64`位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
-2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
-int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]； // &amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int） // 但是prt与(&amp;a+1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int) int *ptr = (int*)(&amp;a + 1); cout &lt;&lt; *(a + 1) &lt;&lt; endl; cout &lt;&lt; *(ptr - 1) &lt;&lt; endl; return 0; }  输出：
-1 2 3 6  注： a，&amp;a的地址是一样的，但意思不一样：
- a是数组首地址，也就是a[0]的地址，a+1是数组下一元素的地址，即a[1]
- &amp;a是对象（整个数组作为一个对象）首地址，而&amp;a+1是下一个对象的地址，即a[5].  
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/" class="link black dim">
-        模板类
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       模板类 template&lt;class T&gt; class Test { public: Test(T t){ m_t = t;}; // explicit Test(T t){ m_t = t;}; T getValue(){ return m_t; }; private: T m_t; }; int main() { Test&lt;int&gt; tInt(1); cout &lt;&lt; tInt.getValue() &lt;&lt; endl; Test&lt;double&gt; tD(1.15); cout &lt;&lt; tD.getValue() &lt;&lt; endl; Test&lt;float&gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换 cout &lt;&lt; tF.getValue() &lt;&lt; endl; return 0; }  输出：
-Start 1 1.15 1.3 0 Finish  
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/" class="link black dim">
-        模板函数
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      模板函数 template &lt;typename T&gt; inline const T&amp; Max (const T&amp; a, const T&amp; b) { return a &lt; b ? b:a; }; int main() { int i = 39; int j = 20; cout &lt;&lt; &quot;Max(i, j): &quot; &lt;&lt; Max(i, j) &lt;&lt; endl; double f1 = 13.5; double f2 = 20.7; cout &lt;&lt; &quot;Max(f1, f2): &quot; &lt;&lt; Max(f1, f2) &lt;&lt; endl; string s1 = &quot;Hello&quot;; string s2 = &quot;World&quot;; cout &lt;&lt; &quot;Max(s1, s2): &quot; &lt;&lt; Max(s1, s2) &lt;&lt; endl; return 0; }  输出：
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/27-arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/" class="link black dim">
-        ArcMap加载天地图服务
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-      ArcMap加载天地图服务  注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是OGC标准，会导致 ArcMap 加载后坐标不对  影像底图：
-http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
-http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
-http://t0.tianditu.com/img_w/esri/wmts 天地图影像（墨卡托，WGS1984）
-http://t0.tianditu.com/cia_w/esri/wmts 天地图影像注记（墨卡托，WGS1984）
-矢量底图：
-http://t0.tianditu.com/vec_c/esri/wmts 天地图矢量（经纬度，CGCS2000）
-http://t0.tianditu.com/cva_c/esri/wmts 天地图矢量注记（经纬度，CGCS2000）
-http://t0.tianditu.com/vec_w/esri/wmts 天地图矢量（墨卡托，WGS1984）
-http://t0.tianditu.com/cva_w/esri/wmts 天地图矢量注记（墨卡托，WGS1984）
-ArcMap WMTS
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="link black dim">
-        函数指针
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       函数指针 #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; }  Start 10 10 20 30 0 Finish  
-    </div>
-  </div>
-</div>
-</div>
-      
-        <div class="relative w-100 w-30-l mb4 bg-white"><div class="relative w-100 mb4 bg-white nested-copy-line-height">
-  <div class="bg-white mb3 pa4 gray overflow-hidden">
-    <span class="f6 db">Posts</span>
-    <h1 class="f3 near-black">
-      <a href="/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" class="link black dim">
-        指针函数和函数指针
-      </a>
-    </h1>
-    <div class="nested-links f5 lh-copy nested-copy-line-height">
-       指针函数和函数指针  指针函数本质是一个函数，返回值是一个指针；
- 函数指针是指向函数的一个指针变量；
-  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &quot;fun: &quot; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun pf(&quot;Hello&quot;); return 0; }  
     </div>
   </div>
 </div>

@@ -30,25 +30,25 @@
 
     <meta property="og:title" content="虚继承和虚基类" />
 <meta property="og:description" content="虚继承和虚基类 参考
-微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项cl [filename].cpp /d1 reportSingleClassLayout[className]
- 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  一般继承：
+ 在C&#43;&#43;中，在定义公共基类A的派生类B、C&hellip;的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C&hellip;的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项cl [filename].cpp /d1 reportSingleClassLayout[className]
+一般继承：
 class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; };  输出：
-class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;---  虚继承：" />
+class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;---  调用：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/" /><meta property="article:published_time" content="2021-12-27T13:34:27&#43;08:00"/>
 <meta property="article:modified_time" content="2021-12-27T13:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="虚继承和虚基类">
 <meta itemprop="description" content="虚继承和虚基类 参考
-微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项cl [filename].cpp /d1 reportSingleClassLayout[className]
- 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  一般继承：
+ 在C&#43;&#43;中，在定义公共基类A的派生类B、C&hellip;的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C&hellip;的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项cl [filename].cpp /d1 reportSingleClassLayout[className]
+一般继承：
 class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; };  输出：
-class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;---  虚继承：">
+class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;---  调用：">
 
 
 <meta itemprop="datePublished" content="2021-12-27T13:34:27&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-27T13:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="305">
+<meta itemprop="wordCount" content="376">
 
 
 
@@ -56,10 +56,10 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="虚继承和虚基类"/>
 <meta name="twitter:description" content="虚继承和虚基类 参考
-微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项cl [filename].cpp /d1 reportSingleClassLayout[className]
- 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  一般继承：
+ 在C&#43;&#43;中，在定义公共基类A的派生类B、C&hellip;的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C&hellip;的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项cl [filename].cpp /d1 reportSingleClassLayout[className]
+一般继承：
 class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; };  输出：
-class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;---  虚继承："/>
+class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;---  调用："/>
 
   </head>
 
@@ -125,12 +125,14 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
 
 <p><a href="https://blog.csdn.net/xiejingfa/article/details/48028491">参考</a></p>
 
-<p><strong>微软的Visual Studio提供给用户显示C++对象在内存中的布局的选项<code>cl [filename].cpp /d1 reportSingleClassLayout[className]</code></strong></p>
-
 <ul>
+<li>在C++中，在定义公共基类A的派生类B、C&hellip;的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为<strong>虚基类</strong>。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C&hellip;的公共派生类D中，该基类A的成员就<strong>只有一份拷贝</strong></li>
+<li>一个类有多个基类，这样的继承关系称为多继承。<strong>在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性</strong>。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。</li>
 <li>会在虚继承的类中生成一个指向虚基类的指针 <code>{vbptr}</code></li>
 <li>会在内存中生成一个虚基类表 <code>D::$vbtable@B@</code></li>
 </ul>
+
+<p><strong>微软的Visual Studio提供给用户显示C++对象在内存中的布局的选项<code>cl [filename].cpp /d1 reportSingleClassLayout[className]</code></strong></p>
 
 <p>一般继承：</p>
 
@@ -174,6 +176,32 @@ public:
         | +---
 16      | dataD
         +---
+</code></pre>
+
+<p>调用：</p>
+
+<pre><code class="language-C++">int main( )
+{
+    D d;
+    cout &lt;&lt; d.dataA &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+
+<p>调用输出：</p>
+
+<pre><code class="language-text">Start
+prog.cc:29:15: error: non-static member 'dataA' found in multiple base-class subobjects of type 'A':
+    class D -&gt; class B -&gt; class A
+    class D -&gt; class C -&gt; class A
+    cout &lt;&lt; d.dataA &lt;&lt; endl;
+              ^
+prog.cc:9:9: note: member found by ambiguous name lookup
+    int dataA;
+        ^
+1 error generated.
+1
+Finish
 </code></pre>
 
 <p>虚继承：</p>

@@ -29,14 +29,14 @@
     
 
     <meta property="og:title" content="指针引用" />
-<meta property="og:description" content="指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是指针地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+<meta property="og:description" content="指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
 void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;test:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &quot;main point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; return 0; }  输出：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/" /><meta property="article:published_time" content="2021-12-25T21:34:27&#43;08:00"/>
 <meta property="article:modified_time" content="2021-12-25T21:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="指针引用">
-<meta itemprop="description" content="指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是指针地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+<meta itemprop="description" content="指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
 void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;test:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &quot;main point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; return 0; }  输出：">
 
 
@@ -49,7 +49,7 @@ void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="指针引用"/>
-<meta name="twitter:description" content="指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是指针地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+<meta name="twitter:description" content="指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
 void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;test:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &quot;main point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; return 0; }  输出："/>
 
   </head>
@@ -115,7 +115,7 @@ void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a
 <h2 id="指针引用">指针引用</h2>
 
 <ul>
-<li>指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是指针地址）</li>
+<li>指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址）</li>
 <li>使用指针引用的方式，代码更加简洁，逻辑更加清晰</li>
 <li>释放掉指针指向的空间后，一定记得把指针置空</li>
 <li>声明指针时就进行初始化或将其指向 <code>NULL</code> 是个好习惯</li>
