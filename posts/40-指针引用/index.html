@@ -42,7 +42,7 @@ void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a
 
 <meta itemprop="datePublished" content="2021-12-25T21:34:27&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-25T21:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="285">
+<meta itemprop="wordCount" content="289">
 
 
 
@@ -157,6 +157,7 @@ Finish
     char name[64];
     int id;
 };
+// 方式一：
 // 如果想要在函数内部实现指针内存分配
 // 就只能用二级指针的形参
 int getTT(struct teacher ** tpp){
@@ -180,6 +181,8 @@ void freeTT(struct teacher **tpp){
         *tpp = NULL;
     }
 }
+
+// 方式二：
 // 指针引用的方式，更加简洁
 int getT(struct teacher *&amp; tp){
     tp = (struct teacher *)malloc(sizeof(struct teacher));
@@ -207,7 +210,7 @@ int main()
     cout &lt;&lt; tp-&gt;name &lt;&lt; endl;
     //freeTT(&amp;tp);
     freeT(tp);
-    cout &lt;&lt; &quot;==========================&quot; &lt;&lt; endl;
+    cout &lt;&lt; &quot;+++++++++++++++++++++++++++++++++++&quot; &lt;&lt; endl;
     if(tp == NULL){
         cout &lt;&lt; &quot;free ok&quot; &lt;&lt; endl;
         return 0;
@@ -220,16 +223,15 @@ int main()
 
 <p>输出：</p>
 
-<p>``` text
+<p><code>text
 Start
-100</p>
-
-<h1 id="zhang3">zhang3</h1>
-
-<p>free ok
+100
+zhang3
++++++++++++++++++++++++++++++++++++
+free ok
 0
 Finish
-````</p>
+</code>`</p>
 <ul class="pa0">
   
 </ul>
