@@ -29,28 +29,28 @@
     
 
     <meta property="og:title" content="异常" />
-<meta property="og:description" content="异常 try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
-int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常 cout &lt;&lt; &quot;...&quot; &lt;&lt; endl; } { cout &lt;&lt; &quot;finally&quot; &lt;&lt; endl; } return 0; }  Start exception finally 0 Finish  std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类：" />
+<meta property="og:description" content="异常 一、try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
+int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常 cout &lt;&lt; &quot;...&quot; &lt;&lt; endl; } { cout &lt;&lt; &quot;finally&quot; &lt;&lt; endl; } return 0; }  Start exception finally 0 Finish  二、std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/" /><meta property="article:published_time" content="2021-12-30T15:34:27&#43;08:00"/>
 <meta property="article:modified_time" content="2021-12-30T15:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="异常">
-<meta itemprop="description" content="异常 try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
-int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常 cout &lt;&lt; &quot;...&quot; &lt;&lt; endl; } { cout &lt;&lt; &quot;finally&quot; &lt;&lt; endl; } return 0; }  Start exception finally 0 Finish  std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类：">
+<meta itemprop="description" content="异常 一、try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
+int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常 cout &lt;&lt; &quot;...&quot; &lt;&lt; endl; } { cout &lt;&lt; &quot;finally&quot; &lt;&lt; endl; } return 0; }  Start exception finally 0 Finish  二、std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类：">
 
 
 <meta itemprop="datePublished" content="2021-12-30T15:34:27&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-30T15:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="187">
+<meta itemprop="wordCount" content="183">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="异常"/>
-<meta name="twitter:description" content="异常 try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
-int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常 cout &lt;&lt; &quot;...&quot; &lt;&lt; endl; } { cout &lt;&lt; &quot;finally&quot; &lt;&lt; endl; } return 0; }  Start exception finally 0 Finish  std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类："/>
+<meta name="twitter:description" content="异常 一、try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
+int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常 cout &lt;&lt; &quot;...&quot; &lt;&lt; endl; } { cout &lt;&lt; &quot;finally&quot; &lt;&lt; endl; } return 0; }  Start exception finally 0 Finish  二、std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类："/>
 
   </head>
 
@@ -114,7 +114,7 @@ int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt
 
 <h2 id="异常">异常</h2>
 
-<h3 id="try-catch-throw">try、catch、throw</h3>
+<h3 id="一-try-catch-throw">一、try、catch、throw</h3>
 
 <p>可以使用 throw 语句在代码块中的任何地方抛出异常。<strong>throw 语句的操作数可以是任意的表达式</strong>，表达式的结果的类型决定了抛出的异常的类型</p>
 
@@ -142,7 +142,7 @@ finally
 Finish
 </code></pre>
 
-<h3 id="std-exception">std::exception</h3>
+<h3 id="二-std-exception">二、std::exception</h3>
 
 <pre><code class="language-C++">class exception {
 public:
@@ -154,35 +154,103 @@ public:
 };
 </code></pre>
 
-<p>派生了两个异常类：</p>
+<p><strong>派生了两个异常类：</strong></p>
 
-<p>|   |   |
-|:-|:-|
-|logic_erro     | 报告程序的逻辑错误，<strong>可在程序执行前被检测到</strong>|
-|runtime_erro   | 报告程序运行时的错误，只有在运行的时候才能检测到|</p>
+<table>
+<thead>
+<tr>
+<th align="left">类名</th>
+<th align="left">描述</th>
+</tr>
+</thead>
 
-<p>由logic_erro派生的异常类：</p>
+<tbody>
+<tr>
+<td align="left">logic_erro</td>
+<td align="left">报告程序的逻辑错误，<strong>可在程序执行前被检测到</strong></td>
+</tr>
 
-<p>|||
-|:-|:-|
-|domain_error       |报告违反了前置条件|
-|invalid_argument   |指出函数的一个无效参数|
-|length_error       |指出有一个产生超过NPOS长度的对象的企图（NPOS为size_t的最大可表现值|
-|out_of_range       |报告参数越界|
-|bad_cast           |在运行时类型识别中有一个无效的dynamic_cast表达式|
-|bad_typeid         |报告在表达式typeid(*p)中有一个空指针P|</p>
+<tr>
+<td align="left">runtime_erro</td>
+<td align="left">报告程序运行时的错误，只有在运行的时候才能检测到</td>
+</tr>
+</tbody>
+</table>
 
-<p>由runtime_error派生的异常：</p>
+<p><strong>由logic_erro派生的异常类：</strong></p>
 
-<p>|||
-|:-|:-|
-|range_error        |报告违反了后置条件|
-|overflow_error     |报告一个算术溢出|
-|bad_alloc          |报告一个存储分配错误|</p>
+<table>
+<thead>
+<tr>
+<th align="left">类名</th>
+<th align="left">描述</th>
+</tr>
+</thead>
 
-<p><img src="../img/exception.png" alt="ttt" /></p>
+<tbody>
+<tr>
+<td align="left">domain_error</td>
+<td align="left">报告违反了前置条件</td>
+</tr>
 
-<h3 id="定义新的异常">定义新的异常</h3>
+<tr>
+<td align="left">invalid_argument</td>
+<td align="left">指出函数的一个无效参数</td>
+</tr>
+
+<tr>
+<td align="left">length_error</td>
+<td align="left">指出有一个产生超过NPOS长度的对象的企图（NPOS为size_t的最大可表现值</td>
+</tr>
+
+<tr>
+<td align="left">out_of_range</td>
+<td align="left">报告参数越界</td>
+</tr>
+
+<tr>
+<td align="left">bad_cast</td>
+<td align="left">在运行时类型识别中有一个无效的dynamic_cast表达式</td>
+</tr>
+
+<tr>
+<td align="left">bad_typeid</td>
+<td align="left">报告在表达式typeid(*p)中有一个空指针P</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>由runtime_error派生的异常：</strong></p>
+
+<table>
+<thead>
+<tr>
+<th align="left">类名</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">range_error</td>
+<td align="left">报告违反了后置条件</td>
+</tr>
+
+<tr>
+<td align="left">overflow_error</td>
+<td align="left">报告一个算术溢出</td>
+</tr>
+
+<tr>
+<td align="left">bad_alloc</td>
+<td align="left">报告一个存储分配错误</td>
+</tr>
+</tbody>
+</table>
+
+<p><img src="../img/exception.png" alt="std::exception" /></p>
+
+<h3 id="三-自定义异常">三、自定义异常</h3>
 
 <p>可以通过继承和重载 exception 类来定义新的异常</p>
 

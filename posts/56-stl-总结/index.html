@@ -29,25 +29,25 @@
     
 
     <meta property="og:title" content="STL 总结" />
-<meta property="og:description" content="STL 总结 1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL常用的容器有哪些以及各自的特点是什么?          vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、说说 vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化" />
+<meta property="og:description" content="STL 总结 1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL 常用的容器有哪些以及各自的特点是什么?    名称 特点     vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector 扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/56-stl-%E6%80%BB%E7%BB%93/" /><meta property="article:published_time" content="2021-12-30T10:34:27&#43;08:00"/>
 <meta property="article:modified_time" content="2021-12-30T10:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="STL 总结">
-<meta itemprop="description" content="STL 总结 1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL常用的容器有哪些以及各自的特点是什么?          vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、说说 vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化">
+<meta itemprop="description" content="STL 总结 1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL 常用的容器有哪些以及各自的特点是什么?    名称 特点     vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector 扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化">
 
 
 <meta itemprop="datePublished" content="2021-12-30T10:34:27&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-30T10:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="65">
+<meta itemprop="wordCount" content="71">
 
 
 
 <meta itemprop="keywords" content="" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="STL 总结"/>
-<meta name="twitter:description" content="STL 总结 1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL常用的容器有哪些以及各自的特点是什么?          vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、说说 vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化"/>
+<meta name="twitter:description" content="STL 总结 1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL 常用的容器有哪些以及各自的特点是什么?    名称 特点     vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector 扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化"/>
 
   </head>
 
@@ -122,13 +122,13 @@
 <li>适配器：修改其他组件接口</li>
 </ul>
 
-<h3 id="2-stl常用的容器有哪些以及各自的特点是什么">2、STL常用的容器有哪些以及各自的特点是什么?</h3>
+<h3 id="2-stl-常用的容器有哪些以及各自的特点是什么">2、STL 常用的容器有哪些以及各自的特点是什么?</h3>
 
 <table>
 <thead>
 <tr>
-<th align="left"></th>
-<th align="left"></th>
+<th align="left">名称</th>
+<th align="left">特点</th>
 </tr>
 </thead>
 
@@ -205,7 +205,7 @@
 </tbody>
 </table>
 
-<h3 id="3-说说-vector-和-list-的区别">3、说说 vector 和 list 的区别</h3>
+<h3 id="3-vector-和-list-的区别">3、vector 和 list 的区别</h3>
 
 <ul>
 <li>vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低</li>
@@ -213,7 +213,7 @@
 <li>vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请</li>
 </ul>
 
-<h3 id="4-vector扩容原理">4、vector扩容原理</h3>
+<h3 id="4-vector-扩容原理">4、vector 扩容原理</h3>
 
 <p>以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化</p>
 
@@ -225,7 +225,7 @@
 <li>map支持用关键字作下标操作，set不支持下标操作</li>
 </ul>
 
-<h3 id="6-map和unordered-map的区别">6、map和unordered_map的区别</h3>
+<h3 id="6-map-和-unordered-map-的区别">6、map 和 unordered_map 的区别</h3>
 
 <ul>
 <li>map内部实现了一个红黑树，红黑树的每一个节点都代表着map的一个元素，因此所有元素都是有序的，对其进行查找、插入、删除得效率都是O(log n)；但是，因为每个结点都需要额外保存数据，所以空间占用率比较高</li>
