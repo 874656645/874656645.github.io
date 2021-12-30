@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.52" />
+    <meta name="generator" content="Hugo 0.91.2" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -33,33 +33,27 @@
 1）所有成员都是 public，没有私有和受保护的非静态成员；
 2）没有定义任何构造函数；
 3）没有类内初始化；
-4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数 void printA() override { cout &lt;&lt; &quot;class AA printA()&quot; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数 void printAA() override { cout &lt;&lt; &quot;class B printAA()&quot; &lt;&lt; endl; } void printB() { cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y &lt;&lt; &quot;, z = &quot; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; endl; c." />
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl; } void printB() { cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl; c." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/" /><meta property="article:published_time" content="2021-12-27T16:34:27&#43;08:00"/>
-<meta property="article:modified_time" content="2021-12-27T16:34:27&#43;08:00"/>
+<meta property="og:url" content="https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-27T16:34:27+08:00" />
+<meta property="article:modified_time" content="2021-12-27T16:34:27+08:00" />
 
 <meta itemprop="name" content="抽象类、接口类、聚合类">
 <meta itemprop="description" content="抽象类、接口类、聚合类  抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
 1）所有成员都是 public，没有私有和受保护的非静态成员；
 2）没有定义任何构造函数；
 3）没有类内初始化；
-4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数 void printA() override { cout &lt;&lt; &quot;class AA printA()&quot; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数 void printAA() override { cout &lt;&lt; &quot;class B printAA()&quot; &lt;&lt; endl; } void printB() { cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y &lt;&lt; &quot;, z = &quot; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; endl; c.">
-
-
-<meta itemprop="datePublished" content="2021-12-27T16:34:27&#43;08:00" />
-<meta itemprop="dateModified" content="2021-12-27T16:34:27&#43;08:00" />
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl; } void printB() { cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl; c."><meta itemprop="datePublished" content="2021-12-27T16:34:27+08:00" />
+<meta itemprop="dateModified" content="2021-12-27T16:34:27+08:00" />
 <meta itemprop="wordCount" content="209">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="抽象类、接口类、聚合类"/>
 <meta name="twitter:description" content="抽象类、接口类、聚合类  抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
 1）所有成员都是 public，没有私有和受保护的非静态成员；
 2）没有定义任何构造函数；
 3）没有类内初始化；
-4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数 void printA() override { cout &lt;&lt; &quot;class AA printA()&quot; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数 void printAA() override { cout &lt;&lt; &quot;class B printAA()&quot; &lt;&lt; endl; } void printB() { cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y &lt;&lt; &quot;, z = &quot; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; endl; c."/>
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl; } void printB() { cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl; c."/>
 
   </head>
 
@@ -119,94 +113,87 @@
       
     </header>
 
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="抽象类-接口类-聚合类">抽象类、接口类、聚合类</h2>
-
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="抽象类接口类聚合类">抽象类、接口类、聚合类</h2>
 <ol>
 <li>抽象类：含有纯虚函数的类，<strong>不能实例化对象</strong></li>
 <li>接口类：仅含有纯虚函数的抽象类</li>
-<li>聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：<br />
-1）所有成员都是 public，没有私有和受保护的非静态成员；<br />
-2）没有定义任何构造函数；<br />
-3）没有类内初始化；<br />
+<li>聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：<br>
+1）所有成员都是 public，没有私有和受保护的非静态成员；<br>
+2）没有定义任何构造函数；<br>
+3）没有类内初始化；<br>
 4）没有基类，也没有 virtual 函数</li>
 </ol>
-
-<pre><code class="language-C++">// 接口类
-class A
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 接口类
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>
 {
-    virtual void printA() = 0;   // 纯虚函数
-};
-// 抽象类
-class AA:public A
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printA</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;   <span style="color:#75715e">// 纯虚函数
+</span><span style="color:#75715e"></span>};
+<span style="color:#75715e">// 抽象类
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AA</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> A
 {
-public:
-    // 覆写接口类的纯虚函数
-    void printA() override
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// 覆写接口类的纯虚函数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> printA() <span style="color:#66d9ef">override</span>
     {
-        cout &lt;&lt; &quot;class AA printA()&quot; &lt;&lt; endl;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;class AA printA()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
     } 
-    virtual void printAA() = 0;
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printAA</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
 };
-// 可实例化的类
-class B:public AA
+<span style="color:#75715e">// 可实例化的类
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AA
 {
-public:
-    // 覆写父类（抽象类）的纯虚函数
-    void printAA() override
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// 覆写父类（抽象类）的纯虚函数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> printAA() <span style="color:#66d9ef">override</span>
     {
-        cout &lt;&lt; &quot;class B printAA()&quot; &lt;&lt; endl;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;class B printAA()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
     }
-    void printB()
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printB</span>()
     {
-        cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;printB()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
     }
 };
-// 聚合类
-class C
+<span style="color:#75715e">// 聚合类
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span>
 {
-public:
-    int x;
-    int y;
-    void print(){
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> x;
+    <span style="color:#66d9ef">int</span> y;
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>(){
         cc();
     }
 
-private:
-    void cc(){
-        cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y &lt;&lt; &quot;, z = &quot; &lt;&lt; z &lt;&lt; endl;       
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> cc(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, y = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, z = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> z <span style="color:#f92672">&lt;&lt;</span> endl;       
     }
-    static int z;
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> z;
 };
-int C::z = 0;
-class D
+<span style="color:#66d9ef">int</span> C<span style="color:#f92672">::</span>z <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">D</span>
 {
-public:
-    int a;
-    int b;
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> a;
+    <span style="color:#66d9ef">int</span> b;
     C c;
     
-    void print(){
-        cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; endl;
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
         c.print();
     }
 };
-int main( )
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
 {
     B b;
     b.printA();
     b.printB();
-    // 初始化聚合类
-    D d = {1, 2, {3, 4}};
+    <span style="color:#75715e">// 初始化聚合类
+</span><span style="color:#75715e"></span>    D d <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, {<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>}};
     d.print();
-    return 0;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre>
-
-<p>输出：</p>
-
-<pre><code class="language-text">Start
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Start
 class AA printA()
 class B printAA()
 printB()
@@ -214,8 +201,7 @@ a = 1, b = 2
 x = 3, y = 4, z = 0
 0
 Finish
-</code></pre>
-<ul class="pa0">
+</code></pre></div><ul class="pa0">
   
 </ul>
 <div class="mt6">

@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.52" />
+    <meta name="generator" content="Hugo 0.91.2" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -29,31 +29,25 @@
     
 
     <meta property="og:title" content="指针函数和函数指针" />
-<meta property="og:description" content=" 指针函数和函数指针  指针函数本质是一个函数，返回值是一个指针；
- 函数指针是指向函数的一个指针变量；
-  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &quot;fun: &quot; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun pf(&quot;Hello&quot;); return 0; }  " />
+<meta property="og:description" content="指针函数和函数指针   指针函数本质是一个函数，返回值是一个指针；
+  函数指针是指向函数的一个指针变量；
+  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &#34;fun: &#34; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun  pf(&#34;Hello&#34;); return 0; } " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" /><meta property="article:published_time" content="2021-12-16T12:34:27&#43;08:00"/>
-<meta property="article:modified_time" content="2021-12-16T12:34:27&#43;08:00"/>
+<meta property="og:url" content="https://874656645.github.io/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-16T12:34:27+08:00" />
+<meta property="article:modified_time" content="2021-12-16T12:34:27+08:00" />
 
 <meta itemprop="name" content="指针函数和函数指针">
-<meta itemprop="description" content=" 指针函数和函数指针  指针函数本质是一个函数，返回值是一个指针；
- 函数指针是指向函数的一个指针变量；
-  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &quot;fun: &quot; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun pf(&quot;Hello&quot;); return 0; }  ">
-
-
-<meta itemprop="datePublished" content="2021-12-16T12:34:27&#43;08:00" />
-<meta itemprop="dateModified" content="2021-12-16T12:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="50">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="指针函数和函数指针   指针函数本质是一个函数，返回值是一个指针；
+  函数指针是指向函数的一个指针变量；
+  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &#34;fun: &#34; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun  pf(&#34;Hello&#34;); return 0; } "><meta itemprop="datePublished" content="2021-12-16T12:34:27+08:00" />
+<meta itemprop="dateModified" content="2021-12-16T12:34:27+08:00" />
+<meta itemprop="wordCount" content="49">
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="指针函数和函数指针"/>
-<meta name="twitter:description" content=" 指针函数和函数指针  指针函数本质是一个函数，返回值是一个指针；
- 函数指针是指向函数的一个指针变量；
-  #include &lt;iostream&gt; #include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &quot;fun: &quot; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun pf(&quot;Hello&quot;); return 0; }  "/>
+<meta name="twitter:description" content="指针函数和函数指针   指针函数本质是一个函数，返回值是一个指针；
+  函数指针是指向函数的一个指针变量；
+  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &#34;fun: &#34; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun  pf(&#34;Hello&#34;); return 0; } "/>
 
   </head>
 
@@ -113,39 +107,37 @@
       
     </header>
 
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="指针函数和函数指针">指针函数和函数指针</h2>
-
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="指针函数和函数指针">指针函数和函数指针</h2>
 <ol>
-<li><p>指针函数本质是一个函数，返回值是一个指针；</p></li>
-
-<li><p>函数指针是指向函数的一个指针变量；</p></li>
+<li>
+<p>指针函数本质是一个函数，返回值是一个指针；</p>
+</li>
+<li>
+<p>函数指针是指向函数的一个指针变量；</p>
+</li>
 </ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
 
-<pre><code class="language-C++">#include &lt;iostream&gt;
-#include &lt;cstdlib&gt;
-
-using namespace std;
-
-//  指针函数fun
-char * fun(const char * p)  {
-    cout &lt;&lt; &quot;fun: &quot; &lt;&lt; p &lt;&lt; endl;
-    return nullptr;
+<span style="color:#75715e">//  指针函数fun
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">fun</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> p)  {
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;fun: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
 };
 
-//  函数指针pf 
-char * (*pf)(const char * p); 
+<span style="color:#75715e">//  函数指针pf 
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> (<span style="color:#f92672">*</span>pf)(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span> p); 
 
-int main()
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
-    pf = fun;                        // 函数指针pf指向函数fun
-    pf(&quot;Hello&quot;); 
+    pf <span style="color:#f92672">=</span> fun;                        <span style="color:#75715e">// 函数指针pf指向函数fun
+</span><span style="color:#75715e"></span>    pf(<span style="color:#e6db74">&#34;Hello&#34;</span>); 
     
-    return 0;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre>
-<ul class="pa0">
+</code></pre></div><ul class="pa0">
   
 </ul>
 <div class="mt6">

@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.52" />
+    <meta name="generator" content="Hugo 0.91.2" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -35,12 +35,9 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/" />
-<meta property="og:updated_time" content="2021-12-28T10:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Posts">
-<meta itemprop="description" content="">
-
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content=""><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Posts"/>
 <meta name="twitter:description" content=""/>
 
@@ -103,8 +100,8 @@
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      构造函数私有  如果类的内部没有专门创建实例的代码，则是无法创建任何实例的 如果父类构造函数设置成了私有的，则子类无法编译，因为在初始化子类时会先执行父类的构造  class A{ public: private: A(int ){ } }; class B:public A{ public: int x; }; int main( ) { B b; b.x = 0; return 0; }  输出：
-Start prog.cc:19:7: error: call to implicitly-deleted default constructor of 'B' B b; ^ prog.cc:13:9: note: default constructor of 'B' is implicitly deleted because base class 'A' has an inaccessible default constructor class B:public A{ ^ 1 error generated.
+      构造函数私有  如果类的内部没有专门创建实例的代码，则是无法创建任何实例的 如果父类构造函数设置成了私有的，则子类无法编译，因为在初始化子类时会先执行父类的构造  class A{ public: private: A(int ){ } }; class B:public A{ public: int x; }; int main( ) { B b; b.x = 0; return 0; } 输出：
+Start prog.cc:19:7: error: call to implicitly-deleted default constructor of &#39;B&#39; B b; ^ prog.cc:13:9: note: default constructor of &#39;B&#39; is implicitly deleted because base class &#39;A&#39; has an inaccessible default constructor class B:public A{ ^ 1 error generated.
     </div>
   </div>
 </div>
@@ -121,8 +118,8 @@ Start prog.cc:19:7: error: call to implicitly-deleted default constructor of 'B'
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       定义一个只能在堆上（栈上）生成对象的类 一、只能在堆上 方法：将析构函数设置为私有
 原因：C++ 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象
-class Test { public: void printT(){ cout &lt;&lt; &quot;printT&quot; &lt;&lt; endl; } void freeT(){ delete this; } private: ~Test(){ cout &lt;&lt; &quot;~Test()&quot; &lt;&lt; endl; } }; int main( ) { // 不能在栈上创建对象 //Test t; // prog.cc:25:10: error: variable of type 'Test' has private destructor // 只能在堆上创建对象 Test *t = new Test; t-&gt;printT(); // 销毁对象 t-&gt;freeT(); return 0; }  输出：
-Start printT ~Test() 0 Finish  二、只能在栈上 方法：将 new 和 delete 重载为私有
+class Test { public: void printT(){ cout &lt;&lt; &#34;printT&#34; &lt;&lt; endl; } void freeT(){ delete this; } private: ~Test(){ cout &lt;&lt; &#34;~Test()&#34; &lt;&lt; endl; } }; int main( ) { // 不能在栈上创建对象  //Test t; // prog.cc:25:10: error: variable of type &#39;Test&#39; has private destructor  // 只能在堆上创建对象  Test *t = new Test; t-&gt;printT(); // 销毁对象  t-&gt;freeT(); return 0; } 输出：
+Start printT ~Test() 0 Finish 二、只能在栈上 方法：将 new 和 delete 重载为私有
     </div>
   </div>
 </div>
@@ -141,7 +138,7 @@ Start printT ~Test() 0 Finish  二、只能在栈上 方法：将 new 和 delete
 1）所有成员都是 public，没有私有和受保护的非静态成员；
 2）没有定义任何构造函数；
 3）没有类内初始化；
-4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数 void printA() override { cout &lt;&lt; &quot;class AA printA()&quot; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数 void printAA() override { cout &lt;&lt; &quot;class B printAA()&quot; &lt;&lt; endl; } void printB() { cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &quot;x = &quot; &lt;&lt; x &lt;&lt; &quot;, y = &quot; &lt;&lt; y &lt;&lt; &quot;, z = &quot; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, b = &quot; &lt;&lt; b &lt;&lt; endl; c.
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl; } void printB() { cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl; c.
     </div>
   </div>
 </div>
@@ -159,8 +156,8 @@ Start printT ~Test() 0 Finish  二、只能在栈上 方法：将 new 和 delete
       虚继承和虚基类 参考
  在C++中，在定义公共基类A的派生类B、C&hellip;的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C&hellip;的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C++对象在内存中的布局的选项cl [filename].cpp /d1 reportSingleClassLayout[className]
 一般继承：
-class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; };  输出：
-class D size(20): +--- 0 | +--- (base class B) 0 | | +--- (base class A) 0 | | | dataA | | +--- 4 | | dataB | +--- 8 | +--- (base class C) 8 | | +--- (base class A) 8 | | | dataA | | +--- 12 | | dataC | +--- 16 | dataD +---  调用：
+class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; }; 输出：
+class D size(20): +--- 0 | +--- (base class B) 0 | | +--- (base class A) 0 | | | dataA | | +--- 4 | | dataB | +--- 8 | +--- (base class C) 8 | | +--- (base class A) 8 | | | dataA | | +--- 12 | | dataC | +--- 16 | dataD +--- 调用：
     </div>
   </div>
 </div>
@@ -175,7 +172,7 @@ class D size(20): +--- 0 | +--- (base class B) 0 | | +--- (base class A) 0 | | |
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      多态总结 C++ 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态） 参数多态（Parametric Polymorphism，编译期）：类模板、函数模板 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &lt;&lt; &quot;~Shape()&quot; &lt;&lt; endl; } }; class Point { public: ~Point(){ cout &lt;&lt; &quot;~Point()&quot; &lt;&lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &lt;&lt; &quot;~Circle()&quot; &lt;&lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针 cout &lt;&lt; sizeof(Shape) &lt;&lt; endl; // 16 类中存有指向虚函数表的指针 // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1 // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7)) cout &lt;&lt; sizeof(Circle) &lt;&lt; endl; // 8 类中的int占4个字节，char占1个字节 // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3)) cout &lt;&lt; sizeof(Point) &lt;&lt; endl; Circle c; return 0; }  Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish  Shape 类
+      多态总结 C++ 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态） 参数多态（Parametric Polymorphism，编译期）：类模板、函数模板 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl; } }; class Point { public: ~Point(){ cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类
     </div>
   </div>
 </div>
@@ -191,8 +188,8 @@ class D size(20): +--- 0 | +--- (base class B) 0 | | +--- (base class A) 0 | | |
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
-// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; }  函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
-int fun(int, char, double) =&gt; fun_icd  重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败   函数指针 int test(int a, int b){ cout &lt;&lt; &quot;test(&quot; &lt;&lt; a &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot; &lt;&lt; endl; return 0; } // 方式一： typedef int(FUN)(int, int); // 方式二： typedef int(*FUN_P)(int, int); int main() { // 方式一： FUN *f1 = NULL; f1 = test; f1(10, 20); (*f1)(10, 20); // 方式二： FUN_P f2 = NULL; f2 = test; f2(10, 20); // 方式三： int (*f3)(int, int) = NULL; f3 = test; f3(10, 20); return 0; }  输出：
+// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; } 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
+int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    函数指针 int test(int a, int b){ cout &lt;&lt; &#34;test(&#34; &lt;&lt; a &lt;&lt; &#34;, &#34; &lt;&lt; b &lt;&lt; &#34;)&#34; &lt;&lt; endl; return 0; } // 方式一： typedef int(FUN)(int, int); // 方式二： typedef int(*FUN_P)(int, int); int main() { // 方式一：  FUN *f1 = NULL; f1 = test; f1(10, 20); (*f1)(10, 20); // 方式二：  FUN_P f2 = NULL; f2 = test; f2(10, 20); // 方式三：  int (*f3)(int, int) = NULL; f3 = test; f3(10, 20); return 0; } 输出：
     </div>
   </div>
 </div>
@@ -207,7 +204,7 @@ int fun(int, char, double) =&gt; fun_icd  重载函数匹配顺序  如果能够
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-       内存区间划分 
+      内存区间划分 
     </div>
   </div>
 </div>
@@ -223,7 +220,7 @@ int fun(int, char, double) =&gt; fun_icd  重载函数匹配顺序  如果能够
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       指针引用  指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
-void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;test:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &quot;main point a = &quot; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &quot;main:&quot; &lt;&lt; a &lt;&lt; &quot;\ta = &quot; &lt;&lt; *a &lt;&lt; endl; return 0; }  输出：
+void test(int * a){ a = new int(20); //*a = 20;  cout &lt;&lt; &#34;test point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;test:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &#34;main point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; return 0; } 输出：
     </div>
   </div>
 </div>
@@ -247,7 +244,7 @@ void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a
 派生类可以访问基类中所有的非私有成员，同时，一个派生类继承了所有的基类方法，但下列情况除外：
  基类的构造函数、析构函数和拷贝构造函数 基类的重载运算符 基类的友元函数  三、多态 虚函数：虚函数是在基类中使用关键字 virtual 声明的函数。在派生类中重新定义基类中定义的虚函数时，会告诉编译器不要静态链接到该函数。我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为动态链接，或后期绑定。
  多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 类析构顺序：1）派生类本身的析构函数；2）对象成员析构函数；3）基类析构函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
-// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &quot;Shape destructor&quot; &lt;&lt; endl; } // pure virtual function virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &quot;PaintCost: &quot; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &quot;Rectangle destructor&quot; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员） cout &lt;&lt; &quot;width: &quot; &lt;&lt; width &lt;&lt; &quot;\theight: &quot; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &quot;Rectangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &quot;Triangle destructor&quot; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &quot;Triangle class area: &quot; &lt;&lt; area &lt;&lt;endl; return area; } };  多继承：
+// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &#34;Shape destructor&#34; &lt;&lt; endl; } // pure virtual function  virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &#34;PaintCost: &#34; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &#34;Rectangle destructor&#34; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员）  cout &lt;&lt; &#34;width: &#34; &lt;&lt; width &lt;&lt; &#34;\theight: &#34; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &#34;Rectangle class area: &#34; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &#34;Triangle destructor&#34; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &#34;Triangle class area: &#34; &lt;&lt; area &lt;&lt;endl; return area; } }; 多继承：
     </div>
   </div>
 </div>
@@ -262,99 +259,42 @@ void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a
       </a>
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
-      类的静态成员  使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A { string name {&quot;C++&quot;}; int id {1024}; static int objCount; public: A(); friend void printA(const A &amp;a); void printA(); static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){ objCount++; } void A::printA(){ cout &lt;&lt; &quot;objCount = &quot; &lt;&lt; this-&gt;objCount &lt;&lt; &quot;\tname = &quot; &lt;&lt; this-&gt;name &lt;&lt; &quot;\tid = &quot; &lt;&lt; this-&gt;id &lt;&lt; endl; } void A::printC(){ // 静态函数内没有this指针 cout &lt;&lt; &quot;objCount = &quot; &lt;&lt; objCount &lt;&lt; endl; // error: 'this' is unavailable for static member functions // cout &lt;&lt; &quot;objCount = &quot; &lt;&lt; this-&gt;objCount &lt;&lt; endl; } void printA(const A &amp;a){ cout &lt;&lt; &quot;objCount = &quot; &lt;&lt; a.
+      类的静态成员  使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A { string name {&#34;C++&#34;}; int id {1024}; static int objCount; public: A(); friend void printA(const A &amp;a); void printA(); static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){ objCount++; } void A::printA(){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; &#34;\tname = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } void A::printC(){ // 静态函数内没有this指针  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; objCount &lt;&lt; endl; // error: &#39;this&#39; is unavailable for static member functions  // cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; endl; } void printA(const A &amp;a){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; a.
     </div>
   </div>
 </div>
 </div>
       
     </section>
-
-<ul class="pagination">
-    
-    <li class="page-item">
-        <a href="/rick/posts/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
-    </li>
-    
-    <li class="page-item">
-    <a href="/rick/posts/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
-    </li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="/rick/posts/">1</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item active"><a class="page-link" href="/rick/posts/page/2/">2</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="/rick/posts/page/3/">3</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="/rick/posts/page/6/">6</a></li>
-    
-    
-    <li class="page-item">
-    <a href="/rick/posts/page/3/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
-    </li>
-    
-    <li class="page-item">
-        <a href="/rick/posts/page/6/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
-    </li>
-    
-</ul>
-</article>
+    <ul class="pagination pagination-default">
+      <li class="page-item">
+        <a href="/rick/posts/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/rick/posts/" aria-label="Previous" class="page-link" role="button"><span aria-hidden="true">&laquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/rick/posts/" aria-label="Page 1" class="page-link" role="button">1</a>
+      </li>
+      <li class="page-item active">
+        <a aria-current="page" aria-label="Page 2" class="page-link" role="button">2</a>
+      </li>
+      <li class="page-item">
+        <a href="/rick/posts/page/3/" aria-label="Page 3" class="page-link" role="button">3</a>
+      </li>
+      <li class="page-item">
+        <a href="/rick/posts/page/4/" aria-label="Page 4" class="page-link" role="button">4</a>
+      </li>
+      <li class="page-item">
+        <a href="/rick/posts/page/5/" aria-label="Page 5" class="page-link" role="button">5</a>
+      </li>
+      <li class="page-item">
+        <a href="/rick/posts/page/3/" aria-label="Next" class="page-link" role="button"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <li class="page-item">
+        <a href="/rick/posts/page/6/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
+      </li>
+    </ul></article>
 
     </main>
     <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">

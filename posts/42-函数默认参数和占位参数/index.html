@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.52" />
+    <meta name="generator" content="Hugo 0.91.2" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -30,30 +30,24 @@
 
     <meta property="og:title" content="函数默认参数和占位参数" />
 <meta property="og:description" content="函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
-// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; }  函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
-int fun(int, char, double) =&gt; fun_icd  重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败   函数指针 int test(int a, int b){ cout &lt;&lt; &quot;test(&quot; &lt;&lt; a &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot; &lt;&lt; endl; return 0; } // 方式一： typedef int(FUN)(int, int); // 方式二： typedef int(*FUN_P)(int, int); int main() { // 方式一： FUN *f1 = NULL; f1 = test; f1(10, 20); (*f1)(10, 20); // 方式二： FUN_P f2 = NULL; f2 = test; f2(10, 20); // 方式三： int (*f3)(int, int) = NULL; f3 = test; f3(10, 20); return 0; }  输出：" />
+// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; } 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
+int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    函数指针 int test(int a, int b){ cout &lt;&lt; &#34;test(&#34; &lt;&lt; a &lt;&lt; &#34;, &#34; &lt;&lt; b &lt;&lt; &#34;)&#34; &lt;&lt; endl; return 0; } // 方式一： typedef int(FUN)(int, int); // 方式二： typedef int(*FUN_P)(int, int); int main() { // 方式一：  FUN *f1 = NULL; f1 = test; f1(10, 20); (*f1)(10, 20); // 方式二：  FUN_P f2 = NULL; f2 = test; f2(10, 20); // 方式三：  int (*f3)(int, int) = NULL; f3 = test; f3(10, 20); return 0; } 输出：" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/" /><meta property="article:published_time" content="2021-12-26T15:34:27&#43;08:00"/>
-<meta property="article:modified_time" content="2021-12-26T15:34:27&#43;08:00"/>
+<meta property="og:url" content="https://874656645.github.io/rick/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-26T15:34:27+08:00" />
+<meta property="article:modified_time" content="2021-12-26T15:34:27+08:00" />
 
 <meta itemprop="name" content="函数默认参数和占位参数">
 <meta itemprop="description" content="函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
-// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; }  函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
-int fun(int, char, double) =&gt; fun_icd  重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败   函数指针 int test(int a, int b){ cout &lt;&lt; &quot;test(&quot; &lt;&lt; a &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot; &lt;&lt; endl; return 0; } // 方式一： typedef int(FUN)(int, int); // 方式二： typedef int(*FUN_P)(int, int); int main() { // 方式一： FUN *f1 = NULL; f1 = test; f1(10, 20); (*f1)(10, 20); // 方式二： FUN_P f2 = NULL; f2 = test; f2(10, 20); // 方式三： int (*f3)(int, int) = NULL; f3 = test; f3(10, 20); return 0; }  输出：">
-
-
-<meta itemprop="datePublished" content="2021-12-26T15:34:27&#43;08:00" />
-<meta itemprop="dateModified" content="2021-12-26T15:34:27&#43;08:00" />
+// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; } 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
+int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    函数指针 int test(int a, int b){ cout &lt;&lt; &#34;test(&#34; &lt;&lt; a &lt;&lt; &#34;, &#34; &lt;&lt; b &lt;&lt; &#34;)&#34; &lt;&lt; endl; return 0; } // 方式一： typedef int(FUN)(int, int); // 方式二： typedef int(*FUN_P)(int, int); int main() { // 方式一：  FUN *f1 = NULL; f1 = test; f1(10, 20); (*f1)(10, 20); // 方式二：  FUN_P f2 = NULL; f2 = test; f2(10, 20); // 方式三：  int (*f3)(int, int) = NULL; f3 = test; f3(10, 20); return 0; } 输出："><meta itemprop="datePublished" content="2021-12-26T15:34:27+08:00" />
+<meta itemprop="dateModified" content="2021-12-26T15:34:27+08:00" />
 <meta itemprop="wordCount" content="151">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="函数默认参数和占位参数"/>
 <meta name="twitter:description" content="函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
-// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; }  函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
-int fun(int, char, double) =&gt; fun_icd  重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败   函数指针 int test(int a, int b){ cout &lt;&lt; &quot;test(&quot; &lt;&lt; a &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot; &lt;&lt; endl; return 0; } // 方式一： typedef int(FUN)(int, int); // 方式二： typedef int(*FUN_P)(int, int); int main() { // 方式一： FUN *f1 = NULL; f1 = test; f1(10, 20); (*f1)(10, 20); // 方式二： FUN_P f2 = NULL; f2 = test; f2(10, 20); // 方式三： int (*f3)(int, int) = NULL; f3 = test; f3(10, 20); return 0; }  输出："/>
+// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; } 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
+int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    函数指针 int test(int a, int b){ cout &lt;&lt; &#34;test(&#34; &lt;&lt; a &lt;&lt; &#34;, &#34; &lt;&lt; b &lt;&lt; &#34;)&#34; &lt;&lt; endl; return 0; } // 方式一： typedef int(FUN)(int, int); // 方式二： typedef int(*FUN_P)(int, int); int main() { // 方式一：  FUN *f1 = NULL; f1 = test; f1(10, 20); (*f1)(10, 20); // 方式二：  FUN_P f2 = NULL; f2 = test; f2(10, 20); // 方式三：  int (*f3)(int, int) = NULL; f3 = test; f3(10, 20); return 0; } 输出："/>
 
   </head>
 
@@ -113,90 +107,77 @@ int fun(int, char, double) =&gt; fun_icd  重载函数匹配顺序  如果能够
       
     </header>
 
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="函数默认参数和占位参数-亚元">函数默认参数和占位参数（亚元）</h2>
-
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="函数默认参数和占位参数亚元">函数默认参数和占位参数（亚元）</h2>
 <p>形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用</p>
-
-<pre><code class="language-C++">// 亚元，设置了默认值所以调用时可以不传参数
-// 否则就必须传入两个参数
-void foo(int a, int = 0){           
-    cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; endl;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 亚元，设置了默认值所以调用时可以不传参数
+</span><span style="color:#75715e">// 否则就必须传入两个参数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>){           
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> endl;
 }
-int main()
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
-    foo(20);
-    return 0;
+    foo(<span style="color:#ae81ff">20</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre>
-
-<h2 id="函数重载">函数重载</h2>
-
+</code></pre></div><h2 id="函数重载">函数重载</h2>
 <ol>
 <li>函数名相同，形参列表不同（形参个数、类型、顺序）</li>
 <li>函数返回值不起作用</li>
 <li>函数重载和默认参数不要同时使用（函数调用时容易产生二义性）</li>
 <li>倾轧技术（name mangling），底层会将函数名进行编译
-
 <ul>
 <li>用 <code>v c i f l d</code> 表示 <code>void char int float long double</code> 及其引用</li>
-<li><code>int fun(int) =&gt; fun_i</code><br />
+<li><code>int fun(int) =&gt; fun_i</code><br>
 <code>int fun(int, char, double) =&gt; fun_icd</code></li>
-</ul></li>
+</ul>
+</li>
 <li>重载函数匹配顺序
-
 <ul>
 <li>如果能够严格匹配，则调用完全匹配的</li>
 <li>如果没有完全匹配的，则调用隐式转换的</li>
 <li>都匹配不上，编译失败</li>
-</ul></li>
+</ul>
+</li>
 </ol>
-
 <h2 id="函数指针">函数指针</h2>
-
-<pre><code class="language-C++">int test(int a, int b){
-    cout &lt;&lt; &quot;test(&quot; &lt;&lt; a &lt;&lt; &quot;, &quot; &lt;&lt; b &lt;&lt; &quot;)&quot; &lt;&lt; endl;
-    return 0;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">test</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;test(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-// 方式一：
-typedef int(FUN)(int, int);
+<span style="color:#75715e">// 方式一：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span>(FUN)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
 
-// 方式二：
-typedef int(*FUN_P)(int, int);
+<span style="color:#75715e">// 方式二：
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span>(<span style="color:#f92672">*</span>FUN_P)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
 
-int main()
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
-    // 方式一：
-    FUN *f1 = NULL;
-    f1 = test;
-    f1(10, 20);
-    (*f1)(10, 20);
-    // 方式二：
-    FUN_P f2 = NULL;
-    f2 = test;
-    f2(10, 20);
-    // 方式三：
-    int (*f3)(int, int) = NULL;
-    f3 = test;
-    f3(10, 20);
+    <span style="color:#75715e">// 方式一：
+</span><span style="color:#75715e"></span>    FUN <span style="color:#f92672">*</span>f1 <span style="color:#f92672">=</span> NULL;
+    f1 <span style="color:#f92672">=</span> test;
+    f1(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>);
+    (<span style="color:#f92672">*</span>f1)(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>);
+    <span style="color:#75715e">// 方式二：
+</span><span style="color:#75715e"></span>    FUN_P f2 <span style="color:#f92672">=</span> NULL;
+    f2 <span style="color:#f92672">=</span> test;
+    f2(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>);
+    <span style="color:#75715e">// 方式三：
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>f3)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> NULL;
+    f3 <span style="color:#f92672">=</span> test;
+    f3(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>);
 
-    return 0;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 
-</code></pre>
-
-<p>输出：</p>
-
-<pre><code class="language-text">Start
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Start
 test(10, 20)
 test(10, 20)
 test(10, 20)
 test(10, 20)
 0
 Finish
-</code></pre>
-<ul class="pa0">
+</code></pre></div><ul class="pa0">
   
 </ul>
 <div class="mt6">

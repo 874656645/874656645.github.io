@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.52" />
+    <meta name="generator" content="Hugo 0.91.2" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -29,31 +29,25 @@
     
 
     <meta property="og:title" content="inline 内联函数" />
-<meta property="og:description" content=" inline 内联函数 当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
+<meta property="og:description" content="inline 内联函数 当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
  适用于函数体积很小并频繁使用的函数 内联函数中不可以出现循环、递归或开关操作 内联函数的声明必须在函数定义之前 内联函数的定义必须出现在内联函数的第一次调用前 在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数 虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联  优点：
  内联函数在被调用处进行代码展开，省去了参数压栈、跳转返回、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度； 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会； 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能； 内联函数在运行时可调试，而宏定义不可以。  缺点：
  代码膨胀，消耗了更多的内存空间； inline 函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像 non-inline 可以直接链接； 内联函数其实是不可控的，它只是对编译器的建议，是否对函数内联，决定权在于编译器; 不能对函数进行取址操作  " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/" /><meta property="article:published_time" content="2021-12-23T11:34:27&#43;08:00"/>
-<meta property="article:modified_time" content="2021-12-23T11:34:27&#43;08:00"/>
+<meta property="og:url" content="https://874656645.github.io/rick/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-23T11:34:27+08:00" />
+<meta property="article:modified_time" content="2021-12-23T11:34:27+08:00" />
 
 <meta itemprop="name" content="inline 内联函数">
-<meta itemprop="description" content=" inline 内联函数 当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
+<meta itemprop="description" content="inline 内联函数 当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
  适用于函数体积很小并频繁使用的函数 内联函数中不可以出现循环、递归或开关操作 内联函数的声明必须在函数定义之前 内联函数的定义必须出现在内联函数的第一次调用前 在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数 虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联  优点：
  内联函数在被调用处进行代码展开，省去了参数压栈、跳转返回、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度； 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会； 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能； 内联函数在运行时可调试，而宏定义不可以。  缺点：
- 代码膨胀，消耗了更多的内存空间； inline 函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像 non-inline 可以直接链接； 内联函数其实是不可控的，它只是对编译器的建议，是否对函数内联，决定权在于编译器; 不能对函数进行取址操作  ">
-
-
-<meta itemprop="datePublished" content="2021-12-23T11:34:27&#43;08:00" />
-<meta itemprop="dateModified" content="2021-12-23T11:34:27&#43;08:00" />
+ 代码膨胀，消耗了更多的内存空间； inline 函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像 non-inline 可以直接链接； 内联函数其实是不可控的，它只是对编译器的建议，是否对函数内联，决定权在于编译器; 不能对函数进行取址操作  "><meta itemprop="datePublished" content="2021-12-23T11:34:27+08:00" />
+<meta itemprop="dateModified" content="2021-12-23T11:34:27+08:00" />
 <meta itemprop="wordCount" content="22">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="inline 内联函数"/>
-<meta name="twitter:description" content=" inline 内联函数 当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
+<meta name="twitter:description" content="inline 内联函数 当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
  适用于函数体积很小并频繁使用的函数 内联函数中不可以出现循环、递归或开关操作 内联函数的声明必须在函数定义之前 内联函数的定义必须出现在内联函数的第一次调用前 在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数 虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联  优点：
  内联函数在被调用处进行代码展开，省去了参数压栈、跳转返回、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度； 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会； 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能； 内联函数在运行时可调试，而宏定义不可以。  缺点：
  代码膨胀，消耗了更多的内存空间； inline 函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像 non-inline 可以直接链接； 内联函数其实是不可控的，它只是对编译器的建议，是否对函数内联，决定权在于编译器; 不能对函数进行取址操作  "/>
@@ -116,12 +110,8 @@
       
     </header>
 
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="inline-内联函数">inline 内联函数</h2>
-
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="inline-内联函数">inline 内联函数</h2>
 <p>当一个函数被声明为内联函数之后，在<strong>编译阶段</strong>，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：</p>
-
 <ul>
 <li>适用于函数体积很小并频繁使用的函数</li>
 <li>内联函数中<strong>不可以出现循环、递归或开关操作</strong></li>
@@ -130,18 +120,14 @@
 <li>在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数</li>
 <li>虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联</li>
 </ul>
-
 <p><strong>优点：</strong></p>
-
 <ol>
 <li>内联函数在被调用处进行代码展开，省去了参数压栈、跳转返回、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度；</li>
 <li>内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会；</li>
 <li>在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能；</li>
 <li>内联函数在运行时可调试，而宏定义不可以。</li>
 </ol>
-
 <p><strong>缺点：</strong></p>
-
 <ol>
 <li>代码膨胀，消耗了更多的内存空间；</li>
 <li>inline 函数无法随着函数库升级而升级。inline函数的改变<strong>需要重新编译</strong>，不像 non-inline 可以直接链接；</li>

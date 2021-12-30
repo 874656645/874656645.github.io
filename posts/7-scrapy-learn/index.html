@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.52" />
+    <meta name="generator" content="Hugo 0.91.2" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -33,36 +33,30 @@
 1. Using a virtual environment (recommended) pip install virtualenv
 详细操作
 2. Creating a new Scrapy project scrapy startproject tutorial
-3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named _quotesspider.py under the tutorial/spiders directory in your project:
-import scrapy class QuotesSpider(scrapy.Spider): name = &quot;quotes&quot; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy." />
+3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
+import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/7-scrapy-learn/" /><meta property="article:published_time" content="2019-02-15T15:40:48&#43;08:00"/>
-<meta property="article:modified_time" content="2019-02-15T15:40:48&#43;08:00"/>
+<meta property="og:url" content="https://874656645.github.io/rick/posts/7-scrapy-learn/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-02-15T15:40:48+08:00" />
+<meta property="article:modified_time" content="2019-02-15T15:40:48+08:00" />
 
 <meta itemprop="name" content="Scrapy Learn">
 <meta itemprop="description" content="原文网址
 1. Using a virtual environment (recommended) pip install virtualenv
 详细操作
 2. Creating a new Scrapy project scrapy startproject tutorial
-3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named _quotesspider.py under the tutorial/spiders directory in your project:
-import scrapy class QuotesSpider(scrapy.Spider): name = &quot;quotes&quot; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy.">
-
-
-<meta itemprop="datePublished" content="2019-02-15T15:40:48&#43;08:00" />
-<meta itemprop="dateModified" content="2019-02-15T15:40:48&#43;08:00" />
+3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
+import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy."><meta itemprop="datePublished" content="2019-02-15T15:40:48+08:00" />
+<meta itemprop="dateModified" content="2019-02-15T15:40:48+08:00" />
 <meta itemprop="wordCount" content="329">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Scrapy Learn"/>
 <meta name="twitter:description" content="原文网址
 1. Using a virtual environment (recommended) pip install virtualenv
 详细操作
 2. Creating a new Scrapy project scrapy startproject tutorial
-3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named _quotesspider.py under the tutorial/spiders directory in your project:
-import scrapy class QuotesSpider(scrapy.Spider): name = &quot;quotes&quot; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy."/>
+3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
+import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy."/>
 
   </head>
 
@@ -122,150 +116,123 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &quot;quotes&quot; def s
       
     </header>
 
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
-
-<p><a href="https://docs.scrapy.org/en/latest/intro/tutorial.html">原文网址</a></p>
-
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><a href="https://docs.scrapy.org/en/latest/intro/tutorial.html">原文网址</a></p>
 <h2 id="1-using-a-virtual-environment-recommended">1. Using a virtual environment (recommended)</h2>
-
-<p><code>pip install virtualenv</code><br />
+<p><code>pip install virtualenv</code><br>
 <a href="https://874656645.github.io/rick/posts/python-virtualenv/">详细操作</a></p>
-
 <h2 id="2-creating-a-new-scrapy-project">2. Creating a new Scrapy project</h2>
-
 <p><code>scrapy startproject tutorial</code></p>
-
 <h2 id="3-writing-a-spider-to-crawl-a-site-and-extract-data">3. Writing a spider to crawl a site and extract data</h2>
+<p>This is the code for our first Spider. Save it in a file named <strong><em>quotes_spider.py</em></strong> under the <strong><em>tutorial/spiders</em></strong> directory in your project:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> scrapy
 
-<p>This is the code for our first Spider. Save it in a file named <strong>_quotes<em>spider.py</em></strong> under the <strong><em>tutorial/spiders</em></strong> directory in your project:</p>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">QuotesSpider</span>(scrapy<span style="color:#f92672">.</span>Spider):
+    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;quotes&#34;</span>
 
-<pre><code class="language-python">import scrapy
-
-class QuotesSpider(scrapy.Spider):
-    name = &quot;quotes&quot;
-
-    def start_requests(self):
-        urls = [
-            'http://quotes.toscrape.com/page/1/',
-            'http://quotes.toscrape.com/page/2/',
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start_requests</span>(self):
+        urls <span style="color:#f92672">=</span> [
+            <span style="color:#e6db74">&#39;http://quotes.toscrape.com/page/1/&#39;</span>,
+            <span style="color:#e6db74">&#39;http://quotes.toscrape.com/page/2/&#39;</span>,
         ]
-        for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse)
+        <span style="color:#66d9ef">for</span> url <span style="color:#f92672">in</span> urls:
+            <span style="color:#66d9ef">yield</span> scrapy<span style="color:#f92672">.</span>Request(url<span style="color:#f92672">=</span>url, callback<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>parse)
 
-    def parse(self, response):
-        page = response.url.split(&quot;/&quot;)[-2]
-        filename = 'quotes-%s.html' % page
-        with open(filename, 'wb') as f:
-            f.write(response.body)
-        self.log('Saved file %s' % filename)
-</code></pre>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse</span>(self, response):
+        page <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>url<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#34;/&#34;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
+        filename <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;quotes-</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">.html&#39;</span> <span style="color:#f92672">%</span> page
+        <span style="color:#66d9ef">with</span> open(filename, <span style="color:#e6db74">&#39;wb&#39;</span>) <span style="color:#66d9ef">as</span> f:
+            f<span style="color:#f92672">.</span>write(response<span style="color:#f92672">.</span>body)
+        self<span style="color:#f92672">.</span>log(<span style="color:#e6db74">&#39;Saved file </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> filename)
+</code></pre></div><h3 id="31-extracting-data-in-our-spider">3.1 Extracting data in our spider</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> scrapy
 
-<h3 id="3-1-extracting-data-in-our-spider">3.1 Extracting data in our spider</h3>
-
-<pre><code class="language-python">import scrapy
-
-class QuotesSpider(scrapy.Spider):
-    name = &quot;quotes&quot;
-    start_urls = [
-        'http://quotes.toscrape.com/page/1/',
-        'http://quotes.toscrape.com/page/2/',
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">QuotesSpider</span>(scrapy<span style="color:#f92672">.</span>Spider):
+    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;quotes&#34;</span>
+    start_urls <span style="color:#f92672">=</span> [
+        <span style="color:#e6db74">&#39;http://quotes.toscrape.com/page/1/&#39;</span>,
+        <span style="color:#e6db74">&#39;http://quotes.toscrape.com/page/2/&#39;</span>,
     ]
 
-    def parse(self, response):
-        for quote in response.css('div.quote'):
-            yield {
-                'text': quote.css('span.text::text').get(),
-                'author': quote.css('small.author::text').get(),
-                'tags': quote.css('div.tags a.tag::text').getall(),
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse</span>(self, response):
+        <span style="color:#66d9ef">for</span> quote <span style="color:#f92672">in</span> response<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;div.quote&#39;</span>):
+            <span style="color:#66d9ef">yield</span> {
+                <span style="color:#e6db74">&#39;text&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;span.text::text&#39;</span>)<span style="color:#f92672">.</span>get(),
+                <span style="color:#e6db74">&#39;author&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;small.author::text&#39;</span>)<span style="color:#f92672">.</span>get(),
+                <span style="color:#e6db74">&#39;tags&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;div.tags a.tag::text&#39;</span>)<span style="color:#f92672">.</span>getall(),
             }
-</code></pre>
-
-<h3 id="3-2-storing-the-scraped-data">3.2 Storing the scraped data</h3>
-
-<p><code>scrapy crawl quotes -o quotes.json</code><br />
-or<br />
+</code></pre></div><h3 id="32-storing-the-scraped-data">3.2 Storing the scraped data</h3>
+<p><code>scrapy crawl quotes -o quotes.json</code><br>
+or<br>
 <code>scrapy crawl quotes -o quotes.jl</code></p>
-
 <h2 id="4-exporting-the-scraped-data-using-the-command-line">4. Exporting the scraped data using the command line</h2>
-
 <p><code>scrapy crawl quotes</code></p>
-
 <h2 id="5-changing-spider-to-recursively-follow-links">5. Changing spider to recursively follow links</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> scrapy
 
-<pre><code class="language-python">import scrapy
 
-
-class QuotesSpider(scrapy.Spider):
-    name = &quot;quotes&quot;
-    start_urls = [
-        'http://quotes.toscrape.com/page/1/',
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">QuotesSpider</span>(scrapy<span style="color:#f92672">.</span>Spider):
+    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;quotes&#34;</span>
+    start_urls <span style="color:#f92672">=</span> [
+        <span style="color:#e6db74">&#39;http://quotes.toscrape.com/page/1/&#39;</span>,
     ]
 
-    def parse(self, response):
-        for quote in response.css('div.quote'):
-            yield {
-                'text': quote.css('span.text::text').get(),
-                'author': quote.css('small.author::text').get(),
-                'tags': quote.css('div.tags a.tag::text').getall(),
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse</span>(self, response):
+        <span style="color:#66d9ef">for</span> quote <span style="color:#f92672">in</span> response<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;div.quote&#39;</span>):
+            <span style="color:#66d9ef">yield</span> {
+                <span style="color:#e6db74">&#39;text&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;span.text::text&#39;</span>)<span style="color:#f92672">.</span>get(),
+                <span style="color:#e6db74">&#39;author&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;small.author::text&#39;</span>)<span style="color:#f92672">.</span>get(),
+                <span style="color:#e6db74">&#39;tags&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;div.tags a.tag::text&#39;</span>)<span style="color:#f92672">.</span>getall(),
             }
 
-        next_page = response.css('li.next a::attr(href)').get()
-        if next_page is not None:
-            next_page = response.urljoin(next_page)
-            yield scrapy.Request(next_page, callback=self.parse)
-</code></pre>
+        next_page <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;li.next a::attr(href)&#39;</span>)<span style="color:#f92672">.</span>get()
+        <span style="color:#66d9ef">if</span> next_page <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>:
+            next_page <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>urljoin(next_page)
+            <span style="color:#66d9ef">yield</span> scrapy<span style="color:#f92672">.</span>Request(next_page, callback<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>parse)
+</code></pre></div><h3 id="51-a-shortcut-for-creating-requests">5.1 A shortcut for creating Requests</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> scrapy
 
-<h3 id="5-1-a-shortcut-for-creating-requests">5.1 A shortcut for creating Requests</h3>
-
-<pre><code class="language-python">import scrapy
-
-class QuotesSpider(scrapy.Spider):
-    name = &quot;quotes&quot;
-    start_urls = [
-        'http://quotes.toscrape.com/page/1/',
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">QuotesSpider</span>(scrapy<span style="color:#f92672">.</span>Spider):
+    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;quotes&#34;</span>
+    start_urls <span style="color:#f92672">=</span> [
+        <span style="color:#e6db74">&#39;http://quotes.toscrape.com/page/1/&#39;</span>,
     ]
 
-    def parse(self, response):
-        for quote in response.css('div.quote'):
-            yield {
-                'text': quote.css('span.text::text').get(),
-                'author': quote.css('span small::text').get(),
-                'tags': quote.css('div.tags a.tag::text').getall(),
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse</span>(self, response):
+        <span style="color:#66d9ef">for</span> quote <span style="color:#f92672">in</span> response<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;div.quote&#39;</span>):
+            <span style="color:#66d9ef">yield</span> {
+                <span style="color:#e6db74">&#39;text&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;span.text::text&#39;</span>)<span style="color:#f92672">.</span>get(),
+                <span style="color:#e6db74">&#39;author&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;span small::text&#39;</span>)<span style="color:#f92672">.</span>get(),
+                <span style="color:#e6db74">&#39;tags&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;div.tags a.tag::text&#39;</span>)<span style="color:#f92672">.</span>getall(),
             }
 
-        next_page = response.css('li.next a::attr(href)').get()
-        if next_page is not None:
-            yield response.follow(next_page, callback=self.parse)
-</code></pre>
-
-<h2 id="6-using-spider-arguments">6. Using spider arguments</h2>
-
+        next_page <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;li.next a::attr(href)&#39;</span>)<span style="color:#f92672">.</span>get()
+        <span style="color:#66d9ef">if</span> next_page <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>:
+            <span style="color:#66d9ef">yield</span> response<span style="color:#f92672">.</span>follow(next_page, callback<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>parse)
+</code></pre></div><h2 id="6-using-spider-arguments">6. Using spider arguments</h2>
 <p><code>scrapy crawl quotes -o quotes-humor.json -a tag=humor</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> scrapy
 
-<pre><code class="language-python">import scrapy
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">QuotesSpider</span>(scrapy<span style="color:#f92672">.</span>Spider):
+    name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;quotes&#34;</span>
 
-class QuotesSpider(scrapy.Spider):
-    name = &quot;quotes&quot;
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">start_requests</span>(self):
+        url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://quotes.toscrape.com/&#39;</span>
+        tag <span style="color:#f92672">=</span> getattr(self, <span style="color:#e6db74">&#39;tag&#39;</span>, <span style="color:#66d9ef">None</span>)
+        <span style="color:#66d9ef">if</span> tag <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>:
+            url <span style="color:#f92672">=</span> url <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;tag/&#39;</span> <span style="color:#f92672">+</span> tag
+        <span style="color:#66d9ef">yield</span> scrapy<span style="color:#f92672">.</span>Request(url, self<span style="color:#f92672">.</span>parse)
 
-    def start_requests(self):
-        url = 'http://quotes.toscrape.com/'
-        tag = getattr(self, 'tag', None)
-        if tag is not None:
-            url = url + 'tag/' + tag
-        yield scrapy.Request(url, self.parse)
-
-    def parse(self, response):
-        for quote in response.css('div.quote'):
-            yield {
-                'text': quote.css('span.text::text').get(),
-                'author': quote.css('small.author::text').get(),
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">parse</span>(self, response):
+        <span style="color:#66d9ef">for</span> quote <span style="color:#f92672">in</span> response<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;div.quote&#39;</span>):
+            <span style="color:#66d9ef">yield</span> {
+                <span style="color:#e6db74">&#39;text&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;span.text::text&#39;</span>)<span style="color:#f92672">.</span>get(),
+                <span style="color:#e6db74">&#39;author&#39;</span>: quote<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;small.author::text&#39;</span>)<span style="color:#f92672">.</span>get(),
             }
 
-        next_page = response.css('li.next a::attr(href)').get()
-        if next_page is not None:
-            yield response.follow(next_page, self.parse)
-</code></pre>
-<ul class="pa0">
+        next_page <span style="color:#f92672">=</span> response<span style="color:#f92672">.</span>css(<span style="color:#e6db74">&#39;li.next a::attr(href)&#39;</span>)<span style="color:#f92672">.</span>get()
+        <span style="color:#66d9ef">if</span> next_page <span style="color:#f92672">is</span> <span style="color:#f92672">not</span> <span style="color:#66d9ef">None</span>:
+            <span style="color:#66d9ef">yield</span> response<span style="color:#f92672">.</span>follow(next_page, self<span style="color:#f92672">.</span>parse)
+</code></pre></div><ul class="pa0">
   
 </ul>
 <div class="mt6">

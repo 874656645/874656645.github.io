@@ -9,7 +9,7 @@
     <meta name="MobileOptimized" content="320">
 
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.52" />
+    <meta name="generator" content="Hugo 0.91.2" />
     
     
       <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
@@ -32,22 +32,16 @@
 <meta property="og:description" content="查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
 2、使用 notepad&#43;&#43; 直接用 记事本 或者 notepad&#43;&#43; 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/" /><meta property="article:published_time" content="2019-06-05T11:36:19&#43;08:00"/>
-<meta property="article:modified_time" content="2019-06-05T11:36:19&#43;08:00"/>
+<meta property="og:url" content="https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-06-05T11:36:19+08:00" />
+<meta property="article:modified_time" content="2019-06-05T11:36:19+08:00" />
 
 <meta itemprop="name" content="查看dll版本">
 <meta itemprop="description" content="查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
-2、使用 notepad&#43;&#43; 直接用 记事本 或者 notepad&#43;&#43; 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。">
-
-
-<meta itemprop="datePublished" content="2019-06-05T11:36:19&#43;08:00" />
-<meta itemprop="dateModified" content="2019-06-05T11:36:19&#43;08:00" />
+2、使用 notepad&#43;&#43; 直接用 记事本 或者 notepad&#43;&#43; 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。"><meta itemprop="datePublished" content="2019-06-05T11:36:19+08:00" />
+<meta itemprop="dateModified" content="2019-06-05T11:36:19+08:00" />
 <meta itemprop="wordCount" content="20">
-
-
-
-<meta itemprop="keywords" content="" />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="查看dll版本"/>
 <meta name="twitter:description" content="查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
 2、使用 notepad&#43;&#43; 直接用 记事本 或者 notepad&#43;&#43; 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。"/>
@@ -110,16 +104,10 @@
       
     </header>
 
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
-
-<h2 id="查看库的版本-win32-or-64">查看库的版本（win32 or 64）</h2>
-
-<h3 id="1-通过-vs-自带工具-dumpbin-exe">1、通过 <strong><em>vs</em></strong> 自带工具 <strong><em>dumpbin.exe</em></strong></h3>
-
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="查看库的版本win32-or-64">查看库的版本（win32 or 64）</h2>
+<h3 id="1通过-_vs_-自带工具-_dumpbinexe_">1、通过 <strong><em>vs</em></strong> 自带工具 <strong><em>dumpbin.exe</em></strong></h3>
 <p><code>dumpbin.exe   /headers   dll文件路径</code></p>
-
-<h3 id="2-使用-notepad">2、使用 <strong><em>notepad++</em></strong></h3>
-
+<h3 id="2使用-_notepad_">2、使用 <strong><em>notepad++</em></strong></h3>
 <p>直接用 <strong><em>记事本</em></strong> 或者 <strong><em>notepad++</em></strong> 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 <strong><em>PE</em></strong> 两个字母，在其后的不远出会出现d 或者L。<strong>若是d，则证明该程序是64位</strong>；若是<strong>L，则证明是32位</strong>。</p>
 <ul class="pa0">
   
