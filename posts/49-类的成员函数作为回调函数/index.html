@@ -31,7 +31,7 @@
     <meta property="og:title" content="类的成员函数作为回调函数" />
 <meta property="og:description" content="类的成员函数作为回调函数 思路是借助类的静态成员函数
 方式一：
-class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback_s(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback_s); b.setCur(); Handle(A::callback_s); return 0; }  方式二：" />
+class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;m_a = &quot; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback); b.setCur(); Handle(A::callback); return 0; }  方式二：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" /><meta property="article:published_time" content="2021-12-28T14:34:27&#43;08:00"/>
 <meta property="article:modified_time" content="2021-12-28T14:34:27&#43;08:00"/>
@@ -39,12 +39,12 @@ class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;a = &quo
 <meta itemprop="name" content="类的成员函数作为回调函数">
 <meta itemprop="description" content="类的成员函数作为回调函数 思路是借助类的静态成员函数
 方式一：
-class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback_s(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback_s); b.setCur(); Handle(A::callback_s); return 0; }  方式二：">
+class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;m_a = &quot; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback); b.setCur(); Handle(A::callback); return 0; }  方式二：">
 
 
 <meta itemprop="datePublished" content="2021-12-28T14:34:27&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-28T14:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="135">
+<meta itemprop="wordCount" content="302">
 
 
 
@@ -53,7 +53,7 @@ class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;a = &quo
 <meta name="twitter:title" content="类的成员函数作为回调函数"/>
 <meta name="twitter:description" content="类的成员函数作为回调函数 思路是借助类的静态成员函数
 方式一：
-class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback_s(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback_s); b.setCur(); Handle(A::callback_s); return 0; }  方式二："/>
+class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;m_a = &quot; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback); b.setCur(); Handle(A::callback); return 0; }  方式二："/>
 
   </head>
 
@@ -127,13 +127,13 @@ public:
         m_a = a;
     }
     void print(){
-        cout &lt;&lt; &quot;a = &quot; &lt;&lt; m_a &lt;&lt; endl;
+        cout &lt;&lt; &quot;m_a = &quot; &lt;&lt; m_a &lt;&lt; endl;
     }
     void setCur(){
         s_curA = this;
     }
     
-    static void callback_s(){
+    static void callback(){
         s_curA-&gt;print();
     }
 private:
@@ -151,9 +151,9 @@ int main( )
 {  
     A a(10), b(20);
     a.setCur();
-    Handle(A::callback_s);
+    Handle(A::callback);
     b.setCur();
-    Handle(A::callback_s);
+    Handle(A::callback);
     
     return 0;
 }
@@ -167,7 +167,7 @@ public:
         m_a = a;
     }
     void print(){
-        cout &lt;&lt; &quot;a = &quot; &lt;&lt; m_a &lt;&lt; endl;
+        cout &lt;&lt; &quot;m_a = &quot; &lt;&lt; m_a &lt;&lt; endl;
     }   
     static void callback(void *a){
         ((A*)a)-&gt;print();
@@ -177,7 +177,7 @@ private:
 };
 
 typedef void (*FUN)(void *);
-void Handle(A *a, FUN call){
+void Handle(void *a, FUN call){
     call(a);
 }
 
@@ -194,8 +194,84 @@ int main( )
 <p>输出：</p>
 
 <pre><code class="language-text">Start
-a = 10
-a = 20
+m_a = 10
+m_a = 20
+0
+Finish
+</code></pre>
+
+<p>还可以进一步封装：</p>
+
+<pre><code class="language-C++">typedef void (*FUN_S)();
+void Handle(FUN_S call){
+    cout &lt;&lt; &quot;Handle(FUN_S) begin...&quot; &lt;&lt; endl;
+    call();
+    cout &lt;&lt; &quot;Handle(FUN_S) end...&quot; &lt;&lt; endl;
+}
+typedef void (*FUN)(void *);
+void Handle(void *a, FUN call){
+    cout &lt;&lt; &quot;Handle(void *, FUN) begin...&quot; &lt;&lt; endl;
+    call(a);
+    cout &lt;&lt; &quot;Handle(void *, FUN) end...&quot; &lt;&lt; endl;
+}
+class A{
+public:
+    A(int a){
+        m_a = a;
+    }
+    void print(){
+        cout &lt;&lt; &quot;m_a = &quot; &lt;&lt; m_a &lt;&lt; endl;
+    }
+    void setCur(){
+        s_curA = this;
+    }
+    void startup(){
+        setCur();
+        Handle(A::callback);
+    }
+    void startup(int){
+        Handle(this, A::callback);
+    }
+    static void callback(){
+        s_curA-&gt;print();
+    }
+    static void callback(void *a){
+        ((A*)a)-&gt;print();
+    }
+private:
+    static A* s_curA;
+    int m_a;
+};
+A* A::s_curA = nullptr;
+
+int main( )
+{  
+    A a(10), b(20);
+    a.startup();
+    b.startup();
+    cout &lt;&lt; &quot;======================================&quot; &lt;&lt; endl;
+    a.startup(1);  
+    b.startup(1);  
+    return 0;
+}
+</code></pre>
+
+<p>输出：</p>
+
+<pre><code class="language-text">Start
+Handle(FUN_S) begin...
+m_a = 10
+Handle(FUN_S) end...
+Handle(FUN_S) begin...
+m_a = 20
+Handle(FUN_S) end...
+======================================
+Handle(void *, FUN) begin...
+m_a = 10
+Handle(void *, FUN) end...
+Handle(void *, FUN) begin...
+m_a = 20
+Handle(void *, FUN) end...
 0
 Finish
 </code></pre>

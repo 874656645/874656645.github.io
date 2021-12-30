@@ -35,7 +35,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://874656645.github.io/rick/" />
-<meta property="og:updated_time" content="2021-12-28T17:34:27&#43;08:00"/>
+<meta property="og:updated_time" content="2021-12-30T15:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="Welcome to Rick&#39;s Page">
 <meta itemprop="description" content="">
@@ -124,17 +124,15 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/rick/posts/50-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/" class="color-inherit dim link">
-            类其它总结
+          <a href="/rick/posts/57-%E5%BC%82%E5%B8%B8/" class="color-inherit dim link">
+            异常
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          类其它总结 1. this指针 this 指针是一个隐含于每一个非静态成员函数中的特殊指针，它指向调用该成员函数的对象的首地址
- 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 this 指针，然后调用成员函数，每次成员函数存取数据成员时，都隐式使用 this 指针 this 指针被隐含地声明为: ClassName *const this，这意味着不能给 this 指针赋值 this 是个右值，所以不能取 this 的地址  2. delete this  类的成员函数中可以调用 delete this，但是在释放后，对象后续调用的方法不能再用到 this 指针 delete this 释放了类对象的内存空间，但是内存空间却并不是马上被回收到系统中，此时其中的值是不确定的 delete 的本质是为将被释放的内存调用一个或多个析构函数，如果在类的析构函数中调用 delete this，会陷入无限递归，造成栈溢出  3. 一个空类class中有什么？ 构造函数、拷贝构造函数、析构函数、赋值运算符重载、取地址操作符重载、被 const 修饰的取地址操作符重载
-4. C++ 计算一个类的 sizeof  一个空的类 sizeof 返回 *1*，因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址 类内的普通成员函数不参与 sizeof 的统计，因为 sizeof 是针对实例的，而普通成员函数，是针对类体的 一个类如果含有虚函数，则这个类中有一个指向虚函数表的指针（虚函数指针），32位程序占4个字节，64位程序占8个字节 静态成员不影响类的大小，被编译器放在程序的数据段中 普通继承的类sizeof，会得到基类的大小加上派生类自身成员的大小 当存在虚拟继承时，派生类中会有一个指向虚基类表的指针。所以其大小应为普通继承的大小，再加上虚基类表的指针大小  5. 构造函数和析构函数能被继承吗? 不能。构造函数和析构函数是用来处理对象的创建和析构的，它们只知道对在它们的特殊层次的对象做什么
-6. 构造函数能不能是虚函数？ 不能。虚函数对应一个虚函数表，可是这个虚函数表存储在对象的内存空间的。问题就在于，如果构造函数是虚的，就需要通过 虚函数表来调用，可是对象还没有实例化，也就是内存空间还没有，就不会有虚函数表
+          异常 try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
+int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常 cout &lt;&lt; &quot;...&quot; &lt;&lt; endl; } { cout &lt;&lt; &quot;finally&quot; &lt;&lt; endl; } return 0; }  Start exception finally 0 Finish  std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类： ||| |:-|:-| |logic_erro | 报告程序的逻辑错误，可在程序执行前被检测到| |runtime_erro | 报告程序运行时的错误，只有在运行的时候才能检测到|
         </div>
-          <a href="/rick/posts/50-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+          <a href="/rick/posts/57-%E5%BC%82%E5%B8%B8/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
       </div>
     </div>
@@ -151,16 +149,14 @@
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/rick/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="color-inherit dim link">
-            类的成员函数作为回调函数
+          <a href="/rick/posts/56-stl-%E6%80%BB%E7%BB%93/" class="color-inherit dim link">
+            STL 总结
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          类的成员函数作为回调函数 思路是借助类的静态成员函数
-方式一：
-class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;a = &quot; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback_s(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback_s); b.setCur(); Handle(A::callback_s); return 0; }  方式二：
+          STL 总结 1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL常用的容器有哪些以及各自的特点是什么?          vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、说说 vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化
         </div>
-          <a href="/rick/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+          <a href="/rick/posts/56-stl-%E6%80%BB%E7%BB%93/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
       </div>
     </div>
@@ -177,16 +173,14 @@ class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &quot;a = &quo
       
       <div class="blah w-100">
         <h1 class="f3 fw1 athelas mt0 lh-title">
-          <a href="/rick/posts/48-%E7%88%B6%E7%B1%BB%E6%8C%87%E9%92%88%E5%92%8C%E5%AD%90%E7%B1%BB%E6%8C%87%E9%92%88/" class="color-inherit dim link">
-            父类指针和子类指针
+          <a href="/rick/posts/55-vector/" class="color-inherit dim link">
+            vector
             </a>
         </h1>
         <div class="f6 f5-l lh-copy nested-copy-line-height nested-links">
-          父类指针和子类指针  父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将父类对象赋值给子类指针，虚函数执行的是父类的，也可以调用子类函数（？） 将子类对象赋值给父类指针，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
-Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
-Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &lt;&lt; &quot;printA()&quot; &lt;&lt; endl; } virtual void print(){ cout &lt;&lt; &quot;A::print()&quot; &lt;&lt; endl; } }; class B:public A{ public: void printB(){ cout &lt;&lt; &quot;printB()&quot; &lt;&lt; endl; } virtual void print() override{ cout &lt;&lt; &quot;B::print() b = &quot; &lt;&lt; b &lt;&lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针） A *a = new A; // 1.
+          vector #include &lt;iostream&gt; #include &lt;vector&gt; int main() { //1.定义和初始化 vector&lt;int&gt; vec1; //默认初始化，vec1为空 vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2 vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2 vector&lt;int&gt; vec4(10); //10个值为0的元素 vector&lt;int&gt; vec5(10,4); //10个值为4的元素 //2.常用操作方法 //2.1 添加函数 vec1.push_back(100); //尾部添加元素 vec1.insert(vec1.end(),5,3); //从vec1.back位置插入5个值为3的元素 //2.2 删除函数 vec1.pop_back(); //删除末尾元素 vec1.erase(vec1.begin(),vec1.begin()+2); //删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移 vec1.clear(); //清空元素，元素在内存中并未消失，通常使用swap()来清空 vector&lt;int&gt;().swap(V); //利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。 // 必须是同类型的 vector //2.3 遍历函数 vec1[0]; //取得第一个元素 vec1.at(int pos); //返回pos位置元素的引用 vec1.front(); //返回首元素的引用 vec1.back(); //返回尾元素的引用 vector&lt;int&gt;::iterator begin= vec1.begin(); //返回向量头指针，指向第一个元素 vector&lt;int&gt;::iterator end= vec1.end(); //返回向量尾指针，指向向量最后一个元素的下一个位置 vector&lt;int&gt;::iterator rbegin= vec1.rbegin(); //反向迭代器，指向最后一个元素 vector&lt;int&gt;::iterator rend= vec1.rend(); //反向迭代器，指向第一个元素之前的位置 //2.
         </div>
-          <a href="/rick/posts/48-%E7%88%B6%E7%B1%BB%E6%8C%87%E9%92%88%E5%92%8C%E5%AD%90%E7%B1%BB%E6%8C%87%E9%92%88/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
+          <a href="/rick/posts/55-vector/" class="ba b--moon-gray bg-light-gray br2 color-inherit dib f7 hover-bg-moon-gray link mt2 ph2 pv1">read more</a>
         
       </div>
     </div>
@@ -203,26 +197,26 @@ Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也
         
         
           <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/rick/posts/47-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%A7%81%E6%9C%89/" class="link black dim">
-              构造函数私有
+            <a href="/rick/posts/54-c&#43;&#43;-stl/" class="link black dim">
+              C&#43;&#43; STL
             </a>
           </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/" class="link black dim">
-              定义一个只能在堆上（栈上）生成对象的类
+            <a href="/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/" class="link black dim">
+              new delete与内存
             </a>
           </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/" class="link black dim">
-              抽象类、接口类、聚合类
+            <a href="/rick/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/" class="link black dim">
+              new 二维数组
             </a>
           </h2>
         
           <h2 class="f5 fw4 mb4 dib mr3">
-            <a href="/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/" class="link black dim">
-              虚继承和虚基类
+            <a href="/rick/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/" class="link black dim">
+              类其它总结
             </a>
           </h2>
         

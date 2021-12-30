@@ -42,7 +42,7 @@ void test(int * a){ a = new int(20); //*a = 20; cout &lt;&lt; &quot;test point a
 
 <meta itemprop="datePublished" content="2021-12-25T21:34:27&#43;08:00" />
 <meta itemprop="dateModified" content="2021-12-25T21:34:27&#43;08:00" />
-<meta itemprop="wordCount" content="287">
+<meta itemprop="wordCount" content="313">
 
 
 
@@ -181,6 +181,17 @@ void freeTT(struct teacher **tpp){
         *tpp = NULL;
     }
 }
+void freeTT(struct teacher *tpp){
+    if(tpp == NULL){
+        return;
+    }
+    if(tpp != NULL){
+        free(tpp);
+        // 此处的tpp是一个指针复本，置空没有效果
+        // 所以只能在外部将指针置空
+        tpp = NULL;
+    }
+}
 
 // 方式二：
 // 指针引用的方式，更加简洁
@@ -204,7 +215,9 @@ void freeT(struct teacher *&amp; tp){
 int main()
 {
     struct teacher *tp = NULL;
+    // 1、利用二级指针
     //getTT(&amp;tp);
+    // 2、利用指针引用
     getT(tp);
     cout &lt;&lt; tp-&gt;id &lt;&lt; endl;
     cout &lt;&lt; tp-&gt;name &lt;&lt; endl;

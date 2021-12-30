@@ -6,21 +6,96 @@
     <description>Recent content in Posts on Welcome to Rick&#39;s Page</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 28 Dec 2021 17:34:27 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Dec 2021 15:34:27 +0800</lastBuildDate>
     
 	<atom:link href="https://874656645.github.io/rick/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>异常</title>
+      <link>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Thu, 30 Dec 2021 15:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</guid>
+      <description>异常 try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
+int main( ) { try{ throw &amp;quot;exception&amp;quot;; }catch(const char * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; }catch(...){ // 捕获所有异常 cout &amp;lt;&amp;lt; &amp;quot;...&amp;quot; &amp;lt;&amp;lt; endl; } { cout &amp;lt;&amp;lt; &amp;quot;finally&amp;quot; &amp;lt;&amp;lt; endl; } return 0; }  Start exception finally 0 Finish  std::exception class exception { public: exception() throw(); exception(const exception&amp;amp; rhs) throw(); exception&amp;amp; operator=(const exception&amp;amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类： ||| |:-|:-| |logic_erro | 报告程序的逻辑错误，可在程序执行前被检测到| |runtime_erro | 报告程序运行时的错误，只有在运行的时候才能检测到|</description>
+    </item>
+    
+    <item>
+      <title>STL 总结</title>
+      <link>https://874656645.github.io/rick/posts/56-stl-%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Thu, 30 Dec 2021 10:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/56-stl-%E6%80%BB%E7%BB%93/</guid>
+      <description>STL 总结 1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL常用的容器有哪些以及各自的特点是什么?          vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、说说 vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化</description>
+    </item>
+    
+    <item>
+      <title>vector</title>
+      <link>https://874656645.github.io/rick/posts/55-vector/</link>
+      <pubDate>Wed, 29 Dec 2021 19:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/55-vector/</guid>
+      <description>vector #include &amp;lt;iostream&amp;gt; #include &amp;lt;vector&amp;gt; int main() { //1.定义和初始化 vector&amp;lt;int&amp;gt; vec1; //默认初始化，vec1为空 vector&amp;lt;int&amp;gt; vec2(vec1); //使用vec1初始化vec2 vector&amp;lt;int&amp;gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2 vector&amp;lt;int&amp;gt; vec4(10); //10个值为0的元素 vector&amp;lt;int&amp;gt; vec5(10,4); //10个值为4的元素 //2.常用操作方法 //2.1 添加函数 vec1.push_back(100); //尾部添加元素 vec1.insert(vec1.end(),5,3); //从vec1.back位置插入5个值为3的元素 //2.2 删除函数 vec1.pop_back(); //删除末尾元素 vec1.erase(vec1.begin(),vec1.begin()+2); //删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移 vec1.clear(); //清空元素，元素在内存中并未消失，通常使用swap()来清空 vector&amp;lt;int&amp;gt;().swap(V); //利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。 // 必须是同类型的 vector //2.3 遍历函数 vec1[0]; //取得第一个元素 vec1.at(int pos); //返回pos位置元素的引用 vec1.front(); //返回首元素的引用 vec1.back(); //返回尾元素的引用 vector&amp;lt;int&amp;gt;::iterator begin= vec1.begin(); //返回向量头指针，指向第一个元素 vector&amp;lt;int&amp;gt;::iterator end= vec1.end(); //返回向量尾指针，指向向量最后一个元素的下一个位置 vector&amp;lt;int&amp;gt;::iterator rbegin= vec1.rbegin(); //反向迭代器，指向最后一个元素 vector&amp;lt;int&amp;gt;::iterator rend= vec1.rend(); //反向迭代器，指向第一个元素之前的位置 //2.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; STL</title>
+      <link>https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/</link>
+      <pubDate>Wed, 29 Dec 2021 17:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/</guid>
+      <description>C++ STL STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C++程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器
+适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
+一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
+1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
+2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
+3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢
+4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list
+ multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  6. 容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
+std::stack template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp;gt; class stack; std::queue template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp;gt; class queue; std::priority_queue template&amp;lt;class T, class Container = vector&amp;lt;T&amp;gt;, class Compare = less&amp;lt;typename Container::value_type&amp;gt;&amp;gt; class priority_queue;  为什么选择deque作为stack和queue的底层默认容器？</description>
+    </item>
+    
+    <item>
+      <title>new delete与内存</title>
+      <link>https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/</link>
+      <pubDate>Wed, 29 Dec 2021 15:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/</guid>
+      <description>new delete 与内存 1、new / delete 具体步骤 new
+ 第一步：调用 operator new 函数分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象 第二步：编译器运行相应的构造函数以构造对象，并为其传入初值 第三部：对象构造完成后，返回一个指向该对象的指针  delete
+ 第一步：调用对象的析构函数 第二步：编译器调用 operator delete 函数释放内存空间  2、new/delete 与 malloc/free 的区别是什么？  malloc/free 是 C 语言的标准库函数， new/delete 是 C++ 的运算符。它们都可用于申请动态内存和释放内存 malloc/free 不会去自动调用构造和析构函数，对于基本数据类型的对象而言，光用 malloc/free 无法满足动态对象的要求 malloc/free 需要指定分配内存的大小，而 new/delete 会自动计算所需内存大小 new 返回的是指定对象的指针，而 malloc 返回的是 void*，因此 malloc 的返回值一般都需要进行强制类型转换  3、C++内存管理 在 C++ 中，虚拟内存分为代码段、数据段、BSS段、堆区、栈区以及文件映射区六部分
+ 代码段：包括只读存储区和文本区，其中只读存储区存储字符串常量，文本区存储程序的机器代码 数据段：存储程序中已初始化的全局变量和静态变量 BSS段：存储未初始化的全局变量和静态变量（局部+全局），以及所有被初始化为0的全局变量和静态变量（这个段的数据全都是*0*） 堆区：调用new/malloc函数时在堆区动态分配内存，同时需要调用delete/free来手动释放申请的内存 映射区：存储动态链接库以及调用mmap函数进行的文件映射 栈区：使用栈空间存储函数的返回地址、参数、局部变量、返回值（最靠近CPU的区）  4、内存的分配方式（三种）  静态存储区分配：是在程序编译时就已经分配好的，在整个运行期间都存在，如全局变量、常量、静态变量 栈上分配：函数内的局部变量就是从这分配的，但分配的内存容易有限 堆上分配：也称动态分配，如我们用 new,malloc 分配内存，用 delete,free 来释放的内存。堆内存空间可由用户手动分配和释放，所以其生存周期由用户指定，较为灵活。但频繁的分配、释放大小不同的堆空间会产生内存碎片</description>
+    </item>
+    
+    <item>
+      <title>new 二维数组</title>
+      <link>https://874656645.github.io/rick/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</link>
+      <pubDate>Wed, 29 Dec 2021 14:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</guid>
+      <description>new 二维数组 int main( ) { int ** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &amp;lt; 4; i++){ pArr[i] = new int[8]; } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ pArr[i][j] = i * j; } } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ if(j == 0) cout &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; pArr[i][j] &amp;lt;&amp;lt; &#39;\t&#39;; } } // 删除 for(int i = 0; i &amp;lt; 4; ++i){ delete [] pArr[i]; } delete [] pArr; return 0; }  输出：</description>
+    </item>
+    
+    <item>
       <title>类其它总结</title>
-      <link>https://874656645.github.io/rick/posts/50-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</link>
+      <link>https://874656645.github.io/rick/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</link>
       <pubDate>Tue, 28 Dec 2021 17:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/50-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</guid>
+      <guid>https://874656645.github.io/rick/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</guid>
       <description>类其它总结 1. this指针 this 指针是一个隐含于每一个非静态成员函数中的特殊指针，它指向调用该成员函数的对象的首地址
  当对一个对象调用成员函数时，编译程序先将对象的地址赋给 this 指针，然后调用成员函数，每次成员函数存取数据成员时，都隐式使用 this 指针 this 指针被隐含地声明为: ClassName *const this，这意味着不能给 this 指针赋值 this 是个右值，所以不能取 this 的地址  2. delete this  类的成员函数中可以调用 delete this，但是在释放后，对象后续调用的方法不能再用到 this 指针 delete this 释放了类对象的内存空间，但是内存空间却并不是马上被回收到系统中，此时其中的值是不确定的 delete 的本质是为将被释放的内存调用一个或多个析构函数，如果在类的析构函数中调用 delete this，会陷入无限递归，造成栈溢出  3. 一个空类class中有什么？ 构造函数、拷贝构造函数、析构函数、赋值运算符重载、取地址操作符重载、被 const 修饰的取地址操作符重载
 4. C++ 计算一个类的 sizeof  一个空的类 sizeof 返回 *1*，因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址 类内的普通成员函数不参与 sizeof 的统计，因为 sizeof 是针对实例的，而普通成员函数，是针对类体的 一个类如果含有虚函数，则这个类中有一个指向虚函数表的指针（虚函数指针），32位程序占4个字节，64位程序占8个字节 静态成员不影响类的大小，被编译器放在程序的数据段中 普通继承的类sizeof，会得到基类的大小加上派生类自身成员的大小 当存在虚拟继承时，派生类中会有一个指向虚基类表的指针。所以其大小应为普通继承的大小，再加上虚基类表的指针大小  5. 构造函数和析构函数能被继承吗? 不能。构造函数和析构函数是用来处理对象的创建和析构的，它们只知道对在它们的特殊层次的对象做什么
 6. 构造函数能不能是虚函数？ 不能。虚函数对应一个虚函数表，可是这个虚函数表存储在对象的内存空间的。问题就在于，如果构造函数是虚的，就需要通过 虚函数表来调用，可是对象还没有实例化，也就是内存空间还没有，就不会有虚函数表</description>
+    </item>
+    
+    <item>
+      <title>构造函数重载与互调</title>
+      <link>https://874656645.github.io/rick/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/</link>
+      <pubDate>Tue, 28 Dec 2021 16:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/</guid>
+      <description>构造函数重载与互调  构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public: Test(int a, int b, int c){ _a = a; _b = b; _c = c; } // 正确 Test(int a, int b):Test(a, b, 100){ } /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */ int getA(){ return _a; } int getB(){ return _b; } int getC(){ return _c; } private: int _a; int _b; int _c; }; int main( ) { Test t1(10, 20); cout &amp;lt;&amp;lt; t1.</description>
     </item>
     
     <item>
@@ -31,7 +106,7 @@
       <guid>https://874656645.github.io/rick/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</guid>
       <description>类的成员函数作为回调函数 思路是借助类的静态成员函数
 方式一：
-class A{ public: A(int a){ m_a = a; } void print(){ cout &amp;lt;&amp;lt; &amp;quot;a = &amp;quot; &amp;lt;&amp;lt; m_a &amp;lt;&amp;lt; endl; } void setCur(){ s_curA = this; } static void callback_s(){ s_curA-&amp;gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback_s); b.setCur(); Handle(A::callback_s); return 0; }  方式二：</description>
+class A{ public: A(int a){ m_a = a; } void print(){ cout &amp;lt;&amp;lt; &amp;quot;m_a = &amp;quot; &amp;lt;&amp;lt; m_a &amp;lt;&amp;lt; endl; } void setCur(){ s_curA = this; } static void callback(){ s_curA-&amp;gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback); b.setCur(); Handle(A::callback); return 0; }  方式二：</description>
     </item>
     
     <item>
@@ -184,7 +259,7 @@ void test(int * a){ a = new int(20); //*a = 20; cout &amp;lt;&amp;lt; &amp;quot;
       <pubDate>Thu, 23 Dec 2021 12:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/</guid>
-      <description> 函数重载、重写、隐藏、模板  重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写； 隐藏： 派生类中函数与基类中的函数同名，但是这个函数在基类中并没有被定义为虚函数，此时基类的函数会被隐藏； 模板： 模板函数是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载，但是可被重写。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  </description>
+      <description>函数重载、重写、隐藏、模板  重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写； 隐藏： 派生类中函数与基类中的函数同名，但是这个函数在基类中并没有被定义为虚函数，此时基类的函数会被隐藏； 模板： 模板函数是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载，但是可被重写。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public: A(int a){ m_a = a; } void print(){ cout &amp;lt;&amp;lt; &amp;quot;print()&amp;quot; &amp;lt;&amp;lt; &amp;quot;m_a = &amp;quot; &amp;lt;&amp;lt; m_a &amp;lt;&amp;lt; endl; } void freeP(A ** p){ if(p == NULL){ return; } if(*p != NULL){ free(*p); *p = NULL; } } void freeP(A * p){ if(p != NULL){ free(p); p = NULL; } } static void printS(){ cout &amp;lt;&amp;lt; &amp;quot;printS() s_a = &amp;quot; &amp;lt;&amp;lt; s_a &amp;lt;&amp;lt; endl; } static void printS(int s){ cout &amp;lt;&amp;lt; &amp;quot;printS(int s) &amp;quot; &amp;lt;&amp;lt; s_a * s &amp;lt;&amp;lt; endl; } static void printS(void *p, int s){ cout &amp;lt;&amp;lt; &amp;quot;printS(void *p, int s) &amp;quot; &amp;lt;&amp;lt; ((A*)p)-&amp;gt;m_a * s &amp;lt;&amp;lt; endl; } static int s_a; private: int m_a; }; int A::s_a = 0; int main( ) { A *a = new A(1); a-&amp;gt;printS(a, 20); a-&amp;gt;print(); A::s_a = 10; a-&amp;gt;printS(); a-&amp;gt;printS(10); a-&amp;gt;freeP(a); if(a == NULL){ cout &amp;lt;&amp;lt; &amp;quot;*a is not valid&amp;quot; &amp;lt;&amp;lt; endl; return 0; } cout &amp;lt;&amp;lt; &amp;quot;*a is valid&amp;quot; &amp;lt;&amp;lt; endl; a-&amp;gt;print(); return 0; }  输出：</description>
     </item>
     
     <item>
@@ -382,7 +457,7 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
       
       <guid>https://874656645.github.io/rick/posts/18-3dmax%E6%93%8D%E4%BD%9C/</guid>
       <description> 3DMax 操作 1、查看纹理 渲染——材质编辑器——精简材质编辑器
-2、合并Mesh——附加 </description>
+2、合并Mesh——附加 3、资源跟踪器快捷键 Shift + T </description>
     </item>
     
     <item>

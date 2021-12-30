@@ -34,7 +34,7 @@
 4. C&#43;&#43; 计算一个类的 sizeof  一个空的类 sizeof 返回 *1*，因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址 类内的普通成员函数不参与 sizeof 的统计，因为 sizeof 是针对实例的，而普通成员函数，是针对类体的 一个类如果含有虚函数，则这个类中有一个指向虚函数表的指针（虚函数指针），32位程序占4个字节，64位程序占8个字节 静态成员不影响类的大小，被编译器放在程序的数据段中 普通继承的类sizeof，会得到基类的大小加上派生类自身成员的大小 当存在虚拟继承时，派生类中会有一个指向虚基类表的指针。所以其大小应为普通继承的大小，再加上虚基类表的指针大小  5. 构造函数和析构函数能被继承吗? 不能。构造函数和析构函数是用来处理对象的创建和析构的，它们只知道对在它们的特殊层次的对象做什么
 6. 构造函数能不能是虚函数？ 不能。虚函数对应一个虚函数表，可是这个虚函数表存储在对象的内存空间的。问题就在于，如果构造函数是虚的，就需要通过 虚函数表来调用，可是对象还没有实例化，也就是内存空间还没有，就不会有虚函数表" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/50-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/" /><meta property="article:published_time" content="2021-12-28T17:34:27&#43;08:00"/>
+<meta property="og:url" content="https://874656645.github.io/rick/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/" /><meta property="article:published_time" content="2021-12-28T17:34:27&#43;08:00"/>
 <meta property="article:modified_time" content="2021-12-28T17:34:27&#43;08:00"/>
 
 <meta itemprop="name" content="类其它总结">
