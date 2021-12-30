@@ -104,7 +104,7 @@
     </h1>
     <div class="nested-links f5 lh-copy nested-copy-line-height">
       异常 try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
-int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常 cout &lt;&lt; &quot;...&quot; &lt;&lt; endl; } { cout &lt;&lt; &quot;finally&quot; &lt;&lt; endl; } return 0; }  Start exception finally 0 Finish  std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类： ||| |:-|:-| |logic_erro | 报告程序的逻辑错误，可在程序执行前被检测到| |runtime_erro | 报告程序运行时的错误，只有在运行的时候才能检测到|
+int main( ) { try{ throw &quot;exception&quot;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常 cout &lt;&lt; &quot;...&quot; &lt;&lt; endl; } { cout &lt;&lt; &quot;finally&quot; &lt;&lt; endl; } return 0; }  Start exception finally 0 Finish  std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); };  派生了两个异常类：
     </div>
   </div>
 </div>
