@@ -1,153 +1,268 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
-    <title>Welcome to Rick&#39;s Page  | C&#43;&#43; STL</title>
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
+<html lang="en" dir="auto">
 
-    <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="generator" content="Hugo 0.91.2" />
-    
-    
-      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
-    
-
-    
-    
-      <link href="/rick/dist/css/app.955516233bcafa4d2a1c13cea63c7b50.css" rel="stylesheet">
-    
-
-    
-
-    
-      
-    
-
-    
-
-    <meta property="og:title" content="C&#43;&#43; STL" />
-<meta property="og:description" content="C&#43;&#43; STL STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>C&#43;&#43; STL | Welcome To My Blog</title>
+<meta name="keywords" content="C&#43;&#43;" />
+<meta name="description" content="STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器
 适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
 一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
 1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
 2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
 3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢
-4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  6. 容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
+4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
+std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack; std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue; std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.91.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="C&#43;&#43; STL" />
+<meta property="og:description" content="STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器
+适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
+一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
+1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
+2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
+3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢
+4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
 std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack; std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue; std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-12-29T17:34:27+08:00" />
-<meta property="article:modified_time" content="2021-12-29T17:34:27+08:00" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-29T17:34:27&#43;08:00" />
+<meta property="article:modified_time" content="2021-12-29T17:34:27&#43;08:00" />
 
-<meta itemprop="name" content="C&#43;&#43; STL">
-<meta itemprop="description" content="C&#43;&#43; STL STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器
-适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
-一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
-1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
-2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
-3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢
-4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  6. 容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
-std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack; std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue; std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？"><meta itemprop="datePublished" content="2021-12-29T17:34:27+08:00" />
-<meta itemprop="dateModified" content="2021-12-29T17:34:27+08:00" />
-<meta itemprop="wordCount" content="91">
-<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
 <meta name="twitter:title" content="C&#43;&#43; STL"/>
-<meta name="twitter:description" content="C&#43;&#43; STL STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器
+<meta name="twitter:description" content="STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器
 适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
 一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
 1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
 2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
 3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢
-4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  6. 容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
+4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
 std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack; std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue; std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？"/>
 
-  </head>
 
-  <body class="ma0 avenir bg-near-white">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/rick/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "C++ STL",
+      "item": "https://874656645.github.io/rick/posts/54-c++-stl/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C++ STL",
+  "name": "C\u002b\u002b STL",
+  "description": "STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C++程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器\n适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。\n一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）\n1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢\n2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上\n3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢\n4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装\nstd::stack template\u0026lt;class T, class Container = deque\u0026lt;T\u0026gt;\u0026gt; class stack; std::queue template\u0026lt;class T, class Container = deque\u0026lt;T\u0026gt;\u0026gt; class queue; std::priority_queue template\u0026lt;class T, class Container = vector\u0026lt;T\u0026gt;, class Compare = less\u0026lt;typename Container::value_type\u0026gt;\u0026gt; class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？",
+  "keywords": [
+    "C++"
+  ],
+  "articleBody": "STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C++程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器\n适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。\n一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）\n1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢\n2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上\n3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢\n4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装\nstd::stack templateclass T, class Container = dequeT class stack; std::queue templateclass T, class Container = dequeT class queue; std::priority_queue templateclass T, class Container = vectorT, class Compare = lesstypename Container::value_type class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？\nstack是后进先出的特殊线性数据结构，只要具有push_back()和pop_back()操作的线性结构，都可以作为stack的底层容器，比如vector和list都可以；\nqueue是先进先出的特殊线性数据结构，只要具有push_back()和pop_front()操作的线性结构，都可以作为queue的底层容器，比如list。\n但是STL中对stack和queue默认选择deque作为其底层容器，主要是因为：\n stack和queue不需要遍历(因此stack和queue没有迭代器)，只需要在固定的一端或者两端进行操作。 在stack中元素增长时，deque比vector的效率高。 在queue中的元素增长时，deque不仅效率高，而且内存使用率高  ",
+  "wordCount" : "88",
+  "inLanguage": "en",
+  "datePublished": "2021-12-29T17:34:27+08:00",
+  "dateModified": "2021-12-29T17:34:27+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/rick/posts/54-c++-stl/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Welcome To My Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/rick/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
 
-    
-   
-  
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
 
-  <header>
-    <div class="bg-black">
-      <nav class="pv3 ph3 ph4-ns" role="navigation">
-  <div class="flex-l justify-between items-center center">
-    <a href="https://874656645.github.io/rick/" class="f3 fw2 hover-white no-underline white-90 dib">
-      Welcome to Rick&#39;s Page
-    </a>
-    <div class="flex-l items-center">
-      
-      
-<div hidden>
-  <span id="new-window-0">Opens in a new window</span>
-  <span id="new-window-1">Opens an external site</span>
-  <span id="new-window-2">Opens an external site in a new window</span>
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <h1 class="post-title">
+      C&#43;&#43; STL
+    </h1>
+    <div class="post-meta"><span title='2021-12-29 17:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/54%20C&#43;&#43;%20STL.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e5%ae%b9%e5%99%a8" aria-label="一、容器">一、容器</a><ul>
+                        
+                <li>
+                    <a href="#1-vector" aria-label="1. vector">1. vector</a></li>
+                <li>
+                    <a href="#2-deque" aria-label="2. deque">2. deque</a></li>
+                <li>
+                    <a href="#3-list" aria-label="3. list">3. list</a></li>
+                <li>
+                    <a href="#4-mapmultimapunordered_mapunordered_multimap" aria-label="4. map、multimap、unordered_map、unordered_multimap">4. map、multimap、unordered_map、unordered_multimap</a></li>
+                <li>
+                    <a href="#5-setmultisetunordered_setunordered_multiset" aria-label="5. set、multiset、unordered_set、unordered_multiset">5. set、multiset、unordered_set、unordered_multiset</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%ae%b9%e5%99%a8%e9%80%82%e9%85%8d%e5%99%a8" aria-label="二、容器适配器">二、容器适配器</a>
+                </li>
+            </ul>
+        </div>
+    </details>
 </div>
 
-
-
-
-
-
-
-
-
-    </div>
-  </div>
-</nav>
-
-    </div>
-  </header>
-
-
-
-    <main class="pb7" role="main">
-      
-  
-  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
-
-    <header class="mt4 w-100">
-      <p class="f6 b helvetica tracked">
-          
-        POSTS
-      </p>
-      <h1 class="f1 athelas mb1">C&#43;&#43; STL</h1>
-      
-      <time class="f6 mv4 dib tracked" datetime="2021-12-29T17:34:27&#43;08:00">December 29, 2021</time>      
-      
-      
-    </header>
-
-    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="c-stl">C++ STL</h2>
-<p><code>STL（Standard Template Library）</code>，即标准模板库，是一个具有工业强度的，高效的C++程序库。STL中包括<strong>六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器</strong><br>
+  <div class="post-content"><p><code>STL（Standard Template Library）</code>，即标准模板库，是一个具有工业强度的，高效的C++程序库。STL中包括<strong>六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器</strong><br>
 <strong>适配器</strong>：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。</p>
-<h3 id="一容器">一、容器</h3>
+<h3 id="一容器">一、容器<a hidden class="anchor" aria-hidden="true" href="#一容器">#</a></h3>
 <p>序列式容器<code>（vector、deque、list）</code>、关联式容器<code>（map、set）</code>、容器适配器<code>（stack、queue、priority_queue）</code></p>
-<h4 id="1-vector">1. vector</h4>
+<h4 id="1-vector">1. vector<a hidden class="anchor" aria-hidden="true" href="#1-vector">#</a></h4>
 <p>是一种动态数组，在内存中具有<strong>连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢</strong></p>
-<h4 id="2-deque">2. deque</h4>
+<h4 id="2-deque">2. deque<a hidden class="anchor" aria-hidden="true" href="#2-deque">#</a></h4>
 <p>deque是 <code>double ended queue</code> 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 <code>vector</code> 不同，<strong>deque 不能保证将所有元素存储在连续的存储空间上</strong></p>
-<h4 id="3-list">3. list</h4>
+<h4 id="3-list">3. list<a hidden class="anchor" aria-hidden="true" href="#3-list">#</a></h4>
 <p>list是STL实现的双向链表，与vector相比, 它<strong>允许快速的插入和删除，但是随机访问却比较慢</strong></p>
-<h4 id="4-mapmultimapunordered_mapunordered_multimap">4. map、multimap、unordered_map、unordered_multimap</h4>
+<h4 id="4-mapmultimapunordered_mapunordered_multimap">4. map、multimap、unordered_map、unordered_multimap<a hidden class="anchor" aria-hidden="true" href="#4-mapmultimapunordered_mapunordered_multimap">#</a></h4>
 <ul>
 <li><code>map</code> 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且<strong>键值是唯一的</strong>，可在我们处理一对一数据的时候，在编程上提供快速通道。map<strong>内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的</strong>。</li>
 <li><code>multimap</code> 中的元素也是有序的，但允许存在相同键值的</li>
 <li><code>unordered_map</code> 中的元素是唯一的，但无序（<strong>也不是插入顺序</strong>），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快）</li>
 <li><code>unordered_multimap</code> 无序且不唯一</li>
 </ul>
-<h4 id="5-setmultisetunordered_setunordered_multiset">5. set、multiset、unordered_set、unordered_multiset</h4>
+<h4 id="5-setmultisetunordered_setunordered_multiset">5. set、multiset、unordered_set、unordered_multiset<a hidden class="anchor" aria-hidden="true" href="#5-setmultisetunordered_setunordered_multiset">#</a></h4>
 <ul>
 <li><code>set</code> 的含义是集合，它是一个有序的容器，里面的元素都是<strong>唯一且排序好的</strong>，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 <code>logn</code>时间内完成，效率非常高，使用方法类似list</li>
 <li><code>multiset</code> 也是排序好的，但是可以存有相同的元素</li>
 <li><code>unordered_set</code> 无序但元素是不可重复的</li>
 <li><code>unordered_multiset</code> 无序，元素也不唯一</li>
 </ul>
-<h4 id="6-容器适配器">6. 容器适配器</h4>
+<h3 id="二容器适配器">二、容器适配器<a hidden class="anchor" aria-hidden="true" href="#二容器适配器">#</a></h3>
 <p>虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">std<span style="color:#f92672">::</span>stack
 <span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span> <span style="color:#f92672">=</span> deque<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;&gt;</span>
@@ -169,51 +284,95 @@ queue是先进先出的特殊线性数据结构，只要具有push_back()和pop_
 <li>在stack中元素增长时，deque比vector的效率高。</li>
 <li>在queue中的元素增长时，deque不仅效率高，而且内存使用率高</li>
 </ul>
-<ul class="pa0">
-  
-</ul>
-<div class="mt6">
-        
-      </div>
-    </main>
-
-    <aside class="w-30-l mt6-l">
 
 
-
-
-</aside>
-
-  </article>
-
-    </main>
-    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
-  <div class="flex justify-between">
-  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="https://874656645.github.io/rick/" >
-    &copy; 2021 Welcome to Rick&#39;s Page
-  </a>
-    <div>
-<div hidden>
-  <span id="new-window-0">Opens in a new window</span>
-  <span id="new-window-1">Opens an external site</span>
-  <span id="new-window-2">Opens an external site in a new window</span>
-</div>
-
-
-
-
-
-
-
-
-</div>
   </div>
-</footer>
 
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/rick/posts/55-vector/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>vector</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>new delete 与内存</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
     
+<footer class="footer">
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
 
-  <script src="/rick/dist/js/app.3fc0f988d21662902933.js"></script>
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
 
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
 
-  </body>
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
 </html>
