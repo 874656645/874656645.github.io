@@ -158,48 +158,19 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
     </h2>
   </header>
   <section class="entry-content">
-    <p>1、初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick git clone https://github.com/adityatelange/hugo-PaperMod.git
-git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
+    <p>1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git
+ 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
+ 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
 2、更新远程仓库代码到本地 git pull blog master
 3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
 4、push推送到远程仓库 git push blog master
 5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
 6、删除配置的远程仓库别名 git remote remove blog
 7、添加文件 git add -A
-8、删除文件 git rm *
-9、删除远程仓库中的文件、文件夹 git rm -r --cached &#34;*.*&#34;
-*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
-10、查看所有分支并切换 git branch -a
-git branch -r
-git checkout dev5...</p>
+8、删除文件 git rm *...</p>
   </section>
   <footer class="entry-footer"><span title='2018-12-15 22:45:47 +0800 CST'>December 15, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Git Commond" href="https://874656645.github.io/rick/posts/3-git-commond/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Git Commond
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、初始化本地仓库 cd public git init git remote add blog https://github.com/874656645/rick git clone https://github.com/adityatelange/hugo-PaperMod.git
-git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
-2、更新远程仓库代码到本地 git pull blog master
-3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
-4、push推送到远程仓库 git push blog master
-5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
-6、删除配置的远程仓库别名 git remote remove blog
-7、添加文件 git add -A
-8、删除文件 git rm *
-9、删除远程仓库中的文件、文件夹 git rm -r --cached &#34;*.*&#34;
-*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了
-10、查看所有分支并切换 git branch -a
-git branch -r
-git checkout dev5...</p>
-  </section>
-  <footer class="entry-footer"><span title='2018-12-15 22:45:47 +0800 CST'>December 15, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git Commond" href="https://874656645.github.io/rick/posts/3-git-commond.zh/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
