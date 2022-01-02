@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Sqlite 随机数 | Welcome To My Blog</title>
+<title>Sqlite 随机数 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="" />
 <meta name="description" content="1、随机数 SQL 脚本
 update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#43;9223372036854775808)/2.0/9223372036854775808 * 7); ">
@@ -106,7 +106,7 @@ update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -127,7 +127,7 @@ update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -188,7 +188,7 @@ update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#
     <h1 class="post-title">
       Sqlite 随机数
     </h1>
-    <div class="post-meta"><span title='2021-11-25 11:36:17 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/16%20Sqlite%20%e9%9a%8f%e6%9c%ba%e6%95%b0.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-11-25 11:36:17 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">
@@ -215,15 +215,15 @@ update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#
 
   <footer class="post-footer">
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/17-arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/">
+  <a class="prev" href="https://874656645.github.io/rick/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/">
     <span class="title">« Prev Page</span>
     <br>
     <span>ArcGIS 字段计算（自增、随机数）</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/">
+  <a class="next" href="https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8B-dll-%E7%89%88%E6%9C%AC/">
     <span class="title">Next Page »</span>
     <br>
-    <span>查看dll版本</span>
+    <span>查看 dll 版本</span>
   </a>
 </nav>
 
@@ -232,7 +232,8 @@ update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -294,6 +295,53 @@ update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>类的静态成员 | Welcome To My Blog</title>
+<title>类的静态成员 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A { string name {&#34;C&#43;&#43;&#34;}; int id {1024}; static int objCount; public: A(); friend void printA(const A &amp;a); void printA(); static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){ objCount&#43;&#43;; } void A::printA(){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; &#34;\tname = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } void A::printC(){ // 静态函数内没有this指针  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; objCount &lt;&lt; endl; // error: &#39;this&#39; is unavailable for static member functions  // cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; endl; } void printA(const A &amp;a){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; a.">
 <meta name="author" content="Rick Cui">
@@ -103,7 +103,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -124,7 +124,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -185,7 +185,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       类的静态成员
     </h1>
-    <div class="post-meta"><span title='2021-12-24 13:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/38%20%e7%b1%bb%e7%9a%84%e9%9d%99%e6%80%81%e6%88%90%e5%91%98.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-24 13:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> 
@@ -273,7 +273,8 @@ Finish
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -335,6 +336,53 @@ Finish
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

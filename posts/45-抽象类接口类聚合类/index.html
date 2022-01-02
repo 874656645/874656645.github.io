@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>抽象类、接口类、聚合类 | Welcome To My Blog</title>
+<title>抽象类、接口类、聚合类 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
 1）所有成员都是 public，没有私有和受保护的非静态成员；
@@ -115,7 +115,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -136,7 +136,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -197,7 +197,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       抽象类、接口类、聚合类
     </h1>
-    <div class="post-meta"><span title='2021-12-27 16:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/45%20%e6%8a%bd%e8%b1%a1%e7%b1%bb%e3%80%81%e6%8e%a5%e5%8f%a3%e7%b1%bb%e3%80%81%e8%81%9a%e5%90%88%e7%b1%bb.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-27 16:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> 
@@ -315,7 +315,8 @@ Finish
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -377,6 +378,53 @@ Finish
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

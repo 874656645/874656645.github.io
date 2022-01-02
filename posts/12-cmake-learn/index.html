@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Cmake Learn | Welcome To My Blog</title>
+<title>Cmake Learn | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="" />
 <meta name="description" content="cmake命令
 1、生成 VS 2015 win64 版本的解决方案 注：下面的命令要在cmd下使用，power shell不可以
@@ -115,7 +115,7 @@ cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -136,7 +136,7 @@ cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -197,7 +197,7 @@ cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
     <h1 class="post-title">
       Cmake Learn
     </h1>
-    <div class="post-meta"><span title='2019-03-22 11:34:12 +0800 CST'>March 22, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/12%20cmake-learn.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2019-03-22 11:34:12 +0800 CST'>March 22, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">
@@ -250,7 +250,8 @@ cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -312,6 +313,53 @@ cmake -H. -B./cmk_build/Win64 -G &quot;Visual Studio 15 2017 Win64&quot;
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

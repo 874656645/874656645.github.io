@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Python Virtualenv | Welcome To My Blog</title>
+<title>Python Virtualenv | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="Python" />
 <meta name="description" content="原文网址
 在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell1、使用pip安装 pip install virtualenv
@@ -127,7 +127,7 @@ virtualenv env
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -148,7 +148,7 @@ virtualenv env
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -209,7 +209,7 @@ virtualenv env
     <h1 class="post-title">
       Python Virtualenv
     </h1>
-    <div class="post-meta"><span title='2019-02-16 11:20:20 +0800 CST'>February 16, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/8%20python-virtualenv.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2019-02-16 11:20:20 +0800 CST'>February 16, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">
@@ -283,7 +283,8 @@ cd E:\python\Virtualenv
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -345,6 +346,53 @@ cd E:\python\Virtualenv
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

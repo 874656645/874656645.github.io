@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>函数形参从右到左入栈 | Welcome To My Blog</title>
+<title>函数形参从右到左入栈 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="int add(int count, ...) { // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节）  int intSize = sizeof(int*) / sizeof(int); int sum = 0; // cout &lt;&lt; &amp;count &lt;&lt; endl;  int *p = &amp;count &#43; intSize; // cout &lt;&lt; p &lt;&lt; endl;  for (int i = 0; i &lt; count; &#43;&#43;i) { sum &#43;= *p; cout &lt;&lt; *p &lt;&lt; endl; p &#43;= intSize; } return sum; } int main() { cout &lt;&lt; add(3, 1, 2, 3) &lt;&lt; endl; return 0; } 输出：">
 <meta name="author" content="Rick Cui">
@@ -103,7 +103,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -124,7 +124,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -185,7 +185,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       函数形参从右到左入栈
     </h1>
-    <div class="post-meta"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/31%20%e5%87%bd%e6%95%b0%e5%bd%a2%e5%8f%82%e4%bb%8e%e5%8f%b3%e5%88%b0%e5%b7%a6%e5%85%a5%e6%a0%88.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> 
@@ -232,7 +232,7 @@ if (!doNotTrack) {
     <br>
     <span>C 与 C&#43;&#43; 的差异</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;-1/">
+  <a class="next" href="https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;1/">
     <span class="title">Next Page »</span>
     <br>
     <span>指针 &#43; 1</span>
@@ -244,7 +244,8 @@ if (!doNotTrack) {
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -306,6 +307,53 @@ if (!doNotTrack) {
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

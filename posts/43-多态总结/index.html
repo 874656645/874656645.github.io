@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>多态总结 | Welcome To My Blog</title>
+<title>多态总结 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态） 参数多态（Parametric Polymorphism，编译期）：类模板、函数模板 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl; } }; class Point { public: ~Point(){ cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类">
 <meta name="author" content="Rick Cui">
@@ -103,7 +103,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -124,7 +124,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -185,7 +185,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       多态总结
     </h1>
-    <div class="post-meta"><span title='2021-12-27 10:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/43%20%e5%a4%9a%e6%80%81%e6%80%bb%e7%bb%93.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-27 10:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">
@@ -341,7 +341,8 @@ Circle::__vecDelDtor this adjustor: 0
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -403,6 +404,53 @@ Circle::__vecDelDtor this adjustor: 0
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

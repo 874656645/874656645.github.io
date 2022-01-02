@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>函数默认参数和占位参数 | Welcome To My Blog</title>
+<title>函数默认参数和占位参数 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="1. 函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
 // 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; } 2. 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
@@ -109,7 +109,7 @@ int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能�
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -130,7 +130,7 @@ int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能�
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -191,7 +191,7 @@ int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能�
     <h1 class="post-title">
       函数默认参数和占位参数
     </h1>
-    <div class="post-meta"><span title='2021-12-26 15:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/42%20%e5%87%bd%e6%95%b0%e9%bb%98%e8%ae%a4%e5%8f%82%e6%95%b0%e5%92%8c%e5%8d%a0%e4%bd%8d%e5%8f%82%e6%95%b0.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-26 15:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">
@@ -309,7 +309,8 @@ Finish
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -371,6 +372,53 @@ Finish
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

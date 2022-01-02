@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>函数重载、重写、隐藏、模板 | Welcome To My Blog</title>
+<title>函数重载、重写、隐藏、模板 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写； 隐藏： 派生类中函数与基类中的函数同名，但是这个函数在基类中并没有被定义为虚函数，此时基类的函数会被隐藏； 模板： 模板函数是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载，但是可被重写。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;print()&#34; &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } void freeP(A ** p){ if(p == NULL){ return; } if(*p != NULL){ free(*p); *p = NULL; } } void freeP(A * p){ if(p != NULL){ free(p); p = NULL; } } static void printS(){ cout &lt;&lt; &#34;printS() s_a = &#34; &lt;&lt; s_a &lt;&lt; endl; } static void printS(int s){ cout &lt;&lt; &#34;printS(int s) &#34; &lt;&lt; s_a * s &lt;&lt; endl; } static void printS(void *p, int s){ cout &lt;&lt; &#34;printS(void *p, int s) &#34; &lt;&lt; ((A*)p)-&gt;m_a * s &lt;&lt; endl; } static int s_a; private: int m_a; }; int A::s_a = 0; int main( ) { A *a = new A(1); a-&gt;printS(a, 20); a-&gt;print(); A::s_a = 10; a-&gt;printS(); a-&gt;printS(10); a-&gt;freeP(a); if(a == NULL){ cout &lt;&lt; &#34;*a is not valid&#34; &lt;&lt; endl; return 0; } cout &lt;&lt; &#34;*a is valid&#34; &lt;&lt; endl; a-&gt;print(); return 0; } 输出：">
 <meta name="author" content="Rick Cui">
@@ -103,7 +103,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -124,7 +124,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -185,7 +185,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       函数重载、重写、隐藏、模板
     </h1>
-    <div class="post-meta"><span title='2021-12-23 12:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/35%20%e5%87%bd%e6%95%b0%e9%87%8d%e8%bd%bd%e3%80%81%e9%87%8d%e5%86%99%e3%80%81%e9%9a%90%e8%97%8f%e3%80%81%e6%a8%a1%e6%9d%bf.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-23 12:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">
@@ -306,7 +306,8 @@ Finish
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -368,6 +369,53 @@ Finish
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

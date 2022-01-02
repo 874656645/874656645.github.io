@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>虚继承和虚基类 | Welcome To My Blog</title>
+<title>虚继承和虚基类 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="虚继承和虚基类 参考
  在C&#43;&#43;中，在定义公共基类A的派生类B、C&hellip;的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C&hellip;的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项
@@ -118,7 +118,7 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -139,7 +139,7 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -200,7 +200,7 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
     <h1 class="post-title">
       虚继承和虚基类
     </h1>
-    <div class="post-meta"><span title='2021-12-27 13:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/44%20%e8%99%9a%e7%bb%a7%e6%89%bf%e5%92%8c%e8%99%9a%e5%9f%ba%e7%b1%bb.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-27 13:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">
@@ -389,7 +389,8 @@ vbi:       class  offset o.vbptr  o.vbte fVtorDisp
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -451,6 +452,53 @@ vbi:       class  offset o.vbptr  o.vbte fVtorDisp
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

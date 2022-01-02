@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on Welcome To My Blog</title>
+    <title>Posts on Slow is Smooth and Smooth is Fast</title>
     <link>https://874656645.github.io/rick/posts/</link>
-    <description>Recent content in Posts on Welcome To My Blog</description>
+    <description>Recent content in Posts on Slow is Smooth and Smooth is Fast</description>
     <image>
       <url>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
@@ -17,7 +17,8 @@
       
       <guid>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</guid>
       <description>一、try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
-int main( ) { try{ throw &amp;#34;exception&amp;#34;; }catch(const char * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; }catch(...){ // 捕获所有异常  cout &amp;lt;&amp;lt; &amp;#34;...&amp;#34; &amp;lt;&amp;lt; endl; } { cout &amp;lt;&amp;lt; &amp;#34;finally&amp;#34; &amp;lt;&amp;lt; endl; } return 0; } Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp;amp; rhs) throw(); exception&amp;amp; operator=(const exception&amp;amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：</description>
+int main( ) { try{ throw &amp;#34;exception&amp;#34;; }catch(const char * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; }catch(...){ // 捕获所有异常  cout &amp;lt;&amp;lt; &amp;#34;...&amp;#34; &amp;lt;&amp;lt; endl; } { cout &amp;lt;&amp;lt; &amp;#34;finally&amp;#34; &amp;lt;&amp;lt; endl; } return 0; } 输出：
+Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp;amp; rhs) throw(); exception&amp;amp; operator=(const exception&amp;amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：</description>
     </item>
     
     <item>
@@ -56,10 +57,10 @@ std::stack template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp
     
     <item>
       <title>new delete 与内存</title>
-      <link>https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/</link>
+      <link>https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/</link>
       <pubDate>Wed, 29 Dec 2021 15:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/</guid>
+      <guid>https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/</guid>
       <description>1、new / delete 具体步骤 new
  第一步：调用 operator new 函数分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象 第二步：编译器运行相应的构造函数以构造对象，并为其传入初值 第三部：对象构造完成后，返回一个指向该对象的指针  delete
  第一步：调用对象的析构函数 第二步：编译器调用 operator delete 函数释放内存空间  2、new/delete 与 malloc/free 的区别是什么？  malloc/free 是 C 语言的标准库函数， new/delete 是 C++ 的运算符。它们都可用于申请动态内存和释放内存 malloc/free 不会去自动调用构造和析构函数，对于基本数据类型的对象而言，光用 malloc/free 无法满足动态对象的要求 malloc/free 需要指定分配内存的大小，而 new/delete 会自动计算所需内存大小 new 返回的是指定对象的指针，而 malloc 返回的是 void*，因此 malloc 的返回值一般都需要进行强制类型转换  3、C++内存管理 在 C++ 中，虚拟内存分为代码段、数据段、BSS段、堆区、栈区以及文件映射区六部分
@@ -309,10 +310,10 @@ C 主要是面向过程，C++ 是面向对象，面向过程是函数驱动，�
     
     <item>
       <title>指针 &#43; 1</title>
-      <link>https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;-1/</link>
+      <link>https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;1/</link>
       <pubDate>Wed, 22 Dec 2021 15:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;-1/</guid>
+      <guid>https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;1/</guid>
       <description>1. 32 位和 64 位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
 2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
 int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]；  // &amp;amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）  // 但是prt与(&amp;amp;a+1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int)  int *ptr = (int*)(&amp;amp;a + 1); cout &amp;lt;&amp;lt; *(a + 1) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; *(ptr - 1) &amp;lt;&amp;lt; endl; return 0; } 输出：
@@ -341,10 +342,10 @@ Start 1 1.15 1.3 0 Finish </description>
     
     <item>
       <title>ArcMap 加载天地图服务</title>
-      <link>https://874656645.github.io/rick/posts/27-arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</link>
+      <link>https://874656645.github.io/rick/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</link>
       <pubDate>Fri, 17 Dec 2021 22:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/27-arcmap%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>https://874656645.github.io/rick/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</guid>
       <description>注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是OGC标准，会导致 ArcMap 加载后坐标不对  影像底图：
 http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
 http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
@@ -380,10 +381,10 @@ ArcMap WMTS</description>
     
     <item>
       <title>explicit（显式）关键字</title>
-      <link>https://874656645.github.io/rick/posts/24-explicit%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <link>https://874656645.github.io/rick/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/</link>
       <pubDate>Wed, 15 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/24-explicit%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <guid>https://874656645.github.io/rick/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
       <description> 修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&amp;lt;bool&amp;gt;(b1); // OK：static_cast 进行直接初始化  return 0; } </description>
     </item>
     
@@ -399,10 +400,10 @@ ArcMap WMTS</description>
     
     <item>
       <title>const 修饰符</title>
-      <link>https://874656645.github.io/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
+      <link>https://874656645.github.io/rick/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
       <pubDate>Fri, 10 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
+      <guid>https://874656645.github.io/rick/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
       <description>1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
 常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
 指针常量：int * const 指针所指的地址不能变（不可以重指向），但地址的内容可以被修改，与引用变量效果类似
@@ -424,10 +425,10 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
     
     <item>
       <title>QString 中文乱码</title>
-      <link>https://874656645.github.io/rick/posts/20-qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</link>
+      <link>https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</link>
       <pubDate>Mon, 06 Dec 2021 11:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/20-qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</guid>
+      <guid>https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</guid>
       <description> QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&amp;quot;This is a debug message at 中文&amp;quot;);
 以QString做为形参变量传递  qDebug(msg.toUtf8());
 QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;amp;logFileName, const QString &amp;amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;amp;file); text_stream &amp;lt;&amp;lt; logMsg &amp;lt;&amp;lt; &amp;#34;\r\n&amp;#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir + &amp;#34;/Log/&amp;#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } </description>
@@ -435,29 +436,29 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
     
     <item>
       <title>IE 64位插件</title>
-      <link>https://874656645.github.io/rick/posts/19-ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/</link>
+      <link>https://874656645.github.io/rick/posts/19-ie64-%E4%BD%8D%E6%8F%92%E4%BB%B6/</link>
       <pubDate>Sat, 04 Dec 2021 11:36:17 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/19-ie-64%E4%BD%8D%E6%8F%92%E4%BB%B6/</guid>
+      <guid>https://874656645.github.io/rick/posts/19-ie64-%E4%BD%8D%E6%8F%92%E4%BB%B6/</guid>
       <description>1、设置IE为单进程模式  64位操作系统的 IE 默认每个 Tab 页都是一个进程，并且 Tab 页的进程是 32 位的，主进程是 64 位的，如下图所示  值为0时是单进程模式，1是多进程</description>
     </item>
     
     <item>
       <title>3DMax 操作</title>
-      <link>https://874656645.github.io/rick/posts/18-3dmax%E6%93%8D%E4%BD%9C/</link>
+      <link>https://874656645.github.io/rick/posts/18-3dmax-%E6%93%8D%E4%BD%9C/</link>
       <pubDate>Thu, 25 Nov 2021 11:36:19 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/18-3dmax%E6%93%8D%E4%BD%9C/</guid>
+      <guid>https://874656645.github.io/rick/posts/18-3dmax-%E6%93%8D%E4%BD%9C/</guid>
       <description>1、查看纹理 渲染——材质编辑器——精简材质编辑器
 2、合并Mesh——附加 3、资源跟踪器快捷键 Shift + T </description>
     </item>
     
     <item>
       <title>ArcGIS 字段计算（自增、随机数）</title>
-      <link>https://874656645.github.io/rick/posts/17-arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
+      <link>https://874656645.github.io/rick/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
       <pubDate>Thu, 25 Nov 2021 11:36:19 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/17-arcgis%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/rick/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
       <description>1、随机数 python 脚本
 import random def randNum(): res = random.randint(1, 7) return res 2、自增 python 脚本
 total = 0 def accumulate(increment): global total if total: total += increment else: total = increment return total </description>
@@ -474,11 +475,11 @@ update &amp;#34;CYBuildings2&amp;#34; set &amp;#34;imgIndex&amp;#34; = FLOOR(1 +
     </item>
     
     <item>
-      <title>查看dll版本</title>
-      <link>https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/</link>
+      <title>查看 dll 版本</title>
+      <link>https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8B-dll-%E7%89%88%E6%9C%AC/</link>
       <pubDate>Wed, 05 Jun 2019 11:36:19 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8Bdll%E7%89%88%E6%9C%AC/</guid>
+      <guid>https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8B-dll-%E7%89%88%E6%9C%AC/</guid>
       <description>查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
 2、使用 notepad++ 直接用 记事本 或者 notepad++ 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。</description>
     </item>
@@ -641,6 +642,15 @@ cd electron-yarn-cz
       <pubDate>Sat, 15 Dec 2018 22:45:47 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/3-git-commond/</guid>
+      <description>Git 常用命令.</description>
+    </item>
+    
+    <item>
+      <title>Git Commond</title>
+      <link>https://874656645.github.io/rick/posts/3-git-commond.zh/</link>
+      <pubDate>Sat, 15 Dec 2018 22:45:47 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/3-git-commond.zh/</guid>
       <description>Git 常用命令.</description>
     </item>
     

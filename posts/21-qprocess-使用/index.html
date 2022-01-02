@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>QProcess 使用 | Welcome To My Blog</title>
+<title>QProcess 使用 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="路径中有空格  m_process-&gt;startDetached(strAppDir &#43; &quot;/ThreeDScreen.exe&quot;, QStringList())
 杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);">
@@ -106,7 +106,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -127,7 +127,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -188,7 +188,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       QProcess 使用
     </h1>
-    <div class="post-meta"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/21%20QProcess%20%e4%bd%bf%e7%94%a8.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> 
@@ -210,12 +210,12 @@ if (!doNotTrack) {
       <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/">
+  <a class="prev" href="https://874656645.github.io/rick/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/">
     <span class="title">« Prev Page</span>
     <br>
     <span>const 修饰符</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/20-qstring%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">
+  <a class="next" href="https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">
     <span class="title">Next Page »</span>
     <br>
     <span>QString 中文乱码</span>
@@ -227,7 +227,8 @@ if (!doNotTrack) {
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -289,6 +290,53 @@ if (!doNotTrack) {
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

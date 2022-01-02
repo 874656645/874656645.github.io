@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>new 二维数组 | Welcome To My Blog</title>
+<title>new 二维数组 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="在堆上声明一个数组 int main( ) { int ** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &lt; 4; i&#43;&#43;){ pArr[i] = new int[8]; } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ pArr[i][j] = i * j; } } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ if(j == 0) cout &lt;&lt; endl; cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;; } } // 删除  for(int i = 0; i &lt; 4; &#43;&#43;i){ delete [] pArr[i]; } delete [] pArr; return 0; } 输出：">
 <meta name="author" content="Rick Cui">
@@ -103,7 +103,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -124,7 +124,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -185,7 +185,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       new 二维数组
     </h1>
-    <div class="post-meta"><span title='2021-12-29 14:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/52%20new%20%e4%ba%8c%e7%bb%b4%e6%95%b0%e7%bb%84.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-29 14:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">
@@ -261,7 +261,7 @@ Finish
       <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/">
+  <a class="prev" href="https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/">
     <span class="title">« Prev Page</span>
     <br>
     <span>new delete 与内存</span>
@@ -278,7 +278,8 @@ Finish
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -340,6 +341,53 @@ Finish
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

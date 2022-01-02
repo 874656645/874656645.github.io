@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>C&#43;&#43; 字符串常量存储 | Welcome To My Blog</title>
+<title>C&#43;&#43; 字符串常量存储 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
  局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &#34;qqq&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  char p[]=&#34;Hello world!&#34;; char* p2 = &#34;w&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  printf(&#34;in s1 p=%p\n&#34;, p); printf(&#34;in s1 p1=%p\n&#34;, p1); printf(&#34;in s1: string&#39;s address: %p\n&#34;, &amp;(&#34;Hello world!&#34;)); printf(&#34;in s1 p2=%p\n&#34;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&#34;Hello world!&#34;; printf(&#34;in s2 q=%p\n&#34;, q); printf(&#34;in s2: string&#39;s address: %p\n&#34;, &amp;(&#34;Hello world!">
@@ -106,7 +106,7 @@ if (!doNotTrack) {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -127,7 +127,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -188,7 +188,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       C&#43;&#43; 字符串常量存储
     </h1>
-    <div class="post-meta"><span title='2021-12-13 12:34:27 +0800 CST'>December 13, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/23%20C&#43;&#43;%20%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%b8%b8%e9%87%8f%e5%ad%98%e5%82%a8.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-13 12:34:27 +0800 CST'>December 13, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> 
@@ -306,12 +306,12 @@ Finish
       <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/24-explicit%E5%85%B3%E9%94%AE%E5%AD%97/">
+  <a class="prev" href="https://874656645.github.io/rick/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/">
     <span class="title">« Prev Page</span>
     <br>
     <span>explicit（显式）关键字</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/22-const%E4%BF%AE%E9%A5%B0%E7%AC%A6/">
+  <a class="next" href="https://874656645.github.io/rick/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/">
     <span class="title">Next Page »</span>
     <br>
     <span>const 修饰符</span>
@@ -323,7 +323,8 @@ Finish
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -385,6 +386,53 @@ Finish
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

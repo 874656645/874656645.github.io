@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>new delete 与内存 | Welcome To My Blog</title>
+<title>new delete 与内存 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="1、new / delete 具体步骤 new
  第一步：调用 operator new 函数分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象 第二步：编译器运行相应的构造函数以构造对象，并为其传入初值 第三部：对象构造完成后，返回一个指向该对象的指针  delete
@@ -14,7 +14,7 @@
   栈上分配：函数内的局部变量就是从这分配的，但分配的内存容易有限
   堆上分配：也称动态分配，如我们用 new,malloc 分配内存，用 delete,free 来释放的内存。堆内存空间可由用户手动分配和释放，所以其生存周期由用户指定，较为灵活。但频繁的分配、释放大小不同的堆空间会产生内存碎片">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/" />
+<link rel="canonical" href="https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
   栈上分配：函数内的局部变量就是从这分配的，但分配的内存容易有限
   堆上分配：也称动态分配，如我们用 new,malloc 分配内存，用 delete,free 来释放的内存。堆内存空间可由用户手动分配和释放，所以其生存周期由用户指定，较为灵活。但频繁的分配、释放大小不同的堆空间会产生内存碎片" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-29T15:34:27&#43;08:00" />
 <meta property="article:modified_time" content="2021-12-29T15:34:27&#43;08:00" />
 
@@ -88,7 +88,7 @@ if (!doNotTrack) {
       "@type": "ListItem",
       "position":  3 ,
       "name": "new delete 与内存",
-      "item": "https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/"
+      "item": "https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/"
     }
   ]
 }
@@ -114,11 +114,11 @@ if (!doNotTrack) {
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/53-new-delete%E4%B8%8E%E5%86%85%E5%AD%98/"
+    "@id": "https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Welcome To My Blog",
+    "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
       "url": "https://874656645.github.io/rick/favicon.ico"
@@ -139,7 +139,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="WELCOME ABOARD (Alt + H)">WELCOME ABOARD</a>
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -200,7 +200,7 @@ if (!doNotTrack) {
     <h1 class="post-title">
       new delete 与内存
     </h1>
-    <div class="post-meta"><span title='2021-12-29 15:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui&nbsp;|&nbsp;<a href="https://github.com/%3cpath_to_repo%3e/content/posts/53%20new%20delete%e4%b8%8e%e5%86%85%e5%ad%98.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2021-12-29 15:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">
@@ -319,7 +319,8 @@ if (!doNotTrack) {
     </main>
     
 <footer class="footer">
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Welcome To My Blog</a></span>
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -381,6 +382,53 @@ if (!doNotTrack) {
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 
