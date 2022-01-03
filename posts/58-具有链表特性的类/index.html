@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>具有链表特性的类 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;" />
+<meta name="description" content="买卖货物问题：
+#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出：">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.91.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="具有链表特性的类" />
+<meta property="og:description" content="买卖货物问题：
+#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-03T09:21:17&#43;08:00" />
+<meta property="article:modified_time" content="2022-01-03T09:21:17&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="具有链表特性的类"/>
+<meta name="twitter:description" content="买卖货物问题：
+#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出："/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/rick/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "具有链表特性的类",
+      "item": "https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "具有链表特性的类",
+  "name": "具有链表特性的类",
+  "description": "买卖货物问题：\n#include \u0026lt;iostream\u0026gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout \u0026lt;\u0026lt; \u0026#34;买入了货物，重量是：\u0026#34; \u0026lt;\u0026lt; m_weight \u0026lt;\u0026lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight += m_weight; cout \u0026lt;\u0026lt; \u0026#34;买入了货物，重量是：\u0026#34; \u0026lt;\u0026lt; m_weight \u0026lt;\u0026lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-\u0026gt;m_pNext = nullptr; cout \u0026lt;\u0026lt; \u0026#34;卖出了货物，重量是：\u0026#34; \u0026lt;\u0026lt; m_weight \u0026lt;\u0026lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *\u0026amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-\u0026gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *\u0026amp;head){ if(head == nullptr){ cout \u0026lt;\u0026lt; \u0026#34;没有货物了\u0026#34; \u0026lt;\u0026lt; endl; return; } Goods *temp = head; head = head-\u0026gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout \u0026lt;\u0026lt; \u0026#34;输入 1 进货\u0026#34; \u0026lt;\u0026lt; endl; cout \u0026lt;\u0026lt; \u0026#34;输入 2 出货\u0026#34; \u0026lt;\u0026lt; endl; cout \u0026lt;\u0026lt; \u0026#34;输入 0 退出\u0026#34; \u0026lt;\u0026lt; endl; cin \u0026gt;\u0026gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout \u0026lt;\u0026lt; \u0026#34;输入货物重量：\u0026#34; \u0026lt;\u0026lt; endl; cin \u0026gt;\u0026gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout \u0026lt;\u0026lt; \u0026#34;目前货物的总重量是：\u0026#34; \u0026lt;\u0026lt; Goods::getTotalWeight() \u0026lt;\u0026lt; endl; }while(1); return 0; } 输出：",
+  "keywords": [
+    "C++"
+  ],
+  "articleBody": "买卖货物问题：\n#include  using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout  \"买入了货物，重量是：\"  m_weight  endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight += m_weight; cout  \"买入了货物，重量是：\"  m_weight  endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-m_pNext = nullptr; cout  \"卖出了货物，重量是：\"  m_weight  endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *\u0026head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-m_pNext = head; head = pNewGoods; } } void sale(Goods *\u0026head){ if(head == nullptr){ cout  \"没有货物了\"  endl; return; } Goods *temp = head; head = head-m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout  \"输入 1 进货\"  endl; cout  \"输入 2 出货\"  endl; cout  \"输入 0 退出\"  endl; cin  choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout  \"输入货物重量：\"  endl; cin  w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout  \"目前货物的总重量是：\"  Goods::getTotalWeight()  endl; }while(1); return 0; } 输出：\n输入 1 进货 输入 2 出货 输入 0 退出 1 输入货物重量： 10 买入了货物，重量是：10 目前货物的总重量是：10 输入 1 进货 输入 2 出货 输入 0 退出 1 输入货物重量： 20 买入了货物，重量是：20 目前货物的总重量是：30 输入 1 进货 输入 2 出货 输入 0 退出 1 输入货物重量： 30 买入了货物，重量是：30 目前货物的总重量是：60 输入 1 进货 输入 2 出货 输入 0 退出 2 卖出了货物，重量是：30 目前货物的总重量是：30 输入 1 进货 输入 2 出货 输入 0 退出 2 卖出了货物，重量是：20 目前货物的总重量是：10 输入 1 进货 输入 2 出货 输入 0 退出 2 卖出了货物，重量是：10 目前货物的总重量是：0 输入 1 进货 输入 2 出货 输入 0 退出 2 没有货物了 目前货物的总重量是：0 输入 1 进货 输入 2 出货 输入 0 退出 0 ",
+  "wordCount" : "319",
+  "inLanguage": "en",
+  "datePublished": "2022-01-03T09:21:17+08:00",
+  "dateModified": "2022-01-03T09:21:17+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/rick/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <h1 class="post-title">
+      具有链表特性的类
+    </h1>
+    <div class="post-meta"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>买卖货物问题：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Goods</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Goods(){
+        m_pNext <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+        m_weight <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;买入了货物，重量是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_weight <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    Goods(<span style="color:#66d9ef">int</span> weight){
+        m_pNext <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+        m_weight <span style="color:#f92672">=</span> weight;
+        total_weight <span style="color:#f92672">+=</span> m_weight;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;买入了货物，重量是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_weight <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#f92672">~</span>Goods(){
+        total_weight <span style="color:#f92672">-=</span> m_weight;
+        <span style="color:#75715e">// m_pNext 不是在本类中 new 的，所以也不用 delete
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_pNext <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;  
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;卖出了货物，重量是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_weight <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getTotalWeight</span>(){
+        <span style="color:#66d9ef">return</span> total_weight;
+    }
+    Goods <span style="color:#f92672">*</span>m_pNext;
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> m_weight;
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> total_weight;
+};
+<span style="color:#66d9ef">int</span> Goods<span style="color:#f92672">::</span>total_weight <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buy</span>(Goods <span style="color:#f92672">*&amp;</span>head, <span style="color:#66d9ef">int</span> weight){
+    Goods <span style="color:#f92672">*</span>pNewGoods <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Goods(weight);
+    <span style="color:#66d9ef">if</span>(head <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>){
+        head <span style="color:#f92672">=</span> pNewGoods;
+    }
+    <span style="color:#66d9ef">else</span>{
+        pNewGoods<span style="color:#f92672">-&gt;</span>m_pNext <span style="color:#f92672">=</span> head;
+        head <span style="color:#f92672">=</span> pNewGoods;
+    }
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sale</span>(Goods <span style="color:#f92672">*&amp;</span>head){
+    <span style="color:#66d9ef">if</span>(head <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;没有货物了&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">return</span>;
+    }
+    Goods <span style="color:#f92672">*</span>temp <span style="color:#f92672">=</span> head;
+    head <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>m_pNext;
+    <span style="color:#66d9ef">delete</span> temp;
+    temp <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
+{ 
+    Goods <span style="color:#f92672">*</span>head <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    <span style="color:#66d9ef">int</span> choice;
+    <span style="color:#66d9ef">do</span>{
+        <span style="color:#75715e">// 提供菜单
+</span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;输入 1 进货&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;输入 2 出货&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;输入 0 退出&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+        
+        cin <span style="color:#f92672">&gt;&gt;</span> choice;
+        <span style="color:#66d9ef">switch</span>(choice){
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>
+                <span style="color:#75715e">// 退出
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
+            {
+                <span style="color:#75715e">// 进货
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> w <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+                cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;输入货物重量：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+                cin <span style="color:#f92672">&gt;&gt;</span> w;
+                buy(head, w);
+                <span style="color:#66d9ef">break</span>;
+            }
+            <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span>
+                <span style="color:#75715e">// 出货
+</span><span style="color:#75715e"></span>                sale(head);
+                <span style="color:#66d9ef">break</span>;
+        }
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;目前货物的总重量是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> Goods<span style="color:#f92672">::</span>getTotalWeight() <span style="color:#f92672">&lt;&lt;</span> endl;
+    }<span style="color:#66d9ef">while</span>(<span style="color:#ae81ff">1</span>);
+    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">输入 1 进货
+输入 2 出货
+输入 0 退出
+1
+输入货物重量：
+10
+买入了货物，重量是：10
+目前货物的总重量是：10
+输入 1 进货
+输入 2 出货
+输入 0 退出
+1
+输入货物重量：
+20
+买入了货物，重量是：20
+目前货物的总重量是：30
+输入 1 进货
+输入 2 出货
+输入 0 退出
+1
+输入货物重量：
+30
+买入了货物，重量是：30
+目前货物的总重量是：60
+输入 1 进货
+输入 2 出货
+输入 0 退出
+2
+卖出了货物，重量是：30
+目前货物的总重量是：30
+输入 1 进货
+输入 2 出货
+输入 0 退出
+2
+卖出了货物，重量是：20
+目前货物的总重量是：10
+输入 1 进货
+输入 2 出货
+输入 0 退出
+2
+卖出了货物，重量是：10
+目前货物的总重量是：0
+输入 1 进货
+输入 2 出货
+输入 0 退出
+2
+没有货物了
+目前货物的总重量是：0
+输入 1 进货
+输入 2 出货
+输入 0 退出
+0
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/rick/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>操作符重载</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>异常</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

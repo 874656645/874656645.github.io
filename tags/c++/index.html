@@ -127,6 +127,31 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>操作符重载
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>#include &lt;iostream&gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c); friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public: Complex(){ cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &lt;&lt; &#34;Complex(int, int)...&#34; &lt;&lt; endl; this-&gt;a = a; this-&gt;b = b; } ~Complex(){ cout &lt;&lt; &#34;~Complex()....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-03 13:54:11 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 操作符重载" href="https://874656645.github.io/rick/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>具有链表特性的类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>买卖货物问题：
+#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 具有链表特性的类" href="https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>异常
     </h2>
   </header>
@@ -161,42 +186,6 @@ Start exception finally 0 Finish 二、std::exception class exception { public: 
   </section>
   <footer class="entry-footer"><span title='2021-12-29 19:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to vector" href="https://874656645.github.io/rick/posts/55-vector/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43; STL
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器
-适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
-一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
-1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
-2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
-3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢
-4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
-std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack; std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue; std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-29 17:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; STL" href="https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>new delete 与内存
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、new / delete 具体步骤 new
- 第一步：调用 operator new 函数分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象 第二步：编译器运行相应的构造函数以构造对象，并为其传入初值 第三部：对象构造完成后，返回一个指向该对象的指针  delete
- 第一步：调用对象的析构函数 第二步：编译器调用 operator delete 函数释放内存空间  2、new/delete 与 malloc/free 的区别是什么？  malloc/free 是 C 语言的标准库函数， new/delete 是 C&#43;&#43; 的运算符。它们都可用于申请动态内存和释放内存 malloc/free 不会去自动调用构造和析构函数，对于基本数据类型的对象而言，光用 malloc/free 无法满足动态对象的要求 malloc/free 需要指定分配内存的大小，而 new/delete 会自动计算所需内存大小 new 返回的是指定对象的指针，而 malloc 返回的是 void*，因此 malloc 的返回值一般都需要进行强制类型转换  3、C&#43;&#43;内存管理 在 C&#43;&#43; 中，虚拟内存分为代码段、数据段、BSS段、堆区、栈区以及文件映射区六部分
- 代码段：包括只读存储区和文本区，其中只读存储区存储字符串常量，文本区存储程序的机器代码 数据段：存储程序中已初始化的全局变量和静态变量 BSS段：存储未初始化的全局变量和静态变量（局部&#43;全局），以及所有被初始化为0的全局变量和静态变量（这个段的数据全都是0） 堆区：调用new/malloc函数时在堆区动态分配内存，同时需要调用delete/free来手动释放申请的内存 映射区：存储动态链接库以及调用mmap函数进行的文件映射 栈区：使用栈空间存储函数的返回地址、参数、局部变量、返回值（最靠近CPU的区）  4、内存的分配方式（三种）   静态存储区分配：是在程序编译时就已经分配好的，在整个运行期间都存在，如全局变量、常量、静态变量
-  栈上分配：函数内的局部变量就是从这分配的，但分配的内存容易有限
-  堆上分配：也称动态分配，如我们用 new,malloc 分配内存，用 delete,free 来释放的内存。堆内存空间可由用户手动分配和释放，所以其生存周期由用户指定，较为灵活。但频繁的分配、释放大小不同的堆空间会产生内存碎片...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-29 15:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to new delete 与内存" href="https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

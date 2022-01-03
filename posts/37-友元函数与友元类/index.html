@@ -5,11 +5,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>友元函数 | Slow is Smooth and Smooth is Fast</title>
+<title>友元函数与友元类 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针   全局函数是友元  class A { friend void printA(const A &amp;a); public: void printA(); private: string name {&#34;C&#43;&#43;&#34;}; int id {1024}; }; void A::printA(){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; a.name &lt;&lt; &#34;\tid = &#34; &lt;&lt; a.">
+<meta name="description" content="友元利弊：
+友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。
+  注意事项：
+（1）友元关系不能被继承；
+（2）友元关系是单向的，不具有交换性；
+（3）友元关系不具有传递性；
+  一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数
+class A { friend void printA(const A &amp;a); public: void printA(); private: string name {&#34;C&#43;&#43;&#34;}; int id {1024}; }; void A::printA(){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; a.">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/" />
+<link rel="canonical" href="https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
@@ -44,18 +51,32 @@ if (!doNotTrack) {
 	
 	ga('send', 'pageview');
 }
-</script><meta property="og:title" content="友元函数" />
-<meta property="og:description" content="类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针   全局函数是友元  class A { friend void printA(const A &amp;a); public: void printA(); private: string name {&#34;C&#43;&#43;&#34;}; int id {1024}; }; void A::printA(){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; a.name &lt;&lt; &#34;\tid = &#34; &lt;&lt; a." />
+</script><meta property="og:title" content="友元函数与友元类" />
+<meta property="og:description" content="友元利弊：
+友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。
+  注意事项：
+（1）友元关系不能被继承；
+（2）友元关系是单向的，不具有交换性；
+（3）友元关系不具有传递性；
+  一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数
+class A { friend void printA(const A &amp;a); public: void printA(); private: string name {&#34;C&#43;&#43;&#34;}; int id {1024}; }; void A::printA(){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; a." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-24T12:34:27&#43;08:00" />
 <meta property="article:modified_time" content="2021-12-24T12:34:27&#43;08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
-<meta name="twitter:title" content="友元函数"/>
-<meta name="twitter:description" content="类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针   全局函数是友元  class A { friend void printA(const A &amp;a); public: void printA(); private: string name {&#34;C&#43;&#43;&#34;}; int id {1024}; }; void A::printA(){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; a.name &lt;&lt; &#34;\tid = &#34; &lt;&lt; a."/>
+<meta name="twitter:title" content="友元函数与友元类"/>
+<meta name="twitter:description" content="友元利弊：
+友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。
+  注意事项：
+（1）友元关系不能被继承；
+（2）友元关系是单向的，不具有交换性；
+（3）友元关系不具有传递性；
+  一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数
+class A { friend void printA(const A &amp;a); public: void printA(); private: string name {&#34;C&#43;&#43;&#34;}; int id {1024}; }; void A::printA(){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; a."/>
 
 
 <script type="application/ld+json">
@@ -72,8 +93,8 @@ if (!doNotTrack) {
     {
       "@type": "ListItem",
       "position":  3 ,
-      "name": "友元函数",
-      "item": "https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/"
+      "name": "友元函数与友元类",
+      "item": "https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/"
     }
   ]
 }
@@ -82,14 +103,14 @@ if (!doNotTrack) {
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "友元函数",
-  "name": "友元函数",
-  "description": "类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针   全局函数是友元  class A { friend void printA(const A \u0026amp;a); public: void printA(); private: string name {\u0026#34;C++\u0026#34;}; int id {1024}; }; void A::printA(){ cout \u0026lt;\u0026lt; \u0026#34;name = \u0026#34; \u0026lt;\u0026lt; this-\u0026gt;name \u0026lt;\u0026lt; \u0026#34;\\tid = \u0026#34; \u0026lt;\u0026lt; this-\u0026gt;id \u0026lt;\u0026lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A \u0026amp;a){ cout \u0026lt;\u0026lt; \u0026#34;name = \u0026#34; \u0026lt;\u0026lt; a.name \u0026lt;\u0026lt; \u0026#34;\\tid = \u0026#34; \u0026lt;\u0026lt; a.",
+  "headline": "友元函数与友元类",
+  "name": "友元函数与友元类",
+  "description": "友元利弊：\n友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。\n  注意事项：\n（1）友元关系不能被继承；\n（2）友元关系是单向的，不具有交换性；\n（3）友元关系不具有传递性；\n  一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数\nclass A { friend void printA(const A \u0026amp;a); public: void printA(); private: string name {\u0026#34;C++\u0026#34;}; int id {1024}; }; void A::printA(){ cout \u0026lt;\u0026lt; \u0026#34;name = \u0026#34; \u0026lt;\u0026lt; this-\u0026gt;name \u0026lt;\u0026lt; \u0026#34;\\tid = \u0026#34; \u0026lt;\u0026lt; this-\u0026gt;id \u0026lt;\u0026lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A \u0026amp;a){ cout \u0026lt;\u0026lt; \u0026#34;name = \u0026#34; \u0026lt;\u0026lt; a.",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针   全局函数是友元  class A { friend void printA(const A \u0026a); public: void printA(); private: string name {\"C++\"}; int id {1024}; }; void A::printA(){ cout  \"name = \"  this-name  \"\\tid = \"  this-id  endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A \u0026a){ cout  \"name = \"  a.name  \"\\tid = \"  a.id  endl; } int main() { A a; printA(a); a.printA(); return 0; } 输出：\nStart name = C++\tid = 1024 name = C++\tid = 1024 0 Finish 类的成员方法是友元  小技巧：为了防止相互嵌套，可以将其中一个类的声明和实现拆开\nclass Point; class PointManager{ public: double getDistance(Point \u0026p1, Point \u0026p2); private: }; class Point{ friend double PointManager::getDistance(Point \u0026p1, Point \u0026p2); public: Point(int x, int y){ this-x = x; this-y = y; } private: int x; int y; }; double PointManager::getDistance(Point \u0026p1, Point \u0026p2){ int dx = p1.x - p2.x; int dy = p1.y - p2.y; return sqrt(dx * dx + dy * dy); } int main( ) { Point p1(1, 1), p2(3, 1); PointManager pm; cout  pm.getDistance(p1, p2)  endl; return 0; } 输出：\nStart 2 0 Finish ",
-  "wordCount" : "188",
+  "articleBody": "  友元利弊：\n友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。\n  注意事项：\n（1）友元关系不能被继承；\n（2）友元关系是单向的，不具有交换性；\n（3）友元关系不具有传递性；\n  一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数\nclass A { friend void printA(const A \u0026a); public: void printA(); private: string name {\"C++\"}; int id {1024}; }; void A::printA(){ cout  \"name = \"  this-name  \"\\tid = \"  this-id  endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A \u0026a){ cout  \"name = \"  a.name  \"\\tid = \"  a.id  endl; } int main() { A a; printA(a); a.printA(); return 0; } 输出：\nStart name = C++\tid = 1024 name = C++\tid = 1024 0 Finish 2. 友元函数是类的成员方法\n小技巧：为了防止相互嵌套，可以将其中一个类的声明和实现拆开\nclass Point; class PointManager{ public: double getDistance(Point \u0026p1, Point \u0026p2); private: }; class Point{ friend double PointManager::getDistance(Point \u0026p1, Point \u0026p2); public: Point(int x, int y){ this-x = x; this-y = y; } private: int x; int y; }; double PointManager::getDistance(Point \u0026p1, Point \u0026p2){ int dx = p1.x - p2.x; int dy = p1.y - p2.y; return sqrt(dx * dx + dy * dy); } int main( ) { Point p1(1, 1), p2(3, 1); PointManager pm; cout  pm.getDistance(p1, p2)  endl; return 0; } 输出：\nStart 2 0 Finish 二、友元类 class A{ friend class B; // 将 B 声明为友元类后，在 B 中 A 就是透明的 public: A(int a){ this-a = a; } void printA(){ cout  \"a = \"  this-a  endl; } private: int a; }; class B{ public: B(int b){ this-b = b; } void printB(){ A a(10); cout  \"print a in b: \"  a.a  endl; cout  \"b = \"  this-b  endl; } private: int b; }; int main( ) { B b(-10); b.printB(); return 0; } Start print a in b: 10 b = -10 0 Finish ",
+  "wordCount" : "293",
   "inLanguage": "en",
   "datePublished": "2021-12-24T12:34:27+08:00",
   "dateModified": "2021-12-24T12:34:27+08:00",
@@ -99,7 +120,7 @@ if (!doNotTrack) {
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/"
+    "@id": "https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/"
   },
   "publisher": {
     "@type": "Organization",
@@ -183,22 +204,48 @@ if (!doNotTrack) {
   <header class="post-header">
     <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
     <h1 class="post-title">
-      友元函数
+      友元函数与友元类
     </h1>
-    <div class="post-meta"><span title='2021-12-24 12:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+    <div class="post-meta"><span title='2021-12-24 12:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
 
 </div>
-  </header> 
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e5%8f%8b%e5%85%83%e5%87%bd%e6%95%b0" aria-label="一、友元函数">一、友元函数</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%8f%8b%e5%85%83%e7%b1%bb" aria-label="二、友元类">二、友元类</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
 
   <div class="post-content"><ul>
+<li>
+<p><strong>友元利弊：</strong><br>
+友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。</p>
+</li>
+<li>
+<p><strong>注意事项：</strong><br>
+（1）友元关系不能被继承；<br>
+（2）友元关系是单向的，不具有交换性；<br>
+（3）友元关系不具有传递性；</p>
+</li>
+</ul>
+<h3 id="一友元函数">一、友元函数<a hidden class="anchor" aria-hidden="true" href="#一友元函数">#</a></h3>
+<ul>
 <li>类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员</li>
 <li>尽管友元函数的原型有在类的定义中出现过，但是 <strong>友元函数并不是成员函数</strong></li>
 <li><strong>this 指针是所有成员函数的隐含参数</strong>。因此，在成员函数内部，它可以用来指向调用对象</li>
 <li>友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针</li>
 </ul>
-<ol>
-<li>全局函数是友元</li>
-</ol>
+<p><strong>1. 友元函数是全局函数</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>
 {
     <span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printA</span>(<span style="color:#66d9ef">const</span> A <span style="color:#f92672">&amp;</span>a);
@@ -230,9 +277,7 @@ name = C++	 id = 1024
 name = C++	 id = 1024
 0
 Finish
-</code></pre></div><ol start="2">
-<li>类的成员方法是友元</li>
-</ol>
+</code></pre></div><p><strong>2. 友元函数是类的成员方法</strong></p>
 <p><em>小技巧：为了防止相互嵌套，可以将其中一个类的声明和实现拆开</em></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Point</span>;
 
@@ -253,10 +298,10 @@ Finish
     <span style="color:#66d9ef">int</span> y;
 };
 <span style="color:#66d9ef">double</span> PointManager<span style="color:#f92672">::</span>getDistance(Point <span style="color:#f92672">&amp;</span>p1, Point <span style="color:#f92672">&amp;</span>p2){
-        <span style="color:#66d9ef">int</span> dx <span style="color:#f92672">=</span> p1.x <span style="color:#f92672">-</span> p2.x;
-        <span style="color:#66d9ef">int</span> dy <span style="color:#f92672">=</span> p1.y <span style="color:#f92672">-</span> p2.y;
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sqrt</span>(dx <span style="color:#f92672">*</span> dx <span style="color:#f92672">+</span> dy <span style="color:#f92672">*</span> dy);
-    }
+    <span style="color:#66d9ef">int</span> dx <span style="color:#f92672">=</span> p1.x <span style="color:#f92672">-</span> p2.x;
+    <span style="color:#66d9ef">int</span> dy <span style="color:#f92672">=</span> p1.y <span style="color:#f92672">-</span> p2.y;
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sqrt</span>(dx <span style="color:#f92672">*</span> dx <span style="color:#f92672">+</span> dy <span style="color:#f92672">*</span> dy);
+}
 <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
 { 
     Point p1(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>), p2(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">1</span>);
@@ -267,6 +312,43 @@ Finish
 </code></pre></div><p>输出：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Start
 2
+0
+Finish
+</code></pre></div><h3 id="二友元类">二、友元类<a hidden class="anchor" aria-hidden="true" href="#二友元类">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>{
+    <span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span>;     <span style="color:#75715e">// 将 B 声明为友元类后，在 B 中 A 就是透明的
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    A(<span style="color:#66d9ef">int</span> a){
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">=</span> a;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printA</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> a;
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    B(<span style="color:#66d9ef">int</span> b){
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">=</span> b;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printB</span>(){
+        A a(<span style="color:#ae81ff">10</span>);
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;print a in b: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a.a <span style="color:#f92672">&lt;&lt;</span> endl;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> b;
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
+{ 
+    B b(<span style="color:#f92672">-</span><span style="color:#ae81ff">10</span>);
+    b.printB();
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Start
+print a in b: 10
+b = -10
 0
 Finish
 </code></pre></div>

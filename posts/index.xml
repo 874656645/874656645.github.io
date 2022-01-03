@@ -9,7 +9,26 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 30 Dec 2021 15:34:27 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 03 Jan 2022 13:54:11 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>操作符重载</title>
+      <link>https://874656645.github.io/rick/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/</link>
+      <pubDate>Mon, 03 Jan 2022 13:54:11 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/</guid>
+      <description>#include &amp;lt;iostream&amp;gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;amp;c1, Complex &amp;amp;c2);  // friend Complex operator+(Complex &amp;amp;c1, Complex &amp;amp;c2);  // friend Complex&amp;amp; operator+= (Complex &amp;amp;c1, Complex &amp;amp;c2);  friend ostream&amp;amp; operator&amp;lt;&amp;lt;(ostream &amp;amp;os, Complex &amp;amp;c); friend istream&amp;amp; operator&amp;gt;&amp;gt;(istream &amp;amp;is, Complex &amp;amp;c); public: Complex(){ cout &amp;lt;&amp;lt; &amp;#34;Complex()...&amp;#34; &amp;lt;&amp;lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &amp;lt;&amp;lt; &amp;#34;Complex(int, int)...&amp;#34; &amp;lt;&amp;lt; endl; this-&amp;gt;a = a; this-&amp;gt;b = b; } ~Complex(){ cout &amp;lt;&amp;lt; &amp;#34;~Complex().</description>
+    </item>
+    
+    <item>
+      <title>具有链表特性的类</title>
+      <link>https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/</link>
+      <pubDate>Mon, 03 Jan 2022 09:21:17 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/</guid>
+      <description>买卖货物问题：
+#include &amp;lt;iostream&amp;gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &amp;lt;&amp;lt; &amp;#34;买入了货物，重量是：&amp;#34; &amp;lt;&amp;lt; m_weight &amp;lt;&amp;lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight += m_weight; cout &amp;lt;&amp;lt; &amp;#34;买入了货物，重量是：&amp;#34; &amp;lt;&amp;lt; m_weight &amp;lt;&amp;lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&amp;gt;m_pNext = nullptr; cout &amp;lt;&amp;lt; &amp;#34;卖出了货物，重量是：&amp;#34; &amp;lt;&amp;lt; m_weight &amp;lt;&amp;lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&amp;gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;amp;head){ if(head == nullptr){ cout &amp;lt;&amp;lt; &amp;#34;没有货物了&amp;#34; &amp;lt;&amp;lt; endl; return; } Goods *temp = head; head = head-&amp;gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &amp;lt;&amp;lt; &amp;#34;输入 1 进货&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;输入 2 出货&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;输入 0 退出&amp;#34; &amp;lt;&amp;lt; endl; cin &amp;gt;&amp;gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &amp;lt;&amp;lt; &amp;#34;输入货物重量：&amp;#34; &amp;lt;&amp;lt; endl; cin &amp;gt;&amp;gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &amp;lt;&amp;lt; &amp;#34;目前货物的总重量是：&amp;#34; &amp;lt;&amp;lt; Goods::getTotalWeight() &amp;lt;&amp;lt; endl; }while(1); return 0; } 输出：</description>
+    </item>
+    
     <item>
       <title>异常</title>
       <link>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</link>
@@ -238,12 +257,19 @@ void test(int * a){ a = new int(20); //*a = 20;  cout &amp;lt;&amp;lt; &amp;#34;
     </item>
     
     <item>
-      <title>友元函数</title>
-      <link>https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/</link>
+      <title>友元函数与友元类</title>
+      <link>https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/</link>
       <pubDate>Fri, 24 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/</guid>
-      <description>类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针   全局函数是友元  class A { friend void printA(const A &amp;amp;a); public: void printA(); private: string name {&amp;#34;C++&amp;#34;}; int id {1024}; }; void A::printA(){ cout &amp;lt;&amp;lt; &amp;#34;name = &amp;#34; &amp;lt;&amp;lt; this-&amp;gt;name &amp;lt;&amp;lt; &amp;#34;\tid = &amp;#34; &amp;lt;&amp;lt; this-&amp;gt;id &amp;lt;&amp;lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;amp;a){ cout &amp;lt;&amp;lt; &amp;#34;name = &amp;#34; &amp;lt;&amp;lt; a.name &amp;lt;&amp;lt; &amp;#34;\tid = &amp;#34; &amp;lt;&amp;lt; a.</description>
+      <guid>https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/</guid>
+      <description>友元利弊：
+友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。
+  注意事项：
+（1）友元关系不能被继承；
+（2）友元关系是单向的，不具有交换性；
+（3）友元关系不具有传递性；
+  一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数
+class A { friend void printA(const A &amp;amp;a); public: void printA(); private: string name {&amp;#34;C++&amp;#34;}; int id {1024}; }; void A::printA(){ cout &amp;lt;&amp;lt; &amp;#34;name = &amp;#34; &amp;lt;&amp;lt; this-&amp;gt;name &amp;lt;&amp;lt; &amp;#34;\tid = &amp;#34; &amp;lt;&amp;lt; this-&amp;gt;id &amp;lt;&amp;lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;amp;a){ cout &amp;lt;&amp;lt; &amp;#34;name = &amp;#34; &amp;lt;&amp;lt; a.</description>
     </item>
     
     <item>
