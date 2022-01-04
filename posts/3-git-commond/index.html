@@ -88,7 +88,7 @@ if (!doNotTrack) {
   "keywords": [
     "Git Commonds"
   ],
-  "articleBody": "1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git\n 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git\n 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git\n2、更新远程仓库代码到本地 git pull blog master\n3、将变化提交到本地仓库 git commit -m \"delete all files\"\n4、push推送到远程仓库 git push blog master\n5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick\n6、删除配置的远程仓库别名 git remote remove blog\n7、添加文件 git add -A\n8、删除文件 git rm *\n9、删除远程仓库中的文件、文件夹 git rm -r --cached \"*.*\"\n*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了\n10、查看所有分支并切换 git branch -a\ngit branch -r\ngit checkout dev5\n11、删除远程分支 git push blog --delete name\n12、解决failed to push some refs to git git pull --rebase blog master\n13、不需验证用户名和密码 执行如下命令\ngit config --global credential.helper store\n此命令会在 .gitconfig 文件中添加如下文本\n[credential] helper = store 14、重新输入用户名和密码 git config --system --unset credential.helper\n或者把上面文件中的 store 删掉\n15、添加子仓库 git submodule add  \n添加成功后，在父仓库根目录增加了 .gitmodule 文件，并且在父仓库的 git 配置文件中加入了 submodule 段\n16、checkout 子仓库 git submodule update\n16、常用命令 ",
+  "articleBody": "1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git\n 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git\n 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git\n2、更新远程仓库代码到本地 git pull blog master\n3、将变化提交到本地仓库 git commit -m \"delete all files\"\n4、push推送到远程仓库 git push blog master\n5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick\n6、删除配置的远程仓库别名 git remote remove blog\n7、添加文件 git add -A\n8、删除文件 git rm *\n9、删除远程仓库中的文件、文件夹 git rm -r --cached \"*.*\"\n*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了\n10、查看所有分支并切换 git branch -a\ngit branch -r\ngit checkout dev5\n11、删除远程分支 git push blog --delete name\n12、解决failed to push some refs to git git pull --rebase blog master\n13、不需验证用户名和密码 执行如下命令\ngit config --global credential.helper store\n此命令会在 .gitconfig 文件中添加如下文本\n[credential] helper = store 14、重新输入用户名和密码 git config --system --unset credential.helper\n或者把上面文件中的 store 删掉\n15、添加子仓库 git submodule add  \n添加成功后，在父仓库根目录增加了 .gitmodule 文件，并且在父仓库的 git 配置文件中加入了 submodule 段\n16、checkout 子仓库 git submodule update\n17、常用命令 ",
   "wordCount" : "141",
   "inLanguage": "en",
   "datePublished": "2018-12-15T22:45:47+08:00",
@@ -231,7 +231,7 @@ if (!doNotTrack) {
                 <li>
                     <a href="#16checkout-%e5%ad%90%e4%bb%93%e5%ba%93" aria-label="16、checkout 子仓库">16、checkout 子仓库</a></li>
                 <li>
-                    <a href="#16%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="16、常用命令">16、常用命令</a>
+                    <a href="#17%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="17、常用命令">17、常用命令</a>
                 </li>
             </ul>
         </div>
@@ -296,7 +296,7 @@ git remote add blog https://github.com/874656645/rick
 添加成功后，在父仓库根目录增加了 <em>.gitmodule</em> 文件，并且在父仓库的 <em>git</em> 配置文件中加入了 <em>submodule</em> 段</p>
 <h3 id="16checkout-子仓库">16、checkout 子仓库<a hidden class="anchor" aria-hidden="true" href="#16checkout-子仓库">#</a></h3>
 <p><code>git submodule update</code></p>
-<h3 id="16常用命令">16、常用命令<a hidden class="anchor" aria-hidden="true" href="#16常用命令">#</a></h3>
+<h3 id="17常用命令">17、常用命令<a hidden class="anchor" aria-hidden="true" href="#17常用命令">#</a></h3>
 <p><img loading="lazy" src="https://github.com/DickyQie/Tool-use/blob/git-learning-document/Git%E5%91%BD%E4%BB%A4.jpg?raw=true" alt="Git 常用命令"  />
 </p>
 

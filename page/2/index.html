@@ -138,6 +138,44 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>异常
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
+int main( ) { try{ throw &#34;exception&#34;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常  cout &lt;&lt; &#34;...&#34; &lt;&lt; endl; } { cout &lt;&lt; &#34;finally&#34; &lt;&lt; endl; } return 0; } 输出：
+Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-30 15:34:27 +0800 CST'>December 30, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 异常" href="https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>STL 总结
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL 常用的容器有哪些以及各自的特点是什么?    名称 特点     vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector 扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-30 10:34:27 +0800 CST'>December 30, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL 总结" href="https://874656645.github.io/rick/posts/56-stl-%E6%80%BB%E7%BB%93/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>vector
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>vector 常用操作 #include &lt;iostream&gt;#include &lt;vector&gt; int main() { //1.定义和初始化  vector&lt;int&gt; vec1; //默认初始化，vec1为空  vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2  vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&lt;int&gt; vec4(10); //10个值为0的元素  vector&lt;int&gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); //尾部添加元素  vec1.insert(vec1.end(),5,3); //从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); //删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()&#43;2); //删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); //清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&lt;int&gt;().swap(V); //利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1.at(int pos); //返回pos位置元素的引用  vec1.front(); //返回首元素的引用  vec1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-29 19:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to vector" href="https://874656645.github.io/rick/posts/55-vector/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43; STL
     </h2>
   </header>
@@ -170,45 +208,6 @@ std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack
   </section>
   <footer class="entry-footer"><span title='2021-12-29 15:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to new delete 与内存" href="https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>new 二维数组
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>在堆上声明一个数组 int main( ) { int ** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &lt; 4; i&#43;&#43;){ pArr[i] = new int[8]; } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ pArr[i][j] = i * j; } } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ if(j == 0) cout &lt;&lt; endl; cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;; } } // 删除  for(int i = 0; i &lt; 4; &#43;&#43;i){ delete [] pArr[i]; } delete [] pArr; return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-29 14:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to new 二维数组" href="https://874656645.github.io/rick/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>类其它总结
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1. this指针 this 指针是一个隐含于每一个非静态成员函数中的特殊指针，它指向调用该成员函数的对象的首地址
- 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 this 指针，然后调用成员函数，每次成员函数存取数据成员时，都隐式使用 this 指针 this 指针被隐含地声明为: ClassName *const this，这意味着不能给 this 指针赋值 this 是个右值，所以不能取 this 的地址  2. delete this  类的成员函数中可以调用 delete this，但是在释放后，对象后续调用的方法不能再用到 this 指针 delete this 释放了类对象的内存空间，但是内存空间却并不是马上被回收到系统中，此时其中的值是不确定的 delete 的本质是为将被释放的内存调用一个或多个析构函数，如果在类的析构函数中调用 delete this，会陷入无限递归，造成栈溢出  3. 一个空类class中有什么？ 构造函数、拷贝构造函数、析构函数、赋值运算符重载、取地址操作符重载、被 const 修饰的取地址操作符重载
-4. C&#43;&#43; 计算一个类的 sizeof  一个空的类 sizeof 返回 1，因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址 类内的普通成员函数不参与 sizeof 的统计，因为 sizeof 是针对实例的，而普通成员函数，是针对类体的 一个类如果含有虚函数，则这个类中有一个指向虚函数表的指针（虚函数指针），32位程序占4个字节，64位程序占8个字节 静态成员不影响类的大小，被编译器放在程序的数据段中 普通继承的类sizeof，会得到基类的大小加上派生类自身成员的大小 当存在虚拟继承时，派生类中会有一个指向虚基类表的指针。所以其大小应为普通继承的大小，再加上虚基类表的指针大小  5. 构造函数和析构函数能被继承吗? 不能。构造函数和析构函数是用来处理对象的创建和析构的，它们只知道对在它们的特殊层次的对象做什么
-6. 构造函数能不能是虚函数？ 不能。虚函数对应一个虚函数表，可是这个虚函数表存储在对象的内存空间的。问题就在于，如果构造函数是虚的，就需要通过 虚函数表来调用，可是对象还没有实例化，也就是内存空间还没有，就不会有虚函数表...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-28 17:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类其它总结" href="https://874656645.github.io/rick/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>构造函数重载与互调
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public: Test(int a, int b, int c){ _a = a; _b = b; _c = c; } // 正确  Test(int a, int b):Test(a, b, 100){ } /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */ int getA(){ return _a; } int getB(){ return _b; } int getC(){ return _c; } private: int _a; int _b; int _c; }; int main( ) { Test t1(10, 20); cout &lt;&lt; t1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-28 16:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 构造函数重载与互调" href="https://874656645.github.io/rick/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

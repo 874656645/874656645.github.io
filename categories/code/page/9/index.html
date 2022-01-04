@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Posts | Slow is Smooth and Smooth is Fast</title>
+<title>Code | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="" />
-<meta name="description" content="Posts - Slow is Smooth and Smooth is Fast">
+<meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/rick/posts/" />
+<link rel="canonical" href="https://874656645.github.io/rick/categories/code/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
@@ -22,7 +22,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.91.2" />
-<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/rick/posts/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/rick/categories/code/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -43,32 +43,17 @@ if (!doNotTrack) {
 	
 	ga('send', 'pageview');
 }
-</script><meta property="og:title" content="Posts" />
+</script><meta property="og:title" content="Code" />
 <meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta property="og:url" content="https://874656645.github.io/rick/categories/code/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
-<meta name="twitter:title" content="Posts"/>
+<meta name="twitter:title" content="Code"/>
 <meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
 
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
-    }
-  ]
-}
-</script>
 </head>
 
 <body class="list dark" id="top">
@@ -136,95 +121,60 @@ if (!doNotTrack) {
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a></div>
-  <h1>Posts</h1>
+<header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/categories/">Categories</a></div>
+  <h1>Code</h1>
 </header>
 
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Cmake Learn
+    <h2>QProcess 使用
     </h2>
   </header>
   <section class="entry-content">
-    <p>cmake命令
-1、生成 VS 2015 win64 版本的解决方案 注：下面的命令要在cmd下使用，power shell不可以
-cmake -H. -B./cmk_build/Win64 -G &#34;Visual Studio 15 2017 Win64&#34;
-2、指定目标版本 cmake -D CMAKE_SYSTEM_VERSION=8.1 -H. -B./cmk_build/Win64 -G &#34;Visual Studio 15 2017 Win64&#34;
-3、使用 MinGW 编译器 cmake -H. -B./cmk_build/MinGW -G &#34;MinGW Makefiles&#34;</p>
+    <p>路径中有空格  m_process-&gt;startDetached(strAppDir &#43; &#34;/ThreeDScreen.exe&#34;, QStringList())
+杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&#34;taskkill -t -f /IM iexplore.exe&#34;);</p>
   </section>
-  <footer class="entry-footer"><span title='2019-03-22 11:34:12 +0800 CST'>March 22, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cmake Learn" href="https://874656645.github.io/rick/posts/12-cmake-learn/"></a>
+  <footer class="entry-footer"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to QProcess 使用" href="https://874656645.github.io/rick/posts/21-qprocess-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Vcpkg Learn
+    <h2>QString 中文乱码
     </h2>
   </header>
   <section class="entry-content">
-    <p>vcpkg安装及使用
-注意：需要安装vs的英文语言包1、指定 vcpkg 中 msvc 的编译版本 在 vcpkg/triplets/文件夹下的所有cmake文件中添加代码 set(VCPKG_PLATFORM_TOOLSET v140)
-如果同时安装了vs2017，需要确保安装vs2017的英文语言包</p>
+    <p> QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
+以QString做为形参变量传递  qDebug(msg.toUtf8());
+QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } </p>
   </section>
-  <footer class="entry-footer"><span title='2019-03-22 11:06:01 +0800 CST'>March 22, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Vcpkg Learn" href="https://874656645.github.io/rick/posts/11-vcpkg-learn/"></a>
+  <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to QString 中文乱码" href="https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
 </article>
 
-<article class="post-entry"> 
+<article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Power Shell ExecutionPolicy
+    <h2>Git Commond
     </h2>
   </header>
   <section class="entry-content">
-    <p>Power shell执行策略 原文网址
-1、查看当前的安全策略 Get-ExecutionPolicy
-2、修改执行策略 ps:这种方法会将执行策略保存到注册表
-Set-ExecutionPolicy UnRestricted
-or
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
-3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
-4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
-6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned</p>
+    <p>1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git
+ 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
+ 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
+2、更新远程仓库代码到本地 git pull blog master
+3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
+4、push推送到远程仓库 git push blog master
+5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
+6、删除配置的远程仓库别名 git remote remove blog
+7、添加文件 git add -A
+8、删除文件 git rm *...</p>
   </section>
-  <footer class="entry-footer"><span title='2019-02-28 17:01:31 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Power Shell ExecutionPolicy" href="https://874656645.github.io/rick/posts/10-power-shell-executionpolicy/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Crawl Pictures From Website
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &#34;dmd&#34; save_path = &#39;E:/python/manhuadao/pics/&#39; __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#39;} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath(&#39;//div[@class=&#34;read-bottom&#34;]//a[@class=&#34;next&#34;]/@href&#39;) # print(next) for href in next_urls: nexturl = href....</p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-28 15:00:16 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Crawl Pictures From Website" href="https://874656645.github.io/rick/posts/9-crawl-pictures-from-website/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Python Virtualenv
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>原文网址
-在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell1、使用pip安装 pip install virtualenv
-2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv 3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env
-或者
-virtualenv env
-此命令会在当前目录下创建一个env目录
-4、启动虚拟环境 env\Scripts\activate
-5、离开虚拟环境 deactivate
-6、删除env文件夹即可 </p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-16 11:20:20 +0800 CST'>February 16, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Python Virtualenv" href="https://874656645.github.io/rick/posts/8-python-virtualenv/"></a>
+  <footer class="entry-footer"><span title='2018-12-15 22:45:47 +0800 CST'>December 15, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Git Commond" href="https://874656645.github.io/rick/posts/3-git-commond/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
-    <a class="prev" href="https://874656645.github.io/rick/posts/page/10/">« Prev Page</a>
-    <a class="next" href="https://874656645.github.io/rick/posts/page/12/">Next Page »</a>
+    <a class="prev" href="https://874656645.github.io/rick/categories/code/page/8/">« Prev Page</a>
   </nav>
 </footer>
     </main>
