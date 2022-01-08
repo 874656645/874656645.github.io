@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Categories | Slow is Smooth and Smooth is Fast</title>
+<title>Code | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="" />
 <meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/rick/categories/" />
+<link rel="canonical" href="https://874656645.github.io/rick/categories/code/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
@@ -22,7 +22,7 @@
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <meta name="generator" content="Hugo 0.91.2" />
-<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/rick/categories/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/rick/categories/code/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -43,15 +43,15 @@ if (!doNotTrack) {
 	
 	ga('send', 'pageview');
 }
-</script><meta property="og:title" content="Categories" />
+</script><meta property="og:title" content="Code" />
 <meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://874656645.github.io/rick/categories/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta property="og:url" content="https://874656645.github.io/rick/categories/code/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
-<meta name="twitter:title" content="Categories"/>
+<meta name="twitter:title" content="Code"/>
 <meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
 
 </head>
@@ -99,7 +99,7 @@ if (!doNotTrack) {
             </li>
             <li>
                 <a href="https://874656645.github.io/rick/categories" title="Categories">
-                    <span class="active">Categories</span>
+                    <span>Categories</span>
                 </a>
             </li>
             <li>
@@ -120,25 +120,50 @@ if (!doNotTrack) {
         </ul>
     </nav>
 </header>
-<main class="main">
-<header class="page-header">
-    <h1>Categories</h1>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/categories/">Categories</a></div>
+  <h1>Code</h1>
 </header>
 
-<ul class="terms-tags">
-    <li>
-        <a href="https://874656645.github.io/rick/categories/code/">Code <sup><strong><sup>47</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://874656645.github.io/rick/categories/gis/">Gis <sup><strong><sup>2</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://874656645.github.io/rick/categories/web/">Web <sup><strong><sup>1</sup></strong></sup> </a>
-    </li>
-    <li>
-        <a href="https://874656645.github.io/rick/categories/windows/">Windows <sup><strong><sup>4</sup></strong></sup> </a>
-    </li>
-</ul>
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>QString 中文乱码
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
+以QString做为形参变量传递  qDebug(msg.toUtf8());
+QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } </p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to QString 中文乱码" href="https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Git Commond
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git
+ 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
+ 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
+2、更新远程仓库代码到本地 git pull blog master
+3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
+git commit -am &#34;update&#34;
+4、push推送到远程仓库 git push blog master
+5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
+6、删除配置的远程仓库别名 git remote remove blog
+7、添加文件 git add -A...</p>
+  </section>
+  <footer class="entry-footer"><span title='2018-12-15 22:45:47 +0800 CST'>December 15, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Git Commond" href="https://874656645.github.io/rick/posts/3-git-commond/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://874656645.github.io/rick/categories/code/page/9/">« Prev Page</a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

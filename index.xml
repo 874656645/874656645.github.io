@@ -9,7 +9,52 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 04 Jan 2022 21:07:15 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 Jan 2022 14:01:27 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>实现一个简单的字符串类</title>
+      <link>https://874656645.github.io/rick/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/</link>
+      <pubDate>Sat, 08 Jan 2022 14:01:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/</guid>
+      <description>MyString.h
+#ifndef __MYSTRING_H_ #define __MYSTRING_H_  #include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;cstring&amp;gt; using namespace std; class MyString { // 重载 &amp;lt;&amp;lt;  // 最好是 const 的，可以输出匿名变量（匿名变量不能被非 const 的左值引用接收）  friend ostream&amp;amp; operator&amp;lt;&amp;lt;(ostream &amp;amp;os, const MyString &amp;amp;s); // 重载 &amp;gt;&amp;gt;  friend istream&amp;amp; operator&amp;gt;&amp;gt;(istream &amp;amp;is, MyString &amp;amp;s); private: // 字符串的有效长度  int m_len; // 字符串指针  char* m_pStr; public: MyString(); MyString(const char *); MyString(const MyString &amp;amp;); ~MyString(); // 重载 =  MyString&amp;amp; operator=(const MyString &amp;amp;); // 重载 []  char&amp;amp; operator[](int index); // 重载 +  MyString operator+(const MyString &amp;amp;); // 重载 +=  MyString&amp;amp; operator+=(const MyString &amp;amp;); // 重载 ==  bool operator==(const MyString &amp;amp;); // 重载 !</description>
+    </item>
+    
+    <item>
+      <title>静态数组初始化</title>
+      <link>https://874656645.github.io/rick/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
+      <pubDate>Sat, 08 Jan 2022 13:50:12 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
+      <description>声明静态数组后一定要进行初始化，否则里面的值都是未知的
+int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto &amp;amp; i : da){ cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; endl; } return 0; } 输出：
+6.95128e-310 4.63759e-310 0 </description>
+    </item>
+    
+    <item>
+      <title>VS Code 搭建 c&#43;&#43; gdb 开发环境</title>
+      <link>https://874656645.github.io/rick/posts/64-vs-code-%E6%90%AD%E5%BB%BA-c&#43;&#43;-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Thu, 06 Jan 2022 20:24:21 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/64-vs-code-%E6%90%AD%E5%BB%BA-c&#43;&#43;-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</guid>
+      <description>一、安装 C++ 开发环境 Using GCC with MinGW
+ 安装 MSYS2 更新 MSYS2 pacman -Syu 在开始菜单中运行 MSYS2 MSYS，更新其余的基本包 pacman -Su 安装 C++ 开发环境：  clang++ x64 gdb: pacman -S --needed base-devel mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-gdb g++ gdb: pacman -S --needed base-devel mingw-w64-x86_64-toolchain clang++ lldb: pacman -S --needed base-devel mingw-w64-clang-x86_64-lldb
+这个库会把 clang clang++ 等库安装到 msys64/clang64/bin 目录，但是 lldb 在 Windows 上的调试效果不如 gdb clang++ x86：pacman -S --needed base-devel mingw-w64-i686-clang   添加环境变量 D:\msys64\ucrt64\bin 检查是否安装成功  clang++ --version g++ --version gdb --version    pacman -Syu // 更新整个系统 pacman -Su // 更新已安装的包 pacman -Ss 关键字 // 搜索含关键字的包 pacman -S 包名 // 安装包，也可以同时安装多个包，只需以空格分隔包名即可 pacman -Rs 包名 // 删除包及其依赖 pacman -R 包名 // 删除包 二、配置 VS Code 主要是修改 task.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 内存对齐</title>
+      <link>https://874656645.github.io/rick/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/</link>
+      <pubDate>Thu, 06 Jan 2022 18:13:09 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/</guid>
+      <description>C/C++内存对齐详解
+内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
+  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
+注意：上面两条规则都需要得到满足 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
+  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&amp;#34;%ld\n&amp;#34;,sizeof(x1)); // 输出8  printf(&amp;#34;%ld\n&amp;#34;,sizeof(x2)); // 输出12  printf(&amp;#34;%ld\n&amp;#34;,sizeof(x3)); // 输出8  cout &amp;lt;&amp;lt; &amp;#34;----------------&amp;#34; &amp;lt;&amp;lt; endl; printf(&amp;#34;%ld\n&amp;#34;,sizeof(y1)); // 输出4  printf(&amp;#34;%ld\n&amp;#34;,sizeof(y2)); // 输出6  printf(&amp;#34;%ld\n&amp;#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：</description>
+    </item>
+    
     <item>
       <title>自定义智能指针</title>
       <link>https://874656645.github.io/rick/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</link>
@@ -36,7 +81,9 @@
       
       <guid>https://874656645.github.io/rick/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/</guid>
       <description>error: cannot bind non-const lvalue reference of type ‘T&amp;amp;’ to an rvalue of type ‘T’
-如果一个参数是以非 const 引用传入，c++ 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。但如果你把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉，所以，一般说来，修改一个临时变量是毫无意义的，据此，c++ 编译器加入了临时变量不能作为非 const 引用的这个语义限制。
+如果一个参数是以非 const 引用传入，c++ 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。
+但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。
+所以，修改一个临时变量是毫无意义的。据此，c++ 编译器加入了临时变量不能作为非 const 引用的这个语义限制。
 c++ 中临时变量是右值类型，不能作为非 const 的引用参数
 std::move() 返回的也是一个右值
 一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
@@ -97,7 +144,8 @@ Start exception finally 0 Finish 二、std::exception class exception { public: 
       <pubDate>Wed, 29 Dec 2021 17:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/</guid>
-      <description>STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C++程序库。STL中包括六大组件：容器、迭代器、迭代适配器、算法、仿函数、空间配置器
+      <description>STL六大组件
+STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C++程序库。STL中包括六大组件：容器、算法、迭代器、适配器、仿函数、空间配置器
 适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
 一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
 1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢

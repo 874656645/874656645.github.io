@@ -142,6 +142,66 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>定义一个只能在堆上（栈上）生成对象的类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、只能在堆上 方法：将析构函数设置为私有
+原因：C&#43;&#43; 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象
+class Test { public: void printT(){ cout &lt;&lt; &#34;printT&#34; &lt;&lt; endl; } void freeT(){ delete this; } private: ~Test(){ cout &lt;&lt; &#34;~Test()&#34; &lt;&lt; endl; } }; int main( ) { // 不能在栈上创建对象  //Test t; // prog.cc:25:10: error: variable of type &#39;Test&#39; has private destructor  // 只能在堆上创建对象  Test *t = new Test; t-&gt;printT(); // 销毁对象  t-&gt;freeT(); return 0; } 输出：
+Start printT ~Test() 0 Finish 二、只能在栈上 方法：将 new 和 delete 重载为私有...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-27 17:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 定义一个只能在堆上（栈上）生成对象的类" href="https://874656645.github.io/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>抽象类、接口类、聚合类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+1）所有成员都是 public，没有私有和受保护的非静态成员；
+2）没有定义任何构造函数；
+3）没有类内初始化；
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl; } void printB() { cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl; c....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-27 16:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 抽象类、接口类、聚合类" href="https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>虚继承和虚基类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>虚继承和虚基类 参考
+ 在C&#43;&#43;中，在定义公共基类A的派生类B、C…的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C…的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项
+cl [filename].cpp /d1 reportSingleClassLayout[className]
+一般继承：
+class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; }; 输出：
+class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;--- 调用：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-27 13:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 虚继承和虚基类" href="https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>多态总结
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态） 参数多态（Parametric Polymorphism，编译期）：类模板、函数模板 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl; } }; class Point { public: ~Point(){ cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-27 10:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 多态总结" href="https://874656645.github.io/rick/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>函数默认参数和占位参数
     </h2>
   </header>
@@ -152,64 +212,6 @@ int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能�
   </section>
   <footer class="entry-footer"><span title='2021-12-26 15:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 函数默认参数和占位参数" href="https://874656645.github.io/rick/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>内存区间划分
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-26 14:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 内存区间划分" href="https://874656645.github.io/rick/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>指针引用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
-void test(int * a){ a = new int(20); //*a = 20;  cout &lt;&lt; &#34;test point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;test:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &#34;main point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-25 21:34:27 +0800 CST'>December 25, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 指针引用" href="https://874656645.github.io/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>抽象、封装、继承、多态
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、抽象、封装 数据抽象：是一种仅向用户暴露接口而把具体的实现细节隐藏起来的机制，是一种依赖于接口实现分离的设计技术
-数据封装：是一种把数据和操作数据的函数捆绑在一起的机制
-1. 好处  类的内部受到保护，不会因无意的用户级错误导致对象状态受损 类实现可能随着时间的推移而发生变化，数据抽象可以更好的应对不断变化的需求  2. 策略  通常情况下，我们都会设置类成员状态为私有（private），除非我们真的需要将其暴露，这样才能保证良好的封装性。 抽象把代码分离为接口和实现。所以在设计组件时，必须保持接口独立于实现，这样，如果改变底层实现，接口也将保持不变。在这种情况下，不管任何程序使用接口，接口都不会受到影响，只需要将最新的实现重新编译即可  3. 接口 接口描述了类的行为和功能，而不需要完成类的特定实现。如果类中至少有一个函数被声明为纯虚函数，则这个类就是抽象类
-设计抽象类（通常称为 ABC）的目的，是为了给其他类提供一个可以继承的适当的基类。抽象类不能被用于实例化对象，它只能作为接口使用。因此，如果一个 ABC 的子类需要被实例化，则必须实现每个虚函数，如果没有在派生类中重写纯虚函数，就尝试实例化该类的对象，会导致编译错误。
-可用于实例化对象的类被称为具体类
-二、继承 继承代表了 is a 关系。例如，哺乳动物是动物，狗是哺乳动物，因此，狗是动物，等等。一个类可以派生自多个类，这意味着，它可以从多个基类继承数据和函数。类派生列表以一个或多个基类命名
-派生类可以访问基类中所有的非私有成员，同时，一个派生类继承了所有的基类方法，但下列情况除外：
- 基类的构造函数、析构函数和拷贝构造函数 基类的重载运算符 基类的友元函数  三、多态 虚函数：虚函数是在基类中使用关键字 virtual 声明的函数。在派生类中重新定义基类中定义的虚函数时，会告诉编译器不要静态链接到该函数。我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为动态链接，或后期绑定。
- 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般情况是将析构函数设置为虚函数 类析构顺序：1）派生类本身的析构函数；2）对象成员析构函数；3）基类析构函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
-// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &#34;Shape destructor&#34; &lt;&lt; endl; } // pure virtual function  virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &#34;PaintCost: &#34; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &#34;Rectangle destructor&#34; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员）  cout &lt;&lt; &#34;width: &#34; &lt;&lt; width &lt;&lt; &#34;\theight: &#34; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &#34;Rectangle class area: &#34; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &#34;Triangle destructor&#34; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &#34;Triangle class area: &#34; &lt;&lt; area &lt;&lt;endl; return area; } }; 多继承：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-24 15:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 抽象、封装、继承、多态" href="https://874656645.github.io/rick/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>类的静态成员
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A { string name {&#34;C&#43;&#43;&#34;}; int id {1024}; static int objCount; public: A(); friend void printA(const A &amp;a); void printA(); static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){ objCount&#43;&#43;; } void A::printA(){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; &#34;\tname = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } void A::printC(){ // 静态函数内没有this指针  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; objCount &lt;&lt; endl; // error: &#39;this&#39; is unavailable for static member functions  // cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; endl; } void printA(const A &amp;a){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; a....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-24 13:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类的静态成员" href="https://874656645.github.io/rick/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
