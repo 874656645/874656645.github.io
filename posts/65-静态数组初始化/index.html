@@ -92,7 +92,7 @@ if (!doNotTrack) {
   "keywords": [
     "C++"
   ],
-  "articleBody": "1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto \u0026 i : da){ cout  i  endl; } return 0; } 输出：\n6.95128e-310 4.63759e-310 0 2. C++ 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() { int arr[10]; cout  arr  endl; cout  arr + 1  endl; cout  \"----------\"  endl; cout  \u0026arr  endl; cout  \u0026arr + 1  endl; return 0; } 输出：\n0x7fff7fd65c20 0x7fff7fd65c24 ---------- 0x7fff7fd65c20 0x7fff7fd65c48 定义数组类型： // 方法一：定义一个数组类型 typedef int(ARRAY_INT_10)[10]; // 方法二：定义一个数组指针（不推荐这种写法） typedef int(*ARRAY_INT_10_P)[10]; int main() { int arr[10]; // 方法一：  ARRAY_INT_10 *arr1 = \u0026arr; for(int i = 0; i  10; i++){ //arr2[i] = i; // 错误 cannot convert ‘int*’ to ‘int (*)[10]’  // arr 是数组指针，arr1 是数组名  (*arr1)[i] = i; // 正确，要对 arr1 降级  } for(int i = 0; i  10; i++){ cout  arr[i]  endl; } cout  \"-----\"  endl; // 方法二：  ARRAY_INT_10_P arr2 = \u0026arr; for(int i = 0; i  10; i++){ cout  (*arr2)[i]  endl; } cout  \"+++++\"  endl; // 方法三：  int(*arr3)[10] = \u0026arr; for(int i = 0; i  10; i++){ cout  (*arr3)[i]  endl; } return 0; } 错误输出：\nmain.cpp:50:26: error: cannot convert ‘int*’ to ‘int (*)[10]’ in initialization 50 | ARRAY_INT_10 *arr2 = arr; | ^~~ | | | int* 输出：\n0 1 2 3 4 5 6 7 8 9 ----- 0 1 2 3 4 5 6 7 8 9 +++++ 0 1 2 3 4 5 6 7 8 9 ",
+  "articleBody": "1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto \u0026 i : da){ cout  i  endl; } return 0; } 输出：\n6.95128e-310 4.63759e-310 0 2. C++ 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() { int arr[10]; cout  arr  endl; cout  arr + 1  endl; cout  \"----------\"  endl; cout  \u0026arr  endl; cout  \u0026arr + 1  endl; return 0; } 输出：\n0x7fff7fd65c20 0x7fff7fd65c24 ---------- 0x7fff7fd65c20 0x7fff7fd65c48 定义数组类型：\n// 方法一：定义一个数组类型 typedef int(ARRAY_INT_10)[10]; // 方法二：定义一个数组指针（不推荐这种写法） typedef int(*ARRAY_INT_10_P)[10]; int main() { int arr[10]; // 方法一：  ARRAY_INT_10 *arr1 = \u0026arr; for(int i = 0; i  10; i++){ //arr2[i] = i; // 错误 cannot convert ‘int*’ to ‘int (*)[10]’  // arr 是数组指针，arr1 是数组名  (*arr1)[i] = i; // 正确，要对 arr1 降级  } for(int i = 0; i  10; i++){ cout  arr[i]  endl; } cout  \"-----\"  endl; // 方法二：  ARRAY_INT_10_P arr2 = \u0026arr; for(int i = 0; i  10; i++){ cout  (*arr2)[i]  endl; } cout  \"+++++\"  endl; // 方法三：  int(*arr3)[10] = \u0026arr; for(int i = 0; i  10; i++){ cout  (*arr3)[i]  endl; } return 0; } 错误输出：\nmain.cpp:50:26: error: cannot convert ‘int*’ to ‘int (*)[10]’ in initialization 50 | ARRAY_INT_10 *arr2 = arr; | ^~~ | | | int* 输出：\n0 1 2 3 4 5 6 7 8 9 ----- 0 1 2 3 4 5 6 7 8 9 +++++ 0 1 2 3 4 5 6 7 8 9 ",
   "wordCount" : "265",
   "inLanguage": "en",
   "datePublished": "2022-01-08T13:50:12+08:00",
@@ -251,11 +251,10 @@ if (!doNotTrack) {
 ----------
 0x7fff7fd65c20
 0x7fff7fd65c48
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">
-<span style="color:#960050;background-color:#1e0010">定义数组类型：</span>
-
+</code></pre></div><p>定义数组类型：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">
 <span style="color:#75715e">// 方法一：定义一个数组类型
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">int</span>(ARRAY_INT_10)[<span style="color:#ae81ff">10</span>];
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span>(ARRAY_INT_10)[<span style="color:#ae81ff">10</span>];
 <span style="color:#75715e">// 方法二：定义一个数组指针（不推荐这种写法）
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span>(<span style="color:#f92672">*</span>ARRAY_INT_10_P)[<span style="color:#ae81ff">10</span>];
 <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
