@@ -127,6 +127,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>函数指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish </p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-16 14:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数指针" href="https://874656645.github.io/rick/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>指针函数和函数指针
     </h2>
   </header>
@@ -180,19 +192,6 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
   </section>
   <footer class="entry-footer"><span title='2021-12-10 12:34:27 +0800 CST'>December 10, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to const 修饰符" href="https://874656645.github.io/rick/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>QProcess 使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>路径中有空格  m_process-&gt;startDetached(strAppDir &#43; &#34;/ThreeDScreen.exe&#34;, QStringList())
-杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&#34;taskkill -t -f /IM iexplore.exe&#34;);</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to QProcess 使用" href="https://874656645.github.io/rick/posts/21-qprocess-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

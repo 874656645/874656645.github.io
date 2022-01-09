@@ -142,6 +142,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>67 面向抽象类编程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>三层架构：业务逻辑层、抽象层、实现层 原则：依赖倒转</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-09 19:12:37 +0800 CST'>January 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 67 面向抽象类编程" href="https://874656645.github.io/rick/posts/67-%E9%9D%A2%E5%90%91%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%BC%96%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>实现一个简单的字符串类
     </h2>
   </header>
@@ -159,11 +171,10 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>声明静态数组后一定要进行初始化，否则里面的值都是未知的
-int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto &amp; i : da){ cout &lt;&lt; i &lt;&lt; endl; } return 0; } 输出：
-6.95128e-310 4.63759e-310 0 </p>
+    <p>1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto &amp; i : da){ cout &lt;&lt; i &lt;&lt; endl; } return 0; } 输出：
+6.95128e-310 4.63759e-310 0 2. C&#43;&#43; 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() { int arr[10]; cout &lt;&lt; arr &lt;&lt; endl; cout &lt;&lt; arr &#43; 1 &lt;&lt; endl; cout &lt;&lt; &#34;----------&#34; &lt;&lt; endl; cout &lt;&lt; &amp;arr &lt;&lt; endl; cout &lt;&lt; &amp;arr &#43; 1 &lt;&lt; endl; return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-08 13:50:12 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <footer class="entry-footer"><span title='2022-01-08 13:50:12 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 静态数组初始化" href="https://874656645.github.io/rick/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
 </article>
 
@@ -190,23 +201,12 @@ int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，�
     <p>C/C&#43;&#43;内存对齐详解
 内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
   规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
-注意：上面两条规则都需要得到满足 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
+注意：上面两条规则都需要得到满足
+注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
   // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8  cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：...</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-06 18:13:09 +0800 CST'>January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; 内存对齐" href="https://874656645.github.io/rick/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>自定义智能指针
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可  return ptr; } T&amp; operator*(){ // 相当于 (*ptr). ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &lt;&lt; &#34;A(int)...&#34; &lt;&lt; endl; this-&gt;a = a; } ~A(){ cout &lt;&lt; &#34;~A()....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/rick/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

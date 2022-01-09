@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>vector | Slow is Smooth and Smooth is Fast</title>
-<meta name="keywords" content="C&#43;&#43;" />
+<meta name="keywords" content="C&#43;&#43;, STL" />
 <meta name="description" content="vector 常用操作 #include &lt;iostream&gt;#include &lt;vector&gt; int main() { //1.定义和初始化  vector&lt;int&gt; vec1; //默认初始化，vec1为空  vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2  vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&lt;int&gt; vec4(10); //10个值为0的元素  vector&lt;int&gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); //尾部添加元素  vec1.insert(vec1.end(),5,3); //从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); //删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()&#43;2); //删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); //清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&lt;int&gt;().swap(V); //利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1.at(int pos); //返回pos位置元素的引用  vec1.front(); //返回首元素的引用  vec1.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick/posts/55-vector/" />
@@ -51,6 +51,7 @@ if (!doNotTrack) {
 <meta property="article:published_time" content="2021-12-29T19:34:27&#43;08:00" />
 <meta property="article:modified_time" content="2021-12-29T19:34:27&#43;08:00" />
 
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
@@ -86,7 +87,7 @@ if (!doNotTrack) {
   "name": "vector",
   "description": "vector 常用操作 #include \u0026lt;iostream\u0026gt;#include \u0026lt;vector\u0026gt; int main() { //1.定义和初始化  vector\u0026lt;int\u0026gt; vec1; //默认初始化，vec1为空  vector\u0026lt;int\u0026gt; vec2(vec1); //使用vec1初始化vec2  vector\u0026lt;int\u0026gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector\u0026lt;int\u0026gt; vec4(10); //10个值为0的元素  vector\u0026lt;int\u0026gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); //尾部添加元素  vec1.insert(vec1.end(),5,3); //从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); //删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()+2); //删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); //清空元素，元素在内存中并未消失，通常使用swap()来清空  vector\u0026lt;int\u0026gt;().swap(V); //利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1.at(int pos); //返回pos位置元素的引用  vec1.front(); //返回首元素的引用  vec1.",
   "keywords": [
-    "C++"
+    "C++", "STL"
   ],
   "articleBody": "vector 常用操作 #include #include  int main() { //1.定义和初始化  vectorint vec1; //默认初始化，vec1为空  vectorint vec2(vec1); //使用vec1初始化vec2  vectorint vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vectorint vec4(10); //10个值为0的元素  vectorint vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); //尾部添加元素  vec1.insert(vec1.end(),5,3); //从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); //删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()+2); //删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); //清空元素，元素在内存中并未消失，通常使用swap()来清空  vectorint().swap(V); //利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1.at(int pos); //返回pos位置元素的引用  vec1.front(); //返回首元素的引用  vec1.back(); //返回尾元素的引用  vectorint::iterator begin= vec1.begin(); //返回向量头指针，指向第一个元素  vectorint::iterator end= vec1.end(); //返回向量尾指针，指向向量最后一个元素的下一个位置  vectorint::iterator rbegin= vec1.rbegin(); //反向迭代器，指向最后一个元素  vectorint::iterator rend= vec1.rend(); //反向迭代器，指向第一个元素之前的位置  //2.4 判断函数  bool isEmpty = vec1.empty(); //判断是否为空  //2.5 大小函数  int size = vec1.size(); //元素个数  vec1.capacity(); //返回容器当前能够容纳的元素个数  vec1.max_size(); //返回容器最大的可能存储的元素个数  //2.6 改动函数  vec1.assign(int n,const T\u0026 x); //赋n个值为x的元素到vec1中，这会清除掉vec1中以前的内容。  vec1.assign(const_iterator first,const_iterator last); //当前向量中[first,last)中元素设置成迭代器所指向量的元素，这会清除掉vec1中以前的内容。 } ",
   "wordCount" : "100",
@@ -257,6 +258,7 @@ if (!doNotTrack) {
   <footer class="post-footer">
     <ul class="post-tags">
       <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/rick/tags/stl/">STL</a></li>
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://874656645.github.io/rick/posts/56-stl-%E6%80%BB%E7%BB%93/">

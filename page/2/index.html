@@ -138,6 +138,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>自定义智能指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可  return ptr; } T&amp; operator*(){ // 相当于 (*ptr). ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &lt;&lt; &#34;A(int)...&#34; &lt;&lt; endl; this-&gt;a = a; } ~A(){ cout &lt;&lt; &#34;~A()....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/rick/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43; 多线程
     </h2>
   </header>
@@ -191,20 +203,6 @@ class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt
   </section>
   <footer class="entry-footer"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 具有链表特性的类" href="https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>异常
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
-int main( ) { try{ throw &#34;exception&#34;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常  cout &lt;&lt; &#34;...&#34; &lt;&lt; endl; } { cout &lt;&lt; &#34;finally&#34; &lt;&lt; endl; } return 0; } 输出：
-Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-30 15:34:27 +0800 CST'>December 30, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 异常" href="https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

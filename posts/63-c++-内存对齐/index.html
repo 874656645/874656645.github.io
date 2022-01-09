@@ -10,7 +10,8 @@
 <meta name="description" content="C/C&#43;&#43;内存对齐详解
 内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
   规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
-注意：上面两条规则都需要得到满足 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
+注意：上面两条规则都需要得到满足
+注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
   // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8  cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
@@ -52,7 +53,8 @@ if (!doNotTrack) {
 <meta property="og:description" content="C/C&#43;&#43;内存对齐详解
 内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
   规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
-注意：上面两条规则都需要得到满足 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
+注意：上面两条规则都需要得到满足
+注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
   // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8  cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
@@ -66,7 +68,8 @@ if (!doNotTrack) {
 <meta name="twitter:description" content="C/C&#43;&#43;内存对齐详解
 内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
   规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
-注意：上面两条规则都需要得到满足 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
+注意：上面两条规则都需要得到满足
+注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
   // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8  cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体："/>
 
 
@@ -96,11 +99,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "C++ 内存对齐",
   "name": "C\u002b\u002b 内存对齐",
-  "description": "C/C++内存对齐详解\n内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节\n  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节\n注意：上面两条规则都需要得到满足 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者\n  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x1)); // 输出8  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x2)); // 输出12  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x3)); // 输出8  cout \u0026lt;\u0026lt; \u0026#34;----------------\u0026#34; \u0026lt;\u0026lt; endl; printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y1)); // 输出4  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y2)); // 输出6  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：",
+  "description": "C/C++内存对齐详解\n内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节\n  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节\n注意：上面两条规则都需要得到满足\n注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者\n  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x1)); // 输出8  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x2)); // 输出12  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x3)); // 输出8  cout \u0026lt;\u0026lt; \u0026#34;----------------\u0026#34; \u0026lt;\u0026lt; endl; printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y1)); // 输出4  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y2)); // 输出6  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：",
   "keywords": [
     "C++"
   ],
-  "articleBody": "C/C++内存对齐详解\n内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节\n  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节\n注意：上面两条规则都需要得到满足 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者\n  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(\"%ld\\n\",sizeof(x1)); // 输出8  printf(\"%ld\\n\",sizeof(x2)); // 输出12  printf(\"%ld\\n\",sizeof(x3)); // 输出8  cout  \"----------------\"  endl; printf(\"%ld\\n\",sizeof(y1)); // 输出4  printf(\"%ld\\n\",sizeof(y2)); // 输出6  printf(\"%ld\\n\",sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：\n以上测试都是在 Linux 环境下进行的，linux 下默认 #pragma pack(4)，且结构体中最长的数据类型为 2 个字节，所以有效对齐单位为 2 字节，下面根据上面所说的规则以 y2 来分析其内存布局：\n首先使用规则 1，对成员变量进行对齐：\nsizeof(c1) = 1 (有效对齐位)，按照 1 字节对齐，占用第 0 单元；\nsizeof(i) = 2 (有效对齐位)，相对于结构体首地址的偏移要为 2 的倍数，占用第 2，3 单元；\nsizeof(c2) = 1 (有效对齐位)，相对于结构体首地址的偏移要为 1 的倍数，占用第 4 单元；\n然后使用规则 2，对结构体整体进行对齐：\ny2 中变量 i 占用内存最大占 2 字节，而有对齐系数为 4 字节，两者较小值就是 2 字节。因此整体也是按照 2 字节对齐。由规则 1 得到 y2 占 5 个字节，此处再按照规则 2 进行整体的 2 字节对齐，所以整个结构体占用 6 个字节。\n",
+  "articleBody": "C/C++内存对齐详解\n内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节\n  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节\n注意：上面两条规则都需要得到满足\n注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者\n  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(\"%ld\\n\",sizeof(x1)); // 输出8  printf(\"%ld\\n\",sizeof(x2)); // 输出12  printf(\"%ld\\n\",sizeof(x3)); // 输出8  cout  \"----------------\"  endl; printf(\"%ld\\n\",sizeof(y1)); // 输出4  printf(\"%ld\\n\",sizeof(y2)); // 输出6  printf(\"%ld\\n\",sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：\n以上测试都是在 Linux 环境下进行的，linux 下默认 #pragma pack(4)，且结构体中最长的数据类型为 2 个字节，所以有效对齐单位为 2 字节，下面根据上面所说的规则以 y2 来分析其内存布局：\n首先使用规则 1，对成员变量进行对齐：\nsizeof(c1) = 1 (有效对齐位)，按照 1 字节对齐，占用第 0 单元；\nsizeof(i) = 2 (有效对齐位)，相对于结构体首地址的偏移要为 2 的倍数，占用第 2，3 单元；\nsizeof(c2) = 1 (有效对齐位)，相对于结构体首地址的偏移要为 1 的倍数，占用第 4 单元；\n然后使用规则 2，对结构体整体进行对齐：\ny2 中变量 i 占用内存最大占 2 字节，而有对齐系数为 4 字节，两者较小值就是 2 字节。因此整体也是按照 2 字节对齐。由规则 1 得到 y2 占 5 个字节，此处再按照规则 2 进行整体的 2 字节对齐，所以整个结构体占用 6 个字节。\n",
   "wordCount" : "183",
   "inLanguage": "en",
   "datePublished": "2022-01-06T18:13:09+08:00",
@@ -227,7 +230,7 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>规则二：结构体的总大小为 <strong>有效对齐值</strong> 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节</p>
-<p><strong>注意：上面两条规则都需要得到满足</strong>
+<p><strong>注意：上面两条规则都需要得到满足</strong><br>
 <strong>注意：成员变量首地址偏移和对齐都是与<!-- raw HTML omitted -->【有效对齐值】<!-- raw HTML omitted -->进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者</strong></p>
 </li>
 </ol>
