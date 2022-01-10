@@ -138,6 +138,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Restart Cortana
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
+2.在其中输入下列命令，重新注册激活小娜
+Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &#34;$($_.InstallLocation)\AppXManifest.xml&#34;}</p>
+  </section>
+  <footer class="entry-footer"><span title='2019-04-09 10:35:41 +0800 CST'>April 9, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Restart Cortana" href="https://874656645.github.io/rick/posts/13-restart-cortana/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Cmake Learn
     </h2>
   </header>
@@ -196,26 +210,6 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
   </section>
   <footer class="entry-footer"><span title='2019-02-28 15:00:16 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Crawl Pictures From Website" href="https://874656645.github.io/rick/posts/9-crawl-pictures-from-website/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Python Virtualenv
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>原文网址
-在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell1、使用pip安装 pip install virtualenv
-2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv 3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env
-或者
-virtualenv env
-此命令会在当前目录下创建一个env目录
-4、启动虚拟环境 env\Scripts\activate
-5、离开虚拟环境 deactivate
-6、删除env文件夹即可 </p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-16 11:20:20 +0800 CST'>February 16, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Python Virtualenv" href="https://874656645.github.io/rick/posts/8-python-virtualenv/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
