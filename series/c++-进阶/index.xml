@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>C&#43;&#43; 进阶 on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/rick/series/c&#43;&#43;-%E8%BF%9B%E9%98%B6/</link>
+    <description>Recent content in C&#43;&#43; 进阶 on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Tue, 11 Jan 2022 21:40:09 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/series/c++-%E8%BF%9B%E9%98%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>函数模板</title>
+      <link>https://874656645.github.io/rick/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/</link>
+      <pubDate>Tue, 11 Jan 2022 21:40:09 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/</guid>
+      <description>函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C++ 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板  template&amp;lt;class T&amp;gt; T MyAdd(T a, T b){ return a + b; } int MyAdd(int a, int b){ return a + b; } int MyAdd(int a, char c){ return a + c; } int main() { cout &amp;lt;&amp;lt; MyAdd(1, 2) &amp;lt;&amp;lt; endl; // 优先调用普通函数  cout &amp;lt;&amp;lt; MyAdd&amp;lt;&amp;gt;(1, 2) &amp;lt;&amp;lt; endl; // 强制调用模板函数  cout &amp;lt;&amp;lt; MyAdd(1.1, 2.2) &amp;lt;&amp;lt; endl; // 函数模板数据类型推导  cout &amp;lt;&amp;lt; MyAdd&amp;lt;double&amp;gt;(1.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>类模板 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;" />
+<meta name="description" content="一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ // 友元重载  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Person&lt;T&gt; &amp;p){ cout &lt;&lt; p.m_age; return os; } // 普通友元函数  friend void printP(Person&lt;T&gt; p){ cout &lt;&lt; p.m_age &lt;&lt; endl; } public: Person(T age){ this-&gt;m_age = age; } void Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } private: T m_age; }; int main() { Person&lt;int&gt; p(20); p.Show(); cout &lt;&lt; p &lt;&lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&lt;class T&gt; Person&lt;T&gt;::Person(T age){ this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() { Person&lt;int&gt; p(20); p.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.91.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="类模板" />
+<meta property="og:description" content="一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ // 友元重载  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Person&lt;T&gt; &amp;p){ cout &lt;&lt; p.m_age; return os; } // 普通友元函数  friend void printP(Person&lt;T&gt; p){ cout &lt;&lt; p.m_age &lt;&lt; endl; } public: Person(T age){ this-&gt;m_age = age; } void Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } private: T m_age; }; int main() { Person&lt;int&gt; p(20); p.Show(); cout &lt;&lt; p &lt;&lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&lt;class T&gt; Person&lt;T&gt;::Person(T age){ this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() { Person&lt;int&gt; p(20); p." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-12T22:47:51&#43;08:00" />
+<meta property="article:modified_time" content="2022-01-12T22:47:51&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="类模板"/>
+<meta name="twitter:description" content="一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ // 友元重载  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Person&lt;T&gt; &amp;p){ cout &lt;&lt; p.m_age; return os; } // 普通友元函数  friend void printP(Person&lt;T&gt; p){ cout &lt;&lt; p.m_age &lt;&lt; endl; } public: Person(T age){ this-&gt;m_age = age; } void Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } private: T m_age; }; int main() { Person&lt;int&gt; p(20); p.Show(); cout &lt;&lt; p &lt;&lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&lt;class T&gt; Person&lt;T&gt;::Person(T age){ this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() { Person&lt;int&gt; p(20); p."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/rick/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "类模板",
+      "item": "https://874656645.github.io/rick/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "类模板",
+  "name": "类模板",
+  "description": "一、类模板写法 1. 声明和定义写在一起 template\u0026lt;class T\u0026gt; class Person{ // 友元重载  friend ostream\u0026amp; operator\u0026lt;\u0026lt;(ostream \u0026amp;os, Person\u0026lt;T\u0026gt; \u0026amp;p){ cout \u0026lt;\u0026lt; p.m_age; return os; } // 普通友元函数  friend void printP(Person\u0026lt;T\u0026gt; p){ cout \u0026lt;\u0026lt; p.m_age \u0026lt;\u0026lt; endl; } public: Person(T age){ this-\u0026gt;m_age = age; } void Show(){ cout \u0026lt;\u0026lt; this-\u0026gt;m_age \u0026lt;\u0026lt; endl; } private: T m_age; }; int main() { Person\u0026lt;int\u0026gt; p(20); p.Show(); cout \u0026lt;\u0026lt; p \u0026lt;\u0026lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template\u0026lt;class T\u0026gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template\u0026lt;class T\u0026gt; Person\u0026lt;T\u0026gt;::Person(T age){ this-\u0026gt;m_age = age; } template\u0026lt;class T\u0026gt; void Person\u0026lt;T\u0026gt;::Show(){ cout \u0026lt;\u0026lt; this-\u0026gt;m_age \u0026lt;\u0026lt; endl; } int main() { Person\u0026lt;int\u0026gt; p(20); p.",
+  "keywords": [
+    "C++"
+  ],
+  "articleBody": "一、类模板写法 1. 声明和定义写在一起 templateclass T class Person{ // 友元重载  friend ostream\u0026 operator(ostream \u0026os, PersonT \u0026p){ cout  p.m_age; return os; } // 普通友元函数  friend void printP(PersonT p){ cout  p.m_age  endl; } public: Person(T age){ this-m_age = age; } void Show(){ cout  this-m_age  endl; } private: T m_age; }; int main() { Personint p(20); p.Show(); cout  p  endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 templateclass T class Person{ public: Person(T age); void Show(); private: T m_age; }; templateclass T PersonT::Person(T age){ this-m_age = age; } templateclass T void PersonT::Show(){ cout  this-m_age  endl; } int main() { Personint p(20); p.Show(); return 0; } 二、类模板派生  类模板派生普通类； 类模板派生类模板；  templateclass T class Base{ public: Base(T a){ this-m_a = a; } void show(){ cout  m_a  endl; } private: T m_a; }; class Derive1 : public Baseint{ public: Derive1(int a):Baseint(a){ } }; templateclass T1, class T2 class Derive2 : public BaseT1{ public: Derive2(T1 a, T2 b):BaseT1(a){ this-b = b; } void show(){ BaseT1::show(); cout  b  endl; } private: T2 b; }; int main() { Derive1 d(10); d.show(); cout  \"---------\"  endl; Derive2int, char dd(100, 'a'); dd.show(); return 0; } 输出：\n10 --------- 100 a 三、类模板中写友元函数 1. 声明和定义一起写 templateclass T class Person{ // 友元重载  friend ostream\u0026 operator(ostream \u0026os, PersonT \u0026p){ os  p.m_age; return os; } // 普通友元  friend void printP(PersonT p){ cout  p.m_age  endl; } public: Person(T age){ this-m_age = age; } void Show(){ cout  this-m_age  endl; } private: T m_age; }; int main() { Personint p(20); p.Show(); cout  p  endl; printP(p); return 0; } 2. 声明和定义分开写 // 前置声明 templateclass T class Person; templateclass T ostream\u0026 operator(ostream \u0026os, PersonT \u0026p); templateclass T void printP(PersonT p); templateclass T class Person{ // 友元重载  friend ostream\u0026 operator T(ostream \u0026os, PersonT \u0026p); // 普通友元  friend void printPT(PersonT p); public: Person(T age); void Show(); private: T m_age; }; templateclass T PersonT::Person(T age){ this-m_age = age; } templateclass T void PersonT::Show(){ cout  this-m_age  endl; } templateclass T ostream\u0026 operator(ostream \u0026os, PersonT \u0026p){ os  p.m_age  endl; return os; } templateclass T void printP(PersonT p){ cout  p.m_age  endl; } int main() { Personint p(20); p.Show(); cout  p  endl; printP(p); return 0; } 四、结论  类模板中不要滥用友元； 将类模板的声明和定义放在同一个文件中，一般为 .hpp 文件；  五、类模板中的 static 变量 每个具体的类都有属于自己的静态变量，每个具体类的实例对象共享自己具体类的静态变量\ntemplateclass T int PersonT::s_a = 0; int main() { Personint p1(10), p2(20); Personchar pp1(10), pp2(20); p1.s_a = 1; pp1.s_a = 100; cout  p2.s_a  endl; cout  pp2.s_a  endl; return 0; } 输出：\n1 100 ",
+  "wordCount" : "420",
+  "inLanguage": "en",
+  "datePublished": "2022-01-12T22:47:51+08:00",
+  "dateModified": "2022-01-12T22:47:51+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/rick/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/rick/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <h1 class="post-title">
+      类模板
+    </h1>
+    <div class="post-meta"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e7%b1%bb%e6%a8%a1%e6%9d%bf%e5%86%99%e6%b3%95" aria-label="一、类模板写法">一、类模板写法</a><ul>
+                        
+                <li>
+                    <a href="#1-%e5%a3%b0%e6%98%8e%e5%92%8c%e5%ae%9a%e4%b9%89%e5%86%99%e5%9c%a8%e4%b8%80%e8%b5%b7" aria-label="1. 声明和定义写在一起">1. 声明和定义写在一起</a></li>
+                <li>
+                    <a href="#2-%e5%a3%b0%e6%98%8e%e5%92%8c%e5%ae%9a%e4%b9%89%e5%88%86%e5%bc%80%e5%86%99%e4%bd%86%e5%9c%a8%e5%90%8c%e4%b8%80%e6%96%87%e4%bb%b6%e4%b8%ad" aria-label="2. 声明和定义分开写，但在同一文件中">2. 声明和定义分开写，但在同一文件中</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8c%e7%b1%bb%e6%a8%a1%e6%9d%bf%e6%b4%be%e7%94%9f" aria-label="二、类模板派生">二、类模板派生</a></li>
+                <li>
+                    <a href="#%e4%b8%89%e7%b1%bb%e6%a8%a1%e6%9d%bf%e4%b8%ad%e5%86%99%e5%8f%8b%e5%85%83%e5%87%bd%e6%95%b0" aria-label="三、类模板中写友元函数">三、类模板中写友元函数</a><ul>
+                        
+                <li>
+                    <a href="#1-%e5%a3%b0%e6%98%8e%e5%92%8c%e5%ae%9a%e4%b9%89%e4%b8%80%e8%b5%b7%e5%86%99" aria-label="1. 声明和定义一起写">1. 声明和定义一起写</a></li>
+                <li>
+                    <a href="#2-%e5%a3%b0%e6%98%8e%e5%92%8c%e5%ae%9a%e4%b9%89%e5%88%86%e5%bc%80%e5%86%99" aria-label="2. 声明和定义分开写">2. 声明和定义分开写</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%9b%9b%e7%bb%93%e8%ae%ba" aria-label="四、结论">四、结论</a></li>
+                <li>
+                    <a href="#%e4%ba%94%e7%b1%bb%e6%a8%a1%e6%9d%bf%e4%b8%ad%e7%9a%84-static-%e5%8f%98%e9%87%8f" aria-label="五、类模板中的 static 变量">五、类模板中的 static 变量</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="一类模板写法">一、类模板写法<a hidden class="anchor" aria-hidden="true" href="#一类模板写法">#</a></h2>
+<h3 id="1-声明和定义写在一起">1. 声明和定义写在一起<a hidden class="anchor" aria-hidden="true" href="#1-声明和定义写在一起">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
+    <span style="color:#75715e">// 友元重载
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">friend</span> ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span>os, Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>p){
+        cout <span style="color:#f92672">&lt;&lt;</span> p.m_age;
+        <span style="color:#66d9ef">return</span> os;
+    }
+    <span style="color:#75715e">// 普通友元函数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printP</span>(Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> p){
+        cout <span style="color:#f92672">&lt;&lt;</span> p.m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Person(T age){
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_age <span style="color:#f92672">=</span> age;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Show</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    T m_age;
+};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    Person<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p(<span style="color:#ae81ff">20</span>);
+    p.Show();
+    cout <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
+    printP(p);
+    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="2-声明和定义分开写但在同一文件中">2. 声明和定义分开写，但在同一文件中<a hidden class="anchor" aria-hidden="true" href="#2-声明和定义分开写但在同一文件中">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Person(T age);
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Show</span>();
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    T m_age;
+};
+
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Person(T age){
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_age <span style="color:#f92672">=</span> age;
+}
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Show(){
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    Person<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p(<span style="color:#ae81ff">20</span>);
+    p.Show();
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h2 id="二类模板派生">二、类模板派生<a hidden class="anchor" aria-hidden="true" href="#二类模板派生">#</a></h2>
+<ol>
+<li>类模板派生普通类；</li>
+<li>类模板派生类模板；</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Base(T a){
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_a <span style="color:#f92672">=</span> a;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> m_a <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    T m_a;
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derive1</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Derive1(<span style="color:#66d9ef">int</span> a)<span style="color:#f92672">:</span>Base<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(a){
+        
+    }
+};
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T1</span>, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T2</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derive2</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base<span style="color:#f92672">&lt;</span>T1<span style="color:#f92672">&gt;</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Derive2(T1 a, T2 b)<span style="color:#f92672">:</span>Base<span style="color:#f92672">&lt;</span>T1<span style="color:#f92672">&gt;</span>(a){
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">=</span> b;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show</span>(){
+        Base<span style="color:#f92672">&lt;</span>T1<span style="color:#f92672">&gt;::</span>show();
+        cout <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    T2 b;
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    Derive1 d(<span style="color:#ae81ff">10</span>);
+    d.show();
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;---------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    Derive2<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> dd(<span style="color:#ae81ff">100</span>, <span style="color:#e6db74">&#39;a&#39;</span>);
+    dd.show();
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">10
+---------
+100
+a
+</code></pre></div><h2 id="三类模板中写友元函数">三、类模板中写友元函数<a hidden class="anchor" aria-hidden="true" href="#三类模板中写友元函数">#</a></h2>
+<h3 id="1-声明和定义一起写">1. 声明和定义一起写<a hidden class="anchor" aria-hidden="true" href="#1-声明和定义一起写">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
+    <span style="color:#75715e">// 友元重载
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">friend</span> ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span>os, Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>p){
+        os <span style="color:#f92672">&lt;&lt;</span> p.m_age;
+        <span style="color:#66d9ef">return</span> os;
+    }
+    <span style="color:#75715e">// 普通友元
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printP</span>(Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> p){
+        cout <span style="color:#f92672">&lt;&lt;</span> p.m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Person(T age){
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_age <span style="color:#f92672">=</span> age;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Show</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    T m_age;
+};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    Person<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p(<span style="color:#ae81ff">20</span>);
+    p.Show();
+    cout <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
+    printP(p);
+    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="2-声明和定义分开写">2. 声明和定义分开写<a hidden class="anchor" aria-hidden="true" href="#2-声明和定义分开写">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 前置声明
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>;
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span>os, Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>p);
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">void</span> printP(Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> p);
+
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
+    <span style="color:#75715e">// 友元重载
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">friend</span> ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(ostream <span style="color:#f92672">&amp;</span>os, Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>p);
+    <span style="color:#75715e">// 普通友元
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">void</span> printP<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> p);
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Person(T age);
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Show</span>();
+    
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    T m_age;
+};
+
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Person(T age){
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_age <span style="color:#f92672">=</span> age;
+}
+
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Show(){
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span>os, Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>p){
+    os <span style="color:#f92672">&lt;&lt;</span> p.m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> os;
+}
+
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> printP(Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> p){
+    cout <span style="color:#f92672">&lt;&lt;</span> p.m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    Person<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p(<span style="color:#ae81ff">20</span>);
+    p.Show();
+    cout <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
+    printP(p);
+    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h2 id="四结论">四、结论<a hidden class="anchor" aria-hidden="true" href="#四结论">#</a></h2>
+<ol>
+<li>类模板中不要滥用友元；</li>
+<li>将类模板的声明和定义放在同一个文件中，一般为 <code>.hpp</code> 文件；</li>
+</ol>
+<h2 id="五类模板中的-static-变量">五、类模板中的 static 变量<a hidden class="anchor" aria-hidden="true" href="#五类模板中的-static-变量">#</a></h2>
+<p>每个具体的类都有属于自己的静态变量，每个具体类的实例对象共享自己具体类的静态变量</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">int</span> Person<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>s_a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    Person<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> p1(<span style="color:#ae81ff">10</span>), p2(<span style="color:#ae81ff">20</span>);
+    Person<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span> pp1(<span style="color:#ae81ff">10</span>), pp2(<span style="color:#ae81ff">20</span>);
+    p1.s_a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+    pp1.s_a <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> p2.s_a <span style="color:#f92672">&lt;&lt;</span> endl;
+    cout <span style="color:#f92672">&lt;&lt;</span> pp2.s_a <span style="color:#f92672">&lt;&lt;</span> endl;
+    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">1
+100
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://874656645.github.io/rick/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>编译过程</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

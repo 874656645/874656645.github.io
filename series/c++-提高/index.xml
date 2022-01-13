@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>C&#43;&#43; 提高 on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/rick/series/c&#43;&#43;-%E6%8F%90%E9%AB%98/</link>
+    <description>Recent content in C&#43;&#43; 提高 on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Wed, 12 Jan 2022 22:47:51 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/series/c++-%E6%8F%90%E9%AB%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>类模板</title>
+      <link>https://874656645.github.io/rick/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/</link>
+      <pubDate>Wed, 12 Jan 2022 22:47:51 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/</guid>
+      <description>一、类模板写法 1. 声明和定义写在一起 template&amp;lt;class T&amp;gt; class Person{ // 友元重载  friend ostream&amp;amp; operator&amp;lt;&amp;lt;(ostream &amp;amp;os, Person&amp;lt;T&amp;gt; &amp;amp;p){ cout &amp;lt;&amp;lt; p.m_age; return os; } // 普通友元函数  friend void printP(Person&amp;lt;T&amp;gt; p){ cout &amp;lt;&amp;lt; p.m_age &amp;lt;&amp;lt; endl; } public: Person(T age){ this-&amp;gt;m_age = age; } void Show(){ cout &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; endl; } private: T m_age; }; int main() { Person&amp;lt;int&amp;gt; p(20); p.Show(); cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&amp;lt;class T&amp;gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&amp;lt;class T&amp;gt; Person&amp;lt;T&amp;gt;::Person(T age){ this-&amp;gt;m_age = age; } template&amp;lt;class T&amp;gt; void Person&amp;lt;T&amp;gt;::Show(){ cout &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; endl; } int main() { Person&amp;lt;int&amp;gt; p(20); p.</description>
+    </item>
+    
+    <item>
+      <title>编译过程</title>
+      <link>https://874656645.github.io/rick/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Wed, 12 Jan 2022 20:12:00 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/</guid>
+      <description>各个 .cpp 文件是独立编译的，如果有其它的类和函数会先在本 .o 文件中生成符号，由最后的链接器去其它 .o 文件找具体的函数定义
+ .c .cpp 文件经过 预编译器拷贝头文件、宏展开 生成 .i 文件（文本文件）
+g++ -E main.cpp -o main.i .i 文件经过 编译器 生成汇编程序 .s（文本文件）
+g++ -S main.i -o main.s .s 文件经过 汇编器 生成可定位目标文件 .o （二进制）
+Windows:
+g++ -c main.s -o main.obj
+Linux:
+g++ -c main.s -o main.o .o 文件经过 链接器 生成可执行目标文件 .exe .dll
+g++ main.s -o main  </description>
+    </item>
+    
+    <item>
+      <title>函数模板</title>
+      <link>https://874656645.github.io/rick/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/</link>
+      <pubDate>Tue, 11 Jan 2022 21:40:09 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/</guid>
+      <description>函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C++ 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
+编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&amp;lt;class T&amp;gt; T MyAdd(T a, T b){ return a + b; } // 函数一 int MyAdd(int a, int b){ return a + b; } // 函数二 int MyAdd(int a, char c){ return a + c; } int main() { cout &amp;lt;&amp;lt; MyAdd(1, 2) &amp;lt;&amp;lt; endl; // 优先调用普通函数  cout &amp;lt;&amp;lt; MyAdd&amp;lt;&amp;gt;(1, 2) &amp;lt;&amp;lt; endl; // 强制调用模板函数  cout &amp;lt;&amp;lt; MyAdd(1.</description>
+    </item>
+    
+  </channel>
+</rss>
