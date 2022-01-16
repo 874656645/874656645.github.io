@@ -9,7 +9,56 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 12 Jan 2022 22:47:51 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/series/c++-%E6%8F%90%E9%AB%98/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jan 2022 18:26:49 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/series/c++-%E6%8F%90%E9%AB%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>异常接口声明</title>
+      <link>https://874656645.github.io/rick/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/</link>
+      <pubDate>Sat, 15 Jan 2022 18:26:49 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/</guid>
+      <description>C++ 异常
+ C++11 不再建议使用异常规范  // 异常规范 只能抛出 int float char 三种类型的异常 C++11以后不再建议使用 void func1() throw(int, float, char){ throw &amp;#34;string&amp;#34;; // terminate called after throwing an instance of &amp;#39;char const*&amp;#39; } // 不能抛出任何类型的异常 OK void func2() throw(){ throw -1; // terminate called after throwing an instance of &amp;#39;int&amp;#39; } // 可以抛出任何类型的异常 void func3(){ throw &amp;#34;error&amp;#34;; } int main() { try{ func1(); } catch(char const * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; } catch(.</description>
+    </item>
+    
+    <item>
+      <title>栈解旋 Unwinding</title>
+      <link>https://874656645.github.io/rick/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/</link>
+      <pubDate>Sat, 15 Jan 2022 18:07:46 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/</guid>
+      <description>异常被抛出后，从进入 try 块起到异常被抛出前，这期间在栈上构造的所有对象都会被自动析构，析构的顺序与构造的顺序相反。
+与 return 类似
+class Test{ public: Test(string name){ m_name = name; cout &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34;被构造了&amp;#34; &amp;lt;&amp;lt; endl; } ~Test(){ cout &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34;被析构了&amp;#34; &amp;lt;&amp;lt; endl; } private: string m_name; }; double func1(int x, int y){ Test t1(&amp;#34;t1&amp;#34;), t2(&amp;#34;t2&amp;#34;); if(y == 0){ throw y; } return x / y; } int main() { try{ Test t3(&amp;#34;t3&amp;#34;), t4(&amp;#34;t4&amp;#34;); func1(10, 0); } catch(int e){ cout &amp;lt;&amp;lt; &amp;#34;除数为 &amp;#34; &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; } return 0; } t3被构造了 t4被构造了 t1被构造了 t2被构造了 t2被析构了 t1被析构了 t4被析构了 t3被析构了 除数为 0 </description>
+    </item>
+    
+    <item>
+      <title>异常</title>
+      <link>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Sat, 15 Jan 2022 17:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</guid>
+      <description>一、try、catch、throw  可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型 C++ 异常机制是跨函数的，且是必须处理的。如果中间函数没有处理就一直抛到最顶层，如果 main 函数也不处理，程序就会挂掉  int main( ) { try{ throw &amp;#34;exception&amp;#34;; }catch(const char * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; }catch(...){ // 捕获所有异常  cout &amp;lt;&amp;lt; &amp;#34;...&amp;#34; &amp;lt;&amp;lt; endl; } { cout &amp;lt;&amp;lt; &amp;#34;finally&amp;#34; &amp;lt;&amp;lt; endl; } return 0; } 输出：
+Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp;amp; rhs) throw(); exception&amp;amp; operator=(const exception&amp;amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：</description>
+    </item>
+    
+    <item>
+      <title>类型转换</title>
+      <link>https://874656645.github.io/rick/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Sat, 15 Jan 2022 15:55:28 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</guid>
+      <description>1. static_cast&amp;lt;&amp;gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&amp;lt;&amp;gt;  // 1. 内置对象  int a = 97; char c = static_cast&amp;lt;char&amp;gt;(a); // OK  cout &amp;lt;&amp;lt; c &amp;lt;&amp;lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&amp;lt;Animal&amp;gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;amp;a;  // char *pc = static_cast&amp;lt;char*&amp;gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &amp;lt;&amp;lt; pc &amp;lt;&amp;lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&amp;lt;Building*&amp;gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4.</description>
+    </item>
+    
+    <item>
+      <title>自定义数组实现</title>
+      <link>https://874656645.github.io/rick/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Sat, 15 Jan 2022 13:36:04 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/</guid>
+      <description>要求  可以对内置数据类型以及自定义数据类型的数据进行存储 将数组中的数据存储到堆区 构造函数中可以传入数组的容量 提供对应的拷贝构造函数以及 operator= 防止浅拷贝问题 提供尾插法和尾删法对数组中的数据进行增加和删除 可以通过下标的方式访问数组中的元素 可以获取数组中当前元素个数和数组的容量  实现 template&amp;lt;class T&amp;gt; class MyArray{ public: MyArray(int capacity){ this-&amp;gt;m_capacity = capacity; this-&amp;gt;m_size = 0; this-&amp;gt;m_addr = new T[this-&amp;gt;m_capacity]; } MyArray(const MyArray&amp;amp; arr){ if(arr.m_addr == NULL){ return; } // 深拷贝  this-&amp;gt;m_capacity = arr.m_capacity; this-&amp;gt;m_size = arr.m_size; this-&amp;gt;m_addr = new T[this-&amp;gt;m_capacity]; for(int i = 0; i &amp;lt; m_size; ++i){ // T 类型是可拷贝的，= 运算符也是深拷贝  this-&amp;gt;m_addr[i] = arr.m_addr[i]; } } MyArray&amp;amp; operator=(const MyArray&amp;amp; arr){ if(this == &amp;amp;arr){ return *this; } if(this-&amp;gt;m_addr !</description>
+    </item>
+    
     <item>
       <title>类模板</title>
       <link>https://874656645.github.io/rick/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/</link>
@@ -44,6 +93,41 @@ g++ main.s -o main  </description>
       <guid>https://874656645.github.io/rick/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/</guid>
       <description>函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C++ 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
 编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&amp;lt;class T&amp;gt; T MyAdd(T a, T b){ return a + b; } // 函数一 int MyAdd(int a, int b){ return a + b; } // 函数二 int MyAdd(int a, char c){ return a + c; } int main() { cout &amp;lt;&amp;lt; MyAdd(1, 2) &amp;lt;&amp;lt; endl; // 优先调用普通函数  cout &amp;lt;&amp;lt; MyAdd&amp;lt;&amp;gt;(1, 2) &amp;lt;&amp;lt; endl; // 强制调用模板函数  cout &amp;lt;&amp;lt; MyAdd(1.</description>
+    </item>
+    
+    <item>
+      <title>STL 总结</title>
+      <link>https://874656645.github.io/rick/posts/56-stl-%E6%80%BB%E7%BB%93/</link>
+      <pubDate>Thu, 30 Dec 2021 10:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/56-stl-%E6%80%BB%E7%BB%93/</guid>
+      <description>1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL 常用的容器有哪些以及各自的特点是什么?    名称 特点     vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector 扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化</description>
+    </item>
+    
+    <item>
+      <title>vector</title>
+      <link>https://874656645.github.io/rick/posts/55-vector/</link>
+      <pubDate>Wed, 29 Dec 2021 19:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/55-vector/</guid>
+      <description>vector 常用操作 #include &amp;lt;iostream&amp;gt;#include &amp;lt;vector&amp;gt; int main() { //1.定义和初始化  vector&amp;lt;int&amp;gt; vec1; //默认初始化，vec1为空  vector&amp;lt;int&amp;gt; vec2(vec1); //使用vec1初始化vec2  vector&amp;lt;int&amp;gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&amp;lt;int&amp;gt; vec4(10); //10个值为0的元素  vector&amp;lt;int&amp;gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); //尾部添加元素  vec1.insert(vec1.end(),5,3); //从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); //删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()+2); //删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); //清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&amp;lt;int&amp;gt;().swap(V); //利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1.at(int pos); //返回pos位置元素的引用  vec1.front(); //返回首元素的引用  vec1.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; STL</title>
+      <link>https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/</link>
+      <pubDate>Wed, 29 Dec 2021 17:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/</guid>
+      <description>STL六大组件
+STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C++程序库。STL中包括六大组件：容器、算法、迭代器、适配器、仿函数、空间配置器
+适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
+一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
+1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
+2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
+3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢
+4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
+std::stack template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp;gt; class stack; std::queue template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp;gt; class queue; std::priority_queue template&amp;lt;class T, class Container = vector&amp;lt;T&amp;gt;, class Compare = less&amp;lt;typename Container::value_type&amp;gt;&amp;gt; class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？</description>
     </item>
     
   </channel>

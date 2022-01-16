@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>类型转换 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;" />
+<meta name="description" content="1. static_cast&lt;&gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&lt;&gt;  // 1. 内置对象  int a = 97; char c = static_cast&lt;char&gt;(a); // OK  cout &lt;&lt; c &lt;&lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;a;  // char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &lt;&lt; pc &lt;&lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.91.2" />
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="类型转换" />
+<meta property="og:description" content="1. static_cast&lt;&gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&lt;&gt;  // 1. 内置对象  int a = 97; char c = static_cast&lt;char&gt;(a); // OK  cout &lt;&lt; c &lt;&lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;a;  // char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &lt;&lt; pc &lt;&lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-15T15:55:28&#43;08:00" />
+<meta property="article:modified_time" content="2022-01-15T15:55:28&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="类型转换"/>
+<meta name="twitter:description" content="1. static_cast&lt;&gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&lt;&gt;  // 1. 内置对象  int a = 97; char c = static_cast&lt;char&gt;(a); // OK  cout &lt;&lt; c &lt;&lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;a;  // char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &lt;&lt; pc &lt;&lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/rick/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "类型转换",
+      "item": "https://874656645.github.io/rick/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "类型转换",
+  "name": "类型转换",
+  "description": "1. static_cast\u0026lt;\u0026gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast\u0026lt;\u0026gt;  // 1. 内置对象  int a = 97; char c = static_cast\u0026lt;char\u0026gt;(a); // OK  cout \u0026lt;\u0026lt; c \u0026lt;\u0026lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast\u0026lt;Animal\u0026gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building\u0026amp;)’  // 3. 不同类型的指针转换  // int *p = \u0026amp;a;  // char *pc = static_cast\u0026lt;char*\u0026gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout \u0026lt;\u0026lt; pc \u0026lt;\u0026lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast\u0026lt;Building*\u0026gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4.",
+  "keywords": [
+    "C++"
+  ],
+  "articleBody": "1. static_cast  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast  // 1. 内置对象  int a = 97; char c = static_castchar(a); // OK  cout  c  endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast(bb); // error: no matching function for call to ‘Animal::Animal(Building\u0026)’  // 3. 不同类型的指针转换  // int *p = \u0026a;  // char *pc = static_cast(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout  // Animal * pa = NULL;  // Building *pb = static_cast(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4. 有继承关系的指针或引用  Animal * pa = NULL; Cat *pc = static_castCat*(pa); // OK  pa = static_castAnimal*(pc); // OK 2. dynamic_cast  只能转换有继承关系的指针或引用，且只能将子类转为父类（从大到小），因为将父类转为子类会不安全（从小到大）  // dynamic_cast  // 1. 内置对象  // c = dynamic_cast(a); // error: cannot dynamic_cast ‘a’ (of type ‘int’) to type ‘char’ (target is not pointer or reference)  // 2. 非继承关系指针  // Building *pb = dynamic_cast(pa); // error: cannot dynamic_cast ‘pa’ (of type ‘class Animal*’) to type ‘class Building*’ (source type is not polymorphic)  // 3. 继承关系指针会做安全检查，只能将子类指针转为父类指针  // pc = dynamic_cast(pa); // error: cannot dynamic_cast ‘pa’ (of type ‘class Animal*’) to type ‘class Cat*’ (source type is not polymorphic)  pa = dynamic_castAnimal*(pc); // OK  3. const_cast  只能转换指针或引用类型，添加或去除 const 修饰 非 const 的可以直接转为 const 类型，但反之不行  int i = 0; int *a = \u0026i const int* b = const_castconst int*(a); const int* bb = a; // OK a = const_castint*(b); // OK a = b; // error: invalid conversion from ‘const int*’ to ‘int*’ [-fpermissive] 4. reinterpret_cast 对任何类型的指针进行强制转换，包括函数指针\n",
+  "wordCount" : "251",
+  "inLanguage": "en",
+  "datePublished": "2022-01-15T15:55:28+08:00",
+  "dateModified": "2022-01-15T15:55:28+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/rick/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/rick/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <h1 class="post-title">
+      类型转换
+    </h1>
+    <div class="post-meta"><span title='2022-01-15 15:55:28 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-static_cast" aria-label="1. static_cast&amp;lt;&amp;gt;">1. static_cast&lt;&gt;</a></li>
+                <li>
+                    <a href="#2-dynamic_cast" aria-label="2. dynamic_cast&amp;lt;&amp;gt;">2. dynamic_cast&lt;&gt;</a></li>
+                <li>
+                    <a href="#3-const_cast" aria-label="3. const_cast&amp;lt;&amp;gt;">3. const_cast&lt;&gt;</a></li>
+                <li>
+                    <a href="#4-reinterpret_cast" aria-label="4. reinterpret_cast&amp;lt;&amp;gt;">4. reinterpret_cast&lt;&gt;</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="1-static_cast">1. static_cast&lt;&gt;<a hidden class="anchor" aria-hidden="true" href="#1-static_cast">#</a></h2>
+<ul>
+<li>可以转换内置数据类型；</li>
+<li>不可以转换没有关系的指针或引用；</li>
+<li>可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">    <span style="color:#75715e">// static_cast&lt;&gt;
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// 1. 内置对象
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">97</span>;
+    <span style="color:#66d9ef">char</span> c <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;</span>(a); <span style="color:#75715e">// OK
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#75715e">// 2. 自定义类型对象
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Building bb;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 3. 不同类型的指针转换
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// int *p = &amp;a;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// cout &lt;&lt; pc &lt;&lt; endl;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Animal * pa = NULL;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 4. 有继承关系的指针或引用
+</span><span style="color:#75715e"></span>    Animal <span style="color:#f92672">*</span> pa <span style="color:#f92672">=</span> NULL;
+    Cat <span style="color:#f92672">*</span>pc <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>Cat<span style="color:#f92672">*&gt;</span>(pa);  <span style="color:#75715e">// OK
+</span><span style="color:#75715e"></span>    pa <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>Animal<span style="color:#f92672">*&gt;</span>(pc); <span style="color:#75715e">// OK
+</span></code></pre></div><h2 id="2-dynamic_cast">2. dynamic_cast&lt;&gt;<a hidden class="anchor" aria-hidden="true" href="#2-dynamic_cast">#</a></h2>
+<ul>
+<li>只能转换有继承关系的指针或引用，且只能将子类转为父类（<strong>从大到小</strong>），因为将父类转为子类会不安全（<strong>从小到大</strong>）</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">    <span style="color:#75715e">// dynamic_cast&lt;&gt;
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// 1. 内置对象
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// c = dynamic_cast&lt;char&gt;(a); // error: cannot dynamic_cast ‘a’ (of type ‘int’) to type ‘char’ (target is not pointer or reference)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 2. 非继承关系指针
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// Building *pb = dynamic_cast&lt;Building*&gt;(pa); // error: cannot dynamic_cast ‘pa’ (of type ‘class Animal*’) to type ‘class Building*’ (source type is not polymorphic)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 3. 继承关系指针会做安全检查，只能将子类指针转为父类指针
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// pc = dynamic_cast&lt;Cat*&gt;(pa); // error: cannot dynamic_cast ‘pa’ (of type ‘class Animal*’) to type ‘class Cat*’ (source type is not polymorphic)
+</span><span style="color:#75715e"></span>    pa <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>Animal<span style="color:#f92672">*&gt;</span>(pc); <span style="color:#75715e">// OK
+</span><span style="color:#75715e"></span>
+</code></pre></div><h2 id="3-const_cast">3. const_cast&lt;&gt;<a hidden class="anchor" aria-hidden="true" href="#3-const_cast">#</a></h2>
+<ul>
+<li>只能转换<strong>指针</strong>或<strong>引用</strong>类型，添加或去除 <code>const</code> 修饰</li>
+<li>非 <code>const</code> 的可以直接转为 <code>const</code> 类型，但反之不行</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>i
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> b <span style="color:#f92672">=</span> <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">*&gt;</span>(a);
+<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> bb <span style="color:#f92672">=</span> a; <span style="color:#75715e">// OK
+</span><span style="color:#75715e"></span>a <span style="color:#f92672">=</span> <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">*&gt;</span>(b); <span style="color:#75715e">// OK
+</span><span style="color:#75715e"></span>a <span style="color:#f92672">=</span> b;  <span style="color:#75715e">// error: invalid conversion from ‘const int*’ to ‘int*’ [-fpermissive]
+</span></code></pre></div><h2 id="4-reinterpret_cast">4. reinterpret_cast&lt;&gt;<a hidden class="anchor" aria-hidden="true" href="#4-reinterpret_cast">#</a></h2>
+<p>对任何类型的指针进行强制转换，包括函数指针</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>异常</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/rick/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>自定义数组实现</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

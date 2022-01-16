@@ -9,7 +9,56 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 12 Jan 2022 22:47:51 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Jan 2022 18:26:49 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>异常接口声明</title>
+      <link>https://874656645.github.io/rick/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/</link>
+      <pubDate>Sat, 15 Jan 2022 18:26:49 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/</guid>
+      <description>C++ 异常
+ C++11 不再建议使用异常规范  // 异常规范 只能抛出 int float char 三种类型的异常 C++11以后不再建议使用 void func1() throw(int, float, char){ throw &amp;#34;string&amp;#34;; // terminate called after throwing an instance of &amp;#39;char const*&amp;#39; } // 不能抛出任何类型的异常 OK void func2() throw(){ throw -1; // terminate called after throwing an instance of &amp;#39;int&amp;#39; } // 可以抛出任何类型的异常 void func3(){ throw &amp;#34;error&amp;#34;; } int main() { try{ func1(); } catch(char const * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; } catch(.</description>
+    </item>
+    
+    <item>
+      <title>栈解旋 Unwinding</title>
+      <link>https://874656645.github.io/rick/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/</link>
+      <pubDate>Sat, 15 Jan 2022 18:07:46 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/</guid>
+      <description>异常被抛出后，从进入 try 块起到异常被抛出前，这期间在栈上构造的所有对象都会被自动析构，析构的顺序与构造的顺序相反。
+与 return 类似
+class Test{ public: Test(string name){ m_name = name; cout &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34;被构造了&amp;#34; &amp;lt;&amp;lt; endl; } ~Test(){ cout &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34;被析构了&amp;#34; &amp;lt;&amp;lt; endl; } private: string m_name; }; double func1(int x, int y){ Test t1(&amp;#34;t1&amp;#34;), t2(&amp;#34;t2&amp;#34;); if(y == 0){ throw y; } return x / y; } int main() { try{ Test t3(&amp;#34;t3&amp;#34;), t4(&amp;#34;t4&amp;#34;); func1(10, 0); } catch(int e){ cout &amp;lt;&amp;lt; &amp;#34;除数为 &amp;#34; &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; } return 0; } t3被构造了 t4被构造了 t1被构造了 t2被构造了 t2被析构了 t1被析构了 t4被析构了 t3被析构了 除数为 0 </description>
+    </item>
+    
+    <item>
+      <title>异常</title>
+      <link>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Sat, 15 Jan 2022 17:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</guid>
+      <description>一、try、catch、throw  可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型 C++ 异常机制是跨函数的，且是必须处理的。如果中间函数没有处理就一直抛到最顶层，如果 main 函数也不处理，程序就会挂掉  int main( ) { try{ throw &amp;#34;exception&amp;#34;; }catch(const char * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; }catch(...){ // 捕获所有异常  cout &amp;lt;&amp;lt; &amp;#34;...&amp;#34; &amp;lt;&amp;lt; endl; } { cout &amp;lt;&amp;lt; &amp;#34;finally&amp;#34; &amp;lt;&amp;lt; endl; } return 0; } 输出：
+Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp;amp; rhs) throw(); exception&amp;amp; operator=(const exception&amp;amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：</description>
+    </item>
+    
+    <item>
+      <title>类型转换</title>
+      <link>https://874656645.github.io/rick/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Sat, 15 Jan 2022 15:55:28 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</guid>
+      <description>1. static_cast&amp;lt;&amp;gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&amp;lt;&amp;gt;  // 1. 内置对象  int a = 97; char c = static_cast&amp;lt;char&amp;gt;(a); // OK  cout &amp;lt;&amp;lt; c &amp;lt;&amp;lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&amp;lt;Animal&amp;gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;amp;a;  // char *pc = static_cast&amp;lt;char*&amp;gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &amp;lt;&amp;lt; pc &amp;lt;&amp;lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&amp;lt;Building*&amp;gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4.</description>
+    </item>
+    
+    <item>
+      <title>自定义数组实现</title>
+      <link>https://874656645.github.io/rick/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Sat, 15 Jan 2022 13:36:04 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/</guid>
+      <description>要求  可以对内置数据类型以及自定义数据类型的数据进行存储 将数组中的数据存储到堆区 构造函数中可以传入数组的容量 提供对应的拷贝构造函数以及 operator= 防止浅拷贝问题 提供尾插法和尾删法对数组中的数据进行增加和删除 可以通过下标的方式访问数组中的元素 可以获取数组中当前元素个数和数组的容量  实现 template&amp;lt;class T&amp;gt; class MyArray{ public: MyArray(int capacity){ this-&amp;gt;m_capacity = capacity; this-&amp;gt;m_size = 0; this-&amp;gt;m_addr = new T[this-&amp;gt;m_capacity]; } MyArray(const MyArray&amp;amp; arr){ if(arr.m_addr == NULL){ return; } // 深拷贝  this-&amp;gt;m_capacity = arr.m_capacity; this-&amp;gt;m_size = arr.m_size; this-&amp;gt;m_addr = new T[this-&amp;gt;m_capacity]; for(int i = 0; i &amp;lt; m_size; ++i){ // T 类型是可拷贝的，= 运算符也是深拷贝  this-&amp;gt;m_addr[i] = arr.m_addr[i]; } } MyArray&amp;amp; operator=(const MyArray&amp;amp; arr){ if(this == &amp;amp;arr){ return *this; } if(this-&amp;gt;m_addr !</description>
+    </item>
+    
     <item>
       <title>类模板</title>
       <link>https://874656645.github.io/rick/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/</link>
@@ -146,10 +195,11 @@ g++ main.s -o main  </description>
 如果一个参数是以非 const 引用传入，c++ 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。
 但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。
 所以，修改一个临时变量是毫无意义的。据此，c++ 编译器加入了临时变量不能作为非 const 引用的这个语义限制。
-c++ 中临时变量是右值类型，不能作为非 const 的引用参数
+c++ 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数
 std::move() 返回的也是一个右值
+对于临时变量或字面量的右值引用可以使用 cosnt &amp;amp; 或 &amp;amp;&amp;amp; 类型的参数接收
 一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
-class T{ public: T(int v){ a = v; } T operator+(T &amp;amp;t){ T temp = this-&amp;gt;a + t.a; return temp; } void printT(T &amp;amp;t){ cout &amp;lt;&amp;lt; &amp;#34;a = &amp;#34; &amp;lt;&amp;lt; t.a &amp;lt;&amp;lt; endl; } private: int a; }; int main() { T t0(0), t1(1), t2(2); t0.</description>
+class T{ public: T(int v){ a = v; } T operator+(T &amp;amp;t){ T temp = this-&amp;gt;a + t.a; return temp; } void printT(T &amp;amp;t){ cout &amp;lt;&amp;lt; &amp;#34;a = &amp;#34; &amp;lt;&amp;lt; t.</description>
     </item>
     
     <item>
@@ -169,17 +219,6 @@ class T{ public: T(int v){ a = v; } T operator+(T &amp;amp;t){ T temp = this-&am
       <guid>https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/</guid>
       <description>买卖货物问题：
 #include &amp;lt;iostream&amp;gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &amp;lt;&amp;lt; &amp;#34;买入了货物，重量是：&amp;#34; &amp;lt;&amp;lt; m_weight &amp;lt;&amp;lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight += m_weight; cout &amp;lt;&amp;lt; &amp;#34;买入了货物，重量是：&amp;#34; &amp;lt;&amp;lt; m_weight &amp;lt;&amp;lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&amp;gt;m_pNext = nullptr; cout &amp;lt;&amp;lt; &amp;#34;卖出了货物，重量是：&amp;#34; &amp;lt;&amp;lt; m_weight &amp;lt;&amp;lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&amp;gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;amp;head){ if(head == nullptr){ cout &amp;lt;&amp;lt; &amp;#34;没有货物了&amp;#34; &amp;lt;&amp;lt; endl; return; } Goods *temp = head; head = head-&amp;gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &amp;lt;&amp;lt; &amp;#34;输入 1 进货&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;输入 2 出货&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;输入 0 退出&amp;#34; &amp;lt;&amp;lt; endl; cin &amp;gt;&amp;gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &amp;lt;&amp;lt; &amp;#34;输入货物重量：&amp;#34; &amp;lt;&amp;lt; endl; cin &amp;gt;&amp;gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &amp;lt;&amp;lt; &amp;#34;目前货物的总重量是：&amp;#34; &amp;lt;&amp;lt; Goods::getTotalWeight() &amp;lt;&amp;lt; endl; }while(1); return 0; } 输出：</description>
-    </item>
-    
-    <item>
-      <title>异常</title>
-      <link>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</link>
-      <pubDate>Thu, 30 Dec 2021 15:34:27 +0800</pubDate>
-      
-      <guid>https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/</guid>
-      <description>一、try、catch、throw 可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型
-int main( ) { try{ throw &amp;#34;exception&amp;#34;; }catch(const char * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; }catch(...){ // 捕获所有异常  cout &amp;lt;&amp;lt; &amp;#34;...&amp;#34; &amp;lt;&amp;lt; endl; } { cout &amp;lt;&amp;lt; &amp;#34;finally&amp;#34; &amp;lt;&amp;lt; endl; } return 0; } 输出：
-Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp;amp; rhs) throw(); exception&amp;amp; operator=(const exception&amp;amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：</description>
     </item>
     
     <item>

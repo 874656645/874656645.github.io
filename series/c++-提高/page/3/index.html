@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>C&#43;&#43; 提高 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="" />
+<meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick/series/c&#43;&#43;-%E6%8F%90%E9%AB%98/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<meta name="generator" content="Hugo 0.91.2" />
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/rick/series/c&#43;&#43;-%E6%8F%90%E9%AB%98/index.xml">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="C&#43;&#43; 提高" />
+<meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://874656645.github.io/rick/series/c&#43;&#43;-%E6%8F%90%E9%AB%98/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="C&#43;&#43; 提高"/>
+<meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
+
+</head>
+
+<body class="list dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/series/">Series</a></div>
+  <h1>C&#43;&#43; 提高</h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43; STL
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>STL六大组件
+STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、算法、迭代器、适配器、仿函数、空间配置器
+适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
+一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
+1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
+2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
+3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢
+4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
+std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack; std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue; std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-29 17:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; STL" href="https://874656645.github.io/rick/posts/54-c&#43;&#43;-stl/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://874656645.github.io/rick/series/c&#43;&#43;-%E6%8F%90%E9%AB%98/page/2/">« Prev Page</a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
