@@ -9,7 +9,157 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 15 Jan 2022 18:26:49 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jan 2022 21:28:13 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>内建函数对象 functional</title>
+      <link>https://874656645.github.io/rick/posts/90-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1-functional/</link>
+      <pubDate>Thu, 20 Jan 2022 21:28:13 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/90-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1-functional/</guid>
+      <description>算术仿函数 template&amp;lt;class T&amp;gt; T plus&amp;lt;T&amp;gt; //加法仿函数 template&amp;lt;class T&amp;gt; T minus&amp;lt;T&amp;gt; //减法仿函数 template&amp;lt;class T&amp;gt; T multiplies&amp;lt;T&amp;gt; //乘法仿函数 template&amp;lt;class T&amp;gt; T divides&amp;lt;T&amp;gt; //除法仿函数 template&amp;lt;class T&amp;gt; T modulus&amp;lt;T&amp;gt; //取模仿函数 template&amp;lt;class T&amp;gt; T negate&amp;lt;T&amp;gt; //取反仿函数 一元谓词 关系仿函数 template&amp;lt;class T&amp;gt; bool equal_to&amp;lt;T&amp;gt; //等于 template&amp;lt;class T&amp;gt; bool not_equal_to&amp;lt;T&amp;gt; //不等于 template&amp;lt;class T&amp;gt; bool greater&amp;lt;T&amp;gt; //大于 template&amp;lt;class T&amp;gt; bool greater_equal&amp;lt;T&amp;gt; //大于等于 template&amp;lt;class T&amp;gt; bool less&amp;lt;T&amp;gt; //小于 template&amp;lt;class T&amp;gt; bool less_equal&amp;lt;T&amp;gt; //小于等于 逻辑仿函数 template&amp;lt;class T&amp;gt; bool logical_and&amp;lt;T&amp;gt; //逻辑与 template&amp;lt;class T&amp;gt; bool logical_or&amp;lt;T&amp;gt; //逻辑或 template&amp;lt;class T&amp;gt; bool logical_not&amp;lt;T&amp;gt; //逻辑非 </description>
+    </item>
+    
+    <item>
+      <title>函数对象与 predicate 谓词</title>
+      <link>https://874656645.github.io/rick/posts/89-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%B8%8E-predicate-%E8%B0%93%E8%AF%8D/</link>
+      <pubDate>Thu, 20 Jan 2022 21:04:13 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/89-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%B8%8E-predicate-%E8%B0%93%E8%AF%8D/</guid>
+      <description>函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象
+ 函数对象可以有自己的状态 函数对象可以作为参数传递  什么是谓词 返回 bool 类型的仿函数称为谓词
+一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词
+比如 find_if 算法
+二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词
+比如 sort 算法</description>
+    </item>
+    
+    <item>
+      <title>map multimap 容器</title>
+      <link>https://874656645.github.io/rick/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Thu, 20 Jan 2022 20:18:25 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/</guid>
+      <description>特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用二叉树实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
+ 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &amp;lt;&amp;lt; &amp;#34;姓名：&amp;#34; &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34; 工资：&amp;#34; &amp;lt;&amp;lt; m_salary &amp;lt;&amp;lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&amp;lt;Worker&amp;gt; &amp;amp;v){ string nameSeed = &amp;#34;ABCDEFGHIJ&amp;#34;; for(int i = 0; i &amp;lt; nameSeed.</description>
+    </item>
+    
+    <item>
+      <title>set multiset 容器</title>
+      <link>https://874656645.github.io/rick/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Tue, 18 Jan 2022 21:20:48 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/</guid>
+      <description>关联式容器 底层结构使用二叉树实现 自动排序  自定义数据类型：
+class Person{ public: Person(string name, int age, int height){ this-&amp;gt;m_name = name; this-&amp;gt;m_age = age; this-&amp;gt;m_height = height; } bool operator&amp;lt;(const Person &amp;amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&amp;gt;m_age == p2.m_age){ return this-&amp;gt;m_height &amp;gt; p2.m_height; } return this-&amp;gt;m_age &amp;lt; p2.m_age; } void printPerson()const{ cout &amp;lt;&amp;lt; &amp;#34;姓名：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_name &amp;lt;&amp;lt; &amp;#34; 年龄：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; &amp;#34; 身高：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_height &amp;lt;&amp;lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set&amp;lt;Person&amp;gt; lp; lp.</description>
+    </item>
+    
+    <item>
+      <title>list 容器</title>
+      <link>https://874656645.github.io/rick/posts/86-list-%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Tue, 18 Jan 2022 20:26:45 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/86-list-%E5%AE%B9%E5%99%A8/</guid>
+      <description>注意事项  双向循环链表 不支持随机访问 因为不支持随机访问，所以也不能用全局的排序算法 sort 一般不支持随机访问的容器会自己提供 sort 方法 自定义类型要指定排序规则  排序案例 案例描述：将 Person 自定义数据类型进行排序，Person 中属性有姓名、年龄、身高
+排序规则：按照年龄进行升序，如果年龄相同按照身高进行降序
+class Person{ public: Person(string name, int age, int height){ this-&amp;gt;m_name = name; this-&amp;gt;m_age = age; this-&amp;gt;m_height = height; } bool operator&amp;lt;(const Person &amp;amp;p2){ if(this-&amp;gt;m_age == p2.m_age){ return this-&amp;gt;m_height &amp;gt; p2.m_height; } return this-&amp;gt;m_age &amp;lt; p2.m_age; } void printPerson()const{ cout &amp;lt;&amp;lt; &amp;#34;姓名：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_name &amp;lt;&amp;lt; &amp;#34; 年龄：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; &amp;#34; 身高：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_height &amp;lt;&amp;lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { list&amp;lt;Person&amp;gt; lp; lp.</description>
+    </item>
+    
+    <item>
+      <title>queue 队列容器适配器</title>
+      <link>https://874656645.github.io/rick/posts/85-queue-%E9%98%9F%E5%88%97%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Mon, 17 Jan 2022 19:41:48 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/85-queue-%E9%98%9F%E5%88%97%E5%AE%B9%E5%99%A8/</guid>
+      <description>先进先出 不允许遍历元素  queue 队列操作：
+size()
+empty()</description>
+    </item>
+    
+    <item>
+      <title>stack 栈容器适配器</title>
+      <link>https://874656645.github.io/rick/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Sun, 16 Jan 2022 22:17:43 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/</guid>
+      <description>先进后出 栈不允许遍历元素  stack 栈操作:
+size()
+empty()</description>
+    </item>
+    
+    <item>
+      <title>评委打分案例</title>
+      <link>https://874656645.github.io/rick/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Sun, 16 Jan 2022 22:10:49 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/</guid>
+      <description>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
+分析：
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34;的平均分为：&amp;#34; &amp;lt;&amp;lt; m_avgScore &amp;lt;&amp;lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&amp;lt;Player&amp;gt; &amp;amp;v){ string nameSeed = &amp;#34;ABCDE&amp;#34;; for(int i = 0; i &amp;lt; nameSeed.</description>
+    </item>
+    
+    <item>
+      <title>生成随机数</title>
+      <link>https://874656645.github.io/rick/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
+      <pubDate>Sun, 16 Jan 2022 22:02:33 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
+      <description>#include &amp;lt;ctime&amp;gt;using namespace std; int main() { srand((unsigned int)time(NULL)); cout &amp;lt;&amp;lt; rand() % 40 &amp;lt;&amp;lt; endl; return 0; } </description>
+    </item>
+    
+    <item>
+      <title>deque 容器</title>
+      <link>https://874656645.github.io/rick/posts/81-deque-%E5%AE%B9%E5%99%A8/</link>
+      <pubDate>Sun, 16 Jan 2022 20:38:31 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/81-deque-%E5%AE%B9%E5%99%A8/</guid>
+      <description>deque 容器的空间不用手动收缩，类内部会自动处理</description>
+    </item>
+    
+    <item>
+      <title>巧妙收缩 vector 空间</title>
+      <link>https://874656645.github.io/rick/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/</link>
+      <pubDate>Sun, 16 Jan 2022 19:52:12 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/</guid>
+      <description>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() { vector&amp;lt;int&amp;gt; v; for(int i = 0; i &amp;lt; 100000; ++i){ v.push_back(i); } cout &amp;lt;&amp;lt; &amp;#34;size: &amp;#34; &amp;lt;&amp;lt; v.size() &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;capacity: &amp;#34; &amp;lt;&amp;lt; v.capacity() &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;-----------------------&amp;#34; &amp;lt;&amp;lt; endl; v.resize(10); cout &amp;lt;&amp;lt; &amp;#34;size: &amp;#34; &amp;lt;&amp;lt; v.size() &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;capacity: &amp;#34; &amp;lt;&amp;lt; v.capacity() &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;-----------------------&amp;#34; &amp;lt;&amp;lt; endl; vector&amp;lt;int&amp;gt;(v).swap(v); cout &amp;lt;&amp;lt; &amp;#34;size: &amp;#34; &amp;lt;&amp;lt; v.</description>
+    </item>
+    
+    <item>
+      <title>vector 中的元素存放在堆上还是栈上</title>
+      <link>https://874656645.github.io/rick/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/</link>
+      <pubDate>Sun, 16 Jan 2022 15:50:29 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/</guid>
+      <description>结论  vector 中存放的如果是对象类型，则对象放在了栈上 new vector 也只是将 vector 这个对象放在了堆上，与存放在里面的对象没有关系，对象仍然是在栈上 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &amp;lt;&amp;lt; &amp;#34;Person(int, int)...&amp;#34; &amp;lt;&amp;lt; endl; } Person(const Person&amp;amp; p){ m_age = p.m_age; m_id = p.m_id; cout &amp;lt;&amp;lt; &amp;#34;Person(const Person&amp;amp; p)...&amp;#34; &amp;lt;&amp;lt; endl; } ~Person(){ cout &amp;lt;&amp;lt; &amp;#34;~Person()...&amp;#34; &amp;lt;&amp;lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &amp;lt;&amp;lt; &amp;#34;new()...&amp;#34; &amp;lt;&amp;lt; endl; return p; } void operator delete(void *p){ cout &amp;lt;&amp;lt; &amp;#34;delete().</description>
+    </item>
+    
+    <item>
+      <title>STL Hello World</title>
+      <link>https://874656645.github.io/rick/posts/78-stl-hello-world/</link>
+      <pubDate>Sun, 16 Jan 2022 12:31:08 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/78-stl-hello-world/</guid>
+      <description> 平时要有容器、算法、迭代器的思维模式 容器提供迭代器，算法使用迭代器  // 算法 int count(int* begin, int* end, int val){ int n = 0; while(begin != end){ if(*begin == val){ n++; } begin++; } return n; } int main() { // 容器  int arr[] = {1, 3, 0, 5, 1, 3, 1, 0}; // 迭代器  int* begin = arr; int* end = *(&amp;amp;arr + 1); int n = count(begin, end, 1); cout &amp;lt;&amp;lt; &amp;#34;count: &amp;#34; &amp;lt;&amp;lt; n &amp;lt;&amp;lt; endl; return 0; } </description>
+    </item>
+    
+    <item>
+      <title>文件操作</title>
+      <link>https://874656645.github.io/rick/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Sun, 16 Jan 2022 09:47:21 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+      <description>一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &amp;lt;iostream&amp;gt;#include &amp;lt;fstream&amp;gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&amp;#34;D:\\Users\\cui_z\\Desktop\\source.txt&amp;#34;, ios::in); ofstream ofs(&amp;#34;D:\\Users\\cui_z\\Desktop\\target.txt&amp;#34;, ios::out | ios::app); if (!ifs) { cout &amp;lt;&amp;lt; &amp;#34;输入文件打开失败&amp;#34; &amp;lt;&amp;lt; endl; return; } if (!ofs) { cout &amp;lt;&amp;lt; &amp;#34;输出文件打开失败&amp;#34; &amp;lt;&amp;lt; endl; return; } char ch; while (ifs.get(ch)) { cout &amp;lt;&amp;lt; ch; ofs &amp;lt;&amp;lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &amp;lt;&amp;lt; &amp;#34;Age: &amp;#34; &amp;lt;&amp;lt; m_age &amp;lt;&amp;lt; &amp;#34; ID: &amp;#34; &amp;lt;&amp;lt; m_id &amp;lt;&amp;lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&amp;#34;D:\\Users\\cui_z\\Desktop\\target.</description>
+    </item>
+    
+    <item>
+      <title>格式化输出</title>
+      <link>https://874656645.github.io/rick/posts/76-%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/</link>
+      <pubDate>Sun, 16 Jan 2022 09:12:08 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/76-%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/</guid>
+      <description>#include &amp;lt;iostream&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;iomanip&amp;gt; // 控制符头文件using namespace std; // 格式化输出 void func(){ // 方式一：使用成员方法  int number = 10; cout &amp;lt;&amp;lt; number &amp;lt;&amp;lt; endl; cout.unsetf(ios::dec); // 八进制  cout.setf(ios::oct); cout.setf(ios::showbase); cout &amp;lt;&amp;lt; number &amp;lt;&amp;lt; endl; // 012  // 十六进制  cout.unsetf(ios::oct); cout.setf(ios::hex); cout &amp;lt;&amp;lt; number &amp;lt;&amp;lt; endl; // 0xa  // 固定宽度  cout.width(10); cout.fill(&amp;#39;*&amp;#39;); cout &amp;lt;&amp;lt; number &amp;lt;&amp;lt; endl; // *******0xa  // 上面的设置只对当前输出有效，下次的输出格式要重新设置  cout.setf(ios::left); cout.width(10); cout.</description>
+    </item>
+    
     <item>
       <title>异常接口声明</title>
       <link>https://874656645.github.io/rick/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/</link>
@@ -236,7 +386,7 @@ class T{ public: T(int v){ a = v; } T operator+(T &amp;amp;t){ T temp = this-&am
       <pubDate>Wed, 29 Dec 2021 19:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/55-vector/</guid>
-      <description>vector 常用操作 #include &amp;lt;iostream&amp;gt;#include &amp;lt;vector&amp;gt; int main() { //1.定义和初始化  vector&amp;lt;int&amp;gt; vec1; //默认初始化，vec1为空  vector&amp;lt;int&amp;gt; vec2(vec1); //使用vec1初始化vec2  vector&amp;lt;int&amp;gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&amp;lt;int&amp;gt; vec4(10); //10个值为0的元素  vector&amp;lt;int&amp;gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); //尾部添加元素  vec1.insert(vec1.end(),5,3); //从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); //删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()+2); //删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); //清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&amp;lt;int&amp;gt;().swap(V); //利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1.at(int pos); //返回pos位置元素的引用  vec1.front(); //返回首元素的引用  vec1.</description>
+      <description>vector 常用操作 #include &amp;lt;iostream&amp;gt;#include &amp;lt;vector&amp;gt; int main() { //1.定义和初始化  vector&amp;lt;int&amp;gt; vec1; //默认初始化，vec1为空  vector&amp;lt;int&amp;gt; vec2(vec1); //使用vec1初始化vec2  vector&amp;lt;int&amp;gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&amp;lt;int&amp;gt; vec4(10); //10个值为0的元素  vector&amp;lt;int&amp;gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); // 尾部添加元素  vec1.insert(vec1.end(),5,3); // 从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); // 删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()+2); // 删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); // 清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&amp;lt;int&amp;gt;().swap(V); // 利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  // 且只有存储对象时才有效  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1.</description>
     </item>
     
     <item>
