@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>set multiset 容器 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;, STL" />
-<meta name="description" content="关联式容器 底层结构使用二叉树实现 自动排序  自定义数据类型：
+<meta name="description" content="关联式容器 底层结构使用红黑树实现（二叉树-&gt;二叉搜索树-&gt;平衡二叉树-&gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
 class Person{ public: Person(string name, int age, int height){ this-&gt;m_name = name; this-&gt;m_age = age; this-&gt;m_height = height; } bool operator&lt;(const Person &amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&gt;m_age == p2.m_age){ return this-&gt;m_height &gt; p2.m_height; } return this-&gt;m_age &lt; p2.m_age; } void printPerson()const{ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set&lt;Person&gt; lp; lp.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="set multiset 容器" />
-<meta property="og:description" content="关联式容器 底层结构使用二叉树实现 自动排序  自定义数据类型：
+<meta property="og:description" content="关联式容器 底层结构使用红黑树实现（二叉树-&gt;二叉搜索树-&gt;平衡二叉树-&gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
 class Person{ public: Person(string name, int age, int height){ this-&gt;m_name = name; this-&gt;m_age = age; this-&gt;m_height = height; } bool operator&lt;(const Person &amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&gt;m_age == p2.m_age){ return this-&gt;m_height &gt; p2.m_height; } return this-&gt;m_age &lt; p2.m_age; } void printPerson()const{ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set&lt;Person&gt; lp; lp." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
@@ -58,7 +58,7 @@ class Person{ public: Person(string name, int age, int height){ this-&gt;m_name 
 <meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="set multiset 容器"/>
-<meta name="twitter:description" content="关联式容器 底层结构使用二叉树实现 自动排序  自定义数据类型：
+<meta name="twitter:description" content="关联式容器 底层结构使用红黑树实现（二叉树-&gt;二叉搜索树-&gt;平衡二叉树-&gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
 class Person{ public: Person(string name, int age, int height){ this-&gt;m_name = name; this-&gt;m_age = age; this-&gt;m_height = height; } bool operator&lt;(const Person &amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&gt;m_age == p2.m_age){ return this-&gt;m_height &gt; p2.m_height; } return this-&gt;m_age &lt; p2.m_age; } void printPerson()const{ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set&lt;Person&gt; lp; lp."/>
 
 
@@ -88,12 +88,12 @@ class Person{ public: Person(string name, int age, int height){ this-&gt;m_name 
   "@type": "BlogPosting",
   "headline": "set multiset 容器",
   "name": "set multiset 容器",
-  "description": "关联式容器 底层结构使用二叉树实现 自动排序  自定义数据类型：\nclass Person{ public: Person(string name, int age, int height){ this-\u0026gt;m_name = name; this-\u0026gt;m_age = age; this-\u0026gt;m_height = height; } bool operator\u0026lt;(const Person \u0026amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-\u0026gt;m_age == p2.m_age){ return this-\u0026gt;m_height \u0026gt; p2.m_height; } return this-\u0026gt;m_age \u0026lt; p2.m_age; } void printPerson()const{ cout \u0026lt;\u0026lt; \u0026#34;姓名：\u0026#34; \u0026lt;\u0026lt; this-\u0026gt;m_name \u0026lt;\u0026lt; \u0026#34; 年龄：\u0026#34; \u0026lt;\u0026lt; this-\u0026gt;m_age \u0026lt;\u0026lt; \u0026#34; 身高：\u0026#34; \u0026lt;\u0026lt; this-\u0026gt;m_height \u0026lt;\u0026lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set\u0026lt;Person\u0026gt; lp; lp.",
+  "description": "关联式容器 底层结构使用红黑树实现（二叉树-\u0026gt;二叉搜索树-\u0026gt;平衡二叉树-\u0026gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：\nclass Person{ public: Person(string name, int age, int height){ this-\u0026gt;m_name = name; this-\u0026gt;m_age = age; this-\u0026gt;m_height = height; } bool operator\u0026lt;(const Person \u0026amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-\u0026gt;m_age == p2.m_age){ return this-\u0026gt;m_height \u0026gt; p2.m_height; } return this-\u0026gt;m_age \u0026lt; p2.m_age; } void printPerson()const{ cout \u0026lt;\u0026lt; \u0026#34;姓名：\u0026#34; \u0026lt;\u0026lt; this-\u0026gt;m_name \u0026lt;\u0026lt; \u0026#34; 年龄：\u0026#34; \u0026lt;\u0026lt; this-\u0026gt;m_age \u0026lt;\u0026lt; \u0026#34; 身高：\u0026#34; \u0026lt;\u0026lt; this-\u0026gt;m_height \u0026lt;\u0026lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set\u0026lt;Person\u0026gt; lp; lp.",
   "keywords": [
     "C++", "STL"
   ],
-  "articleBody": " 关联式容器 底层结构使用二叉树实现 自动排序  自定义数据类型：\nclass Person{ public: Person(string name, int age, int height){ this-m_name = name; this-m_age = age; this-m_height = height; } bool operator(const Person \u0026p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-m_age == p2.m_age){ return this-m_height  p2.m_height; } return this-m_age  p2.m_age; } void printPerson()const{ cout  \"姓名：\"  this-m_name  \" 年龄：\"  this-m_age  \" 身高：\"  this-m_height  endl; } private: string m_name; int m_age; int m_height; }; int main() { setPerson lp; lp.insert(Person(\"刘备\", 35 , 175)); lp.insert(Person(\"曹操\", 45 , 180)); lp.insert(Person(\"孙权\", 40 , 170)); lp.insert(Person(\"赵云\", 25 , 190)); lp.insert(Person(\"张飞\", 35 , 160)); lp.insert(Person(\"关羽\", 35 , 200)); for(const auto \u0026p : lp){ p.printPerson(); } return 0; } ",
-  "wordCount" : "112",
+  "articleBody": " 关联式容器 底层结构使用红黑树实现（二叉树-二叉搜索树-平衡二叉树-红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：\nclass Person{ public: Person(string name, int age, int height){ this-m_name = name; this-m_age = age; this-m_height = height; } bool operator(const Person \u0026p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-m_age == p2.m_age){ return this-m_height  p2.m_height; } return this-m_age  p2.m_age; } void printPerson()const{ cout  \"姓名：\"  this-m_name  \" 年龄：\"  this-m_age  \" 身高：\"  this-m_height  endl; } private: string m_name; int m_age; int m_height; }; int main() { setPerson lp; lp.insert(Person(\"刘备\", 35 , 175)); lp.insert(Person(\"曹操\", 45 , 180)); lp.insert(Person(\"孙权\", 40 , 170)); lp.insert(Person(\"赵云\", 25 , 190)); lp.insert(Person(\"张飞\", 35 , 160)); lp.insert(Person(\"关羽\", 35 , 200)); for(const auto \u0026p : lp){ p.printPerson(); } return 0; } ",
+  "wordCount" : "113",
   "inLanguage": "en",
   "datePublished": "2022-01-18T21:20:48+08:00",
   "dateModified": "2022-01-18T21:20:48+08:00",
@@ -196,8 +196,9 @@ class Person{ public: Person(string name, int age, int height){ this-&gt;m_name 
 
   <div class="post-content"><ul>
 <li>关联式容器</li>
-<li>底层结构使用二叉树实现</li>
+<li>底层结构使用红黑树实现（二叉树-&gt;二叉搜索树-&gt;平衡二叉树-&gt;红黑树）</li>
 <li>自动排序</li>
+<li>不可以修改值，可以通过删除再插入的方式实现</li>
 </ul>
 <p><strong>自定义数据类型：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{

@@ -9,7 +9,47 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 20 Jan 2022 21:28:13 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/tags/stl/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Jan 2022 21:55:47 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/tags/stl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>函数对象适配器</title>
+      <link>https://874656645.github.io/rick/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/</link>
+      <pubDate>Thu, 27 Jan 2022 21:55:47 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/</guid>
+      <description>仿函数适配器 bind1st、bind2nd 将二元仿函数转为一元仿函数
+  仿函数适配器 not1、not2
+  仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了
+  仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器
+  class MyPrint : public binary_function&amp;lt;int, int, void&amp;gt;{ public: void operator()(int v, int val) const{ cout &amp;lt;&amp;lt; &amp;#34;v: &amp;#34; &amp;lt;&amp;lt; v &amp;lt;&amp;lt; &amp;#34;, val: &amp;#34; &amp;lt;&amp;lt; val &amp;lt;&amp;lt; &amp;#34;, v + val: &amp;#34; &amp;lt;&amp;lt; v + val &amp;lt;&amp;lt; endl; } }; void myPrint(int v, int val){ cout &amp;lt;&amp;lt; v + val &amp;lt;&amp;lt; &amp;#34; &amp;#34;; } class MySort: public binary_function&amp;lt;int, int, bool&amp;gt;{ public: bool operator() (int lhs, int rhs)const{ return lhs &amp;gt; rhs; } }; class MyGreater: public unary_function&amp;lt;int, bool&amp;gt;{ public: bool operator()(int v)const{ return v &amp;gt; 50; } }; void printVec(const vector&amp;lt;int&amp;gt; &amp;amp;v){ for(const auto &amp;amp;p : v){ cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; &amp;#34; &amp;#34;; } cout &amp;lt;&amp;lt; endl; } class Person{ public: Person(int id, int age):id(id), age(age){} void show(){ cout &amp;lt;&amp;lt; &amp;#34;id: &amp;#34; &amp;lt;&amp;lt; id &amp;lt;&amp;lt; &amp;#34;, age: &amp;#34; &amp;lt;&amp;lt; age &amp;lt;&amp;lt; endl; } int id; int age; }; int main(){ vector&amp;lt;int&amp;gt; v; for(int i = 0; i &amp;lt; 10; ++i){ v.</description>
+    </item>
+    
+    <item>
+      <title>机房预约系统案例</title>
+      <link>https://874656645.github.io/rick/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Mon, 24 Jan 2022 20:53:57 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>演讲比赛流程管理案例</title>
+      <link>https://874656645.github.io/rick/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Sat, 22 Jan 2022 17:21:43 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>常用算法</title>
+      <link>https://874656645.github.io/rick/posts/91-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 22 Jan 2022 09:31:07 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/91-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/</guid>
+      <description>一、常用遍历算法 1. for_each 2. transform  搬运的目标容器必须要提前开辟空间（resize 而不是 reserve），否则无法正常搬运  int main() { vector&amp;lt;int&amp;gt; v; for(int i = 0; i &amp;lt; 10; ++i){ v.push_back(i); } vector&amp;lt;int&amp;gt; v1; v1.resize(v.size()); // 要用 resize, 不能用 reserve  transform(v.begin(), v.end(), v1.begin(), [](int v){ return v * 2;}); for_each(v1.begin(), v1.end(), [](int v){ cout &amp;lt;&amp;lt; v &amp;lt;&amp;lt; &amp;#34; &amp;#34;; }); cout &amp;lt;&amp;lt; endl; return 0; } 二、常用查找算法 1. find 2. find_if 3. adjacent_find 4. binary_search  无序序列不可用  5.</description>
+    </item>
+    
     <item>
       <title>内建函数对象 functional</title>
       <link>https://874656645.github.io/rick/posts/90-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1-functional/</link>
@@ -26,7 +66,7 @@
       
       <guid>https://874656645.github.io/rick/posts/89-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%B8%8E-predicate-%E8%B0%93%E8%AF%8D/</guid>
       <description>函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象
- 函数对象可以有自己的状态 函数对象可以作为参数传递  什么是谓词 返回 bool 类型的仿函数称为谓词
+ 函数对象可以有自己的状态 函数对象可以作为参数传递 一个参数的函数对象叫做一元仿函数 两个参数的函数对象叫做二元仿函数  什么是谓词 返回 bool 类型的仿函数称为谓词
 一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词
 比如 find_if 算法
 二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词
@@ -39,7 +79,7 @@
       <pubDate>Thu, 20 Jan 2022 20:18:25 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/</guid>
-      <description>特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用二叉树实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
+      <description>特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
  创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &amp;lt;&amp;lt; &amp;#34;姓名：&amp;#34; &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34; 工资：&amp;#34; &amp;lt;&amp;lt; m_salary &amp;lt;&amp;lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&amp;lt;Worker&amp;gt; &amp;amp;v){ string nameSeed = &amp;#34;ABCDEFGHIJ&amp;#34;; for(int i = 0; i &amp;lt; nameSeed.</description>
     </item>
     
@@ -49,7 +89,7 @@
       <pubDate>Tue, 18 Jan 2022 21:20:48 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/</guid>
-      <description>关联式容器 底层结构使用二叉树实现 自动排序  自定义数据类型：
+      <description>关联式容器 底层结构使用红黑树实现（二叉树-&amp;gt;二叉搜索树-&amp;gt;平衡二叉树-&amp;gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
 class Person{ public: Person(string name, int age, int height){ this-&amp;gt;m_name = name; this-&amp;gt;m_age = age; this-&amp;gt;m_height = height; } bool operator&amp;lt;(const Person &amp;amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&amp;gt;m_age == p2.m_age){ return this-&amp;gt;m_height &amp;gt; p2.m_height; } return this-&amp;gt;m_age &amp;lt; p2.m_age; } void printPerson()const{ cout &amp;lt;&amp;lt; &amp;#34;姓名：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_name &amp;lt;&amp;lt; &amp;#34; 年龄：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; &amp;#34; 身高：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_height &amp;lt;&amp;lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set&amp;lt;Person&amp;gt; lp; lp.</description>
     </item>
     
@@ -81,7 +121,7 @@ empty()</description>
       <pubDate>Sun, 16 Jan 2022 22:17:43 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/</guid>
-      <description>先进后出 栈不允许遍历元素  stack 栈操作:
+      <description>先进后出 栈不允许遍历元素 不能随机存取  stack 栈操作:
 size()
 empty()</description>
     </item>
@@ -121,7 +161,7 @@ empty()</description>
       <pubDate>Sun, 16 Jan 2022 15:50:29 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/</guid>
-      <description>结论  vector 中存放的如果是对象类型，则对象放在了栈上 new vector 也只是将 vector 这个对象放在了堆上，与存放在里面的对象没有关系，对象仍然是在栈上 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &amp;lt;&amp;lt; &amp;#34;Person(int, int)...&amp;#34; &amp;lt;&amp;lt; endl; } Person(const Person&amp;amp; p){ m_age = p.m_age; m_id = p.m_id; cout &amp;lt;&amp;lt; &amp;#34;Person(const Person&amp;amp; p)...&amp;#34; &amp;lt;&amp;lt; endl; } ~Person(){ cout &amp;lt;&amp;lt; &amp;#34;~Person()...&amp;#34; &amp;lt;&amp;lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &amp;lt;&amp;lt; &amp;#34;new()...&amp;#34; &amp;lt;&amp;lt; endl; return p; } void operator delete(void *p){ cout &amp;lt;&amp;lt; &amp;#34;delete().</description>
+      <description>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &amp;lt;&amp;lt; &amp;#34;Person(int, int)...&amp;#34; &amp;lt;&amp;lt; endl; } Person(const Person&amp;amp; p){ m_age = p.m_age; m_id = p.m_id; cout &amp;lt;&amp;lt; &amp;#34;Person(const Person&amp;amp; p)...&amp;#34; &amp;lt;&amp;lt; endl; } ~Person(){ cout &amp;lt;&amp;lt; &amp;#34;~Person()...&amp;#34; &amp;lt;&amp;lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &amp;lt;&amp;lt; &amp;#34;new()...&amp;#34; &amp;lt;&amp;lt; endl; return p; } void operator delete(void *p){ cout &amp;lt;&amp;lt; &amp;#34;delete().</description>
     </item>
     
     <item>

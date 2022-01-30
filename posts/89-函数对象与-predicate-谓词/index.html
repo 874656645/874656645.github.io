@@ -8,7 +8,7 @@
 <title>函数对象与 predicate 谓词 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;, STL" />
 <meta name="description" content="函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象
- 函数对象可以有自己的状态 函数对象可以作为参数传递  什么是谓词 返回 bool 类型的仿函数称为谓词
+ 函数对象可以有自己的状态 函数对象可以作为参数传递 一个参数的函数对象叫做一元仿函数 两个参数的函数对象叫做二元仿函数  什么是谓词 返回 bool 类型的仿函数称为谓词
 一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词
 比如 find_if 算法
 二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词
@@ -51,7 +51,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="函数对象与 predicate 谓词" />
 <meta property="og:description" content="函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象
- 函数对象可以有自己的状态 函数对象可以作为参数传递  什么是谓词 返回 bool 类型的仿函数称为谓词
+ 函数对象可以有自己的状态 函数对象可以作为参数传递 一个参数的函数对象叫做一元仿函数 两个参数的函数对象叫做二元仿函数  什么是谓词 返回 bool 类型的仿函数称为谓词
 一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词
 比如 find_if 算法
 二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词
@@ -67,7 +67,7 @@ if (!doNotTrack) {
 
 <meta name="twitter:title" content="函数对象与 predicate 谓词"/>
 <meta name="twitter:description" content="函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象
- 函数对象可以有自己的状态 函数对象可以作为参数传递  什么是谓词 返回 bool 类型的仿函数称为谓词
+ 函数对象可以有自己的状态 函数对象可以作为参数传递 一个参数的函数对象叫做一元仿函数 两个参数的函数对象叫做二元仿函数  什么是谓词 返回 bool 类型的仿函数称为谓词
 一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词
 比如 find_if 算法
 二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词
@@ -100,12 +100,12 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "函数对象与 predicate 谓词",
   "name": "函数对象与 predicate 谓词",
-  "description": "函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象\n 函数对象可以有自己的状态 函数对象可以作为参数传递  什么是谓词 返回 bool 类型的仿函数称为谓词\n一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词\n比如 find_if 算法\n二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词\n比如 sort 算法",
+  "description": "函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象\n 函数对象可以有自己的状态 函数对象可以作为参数传递 一个参数的函数对象叫做一元仿函数 两个参数的函数对象叫做二元仿函数  什么是谓词 返回 bool 类型的仿函数称为谓词\n一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词\n比如 find_if 算法\n二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词\n比如 sort 算法",
   "keywords": [
     "C++", "STL"
   ],
-  "articleBody": "函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象\n 函数对象可以有自己的状态 函数对象可以作为参数传递  什么是谓词 返回 bool 类型的仿函数称为谓词\n一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词\n比如 find_if 算法\n二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词\n比如 sort 算法\n",
-  "wordCount" : "25",
+  "articleBody": "函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象\n 函数对象可以有自己的状态 函数对象可以作为参数传递 一个参数的函数对象叫做一元仿函数 两个参数的函数对象叫做二元仿函数  什么是谓词 返回 bool 类型的仿函数称为谓词\n一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词\n比如 find_if 算法\n二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词\n比如 sort 算法\n",
+  "wordCount" : "27",
   "inLanguage": "en",
   "datePublished": "2022-01-20T21:04:13+08:00",
   "dateModified": "2022-01-20T21:04:13+08:00",
@@ -230,6 +230,8 @@ if (!doNotTrack) {
 <ul>
 <li>函数对象可以有自己的状态</li>
 <li>函数对象可以作为参数传递</li>
+<li>一个参数的函数对象叫做一元仿函数</li>
+<li>两个参数的函数对象叫做二元仿函数</li>
 </ul>
 <h2 id="什么是谓词">什么是谓词<a hidden class="anchor" aria-hidden="true" href="#什么是谓词">#</a></h2>
 <p>返回 <em>bool</em> 类型的<strong>仿函数</strong>称为谓词</p>

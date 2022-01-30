@@ -9,7 +9,102 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 20 Jan 2022 21:28:13 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 30 Jan 2022 11:57:37 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>设计模式</title>
+      <link>https://874656645.github.io/rick/posts/98-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sun, 30 Jan 2022 11:57:37 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/98-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
+      <description>设计模式
+一、概念  设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。 软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。 在一定环境下，用固定套路解决问题。 设计模式的基础是多态。  二、软件设计模式种类 GoF 提出的设计模式有 23 种，加简单工厂模式，一共 24 种
+1、创建型模式 Creational 6种 如何创建对象
+ 单例模式 简单工厂模式 工厂方法模式 抽象工厂模式 原型模式 建造者模式  2、结构型模式 Structural 7种 如何实现类或对象的组合
+ 适配器模式 桥接模式 组合模式 装饰模式 外观模式 享元模式 代理模式  3、行为型模式 Behavioral 11种 类或对象怎样交互以及怎样分配职责
+ 职责链模式 命令模式 解释器模式 迭代器模式 中介模式 备忘录模式 观察者模式 状态模式 策略模式 模板方法模式 访问者模式  </description>
+    </item>
+    
+    <item>
+      <title>UML 统一建模语言</title>
+      <link>https://874656645.github.io/rick/posts/97-uml-%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80/</link>
+      <pubDate>Sat, 29 Jan 2022 19:55:47 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/97-uml-%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80/</guid>
+      <description>一、用例图  用例代表系统的某项完整功能 从客户角度来描述系统功能 包括参与者、用例、关系  1. 泛化关系 Generalization  父类和子类的关系  2. 包含关系 Include  一个功能肯定会使用另一个功能  3. 扩展关系 Extend  完成某个功能的时候偶尔会执行另一个功能  二、类图 用来显示系统中的类，接口以及它们之间的关系
+1. 泛化关系 Generalization（is a） 一种类与类之间的继承关系
+2. 实现关系 Realization（is a） 类与抽象类之间的实现关系
+3. 依赖关系 Dependence（use a） 两个相对独立的系统，一个系统负责构造另一个系统的实例，或者依赖另一个系统的服务
+类 A 做为类 B 方法的形参，而不是类 B 的成员属性
+4. 关联关系 Directed Association 两个相对独立的系统，一个系统的实例与另一个系统的一些实例存在固定的对应关系
+  聚合 Aggregation
+ 聚合关系是关联关系的一种，是更强的关联关系 聚合是整体和部分之间的关系，例如汽车由引擎、轮胎以及其它零件组成 聚合关系也是通过成员变量来实现的，但是，关联关系所涉及的两个类处在同一个层次上，而聚合关系中，两个类处于不同层次上，一个代表整体，一个代表部分 整体与部分之间是可分离的，它们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享    组合 Composition
+  三、对象图 四、时序图 五、活动图 </description>
+    </item>
+    
+    <item>
+      <title>函数对象适配器</title>
+      <link>https://874656645.github.io/rick/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/</link>
+      <pubDate>Thu, 27 Jan 2022 21:55:47 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/</guid>
+      <description>仿函数适配器 bind1st、bind2nd 将二元仿函数转为一元仿函数
+  仿函数适配器 not1、not2
+  仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了
+  仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器
+  class MyPrint : public binary_function&amp;lt;int, int, void&amp;gt;{ public: void operator()(int v, int val) const{ cout &amp;lt;&amp;lt; &amp;#34;v: &amp;#34; &amp;lt;&amp;lt; v &amp;lt;&amp;lt; &amp;#34;, val: &amp;#34; &amp;lt;&amp;lt; val &amp;lt;&amp;lt; &amp;#34;, v + val: &amp;#34; &amp;lt;&amp;lt; v + val &amp;lt;&amp;lt; endl; } }; void myPrint(int v, int val){ cout &amp;lt;&amp;lt; v + val &amp;lt;&amp;lt; &amp;#34; &amp;#34;; } class MySort: public binary_function&amp;lt;int, int, bool&amp;gt;{ public: bool operator() (int lhs, int rhs)const{ return lhs &amp;gt; rhs; } }; class MyGreater: public unary_function&amp;lt;int, bool&amp;gt;{ public: bool operator()(int v)const{ return v &amp;gt; 50; } }; void printVec(const vector&amp;lt;int&amp;gt; &amp;amp;v){ for(const auto &amp;amp;p : v){ cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; &amp;#34; &amp;#34;; } cout &amp;lt;&amp;lt; endl; } class Person{ public: Person(int id, int age):id(id), age(age){} void show(){ cout &amp;lt;&amp;lt; &amp;#34;id: &amp;#34; &amp;lt;&amp;lt; id &amp;lt;&amp;lt; &amp;#34;, age: &amp;#34; &amp;lt;&amp;lt; age &amp;lt;&amp;lt; endl; } int id; int age; }; int main(){ vector&amp;lt;int&amp;gt; v; for(int i = 0; i &amp;lt; 10; ++i){ v.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 沉思录笔记</title>
+      <link>https://874656645.github.io/rick/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/</link>
+      <pubDate>Wed, 26 Jan 2022 17:48:58 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/</guid>
+      <description>有的情况下，现在的折衷方案比未来的理想方案好得多
+  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。
+  只要类定义正确，我就只能按照我编写它的初衷那样去用它。
+  C++ 哲学：抽象，实用，只为用到的东西付出代价。
+  类设计者的核查表：
+ 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
+class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* .</description>
+    </item>
+    
+    <item>
+      <title>机房预约系统案例</title>
+      <link>https://874656645.github.io/rick/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Mon, 24 Jan 2022 20:53:57 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>switch 与 if Else 区别</title>
+      <link>https://874656645.github.io/rick/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Mon, 24 Jan 2022 20:01:08 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/</guid>
+      <description> while 循环中的 switch, break 只能中断 switch，不能中断 while 循环  void managerMenue(){ while(true){ cout &amp;lt;&amp;lt; &amp;#34;这是子菜单&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;是否返回主菜单？&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;1 是&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;2 否&amp;#34; &amp;lt;&amp;lt; endl; int i = 0; cin &amp;gt;&amp;gt; i; switch(i){ case 1: break; case 2: return; default: break; } // if(i == 1){  // // system(&amp;#34;reset&amp;#34;);  // break;  // }  // else if(i == 2){  // return;  // }  // else{  // cout &amp;lt;&amp;lt; &amp;#34;输入有误，请重新输入&amp;#34; &amp;lt;&amp;lt; endl;  // }  } cout &amp;lt;&amp;lt; &amp;#34;这是子菜单循环外代码&amp;#34; &amp;lt;&amp;lt; endl; } int main() { while(true){ cout &amp;lt;&amp;lt; &amp;#34;欢迎登陆！&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;这是主菜单&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;请输入选项：&amp;#34; &amp;lt;&amp;lt; endl; int i = 0; cin &amp;gt;&amp;gt; i; // switch(i)  // {  // case 1:  // system(&amp;#34;reset&amp;#34;);  // managerMenue();  // break;  // case 2:  // break;  // }  if(i == 1){ // system(&amp;#34;reset&amp;#34;);  managerMenue(); // break;  } else{ break; } cout &amp;lt;&amp;lt; &amp;#34;switch 外代码&amp;#34; &amp;lt;&amp;lt; endl; } cout &amp;lt;&amp;lt; &amp;#34;while 外代码&amp;#34; &amp;lt;&amp;lt; endl; return 0; } </description>
+    </item>
+    
+    <item>
+      <title>演讲比赛流程管理案例</title>
+      <link>https://874656645.github.io/rick/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Sat, 22 Jan 2022 17:21:43 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>常用算法</title>
+      <link>https://874656645.github.io/rick/posts/91-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Sat, 22 Jan 2022 09:31:07 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/91-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/</guid>
+      <description>一、常用遍历算法 1. for_each 2. transform  搬运的目标容器必须要提前开辟空间（resize 而不是 reserve），否则无法正常搬运  int main() { vector&amp;lt;int&amp;gt; v; for(int i = 0; i &amp;lt; 10; ++i){ v.push_back(i); } vector&amp;lt;int&amp;gt; v1; v1.resize(v.size()); // 要用 resize, 不能用 reserve  transform(v.begin(), v.end(), v1.begin(), [](int v){ return v * 2;}); for_each(v1.begin(), v1.end(), [](int v){ cout &amp;lt;&amp;lt; v &amp;lt;&amp;lt; &amp;#34; &amp;#34;; }); cout &amp;lt;&amp;lt; endl; return 0; } 二、常用查找算法 1. find 2. find_if 3. adjacent_find 4. binary_search  无序序列不可用  5.</description>
+    </item>
+    
     <item>
       <title>内建函数对象 functional</title>
       <link>https://874656645.github.io/rick/posts/90-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1-functional/</link>
@@ -26,7 +121,7 @@
       
       <guid>https://874656645.github.io/rick/posts/89-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%B8%8E-predicate-%E8%B0%93%E8%AF%8D/</guid>
       <description>函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象
- 函数对象可以有自己的状态 函数对象可以作为参数传递  什么是谓词 返回 bool 类型的仿函数称为谓词
+ 函数对象可以有自己的状态 函数对象可以作为参数传递 一个参数的函数对象叫做一元仿函数 两个参数的函数对象叫做二元仿函数  什么是谓词 返回 bool 类型的仿函数称为谓词
 一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词
 比如 find_if 算法
 二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词
@@ -39,7 +134,7 @@
       <pubDate>Thu, 20 Jan 2022 20:18:25 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/</guid>
-      <description>特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用二叉树实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
+      <description>特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
  创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &amp;lt;&amp;lt; &amp;#34;姓名：&amp;#34; &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34; 工资：&amp;#34; &amp;lt;&amp;lt; m_salary &amp;lt;&amp;lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&amp;lt;Worker&amp;gt; &amp;amp;v){ string nameSeed = &amp;#34;ABCDEFGHIJ&amp;#34;; for(int i = 0; i &amp;lt; nameSeed.</description>
     </item>
     
@@ -49,7 +144,7 @@
       <pubDate>Tue, 18 Jan 2022 21:20:48 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/</guid>
-      <description>关联式容器 底层结构使用二叉树实现 自动排序  自定义数据类型：
+      <description>关联式容器 底层结构使用红黑树实现（二叉树-&amp;gt;二叉搜索树-&amp;gt;平衡二叉树-&amp;gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
 class Person{ public: Person(string name, int age, int height){ this-&amp;gt;m_name = name; this-&amp;gt;m_age = age; this-&amp;gt;m_height = height; } bool operator&amp;lt;(const Person &amp;amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&amp;gt;m_age == p2.m_age){ return this-&amp;gt;m_height &amp;gt; p2.m_height; } return this-&amp;gt;m_age &amp;lt; p2.m_age; } void printPerson()const{ cout &amp;lt;&amp;lt; &amp;#34;姓名：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_name &amp;lt;&amp;lt; &amp;#34; 年龄：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; &amp;#34; 身高：&amp;#34; &amp;lt;&amp;lt; this-&amp;gt;m_height &amp;lt;&amp;lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set&amp;lt;Person&amp;gt; lp; lp.</description>
     </item>
     
@@ -81,7 +176,7 @@ empty()</description>
       <pubDate>Sun, 16 Jan 2022 22:17:43 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/</guid>
-      <description>先进后出 栈不允许遍历元素  stack 栈操作:
+      <description>先进后出 栈不允许遍历元素 不能随机存取  stack 栈操作:
 size()
 empty()</description>
     </item>
@@ -130,7 +225,7 @@ empty()</description>
       <pubDate>Sun, 16 Jan 2022 15:50:29 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/</guid>
-      <description>结论  vector 中存放的如果是对象类型，则对象放在了栈上 new vector 也只是将 vector 这个对象放在了堆上，与存放在里面的对象没有关系，对象仍然是在栈上 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &amp;lt;&amp;lt; &amp;#34;Person(int, int)...&amp;#34; &amp;lt;&amp;lt; endl; } Person(const Person&amp;amp; p){ m_age = p.m_age; m_id = p.m_id; cout &amp;lt;&amp;lt; &amp;#34;Person(const Person&amp;amp; p)...&amp;#34; &amp;lt;&amp;lt; endl; } ~Person(){ cout &amp;lt;&amp;lt; &amp;#34;~Person()...&amp;#34; &amp;lt;&amp;lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &amp;lt;&amp;lt; &amp;#34;new()...&amp;#34; &amp;lt;&amp;lt; endl; return p; } void operator delete(void *p){ cout &amp;lt;&amp;lt; &amp;#34;delete().</description>
+      <description>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &amp;lt;&amp;lt; &amp;#34;Person(int, int)...&amp;#34; &amp;lt;&amp;lt; endl; } Person(const Person&amp;amp; p){ m_age = p.m_age; m_id = p.m_id; cout &amp;lt;&amp;lt; &amp;#34;Person(const Person&amp;amp; p)...&amp;#34; &amp;lt;&amp;lt; endl; } ~Person(){ cout &amp;lt;&amp;lt; &amp;#34;~Person()...&amp;#34; &amp;lt;&amp;lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &amp;lt;&amp;lt; &amp;#34;new()...&amp;#34; &amp;lt;&amp;lt; endl; return p; } void operator delete(void *p){ cout &amp;lt;&amp;lt; &amp;#34;delete().</description>
     </item>
     
     <item>
@@ -322,7 +417,7 @@ g++ main.s -o main  </description>
       <pubDate>Tue, 04 Jan 2022 21:07:15 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</guid>
-      <description>使用模板类 重载 -&amp;gt; 操作符 重载 * 操作符  template&amp;lt;typename T&amp;gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&amp;gt;(){ // 相当于 ptr-&amp;gt; , 所以返回 ptr 指针即可  return ptr; } T&amp;amp; operator*(){ // 相当于 (*ptr). ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &amp;lt;&amp;lt; &amp;#34;A(int)...&amp;#34; &amp;lt;&amp;lt; endl; this-&amp;gt;a = a; } ~A(){ cout &amp;lt;&amp;lt; &amp;#34;~A().</description>
+      <description>使用模板类 重载 -&amp;gt; 操作符 重载 * 操作符  template&amp;lt;typename T&amp;gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&amp;gt;(){ // 相当于 ptr-&amp;gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr; } T&amp;amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &amp;lt;&amp;lt; &amp;#34;A(int)...&amp;#34; &amp;lt;&amp;lt; endl; this-&amp;gt;a = a; } ~A(){ cout &amp;lt;&amp;lt; &amp;#34;~A().</description>
     </item>
     
     <item>
@@ -412,12 +507,11 @@ std::stack template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp
       <pubDate>Wed, 29 Dec 2021 15:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/</guid>
-      <description>1、new / delete 具体步骤 new
+      <description>C++ 中 new 操作符内幕：new operator、operator new、placement new 
+1、new / delete 具体步骤 new
  第一步：调用 operator new 函数分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象 第二步：编译器运行相应的构造函数以构造对象，并为其传入初值 第三部：对象构造完成后，返回一个指向该对象的指针  delete
- 第一步：调用对象的析构函数 第二步：编译器调用 operator delete 函数释放内存空间  2、new/delete 与 malloc/free 的区别是什么？  malloc/free 是 C 语言的标准库函数， new/delete 是 C++ 的运算符。它们都可用于申请动态内存和释放内存 malloc/free 不会去自动调用构造和析构函数，对于基本数据类型的对象而言，光用 malloc/free 无法满足动态对象的要求 malloc/free 需要指定分配内存的大小，而 new/delete 会自动计算所需内存大小 new 返回的是指定对象的指针，而 malloc 返回的是 void*，因此 malloc 的返回值一般都需要进行强制类型转换  3、C++内存管理 在 C++ 中，虚拟内存分为代码段、数据段、BSS段、堆区、栈区以及文件映射区六部分
- 代码段：包括只读存储区和文本区，其中只读存储区存储字符串常量，文本区存储程序的机器代码 数据段：存储程序中已初始化的全局变量和静态变量 BSS段：存储未初始化的全局变量和静态变量（局部+全局），以及所有被初始化为0的全局变量和静态变量（这个段的数据全都是0） 堆区：调用new/malloc函数时在堆区动态分配内存，同时需要调用delete/free来手动释放申请的内存 映射区：存储动态链接库以及调用mmap函数进行的文件映射 栈区：使用栈空间存储函数的返回地址、参数、局部变量、返回值（最靠近CPU的区）  4、内存的分配方式（三种）   静态存储区分配：是在程序编译时就已经分配好的，在整个运行期间都存在，如全局变量、常量、静态变量
-  栈上分配：函数内的局部变量就是从这分配的，但分配的内存容易有限
-  堆上分配：也称动态分配，如我们用 new,malloc 分配内存，用 delete,free 来释放的内存。堆内存空间可由用户手动分配和释放，所以其生存周期由用户指定，较为灵活。但频繁的分配、释放大小不同的堆空间会产生内存碎片</description>
+ 第一步：调用对象的析构函数 第二步：编译器调用 operator delete 函数释放内存空间  2、new/delete 与 malloc/free 的区别是什么？  malloc/free 是 C 语言的标准库函数， new/delete 是 C++ 的运算符。它们都可用于申请动态内存和释放内存 malloc/free 不会去自动调用构造和析构函数，对于基本数据类型的对象而言，光用 malloc/free 无法满足动态对象的要求 malloc/free 需要指定分配内存的大小，而 new/delete 会自动计算所需内存大小 new 返回的是指定对象的指针，而 malloc 返回的是 void*，因此 malloc 的返回值一般都需要进行强制类型转换  operator new 重载：
+class Person{ public: Person(){ id = 0; score = 0; cout &amp;lt;&amp;lt; &amp;#34;Person()&amp;#34; &amp;lt;&amp;lt; endl; } Person(int id, int score):id(id),score(score){ cout &amp;lt;&amp;lt; &amp;#34;Person(int, int)&amp;#34; &amp;lt;&amp;lt; endl; } Person(const Person &amp;amp;p){ cout &amp;lt;&amp;lt; &amp;#34;Person(const Person &amp;amp;p)&amp;#34; &amp;lt;&amp;lt; endl; id = p.</description>
     </item>
     
     <item>
@@ -426,7 +520,7 @@ std::stack template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp
       <pubDate>Wed, 29 Dec 2021 14:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</guid>
-      <description>在堆上声明一个数组 int main( ) { int ** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &amp;lt; 4; i++){ pArr[i] = new int[8]; } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ pArr[i][j] = i * j; } } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ if(j == 0) cout &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; pArr[i][j] &amp;lt;&amp;lt; &amp;#39;\t&amp;#39;; } } // 删除  for(int i = 0; i &amp;lt; 4; ++i){ delete [] pArr[i]; } delete [] pArr; return 0; } 输出：</description>
+      <description>在堆上声明一个数组 int main( ) { #if 0// 方式一： int** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &amp;lt; 4; i++){ pArr[i] = new int[8]; } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ pArr[i][j] = i * j; } } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ if(j == 0) cout &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; pArr[i][j] &amp;lt;&amp;lt; &amp;#39;\t&amp;#39;; } } // 删除 for(int i = 0; i &amp;lt; 4; ++i){ delete [] pArr[i]; } delete [] pArr; #endif  // 方式二：  cout &amp;lt;&amp;lt; sizeof(int[5]) &amp;lt;&amp;lt; endl; // 初始化  int(*pArr)[8] = new int[4][8]; memset(pArr, 0, sizeof(int[4][8])); // 或者  // int(*pArr)[8] = new int[4][8]{{0}};  cout &amp;lt;&amp;lt; sizeof(int[4][8]) &amp;lt;&amp;lt; endl; for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ pArr[i][j] = i * j; } } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ cout &amp;lt;&amp;lt; pArr[i][j] &amp;lt;&amp;lt; &amp;#39;\t&amp;#39;; } cout &amp;lt;&amp;lt; endl; } cout &amp;lt;&amp;lt; endl; delete[] pArr; // 取地址  int arr[3][4]{{0}}; int(*p)[3][4] = &amp;amp;arr; cout &amp;lt;&amp;lt; arr[2][3] &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; *p[2][3] &amp;lt;&amp;lt; endl; return 0; } 输出：</description>
     </item>
     
     <item>
