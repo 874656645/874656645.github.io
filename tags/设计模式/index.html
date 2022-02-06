@@ -127,40 +127,71 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>设计模式
+    <h2>装饰器模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>设计模式
-一、概念  设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。 软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。 在一定环境下，用固定套路解决问题。 设计模式的基础是多态。  二、软件设计模式种类 GoF 提出的设计模式有 23 种，加简单工厂模式，一共 24 种
-1、创建型模式 Creational 6种 如何创建对象
- 单例模式 简单工厂模式 工厂方法模式 抽象工厂模式 原型模式 建造者模式  2、结构型模式 Structural 7种 如何实现类或对象的组合
- 适配器模式 桥接模式 组合模式 装饰模式 外观模式 享元模式 代理模式  3、行为型模式 Behavioral 11种 类或对象怎样交互以及怎样分配职责
- 职责链模式 命令模式 解释器模式 迭代器模式 中介模式 备忘录模式 观察者模式 状态模式 策略模式 模板方法模式 访问者模式  </p>
+    <p>装饰模式又叫包装模式，通过一种对客户端透明的方式来扩展对象功能，是继承关系的一种替代。
+装饰模式可以动态给一个类增加功能</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-30 11:57:37 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 设计模式" href="https://874656645.github.io/rick/posts/98-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/rick/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>UML 统一建模语言
+    <h2>观察者模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、用例图  用例代表系统的某项完整功能 从客户角度来描述系统功能 包括参与者、用例、关系  1. 泛化关系 Generalization  父类和子类的关系  2. 包含关系 Include  一个功能肯定会使用另一个功能  3. 扩展关系 Extend  完成某个功能的时候偶尔会执行另一个功能  二、类图 用来显示系统中的类，接口以及它们之间的关系
-1. 泛化关系 Generalization（is a） 一种类与类之间的继承关系
-2. 实现关系 Realization（is a） 类与抽象类之间的实现关系
-3. 依赖关系 Dependence（use a） 两个相对独立的系统，一个系统负责构造另一个系统的实例，或者依赖另一个系统的服务
-类 A 做为类 B 方法的形参，而不是类 B 的成员属性
-4. 关联关系 Directed Association 两个相对独立的系统，一个系统的实例与另一个系统的一些实例存在固定的对应关系
-  聚合 Aggregation
- 聚合关系是关联关系的一种，是更强的关联关系 聚合是整体和部分之间的关系，例如汽车由引擎、轮胎以及其它零件组成 聚合关系也是通过成员变量来实现的，但是，关联关系所涉及的两个类处在同一个层次上，而聚合关系中，两个类处于不同层次上，一个代表整体，一个代表部分 整体与部分之间是可分离的，它们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享    组合 Composition
-  三、对象图 四、时序图 五、活动图 </p>
+    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-29 19:55:47 +0800 CST'>January 29, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to UML 统一建模语言" href="https://874656645.github.io/rick/posts/97-uml-%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80/"></a>
+  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/rick/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
 </article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>命令模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>将一个请求封闭为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。
+命令模式可以将请求者和接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/rick/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>策略模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>策略模式定义了一系列的算法，并将每个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-01 16:59:42 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 策略模式" href="https://874656645.github.io/rick/posts/112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>模板方法模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
+class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-01 16:41:35 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 模板方法模式" href="https://874656645.github.io/rick/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://874656645.github.io/rick/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/page/2/">Next Page »</a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

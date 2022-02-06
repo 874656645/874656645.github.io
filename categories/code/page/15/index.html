@@ -127,65 +127,76 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>模板函数
+    <h2>定义一个只能在堆上（栈上）生成对象的类
     </h2>
   </header>
   <section class="entry-content">
-    <p>template &lt;typename T&gt; inline const T&amp; Max (const T&amp; a, const T&amp; b) { return a &lt; b ? b:a; }; int main() { int i = 39; int j = 20; cout &lt;&lt; &#34;Max(i, j): &#34; &lt;&lt; Max(i, j) &lt;&lt; endl; double f1 = 13.5; double f2 = 20.7; cout &lt;&lt; &#34;Max(f1, f2): &#34; &lt;&lt; Max(f1, f2) &lt;&lt; endl; string s1 = &#34;Hello&#34;; string s2 = &#34;World&#34;; cout &lt;&lt; &#34;Max(s1, s2): &#34; &lt;&lt; Max(s1, s2) &lt;&lt; endl; return 0; } 输出：...</p>
+    <p>一、只能在堆上 方法：将析构函数设置为私有
+原因：C&#43;&#43; 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象
+class Test { public: void printT(){ cout &lt;&lt; &#34;printT&#34; &lt;&lt; endl; } void freeT(){ delete this; } private: ~Test(){ cout &lt;&lt; &#34;~Test()&#34; &lt;&lt; endl; } }; int main( ) { // 不能在栈上创建对象  //Test t; // prog.cc:25:10: error: variable of type &#39;Test&#39; has private destructor  // 只能在堆上创建对象  Test *t = new Test; t-&gt;printT(); // 销毁对象  t-&gt;freeT(); return 0; } 输出：
+Start printT ~Test() 0 Finish 二、只能在栈上 方法：将 new 和 delete 重载为私有...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-22 09:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板函数" href="https://874656645.github.io/rick/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2021-12-27 17:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 定义一个只能在堆上（栈上）生成对象的类" href="https://874656645.github.io/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>函数指针
+    <h2>抽象类、接口类、聚合类
     </h2>
   </header>
   <section class="entry-content">
-    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针 int (*fn)(int); // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish </p>
+    <p>抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+1）所有成员都是 public，没有私有和受保护的非静态成员；
+2）没有定义任何构造函数；
+3）没有类内初始化；
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl; } void printB() { cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl; c....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-16 14:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数指针" href="https://874656645.github.io/rick/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
+  <footer class="entry-footer"><span title='2021-12-27 16:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 抽象类、接口类、聚合类" href="https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>指针函数和函数指针
+    <h2>虚继承和虚基类
     </h2>
   </header>
   <section class="entry-content">
-    <p>  指针函数本质是一个函数，返回值是一个指针；
-  函数指针是指向函数的一个指针变量；
-  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &#34;fun: &#34; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun  pf(&#34;Hello&#34;); return 0; } </p>
+    <p>虚继承和虚基类 参考
+ 在C&#43;&#43;中，在定义公共基类A的派生类B、C…的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C…的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项
+cl [filename].cpp /d1 reportSingleClassLayout[className]
+一般继承：
+class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; }; 输出：
+class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;--- 调用：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-16 12:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 指针函数和函数指针" href="https://874656645.github.io/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
+  <footer class="entry-footer"><span title='2021-12-27 13:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 虚继承和虚基类" href="https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>explicit（显式）关键字
+    <h2>多态总结
     </h2>
   </header>
   <section class="entry-content">
-    <p>修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：...</p>
+    <p>1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl; } }; class Point { public: ~Point(){ cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-15 12:34:27 +0800 CST'>December 15, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to explicit（显式）关键字" href="https://874656645.github.io/rick/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+  <footer class="entry-footer"><span title='2021-12-27 10:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 多态总结" href="https://874656645.github.io/rick/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43; 字符串常量存储
+    <h2>函数默认参数和占位参数
     </h2>
   </header>
   <section class="entry-content">
-    <p>局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
- 局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &#34;qqq&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  char p[]=&#34;Hello world!&#34;; char* p2 = &#34;w&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  printf(&#34;in s1 p=%p\n&#34;, p); printf(&#34;in s1 p1=%p\n&#34;, p1); printf(&#34;in s1: string&#39;s address: %p\n&#34;, &amp;(&#34;Hello world!&#34;)); printf(&#34;in s1 p2=%p\n&#34;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&#34;Hello world!&#34;; printf(&#34;in s2 q=%p\n&#34;, q); printf(&#34;in s2: string&#39;s address: %p\n&#34;, &amp;(&#34;Hello world!...</p>
+    <p>1. 函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
+// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; } 2. 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
+int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    3....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-13 12:34:27 +0800 CST'>December 13, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 字符串常量存储" href="https://874656645.github.io/rick/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/"></a>
+  <footer class="entry-footer"><span title='2021-12-26 15:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数默认参数和占位参数" href="https://874656645.github.io/rick/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

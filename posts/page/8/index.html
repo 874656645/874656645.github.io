@@ -142,78 +142,62 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>VS Code 搭建 c&#43;&#43; gdb 开发环境
+    <h2>deque 容器
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、安装 C&#43;&#43; 开发环境 Using GCC with MinGW
- 安装 MSYS2 更新 MSYS2 pacman -Syu 在开始菜单中运行 MSYS2 MSYS，更新其余的基本包 pacman -Su 安装 C&#43;&#43; 开发环境：  clang&#43;&#43; x64 gdb: pacman -S --needed base-devel mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-gdb g&#43;&#43; gdb: pacman -S --needed base-devel mingw-w64-x86_64-toolchain clang&#43;&#43; lldb: pacman -S --needed base-devel mingw-w64-clang-x86_64-lldb
-这个库会把 clang clang&#43;&#43; 等库安装到 msys64/clang64/bin 目录，但是 lldb 在 Windows 上的调试效果不如 gdb clang&#43;&#43; x86：pacman -S --needed base-devel mingw-w64-i686-clang   添加环境变量 D:\msys64\ucrt64\bin 检查是否安装成功  clang&#43;&#43; --version g&#43;&#43; --version gdb --version    pacman -Syu // 更新整个系统 pacman -Su // 更新已安装的包 pacman -Ss 关键字 // 搜索含关键字的包 pacman -S 包名 // 安装包，也可以同时安装多个包，只需以空格分隔包名即可 pacman -Rs 包名 // 删除包及其依赖 pacman -R 包名 // 删除包 二、配置 VS Code 主要是修改 task....</p>
+    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-06 20:24:21 +0800 CST'>January 6, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to VS Code 搭建 c&#43;&#43; gdb 开发环境" href="https://874656645.github.io/rick/posts/64-vs-code-%E6%90%AD%E5%BB%BA-c&#43;&#43;-%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/rick/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43; 内存对齐
+    <h2>巧妙收缩 vector 空间
     </h2>
   </header>
   <section class="entry-content">
-    <p>C/C&#43;&#43;内存对齐详解
-内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
-  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
-注意：上面两条规则都需要得到满足
-注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
-  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8  cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：...</p>
+    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 100000; &#43;&#43;i){ v.push_back(i); } cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; v.resize(10); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; vector&lt;int&gt;(v).swap(v); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-06 18:13:09 +0800 CST'>January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 内存对齐" href="https://874656645.github.io/rick/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/rick/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>自定义智能指针
+    <h2>vector 中的元素存放在堆上还是栈上
     </h2>
   </header>
   <section class="entry-content">
-    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr; } T&amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &lt;&lt; &#34;A(int)...&#34; &lt;&lt; endl; this-&gt;a = a; } ~A(){ cout &lt;&lt; &#34;~A()....</p>
+    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete()....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/rick/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 15:50:29 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to vector 中的元素存放在堆上还是栈上" href="https://874656645.github.io/rick/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43; 多线程
+    <h2>STL Hello World
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、进程与线程  进程是资源分配和调度的一个独立单位；而线程是进程的一个实体，是 CPU 调度和分配的基本单位 同一个进程中的多个线程的内存资源是共享的，各线程都可以改变进程中的变量。因此在执行多线程运算的时候要注意执行顺序  二、并行与并发  并行（parallellism）指的是多个任务在同一时刻同时在执行 并发（concurrency）是指在一个时间段内，多个任务交替进行。虽然看起来像在同时执行，但其实是交替的  三、多任务处理 多线程是多任务处理的一种特殊形式，一般情况下，有基于进程和基于线程的两种类型的多任务处理方式。
- 基于进程的多任务处理是程序的并发执行 基于线程的多任务处理是同一程序的片段的并发执行  四、C&#43;&#43;11 线程管理 thread 库  C&#43;&#43;11 提供了多线程库，使用时需要 #include &lt;thread&gt; 头文件，该头文件主要包含了对线程的管理类 std::thread 以及其他管理线程相关的类 每个应用程序至少有一个进程，而每个进程至少有一个主线程，除了主线程外，在一个进程中还可以创建多个子线程。每个线程都需要一个入口函数，入口函数返回退出，该线程也会退出，主线程就是以 main 函数作为入口函数的线程 主线程退出后，运行中的子线程也会被销毁 std::thread 的构造函数需要的是可调用（callable）类型，除了函数外，还可以调用 lambda 表达式、重载了 () 运算符的类的实例 把函数对象传入 std::thread 时，应传入函数名称（不带括号） 当启动一个线程后，一定要在该线程 thread 销毁前，调用 join() 或者 detach()，确定以何种方式等待线程执行结束  detach 方式，启动的线程自主在后台运行，当前的代码继续往下执行，不等待新线程结束 join 方式，等待关联的线程完成，才会继续执行 join() 后的代码 在以 detach 的方式执行线程时，要将线程访问的局部数据复制到线程的空间（使用按值传递），一定要确保线程没有使用局部变量的引用或者指针，除非你能肯定该线程会在局部作用域结束前执行结束    1、调用全局函数启动线程 #include &lt;thread&gt; using namespace std; void func(int i){ cout &lt;&lt; i &lt;&lt; endl; } int main() { for(int i = 0; i &lt; 4; &#43;&#43;i){ // 创建一个线程t，第一个参数为调用的函数，第二个参数为传递的参数  thread t(func, i); // 表示允许该线程在后台运行  t....</p>
+    <p> 平时要有容器、算法、迭代器的思维模式 容器提供迭代器，算法使用迭代器  // 算法 int count(int* begin, int* end, int val){ int n = 0; while(begin != end){ if(*begin == val){ n&#43;&#43;; } begin&#43;&#43;; } return n; } int main() { // 容器  int arr[] = {1, 3, 0, 5, 1, 3, 1, 0}; // 迭代器  int* begin = arr; int* end = *(&amp;arr &#43; 1); int n = count(begin, end, 1); cout &lt;&lt; &#34;count: &#34; &lt;&lt; n &lt;&lt; endl; return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-04 14:02:20 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 多线程" href="https://874656645.github.io/rick/posts/61-c&#43;&#43;-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 12:31:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL Hello World" href="https://874656645.github.io/rick/posts/78-stl-hello-world/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>临时变量不能绑定 no-const 左值引用类型
+    <h2>文件操作
     </h2>
   </header>
   <section class="entry-content">
-    <p>error: cannot bind non-const lvalue reference of type ‘T&amp;’ to an rvalue of type ‘T’
-如果一个参数是以非 const 引用传入，c&#43;&#43; 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。
-但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。
-所以，修改一个临时变量是毫无意义的。据此，c&#43;&#43; 编译器加入了临时变量不能作为非 const 引用的这个语义限制。
-c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数
-std::move() 返回的也是一个右值
-对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
-一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
-class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt;a &#43; t.a; return temp; } void printT(T &amp;t){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; t....</p>
+    <p>一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in); ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app); if (!ifs) { cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl; return; } if (!ofs) { cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl; return; } char ch; while (ifs.get(ch)) { cout &lt;&lt; ch; ofs &lt;&lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &lt;&lt; &#34;Age: &#34; &lt;&lt; m_age &lt;&lt; &#34; ID: &#34; &lt;&lt; m_id &lt;&lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-04 10:31:45 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 临时变量不能绑定 no-const 左值引用类型" href="https://874656645.github.io/rick/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 09:47:21 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 文件操作" href="https://874656645.github.io/rick/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

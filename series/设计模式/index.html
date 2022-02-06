@@ -127,23 +127,71 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>面向抽象类编程
+    <h2>装饰器模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>三层架构：业务逻辑层、抽象层、实现层
-原则：依赖倒转
-案例一：动物园 设计实现：
- 抽象层：Animal
-提供接口 voice 实现层：Dog、Cat
-分别实现 voice ，发出不同的声音 业务层：main 函数调用，只通过 Animal 的指针统一实现业务  案例二：编写一个 C&#43;&#43; 程序, 计算程序员( programmer )工资  要求能计算出初级程序员( junior_programmer ) 中级程序员 ( mid_programmer )高级程序员( adv_programmer )的工资 要求利用抽象类统一界面，方便程序的扩展，比如:新增，计算架构师( architect ) 的工资  设计实现：
- 抽象层：Programmer
-提供计算工资的接口 实现层：JuniorProgrammer、MidProgrammer、AdvProgrammer
-分别对计算工资接口进行实现 业务层：通过 Programmer 类统一管理，实现业务逻辑，同时业务的可扩展性更强，如新增架构师类型  案例三：电脑组装，面向抽象层编程  组装电脑有 3 个抽象类，抽象的 cpu，抽象的显卡，抽象的内存。 现在要求组装两台电脑，一台是 Intel 的 CPU，Intel 的显卡和 Intel 的内存。另一台是 Intel 的 CPU、Nvidia 的显卡和 Kingston 的内存条。 针对抽象层编程。  设计实现：...</p>
+    <p>装饰模式又叫包装模式，通过一种对客户端透明的方式来扩展对象功能，是继承关系的一种替代。
+装饰模式可以动态给一个类增加功能</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-09 19:12:37 +0800 CST'>January 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 面向抽象类编程" href="https://874656645.github.io/rick/posts/67-%E9%9D%A2%E5%90%91%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%BC%96%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/rick/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
 </article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>观察者模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/rick/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>命令模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>将一个请求封闭为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。
+命令模式可以将请求者和接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/rick/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>策略模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>策略模式定义了一系列的算法，并将每个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-01 16:59:42 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 策略模式" href="https://874656645.github.io/rick/posts/112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>模板方法模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
+class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-01 16:41:35 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 模板方法模式" href="https://874656645.github.io/rick/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://874656645.github.io/rick/series/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/page/2/">Next Page »</a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

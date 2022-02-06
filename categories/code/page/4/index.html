@@ -127,64 +127,81 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>评委打分案例
+    <h2>迪米特法则
     </h2>
   </header>
   <section class="entry-content">
-    <p>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
-分析：
- 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed....</p>
+    <p>又叫最少知识原则
+封装一个中间层进行隔离
+class AbstractBuilding{ public: virtual string getQuality()const = 0; virtual void sale() = 0; }; class BuildingA:public AbstractBuilding{ public: BuildingA(){ m_quality = &#34;高品质&#34;; } string getQuality()const override{ return m_quality; } void sale()override{ cout &lt;&lt; &#34;楼盘A：&#34; &lt;&lt; m_quality &lt;&lt; endl; } private: string m_quality; }; class BuildingB:public AbstractBuilding{ public: BuildingB(){ m_quality = &#34;低品质&#34;; } string getQuality()const override{ return m_quality; } void sale()override{ cout &lt;&lt; &#34;楼盘B：&#34; &lt;&lt; m_quality &lt;&lt; endl; } private: string m_quality; }; // 错误的做法 // 客户端 void test1(){ string myRequest = &#34;低品质&#34;; BuildingA* bA = new BuildingA; if(bA-&gt;getQuality() == myRequest){ bA-&gt;sale(); delete bA; } BuildingB* bB = new BuildingB; if(bB-&gt;getQuality() == myRequest){ bB-&gt;sale(); delete bB; } } // 正确做法 // 封装一个中间类 class Mediator{ public: Mediator(){ AbstractBuilding* b = new BuildingA; vb....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/rick/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-30 20:38:36 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 迪米特法则" href="https://874656645.github.io/rick/posts/101-%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>生成随机数
+    <h2>开闭原则
     </h2>
   </header>
   <section class="entry-content">
-    <p>#include &lt;ctime&gt;using namespace std; int main() { srand((unsigned int)time(NULL)); cout &lt;&lt; rand() % 40 &lt;&lt; endl; return 0; } </p>
+    <p>对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码
+如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
+class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a &#43; m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/rick/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-01-30 20:05:30 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 开闭原则" href="https://874656645.github.io/rick/posts/100-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>deque 容器
+    <h2>面向对象设计原则
     </h2>
   </header>
   <section class="entry-content">
-    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
+    <p>原则目的：高内聚，低耦合
+ 单一职责原则 Single Responsibility Principal（SRP）：类的职责单一，对外只提供一种功能 开闭原则 Open-Closed Principal（OCP）：对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码 里氏代换原则 Liskov Substitution Principal（LSP）：任何抽象类出现的地方都可以用他的实现类进行替换（多态） 依赖倒转原则 Dependence Inversion Principal（DIP）：依赖于抽象（接口），不要依赖具体的实现（类），针对接口编程 接口隔离原则 Interface Segregation Principal（ISP）：一个接口应该只提供一种对外功能，不应该把所有操作都封装到一个接口中去 合成复用原则 Composite Reuse Principal（CRP）：对于继承和组合，优先使用组合 迪米特法则 Law of Demeter（LoD）：一个对象应当对其他对象尽可能少的了解，从而降低各个对象之间的耦合。例如在一个程序中，各个模块之间相互调用时，通常会提供一个统一的接口来实现。这样其他模块不需要了解另外一个模块的内部实现细节（黑盒原理）  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/rick/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-30 19:17:09 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 面向对象设计原则" href="https://874656645.github.io/rick/posts/99-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>巧妙收缩 vector 空间
+    <h2>设计模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 100000; &#43;&#43;i){ v.push_back(i); } cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; v.resize(10); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; vector&lt;int&gt;(v).swap(v); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v....</p>
+    <p>设计模式
+一、概念  设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。 软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。 在一定环境下，用固定套路解决问题。 设计模式的基础是多态。  二、目的  学习设计模式有助于更加深入的理解面向对象思想 如何将代码分散在几个不同的类中 为什么要有接口 何谓针对抽象编程 何时不应该使用继承 如何不修改源代码增加新功能 更好地阅读和理解现有类库与其它系统中的源代码  三、软件设计模式种类 GoF 提出的设计模式有 23 种，加简单工厂模式，一共 24 种
+1、创建型模式 Creational 6种 如何创建对象
+ 单例模式 简单工厂模式 工厂方法模式 抽象工厂模式 原型模式 建造者模式  2、结构型模式 Structural 7种 如何实现类或对象的组合
+让类和类进行组合，获得更大的结构
+ 适配器模式 桥接模式 组合模式 装饰模式 外观模式 享元模式 代理模式  3、行为型模式 Behavioral 11种 类或对象怎样交互以及怎样分配职责
+ 职责链模式 命令模式 解释器模式 迭代器模式 中介模式 备忘录模式 观察者模式 状态模式 策略模式 模板方法模式 访问者模式  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/rick/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
+  <footer class="entry-footer"><span title='2022-01-30 11:57:37 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 设计模式" href="https://874656645.github.io/rick/posts/98-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>vector 中的元素存放在堆上还是栈上
+    <h2>UML 统一建模语言
     </h2>
   </header>
   <section class="entry-content">
-    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete()....</p>
+    <p>一、用例图  用例代表系统的某项完整功能 从客户角度来描述系统功能 包括参与者、用例、关系  1. 泛化关系 Generalization  父类和子类的关系  2. 包含关系 Include  一个功能肯定会使用另一个功能  3. 扩展关系 Extend  完成某个功能的时候偶尔会执行另一个功能  二、类图 用来显示系统中的类，接口以及它们之间的关系
+1. 泛化关系 Generalization（is a） 一种类与类之间的继承关系
+2. 实现关系 Realization（is a） 类与抽象类之间的实现关系
+3. 依赖关系 Dependence（use a） 两个相对独立的系统，一个系统负责构造另一个系统的实例，或者依赖另一个系统的服务
+类 A 做为类 B 方法的形参，而不是类 B 的成员属性
+4. 关联关系 Directed Association 两个相对独立的系统，一个系统的实例与另一个系统的一些实例存在固定的对应关系
+  聚合 Aggregation
+ 聚合关系是关联关系的一种，是更强的关联关系 聚合是整体和部分之间的关系，例如汽车由引擎、轮胎以及其它零件组成 聚合关系也是通过成员变量来实现的，但是，关联关系所涉及的两个类处在同一个层次上，而聚合关系中，两个类处于不同层次上，一个代表整体，一个代表部分 整体与部分之间是可分离的，它们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享    组合 Composition
+  三、对象图 四、时序图 五、活动图 </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 15:50:29 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to vector 中的元素存放在堆上还是栈上" href="https://874656645.github.io/rick/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"></a>
+  <footer class="entry-footer"><span title='2022-01-29 19:55:47 +0800 CST'>January 29, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to UML 统一建模语言" href="https://874656645.github.io/rick/posts/97-uml-%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

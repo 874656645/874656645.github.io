@@ -101,8 +101,8 @@ if (!doNotTrack) {
   "keywords": [
     "C++"
   ],
-  "articleBody": " 抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：\n1）所有成员都是 public，没有私有和受保护的非静态成员；\n2）没有定义任何构造函数；\n3）没有类内初始化；\n4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout  \"class AA printA()\"  endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout  \"class B printAA()\"  endl; } void printB() { cout  \"printB()\"  endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout  \"x = \"  x  \", y = \"  y  \", z = \"  z  endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout  \"a = \"  a  \", b = \"  b  endl; c.print(); } }; int main( ) { B b; b.printA(); b.printB(); // 初始化聚合类  D d = {1, 2, {3, 4}}; d.print(); return 0; } 输出：\nStart class AA printA() class B printAA() printB() a = 1, b = 2 x = 3, y = 4, z = 0 0 Finish ",
-  "wordCount" : "208",
+  "articleBody": " 抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：\n1）所有成员都是 public，没有私有和受保护的非静态成员；\n2）没有定义任何构造函数；\n3）没有类内初始化；\n4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout  \"class AA printA()\"  endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout  \"class B printAA()\"  endl; } void printB() { cout  \"printB()\"  endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout  \"x = \"  x  \", y = \"  y  \", z = \"  z  endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout  \"a = \"  a  \", b = \"  b  endl; c.print(); } }; int main( ) { B b; b.printA(); b.printB(); // 初始化聚合类  D d = {1, 2, {3, 4}}; d.print(); return 0; } 输出：\nStart class AA printA() class B printAA() printB() a = 1, b = 2 x = 3, y = 4, z = 0 0 Finish 既然有抽象类，为什么要用接口呢？\n 接口带来的最大好处就是避免了多继承带来的复杂性和低效性，并且同时可以提供多重继承的好处 抽象类对事物进行抽象，更多的是为了继承，为了扩展，为了实现代码的重用，子类和父类之间体现的是is-a关系 接口则更多的体现一种行为约束，一种规则，一旦实现了这个接口，就要给出这个接口中所有方法的具体实现，也就是说实现类对于接口中所有的方法都是有意义的 接口用于抽象事物的特性，抽象类用于代码复用  ",
+  "wordCount" : "213",
   "inLanguage": "en",
   "datePublished": "2021-12-27T16:34:27+08:00",
   "dateModified": "2021-12-27T16:34:27+08:00",
@@ -290,7 +290,14 @@ a = 1, b = 2
 x = 3, y = 4, z = 0
 0
 Finish
-</code></pre></div>
+</code></pre></div><p><strong>既然有抽象类，为什么要用接口呢？</strong></p>
+<ul>
+<li>接口带来的最大好处就是避免了多继承带来的复杂性和低效性，并且同时可以提供多重继承的好处</li>
+<li>抽象类对事物进行抽象，更多的是为了继承，为了扩展，为了实现代码的重用，子类和父类之间体现的是is-a关系</li>
+<li>接口则更多的体现一种行为约束，一种规则，一旦实现了这个接口，就要给出这个接口中所有方法的具体实现，也就是说实现类对于接口中所有的方法都是有意义的</li>
+<li>接口用于抽象事物的特性，抽象类用于代码复用</li>
+</ul>
+
 
   </div>
 

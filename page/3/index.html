@@ -138,70 +138,68 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>map multimap 容器
+    <h2>抽象工厂模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
- 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; m_name &lt;&lt; &#34; 工资：&#34; &lt;&lt; m_salary &lt;&lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&lt;Worker&gt; &amp;v){ string nameSeed = &#34;ABCDEFGHIJ&#34;; for(int i = 0; i &lt; nameSeed....</p>
+    <p> 抽象工厂针对的是产品族，而不是产品等级 产品族：同一产地或者同一厂商，功能不同 产品等级：功能相同，产地或者厂商不同 对于增加产品族，符合开闭原则 对于增加产品等级，不符合开闭原则  // 抽象工厂模式 class AbstractApple{ public: virtual void showName() = 0; }; class AbstractBanana{ public: virtual void showName() = 0; }; class AbstractPear{ public: virtual void showName() = 0; }; class ChinaApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是中国苹果！&#34; &lt;&lt; endl; } }; class ChinaBanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是中国香蕉！&#34; &lt;&lt; endl; } }; class ChinaPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是中国鸭梨！&#34; &lt;&lt; endl; } }; class USAApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是美国苹果！&#34; &lt;&lt; endl; } }; class USABanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是美国香蕉！&#34; &lt;&lt; endl; } }; class USAPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是美国鸭梨！&#34; &lt;&lt; endl; } }; class JapanApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是日本苹果！&#34; &lt;&lt; endl; } }; class JapanBanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是日本香蕉！&#34; &lt;&lt; endl; } }; class JapanPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是日本鸭梨！&#34; &lt;&lt; endl; } }; class AbstractFactory{ public: virtual AbstractApple* CreateApple() = 0; virtual AbstractBanana* CreateBanana() = 0; virtual AbstractPear* CreatePear() = 0; }; class ChinaFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new ChinaApple; } AbstractBanana* CreateBanana() override{ return new ChinaBanana; } AbstractPear* CreatePear() override{ return new ChinaPear; } }; class USAFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new USAApple; } AbstractBanana* CreateBanana() override{ return new USABanana; } AbstractPear* CreatePear() override{ return new USAPear; } }; class JapanFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new JapanApple; } AbstractBanana* CreateBanana() override{ return new JapanBanana; } AbstractPear* CreatePear() override{ return new JapanPear; } }; int main() { AbstractFactory* factory = nullptr; AbstractApple* apple = nullptr; AbstractBanana* banana = nullptr; AbstractPear* pear = nullptr; // 中国  factory = new ChinaFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; // 美国  factory = new USAFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; // 日本  factory = new JapanFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-20 20:18:25 +0800 CST'>January 20, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to map multimap 容器" href="https://874656645.github.io/rick/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-31 17:44:49 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 抽象工厂模式" href="https://874656645.github.io/rick/posts/106-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>set multiset 容器
+    <h2>工厂方法模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>关联式容器 底层结构使用红黑树实现（二叉树-&gt;二叉搜索树-&gt;平衡二叉树-&gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
-class Person{ public: Person(string name, int age, int height){ this-&gt;m_name = name; this-&gt;m_age = age; this-&gt;m_height = height; } bool operator&lt;(const Person &amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&gt;m_age == p2.m_age){ return this-&gt;m_height &gt; p2.m_height; } return this-&gt;m_age &lt; p2.m_age; } void printPerson()const{ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set&lt;Person&gt; lp; lp....</p>
+    <p>工厂方法模式 = 简单工厂模式 &#43; 开闭原则
+类的个数成倍增多，维护成本很高
+适用场景：
+ 客户端不知道它所需要的对象的类 抽象工厂类通过其子类来指定创建哪个对象  // 工厂方法模式 class AbstractFruit{ public: virtual void showName() = 0; }; class Apple : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl; } }; class Banana : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl; } }; class Pear : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl; } }; // 抽象工厂 class AbstractFruitFactory{ public: virtual AbstractFruit* CreateFruit() = 0; }; class AppleFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Apple; } }; class PearFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Pear; } }; class BananaFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Banana; } }; int main() { AbstractFruitFactory* factory = nullptr; AbstractFruit* fruit = nullptr; factory = new AppleFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new BananaFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new PearFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-18 21:20:48 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to set multiset 容器" href="https://874656645.github.io/rick/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-31 15:51:36 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 工厂方法模式" href="https://874656645.github.io/rick/posts/105-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>list 容器
+    <h2>简单工厂模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>注意事项  双向循环链表 不支持随机访问 因为不支持随机访问，所以也不能用全局的排序算法 sort 一般不支持随机访问的容器会自己提供 sort 方法 自定义类型要指定排序规则  排序案例 案例描述：将 Person 自定义数据类型进行排序，Person 中属性有姓名、年龄、身高
-排序规则：按照年龄进行升序，如果年龄相同按照身高进行降序
-class Person{ public: Person(string name, int age, int height){ this-&gt;m_name = name; this-&gt;m_age = age; this-&gt;m_height = height; } bool operator&lt;(const Person &amp;p2){ if(this-&gt;m_age == p2.m_age){ return this-&gt;m_height &gt; p2.m_height; } return this-&gt;m_age &lt; p2.m_age; } void printPerson()const{ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { list&lt;Person&gt; lp; lp....</p>
+    <p> 实现了客户端与功能类的解耦 但是违反了类的单一职责原则，整个类的代码冗长，阅读难度、维护难度和测试难度也很大 违反了开闭原则，增添功能要修改源代码  适用场景：
+ 工厂类负责创建的对象比较少，不会造成工厂方法中的业务逻辑太过复杂 客户端只知道传入工厂类的参数，对于如何创建对象并不关心  // 简单工厂模式 class AbstractFruit{ public: virtual void showName() = 0; }; class Apple : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl; } }; class Banana : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl; } }; class Pear : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl; } }; class FruitFactory{ public: static AbstractFruit* CreateFruit(string flag){ if(flag == &#34;apple&#34;){ return new Apple; } else if(flag == &#34;banana&#34;){ return new Banana; } else if(flag == &#34;pear&#34;){ return new Pear; } else{ return nullptr; } } }; int main() { AbstractFruit* fruit = FruitFactory::CreateFruit(&#34;apple&#34;); fruit-&gt;showName(); delete fruit; fruit = FruitFactory::CreateFruit(&#34;banana&#34;); fruit-&gt;showName(); delete fruit; fruit = FruitFactory::CreateFruit(&#34;pear&#34;); fruit-&gt;showName(); delete fruit; return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-18 20:26:45 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to list 容器" href="https://874656645.github.io/rick/posts/86-list-%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-31 15:14:38 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 简单工厂模式" href="https://874656645.github.io/rick/posts/104-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>queue 队列容器适配器
+    <h2>依赖倒转原则
     </h2>
   </header>
   <section class="entry-content">
-    <p>先进先出 不允许遍历元素  queue 队列操作：
-size()
-empty()</p>
+    <p>传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层
+// 底层实现 class BankWorker{ public: void saveService(){ cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl; } void transferService(){ cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl; } void payService(){ cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl; } }; // 中层封装 void doSaveBusiness(BankWorker* worker){ worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){ worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){ worker-&gt;payService(); } // 高层调用 void test1(){ BankWorker* bw = new BankWorker; doSaveBusiness(bw); doPayBusiness(bw); doTransferBusiness(bw); delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public: virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout &lt;&lt; &#34;办理存款业务....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-17 19:41:48 +0800 CST'>January 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to queue 队列容器适配器" href="https://874656645.github.io/rick/posts/85-queue-%E9%98%9F%E5%88%97%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-31 11:35:37 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 依赖倒转原则" href="https://874656645.github.io/rick/posts/103-%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>stack 栈容器适配器
+    <h2>合成复用原则
     </h2>
   </header>
   <section class="entry-content">
-    <p>先进后出 栈不允许遍历元素 不能随机存取  stack 栈操作:
-size()
-empty()</p>
+    <p>优先使用组合的方式，而不是继承
+class AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-&gt;run(); delete car; } void drive(AbstractCar* car){ car-&gt;run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-&gt;drive(); delete p; p = new Person(new DaZhong); p-&gt;drive(); delete p; // 方式二：  Person pp; pp....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:17:43 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to stack 栈容器适配器" href="https://874656645.github.io/rick/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-30 21:45:22 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 合成复用原则" href="https://874656645.github.io/rick/posts/102-%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

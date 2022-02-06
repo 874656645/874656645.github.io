@@ -127,6 +127,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>函数指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish </p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-16 14:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数指针" href="https://874656645.github.io/rick/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>指针函数和函数指针
     </h2>
   </header>
