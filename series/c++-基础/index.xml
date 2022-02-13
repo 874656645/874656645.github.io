@@ -9,7 +9,27 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 03 Feb 2022 20:29:17 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/series/c++-%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Feb 2022 21:38:53 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/series/c++-%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>递归</title>
+      <link>https://874656645.github.io/rick/posts/119-%E9%80%92%E5%BD%92/</link>
+      <pubDate>Mon, 07 Feb 2022 21:38:53 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/119-%E9%80%92%E5%BD%92/</guid>
+      <description>逆序打印字符串
+void printReverseString(const char* str){ if(*str == &amp;#39;\0&amp;#39;){ return; } printReverseString(str + 1); printf(&amp;#34;%c&amp;#34;, *str); } int main() { const char* str = &amp;#34;Hello World&amp;#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
+struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&amp;gt;next); printf(&amp;#34;%d\n&amp;#34;, header-&amp;gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&amp;gt;data = 10; node1-&amp;gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&amp;gt;data = 20; node2-&amp;gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&amp;gt;data = 30; node3-&amp;gt;next = NULL; header-&amp;gt;next = node1; node1-&amp;gt;next = node2; node2-&amp;gt;next = node3; printReverseLinkNode(header-&amp;gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3</description>
+    </item>
+    
+    <item>
+      <title>常用的宏定义</title>
+      <link>https://874656645.github.io/rick/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/</link>
+      <pubDate>Mon, 07 Feb 2022 10:11:16 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/</guid>
+      <description>int main() { printf(&amp;#34;%s\n&amp;#34;, __FILE__); // main.c  printf(&amp;#34;%d\n&amp;#34;, __LINE__); // 14  printf(&amp;#34;%s\n&amp;#34;, __DATE__); // Feb 7 2022  printf(&amp;#34;%s\n&amp;#34;, __TIME__); // 01:59:37  return 0; } // func1.h #ifdef __cplusplus extern &amp;#34;C&amp;#34;{ #endif  void func1(); #ifdef __cplusplus } #endif  // main.h extern &amp;#34;C&amp;#34;{ include &amp;#34;func1.h&amp;#34; } extern &amp;#34;C&amp;#34;{ extern void func1(); } int main() { func1(); return 0; } </description>
+    </item>
+    
     <item>
       <title>char* 数组</title>
       <link>https://874656645.github.io/rick/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/</link>

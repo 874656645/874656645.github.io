@@ -127,68 +127,67 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>抽象工厂模式
+    <h2>模板方法模式
     </h2>
   </header>
   <section class="entry-content">
-    <p> 抽象工厂针对的是产品族，而不是产品等级 产品族：同一产地或者同一厂商，功能不同 产品等级：功能相同，产地或者厂商不同 对于增加产品族，符合开闭原则 对于增加产品等级，不符合开闭原则  // 抽象工厂模式 class AbstractApple{ public: virtual void showName() = 0; }; class AbstractBanana{ public: virtual void showName() = 0; }; class AbstractPear{ public: virtual void showName() = 0; }; class ChinaApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是中国苹果！&#34; &lt;&lt; endl; } }; class ChinaBanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是中国香蕉！&#34; &lt;&lt; endl; } }; class ChinaPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是中国鸭梨！&#34; &lt;&lt; endl; } }; class USAApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是美国苹果！&#34; &lt;&lt; endl; } }; class USABanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是美国香蕉！&#34; &lt;&lt; endl; } }; class USAPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是美国鸭梨！&#34; &lt;&lt; endl; } }; class JapanApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是日本苹果！&#34; &lt;&lt; endl; } }; class JapanBanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是日本香蕉！&#34; &lt;&lt; endl; } }; class JapanPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是日本鸭梨！&#34; &lt;&lt; endl; } }; class AbstractFactory{ public: virtual AbstractApple* CreateApple() = 0; virtual AbstractBanana* CreateBanana() = 0; virtual AbstractPear* CreatePear() = 0; }; class ChinaFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new ChinaApple; } AbstractBanana* CreateBanana() override{ return new ChinaBanana; } AbstractPear* CreatePear() override{ return new ChinaPear; } }; class USAFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new USAApple; } AbstractBanana* CreateBanana() override{ return new USABanana; } AbstractPear* CreatePear() override{ return new USAPear; } }; class JapanFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new JapanApple; } AbstractBanana* CreateBanana() override{ return new JapanBanana; } AbstractPear* CreatePear() override{ return new JapanPear; } }; int main() { AbstractFactory* factory = nullptr; AbstractApple* apple = nullptr; AbstractBanana* banana = nullptr; AbstractPear* pear = nullptr; // 中国  factory = new ChinaFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; // 美国  factory = new USAFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; // 日本  factory = new JapanFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; return 0; } </p>
+    <p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
+class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 17:44:49 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 抽象工厂模式" href="https://874656645.github.io/rick/posts/106-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-01 16:41:35 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 模板方法模式" href="https://874656645.github.io/rick/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>工厂方法模式
+    <h2>适配器模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>工厂方法模式 = 简单工厂模式 &#43; 开闭原则
-类的个数成倍增多，维护成本很高
-适用场景：
- 客户端不知道它所需要的对象的类 抽象工厂类通过其子类来指定创建哪个对象  // 工厂方法模式 class AbstractFruit{ public: virtual void showName() = 0; }; class Apple : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl; } }; class Banana : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl; } }; class Pear : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl; } }; // 抽象工厂 class AbstractFruitFactory{ public: virtual AbstractFruit* CreateFruit() = 0; }; class AppleFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Apple; } }; class PearFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Pear; } }; class BananaFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Banana; } }; int main() { AbstractFruitFactory* factory = nullptr; AbstractFruit* fruit = nullptr; factory = new AppleFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new BananaFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new PearFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; return 0; } </p>
+    <p>有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式
+class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &lt;&lt; endl; } }; class TargetInterface{ public: virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public: MyAdaptor(int param):param(param){} void operator()(int v){ print(v, param); } private: MyPrint print; int param; }; MyAdaptor myBind2nd(int v){ return MyAdaptor(v); } int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v.push_back(i); } for_each(v.begin(), v....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 15:51:36 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 工厂方法模式" href="https://874656645.github.io/rick/posts/105-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-01 16:07:36 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 适配器模式" href="https://874656645.github.io/rick/posts/110-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>简单工厂模式
+    <h2>外观模式
     </h2>
   </header>
   <section class="entry-content">
-    <p> 实现了客户端与功能类的解耦 但是违反了类的单一职责原则，整个类的代码冗长，阅读难度、维护难度和测试难度也很大 违反了开闭原则，增添功能要修改源代码  适用场景：
- 工厂类负责创建的对象比较少，不会造成工厂方法中的业务逻辑太过复杂 客户端只知道传入工厂类的参数，对于如何创建对象并不关心  // 简单工厂模式 class AbstractFruit{ public: virtual void showName() = 0; }; class Apple : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl; } }; class Banana : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl; } }; class Pear : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl; } }; class FruitFactory{ public: static AbstractFruit* CreateFruit(string flag){ if(flag == &#34;apple&#34;){ return new Apple; } else if(flag == &#34;banana&#34;){ return new Banana; } else if(flag == &#34;pear&#34;){ return new Pear; } else{ return nullptr; } } }; int main() { AbstractFruit* fruit = FruitFactory::CreateFruit(&#34;apple&#34;); fruit-&gt;showName(); delete fruit; fruit = FruitFactory::CreateFruit(&#34;banana&#34;); fruit-&gt;showName(); delete fruit; fruit = FruitFactory::CreateFruit(&#34;pear&#34;); fruit-&gt;showName(); delete fruit; return 0; } </p>
+    <p>将复杂的子系统抽象到同一个接口进行管理，外界只需要通过此接口与子类系统进行交互，而不必直接与复杂的子类系统进行交互
+案例：家庭影院外观模式 实现KTV模式：电视打开，灯关掉，音响打开，麦克风打开，DVD打开
+实现游戏模式：电视打开，音响打开，游戏机打开</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 15:14:38 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 简单工厂模式" href="https://874656645.github.io/rick/posts/104-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-01 15:32:38 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 外观模式" href="https://874656645.github.io/rick/posts/109-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>依赖倒转原则
+    <h2>代理模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层
-// 底层实现 class BankWorker{ public: void saveService(){ cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl; } void transferService(){ cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl; } void payService(){ cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl; } }; // 中层封装 void doSaveBusiness(BankWorker* worker){ worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){ worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){ worker-&gt;payService(); } // 高层调用 void test1(){ BankWorker* bw = new BankWorker; doSaveBusiness(bw); doPayBusiness(bw); doTransferBusiness(bw); delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public: virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout &lt;&lt; &#34;办理存款业务....</p>
+    <p>为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 11:35:37 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 依赖倒转原则" href="https://874656645.github.io/rick/posts/103-%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/"></a>
+  <footer class="entry-footer"><span title='2022-02-01 07:28:53 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 代理模式" href="https://874656645.github.io/rick/posts/108-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>合成复用原则
+    <h2>单例模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>优先使用组合的方式，而不是继承
-class AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-&gt;run(); delete car; } void drive(AbstractCar* car){ car-&gt;run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-&gt;drive(); delete p; p = new Person(new DaZhong); p-&gt;drive(); delete p; // 方式二：  Person pp; pp....</p>
+    <p>单例在内存中只有一份，在内存中不会占用太多，程序退出时会随着程序统一释放内存，所以可以不必特意释放  一、懒汉式 不是线程安全的，所以多线程使用要加锁
+class Singleton{ public: static Singleton* getInstance(){ if(s_instance == nullptr){ s_instance = new Singleton; } return s_instance; } // 可有可无，程序结束时，系统会自动回收程序的所有内存  class Garbo{ ~Garbo(){ if(s_instance){ cout &lt;&lt; &#34;gc...&#34; &lt;&lt; endl; delete s_instance; } } }; private: Singleton(){ cout &lt;&lt; &#34;Singleton()...&#34; &lt;&lt; endl; } Singleton(const Singleton&amp;) = delete; Singleton&amp; operator=(const Singleton&amp;) = delete; static Singleton* s_instance; static Garbo s_gc; }; Singleton* Singleton::s_instance = nullptr; int main() { cout &lt;&lt; &#34;main()....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-30 21:45:22 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 合成复用原则" href="https://874656645.github.io/rick/posts/102-%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"></a>
+  <footer class="entry-footer"><span title='2022-01-31 20:43:34 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 单例模式" href="https://874656645.github.io/rick/posts/107-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

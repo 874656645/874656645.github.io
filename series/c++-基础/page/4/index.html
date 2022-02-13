@@ -127,6 +127,33 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>构造函数重载与互调
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 构造函数中不要写业务逻辑 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public: Test(int a, int b, int c){ _a = a; _b = b; _c = c; } // 正确  Test(int a, int b):Test(a, b, 100){ } /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */ int getA(){ return _a; } int getB(){ return _b; } int getC(){ return _c; } private: int _a; int _b; int _c; }; int main( ) { Test t1(10, 20); cout &lt;&lt; t1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-28 16:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 构造函数重载与互调" href="https://874656645.github.io/rick/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>类的成员函数作为回调函数
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>思路是借助类的静态成员函数
+方式一：
+class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback); b.setCur(); Handle(A::callback); return 0; } 方式二：
+class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } static void callback(void *a){ ((A*)a)-&gt;print(); } private: int m_a; }; typedef void (*FUN)(void *); void Handle(void *a, FUN call){ call(a); } int main( ) { A a(10), b(20); Handle(&amp;a, A::callback); Handle(&amp;b, A::callback); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-28 14:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类的成员函数作为回调函数" href="https://874656645.github.io/rick/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>类的兼容性原则
     </h2>
   </header>
@@ -165,39 +192,6 @@ Start printT ~Test() 0 Finish 二、只能在栈上 方法：将 new 和 delete 
   </section>
   <footer class="entry-footer"><span title='2021-12-27 17:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 定义一个只能在堆上（栈上）生成对象的类" href="https://874656645.github.io/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>抽象类、接口类、聚合类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
-1）所有成员都是 public，没有私有和受保护的非静态成员；
-2）没有定义任何构造函数；
-3）没有类内初始化；
-4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl; } void printB() { cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl; c....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-27 16:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 抽象类、接口类、聚合类" href="https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>虚继承和虚基类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>虚继承和虚基类 参考
- 在C&#43;&#43;中，在定义公共基类A的派生类B、C…的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C…的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项
-cl [filename].cpp /d1 reportSingleClassLayout[className]
-一般继承：
-class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; }; 输出：
-class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;--- 调用：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-27 13:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 虚继承和虚基类" href="https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
