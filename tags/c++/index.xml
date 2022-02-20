@@ -9,7 +9,19 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 07 Feb 2022 21:38:53 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Feb 2022 15:29:35 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2022-02-14 杂记</title>
+      <link>https://874656645.github.io/rick/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/</link>
+      <pubDate>Tue, 15 Feb 2022 15:29:35 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/</guid>
+      <description>NULL，0，&#39;\0&#39;，&amp;lsquo;0&amp;rsquo;
+int main() { char arr[] = {0, &amp;#39;\0&amp;#39;, &amp;#39;0&amp;#39;, 48}; printf(&amp;#34;%c\n&amp;#34;, arr[0]); printf(&amp;#34;%c\n&amp;#34;, arr[1]); printf(&amp;#34;%c\n&amp;#34;, arr[2]); printf(&amp;#34;%c\n&amp;#34;, arr[3]); printf(&amp;#34;---------------\n&amp;#34;); printf(&amp;#34;%d\n&amp;#34;, arr[0]); printf(&amp;#34;%d\n&amp;#34;, arr[1]); printf(&amp;#34;%d\n&amp;#34;, arr[2]); printf(&amp;#34;%d\n&amp;#34;, arr[3]); return 0; } 输出：
+0 0 --------------- 0 0 48 48   UTF-8 向下兼容 ASCII 编码，UTF-8 编码中，一个英文字为一个字节，一个中文一般为三个字节（ASCII、Unicode、UTF-8）
+ 0xxxxxxx：单字节编码形式，这和 ASCII 编码完全一样，因此 UTF-8 是兼容 ASCII 的； 110xxxxx 10xxxxxx：双字节编码形式； 1110xxxx 10xxxxxx 10xxxxxx：三字节编码形式； 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx：四字节编码形式； UTF-8：每字 1 ~ 6 字节 Unicode（UCS-2）：每字都是 2 bytes UTF-16：每字 2 ~ 4 字节 UTF-32（UCS-4）：每字都是 4 bytes    float 单精度，浮点数在内存中是按科学计数法来存储的，小数点后6位能确定表示，float 是由 1 bit 符号位，8 bit 指数位和 23 bit 尾数位组成，精度是由尾数位决定的（2^23 = 8388608）</description>
+    </item>
+    
     <item>
       <title>递归</title>
       <link>https://874656645.github.io/rick/posts/119-%E9%80%92%E5%BD%92/</link>
@@ -36,7 +48,7 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
       <pubDate>Thu, 03 Feb 2022 20:29:17 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/</guid>
-      <description>void printArr(const char ** p, int len){ for(int i = 0; i &amp;lt; len; ++i){ cout &amp;lt;&amp;lt; p[i] &amp;lt;&amp;lt; endl; } } void sortSelect(const char ** p, int len){ for(int i = 0; i &amp;lt; len; ++i){ int max = i; for(int j = i + 1; j &amp;lt; len; ++j){ if(p[j] &amp;gt; p[max]){ max = j; } } // 交换  if(i != max){ const char* tmp = p[i]; p[i] = p[max]; p[max] = tmp; } } } int main() { const char* arr[] = {&amp;#34;aa&amp;#34;, &amp;#34;bb&amp;#34;, &amp;#34;cc&amp;#34;, &amp;#34;dd&amp;#34;, &amp;#34;ee&amp;#34;}; int len = sizeof(arr) / sizeof(char*); cout &amp;lt;&amp;lt; len &amp;lt;&amp;lt; endl; printArr(arr, len); sortSelect(arr, len); cout &amp;lt;&amp;lt; &amp;#34;----------------&amp;#34; &amp;lt;&amp;lt; endl; printArr(arr, len); return 0; } 输出：</description>
+      <description>void printArr(const char ** p, int len){ for(int i = 0; i &amp;lt; len; ++i){ cout &amp;lt;&amp;lt; p[i] &amp;lt;&amp;lt; endl; } } void sortSelect(const char ** p, int len){ for(int i = 0; i &amp;lt; len - 1; ++i){ int max = i; for(int j = i + 1; j &amp;lt; len; ++j){ if(p[j] &amp;gt; p[max]){ max = j; } } // 交换  if(i != max){ const char* tmp = p[i]; p[i] = p[max]; p[max] = tmp; } } } int main() { const char* arr[] = {&amp;#34;aa&amp;#34;, &amp;#34;bb&amp;#34;, &amp;#34;cc&amp;#34;, &amp;#34;dd&amp;#34;, &amp;#34;ee&amp;#34;}; int len = sizeof(arr) / sizeof(char*); cout &amp;lt;&amp;lt; len &amp;lt;&amp;lt; endl; printArr(arr, len); sortSelect(arr, len); cout &amp;lt;&amp;lt; &amp;#34;----------------&amp;#34; &amp;lt;&amp;lt; endl; printArr(arr, len); return 0; } 输出：</description>
     </item>
     
     <item>
@@ -697,10 +709,10 @@ STL（Standard Template Library），即标准模板库，是一个具有工业�
 适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
 一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
 1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
-2. deque deque是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
-3. list list是STL实现的双向链表，与vector相比, 它允许快速的插入和删除，但是随机访问却比较慢
-4. map、multimap、unordered_map、unordered_multimap  map 是STL的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然stack、queue、priority_queue中也可以存放元素，但在STL中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而stack、queue、priority_queue只是在底层将其他容器进行了封装
-std::stack template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp;gt; class stack; std::queue template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp;gt; class queue; std::priority_queue template&amp;lt;class T, class Container = vector&amp;lt;T&amp;gt;, class Compare = less&amp;lt;typename Container::value_type&amp;gt;&amp;gt; class priority_queue; 为什么选择deque作为stack和queue的底层默认容器？</description>
+2. deque deque 是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
+3. list list 是 STL 实现的双向链表，与 vector 相比, 它允许快速的插入和删除，但是随机访问却比较慢
+4. map、multimap、unordered_map、unordered_multimap  map 是 STL 的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似 list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然 stack、queue、priority_queue 中也可以存放元素，但在 STL 中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而 stack、queue、priority_queue 只是在底层将其他容器进行了封装
+std::stack template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp;gt; class stack; std::queue template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp;gt; class queue; std::priority_queue template&amp;lt;class T, class Container = vector&amp;lt;T&amp;gt;, class Compare = less&amp;lt;typename Container::value_type&amp;gt;&amp;gt; class priority_queue; 为什么选择 deque 作为 stack 和 queue 的底层默认容器？</description>
     </item>
     
     <item>
@@ -844,7 +856,8 @@ int fun(int, char, double) =&amp;gt; fun_icd   重载函数匹配顺序  如果�
       <pubDate>Sun, 26 Dec 2021 14:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/</guid>
-      <description>一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  三、全局变量与静态变量的区别 作用域不同
+      <description>一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：
+三、全局变量与静态变量的区别 作用域不同
 全局变量默认是 extern 的
 静态变量是文件作用域
 C/C++中extern关键字详解</description>

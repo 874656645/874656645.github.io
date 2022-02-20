@@ -21,7 +21,6 @@
 <link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.91.2" />
 <link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/rick/tags/c&#43;&#43;/index.xml">
 <noscript>
     <style>
@@ -127,6 +126,20 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>栈解旋 Unwinding
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>异常被抛出后，从进入 try 块起到异常被抛出前，这期间在栈上构造的所有对象都会被自动析构，析构的顺序与构造的顺序相反。
+与 return 类似
+class Test{ public: Test(string name){ m_name = name; cout &lt;&lt; m_name &lt;&lt; &#34;被构造了&#34; &lt;&lt; endl; } ~Test(){ cout &lt;&lt; m_name &lt;&lt; &#34;被析构了&#34; &lt;&lt; endl; } private: string m_name; }; double func1(int x, int y){ Test t1(&#34;t1&#34;), t2(&#34;t2&#34;); if(y == 0){ throw y; } return x / y; } int main() { try{ Test t3(&#34;t3&#34;), t4(&#34;t4&#34;); func1(10, 0); } catch(int e){ cout &lt;&lt; &#34;除数为 &#34; &lt;&lt; e &lt;&lt; endl; } return 0; } t3被构造了 t4被构造了 t1被构造了 t2被构造了 t2被析构了 t1被析构了 t4被析构了 t3被析构了 除数为 0 </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-15 18:07:46 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 栈解旋 Unwinding" href="https://874656645.github.io/rick/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>异常
     </h2>
   </header>
@@ -172,26 +185,6 @@ Start exception finally 0 Finish 二、std::exception class exception { public: 
   </section>
   <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/rick/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>编译过程
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>各个 .cpp 文件是独立编译的，如果有其它的类和函数会先在本 .o 文件中生成符号，由最后的链接器去其它 .o 文件找具体的函数定义
- .c .cpp 文件经过 预编译器拷贝头文件、宏展开 生成 .i 文件（文本文件）
-g&#43;&#43; -E main.cpp -o main.i .i 文件经过 编译器 生成汇编程序 .s（文本文件）
-g&#43;&#43; -S main.i -o main.s .s 文件经过 汇编器 生成可定位目标文件 .o （二进制）
-Windows:
-g&#43;&#43; -c main.s -o main.obj
-Linux:
-g&#43;&#43; -c main.s -o main.o .o 文件经过 链接器 生成可执行目标文件 .exe .dll
-g&#43;&#43; main.s -o main  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-12 20:12:00 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 编译过程" href="https://874656645.github.io/rick/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

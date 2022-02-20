@@ -7,7 +7,8 @@
 <meta name="robots" content="index, follow">
 <title>内存区间划分 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  三、全局变量与静态变量的区别 作用域不同
+<meta name="description" content="一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：
+三、全局变量与静态变量的区别 作用域不同
 全局变量默认是 extern 的
 静态变量是文件作用域
 C/C&#43;&#43;中extern关键字详解">
@@ -26,7 +27,6 @@ C/C&#43;&#43;中extern关键字详解">
 <link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.91.2" />
 <noscript>
     <style>
         #theme-toggle,
@@ -48,7 +48,8 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="内存区间划分" />
-<meta property="og:description" content="一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  三、全局变量与静态变量的区别 作用域不同
+<meta property="og:description" content="一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：
+三、全局变量与静态变量的区别 作用域不同
 全局变量默认是 extern 的
 静态变量是文件作用域
 C/C&#43;&#43;中extern关键字详解" />
@@ -62,7 +63,8 @@ C/C&#43;&#43;中extern关键字详解" />
 <meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="内存区间划分"/>
-<meta name="twitter:description" content="一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  三、全局变量与静态变量的区别 作用域不同
+<meta name="twitter:description" content="一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：
+三、全局变量与静态变量的区别 作用域不同
 全局变量默认是 extern 的
 静态变量是文件作用域
 C/C&#43;&#43;中extern关键字详解"/>
@@ -94,12 +96,12 @@ C/C&#43;&#43;中extern关键字详解"/>
   "@type": "BlogPosting",
   "headline": "内存区间划分",
   "name": "内存区间划分",
-  "description": "一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  三、全局变量与静态变量的区别 作用域不同\n全局变量默认是 extern 的\n静态变量是文件作用域\nC/C++中extern关键字详解",
+  "description": "一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：\n三、全局变量与静态变量的区别 作用域不同\n全局变量默认是 extern 的\n静态变量是文件作用域\nC/C++中extern关键字详解",
   "keywords": [
     "C++"
   ],
-  "articleBody": "一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  三、全局变量与静态变量的区别 作用域不同\n全局变量默认是 extern 的\n静态变量是文件作用域\nC/C++中extern关键字详解\n",
-  "wordCount" : "15",
+  "articleBody": "一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：\n三、全局变量与静态变量的区别 作用域不同\n全局变量默认是 extern 的\n静态变量是文件作用域\nC/C++中extern关键字详解\n",
+  "wordCount" : "16",
   "inLanguage": "en",
   "datePublished": "2021-12-26T14:34:27+08:00",
   "dateModified": "2021-12-26T14:34:27+08:00",
@@ -230,6 +232,9 @@ C/C&#43;&#43;中extern关键字详解"/>
 <li>代码区</li>
 </ul>
 <p><img loading="lazy" src="../img/%e5%86%85%e5%ad%98%e5%8c%ba%e9%97%b4%e5%88%92%e5%88%86.png" alt="内存区间段"  />
+</p>
+<p><strong>Linux程序运行内存虚拟地址空间：</strong></p>
+<p><img loading="lazy" src="../img/Linux%e7%a8%8b%e5%ba%8f%e8%bf%90%e8%a1%8c%e5%86%85%e5%ad%98%e8%99%9a%e6%8b%9f%e5%9c%b0%e5%9d%80%e7%a9%ba%e9%97%b4.jpg" alt="Linux程序运行内存虚拟地址空间"  />
 </p>
 <h3 id="三全局变量与静态变量的区别">三、全局变量与静态变量的区别<a hidden class="anchor" aria-hidden="true" href="#三全局变量与静态变量的区别">#</a></h3>
 <p><strong>作用域不同</strong><br>

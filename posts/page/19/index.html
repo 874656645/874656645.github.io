@@ -21,7 +21,6 @@
 <link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<meta name="generator" content="Hugo 0.91.2" />
 <link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/rick/posts/index.xml">
 <noscript>
     <style>
@@ -142,77 +141,74 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>函数形参从右到左入栈
+    <h2>友元函数与友元类
     </h2>
   </header>
   <section class="entry-content">
-    <p>int add(int count, ...) { // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节）  int intSize = sizeof(int*) / sizeof(int); int sum = 0; // cout &lt;&lt; &amp;count &lt;&lt; endl;  int *p = &amp;count &#43; intSize; // cout &lt;&lt; p &lt;&lt; endl;  for (int i = 0; i &lt; count; &#43;&#43;i) { sum &#43;= *p; cout &lt;&lt; *p &lt;&lt; endl; p &#43;= intSize; } return sum; } int main() { cout &lt;&lt; add(3, 1, 2, 3) &lt;&lt; endl; return 0; } 输出：...</p>
+    <p>友元利弊：
+友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。
+  注意事项：
+（1）友元关系不能被继承；
+（2）友元关系是单向的，不具有交换性；
+（3）友元关系不具有传递性；
+  一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数
+class A { friend void printA(const A &amp;a); public: void printA(); private: string name {&#34;C&#43;&#43;&#34;}; int id {1024}; }; void A::printA(){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; a....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数形参从右到左入栈" href="https://874656645.github.io/rick/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/"></a>
+  <footer class="entry-footer"><span title='2021-12-24 12:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 友元函数与友元类" href="https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>指针 &#43; 1
+    <h2>构造、拷贝构造、赋值构造
     </h2>
   </header>
   <section class="entry-content">
-    <p>1. 32 位和 64 位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
-2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
-int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]；  // &amp;a&#43;1不是首地址&#43;1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）  // 但是prt与(&amp;a&#43;1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int)  int *ptr = (int*)(&amp;a &#43; 1); cout &lt;&lt; *(a &#43; 1) &lt;&lt; endl; cout &lt;&lt; *(ptr - 1) &lt;&lt; endl; return 0; } 输出：
-1 2 3 6 注： a，&amp;a的地址是一样的，但意思不一样：
- a是数组首地址，也就是a[0]的地址，a&#43;1是数组下一元素的地址，即a[1] &amp;a是对象（整个数组作为一个对象）首地址，而&amp;a&#43;1是下一个对象的地址，即a[5].  </p>
+    <p>结论：
+ 拷贝构造函数是函数，赋值运算符是运算符的重载； 拷贝构造函数会生成新的类对象，赋值运算符不会； 拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值; 若接受返回值的对象已经初始化过，则会调用赋值构造函数，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值构造函数，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。 当没有显式的构造函数和拷贝构造时，系统才会提供默认的无参构造  成员初始化列表  使用初始化列表，少了一次调用默认构造函数的过程，提高效率 常量成员，因为常量只能初始化不能赋值，所以必须放在初始化列表里面 引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面 成员变量初始化的顺序跟在初始化列表的顺序无关，与变量声明的顺序有关  测试类 class A { public: A(){ cout &lt;&lt; &#34;default constructor&#34; &lt;&lt; endl; cout &lt;&lt; &#34;adrres: &#34; &lt;&lt; this &lt;&lt; &#34;\tpoint x: &#34; &lt;&lt; x &lt;&lt; &#34;\ty: &#34; &lt;&lt; y &lt;&lt; endl; } A(int t){ x = new int(0); y = t; cout &lt;&lt; &#34;second constructor&#34; &lt;&lt; endl; cout &lt;&lt; &#34;adrres: &#34; &lt;&lt; this &lt;&lt; &#34;\tpoint x: &#34; &lt;&lt; x &lt;&lt; &#34;\ty: &#34; &lt;&lt; y &lt;&lt; endl; } A(const A &amp;a){ cout &lt;&lt; &#34;const copy constructor&#34; &lt;&lt; endl; cout &lt;&lt; &#34;adrres: &#34; &lt;&lt; this &lt;&lt; &#34;\tpoint x: &#34; &lt;&lt; x &lt;&lt; &#34;\ty: &#34; &lt;&lt; y &lt;&lt; endl; this-&gt;x = a....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 指针 &#43; 1" href="https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;1/"></a>
+  <footer class="entry-footer"><span title='2021-12-23 14:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 构造、拷贝构造、赋值构造" href="https://874656645.github.io/rick/posts/36-%E6%9E%84%E9%80%A0%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>模板类
+    <h2>函数重载、重写、隐藏、模板
     </h2>
   </header>
   <section class="entry-content">
-    <p>template&lt;class T&gt; class Test { public: Test(T t){ m_t = t;}; // explicit Test(T t){ m_t = t;};  T getValue(){ return m_t; }; private: T m_t; }; int main() { Test&lt;int&gt; tInt(1); cout &lt;&lt; tInt.getValue() &lt;&lt; endl; Test&lt;double&gt; tD(1.15); cout &lt;&lt; tD.getValue() &lt;&lt; endl; Test&lt;float&gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换  cout &lt;&lt; tF.getValue() &lt;&lt; endl; return 0; } 输出：
-Start 1 1.15 1.3 0 Finish </p>
+    <p>重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写； 重定义： 派生类中函数与基类中的函数同名，但是这个函数在基类中并没有被定义为虚函数 隐藏： 派生类中重定义了父类的函数，此时基类的函数会被隐藏； 模板： 模板函数是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;print()&#34; &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } void freeP(A ** p){ if(p == NULL){ return; } if(*p != NULL){ free(*p); *p = NULL; } } void freeP(A * p){ if(p != NULL){ free(p); p = NULL; } } static void printS(){ cout &lt;&lt; &#34;printS() s_a = &#34; &lt;&lt; s_a &lt;&lt; endl; } static void printS(int s){ cout &lt;&lt; &#34;printS(int s) &#34; &lt;&lt; s_a * s &lt;&lt; endl; } static void printS(void *p, int s){ cout &lt;&lt; &#34;printS(void *p, int s) &#34; &lt;&lt; ((A*)p)-&gt;m_a * s &lt;&lt; endl; } static int s_a; private: int m_a; }; int A::s_a = 0; int main( ) { A *a = new A(1); a-&gt;printS(a, 20); a-&gt;print(); A::s_a = 10; a-&gt;printS(); a-&gt;printS(10); a-&gt;freeP(a); if(a == NULL){ cout &lt;&lt; &#34;*a is not valid&#34; &lt;&lt; endl; return 0; } cout &lt;&lt; &#34;*a is valid&#34; &lt;&lt; endl; a-&gt;print(); return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-22 10:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板类" href="https://874656645.github.io/rick/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/"></a>
+  <footer class="entry-footer"><span title='2021-12-23 12:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数重载、重写、隐藏、模板" href="https://874656645.github.io/rick/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>模板函数
+    <h2>inline 内联函数
     </h2>
   </header>
   <section class="entry-content">
-    <p>template &lt;typename T&gt; inline const T&amp; Max (const T&amp; a, const T&amp; b) { return a &lt; b ? b:a; }; int main() { int i = 39; int j = 20; cout &lt;&lt; &#34;Max(i, j): &#34; &lt;&lt; Max(i, j) &lt;&lt; endl; double f1 = 13.5; double f2 = 20.7; cout &lt;&lt; &#34;Max(f1, f2): &#34; &lt;&lt; Max(f1, f2) &lt;&lt; endl; string s1 = &#34;Hello&#34;; string s2 = &#34;World&#34;; cout &lt;&lt; &#34;Max(s1, s2): &#34; &lt;&lt; Max(s1, s2) &lt;&lt; endl; return 0; } 输出：...</p>
+    <p>当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
+ 适用于函数体积很小并频繁使用的函数 内联函数中不可以出现循环、递归或开关操作 内联函数的声明必须在函数定义之前 内联函数的定义必须出现在内联函数的第一次调用前 在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数 虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联  优点：
+ 内联函数在被调用处进行代码展开，省去了参数压栈、跳转返回、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度； 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会； 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能； 内联函数在运行时可调试，而宏定义不可以。  缺点：
+ 代码膨胀，消耗了更多的内存空间； inline 函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像 non-inline 可以直接链接； 内联函数其实是不可控的，它只是对编译器的建议，是否对函数内联，决定权在于编译器; 不能对函数进行取址操作  </p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-22 09:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板函数" href="https://874656645.github.io/rick/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2021-12-23 11:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to inline 内联函数" href="https://874656645.github.io/rick/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>ArcMap 加载天地图服务
+    <h2>fork Unix
     </h2>
   </header>
   <section class="entry-content">
-    <p>注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是OGC标准，会导致 ArcMap 加载后坐标不对  影像底图：
-http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
-http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
-http://t0.tianditu.com/img_w/esri/wmts 天地图影像（墨卡托，WGS1984）
-http://t0.tianditu.com/cia_w/esri/wmts 天地图影像注记（墨卡托，WGS1984）
-矢量底图：
-http://t0.tianditu.com/vec_c/esri/wmts 天地图矢量（经纬度，CGCS2000）
-http://t0.tianditu.com/cva_c/esri/wmts 天地图矢量注记（经纬度，CGCS2000）
-http://t0.tianditu.com/vec_w/esri/wmts 天地图矢量（墨卡托，WGS1984）
-http://t0.tianditu.com/cva_w/esri/wmts 天地图矢量注记（墨卡托，WGS1984）
-ArcMap WMTS</p>
+    <p>Unix 的 fork 函数 fork函数可以创建一个和当前映像一样的子进程，这个函数会返回两个值：从子进程返回0，从父进程返回子进程的PID；
+ 1）在父进程中，fork返回新创建子进程的进程ID； 2）在子进程中，fork返回0； 3）如果出现错误，fork返回一个负值；  #include &lt;iostream&gt;#include &lt;unistd.h&gt; using namespace std; int main() { pid_t fpid; //fpid表示fork函数返回的值  int count = 0; cout &lt;&lt; &amp;count &lt;&lt; endl; fpid = fork(); if (fpid &lt; 0) printf(&#34;error in fork!\n&#34;); else if (fpid == 0) { printf(&#34;i am the child process, my process id is %d\n&#34;,getpid()); cout &lt;&lt; &amp;count &lt;&lt; endl; count&#43;&#43;; } else { printf(&#34;i am the parent process, my process id is %d\n&#34;,getpid()); cout &lt;&lt; &amp;count &lt;&lt; endl; count&#43;&#43;; } printf(&#34;统计结果是: %d\n&#34;,count); return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-17 22:34:27 +0800 CST'>December 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcMap 加载天地图服务" href="https://874656645.github.io/rick/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
+  <footer class="entry-footer"><span title='2021-12-23 10:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to fork Unix" href="https://874656645.github.io/rick/posts/33-fork-unix/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
