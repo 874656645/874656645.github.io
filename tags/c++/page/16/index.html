@@ -126,6 +126,50 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>构造函数私有
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 如果类的内部没有专门创建实例的代码，则是无法创建任何实例的 如果父类构造函数设置成了私有的，则子类无法编译，因为在初始化子类时会先执行父类的构造  class A{ public: private: A(int ){ } }; class B:public A{ public: int x; }; int main( ) { B b; b.x = 0; return 0; } 输出：
+Start prog.cc:19:7: error: call to implicitly-deleted default constructor of &#39;B&#39; B b; ^ prog.cc:13:9: note: default constructor of &#39;B&#39; is implicitly deleted because base class &#39;A&#39; has an inaccessible default constructor class B:public A{ ^ 1 error generated. 1 Finish </p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-28 10:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 构造函数私有" href="https://874656645.github.io/rick/posts/47-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%A7%81%E6%9C%89/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>定义一个只能在堆上（栈上）生成对象的类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、只能在堆上 方法：将析构函数设置为私有
+原因：C&#43;&#43; 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象
+class Test { public: void printT(){ cout &lt;&lt; &#34;printT&#34; &lt;&lt; endl; } void freeT(){ delete this; } private: ~Test(){ cout &lt;&lt; &#34;~Test()&#34; &lt;&lt; endl; } }; int main( ) { // 不能在栈上创建对象  //Test t; // prog.cc:25:10: error: variable of type &#39;Test&#39; has private destructor  // 只能在堆上创建对象  Test *t = new Test; t-&gt;printT(); // 销毁对象  t-&gt;freeT(); return 0; } 输出：
+Start printT ~Test() 0 Finish 二、只能在栈上 方法：将 new 和 delete 重载为私有...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-27 17:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 定义一个只能在堆上（栈上）生成对象的类" href="https://874656645.github.io/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>抽象类、接口类、聚合类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+1）所有成员都是 public，没有私有和受保护的非静态成员；
+2）没有定义任何构造函数；
+3）没有类内初始化；
+4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl; } void printB() { cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl; c....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-27 16:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 抽象类、接口类、聚合类" href="https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>虚继承和虚基类
     </h2>
   </header>
@@ -151,49 +195,6 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
   </section>
   <footer class="entry-footer"><span title='2021-12-27 10:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 多态总结" href="https://874656645.github.io/rick/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>函数默认参数和占位参数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1. 函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
-// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; } 2. 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
-int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    3....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-26 15:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数默认参数和占位参数" href="https://874656645.github.io/rick/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>内存区间划分
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：
-三、全局变量与静态变量的区别 作用域不同
-全局变量默认是 extern 的
-静态变量是文件作用域
-C/C&#43;&#43;中extern关键字详解</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-26 14:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 内存区间划分" href="https://874656645.github.io/rick/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>指针引用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
-void test(int * a){ a = new int(20); //*a = 20;  cout &lt;&lt; &#34;test point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;test:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &#34;main point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-25 21:34:27 +0800 CST'>December 25, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 指针引用" href="https://874656645.github.io/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

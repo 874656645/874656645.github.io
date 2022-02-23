@@ -87,8 +87,8 @@ if (!doNotTrack) {
   "keywords": [
     "Git Commonds"
   ],
-  "articleBody": "1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git\n 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git\n 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git\n2、更新远程仓库代码到本地 git pull blog master\n3、将变化提交到本地仓库 git commit -m \"delete all files\"\ngit commit -am \"update\"\n4、push推送到远程仓库 git push blog master\n5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick\n6、删除配置的远程仓库别名 git remote remove blog\n7、添加文件 git add -A\n8、删除文件 git rm *\n9、删除远程仓库中的文件、文件夹 git rm -r --cached \"*.*\"\n*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了\n10、查看所有分支并切换 git branch -a\ngit branch -r\ngit checkout dev5\n11、删除远程分支 git push blog --delete name\n12、解决failed to push some refs to git git pull --rebase blog master\n13、不需验证用户名和密码 执行如下命令\ngit config --global credential.helper store\n此命令会在 .gitconfig 文件中添加如下文本\n[credential] helper = store 14、重新输入用户名和密码 git config --system --unset credential.helper\n或者把上面文件中的 store 删掉\n15、添加子仓库 git submodule add  \n添加成功后，在父仓库根目录增加了 .gitmodule 文件，并且在父仓库的 git 配置文件中加入了 submodule 段\n16、checkout 子仓库 git submodule update --init --recursive\ngit submodule init\ngit submodule update\n17、删除子模块 git submodule deinit {MOD_NAME}\n逆初始化模块，其中 {MOD_NAME} 为模块目录，执行后可发现模块目录被清空\ngit rm --cached {MOD_NAME}\n删除 .gitmodules 中记录的模块信息（–cached 选项清除 .git/modules 中的缓存）\n但是测试有问题， git 配置文件中的 submodule 段和*.git/modules* 中仍有缓存\n18、常用命令 ",
-  "wordCount" : "177",
+  "articleBody": "一、Git 常用命令 1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git\n 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git\n 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git\n2、更新远程仓库代码到本地 git pull blog master\n3、将变化提交到本地仓库 git commit -m \"delete all files\"\ngit commit -am \"update\"\n4、push推送到远程仓库 git push blog master\n5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick\n6、删除配置的远程仓库别名 git remote remove blog\n7、添加文件 git add -A\n8、删除文件 git rm *\n9、删除远程仓库中的文件、文件夹 git rm -r --cached \"*.*\"\n*.*表示全部文件和文件夹，如果想删除具体的文件或文件夹，使用具体的名称就可以了\n10、查看所有分支并切换 git branch -a\ngit branch -r\ngit checkout dev5\n11、删除远程分支 git push blog --delete name\n12、解决failed to push some refs to git git pull --rebase blog master\n13、不需验证用户名和密码 执行如下命令\ngit config --global credential.helper store\n此命令会在 .gitconfig 文件中添加如下文本\n[credential] helper = store 14、重新输入用户名和密码 git config --system --unset credential.helper\n或者把上面文件中的 store 删掉\n15、添加子仓库 git submodule add  \n添加成功后，在父仓库根目录增加了 .gitmodule 文件，并且在父仓库的 git 配置文件中加入了 submodule 段\n16、checkout 子仓库 git submodule update --init --recursive\ngit submodule init\ngit submodule update\n17、删除子模块 git submodule deinit {MOD_NAME}\n逆初始化模块，其中 {MOD_NAME} 为模块目录，执行后可发现模块目录被清空\ngit rm --cached {MOD_NAME}\n删除 .gitmodules 中记录的模块信息（–cached 选项清除 .git/modules 中的缓存）\n但是测试有问题， git 配置文件中的 submodule 段和*.git/modules* 中仍有缓存\n18、常用命令 二、连接超时的情况   修改 windows 的 host 文件，win + R 打开运行，输入 drivers，在 etc 目录下找到 host 文件，添加如下内容（注：ip 地址可通过此网站查询）：\n140.82.112.3 github.com git 199.232.69.194 github.global.ssl.fastly.net   还要能科学上网\n  打开 cmd，尝试能否 ping 通 ping github.com\n  ",
+  "wordCount" : "206",
   "inLanguage": "en",
   "datePublished": "2018-12-15T22:45:47+08:00",
   "dateModified": "2018-12-15T22:45:47+08:00",
@@ -198,6 +198,9 @@ if (!doNotTrack) {
 
         <div class="inner"><ul>
                 <li>
+                    <a href="#%e4%b8%80git-%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="一、Git 常用命令">一、Git 常用命令</a><ul>
+                        
+                <li>
                     <a href="#1%e5%88%9d%e5%a7%8b%e5%8c%96%e6%9c%ac%e5%9c%b0%e4%bb%93%e5%ba%93" aria-label="1、初始化本地仓库">1、初始化本地仓库</a></li>
                 <li>
                     <a href="#2%e6%9b%b4%e6%96%b0%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93%e4%bb%a3%e7%a0%81%e5%88%b0%e6%9c%ac%e5%9c%b0" aria-label="2、更新远程仓库代码到本地">2、更新远程仓库代码到本地</a></li>
@@ -232,14 +235,18 @@ if (!doNotTrack) {
                 <li>
                     <a href="#17%e5%88%a0%e9%99%a4%e5%ad%90%e6%a8%a1%e5%9d%97" aria-label="17、删除子模块">17、删除子模块</a></li>
                 <li>
-                    <a href="#18%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="18、常用命令">18、常用命令</a>
+                    <a href="#18%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="18、常用命令">18、常用命令</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8c%e8%bf%9e%e6%8e%a5%e8%b6%85%e6%97%b6%e7%9a%84%e6%83%85%e5%86%b5" aria-label="二、连接超时的情况">二、连接超时的情况</a>
                 </li>
             </ul>
         </div>
     </details>
 </div>
 
-  <div class="post-content"><h3 id="1初始化本地仓库">1、初始化本地仓库<a hidden class="anchor" aria-hidden="true" href="#1初始化本地仓库">#</a></h3>
+  <div class="post-content"><h2 id="一git-常用命令">一、Git 常用命令<a hidden class="anchor" aria-hidden="true" href="#一git-常用命令">#</a></h2>
+<h3 id="1初始化本地仓库">1、初始化本地仓库<a hidden class="anchor" aria-hidden="true" href="#1初始化本地仓库">#</a></h3>
 <ul>
 <li>适合远程仓库是空仓库</li>
 </ul>
@@ -309,6 +316,20 @@ git remote add blog https://github.com/874656645/rick
 <h3 id="18常用命令">18、常用命令<a hidden class="anchor" aria-hidden="true" href="#18常用命令">#</a></h3>
 <p><img loading="lazy" src="https://github.com/DickyQie/Tool-use/blob/git-learning-document/Git%E5%91%BD%E4%BB%A4.jpg?raw=true" alt="Git 常用命令"  />
 </p>
+<h2 id="二连接超时的情况">二、连接超时的情况<a hidden class="anchor" aria-hidden="true" href="#二连接超时的情况">#</a></h2>
+<ol>
+<li>
+<p>修改 windows 的 host 文件，<code>win + R</code> 打开运行，输入 <code>drivers</code>，在 <code>etc</code> 目录下找到  <code>host</code> 文件，添加如下内容（注：ip 地址可通过<a href="https://www.ipaddress.com/">此网站</a>查询）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">140.82.112.3 github.com git 
+199.232.69.194 github.global.ssl.fastly.net
+</code></pre></div></li>
+<li>
+<p>还要能科学上网</p>
+</li>
+<li>
+<p>打开 cmd，尝试能否 ping 通 <code>ping github.com</code></p>
+</li>
+</ol>
 
 
   </div>

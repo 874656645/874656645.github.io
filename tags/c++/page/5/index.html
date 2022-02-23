@@ -126,6 +126,47 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>合成复用原则
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>优先使用组合的方式，而不是继承
+class AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-&gt;run(); delete car; } void drive(AbstractCar* car){ car-&gt;run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-&gt;drive(); delete p; p = new Person(new DaZhong); p-&gt;drive(); delete p; // 方式二：  Person pp; pp....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-30 21:45:22 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 合成复用原则" href="https://874656645.github.io/rick/posts/102-%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>迪米特法则
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>又叫最少知识原则
+封装一个中间层进行隔离
+class AbstractBuilding{ public: virtual string getQuality()const = 0; virtual void sale() = 0; }; class BuildingA:public AbstractBuilding{ public: BuildingA(){ m_quality = &#34;高品质&#34;; } string getQuality()const override{ return m_quality; } void sale()override{ cout &lt;&lt; &#34;楼盘A：&#34; &lt;&lt; m_quality &lt;&lt; endl; } private: string m_quality; }; class BuildingB:public AbstractBuilding{ public: BuildingB(){ m_quality = &#34;低品质&#34;; } string getQuality()const override{ return m_quality; } void sale()override{ cout &lt;&lt; &#34;楼盘B：&#34; &lt;&lt; m_quality &lt;&lt; endl; } private: string m_quality; }; // 错误的做法 // 客户端 void test1(){ string myRequest = &#34;低品质&#34;; BuildingA* bA = new BuildingA; if(bA-&gt;getQuality() == myRequest){ bA-&gt;sale(); delete bA; } BuildingB* bB = new BuildingB; if(bB-&gt;getQuality() == myRequest){ bB-&gt;sale(); delete bB; } } // 正确做法 // 封装一个中间类 class Mediator{ public: Mediator(){ AbstractBuilding* b = new BuildingA; vb....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-30 20:38:36 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 迪米特法则" href="https://874656645.github.io/rick/posts/101-%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>开闭原则
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码
+如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
+class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a &#43; m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-30 20:05:30 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 开闭原则" href="https://874656645.github.io/rick/posts/100-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>面向对象设计原则
     </h2>
   </header>
@@ -153,60 +194,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-01-30 11:57:37 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 设计模式" href="https://874656645.github.io/rick/posts/98-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>UML 统一建模语言
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、用例图  用例代表系统的某项完整功能 从客户角度来描述系统功能 包括参与者、用例、关系  1. 泛化关系 Generalization  父类和子类的关系  2. 包含关系 Include  一个功能肯定会使用另一个功能  3. 扩展关系 Extend  完成某个功能的时候偶尔会执行另一个功能  二、类图 用来显示系统中的类，接口以及它们之间的关系
-1. 泛化关系 Generalization（is a） 一种类与类之间的继承关系
-2. 实现关系 Realization（is a） 类与抽象类之间的实现关系
-3. 依赖关系 Dependence（use a） 两个相对独立的系统，一个系统负责构造另一个系统的实例，或者依赖另一个系统的服务
-类 A 做为类 B 方法的形参，而不是类 B 的成员属性
-4. 关联关系 Directed Association 两个相对独立的系统，一个系统的实例与另一个系统的一些实例存在固定的对应关系
-  聚合 Aggregation
- 聚合关系是关联关系的一种，是更强的关联关系 聚合是整体和部分之间的关系，例如汽车由引擎、轮胎以及其它零件组成 聚合关系也是通过成员变量来实现的，但是，关联关系所涉及的两个类处在同一个层次上，而聚合关系中，两个类处于不同层次上，一个代表整体，一个代表部分 整体与部分之间是可分离的，它们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享    组合 Composition
-  三、对象图 四、时序图 五、活动图 </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-29 19:55:47 +0800 CST'>January 29, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to UML 统一建模语言" href="https://874656645.github.io/rick/posts/97-uml-%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>函数对象适配器
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>仿函数适配器 bind1st、bind2nd 将二元仿函数转为一元仿函数
-  仿函数适配器 not1、not2
-  仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了
-  仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器
-  class MyPrint : public binary_function&lt;int, int, void&gt;{ public: void operator()(int v, int val) const{ cout &lt;&lt; &#34;v: &#34; &lt;&lt; v &lt;&lt; &#34;, val: &#34; &lt;&lt; val &lt;&lt; &#34;, v &#43; val: &#34; &lt;&lt; v &#43; val &lt;&lt; endl; } }; void myPrint(int v, int val){ cout &lt;&lt; v &#43; val &lt;&lt; &#34; &#34;; } class MySort: public binary_function&lt;int, int, bool&gt;{ public: bool operator() (int lhs, int rhs)const{ return lhs &gt; rhs; } }; class MyGreater: public unary_function&lt;int, bool&gt;{ public: bool operator()(int v)const{ return v &gt; 50; } }; void printVec(const vector&lt;int&gt; &amp;v){ for(const auto &amp;p : v){ cout &lt;&lt; p &lt;&lt; &#34; &#34;; } cout &lt;&lt; endl; } class Person{ public: Person(int id, int age):id(id), age(age){} void show(){ cout &lt;&lt; &#34;id: &#34; &lt;&lt; id &lt;&lt; &#34;, age: &#34; &lt;&lt; age &lt;&lt; endl; } int id; int age; }; int main(){ vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-27 21:55:47 +0800 CST'>January 27, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数对象适配器" href="https://874656645.github.io/rick/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43; 沉思录笔记
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>有的情况下，现在的折衷方案比未来的理想方案好得多
-  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。
-  只要类定义正确，我就只能按照我编写它的初衷那样去用它。
-  C&#43;&#43; 哲学：抽象，实用，只为用到的东西付出代价。
-  类设计者的核查表：
- 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
-class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* ....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-26 17:48:58 +0800 CST'>January 26, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 沉思录笔记" href="https://874656645.github.io/rick/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

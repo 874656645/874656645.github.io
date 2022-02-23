@@ -88,8 +88,8 @@ if (!doNotTrack) {
   "keywords": [
     "C++"
   ],
-  "articleBody": "在堆上声明一个数组 int main( ) { #if 0// 方式一： int** pArr = NULL; pArr = new int*[4]; for(int i = 0; i pArr[i] = new int[8]; } for(int i = 0; i for(int j = 0; j pArr[i][j] = i * j; } } for(int i = 0; i for(int j = 0; j if(j == 0) cout cout } } // 删除 for(int i = 0; i delete [] pArr[i]; } delete [] pArr; #endif  // 方式二：  cout  sizeof(int[5])  endl; // 初始化  int(*pArr)[8] = new int[4][8]; memset(pArr, 0, sizeof(int[4][8])); // 或者  // int(*pArr)[8] = new int[4][8]{{0}};  cout  sizeof(int[4][8])  endl; for(int i = 0; i  4; ++i){ for(int j = 0; j  8; ++j){ pArr[i][j] = i * j; } } for(int i = 0; i  4; ++i){ for(int j = 0; j  8; ++j){ cout  pArr[i][j]  '\\t'; } cout  endl; } cout  endl; delete[] pArr; // 取地址  int arr[3][4]{{0}}; int(*p)[3][4] = \u0026arr; cout  arr[2][3]  endl; cout  *p[2][3]  endl; return 0; } 输出：\nStart 0\t0\t0\t0\t0\t0\t0\t0\t0\t1\t2\t3\t4\t5\t6\t7\t0\t2\t4\t6\t8\t10\t12\t14\t0\t3\t6\t9\t12\t15\t18\t21\t0 Finish 在栈上声明一个数组 int main( ) { int a[3]; // 全部初始化为 0  int b[3]{4}; // 第一个值是 4，其余初始化为 0  int c[3] = {4}; // 同上  // 与 vector 不同  vectorint v(3, 4);// 3 个值都是 4  return 0; } ",
-  "wordCount" : "272",
+  "articleBody": "在堆上声明一个数组 int main( ) { #if 0// 方式一： int** pArr = NULL; pArr = new int*[4]; for(int i = 0; i pArr[i] = new int[8]; } for(int i = 0; i for(int j = 0; j pArr[i][j] = i * j; } } for(int i = 0; i for(int j = 0; j if(j == 0) cout cout } } // 删除 for(int i = 0; i delete [] pArr[i]; } delete [] pArr; #endif  // 方式二：  cout  sizeof(int[5])  endl; // 初始化  int(*pArr)[8] = new int[4][8]; memset(pArr, 0, sizeof(int[4][8])); // 或者  // int(*pArr)[8] = new int[4][8]{{0}};  cout  sizeof(int[4][8])  endl; for(int i = 0; i  4; ++i){ for(int j = 0; j  8; ++j){ pArr[i][j] = i * j; } } for(int i = 0; i  4; ++i){ for(int j = 0; j  8; ++j){ cout  pArr[i][j]  '\\t'; } cout  endl; } cout  endl; delete[] pArr; // 取地址  int arr[3][4]{{0}}; int(*p)[3][4] = \u0026arr; cout  arr[2][3]  endl; cout  *p[2][3]  endl; return 0; } 输出：\nStart 0\t0\t0\t0\t0\t0\t0\t0\t0\t1\t2\t3\t4\t5\t6\t7\t0\t2\t4\t6\t8\t10\t12\t14\t0\t3\t6\t9\t12\t15\t18\t21\t0 Finish 在栈上声明一个数组 int main( ) { int a[3]; // 全部初始化为 0  int b[3]{4}; // 第一个值是 4，其余初始化为 0  int c[3] = {4}; // 同上  // new 一维数组  int* d = new int[3]{4}; // 同上  // 与 vector 不同  vectorint v(3, 4);// 3 个值都是 4  return 0; } ",
+  "wordCount" : "282",
   "inLanguage": "en",
   "datePublished": "2021-12-29T14:34:27+08:00",
   "dateModified": "2021-12-29T14:34:27+08:00",
@@ -278,6 +278,8 @@ Finish
     <span style="color:#66d9ef">int</span> a[<span style="color:#ae81ff">3</span>];           <span style="color:#75715e">// 全部初始化为 0
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> b[<span style="color:#ae81ff">3</span>]{<span style="color:#ae81ff">4</span>};        <span style="color:#75715e">// 第一个值是 4，其余初始化为 0
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> c[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">4</span>};     <span style="color:#75715e">// 同上
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// new 一维数组
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> d <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[<span style="color:#ae81ff">3</span>]{<span style="color:#ae81ff">4</span>}; <span style="color:#75715e">// 同上
 </span><span style="color:#75715e"></span>
     <span style="color:#75715e">// 与 vector 不同
 </span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);<span style="color:#75715e">// 3 个值都是 4

@@ -133,7 +133,7 @@ if (!doNotTrack) {
     <p>1. 32 位和 64 位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
 2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
 int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]；  // &amp;a&#43;1不是首地址&#43;1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）  // 但是prt与(&amp;a&#43;1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int)  int *ptr = (int*)(&amp;a &#43; 1); cout &lt;&lt; *(a &#43; 1) &lt;&lt; endl; cout &lt;&lt; *(ptr - 1) &lt;&lt; endl; return 0; } 输出：
-1 2 3 6 注： a，&amp;a的地址是一样的，但意思不一样：
+2 5 注： a，&amp;a的地址是一样的，但意思不一样：
  a是数组首地址，也就是a[0]的地址，a&#43;1是数组下一元素的地址，即a[1] &amp;a是对象（整个数组作为一个对象）首地址，而&amp;a&#43;1是下一个对象的地址，即a[5].  </p>
   </section>
   <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>

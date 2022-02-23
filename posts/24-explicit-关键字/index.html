@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>explicit（显式）关键字 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：">
+<meta name="description" content="修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -44,7 +44,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="explicit（显式）关键字" />
-<meta property="og:description" content="修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：" />
+<meta property="og:description" content="修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-15T12:34:27&#43;08:00" />
@@ -55,7 +55,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="explicit（显式）关键字"/>
-<meta name="twitter:description" content="修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换："/>
+<meta name="twitter:description" content="修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换："/>
 
 
 <script type="application/ld+json">
@@ -84,11 +84,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "explicit（显式）关键字",
   "name": "explicit（显式）关键字",
-  "description": "修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast\u0026lt;bool\u0026gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：",
+  "description": "修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast\u0026lt;bool\u0026gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 修饰构造函数，防止隐式转换，复制初始化，复制列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以复制初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_castbool(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：\nclass T{ public: T(int a, int b){ cout  \"T(int, int)...\"  endl; this-a = a; this-b = b; } ~T(){ cout  \"~T()...\"  endl; } void printT(){ cout  \"a = \"  a  \", b = \"  b  endl; } private: int a; int b; }; T func(){ cout  \"in func()...\"  endl; return {3, 4}; } int main() { T t = func(); t.printT(); return 0; } 输出：\nin func()... T(int, int)... a = 3, b = 4 ~T()... ",
+  "articleBody": " 修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_castbool(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：\nclass T{ public: T(int a, int b){ cout  \"T(int, int)...\"  endl; this-a = a; this-b = b; } ~T(){ cout  \"~T()...\"  endl; } void printT(){ cout  \"a = \"  a  \", b = \"  b  endl; } private: int a; int b; }; T func(){ cout  \"in func()...\"  endl; return {3, 4}; } int main() { T t = func(); t.printT(); return 0; } 输出：\nin func()... T(int, int)... a = 3, b = 4 ~T()... ",
   "wordCount" : "198",
   "inLanguage": "en",
   "datePublished": "2021-12-15T12:34:27+08:00",
@@ -191,7 +191,7 @@ if (!doNotTrack) {
   </header> 
 
   <div class="post-content"><ol>
-<li>修饰构造函数，防止隐式转换，复制初始化，复制列表初始化</li>
+<li>修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化</li>
 <li>修饰转换函数，可以防止隐式转换，但按语境转换除外</li>
 <li>explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)</li>
 </ol>
@@ -204,9 +204,9 @@ if (!doNotTrack) {
 <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
     B b1(<span style="color:#ae81ff">1</span>);            <span style="color:#75715e">// OK：直接初始化
-</span><span style="color:#75715e"></span>    B b2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;           <span style="color:#75715e">// 错误：被 explicit 修饰构造函数的对象不可以复制初始化
+</span><span style="color:#75715e"></span>    B b2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;           <span style="color:#75715e">// 错误：被 explicit 修饰构造函数的对象不可以赋值初始化
 </span><span style="color:#75715e"></span>    B b3{ <span style="color:#ae81ff">1</span> };          <span style="color:#75715e">// OK：直接列表初始化
-</span><span style="color:#75715e"></span>    B b4 <span style="color:#f92672">=</span> { <span style="color:#ae81ff">1</span> };       <span style="color:#75715e">// 错误：被 explicit 修饰构造函数的对象不可以复制列表初始化
+</span><span style="color:#75715e"></span>    B b4 <span style="color:#f92672">=</span> { <span style="color:#ae81ff">1</span> };       <span style="color:#75715e">// 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化
 </span><span style="color:#75715e"></span>    B b5 <span style="color:#f92672">=</span> (B)<span style="color:#ae81ff">1</span>;        <span style="color:#75715e">// OK：允许 static_cast 的显式转换
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (b1);            <span style="color:#75715e">// OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> b6(b1);        <span style="color:#75715e">// OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换
