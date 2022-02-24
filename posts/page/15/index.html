@@ -141,6 +141,23 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43; 内存对齐
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>C/C&#43;&#43;内存对齐详解
+内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
+  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
+注意：上面两条规则都需要得到满足
+注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
+  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8  cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-06 18:13:09 +0800 CST'>January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 内存对齐" href="https://874656645.github.io/rick/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>自定义智能指针
     </h2>
   </header>
@@ -194,19 +211,6 @@ class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt
   </section>
   <footer class="entry-footer"><span title='2022-01-03 13:54:11 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 操作符重载" href="https://874656645.github.io/rick/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>具有链表特性的类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>买卖货物问题：
-#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 具有链表特性的类" href="https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

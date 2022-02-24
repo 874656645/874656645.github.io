@@ -126,6 +126,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Linux 常用命令
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Linux 命令大全
+一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade 2. 安装软件 sudo apt-get install tree 二、shell 操作和常用命令 1、查看输入的命令历史 history 2、删除光标前面的字符串 ctrl &#43; u 3、删除光标后面的字符串 ctrl &#43; k 4、光标定位到头部 ctrl &#43; a 5、光标定位到尾部 ctrl &#43; e 6、命令、路径补全 Tab 7、缩写别名 alias 8、查看说明 man 5 passwd 9、宿主目录 ~ 10、查看目录内容 tree ~ 11、打印工作目录 pwd 12、表示当前用户是普通用户 $ 13、表示当前用户是超级用户 # 14、切换超级用户 sudo su 15、 查看文件和目录 ls ls -a ls -l // -rwxrw-r-- 1 rick rick 0 Feb 12 18:37 test ls -lh ls -alF // drwxr-xr-x 1 rick rick 4096 Feb 12 18:37 rick/ ll 16、 cd cd /home/rick cd ~ cd cd - // 切换到上一个的历史目录 17、 mkdir 目录名 mkdir aa mkdir aa/bb rm aa -r mkdir aa/bb/cc -p 18、 touch 文件名  如果文件不存在，则创建文件 如果文件存在，更新文件时间  19、 rmdir 删除空目录  只能删除空目录  20、 rm 删除目录和文件  删除后很难恢复  rm -r // 用递归的方式删除目录 rm -ri // 提示 rm aa/* -r // 删除 aa 目录下的所有文件和目录 21、 cp 拷贝 cp file file1 // file1 不存在，则创建 file1 并把 file 中的内容拷贝进去 cp file file1 // file1 存在，则会用 file 中的内容覆盖 file1 中的内容 cp file dir // 将 file 拷贝到 dir 目录下 cp dir dir1 // dir1 目录不存在，则把 dir 的所有子目录拷贝到 dir1 目录下 rm dir1/* -r cp dir dir1 // dir1 目录存在，则把 dir 整个目录拷贝到 dir1 目录下 22、 mv mv file file1 // file1 不存在，则是将 file 文件改名为 file1 mv file file1 // file1 存在，则用 file 中的内容覆盖 file1 中的内容，并删除 file mv file dir // dir 存在，将 file 移动到 dir 目录下 mv dir dir1 // dir1 不存在，就是将 dir 改名为 dir1 mv dir dir1 // dir1 存在，则将 dir 目录移动到 dir1下 23、 cat 将文件内容打印到终端  适用文件内容较小的情况  23、 more 将文件内容打印到终端  不能向上翻页 Enter 向下滚动一行 空格：向下翻页 退出：q  23、 less 将文件内容打印到终端  Enter 或 ctrl &#43; n : 向下滚动一行 ctrl &#43; p : 向上滚动一行 pgdn : 向下翻页 空格 : 向下翻页 pgup : 向上翻页 q : 退出  23、 head 打印文件内容的前 10 行到终端 24、 tail 打印文件内容的后 10 行到终端 25、 ln 创建软硬链接  创建软链接 ln -s 全文件名 链接名称 创建硬链接（在其他多个目录中管理文件，并且能时时同步修改） ln 文件名 链接名  26、 chmod 修改权限 chmod uo-rw program chmod u&#43;r,g-x program chmod -440 program chmod 777 program 27、 chown 修改所有者或所属组 sudo chown sys program sudo chown rick:sys program 28、 chgrp 所属组 sudo chgrp rick program...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 常用命令" href="https://874656645.github.io/rick/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>char* 数组
     </h2>
   </header>
@@ -172,18 +185,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/rick/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>策略模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>策略模式定义了一系列的算法，并将每个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:59:42 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 策略模式" href="https://874656645.github.io/rick/posts/112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

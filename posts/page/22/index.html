@@ -141,6 +141,28 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>ArcMap 加载天地图服务
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是OGC标准，会导致 ArcMap 加载后坐标不对  影像底图：
+http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
+http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
+http://t0.tianditu.com/img_w/esri/wmts 天地图影像（墨卡托，WGS1984）
+http://t0.tianditu.com/cia_w/esri/wmts 天地图影像注记（墨卡托，WGS1984）
+矢量底图：
+http://t0.tianditu.com/vec_c/esri/wmts 天地图矢量（经纬度，CGCS2000）
+http://t0.tianditu.com/cva_c/esri/wmts 天地图矢量注记（经纬度，CGCS2000）
+http://t0.tianditu.com/vec_w/esri/wmts 天地图矢量（墨卡托，WGS1984）
+http://t0.tianditu.com/cva_w/esri/wmts 天地图矢量注记（墨卡托，WGS1984）
+ArcMap WMTS</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-17 22:34:27 +0800 CST'>December 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to ArcMap 加载天地图服务" href="https://874656645.github.io/rick/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>函数指针
     </h2>
   </header>
@@ -188,24 +210,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2021-12-13 12:34:27 +0800 CST'>December 13, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; 字符串常量存储" href="https://874656645.github.io/rick/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>const 修饰符
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
-常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
-指针常量：int * const 指针所指的地址不能变（不可以重指向），但地址的内容可以被修改，与引用变量效果类似
-常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
-const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
-const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
-ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用  b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-10 12:34:27 +0800 CST'>December 10, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to const 修饰符" href="https://874656645.github.io/rick/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

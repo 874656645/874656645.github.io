@@ -126,6 +126,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>文件操作
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in); ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app); if (!ifs) { cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl; return; } if (!ofs) { cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl; return; } char ch; while (ifs.get(ch)) { cout &lt;&lt; ch; ofs &lt;&lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &lt;&lt; &#34;Age: &#34; &lt;&lt; m_age &lt;&lt; &#34; ID: &#34; &lt;&lt; m_id &lt;&lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 09:47:21 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 文件操作" href="https://874656645.github.io/rick/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>格式化输出
     </h2>
   </header>
@@ -174,18 +186,6 @@ Start exception finally 0 Finish 二、std::exception class exception { public: 
   </section>
   <footer class="entry-footer"><span title='2022-01-15 17:34:27 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 异常" href="https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>类型转换
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1. static_cast&lt;&gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&lt;&gt;  // 1. 内置对象  int a = 97; char c = static_cast&lt;char&gt;(a); // OK  cout &lt;&lt; c &lt;&lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;a;  // char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &lt;&lt; pc &lt;&lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-15 15:55:28 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类型转换" href="https://874656645.github.io/rick/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

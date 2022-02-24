@@ -138,6 +138,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>具有链表特性的类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>买卖货物问题：
+#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 具有链表特性的类" href="https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>STL 总结
     </h2>
   </header>
@@ -194,18 +207,6 @@ class Person{ public: Person(){ id = 0; score = 0; cout &lt;&lt; &#34;Person()&#
   </section>
   <footer class="entry-footer"><span title='2021-12-29 15:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to new delete 与内存" href="https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>new 二维数组
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>在堆上声明一个数组 int main( ) { #if 0// 方式一： int** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &lt; 4; i&#43;&#43;){ pArr[i] = new int[8]; } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ pArr[i][j] = i * j; } } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ if(j == 0) cout &lt;&lt; endl; cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;; } } // 删除 for(int i = 0; i &lt; 4; &#43;&#43;i){ delete [] pArr[i]; } delete [] pArr; #endif  // 方式二：  cout &lt;&lt; sizeof(int[5]) &lt;&lt; endl; // 初始化  int(*pArr)[8] = new int[4][8]; memset(pArr, 0, sizeof(int[4][8])); // 或者  // int(*pArr)[8] = new int[4][8]{{0}};  cout &lt;&lt; sizeof(int[4][8]) &lt;&lt; endl; for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ pArr[i][j] = i * j; } } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;; } cout &lt;&lt; endl; } cout &lt;&lt; endl; delete[] pArr; // 取地址  int arr[3][4]{{0}}; int(*p)[3][4] = &amp;arr; cout &lt;&lt; arr[2][3] &lt;&lt; endl; cout &lt;&lt; *p[2][3] &lt;&lt; endl; return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-29 14:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to new 二维数组" href="https://874656645.github.io/rick/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

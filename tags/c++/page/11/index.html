@@ -126,6 +126,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>异常
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、try、catch、throw  可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型 C&#43;&#43; 异常机制是跨函数的，且是必须处理的。如果中间函数没有处理就一直抛到最顶层，如果 main 函数也不处理，程序就会挂掉  int main( ) { try{ throw &#34;exception&#34;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常  cout &lt;&lt; &#34;...&#34; &lt;&lt; endl; } { cout &lt;&lt; &#34;finally&#34; &lt;&lt; endl; } return 0; } 输出：
+Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-15 17:34:27 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 异常" href="https://874656645.github.io/rick/posts/57-%E5%BC%82%E5%B8%B8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>类型转换
     </h2>
   </header>
@@ -178,19 +191,6 @@ g&#43;&#43; main.s -o main  </p>
   </section>
   <footer class="entry-footer"><span title='2022-01-12 20:12:00 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 编译过程" href="https://874656645.github.io/rick/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>函数模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C&#43;&#43; 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
-编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){ return a &#43; b; } // 函数一 int MyAdd(int a, int b){ return a &#43; b; } // 函数二 int MyAdd(int a, char c){ return a &#43; c; } int main() { cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-11 21:40:09 +0800 CST'>January 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数模板" href="https://874656645.github.io/rick/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

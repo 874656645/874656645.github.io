@@ -7,9 +7,9 @@
 <meta name="robots" content="index, follow">
 <title>C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  一、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
-二、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
-三、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
+<meta name="description" content="一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
+三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
+四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
 所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！
 class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){ p-&gt;setAge(30); return p; } int main() { unique_ptr&lt;Person&gt; pP(new Person); cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl; // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl; cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; if(pP == nullptr){ cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl; } return 0; } 输出：">
 <meta name="author" content="Rick Cui">
@@ -48,24 +48,24 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr" />
-<meta property="og:description" content="支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  一、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
-二、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
-三、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
+<meta property="og:description" content="一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
+三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
+四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
 所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！
 class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){ p-&gt;setAge(30); return p; } int main() { unique_ptr&lt;Person&gt; pP(new Person); cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl; // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl; cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; if(pP == nullptr){ cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl; } return 0; } 输出：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/rick/posts/131-c&#43;&#43;11-auto_ptr-%E8%A2%AB%E5%BA%9F%E5%BC%83%E4%B8%8E-unique_ptr/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-22T22:18:33&#43;08:00" />
 <meta property="article:modified_time" content="2022-02-22T22:18:33&#43;08:00" />
-<meta property="og:see_also" content="https://874656645.github.io/rick/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/" /><meta property="og:see_also" content="https://874656645.github.io/rick/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/" />
+<meta property="og:see_also" content="https://874656645.github.io/rick/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" /><meta property="og:see_also" content="https://874656645.github.io/rick/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/" /><meta property="og:see_also" content="https://874656645.github.io/rick/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr"/>
-<meta name="twitter:description" content="支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  一、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
-二、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
-三、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
+<meta name="twitter:description" content="一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
+三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
+四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
 所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！
 class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){ p-&gt;setAge(30); return p; } int main() { unique_ptr&lt;Person&gt; pP(new Person); cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl; // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl; cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; if(pP == nullptr){ cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl; } return 0; } 输出："/>
 
@@ -96,12 +96,12 @@ class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m
   "@type": "BlogPosting",
   "headline": "C++11 auto_ptr 被废弃与 unique_ptr",
   "name": "C\u002b\u002b11 auto_ptr 被废弃与 unique_ptr",
-  "description": "支持拷贝构造 支持赋值拷贝 支持 operator-\u0026gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  一、问题一：使用数组存储 auto_ptr std::vector\u0026lt;std::auto_ptr\u0026lt;People\u0026gt;\u0026gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr\u0026lt;People\u0026gt; one = peoples[5]; ... std::cout \u0026lt;\u0026lt; peoples[5]-\u0026gt;get_name() \u0026lt;\u0026lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null\n二、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr\u0026lt;People\u0026gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr\u0026lt;People\u0026gt; people(new People(\u0026#34;jony\u0026#34;)); do_something(people); ... std::cout \u0026lt;\u0026lt; people-\u0026gt;get_name() \u0026lt;\u0026lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权\n三、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！\n所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！\nclass Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr\u0026lt;Person\u0026gt; Change(unique_ptr\u0026lt;Person\u0026gt; p){ p-\u0026gt;setAge(30); return p; } int main() { unique_ptr\u0026lt;Person\u0026gt; pP(new Person); cout \u0026lt;\u0026lt; pP-\u0026gt;getAge() \u0026lt;\u0026lt; endl; // unique_ptr\u0026lt;Person\u0026gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr\u0026lt;Person\u0026gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout \u0026lt;\u0026lt; \u0026#34;-------------\u0026#34; \u0026lt;\u0026lt; endl; cout \u0026lt;\u0026lt; pP2-\u0026gt;getAge() \u0026lt;\u0026lt; endl; cout \u0026lt;\u0026lt; \u0026#34;-------------\u0026#34; \u0026lt;\u0026lt; endl; if(pP == nullptr){ cout \u0026lt;\u0026lt; \u0026#34;pP 变量已失效\u0026#34; \u0026lt;\u0026lt; endl; } return 0; } 输出：",
+  "description": "一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-\u0026gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector\u0026lt;std::auto_ptr\u0026lt;People\u0026gt;\u0026gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr\u0026lt;People\u0026gt; one = peoples[5]; ... std::cout \u0026lt;\u0026lt; peoples[5]-\u0026gt;get_name() \u0026lt;\u0026lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null\n三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr\u0026lt;People\u0026gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr\u0026lt;People\u0026gt; people(new People(\u0026#34;jony\u0026#34;)); do_something(people); ... std::cout \u0026lt;\u0026lt; people-\u0026gt;get_name() \u0026lt;\u0026lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权\n四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！\n所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！\nclass Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr\u0026lt;Person\u0026gt; Change(unique_ptr\u0026lt;Person\u0026gt; p){ p-\u0026gt;setAge(30); return p; } int main() { unique_ptr\u0026lt;Person\u0026gt; pP(new Person); cout \u0026lt;\u0026lt; pP-\u0026gt;getAge() \u0026lt;\u0026lt; endl; // unique_ptr\u0026lt;Person\u0026gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr\u0026lt;Person\u0026gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout \u0026lt;\u0026lt; \u0026#34;-------------\u0026#34; \u0026lt;\u0026lt; endl; cout \u0026lt;\u0026lt; pP2-\u0026gt;getAge() \u0026lt;\u0026lt; endl; cout \u0026lt;\u0026lt; \u0026#34;-------------\u0026#34; \u0026lt;\u0026lt; endl; if(pP == nullptr){ cout \u0026lt;\u0026lt; \u0026#34;pP 变量已失效\u0026#34; \u0026lt;\u0026lt; endl; } return 0; } 输出：",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 支持拷贝构造 支持赋值拷贝 支持 operator-/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  一、问题一：使用数组存储 auto_ptr std::vectorstd::auto_ptrPeople peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptrPeople one = peoples[5]; ... std::cout  peoples[5]-get_name()  std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null\n二、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptrPeople people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptrPeople people(new People(\"jony\")); do_something(people); ... std::cout  people-get_name()  std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权\n三、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！\n所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！\nclass Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptrPerson Change(unique_ptrPerson p){ p-setAge(30); return p; } int main() { unique_ptrPerson pP(new Person); cout  pP-getAge()  endl; // unique_ptr pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptrPerson pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout  \"-------------\"  endl; cout  pP2-getAge()  endl; cout  \"-------------\"  endl; if(pP == nullptr){ cout  \"pP 变量已失效\"  endl; } return 0; } 输出：\n20 ------------- 30 ------------- pP 变量已失效 ",
-  "wordCount" : "157",
+  "articleBody": "一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vectorstd::auto_ptrPeople peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptrPeople one = peoples[5]; ... std::cout  peoples[5]-get_name()  std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null\n三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptrPeople people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptrPeople people(new People(\"jony\")); do_something(people); ... std::cout  people-get_name()  std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权\n四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！\n所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！\nclass Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptrPerson Change(unique_ptrPerson p){ p-setAge(30); return p; } int main() { unique_ptrPerson pP(new Person); cout  pP-getAge()  endl; // unique_ptr pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptrPerson pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout  \"-------------\"  endl; cout  pP2-getAge()  endl; cout  \"-------------\"  endl; if(pP == nullptr){ cout  \"pP 变量已失效\"  endl; } return 0; } 输出：\n20 ------------- 30 ------------- pP 变量已失效 ",
+  "wordCount" : "159",
   "inLanguage": "en",
   "datePublished": "2022-02-22T22:18:33+08:00",
   "dateModified": "2022-02-22T22:18:33+08:00",
@@ -208,25 +208,28 @@ class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m
 
         <div class="inner"><ul>
                 <li>
-                    <a href="#%e4%b8%80%e9%97%ae%e9%a2%98%e4%b8%80%e4%bd%bf%e7%94%a8%e6%95%b0%e7%bb%84%e5%ad%98%e5%82%a8-auto_ptr" aria-label="一、问题一：使用数组存储 auto_ptr">一、问题一：使用数组存储 auto_ptr</a></li>
+                    <a href="#%e4%b8%80auto_ptr-%e7%89%b9%e7%82%b9" aria-label="一、auto_ptr 特点">一、auto_ptr 特点</a></li>
                 <li>
-                    <a href="#%e4%ba%8c%e9%97%ae%e9%a2%98%e4%ba%8c%e5%87%bd%e6%95%b0%e4%bc%a0%e5%8f%82-auto_ptr-%e7%b1%bb%e5%9e%8b" aria-label="二、问题二、函数传参 auto_ptr 类型">二、问题二、函数传参 auto_ptr 类型</a></li>
+                    <a href="#%e4%ba%8c%e9%97%ae%e9%a2%98%e4%b8%80%e4%bd%bf%e7%94%a8%e6%95%b0%e7%bb%84%e5%ad%98%e5%82%a8-auto_ptr" aria-label="二、问题一：使用数组存储 auto_ptr">二、问题一：使用数组存储 auto_ptr</a></li>
                 <li>
-                    <a href="#%e4%b8%89unique_ptr" aria-label="三、unique_ptr">三、unique_ptr</a>
+                    <a href="#%e4%b8%89%e9%97%ae%e9%a2%98%e4%ba%8c%e5%87%bd%e6%95%b0%e4%bc%a0%e5%8f%82-auto_ptr-%e7%b1%bb%e5%9e%8b" aria-label="三、问题二、函数传参 auto_ptr 类型">三、问题二、函数传参 auto_ptr 类型</a></li>
+                <li>
+                    <a href="#%e5%9b%9bunique_ptr" aria-label="四、unique_ptr">四、unique_ptr</a>
                 </li>
             </ul>
         </div>
     </details>
 </div>
 
-  <div class="post-content"><ol>
+  <div class="post-content"><h3 id="一auto_ptr-特点">一、auto_ptr 特点<a hidden class="anchor" aria-hidden="true" href="#一auto_ptr-特点">#</a></h3>
+<ol>
 <li>支持拷贝构造</li>
 <li>支持赋值拷贝</li>
 <li>支持 <code>operator-&gt;/operator*</code> 解引用</li>
 <li>支持指针变量重置</li>
 <li><strong>保证指针持有者唯一（涉及所有权转移）</strong></li>
 </ol>
-<h3 id="一问题一使用数组存储-auto_ptr">一、问题一：使用数组存储 auto_ptr<a hidden class="anchor" aria-hidden="true" href="#一问题一使用数组存储-auto_ptr">#</a></h3>
+<h3 id="二问题一使用数组存储-auto_ptr">二、问题一：使用数组存储 auto_ptr<a hidden class="anchor" aria-hidden="true" href="#二问题一使用数组存储-auto_ptr">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>auto_ptr<span style="color:#f92672">&lt;</span>People<span style="color:#f92672">&gt;&gt;</span> peoples;
 <span style="color:#75715e">// 这里实例化多个people并保存到数组中
 </span><span style="color:#75715e"></span>...
@@ -234,7 +237,7 @@ std<span style="color:#f92672">::</span>auto_ptr<span style="color:#f92672">&lt;
 ...
 std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> peoples[<span style="color:#ae81ff">5</span>]<span style="color:#f92672">-&gt;</span>get_name() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; 
 </code></pre></div><p>原因在于 <code>std::auto_ptr</code> 支持 <code>operator=</code>，<strong>为了确保指针所有者唯一，这里转移了所有权</strong>，people[5] 变成了 null</p>
-<h3 id="二问题二函数传参-auto_ptr-类型">二、问题二、函数传参 auto_ptr 类型<a hidden class="anchor" aria-hidden="true" href="#二问题二函数传参-auto_ptr-类型">#</a></h3>
+<h3 id="三问题二函数传参-auto_ptr-类型">三、问题二、函数传参 auto_ptr 类型<a hidden class="anchor" aria-hidden="true" href="#三问题二函数传参-auto_ptr-类型">#</a></h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">do_somthing</span>(std<span style="color:#f92672">::</span>auto_ptr<span style="color:#f92672">&lt;</span>People<span style="color:#f92672">&gt;</span> people){
     <span style="color:#75715e">// 该函数内不对people变量执行各种隐式/显示的所有权转移和释放
 </span><span style="color:#75715e"></span>    ...
@@ -246,7 +249,7 @@ do_something(people);
 
 std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> people<span style="color:#f92672">-&gt;</span>get_name() <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; 
 </code></pre></div><p>原因在于 <code>std::auto_ptr支持拷贝构造</code>，<strong>为了确保指针所有者唯一，这里转移了所有权</strong></p>
-<h3 id="三unique_ptr">三、unique_ptr<a hidden class="anchor" aria-hidden="true" href="#三unique_ptr">#</a></h3>
+<h3 id="四unique_ptr">四、unique_ptr<a hidden class="anchor" aria-hidden="true" href="#四unique_ptr">#</a></h3>
 <p>在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 <code>std::unique_ptr</code>。<code>std::unique_ptr</code> 不仅加入了移动语义的支持，同时也<strong>关闭了左值拷贝构造和左值赋值功能</strong>！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！</p>
 <p><strong>所以 <code>std::auto_ptr</code> 废弃了，由 <code>std::unique_ptr</code> 代替！</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
@@ -296,6 +299,11 @@ pP 变量已失效
       <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/rick/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>C&#43;&#43;11 左值、右值和移动语义</span>
+  </a>
   <a class="next" href="https://874656645.github.io/rick/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/">
     <span class="title">Next Page »</span>
     <br>
