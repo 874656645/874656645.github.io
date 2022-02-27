@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>哈希法与冲突处理 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="哈希表, 算法, 处理哈希冲突" />
+<meta name="description" content="哈希表及处理冲突的方法
+一、哈希法与哈希表  哈希法又称散列法、杂凑法以及关键字地址计算法等，相应的表称为哈希表。 这种方法的基本思想是：首先在元素的关键字 k 和元素的存储位置 p 之间建立一个对应关系 f，使得 p = f(k)，f 称为哈希函数。 创建哈希表时，把关键字为 k 的元素直接存入地址为 f(k) 的单元；以后当查找关键字为 k 的元素时，再利用哈希函数计算出该元素的存储位置 p=f(k)，从而达到按关键字直接存取元素的目的。  二、冲突 当关键字集合很大时，关键字值不同的元素可能会映象到哈希表的同一地址上，即 k1 ≠ k2，但 f(k1) = f(k2)，这种现象称为冲突，此时称 k1 和 k2 为同义词。
+三、哈希函数构造方法 构造哈希函数的原则是：
+ 函数本身便于计算； 计算出来的地址分布均匀，即对任一关键字 k，f(k) 对应不同地址的概率相等，目的是尽可能减少冲突  常用的构造方法：
+ 数字分析法 平方取中法 分段叠加法 除留余数法：假设哈希表长为 m，p 为小于等于 m 的最大素数，则哈希函数为 f(k)=k % p 伪随机数法  四、冲突处理方法 1. 开放地址法（Open addressing） 这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi
+ 线性探测 二次探测 伪随机探测  线性探测再散列的优点是：只要哈希表不满，就一定能找到一个不冲突的哈希地址，而二次探测再散列和伪随机探测再散列则不一定；缺点是线性探测再散列容易产生二次聚集
+2. 再哈希法 这种方法是同时构造多个不同的哈希函数，当哈希地址Hi=RH1（key）发生冲突时，再计算Hi=RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="哈希法与冲突处理" />
+<meta property="og:description" content="哈希表及处理冲突的方法
+一、哈希法与哈希表  哈希法又称散列法、杂凑法以及关键字地址计算法等，相应的表称为哈希表。 这种方法的基本思想是：首先在元素的关键字 k 和元素的存储位置 p 之间建立一个对应关系 f，使得 p = f(k)，f 称为哈希函数。 创建哈希表时，把关键字为 k 的元素直接存入地址为 f(k) 的单元；以后当查找关键字为 k 的元素时，再利用哈希函数计算出该元素的存储位置 p=f(k)，从而达到按关键字直接存取元素的目的。  二、冲突 当关键字集合很大时，关键字值不同的元素可能会映象到哈希表的同一地址上，即 k1 ≠ k2，但 f(k1) = f(k2)，这种现象称为冲突，此时称 k1 和 k2 为同义词。
+三、哈希函数构造方法 构造哈希函数的原则是：
+ 函数本身便于计算； 计算出来的地址分布均匀，即对任一关键字 k，f(k) 对应不同地址的概率相等，目的是尽可能减少冲突  常用的构造方法：
+ 数字分析法 平方取中法 分段叠加法 除留余数法：假设哈希表长为 m，p 为小于等于 m 的最大素数，则哈希函数为 f(k)=k % p 伪随机数法  四、冲突处理方法 1. 开放地址法（Open addressing） 这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi
+ 线性探测 二次探测 伪随机探测  线性探测再散列的优点是：只要哈希表不满，就一定能找到一个不冲突的哈希地址，而二次探测再散列和伪随机探测再散列则不一定；缺点是线性探测再散列容易产生二次聚集
+2. 再哈希法 这种方法是同时构造多个不同的哈希函数，当哈希地址Hi=RH1（key）发生冲突时，再计算Hi=RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/rick/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-25T17:23:49&#43;08:00" />
+<meta property="article:modified_time" content="2022-02-25T17:23:49&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="哈希法与冲突处理"/>
+<meta name="twitter:description" content="哈希表及处理冲突的方法
+一、哈希法与哈希表  哈希法又称散列法、杂凑法以及关键字地址计算法等，相应的表称为哈希表。 这种方法的基本思想是：首先在元素的关键字 k 和元素的存储位置 p 之间建立一个对应关系 f，使得 p = f(k)，f 称为哈希函数。 创建哈希表时，把关键字为 k 的元素直接存入地址为 f(k) 的单元；以后当查找关键字为 k 的元素时，再利用哈希函数计算出该元素的存储位置 p=f(k)，从而达到按关键字直接存取元素的目的。  二、冲突 当关键字集合很大时，关键字值不同的元素可能会映象到哈希表的同一地址上，即 k1 ≠ k2，但 f(k1) = f(k2)，这种现象称为冲突，此时称 k1 和 k2 为同义词。
+三、哈希函数构造方法 构造哈希函数的原则是：
+ 函数本身便于计算； 计算出来的地址分布均匀，即对任一关键字 k，f(k) 对应不同地址的概率相等，目的是尽可能减少冲突  常用的构造方法：
+ 数字分析法 平方取中法 分段叠加法 除留余数法：假设哈希表长为 m，p 为小于等于 m 的最大素数，则哈希函数为 f(k)=k % p 伪随机数法  四、冲突处理方法 1. 开放地址法（Open addressing） 这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi
+ 线性探测 二次探测 伪随机探测  线性探测再散列的优点是：只要哈希表不满，就一定能找到一个不冲突的哈希地址，而二次探测再散列和伪随机探测再散列则不一定；缺点是线性探测再散列容易产生二次聚集
+2. 再哈希法 这种方法是同时构造多个不同的哈希函数，当哈希地址Hi=RH1（key）发生冲突时，再计算Hi=RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/rick/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "哈希法与冲突处理",
+      "item": "https://874656645.github.io/rick/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "哈希法与冲突处理",
+  "name": "哈希法与冲突处理",
+  "description": "哈希表及处理冲突的方法\n一、哈希法与哈希表  哈希法又称散列法、杂凑法以及关键字地址计算法等，相应的表称为哈希表。 这种方法的基本思想是：首先在元素的关键字 k 和元素的存储位置 p 之间建立一个对应关系 f，使得 p = f(k)，f 称为哈希函数。 创建哈希表时，把关键字为 k 的元素直接存入地址为 f(k) 的单元；以后当查找关键字为 k 的元素时，再利用哈希函数计算出该元素的存储位置 p=f(k)，从而达到按关键字直接存取元素的目的。  二、冲突 当关键字集合很大时，关键字值不同的元素可能会映象到哈希表的同一地址上，即 k1 ≠ k2，但 f(k1) = f(k2)，这种现象称为冲突，此时称 k1 和 k2 为同义词。\n三、哈希函数构造方法 构造哈希函数的原则是：\n 函数本身便于计算； 计算出来的地址分布均匀，即对任一关键字 k，f(k) 对应不同地址的概率相等，目的是尽可能减少冲突  常用的构造方法：\n 数字分析法 平方取中法 分段叠加法 除留余数法：假设哈希表长为 m，p 为小于等于 m 的最大素数，则哈希函数为 f(k)=k % p 伪随机数法  四、冲突处理方法 1. 开放地址法（Open addressing） 这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi\n 线性探测 二次探测 伪随机探测  线性探测再散列的优点是：只要哈希表不满，就一定能找到一个不冲突的哈希地址，而二次探测再散列和伪随机探测再散列则不一定；缺点是线性探测再散列容易产生二次聚集\n2. 再哈希法 这种方法是同时构造多个不同的哈希函数，当哈希地址Hi=RH1（key）发生冲突时，再计算Hi=RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间",
+  "keywords": [
+    "哈希表", "算法", "处理哈希冲突"
+  ],
+  "articleBody": "哈希表及处理冲突的方法\n一、哈希法与哈希表  哈希法又称散列法、杂凑法以及关键字地址计算法等，相应的表称为哈希表。 这种方法的基本思想是：首先在元素的关键字 k 和元素的存储位置 p 之间建立一个对应关系 f，使得 p = f(k)，f 称为哈希函数。 创建哈希表时，把关键字为 k 的元素直接存入地址为 f(k) 的单元；以后当查找关键字为 k 的元素时，再利用哈希函数计算出该元素的存储位置 p=f(k)，从而达到按关键字直接存取元素的目的。  二、冲突 当关键字集合很大时，关键字值不同的元素可能会映象到哈希表的同一地址上，即 k1 ≠ k2，但 f(k1) = f(k2)，这种现象称为冲突，此时称 k1 和 k2 为同义词。\n三、哈希函数构造方法 构造哈希函数的原则是：\n 函数本身便于计算； 计算出来的地址分布均匀，即对任一关键字 k，f(k) 对应不同地址的概率相等，目的是尽可能减少冲突  常用的构造方法：\n 数字分析法 平方取中法 分段叠加法 除留余数法：假设哈希表长为 m，p 为小于等于 m 的最大素数，则哈希函数为 f(k)=k % p 伪随机数法  四、冲突处理方法 1. 开放地址法（Open addressing） 这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi\n 线性探测 二次探测 伪随机探测  线性探测再散列的优点是：只要哈希表不满，就一定能找到一个不冲突的哈希地址，而二次探测再散列和伪随机探测再散列则不一定；缺点是线性探测再散列容易产生二次聚集\n2. 再哈希法 这种方法是同时构造多个不同的哈希函数，当哈希地址Hi=RH1（key）发生冲突时，再计算Hi=RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间\n3. 开链法（Separate chaining） 这种方法的基本思想是将所有哈希地址为i的元素构成一个称为同义词链的单链表，并将单链表的头指针存在哈希表的第 i 个单元中，因而查找、插入和删除主要在同义词链中进行。同义词较多时可以考虑使用红黑树替代链表。链地址法适用于经常进行插入和删除的情况\n4. 建立公共溢出区 将哈希表分为基本表和溢出表两部分，凡是和基本表发生冲突的元素，一律填入溢出表\n",
+  "wordCount" : "73",
+  "inLanguage": "en",
+  "datePublished": "2022-02-25T17:23:49+08:00",
+  "dateModified": "2022-02-25T17:23:49+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/rick/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/rick/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <h1 class="post-title">
+      哈希法与冲突处理
+    </h1>
+    <div class="post-meta"><span title='2022-02-25 17:23:49 +0800 CST'>February 25, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e5%93%88%e5%b8%8c%e6%b3%95%e4%b8%8e%e5%93%88%e5%b8%8c%e8%a1%a8" aria-label="一、哈希法与哈希表">一、哈希法与哈希表</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%86%b2%e7%aa%81" aria-label="二、冲突">二、冲突</a></li>
+                <li>
+                    <a href="#%e4%b8%89%e5%93%88%e5%b8%8c%e5%87%bd%e6%95%b0%e6%9e%84%e9%80%a0%e6%96%b9%e6%b3%95" aria-label="三、哈希函数构造方法">三、哈希函数构造方法</a></li>
+                <li>
+                    <a href="#%e5%9b%9b%e5%86%b2%e7%aa%81%e5%a4%84%e7%90%86%e6%96%b9%e6%b3%95" aria-label="四、冲突处理方法">四、冲突处理方法</a><ul>
+                        
+                <li>
+                    <a href="#1-%e5%bc%80%e6%94%be%e5%9c%b0%e5%9d%80%e6%b3%95open-addressing" aria-label="1. 开放地址法（Open addressing）">1. 开放地址法（Open addressing）</a></li>
+                <li>
+                    <a href="#2-%e5%86%8d%e5%93%88%e5%b8%8c%e6%b3%95" aria-label="2. 再哈希法">2. 再哈希法</a></li>
+                <li>
+                    <a href="#3-%e5%bc%80%e9%93%be%e6%b3%95separate-chaining" aria-label="3. 开链法（Separate chaining）">3. 开链法（Separate chaining）</a></li>
+                <li>
+                    <a href="#4-%e5%bb%ba%e7%ab%8b%e5%85%ac%e5%85%b1%e6%ba%a2%e5%87%ba%e5%8c%ba" aria-label="4. 建立公共溢出区">4. 建立公共溢出区</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><a href="https://blog.51cto.com/zlfwmm/1636787">哈希表及处理冲突的方法</a></p>
+<h2 id="一哈希法与哈希表">一、哈希法与哈希表<a hidden class="anchor" aria-hidden="true" href="#一哈希法与哈希表">#</a></h2>
+<ul>
+<li>哈希法又称散列法、杂凑法以及关键字地址计算法等，相应的表称为哈希表。</li>
+<li>这种方法的基本思想是：首先在元素的关键字 <code>k</code> 和元素的存储位置 <code>p</code> 之间建立一个对应关系 <code>f</code>，使得 <code>p = f(k)</code>，<code>f</code> 称为哈希函数。</li>
+<li>创建哈希表时，把关键字为 <code>k</code> 的元素直接存入地址为 <code>f(k)</code> 的单元；以后当查找关键字为 <code>k</code> 的元素时，再利用哈希函数计算出该元素的存储位置 <code>p=f(k)</code>，<strong>从而达到按关键字直接存取元素的目的</strong>。</li>
+</ul>
+<h2 id="二冲突">二、冲突<a hidden class="anchor" aria-hidden="true" href="#二冲突">#</a></h2>
+<p>当关键字集合很大时，关键字值不同的元素可能会映象到哈希表的同一地址上，即 <code>k1 ≠ k2</code>，但 <code>f(k1) = f(k2)</code>，这种现象称为<strong>冲突</strong>，此时称 <code>k1</code> 和 <code>k2</code> 为<strong>同义词</strong>。</p>
+<h2 id="三哈希函数构造方法">三、哈希函数构造方法<a hidden class="anchor" aria-hidden="true" href="#三哈希函数构造方法">#</a></h2>
+<p>构造哈希函数的原则是：</p>
+<ul>
+<li>函数本身便于计算；</li>
+<li>计算出来的地址分布均匀，即对任一关键字 <code>k</code>，<code>f(k)</code> 对应不同地址的概率相等，目的是尽可能减少冲突</li>
+</ul>
+<p>常用的构造方法：</p>
+<ol>
+<li>数字分析法</li>
+<li>平方取中法</li>
+<li>分段叠加法</li>
+<li>除留余数法：假设哈希表长为 <code>m</code>，<code>p</code> 为小于等于 <code>m</code> 的最大<strong>素数</strong>，则哈希函数为 f(k)=k % p</li>
+<li>伪随机数法</li>
+</ol>
+<h2 id="四冲突处理方法">四、冲突处理方法<a hidden class="anchor" aria-hidden="true" href="#四冲突处理方法">#</a></h2>
+<h3 id="1-开放地址法open-addressing">1. 开放地址法（Open addressing）<a hidden class="anchor" aria-hidden="true" href="#1-开放地址法open-addressing">#</a></h3>
+<p>这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi</p>
+<ul>
+<li>线性探测</li>
+<li>二次探测</li>
+<li>伪随机探测</li>
+</ul>
+<p>线性探测再散列的优点是：只要哈希表不满，就一定能找到一个不冲突的哈希地址，而二次探测再散列和伪随机探测再散列则不一定；缺点是线性探测再散列容易产生<strong>二次聚集</strong></p>
+<h3 id="2-再哈希法">2. 再哈希法<a hidden class="anchor" aria-hidden="true" href="#2-再哈希法">#</a></h3>
+<p>这种方法是同时构造多个不同的哈希函数，当哈希地址Hi=RH1（key）发生冲突时，再计算Hi=RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但<strong>增加了计算时间</strong></p>
+<h3 id="3-开链法separate-chaining">3. 开链法（Separate chaining）<a hidden class="anchor" aria-hidden="true" href="#3-开链法separate-chaining">#</a></h3>
+<p>这种方法的基本思想是将所有哈希地址为i的元素构成一个称为同义词链的单链表，并将单链表的头指针存在哈希表的第 i 个单元中，因而查找、插入和删除主要在同义词链中进行。同义词较多时可以考虑使用<strong>红黑树替代链表</strong>。<strong>链地址法适用于经常进行插入和删除的情况</strong></p>
+<h3 id="4-建立公共溢出区">4. 建立公共溢出区<a hidden class="anchor" aria-hidden="true" href="#4-建立公共溢出区">#</a></h3>
+<p>将哈希表分为基本表和溢出表两部分，凡是和基本表发生冲突的元素，一律填入溢出表</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/rick/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a></li>
+      <li><a href="https://874656645.github.io/rick/tags/%E7%AE%97%E6%B3%95/">算法</a></li>
+      <li><a href="https://874656645.github.io/rick/tags/%E5%A4%84%E7%90%86%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81/">处理哈希冲突</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/rick/posts/135-cmake-%E4%BD%BF%E7%94%A8/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>CMake 使用</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/rick/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>C&#43;&#43;11 左值、右值和移动语义</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
