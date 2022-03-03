@@ -9,7 +9,44 @@
       <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 27 Feb 2022 15:56:29 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Mar 2022 20:12:47 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CMake 添加对测试仪表板的支持</title>
+      <link>https://874656645.github.io/rick/posts/142-cmake-%E6%B7%BB%E5%8A%A0%E5%AF%B9%E6%B5%8B%E8%AF%95%E4%BB%AA%E8%A1%A8%E6%9D%BF%E7%9A%84%E6%94%AF%E6%8C%81/</link>
+      <pubDate>Thu, 03 Mar 2022 20:12:47 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/142-cmake-%E6%B7%BB%E5%8A%A0%E5%AF%B9%E6%B5%8B%E8%AF%95%E4%BB%AA%E8%A1%A8%E6%9D%BF%E7%9A%84%E6%94%AF%E6%8C%81/</guid>
+      <description>向仪表板提交测试结果 1. 修改最上层的 CMakeLists.txt 文件 将 enable_testing() 替换为 include(CTest)，CTest 模块会自动调用 enable_testing()
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &amp;#34;Use tutorial provided math implementation&amp;#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &amp;#34;${PROJECT_BINARY_DIR}&amp;#34; # &amp;#34;${PROJECT_SOURCE_DIR}/MathFunctions&amp;#34; # ) target_include_directories(Tutorial PUBLIC &amp;#34;${PROJECT_BINARY_DIR}&amp;#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &amp;#34;${PROJECT_BINARY_DIR}/TutorialConfig.</description>
+    </item>
+    
+    <item>
+      <title>CMake 打包可安装程序</title>
+      <link>https://874656645.github.io/rick/posts/141-cmake-%E6%89%93%E5%8C%85%E5%8F%AF%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F/</link>
+      <pubDate>Tue, 01 Mar 2022 21:45:45 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/141-cmake-%E6%89%93%E5%8C%85%E5%8F%AF%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F/</guid>
+      <description>可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &amp;#34;Use tutorial provided math implementation&amp;#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &amp;#34;${PROJECT_BINARY_DIR}&amp;#34; # &amp;#34;${PROJECT_SOURCE_DIR}/MathFunctions&amp;#34; # ) target_include_directories(Tutorial PUBLIC &amp;#34;${PROJECT_BINARY_DIR}&amp;#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &amp;#34;${PROJECT_BINARY_DIR}/TutorialConfig.</description>
+    </item>
+    
+    <item>
+      <title>CMake 添加自定义命令和生成文件</title>
+      <link>https://874656645.github.io/rick/posts/140-cmake-%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%91%BD%E4%BB%A4%E5%92%8C%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Mon, 28 Feb 2022 21:13:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/140-cmake-%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89%E5%91%BD%E4%BB%A4%E5%92%8C%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6/</guid>
+      <description>add_custom_command  MathFunctions 工程的 CMakeLists.txt # 添加可执行程序 MakeTable add_executable(MakeTable MakeTable.cxx)# 添加一个自定义命令，指定如何通过运行 MakeTable 生成 Table.h add_custom_command( OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Table.h COMMAND MakeTable ${CMAKE_CURRENT_BINARY_DIR}/Table.h DEPENDS MakeTable )# 将生成的 Table.h 添加到库 MathFunctions 的源代码列表 add_library(MathFunctions mysqrt.cxx ${CMAKE_CURRENT_BINARY_DIR}/Table.h )# 将当前二进制目录添加到包含目录列表中，这样 Table.h 才能被 mysqrt.cxx 找到并包含 target_include_directories(MathFunctions INTERFACE ${CMAKE_CURRENT_SOURCE_DIR} PRIVATE ${CMAKE_CURRENT_BINARY_DIR} )install(TARGETS MathFunctions DESTINATION lib)install(FILES MathFunctions.h DESTINATION include)install(FILES ${CMAKE_CURRENT_BINARY_DIR}/Table.h DESTINATION include)生成的 Table.h 文件 double sqrtTable[] = { 0, 1, 1.41421, 1.73205, 2, 2.23607, 2.44949, 2.64575, 2.82843, 3, 0}; Tutorial.</description>
+    </item>
+    
+    <item>
+      <title>CMake 添加系统自检</title>
+      <link>https://874656645.github.io/rick/posts/139-cmake-%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%87%AA%E6%A3%80/</link>
+      <pubDate>Sun, 27 Feb 2022 21:46:10 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/rick/posts/139-cmake-%E6%B7%BB%E5%8A%A0%E7%B3%BB%E7%BB%9F%E8%87%AA%E6%A3%80/</guid>
+      <description>CheckSymbolExists: 考虑在项目中添加一些代码，这些代码依赖于目标平台可能没有的特性 target_compile_definitions  add_library(MathFunctions mysqrt.cxx)target_include_directories(MathFunctions INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})# does this system provide the log and exp functions? include(CheckSymbolExists)check_symbol_exists(log &amp;#34;math.h&amp;#34; HAVE_LOG)check_symbol_exists(exp &amp;#34;math.h&amp;#34; HAVE_EXP)# 如果平台中没有找到 log 和 exp，我们需要链接到 m 库 if(NOT (HAVE_LOG AND HAVE_EXP)) unset(HAVE_LOG CACHE) unset(HAVE_EXP CACHE) # 设置 m 库并再次尝试  set(CMAKE_REQUIRED_LIBRARIES &amp;#34;m&amp;#34;) check_symbol_exists(log &amp;#34;math.h&amp;#34; HAVE_LOG) check_symbol_exists(exp &amp;#34;math.h&amp;#34; HAVE_EXP) if(HAVE_LOG AND HAVE_EXP) target_link_libraries(MathFunctions PRIVATE m) endif()endif()# 如果可用，使用 target_compile_definitions() 指定 HAVE LOG 和 HAVE EXP 作为私有编译定义 # 在项目配置 预处理器定义中添加 HAVE LOG 和 HAVE EXP 两个宏定义 if(HAVE_LOG AND HAVE_EXP) target_compile_definitions(MathFunctions PRIVATE &amp;#34;HAVE_LOG&amp;#34; &amp;#34;HAVE_EXP&amp;#34;)endif()# install install(TARGETS MathFunctions DESTINATION lib)install(FILES MathFunctions.</description>
+    </item>
+    
     <item>
       <title>CMake 安装和测试</title>
       <link>https://874656645.github.io/rick/posts/138-cmake-%E5%AE%89%E8%A3%85%E5%92%8C%E6%B5%8B%E8%AF%95/</link>
@@ -46,7 +83,7 @@ add_library(MathFunctions mysqrt.cxx)target_include_directories(MathFunctions IN
       <pubDate>Sat, 26 Feb 2022 20:03:44 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/135-cmake-%E4%BD%BF%E7%94%A8/</guid>
-      <description>一、CMakeLists.txt 文件示例 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 1.0)# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)二、CMake 相关命令  cmake .. 含有 CMakeLists.txt 文件的路径，根据 CMakeLists.txt 文件构建对应的工程； cmake .. -DUSE_MYMATH=OFF 将 CMake 编译选项 USE_MYMATH 设置为关闭状态，并构建工程 cmake .. -DCMAKE_BUILD_TYPE=Release 在Linux中设定 Release 版本 cmake --install . --prefix &amp;quot;E:/VSCode-Projects/CMake&amp;quot; 指定安装路径，在 Windows 中，如果不指定 --prefix 参数，64位默认会安装到 C:\Program Files  Windows  cmake --build . 在当前目录编译成二进制文件，默认是 Debug cmake --build . --config Release 编译 Release ctest -C Release -VV 参数 -VV 输出详细信息，可不加。对于多配置生成器(例如Visual Studio)，配置类型必须用 -C &amp;lt;mode&amp;gt; 标志来指定  Linux  make 进行编译 ctest -N 和 ctest -VV 测试  </description>
+      <description>一、CMakeLists.txt 文件示例 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 1.0)# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)二、CMake 相关命令  cmake .. 含有 CMakeLists.txt 文件的路径，根据 CMakeLists.txt 文件构建对应的工程； cmake .. -DUSE_MYMATH=OFF 将 CMake 编译选项 USE_MYMATH 设置为关闭状态，并构建工程 cmake .. -DCMAKE_BUILD_TYPE=Release 在Linux中设定 Release 版本 cmake --install . --prefix &amp;quot;E:/VSCode-Projects/CMake&amp;quot; 指定安装路径，在 Windows 中，如果不指定 --prefix 参数，64位默认会安装到 C:\Program Files cpack --config CPackSourceConfig.cmake：创建完整源代码树和 build 的压缩包  Windows  cmake --build . 在当前目录编译成二进制文件，默认是 Debug cmake --build . --config Release 编译 Release ctest -C Release -VV 参数 -VV 输出详细信息，可不加。对于多配置生成器(例如Visual Studio)，配置类型必须用 -C &amp;lt;mode&amp;gt; 标志来指定 cpack -G ZIP -C Debug：要指定生成器，请使用 -G 选项。对于多配置构建，使用 -C 来指定配置 ctest [-VV] -C Debug -D Experimental：向仪表板提交测试结果  Linux  make 进行编译 ctest -N 和 ctest -VV 测试 cpack ctest [-VV] -D Experimental：向仪表板提交测试结果  </description>
     </item>
     
     <item>
@@ -1214,7 +1251,7 @@ Start 1 1.15 1.3 0 Finish </description>
       <pubDate>Fri, 17 Dec 2021 22:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/rick/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/</guid>
-      <description>注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是OGC标准，会导致 ArcMap 加载后坐标不对  影像底图：
+      <description>注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是 OGC 标准，会导致 ArcMap 加载影像后，矢量化的坐标不对  影像底图：
 http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
 http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
 http://t0.tianditu.com/img_w/esri/wmts 天地图影像（墨卡托，WGS1984）

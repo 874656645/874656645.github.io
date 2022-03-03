@@ -141,6 +141,71 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>开闭原则
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码
+如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
+class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a &#43; m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-30 20:05:30 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 开闭原则" href="https://874656645.github.io/rick/posts/100-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>面向对象设计原则
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>原则目的：高内聚，低耦合
+ 单一职责原则 Single Responsibility Principal（SRP）：类的职责单一，对外只提供一种功能 开闭原则 Open-Closed Principal（OCP）：对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码 里氏代换原则 Liskov Substitution Principal（LSP）：任何抽象类出现的地方都可以用他的实现类进行替换（多态） 依赖倒转原则 Dependence Inversion Principal（DIP）：依赖于抽象（接口），不要依赖具体的实现（类），针对接口编程 接口隔离原则 Interface Segregation Principal（ISP）：一个接口应该只提供一种对外功能，不应该把所有操作都封装到一个接口中去 合成复用原则 Composite Reuse Principal（CRP）：对于继承和组合，优先使用组合 迪米特法则 Law of Demeter（LoD）：一个对象应当对其他对象尽可能少的了解，从而降低各个对象之间的耦合。例如在一个程序中，各个模块之间相互调用时，通常会提供一个统一的接口来实现。这样其他模块不需要了解另外一个模块的内部实现细节（黑盒原理）  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-30 19:17:09 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 面向对象设计原则" href="https://874656645.github.io/rick/posts/99-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>设计模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>设计模式
+一、概念  设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。 软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。 在一定环境下，用固定套路解决问题。 设计模式的基础是多态。  二、目的  学习设计模式有助于更加深入的理解面向对象思想 如何将代码分散在几个不同的类中 为什么要有接口 何谓针对抽象编程 何时不应该使用继承 如何不修改源代码增加新功能 更好地阅读和理解现有类库与其它系统中的源代码  三、软件设计模式种类 GoF 提出的设计模式有 23 种，加简单工厂模式，一共 24 种
+1、创建型模式 Creational 6种 如何创建对象
+ 单例模式 简单工厂模式 工厂方法模式 抽象工厂模式 原型模式 建造者模式  2、结构型模式 Structural 7种 如何实现类或对象的组合
+让类和类进行组合，获得更大的结构
+ 适配器模式 桥接模式 组合模式 装饰模式 外观模式 享元模式 代理模式  3、行为型模式 Behavioral 11种 类或对象怎样交互以及怎样分配职责
+ 职责链模式 命令模式 解释器模式 迭代器模式 中介模式 备忘录模式 观察者模式 状态模式 策略模式 模板方法模式 访问者模式  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-30 11:57:37 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 设计模式" href="https://874656645.github.io/rick/posts/98-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>UML 统一建模语言
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、用例图  用例代表系统的某项完整功能 从客户角度来描述系统功能 包括参与者、用例、关系  1. 泛化关系 Generalization  父类和子类的关系  2. 包含关系 Include  一个功能肯定会使用另一个功能  3. 扩展关系 Extend  完成某个功能的时候偶尔会执行另一个功能  二、类图 用来显示系统中的类，接口以及它们之间的关系
+1. 泛化关系 Generalization（is a） 一种类与类之间的继承关系
+2. 实现关系 Realization（is a） 类与抽象类之间的实现关系
+3. 依赖关系 Dependence（use a） 两个相对独立的系统，一个系统负责构造另一个系统的实例，或者依赖另一个系统的服务
+类 A 做为类 B 方法的形参，而不是类 B 的成员属性
+4. 关联关系 Directed Association 两个相对独立的系统，一个系统的实例与另一个系统的一些实例存在固定的对应关系
+  聚合 Aggregation
+ 聚合关系是关联关系的一种，是更强的关联关系 聚合是整体和部分之间的关系，例如汽车由引擎、轮胎以及其它零件组成 聚合关系也是通过成员变量来实现的，但是，关联关系所涉及的两个类处在同一个层次上，而聚合关系中，两个类处于不同层次上，一个代表整体，一个代表部分 整体与部分之间是可分离的，它们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享    组合 Composition
+  三、对象图 四、时序图 五、活动图 </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-29 19:55:47 +0800 CST'>January 29, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to UML 统一建模语言" href="https://874656645.github.io/rick/posts/97-uml-%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>函数对象适配器
     </h2>
   </header>
@@ -153,60 +218,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-01-27 21:55:47 +0800 CST'>January 27, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 函数对象适配器" href="https://874656645.github.io/rick/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43; 沉思录笔记
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>有的情况下，现在的折衷方案比未来的理想方案好得多
-  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。
-  只要类定义正确，我就只能按照我编写它的初衷那样去用它。
-  C&#43;&#43; 哲学：抽象，实用，只为用到的东西付出代价。
-  类设计者的核查表：
- 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
-class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* ....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-26 17:48:58 +0800 CST'>January 26, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 沉思录笔记" href="https://874656645.github.io/rick/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>机房预约系统案例
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-24 20:53:57 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 机房预约系统案例" href="https://874656645.github.io/rick/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>switch 与 if Else 区别
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> while 循环中的 switch, break 只能中断 switch，不能中断 while 循环  void managerMenue(){ while(true){ cout &lt;&lt; &#34;这是子菜单&#34; &lt;&lt; endl; cout &lt;&lt; &#34;是否返回主菜单？&#34; &lt;&lt; endl; cout &lt;&lt; &#34;1 是&#34; &lt;&lt; endl; cout &lt;&lt; &#34;2 否&#34; &lt;&lt; endl; int i = 0; cin &gt;&gt; i; switch(i){ case 1: break; case 2: return; default: break; } // if(i == 1){  // // system(&#34;reset&#34;);  // break;  // }  // else if(i == 2){  // return;  // }  // else{  // cout &lt;&lt; &#34;输入有误，请重新输入&#34; &lt;&lt; endl;  // }  } cout &lt;&lt; &#34;这是子菜单循环外代码&#34; &lt;&lt; endl; } int main() { while(true){ cout &lt;&lt; &#34;欢迎登陆！&#34; &lt;&lt; endl; cout &lt;&lt; &#34;这是主菜单&#34; &lt;&lt; endl; cout &lt;&lt; &#34;请输入选项：&#34; &lt;&lt; endl; int i = 0; cin &gt;&gt; i; // switch(i)  // {  // case 1:  // system(&#34;reset&#34;);  // managerMenue();  // break;  // case 2:  // break;  // }  if(i == 1){ // system(&#34;reset&#34;);  managerMenue(); // break;  } else{ break; } cout &lt;&lt; &#34;switch 外代码&#34; &lt;&lt; endl; } cout &lt;&lt; &#34;while 外代码&#34; &lt;&lt; endl; return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-24 20:01:08 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to switch 与 if Else 区别" href="https://874656645.github.io/rick/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>演讲比赛流程管理案例
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-22 17:21:43 +0800 CST'>January 22, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 演讲比赛流程管理案例" href="https://874656645.github.io/rick/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

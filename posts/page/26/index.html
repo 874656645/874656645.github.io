@@ -141,6 +141,69 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>查看 dll 版本
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
+2、使用 notepad&#43;&#43; 直接用 记事本 或者 notepad&#43;&#43; 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。</p>
+  </section>
+  <footer class="entry-footer"><span title='2019-06-05 11:36:19 +0800 CST'>June 5, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 查看 dll 版本" href="https://874656645.github.io/rick/posts/15-%E6%9F%A5%E7%9C%8B-dll-%E7%89%88%E6%9C%AC/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Conda Learn
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
+set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
+1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
+2、搜索某个库的所有版本 conda search gdal
+3、查看当前环境下已安装的包 conda list
+4、创建一个虚拟环境 conda create --name python34 python=3.4
+5、激活某个环境 activate python34 // for windows
+source activate python34 // for Linux &amp; Mac
+6、取消激活 conda deactivate // for windows...</p>
+  </section>
+  <footer class="entry-footer"><span title='2019-06-04 10:16:11 +0800 CST'>June 4, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Conda Learn" href="https://874656645.github.io/rick/posts/14-conda-learn/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Restart Cortana
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
+2.在其中输入下列命令，重新注册激活小娜
+Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &#34;$($_.InstallLocation)\AppXManifest.xml&#34;}</p>
+  </section>
+  <footer class="entry-footer"><span title='2019-04-09 10:35:41 +0800 CST'>April 9, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Restart Cortana" href="https://874656645.github.io/rick/posts/13-restart-cortana/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Cmake Learn
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>cmake命令
+1、生成 VS 2015 win64 版本的解决方案 注：下面的命令要在cmd下使用，power shell不可以
+cmake -H. -B./cmk_build/Win64 -G &#34;Visual Studio 15 2017 Win64&#34;
+2、指定目标版本 cmake -D CMAKE_SYSTEM_VERSION=8.1 -H. -B./cmk_build/Win64 -G &#34;Visual Studio 15 2017 Win64&#34;
+3、使用 MinGW 编译器 cmake -H. -B./cmk_build/MinGW -G &#34;MinGW Makefiles&#34;</p>
+  </section>
+  <footer class="entry-footer"><span title='2019-03-22 11:34:12 +0800 CST'>March 22, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cmake Learn" href="https://874656645.github.io/rick/posts/12-cmake-learn/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Vcpkg Learn
     </h2>
   </header>
@@ -151,75 +214,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2019-03-22 11:06:01 +0800 CST'>March 22, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Vcpkg Learn" href="https://874656645.github.io/rick/posts/11-vcpkg-learn/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Power Shell ExecutionPolicy
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Power shell执行策略 原文网址
-1、查看当前的安全策略 Get-ExecutionPolicy
-2、修改执行策略 ps:这种方法会将执行策略保存到注册表
-Set-ExecutionPolicy UnRestricted
-or
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
-3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
-4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
-6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned</p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-28 17:01:31 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Power Shell ExecutionPolicy" href="https://874656645.github.io/rick/posts/10-power-shell-executionpolicy/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Crawl Pictures From Website
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &#34;dmd&#34; save_path = &#39;E:/python/manhuadao/pics/&#39; __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#39;} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath(&#39;//div[@class=&#34;read-bottom&#34;]//a[@class=&#34;next&#34;]/@href&#39;) # print(next) for href in next_urls: nexturl = href....</p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-28 15:00:16 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Crawl Pictures From Website" href="https://874656645.github.io/rick/posts/9-crawl-pictures-from-website/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Python Virtualenv
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>原文网址
-在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell1、使用pip安装 pip install virtualenv
-2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv 3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env
-或者
-virtualenv env
-此命令会在当前目录下创建一个env目录
-4、启动虚拟环境 env\Scripts\activate
-5、离开虚拟环境 deactivate
-6、删除env文件夹即可 </p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-16 11:20:20 +0800 CST'>February 16, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Python Virtualenv" href="https://874656645.github.io/rick/posts/8-python-virtualenv/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Scrapy Learn
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>原文网址
-1. Using a virtual environment (recommended) pip install virtualenv
-详细操作
-2. Creating a new Scrapy project scrapy startproject tutorial
-3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
-import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy....</p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-15 15:40:48 +0800 CST'>February 15, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Scrapy Learn" href="https://874656645.github.io/rick/posts/7-scrapy-learn/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
