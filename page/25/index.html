@@ -14,7 +14,7 @@
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
@@ -138,6 +138,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>指针函数和函数指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  指针函数本质是一个函数，返回值是一个指针；
+  函数指针是指向函数的一个指针变量；
+  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &#34;fun: &#34; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun  pf(&#34;Hello&#34;); return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-16 12:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 指针函数和函数指针" href="https://874656645.github.io/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>explicit（显式）关键字
     </h2>
   </header>
@@ -190,20 +204,6 @@ ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员�
   </section>
   <footer class="entry-footer"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to QProcess 使用" href="https://874656645.github.io/rick/posts/21-qprocess-%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>QString 中文乱码
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
-以QString做为形参变量传递  qDebug(msg.toUtf8());
-QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to QString 中文乱码" href="https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

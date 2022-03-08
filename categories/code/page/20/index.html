@@ -13,7 +13,7 @@
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.c88963fe2d79462000fd0fb1b3737783c32855d340583e4523343f8735c787f0.css" integrity="sha256-yIlj/i15RiAA/Q&#43;xs3N3g8MoVdNAWD5FIzQ/hzXHh/A=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
@@ -126,6 +126,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>构造函数重载与互调
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 构造函数中不要写业务逻辑 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public: Test(int a, int b, int c){ _a = a; _b = b; _c = c; } // 正确  Test(int a, int b):Test(a, b, 100){ } /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */ int getA(){ return _a; } int getB(){ return _b; } int getC(){ return _c; } private: int _a; int _b; int _c; }; int main( ) { Test t1(10, 20); cout &lt;&lt; t1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-28 16:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 构造函数重载与互调" href="https://874656645.github.io/rick/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>类的成员函数作为回调函数
     </h2>
   </header>
@@ -179,22 +191,6 @@ Start printT ~Test() 0 Finish 二、只能在栈上 方法：将 new 和 delete 
   </section>
   <footer class="entry-footer"><span title='2021-12-27 17:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 定义一个只能在堆上（栈上）生成对象的类" href="https://874656645.github.io/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>抽象类、接口类、聚合类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
-1）所有成员都是 public，没有私有和受保护的非静态成员；
-2）没有定义任何构造函数；
-3）没有类内初始化；
-4）没有基类，也没有 virtual 函数  // 接口类 class A { virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public: // 覆写接口类的纯虚函数  void printA() override { cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl; } virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public: // 覆写父类（抽象类）的纯虚函数  void printAA() override { cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl; } void printB() { cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } }; // 聚合类 class C { public: int x; int y; void print(){ cc(); } private: void cc(){ cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl; } static int z; }; int C::z = 0; class D { public: int a; int b; C c; void print(){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl; c....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-27 16:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 抽象类、接口类、聚合类" href="https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
