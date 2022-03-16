@@ -138,6 +138,56 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>观察者模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/rick/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>命令模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>将一个请求封闭为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。
+命令模式可以将请求者和接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/rick/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>策略模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>策略模式定义了一系列的算法，并将每个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-01 16:59:42 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 策略模式" href="https://874656645.github.io/rick/posts/112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>模板方法模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
+class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-01 16:41:35 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 模板方法模式" href="https://874656645.github.io/rick/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>适配器模式
     </h2>
   </header>
@@ -147,57 +197,6 @@ class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &l
   </section>
   <footer class="entry-footer"><span title='2022-02-01 16:07:36 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 适配器模式" href="https://874656645.github.io/rick/posts/110-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>外观模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>将复杂的子系统抽象到同一个接口进行管理，外界只需要通过此接口与子类系统进行交互，而不必直接与复杂的子类系统进行交互
-案例：家庭影院外观模式 实现KTV模式：电视打开，灯关掉，音响打开，麦克风打开，DVD打开
-实现游戏模式：电视打开，音响打开，游戏机打开</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-01 15:32:38 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 外观模式" href="https://874656645.github.io/rick/posts/109-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>代理模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-01 07:28:53 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 代理模式" href="https://874656645.github.io/rick/posts/108-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>单例模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>单例在内存中只有一份，在内存中不会占用太多，程序退出时会随着程序统一释放内存，所以可以不必特意释放  一、懒汉式 不是线程安全的，所以多线程使用要加锁
-class Singleton{ public: static Singleton* getInstance(){ if(s_instance == nullptr){ s_instance = new Singleton; } return s_instance; } // 可有可无，程序结束时，系统会自动回收程序的所有内存  class Garbo{ ~Garbo(){ if(s_instance){ cout &lt;&lt; &#34;gc...&#34; &lt;&lt; endl; delete s_instance; } } }; private: Singleton(){ cout &lt;&lt; &#34;Singleton()...&#34; &lt;&lt; endl; } Singleton(const Singleton&amp;) = delete; Singleton&amp; operator=(const Singleton&amp;) = delete; static Singleton* s_instance; static Garbo s_gc; }; Singleton* Singleton::s_instance = nullptr; int main() { cout &lt;&lt; &#34;main()....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-31 20:43:34 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 单例模式" href="https://874656645.github.io/rick/posts/107-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>抽象工厂模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> 抽象工厂针对的是产品族，而不是产品等级 产品族：同一产地或者同一厂商，功能不同 产品等级：功能相同，产地或者厂商不同 对于增加产品族，符合开闭原则 对于增加产品等级，不符合开闭原则  // 抽象工厂模式 class AbstractApple{ public: virtual void showName() = 0; }; class AbstractBanana{ public: virtual void showName() = 0; }; class AbstractPear{ public: virtual void showName() = 0; }; class ChinaApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是中国苹果！&#34; &lt;&lt; endl; } }; class ChinaBanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是中国香蕉！&#34; &lt;&lt; endl; } }; class ChinaPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是中国鸭梨！&#34; &lt;&lt; endl; } }; class USAApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是美国苹果！&#34; &lt;&lt; endl; } }; class USABanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是美国香蕉！&#34; &lt;&lt; endl; } }; class USAPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是美国鸭梨！&#34; &lt;&lt; endl; } }; class JapanApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是日本苹果！&#34; &lt;&lt; endl; } }; class JapanBanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是日本香蕉！&#34; &lt;&lt; endl; } }; class JapanPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是日本鸭梨！&#34; &lt;&lt; endl; } }; class AbstractFactory{ public: virtual AbstractApple* CreateApple() = 0; virtual AbstractBanana* CreateBanana() = 0; virtual AbstractPear* CreatePear() = 0; }; class ChinaFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new ChinaApple; } AbstractBanana* CreateBanana() override{ return new ChinaBanana; } AbstractPear* CreatePear() override{ return new ChinaPear; } }; class USAFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new USAApple; } AbstractBanana* CreateBanana() override{ return new USABanana; } AbstractPear* CreatePear() override{ return new USAPear; } }; class JapanFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new JapanApple; } AbstractBanana* CreateBanana() override{ return new JapanBanana; } AbstractPear* CreatePear() override{ return new JapanPear; } }; int main() { AbstractFactory* factory = nullptr; AbstractApple* apple = nullptr; AbstractBanana* banana = nullptr; AbstractPear* pear = nullptr; // 中国  factory = new ChinaFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; // 美国  factory = new USAFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; // 日本  factory = new JapanFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-31 17:44:49 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 抽象工厂模式" href="https://874656645.github.io/rick/posts/106-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
