@@ -14,18 +14,18 @@ cl [filename].cpp /d1 reportSingleClassLayout[className]
 class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; }; 输出：
 class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;--- 调用：">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/" />
+<link rel="canonical" href="https://874656645.github.io/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
-<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -56,13 +56,13 @@ cl [filename].cpp /d1 reportSingleClassLayout[className]
 class A { public: int dataA; }; class B:public A { public: int dataB; }; class C:public A { public: int dataC; }; class D : public B, public C { public: int dataD; }; 输出：
 class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base class A) 0 | | | dataA | | &#43;--- 4 | | dataB | &#43;--- 8 | &#43;--- (base class C) 8 | | &#43;--- (base class A) 8 | | | dataA | | &#43;--- 12 | | dataC | &#43;--- 16 | dataD &#43;--- 调用：" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-27T13:34:27&#43;08:00" />
 <meta property="article:modified_time" content="2021-12-27T13:34:27&#43;08:00" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="虚继承和虚基类"/>
 <meta name="twitter:description" content="虚继承和虚基类 参考
@@ -82,13 +82,13 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
       "@type": "ListItem",
       "position":  2 ,
       "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
+      "item": "https://874656645.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "虚继承和虚基类",
-      "item": "https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/"
+      "item": "https://874656645.github.io/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/"
     }
   ]
 }
@@ -114,14 +114,14 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/"
+    "@id": "https://874656645.github.io/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://874656645.github.io/rick/favicon.ico"
+      "url": "https://874656645.github.io/favicon.ico"
     }
   }
 }
@@ -139,7 +139,7 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -165,27 +165,27 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
         </div>
         <ul id="menu">
             <li>
-                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                <a href="https://874656645.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                <a href="https://874656645.github.io/categories" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/series" title="Series">
+                <a href="https://874656645.github.io/series" title="Series">
                     <span>Series</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                <a href="https://874656645.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -196,7 +196,7 @@ class D size(20): &#43;--- 0 | &#43;--- (base class B) 0 | | &#43;--- (base clas
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       虚继承和虚基类
     </h1>
@@ -369,15 +369,15 @@ vbi:       class  offset o.vbptr  o.vbte fVtorDisp
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/">
+  <a class="prev" href="https://874656645.github.io/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/">
     <span class="title">« Prev Page</span>
     <br>
     <span>抽象类、接口类、聚合类</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/">
+  <a class="next" href="https://874656645.github.io/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/">
     <span class="title">Next Page »</span>
     <br>
     <span>多态总结</span>
@@ -390,7 +390,7 @@ vbi:       class  offset o.vbptr  o.vbte fVtorDisp
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

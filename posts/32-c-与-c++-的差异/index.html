@@ -12,18 +12,18 @@ C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱
 1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
 故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C&#43;&#43; 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C&#43;&#43; 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C&#43;&#43; 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C&#43;&#43; 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/" />
+<link rel="canonical" href="https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
-<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -52,13 +52,13 @@ C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱
 1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
 故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C&#43;&#43; 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C&#43;&#43; 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C&#43;&#43; 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C&#43;&#43; 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-22T22:34:27&#43;08:00" />
 <meta property="article:modified_time" content="2021-12-22T22:34:27&#43;08:00" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="C 与 C&#43;&#43; 的差异"/>
 <meta name="twitter:description" content="C&#43;&#43; 是 C 的超集和增强，校验更加严格
@@ -76,13 +76,13 @@ C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱
       "@type": "ListItem",
       "position":  2 ,
       "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
+      "item": "https://874656645.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "C 与 C++ 的差异",
-      "item": "https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c++-%E7%9A%84%E5%B7%AE%E5%BC%82/"
+      "item": "https://874656645.github.io/posts/32-c-%E4%B8%8E-c++-%E7%9A%84%E5%B7%AE%E5%BC%82/"
     }
   ]
 }
@@ -108,14 +108,14 @@ C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c++-%E7%9A%84%E5%B7%AE%E5%BC%82/"
+    "@id": "https://874656645.github.io/posts/32-c-%E4%B8%8E-c++-%E7%9A%84%E5%B7%AE%E5%BC%82/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://874656645.github.io/rick/favicon.ico"
+      "url": "https://874656645.github.io/favicon.ico"
     }
   }
 }
@@ -133,7 +133,7 @@ C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -159,27 +159,27 @@ C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱
         </div>
         <ul id="menu">
             <li>
-                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                <a href="https://874656645.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                <a href="https://874656645.github.io/categories" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/series" title="Series">
+                <a href="https://874656645.github.io/series" title="Series">
                     <span>Series</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                <a href="https://874656645.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -190,7 +190,7 @@ C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       C 与 C&#43;&#43; 的差异
     </h1>
@@ -330,15 +330,15 @@ cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#3
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/33-fork-unix/">
+  <a class="prev" href="https://874656645.github.io/posts/33-fork-unix/">
     <span class="title">« Prev Page</span>
     <br>
     <span>fork Unix</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/">
+  <a class="next" href="https://874656645.github.io/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/">
     <span class="title">Next Page »</span>
     <br>
     <span>函数形参从右到左入栈</span>
@@ -351,7 +351,7 @@ cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#3
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

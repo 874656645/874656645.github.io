@@ -14,14 +14,14 @@
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
-<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -48,13 +48,13 @@ if (!doNotTrack) {
 <meta property="og:description" content="特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
  创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; m_name &lt;&lt; &#34; 工资：&#34; &lt;&lt; m_salary &lt;&lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&lt;Worker&gt; &amp;v){ string nameSeed = &#34;ABCDEFGHIJ&#34;; for(int i = 0; i &lt; nameSeed." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-20T20:18:25&#43;08:00" />
 <meta property="article:modified_time" content="2022-01-20T20:18:25&#43;08:00" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="map multimap 容器"/>
 <meta name="twitter:description" content="特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
@@ -70,13 +70,13 @@ if (!doNotTrack) {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
+      "item": "https://874656645.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "map multimap 容器",
-      "item": "https://874656645.github.io/rick/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"
+      "item": "https://874656645.github.io/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"
     }
   ]
 }
@@ -102,14 +102,14 @@ if (!doNotTrack) {
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"
+    "@id": "https://874656645.github.io/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://874656645.github.io/rick/favicon.ico"
+      "url": "https://874656645.github.io/favicon.ico"
     }
   }
 }
@@ -127,7 +127,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -153,27 +153,27 @@ if (!doNotTrack) {
         </div>
         <ul id="menu">
             <li>
-                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                <a href="https://874656645.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                <a href="https://874656645.github.io/categories" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/series" title="Series">
+                <a href="https://874656645.github.io/series" title="Series">
                     <span>Series</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                <a href="https://874656645.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -184,7 +184,7 @@ if (!doNotTrack) {
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       map multimap 容器
     </h1>
@@ -333,16 +333,16 @@ if (!doNotTrack) {
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
-      <li><a href="https://874656645.github.io/rick/tags/stl/">STL</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/stl/">STL</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/89-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%B8%8E-predicate-%E8%B0%93%E8%AF%8D/">
+  <a class="prev" href="https://874656645.github.io/posts/89-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%B8%8E-predicate-%E8%B0%93%E8%AF%8D/">
     <span class="title">« Prev Page</span>
     <br>
     <span>函数对象与 predicate 谓词</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/">
+  <a class="next" href="https://874656645.github.io/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/">
     <span class="title">Next Page »</span>
     <br>
     <span>set multiset 容器</span>
@@ -355,7 +355,7 @@ if (!doNotTrack) {
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

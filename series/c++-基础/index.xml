@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>C&#43;&#43; 基础 on Slow is Smooth and Smooth is Fast</title>
-    <link>https://874656645.github.io/rick/series/c&#43;&#43;-%E5%9F%BA%E7%A1%80/</link>
+    <link>https://874656645.github.io/series/c&#43;&#43;-%E5%9F%BA%E7%A1%80/</link>
     <description>Recent content in C&#43;&#43; 基础 on Slow is Smooth and Smooth is Fast</description>
     <image>
-      <url>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+      <url>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 15 Feb 2022 15:29:35 +0800</lastBuildDate><atom:link href="https://874656645.github.io/rick/series/c++-%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Feb 2022 15:29:35 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/c++-%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>2022-02-14 杂记</title>
-      <link>https://874656645.github.io/rick/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/</link>
+      <link>https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/</link>
       <pubDate>Tue, 15 Feb 2022 15:29:35 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/</guid>
+      <guid>https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/</guid>
       <description>NULL，0，&#39;\0&#39;，&amp;lsquo;0&amp;rsquo;
 int main() { char arr[] = {0, &amp;#39;\0&amp;#39;, &amp;#39;0&amp;#39;, 48}; printf(&amp;#34;%c\n&amp;#34;, arr[0]); printf(&amp;#34;%c\n&amp;#34;, arr[1]); printf(&amp;#34;%c\n&amp;#34;, arr[2]); printf(&amp;#34;%c\n&amp;#34;, arr[3]); printf(&amp;#34;---------------\n&amp;#34;); printf(&amp;#34;%d\n&amp;#34;, arr[0]); printf(&amp;#34;%d\n&amp;#34;, arr[1]); printf(&amp;#34;%d\n&amp;#34;, arr[2]); printf(&amp;#34;%d\n&amp;#34;, arr[3]); return 0; } 输出：
 0 0 --------------- 0 0 48 48   UTF-8 向下兼容 ASCII 编码，UTF-8 编码中，一个英文字为一个字节，一个中文一般为三个字节（ASCII、Unicode、UTF-8）
@@ -24,10 +24,10 @@ int main() { char arr[] = {0, &amp;#39;\0&amp;#39;, &amp;#39;0&amp;#39;, 48}; pr
     
     <item>
       <title>递归</title>
-      <link>https://874656645.github.io/rick/posts/119-%E9%80%92%E5%BD%92/</link>
+      <link>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/</link>
       <pubDate>Mon, 07 Feb 2022 21:38:53 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/119-%E9%80%92%E5%BD%92/</guid>
+      <guid>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/</guid>
       <description>逆序打印字符串
 void printReverseString(const char* str){ if(*str == &amp;#39;\0&amp;#39;){ return; } printReverseString(str + 1); printf(&amp;#34;%c&amp;#34;, *str); } int main() { const char* str = &amp;#34;Hello World&amp;#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
 struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&amp;gt;next); printf(&amp;#34;%d\n&amp;#34;, header-&amp;gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&amp;gt;data = 10; node1-&amp;gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&amp;gt;data = 20; node2-&amp;gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&amp;gt;data = 30; node3-&amp;gt;next = NULL; header-&amp;gt;next = node1; node1-&amp;gt;next = node2; node2-&amp;gt;next = node3; printReverseLinkNode(header-&amp;gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3</description>
@@ -35,85 +35,85 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
     
     <item>
       <title>常用的宏定义</title>
-      <link>https://874656645.github.io/rick/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/</link>
+      <link>https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/</link>
       <pubDate>Mon, 07 Feb 2022 10:11:16 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/</guid>
+      <guid>https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/</guid>
       <description>int main() { printf(&amp;#34;%s\n&amp;#34;, __FILE__); // main.c  printf(&amp;#34;%d\n&amp;#34;, __LINE__); // 14  printf(&amp;#34;%s\n&amp;#34;, __DATE__); // Feb 7 2022  printf(&amp;#34;%s\n&amp;#34;, __TIME__); // 01:59:37  return 0; } // func1.h #ifdef __cplusplus extern &amp;#34;C&amp;#34;{ #endif  void func1(); #ifdef __cplusplus } #endif  // main.h extern &amp;#34;C&amp;#34;{ include &amp;#34;func1.h&amp;#34; } extern &amp;#34;C&amp;#34;{ extern void func1(); } int main() { func1(); return 0; } </description>
     </item>
     
     <item>
       <title>char* 数组</title>
-      <link>https://874656645.github.io/rick/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/</link>
+      <link>https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/</link>
       <pubDate>Thu, 03 Feb 2022 20:29:17 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/</guid>
+      <guid>https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/</guid>
       <description>void printArr(const char ** p, int len){ for(int i = 0; i &amp;lt; len; ++i){ cout &amp;lt;&amp;lt; p[i] &amp;lt;&amp;lt; endl; } } void sortSelect(const char ** p, int len){ for(int i = 0; i &amp;lt; len - 1; ++i){ int max = i; for(int j = i + 1; j &amp;lt; len; ++j){ if(p[j] &amp;gt; p[max]){ max = j; } } // 交换  if(i != max){ const char* tmp = p[i]; p[i] = p[max]; p[max] = tmp; } } } int main() { const char* arr[] = {&amp;#34;aa&amp;#34;, &amp;#34;bb&amp;#34;, &amp;#34;cc&amp;#34;, &amp;#34;dd&amp;#34;, &amp;#34;ee&amp;#34;}; int len = sizeof(arr) / sizeof(char*); cout &amp;lt;&amp;lt; len &amp;lt;&amp;lt; endl; printArr(arr, len); sortSelect(arr, len); cout &amp;lt;&amp;lt; &amp;#34;----------------&amp;#34; &amp;lt;&amp;lt; endl; printArr(arr, len); return 0; } 输出：</description>
     </item>
     
     <item>
       <title>switch 与 if Else 区别</title>
-      <link>https://874656645.github.io/rick/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/</link>
+      <link>https://874656645.github.io/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/</link>
       <pubDate>Mon, 24 Jan 2022 20:01:08 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/</guid>
+      <guid>https://874656645.github.io/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/</guid>
       <description> while 循环中的 switch, break 只能中断 switch，不能中断 while 循环  void managerMenue(){ while(true){ cout &amp;lt;&amp;lt; &amp;#34;这是子菜单&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;是否返回主菜单？&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;1 是&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;2 否&amp;#34; &amp;lt;&amp;lt; endl; int i = 0; cin &amp;gt;&amp;gt; i; switch(i){ case 1: break; case 2: return; default: break; } // if(i == 1){  // // system(&amp;#34;reset&amp;#34;);  // break;  // }  // else if(i == 2){  // return;  // }  // else{  // cout &amp;lt;&amp;lt; &amp;#34;输入有误，请重新输入&amp;#34; &amp;lt;&amp;lt; endl;  // }  } cout &amp;lt;&amp;lt; &amp;#34;这是子菜单循环外代码&amp;#34; &amp;lt;&amp;lt; endl; } int main() { while(true){ cout &amp;lt;&amp;lt; &amp;#34;欢迎登陆！&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;这是主菜单&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;请输入选项：&amp;#34; &amp;lt;&amp;lt; endl; int i = 0; cin &amp;gt;&amp;gt; i; // switch(i)  // {  // case 1:  // system(&amp;#34;reset&amp;#34;);  // managerMenue();  // break;  // case 2:  // break;  // }  if(i == 1){ // system(&amp;#34;reset&amp;#34;);  managerMenue(); // break;  } else{ break; } cout &amp;lt;&amp;lt; &amp;#34;switch 外代码&amp;#34; &amp;lt;&amp;lt; endl; } cout &amp;lt;&amp;lt; &amp;#34;while 外代码&amp;#34; &amp;lt;&amp;lt; endl; return 0; } </description>
     </item>
     
     <item>
       <title>生成随机数</title>
-      <link>https://874656645.github.io/rick/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
+      <link>https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
       <pubDate>Sun, 16 Jan 2022 22:02:33 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
       <description>#include &amp;lt;ctime&amp;gt;using namespace std; int main() { srand((unsigned int)time(NULL)); cout &amp;lt;&amp;lt; rand() % 40 &amp;lt;&amp;lt; endl; return 0; } </description>
     </item>
     
     <item>
       <title>C 语言面向接口编程</title>
-      <link>https://874656645.github.io/rick/posts/68-c-%E8%AF%AD%E8%A8%80%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/</link>
+      <link>https://874656645.github.io/posts/68-c-%E8%AF%AD%E8%A8%80%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/</link>
       <pubDate>Mon, 10 Jan 2022 22:23:34 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/68-c-%E8%AF%AD%E8%A8%80%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/</guid>
+      <guid>https://874656645.github.io/posts/68-c-%E8%AF%AD%E8%A8%80%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/</guid>
       <description>通过函数指针实现多态，注册回调函数的方式
 void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char* arrStart = (char*)arr; for(int i = 0; i &amp;lt; len; ++i){ char* eleStart = arrStart + i * eleSize; myPrint(eleStart); } printf(&amp;#34;\n&amp;#34;); } void printInt(void* data){ int* ele = (int*)data; printf(&amp;#34;%d &amp;#34;, *ele); } struct Person{ char name[64]; int age; }; void printPerson(void* data){ struct Person* ele = (struct Person*)data; printf(&amp;#34;Name: %s, Age: %d \n&amp;#34;, ele-&amp;gt;name, ele-&amp;gt;age); } int main() { int arr[] = {1, 2, 3, 4, 5}; printAllArray(arr, sizeof(int), 5, printInt); struct Person personArr[] = { {&amp;#34;aaa&amp;#34;, 20}, {&amp;#34;bbb&amp;#34;, 30}, {&amp;#34;ccc&amp;#34;, 40}, {&amp;#34;ddd&amp;#34;, 50}, {&amp;#34;eee&amp;#34;, 60}, }; printAllArray(personArr, sizeof(struct Person), 5, printPerson); return 0; } 输出：</description>
     </item>
     
     <item>
       <title>实现一个简单的字符串类</title>
-      <link>https://874656645.github.io/rick/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/</link>
+      <link>https://874656645.github.io/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/</link>
       <pubDate>Sat, 08 Jan 2022 14:01:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/</guid>
+      <guid>https://874656645.github.io/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/</guid>
       <description>MyString.h
 #ifndef __MYSTRING_H_ #define __MYSTRING_H_  #include &amp;lt;stdlib.h&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;cstring&amp;gt; using namespace std; class MyString { // 重载 &amp;lt;&amp;lt;  // 最好是 const 的，可以输出匿名变量（匿名变量不能被非 const 的左值引用接收）  friend ostream&amp;amp; operator&amp;lt;&amp;lt;(ostream &amp;amp;os, const MyString &amp;amp;s); // 重载 &amp;gt;&amp;gt;  friend istream&amp;amp; operator&amp;gt;&amp;gt;(istream &amp;amp;is, MyString &amp;amp;s); private: // 字符串的有效长度  int m_len; // 字符串指针  char* m_pStr; public: MyString(); MyString(const char *); MyString(const MyString &amp;amp;); ~MyString(); // 重载 =  MyString&amp;amp; operator=(const MyString &amp;amp;); // 重载 []  char&amp;amp; operator[](int index); // 重载 +  MyString operator+(const MyString &amp;amp;); // 重载 +=  MyString&amp;amp; operator+=(const MyString &amp;amp;); // 重载 ==  bool operator==(const MyString &amp;amp;); // 重载 !</description>
     </item>
     
     <item>
       <title>静态数组初始化</title>
-      <link>https://874656645.github.io/rick/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
+      <link>https://874656645.github.io/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
       <pubDate>Sat, 08 Jan 2022 13:50:12 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
+      <guid>https://874656645.github.io/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
       <description>1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto &amp;amp; i : da){ cout &amp;lt;&amp;lt; i &amp;lt;&amp;lt; endl; } return 0; } 输出：
 6.95128e-310 4.63759e-310 0 2. C++ 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() { int arr[10]; cout &amp;lt;&amp;lt; arr &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; arr + 1 &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;----------&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;amp;arr &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;amp;arr + 1 &amp;lt;&amp;lt; endl; return 0; } 输出：</description>
     </item>
     
     <item>
       <title>自定义智能指针</title>
-      <link>https://874656645.github.io/rick/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</link>
+      <link>https://874656645.github.io/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</link>
       <pubDate>Tue, 04 Jan 2022 21:07:15 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</guid>
+      <guid>https://874656645.github.io/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/</guid>
       <description>使用模板类 重载 -&amp;gt; 操作符 重载 * 操作符  template&amp;lt;typename T&amp;gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&amp;gt;(){ // 相当于 ptr-&amp;gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr; } T&amp;amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &amp;lt;&amp;lt; &amp;#34;A(int)...&amp;#34; &amp;lt;&amp;lt; endl; this-&amp;gt;a = a; } ~A(){ cout &amp;lt;&amp;lt; &amp;#34;~A().</description>
     </item>
     
     <item>
       <title>临时变量不能绑定 no-const 左值引用类型</title>
-      <link>https://874656645.github.io/rick/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/</link>
+      <link>https://874656645.github.io/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/</link>
       <pubDate>Tue, 04 Jan 2022 10:31:45 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/</guid>
       <description>error: cannot bind non-const lvalue reference of type ‘T&amp;amp;’ to an rvalue of type ‘T’
 如果一个参数是以非 const 引用传入，c++ 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。
 但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。
@@ -127,29 +127,29 @@ class T{ public: T(int v){ a = v; } T operator+(T &amp;amp;t){ T temp = this-&am
     
     <item>
       <title>操作符重载</title>
-      <link>https://874656645.github.io/rick/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/</link>
+      <link>https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/</link>
       <pubDate>Mon, 03 Jan 2022 13:54:11 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/</guid>
+      <guid>https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/</guid>
       <description>#include &amp;lt;iostream&amp;gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;amp;c1, Complex &amp;amp;c2);  // friend Complex operator+(Complex &amp;amp;c1, Complex &amp;amp;c2);  // friend Complex&amp;amp; operator+= (Complex &amp;amp;c1, Complex &amp;amp;c2);  friend ostream&amp;amp; operator&amp;lt;&amp;lt;(ostream &amp;amp;os, Complex &amp;amp;c); friend istream&amp;amp; operator&amp;gt;&amp;gt;(istream &amp;amp;is, Complex &amp;amp;c); public: Complex(){ cout &amp;lt;&amp;lt; &amp;#34;Complex()...&amp;#34; &amp;lt;&amp;lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &amp;lt;&amp;lt; &amp;#34;Complex(int, int)...&amp;#34; &amp;lt;&amp;lt; endl; this-&amp;gt;a = a; this-&amp;gt;b = b; } ~Complex(){ cout &amp;lt;&amp;lt; &amp;#34;~Complex().</description>
     </item>
     
     <item>
       <title>具有链表特性的类</title>
-      <link>https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/</link>
+      <link>https://874656645.github.io/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/</link>
       <pubDate>Mon, 03 Jan 2022 09:21:17 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/</guid>
+      <guid>https://874656645.github.io/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/</guid>
       <description>买卖货物问题：
 #include &amp;lt;iostream&amp;gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &amp;lt;&amp;lt; &amp;#34;买入了货物，重量是：&amp;#34; &amp;lt;&amp;lt; m_weight &amp;lt;&amp;lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight += m_weight; cout &amp;lt;&amp;lt; &amp;#34;买入了货物，重量是：&amp;#34; &amp;lt;&amp;lt; m_weight &amp;lt;&amp;lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&amp;gt;m_pNext = nullptr; cout &amp;lt;&amp;lt; &amp;#34;卖出了货物，重量是：&amp;#34; &amp;lt;&amp;lt; m_weight &amp;lt;&amp;lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&amp;gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;amp;head){ if(head == nullptr){ cout &amp;lt;&amp;lt; &amp;#34;没有货物了&amp;#34; &amp;lt;&amp;lt; endl; return; } Goods *temp = head; head = head-&amp;gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &amp;lt;&amp;lt; &amp;#34;输入 1 进货&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;输入 2 出货&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;输入 0 退出&amp;#34; &amp;lt;&amp;lt; endl; cin &amp;gt;&amp;gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &amp;lt;&amp;lt; &amp;#34;输入货物重量：&amp;#34; &amp;lt;&amp;lt; endl; cin &amp;gt;&amp;gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &amp;lt;&amp;lt; &amp;#34;目前货物的总重量是：&amp;#34; &amp;lt;&amp;lt; Goods::getTotalWeight() &amp;lt;&amp;lt; endl; }while(1); return 0; } 输出：</description>
     </item>
     
     <item>
       <title>new delete 与内存</title>
-      <link>https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/</link>
+      <link>https://874656645.github.io/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/</link>
       <pubDate>Wed, 29 Dec 2021 15:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/</guid>
+      <guid>https://874656645.github.io/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/</guid>
       <description>C++ 中 new 操作符内幕：new operator、operator new、placement new 
 1、new / delete 具体步骤 new
  第一步：调用 operator new 函数分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象 第二步：编译器运行相应的构造函数以构造对象，并为其传入初值 第三部：对象构造完成后，返回一个指向该对象的指针  delete
@@ -159,19 +159,19 @@ class Person{ public: Person(){ id = 0; score = 0; cout &amp;lt;&amp;lt; &amp;#3
     
     <item>
       <title>new 二维数组</title>
-      <link>https://874656645.github.io/rick/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</link>
+      <link>https://874656645.github.io/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</link>
       <pubDate>Wed, 29 Dec 2021 14:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</guid>
+      <guid>https://874656645.github.io/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</guid>
       <description>在堆上声明一个数组 int main( ) { #if 0// 方式一： int** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &amp;lt; 4; i++){ pArr[i] = new int[8]; } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ pArr[i][j] = i * j; } } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ if(j == 0) cout &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; pArr[i][j] &amp;lt;&amp;lt; &amp;#39;\t&amp;#39;; } } // 删除 for(int i = 0; i &amp;lt; 4; ++i){ delete [] pArr[i]; } delete [] pArr; #endif  // 方式二：  cout &amp;lt;&amp;lt; sizeof(int[5]) &amp;lt;&amp;lt; endl; // 初始化  int(*pArr)[8] = new int[4][8]; memset(pArr, 0, sizeof(int[4][8])); // 或者  // int(*pArr)[8] = new int[4][8]{{0}};  cout &amp;lt;&amp;lt; sizeof(int[4][8]) &amp;lt;&amp;lt; endl; for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ pArr[i][j] = i * j; } } for(int i = 0; i &amp;lt; 4; ++i){ for(int j = 0; j &amp;lt; 8; ++j){ cout &amp;lt;&amp;lt; pArr[i][j] &amp;lt;&amp;lt; &amp;#39;\t&amp;#39;; } cout &amp;lt;&amp;lt; endl; } cout &amp;lt;&amp;lt; endl; delete[] pArr; // 取地址  int arr[3][4]{{0}}; int(*p)[3][4] = &amp;amp;arr; cout &amp;lt;&amp;lt; arr[2][3] &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; *p[2][3] &amp;lt;&amp;lt; endl; return 0; } 输出：</description>
     </item>
     
     <item>
       <title>类其它总结</title>
-      <link>https://874656645.github.io/rick/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</link>
+      <link>https://874656645.github.io/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</link>
       <pubDate>Tue, 28 Dec 2021 17:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</guid>
+      <guid>https://874656645.github.io/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/</guid>
       <description>1. this指针 this 指针是一个隐含于每一个非静态成员函数中的特殊指针，它指向调用该成员函数的对象的首地址
  当对一个对象调用成员函数时，编译程序先将对象的地址赋给 this 指针，然后调用成员函数，每次成员函数存取数据成员时，都隐式使用 this 指针 this 指针被隐含地声明为: ClassName *const this，这意味着不能给 this 指针赋值 this 是个右值，所以不能取 this 的地址  2. delete this  类的成员函数中可以调用 delete this，但是在释放后，对象后续调用的方法不能再用到 this 指针 delete this 释放了类对象的内存空间，但是内存空间却并不是马上被回收到系统中，此时其中的值是不确定的 delete 的本质是为将被释放的内存调用一个或多个析构函数，如果在类的析构函数中调用 delete this，会陷入无限递归，造成栈溢出  3. 一个空类class中有什么？ 构造函数、拷贝构造函数、析构函数、赋值运算符重载、取地址操作符重载、被 const 修饰的取地址操作符重载
 4. C++ 计算一个类的 sizeof  一个空的类 sizeof 返回 1，因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址 类内的普通成员函数不参与 sizeof 的统计，因为 sizeof 是针对实例的，而普通成员函数，是针对类体的 一个类如果含有虚函数，则这个类中有一个指向虚函数表的指针（虚函数指针），32位程序占4个字节，64位程序占8个字节 静态成员不影响类的大小，被编译器放在程序的数据段中 普通继承的类sizeof，会得到基类的大小加上派生类自身成员的大小 当存在虚拟继承时，派生类中会有一个指向虚基类表的指针。所以其大小应为普通继承的大小，再加上虚基类表的指针大小  5. 构造函数和析构函数能被继承吗? 不能。构造函数和析构函数是用来处理对象的创建和析构的，它们只知道对在它们的特殊层次的对象做什么
@@ -180,19 +180,19 @@ class Person{ public: Person(){ id = 0; score = 0; cout &amp;lt;&amp;lt; &amp;#3
     
     <item>
       <title>构造函数重载与互调</title>
-      <link>https://874656645.github.io/rick/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/</link>
+      <link>https://874656645.github.io/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/</link>
       <pubDate>Tue, 28 Dec 2021 16:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/</guid>
+      <guid>https://874656645.github.io/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/</guid>
       <description>构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 构造函数中不要写业务逻辑 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public: Test(int a, int b, int c){ _a = a; _b = b; _c = c; } // 正确  Test(int a, int b):Test(a, b, 100){ } /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */ int getA(){ return _a; } int getB(){ return _b; } int getC(){ return _c; } private: int _a; int _b; int _c; }; int main( ) { Test t1(10, 20); cout &amp;lt;&amp;lt; t1.</description>
     </item>
     
     <item>
       <title>类的成员函数作为回调函数</title>
-      <link>https://874656645.github.io/rick/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</link>
+      <link>https://874656645.github.io/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</link>
       <pubDate>Tue, 28 Dec 2021 14:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</guid>
       <description>思路是借助类的静态成员函数
 方式一：
 class A{ public: A(int a){ m_a = a; } void print(){ cout &amp;lt;&amp;lt; &amp;#34;m_a = &amp;#34; &amp;lt;&amp;lt; m_a &amp;lt;&amp;lt; endl; } void setCur(){ s_curA = this; } static void callback(){ s_curA-&amp;gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback); b.setCur(); Handle(A::callback); return 0; } 方式二：
@@ -201,10 +201,10 @@ class A{ public: A(int a){ m_a = a; } void print(){ cout &amp;lt;&amp;lt; &amp;#
     
     <item>
       <title>类的兼容性原则</title>
-      <link>https://874656645.github.io/rick/posts/48-%E7%B1%BB%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8E%9F%E5%88%99/</link>
+      <link>https://874656645.github.io/posts/48-%E7%B1%BB%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8E%9F%E5%88%99/</link>
       <pubDate>Tue, 28 Dec 2021 11:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/48-%E7%B1%BB%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8E%9F%E5%88%99/</guid>
+      <guid>https://874656645.github.io/posts/48-%E7%B1%BB%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8E%9F%E5%88%99/</guid>
       <description>父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
 Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
 Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &amp;lt;&amp;lt; &amp;#34;printA()&amp;#34; &amp;lt;&amp;lt; endl; } virtual void print(){ cout &amp;lt;&amp;lt; &amp;#34;A::print()&amp;#34; &amp;lt;&amp;lt; endl; } }; class B:public A{ public: void printB(){ cout &amp;lt;&amp;lt; &amp;#34;printB()&amp;#34; &amp;lt;&amp;lt; endl; } virtual void print() override{ cout &amp;lt;&amp;lt; &amp;#34;B::print() b = &amp;#34; &amp;lt;&amp;lt; b &amp;lt;&amp;lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A; // 1.</description>
@@ -212,20 +212,20 @@ Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也
     
     <item>
       <title>构造函数私有</title>
-      <link>https://874656645.github.io/rick/posts/47-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%A7%81%E6%9C%89/</link>
+      <link>https://874656645.github.io/posts/47-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%A7%81%E6%9C%89/</link>
       <pubDate>Tue, 28 Dec 2021 10:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/47-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%A7%81%E6%9C%89/</guid>
+      <guid>https://874656645.github.io/posts/47-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%A7%81%E6%9C%89/</guid>
       <description> 如果类的内部没有专门创建实例的代码，则是无法创建任何实例的 如果父类构造函数设置成了私有的，则子类无法编译，因为在初始化子类时会先执行父类的构造  class A{ public: private: A(int ){ } }; class B:public A{ public: int x; }; int main( ) { B b; b.x = 0; return 0; } 输出：
 Start prog.cc:19:7: error: call to implicitly-deleted default constructor of &amp;#39;B&amp;#39; B b; ^ prog.cc:13:9: note: default constructor of &amp;#39;B&amp;#39; is implicitly deleted because base class &amp;#39;A&amp;#39; has an inaccessible default constructor class B:public A{ ^ 1 error generated. 1 Finish </description>
     </item>
     
     <item>
       <title>定义一个只能在堆上（栈上）生成对象的类</title>
-      <link>https://874656645.github.io/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/</link>
+      <link>https://874656645.github.io/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/</link>
       <pubDate>Mon, 27 Dec 2021 17:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/</guid>
+      <guid>https://874656645.github.io/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/</guid>
       <description>一、只能在堆上 方法：将析构函数设置为私有
 原因：C++ 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象
 class Test { public: void printT(){ cout &amp;lt;&amp;lt; &amp;#34;printT&amp;#34; &amp;lt;&amp;lt; endl; } void freeT(){ delete this; } private: ~Test(){ cout &amp;lt;&amp;lt; &amp;#34;~Test()&amp;#34; &amp;lt;&amp;lt; endl; } }; int main( ) { // 不能在栈上创建对象  //Test t; // prog.cc:25:10: error: variable of type &amp;#39;Test&amp;#39; has private destructor  // 只能在堆上创建对象  Test *t = new Test; t-&amp;gt;printT(); // 销毁对象  t-&amp;gt;freeT(); return 0; } 输出：
@@ -234,10 +234,10 @@ Start printT ~Test() 0 Finish 二、只能在栈上 方法：将 new 和 delete 
     
     <item>
       <title>抽象类、接口类、聚合类</title>
-      <link>https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/</link>
+      <link>https://874656645.github.io/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/</link>
       <pubDate>Mon, 27 Dec 2021 16:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/</guid>
+      <guid>https://874656645.github.io/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/</guid>
       <description>抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
 1）所有成员都是 public，没有私有和受保护的非静态成员；
 2）没有定义任何构造函数；
@@ -247,10 +247,10 @@ Start printT ~Test() 0 Finish 二、只能在栈上 方法：将 new 和 delete 
     
     <item>
       <title>虚继承和虚基类</title>
-      <link>https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/</link>
+      <link>https://874656645.github.io/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/</link>
       <pubDate>Mon, 27 Dec 2021 13:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/</guid>
+      <guid>https://874656645.github.io/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/</guid>
       <description>虚继承和虚基类 参考
  在C++中，在定义公共基类A的派生类B、C&amp;hellip;的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C&amp;hellip;的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C++对象在内存中的布局的选项
 cl [filename].cpp /d1 reportSingleClassLayout[className]
@@ -261,19 +261,19 @@ class D size(20): +--- 0 | +--- (base class B) 0 | | +--- (base class A) 0 | | |
     
     <item>
       <title>多态总结</title>
-      <link>https://874656645.github.io/rick/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/</link>
+      <link>https://874656645.github.io/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/</link>
       <pubDate>Mon, 27 Dec 2021 10:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/</guid>
+      <guid>https://874656645.github.io/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/</guid>
       <description>1. C++ 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &amp;lt;&amp;lt; &amp;#34;~Shape()&amp;#34; &amp;lt;&amp;lt; endl; } }; class Point { public: ~Point(){ cout &amp;lt;&amp;lt; &amp;#34;~Point()&amp;#34; &amp;lt;&amp;lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &amp;lt;&amp;lt; &amp;#34;~Circle()&amp;#34; &amp;lt;&amp;lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout &amp;lt;&amp;lt; sizeof(Shape) &amp;lt;&amp;lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &amp;lt;alignment member&amp;gt; (size=7))  cout &amp;lt;&amp;lt; sizeof(Circle) &amp;lt;&amp;lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&amp;lt;alignment member&amp;gt; (size=3))  cout &amp;lt;&amp;lt; sizeof(Point) &amp;lt;&amp;lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类</description>
     </item>
     
     <item>
       <title>函数默认参数和占位参数</title>
-      <link>https://874656645.github.io/rick/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/</link>
+      <link>https://874656645.github.io/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/</link>
       <pubDate>Sun, 26 Dec 2021 15:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/</guid>
       <description>1. 函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
 // 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &amp;lt;&amp;lt; &amp;#34;a = &amp;#34; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; endl; } int main() { foo(20); return 0; } 2. 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&amp;gt; fun_i
 int fun(int, char, double) =&amp;gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    3.</description>
@@ -281,10 +281,10 @@ int fun(int, char, double) =&amp;gt; fun_icd   重载函数匹配顺序  如果�
     
     <item>
       <title>内存区间划分</title>
-      <link>https://874656645.github.io/rick/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/</link>
+      <link>https://874656645.github.io/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/</link>
       <pubDate>Sun, 26 Dec 2021 14:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/</guid>
+      <guid>https://874656645.github.io/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/</guid>
       <description>一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：
 三、全局变量与静态变量的区别 作用域不同
 全局变量默认是 extern 的
@@ -294,20 +294,20 @@ C/C++中extern关键字详解</description>
     
     <item>
       <title>指针引用</title>
-      <link>https://874656645.github.io/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/</link>
+      <link>https://874656645.github.io/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/</link>
       <pubDate>Sat, 25 Dec 2021 21:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/</guid>
+      <guid>https://874656645.github.io/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/</guid>
       <description>指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
 void test(int * a){ a = new int(20); //*a = 20;  cout &amp;lt;&amp;lt; &amp;#34;test point a = &amp;#34; &amp;lt;&amp;lt; &amp;amp;a &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;test:&amp;#34; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;#34;\ta = &amp;#34; &amp;lt;&amp;lt; *a &amp;lt;&amp;lt; endl; } int main() { int *a = new int(10); cout &amp;lt;&amp;lt; &amp;#34;main point a = &amp;#34; &amp;lt;&amp;lt; &amp;amp;a &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;main:&amp;#34; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;#34;\ta = &amp;#34; &amp;lt;&amp;lt; *a &amp;lt;&amp;lt; endl; test(a); cout &amp;lt;&amp;lt; &amp;#34;main:&amp;#34; &amp;lt;&amp;lt; a &amp;lt;&amp;lt; &amp;#34;\ta = &amp;#34; &amp;lt;&amp;lt; *a &amp;lt;&amp;lt; endl; return 0; } 输出：</description>
     </item>
     
     <item>
       <title>抽象、封装、继承、多态</title>
-      <link>https://874656645.github.io/rick/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/</link>
+      <link>https://874656645.github.io/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/</link>
       <pubDate>Fri, 24 Dec 2021 15:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/</guid>
+      <guid>https://874656645.github.io/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/</guid>
       <description>一、抽象、封装 数据抽象：是一种仅向用户暴露接口而把具体的实现细节隐藏起来的机制，是一种依赖于接口实现分离的设计技术
 数据封装：是一种把数据和操作数据的函数捆绑在一起的机制
 1. 好处  类的内部受到保护，不会因无意的用户级错误导致对象状态受损 类实现可能随着时间的推移而发生变化，数据抽象可以更好的应对不断变化的需求  2. 策略  通常情况下，我们都会设置类成员状态为私有（private），除非我们真的需要将其暴露，这样才能保证良好的封装性。 抽象把代码分离为接口和实现。所以在设计组件时，必须保持接口独立于实现，这样，如果改变底层实现，接口也将保持不变。在这种情况下，不管任何程序使用接口，接口都不会受到影响，只需要将最新的实现重新编译即可  3. 接口 接口描述了类的行为和功能，而不需要完成类的特定实现。如果类中至少有一个函数被声明为纯虚函数，则这个类就是抽象类
@@ -323,19 +323,19 @@ void test(int * a){ a = new int(20); //*a = 20;  cout &amp;lt;&amp;lt; &amp;#34;
     
     <item>
       <title>类的静态成员</title>
-      <link>https://874656645.github.io/rick/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/</link>
+      <link>https://874656645.github.io/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/</link>
       <pubDate>Fri, 24 Dec 2021 13:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/</guid>
+      <guid>https://874656645.github.io/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/</guid>
       <description>使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A { string name {&amp;#34;C++&amp;#34;}; int id {1024}; static int objCount; public: A(); friend void printA(const A &amp;amp;a); void printA(); static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){ objCount++; } void A::printA(){ cout &amp;lt;&amp;lt; &amp;#34;objCount = &amp;#34; &amp;lt;&amp;lt; this-&amp;gt;objCount &amp;lt;&amp;lt; &amp;#34;\tname = &amp;#34; &amp;lt;&amp;lt; this-&amp;gt;name &amp;lt;&amp;lt; &amp;#34;\tid = &amp;#34; &amp;lt;&amp;lt; this-&amp;gt;id &amp;lt;&amp;lt; endl; } void A::printC(){ // 静态函数内没有this指针  cout &amp;lt;&amp;lt; &amp;#34;objCount = &amp;#34; &amp;lt;&amp;lt; objCount &amp;lt;&amp;lt; endl; // error: &amp;#39;this&amp;#39; is unavailable for static member functions  // cout &amp;lt;&amp;lt; &amp;#34;objCount = &amp;#34; &amp;lt;&amp;lt; this-&amp;gt;objCount &amp;lt;&amp;lt; endl; } void printA(const A &amp;amp;a){ cout &amp;lt;&amp;lt; &amp;#34;objCount = &amp;#34; &amp;lt;&amp;lt; a.</description>
     </item>
     
     <item>
       <title>友元函数与友元类</title>
-      <link>https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/</link>
+      <link>https://874656645.github.io/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/</link>
       <pubDate>Fri, 24 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/</guid>
+      <guid>https://874656645.github.io/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/</guid>
       <description>友元利弊：
 友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。
   注意事项：
@@ -348,29 +348,29 @@ class A { friend void printA(const A &amp;amp;a); public: void printA(); private
     
     <item>
       <title>构造、拷贝构造、赋值构造</title>
-      <link>https://874656645.github.io/rick/posts/36-%E6%9E%84%E9%80%A0%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/</link>
+      <link>https://874656645.github.io/posts/36-%E6%9E%84%E9%80%A0%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/</link>
       <pubDate>Thu, 23 Dec 2021 14:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/36-%E6%9E%84%E9%80%A0%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/</guid>
+      <guid>https://874656645.github.io/posts/36-%E6%9E%84%E9%80%A0%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/</guid>
       <description>结论：
  拷贝构造函数是函数，赋值运算符是运算符的重载； 拷贝构造函数会生成新的类对象，赋值运算符不会； 拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值; 若接受返回值的对象已经初始化过，则会调用赋值运算符，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值运算符，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。 如果只有显示的构造函数，系统会提供默认的拷贝构造； 如果显示提供了拷贝构造，系统就不会提供默认的无参构造了，用户必需显示提供构造函数； 当既没有显式的构造函数，也没有拷贝构造时，系统才会提供默认的无参构造； 显示提供拷贝构造就必需显示提供构造函数； 显示提供赋值运算符重载就必需显示提供拷贝构造；  成员初始化列表  使用成员变量初始化列表，少了一次调用默认构造函数的过程，提高效率 常量成员，因为常量只能初始化不能赋值，所以必须放在初始化列表里面 引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面 成员变量初始化的顺序跟在初始化列表的顺序无关，与变量声明的顺序有关  测试类 class A { public: A(){ cout &amp;lt;&amp;lt; &amp;#34;default constructor&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;adrres: &amp;#34; &amp;lt;&amp;lt; this &amp;lt;&amp;lt; &amp;#34;\tpoint x: &amp;#34; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &amp;#34;\ty: &amp;#34; &amp;lt;&amp;lt; y &amp;lt;&amp;lt; endl; } A(int t){ x = new int(0); y = t; cout &amp;lt;&amp;lt; &amp;#34;second constructor&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;adrres: &amp;#34; &amp;lt;&amp;lt; this &amp;lt;&amp;lt; &amp;#34;\tpoint x: &amp;#34; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &amp;#34;\ty: &amp;#34; &amp;lt;&amp;lt; y &amp;lt;&amp;lt; endl; } A(const A &amp;amp;a){ cout &amp;lt;&amp;lt; &amp;#34;const copy constructor&amp;#34; &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;adrres: &amp;#34; &amp;lt;&amp;lt; this &amp;lt;&amp;lt; &amp;#34;\tpoint x: &amp;#34; &amp;lt;&amp;lt; x &amp;lt;&amp;lt; &amp;#34;\ty: &amp;#34; &amp;lt;&amp;lt; y &amp;lt;&amp;lt; endl; this-&amp;gt;x = a.</description>
     </item>
     
     <item>
       <title>函数重载、重写、隐藏、模板</title>
-      <link>https://874656645.github.io/rick/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/</link>
+      <link>https://874656645.github.io/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/</link>
       <pubDate>Thu, 23 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/</guid>
+      <guid>https://874656645.github.io/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/</guid>
       <description>重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写； 重定义： 派生类中函数与基类中的函数同名，但是这个函数在基类中并没有被定义为虚函数 隐藏： 派生类中重定义了父类的函数，此时基类的函数会被隐藏； 模板： 函数模板是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public: A(int a){ m_a = a; } void print(){ cout &amp;lt;&amp;lt; &amp;#34;print()&amp;#34; &amp;lt;&amp;lt; &amp;#34;m_a = &amp;#34; &amp;lt;&amp;lt; m_a &amp;lt;&amp;lt; endl; } void freeP(A ** p){ if(p == NULL){ return; } if(*p != NULL){ free(*p); *p = NULL; } } void freeP(A * p){ if(p != NULL){ free(p); p = NULL; } } static void printS(){ cout &amp;lt;&amp;lt; &amp;#34;printS() s_a = &amp;#34; &amp;lt;&amp;lt; s_a &amp;lt;&amp;lt; endl; } static void printS(int s){ cout &amp;lt;&amp;lt; &amp;#34;printS(int s) &amp;#34; &amp;lt;&amp;lt; s_a * s &amp;lt;&amp;lt; endl; } static void printS(void *p, int s){ cout &amp;lt;&amp;lt; &amp;#34;printS(void *p, int s) &amp;#34; &amp;lt;&amp;lt; ((A*)p)-&amp;gt;m_a * s &amp;lt;&amp;lt; endl; } static int s_a; private: int m_a; }; int A::s_a = 0; int main( ) { A *a = new A(1); a-&amp;gt;printS(a, 20); a-&amp;gt;print(); A::s_a = 10; a-&amp;gt;printS(); a-&amp;gt;printS(10); a-&amp;gt;freeP(a); if(a == NULL){ cout &amp;lt;&amp;lt; &amp;#34;*a is not valid&amp;#34; &amp;lt;&amp;lt; endl; return 0; } cout &amp;lt;&amp;lt; &amp;#34;*a is valid&amp;#34; &amp;lt;&amp;lt; endl; a-&amp;gt;print(); return 0; } 输出：</description>
     </item>
     
     <item>
       <title>inline 内联函数</title>
-      <link>https://874656645.github.io/rick/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/</link>
+      <link>https://874656645.github.io/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/</link>
       <pubDate>Thu, 23 Dec 2021 11:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/</guid>
       <description>当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
  适用于函数体积很小并频繁使用的函数 内联函数中不可以出现循环、递归或开关操作 内联函数的声明必须在函数定义之前 内联函数的定义必须出现在内联函数的第一次调用前 在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数 虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联  优点：
  内联函数在被调用处进行代码展开，省去了参数压栈、跳转返回、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度； 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会； 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能； 内联函数在运行时可调试，而宏定义不可以。  缺点：
@@ -379,10 +379,10 @@ class A { friend void printA(const A &amp;amp;a); public: void printA(); private
     
     <item>
       <title>C 与 C&#43;&#43; 的差异</title>
-      <link>https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</link>
+      <link>https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</link>
       <pubDate>Wed, 22 Dec 2021 22:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</guid>
+      <guid>https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/</guid>
       <description>C++ 是 C 的超集和增强，校验更加严格
 C 主要是面向过程，C++ 是面向对象，面向过程是函数驱动，面向对象是对象驱动
 1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
@@ -391,19 +391,19 @@ C 主要是面向过程，C++ 是面向对象，面向过程是函数驱动，�
     
     <item>
       <title>函数形参从右到左入栈</title>
-      <link>https://874656645.github.io/rick/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</link>
+      <link>https://874656645.github.io/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</link>
       <pubDate>Wed, 22 Dec 2021 15:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</guid>
+      <guid>https://874656645.github.io/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/</guid>
       <description>int add(int count, ...) { // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节）  int intSize = sizeof(int*) / sizeof(int); int sum = 0; // cout &amp;lt;&amp;lt; &amp;amp;count &amp;lt;&amp;lt; endl;  int *p = &amp;amp;count + intSize; // cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl;  for (int i = 0; i &amp;lt; count; ++i) { sum += *p; cout &amp;lt;&amp;lt; *p &amp;lt;&amp;lt; endl; p += intSize; } return sum; } int main() { cout &amp;lt;&amp;lt; add(3, 1, 2, 3) &amp;lt;&amp;lt; endl; return 0; } 输出：</description>
     </item>
     
     <item>
       <title>指针 &#43; 1</title>
-      <link>https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;1/</link>
+      <link>https://874656645.github.io/posts/30-%E6%8C%87%E9%92%88-&#43;1/</link>
       <pubDate>Wed, 22 Dec 2021 15:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/30-%E6%8C%87%E9%92%88-&#43;1/</guid>
+      <guid>https://874656645.github.io/posts/30-%E6%8C%87%E9%92%88-&#43;1/</guid>
       <description>1. 32 位和 64 位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
 2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
 int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]；  // &amp;amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）  // 但是prt与(&amp;amp;a+1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int)  int *ptr = (int*)(&amp;amp;a + 1); cout &amp;lt;&amp;lt; *(a + 1) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; *(ptr - 1) &amp;lt;&amp;lt; endl; return 0; } 输出：
@@ -413,38 +413,38 @@ int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;amp;a是数组指针，其类型
     
     <item>
       <title>模板类</title>
-      <link>https://874656645.github.io/rick/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/</link>
+      <link>https://874656645.github.io/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/</link>
       <pubDate>Wed, 22 Dec 2021 10:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/</guid>
+      <guid>https://874656645.github.io/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/</guid>
       <description>template&amp;lt;class T&amp;gt; class Test { public: Test(T t){ m_t = t;}; // explicit Test(T t){ m_t = t;};  T getValue(){ return m_t; }; private: T m_t; }; int main() { Test&amp;lt;int&amp;gt; tInt(1); cout &amp;lt;&amp;lt; tInt.getValue() &amp;lt;&amp;lt; endl; Test&amp;lt;double&amp;gt; tD(1.15); cout &amp;lt;&amp;lt; tD.getValue() &amp;lt;&amp;lt; endl; Test&amp;lt;float&amp;gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换  cout &amp;lt;&amp;lt; tF.getValue() &amp;lt;&amp;lt; endl; return 0; } 输出：
 Start 1 1.15 1.3 0 Finish </description>
     </item>
     
     <item>
       <title>模板函数</title>
-      <link>https://874656645.github.io/rick/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</link>
+      <link>https://874656645.github.io/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</link>
       <pubDate>Wed, 22 Dec 2021 09:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</guid>
+      <guid>https://874656645.github.io/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/</guid>
       <description>template &amp;lt;typename T&amp;gt; inline const T&amp;amp; Max (const T&amp;amp; a, const T&amp;amp; b) { return a &amp;lt; b ? b:a; }; int main() { int i = 39; int j = 20; cout &amp;lt;&amp;lt; &amp;#34;Max(i, j): &amp;#34; &amp;lt;&amp;lt; Max(i, j) &amp;lt;&amp;lt; endl; double f1 = 13.5; double f2 = 20.7; cout &amp;lt;&amp;lt; &amp;#34;Max(f1, f2): &amp;#34; &amp;lt;&amp;lt; Max(f1, f2) &amp;lt;&amp;lt; endl; string s1 = &amp;#34;Hello&amp;#34;; string s2 = &amp;#34;World&amp;#34;; cout &amp;lt;&amp;lt; &amp;#34;Max(s1, s2): &amp;#34; &amp;lt;&amp;lt; Max(s1, s2) &amp;lt;&amp;lt; endl; return 0; } 输出：</description>
     </item>
     
     <item>
       <title>函数指针</title>
-      <link>https://874656645.github.io/rick/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
+      <link>https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
       <pubDate>Thu, 16 Dec 2021 14:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
+      <guid>https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
       <description>#include &amp;lt;iostream&amp;gt;#include &amp;lt;cstdlib&amp;gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &amp;lt;&amp;lt; f(v) &amp;lt;&amp;lt; endl; }; int main() { fn = cal; cout &amp;lt;&amp;lt; (*fn)(10) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; fn(10) &amp;lt;&amp;lt; endl; Fn f1 = cal; cout &amp;lt;&amp;lt; (*f1)(20) &amp;lt;&amp;lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish </description>
     </item>
     
     <item>
       <title>指针函数和函数指针</title>
-      <link>https://874656645.github.io/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
+      <link>https://874656645.github.io/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</link>
       <pubDate>Thu, 16 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
+      <guid>https://874656645.github.io/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
       <description>  指针函数本质是一个函数，返回值是一个指针；
   函数指针是指向函数的一个指针变量；
   #include &amp;lt;iostream&amp;gt;#include &amp;lt;cstdlib&amp;gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &amp;lt;&amp;lt; &amp;#34;fun: &amp;#34; &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun  pf(&amp;#34;Hello&amp;#34;); return 0; } </description>
@@ -452,29 +452,29 @@ Start 1 1.15 1.3 0 Finish </description>
     
     <item>
       <title>explicit（显式）关键字</title>
-      <link>https://874656645.github.io/rick/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <link>https://874656645.github.io/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/</link>
       <pubDate>Wed, 15 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <guid>https://874656645.github.io/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
       <description>修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&amp;lt;bool&amp;gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：</description>
     </item>
     
     <item>
       <title>C&#43;&#43; 字符串常量存储</title>
-      <link>https://874656645.github.io/rick/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</link>
+      <link>https://874656645.github.io/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</link>
       <pubDate>Mon, 13 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</guid>
+      <guid>https://874656645.github.io/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/</guid>
       <description>局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
  局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &amp;lt;iostream&amp;gt;#include &amp;lt;cstdlib&amp;gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &amp;#34;qqq&amp;#34;;//为了测试‘char p[]=&amp;#34;Hello world!&amp;#34;’中的字符串在静态存储区是否也有一份拷贝  char p[]=&amp;#34;Hello world!&amp;#34;; char* p2 = &amp;#34;w&amp;#34;;//为了测试‘char p[]=&amp;#34;Hello world!&amp;#34;’中的字符串在静态存储区是否也有一份拷贝  printf(&amp;#34;in s1 p=%p\n&amp;#34;, p); printf(&amp;#34;in s1 p1=%p\n&amp;#34;, p1); printf(&amp;#34;in s1: string&amp;#39;s address: %p\n&amp;#34;, &amp;amp;(&amp;#34;Hello world!&amp;#34;)); printf(&amp;#34;in s1 p2=%p\n&amp;#34;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&amp;#34;Hello world!&amp;#34;; printf(&amp;#34;in s2 q=%p\n&amp;#34;, q); printf(&amp;#34;in s2: string&amp;#39;s address: %p\n&amp;#34;, &amp;amp;(&amp;#34;Hello world!</description>
     </item>
     
     <item>
       <title>const 修饰符</title>
-      <link>https://874656645.github.io/rick/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
+      <link>https://874656645.github.io/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</link>
       <pubDate>Fri, 10 Dec 2021 12:34:27 +0800</pubDate>
       
-      <guid>https://874656645.github.io/rick/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
+      <guid>https://874656645.github.io/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/</guid>
       <description>1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
 常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
 指针常量：int * const 指针所指的地址不能变（不可以重指向），但地址的内容可以被修改，与引用变量效果类似

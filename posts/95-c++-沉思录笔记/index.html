@@ -19,14 +19,14 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
-<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -58,13 +58,13 @@ if (!doNotTrack) {
  你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
 class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* ." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-26T17:48:58&#43;08:00" />
 <meta property="article:modified_time" content="2022-01-26T17:48:58&#43;08:00" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="C&#43;&#43; 沉思录笔记"/>
 <meta name="twitter:description" content="有的情况下，现在的折衷方案比未来的理想方案好得多
@@ -85,13 +85,13 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
       "@type": "ListItem",
       "position":  2 ,
       "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
+      "item": "https://874656645.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "C++ 沉思录笔记",
-      "item": "https://874656645.github.io/rick/posts/95-c++-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"
+      "item": "https://874656645.github.io/posts/95-c++-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"
     }
   ]
 }
@@ -117,14 +117,14 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/95-c++-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"
+    "@id": "https://874656645.github.io/posts/95-c++-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://874656645.github.io/rick/favicon.ico"
+      "url": "https://874656645.github.io/favicon.ico"
     }
   }
 }
@@ -142,7 +142,7 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -168,27 +168,27 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
         </div>
         <ul id="menu">
             <li>
-                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                <a href="https://874656645.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                <a href="https://874656645.github.io/categories" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/series" title="Series">
+                <a href="https://874656645.github.io/series" title="Series">
                     <span>Series</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                <a href="https://874656645.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -199,7 +199,7 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       C&#43;&#43; 沉思录笔记
     </h1>
@@ -459,15 +459,15 @@ Point(const Point&amp; p)
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/">
+  <a class="prev" href="https://874656645.github.io/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/">
     <span class="title">« Prev Page</span>
     <br>
     <span>函数对象适配器</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/">
+  <a class="next" href="https://874656645.github.io/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/">
     <span class="title">Next Page »</span>
     <br>
     <span>机房预约系统案例</span>
@@ -480,7 +480,7 @@ Point(const Point&amp; p)
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
