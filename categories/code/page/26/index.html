@@ -13,6 +13,8 @@
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -52,6 +54,7 @@ if (!doNotTrack) {
 
 <meta name="twitter:title" content="Code"/>
 <meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
+
 
 </head>
 
@@ -119,10 +122,38 @@ if (!doNotTrack) {
         </ul>
     </nav>
 </header>
-<main class="main"> 
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
 <header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/categories/">Categories</a></div>
   <h1>Code</h1>
 </header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>explicit（显式）关键字
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-15 12:34:27 +0800 CST'>December 15, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to explicit（显式）关键字" href="https://874656645.github.io/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+</article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
@@ -181,29 +212,10 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
   <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to QString 中文乱码" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Git Commond
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、Git 常用命令 1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git
- 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
- 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
-2、更新远程仓库代码到本地 git pull blog master
-3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
-git commit -am &#34;update&#34;
-4、push推送到远程仓库 git push blog master
-5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
-6、删除配置的远程仓库别名 git remote remove blog...</p>
-  </section>
-  <footer class="entry-footer"><span title='2018-12-15 22:45:47 +0800 CST'>December 15, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git Commond" href="https://874656645.github.io/posts/3-git-commond/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/categories/code/page/25/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/categories/code/page/27/">Next Page »</a>
   </nav>
 </footer>
     </main>
@@ -249,15 +261,7 @@ git commit -am &#34;update&#34;
 
 </script>
 
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {

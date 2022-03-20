@@ -13,6 +13,8 @@
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -68,6 +70,7 @@ if (!doNotTrack) {
   ]
 }
 </script>
+
 </head>
 
 <body class="list dark" id="top">
@@ -134,10 +137,38 @@ if (!doNotTrack) {
         </ul>
     </nav>
 </header>
-<main class="main"> 
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
 <header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io">Home</a></div>
   <h1>Posts</h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>类模板
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ // 友元重载  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Person&lt;T&gt; &amp;p){ cout &lt;&lt; p.m_age; return os; } // 普通友元函数  friend void printP(Person&lt;T&gt; p){ cout &lt;&lt; p.m_age &lt;&lt; endl; } public: Person(T age){ this-&gt;m_age = age; } void Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } private: T m_age; }; int main() { Person&lt;int&gt; p(20); p.Show(); cout &lt;&lt; p &lt;&lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&lt;class T&gt; Person&lt;T&gt;::Person(T age){ this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() { Person&lt;int&gt; p(20); p....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -204,19 +235,6 @@ void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char
   <footer class="entry-footer"><span title='2022-01-09 19:12:37 +0800 CST'>January 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 面向抽象类编程" href="https://874656645.github.io/posts/67-%E9%9D%A2%E5%90%91%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%BC%96%E7%A8%8B/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>实现一个简单的字符串类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>MyString.h
-#ifndef __MYSTRING_H_ #define __MYSTRING_H_  #include &lt;stdlib.h&gt;#include &lt;iostream&gt;#include &lt;cstring&gt; using namespace std; class MyString { // 重载 &lt;&lt;  // 最好是 const 的，可以输出匿名变量（匿名变量不能被非 const 的左值引用接收）  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, const MyString &amp;s); // 重载 &gt;&gt;  friend istream&amp; operator&gt;&gt;(istream &amp;is, MyString &amp;s); private: // 字符串的有效长度  int m_len; // 字符串指针  char* m_pStr; public: MyString(); MyString(const char *); MyString(const MyString &amp;); ~MyString(); // 重载 =  MyString&amp; operator=(const MyString &amp;); // 重载 []  char&amp; operator[](int index); // 重载 &#43;  MyString operator&#43;(const MyString &amp;); // 重载 &#43;=  MyString&amp; operator&#43;=(const MyString &amp;); // 重载 ==  bool operator==(const MyString &amp;); // 重载 !...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-08 14:01:27 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 实现一个简单的字符串类" href="https://874656645.github.io/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/posts/page/16/">« Prev Page</a>
@@ -266,15 +284,7 @@ void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char
 
 </script>
 
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {

@@ -13,6 +13,8 @@
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -68,6 +70,7 @@ if (!doNotTrack) {
   ]
 }
 </script>
+
 </head>
 
 <body class="list dark" id="top">
@@ -134,10 +137,41 @@ if (!doNotTrack) {
         </ul>
     </nav>
 </header>
-<main class="main"> 
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
 <header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io">Home</a></div>
   <h1>Posts</h1>
 </header>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>工厂方法模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>工厂方法模式 = 简单工厂模式 &#43; 开闭原则
+类的个数成倍增多，维护成本很高
+适用场景：
+ 客户端不知道它所需要的对象的类 抽象工厂类通过其子类来指定创建哪个对象  // 工厂方法模式 class AbstractFruit{ public: virtual void showName() = 0; }; class Apple : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl; } }; class Banana : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl; } }; class Pear : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl; } }; // 抽象工厂 class AbstractFruitFactory{ public: virtual AbstractFruit* CreateFruit() = 0; }; class AppleFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Apple; } }; class PearFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Pear; } }; class BananaFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Banana; } }; int main() { AbstractFruitFactory* factory = nullptr; AbstractFruit* fruit = nullptr; factory = new AppleFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new BananaFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new PearFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-31 15:51:36 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 工厂方法模式" href="https://874656645.github.io/posts/105-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -191,20 +225,6 @@ class AbstractBuilding{ public: virtual string getQuality()const = 0; virtual vo
   <footer class="entry-footer"><span title='2022-01-30 20:38:36 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 迪米特法则" href="https://874656645.github.io/posts/101-%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>开闭原则
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码
-如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
-class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a &#43; m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-30 20:05:30 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 开闭原则" href="https://874656645.github.io/posts/100-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/posts/page/9/">« Prev Page</a>
@@ -254,15 +274,7 @@ class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0;
 
 </script>
 
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {

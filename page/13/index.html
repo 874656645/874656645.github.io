@@ -14,6 +14,8 @@
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -68,6 +70,7 @@ if (!doNotTrack) {
   ]
 }
 </script>
+
 </head>
 
 <body class="list dark" id="top">
@@ -134,7 +137,35 @@ if (!doNotTrack) {
         </ul>
     </nav>
 </header>
-<main class="main"> 
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>内建函数对象 functional
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>算术仿函数 template&lt;class T&gt; T plus&lt;T&gt; //加法仿函数 template&lt;class T&gt; T minus&lt;T&gt; //减法仿函数 template&lt;class T&gt; T multiplies&lt;T&gt; //乘法仿函数 template&lt;class T&gt; T divides&lt;T&gt; //除法仿函数 template&lt;class T&gt; T modulus&lt;T&gt; //取模仿函数 template&lt;class T&gt; T negate&lt;T&gt; //取反仿函数 一元谓词 关系仿函数 template&lt;class T&gt; bool equal_to&lt;T&gt; //等于 template&lt;class T&gt; bool not_equal_to&lt;T&gt; //不等于 template&lt;class T&gt; bool greater&lt;T&gt; //大于 template&lt;class T&gt; bool greater_equal&lt;T&gt; //大于等于 template&lt;class T&gt; bool less&lt;T&gt; //小于 template&lt;class T&gt; bool less_equal&lt;T&gt; //小于等于 逻辑仿函数 template&lt;class T&gt; bool logical_and&lt;T&gt; //逻辑与 template&lt;class T&gt; bool logical_or&lt;T&gt; //逻辑或 template&lt;class T&gt; bool logical_not&lt;T&gt; //逻辑非 </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-20 21:28:13 +0800 CST'>January 20, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 内建函数对象 functional" href="https://874656645.github.io/posts/90-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1-functional/"></a>
+</article>
 
 <article class="post-entry"> 
   <header class="entry-header">
@@ -192,20 +223,6 @@ class Person{ public: Person(string name, int age, int height){ this-&gt;m_name 
   <footer class="entry-footer"><span title='2022-01-18 20:26:45 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to list 容器" href="https://874656645.github.io/posts/86-list-%E5%AE%B9%E5%99%A8/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>queue 队列容器适配器
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>先进先出 不允许遍历元素  queue 队列操作：
-size()
-empty()</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-17 19:41:48 +0800 CST'>January 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to queue 队列容器适配器" href="https://874656645.github.io/posts/85-queue-%E9%98%9F%E5%88%97%E5%AE%B9%E5%99%A8/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/page/12/">« Prev Page</a>
@@ -255,15 +272,7 @@ empty()</p>
 
 </script>
 
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {

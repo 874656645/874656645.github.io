@@ -9,19 +9,21 @@
 <meta name="keywords" content="数据结构与算法" />
 <meta name="description" content="算法的时间和空间性能非常重要
 一、算法的渐近分析 当 n 增大到一定值后，其他的常数项和低幂次项都可以忽略，只需确定是在什么量级（线性、n 方、指数级等）
-1. 大 O 表式法 函数增长率上限
-2. 大 Ω 表式法 函数增值率的下限
-3. 大 θ 表示法 当上、下限相同时则可用 θ 表示法
+1. 大 $\mathcal{O}$ 表式法 函数增长率上限
+2. 大 $\Omega$ 表式法 函数增值率的下限
+3. 大 $\Theta$ 表示法 当上、下限相同时则可用 $\Theta$ 表示法
 二、增长率曲线 三、数据结构和算法的选择  仔细分析所要解决的问题  特别是求解问题所涉及的数据类型和数据间逻辑关系（问题抽象、数据抽象） 数据结构的初步设计往往先于算法设计   注意数据结构的可扩展性  考虑当输入数据的规模发生改变时，数据结构是否能够适应求解问题的演变和扩展    三、思考题   数据结构的三个要素任何一个发生改变，都是不同的数据结构，请举例讨论
  双向链表和二叉树的存储结构其实是一样的，他们的不同在于逻辑结构。 数组和向量都是线性表，其存储形式不同，成为不同的数据结构。    算法设计目标是什么？
  时间和空间的权衡 易读 易编码 易调试 易维护 易扩展    算法选择的过程？
-  要求在时间复杂度 O(n)、空间复杂度 O(1)，使数组元素循环向右移动 K 位
+  要求在时间复杂度 $\mathcal{O}(n)$、空间复杂度 $\mathcal{O}(1)$，使数组元素循环向右移动 K 位
   ">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/150-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E4%B8%8E%E5%BA%A6%E9%87%8F/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
@@ -55,13 +57,13 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="数据结构与算法——算法效率与度量" />
 <meta property="og:description" content="算法的时间和空间性能非常重要
 一、算法的渐近分析 当 n 增大到一定值后，其他的常数项和低幂次项都可以忽略，只需确定是在什么量级（线性、n 方、指数级等）
-1. 大 O 表式法 函数增长率上限
-2. 大 Ω 表式法 函数增值率的下限
-3. 大 θ 表示法 当上、下限相同时则可用 θ 表示法
+1. 大 $\mathcal{O}$ 表式法 函数增长率上限
+2. 大 $\Omega$ 表式法 函数增值率的下限
+3. 大 $\Theta$ 表示法 当上、下限相同时则可用 $\Theta$ 表示法
 二、增长率曲线 三、数据结构和算法的选择  仔细分析所要解决的问题  特别是求解问题所涉及的数据类型和数据间逻辑关系（问题抽象、数据抽象） 数据结构的初步设计往往先于算法设计   注意数据结构的可扩展性  考虑当输入数据的规模发生改变时，数据结构是否能够适应求解问题的演变和扩展    三、思考题   数据结构的三个要素任何一个发生改变，都是不同的数据结构，请举例讨论
  双向链表和二叉树的存储结构其实是一样的，他们的不同在于逻辑结构。 数组和向量都是线性表，其存储形式不同，成为不同的数据结构。    算法设计目标是什么？
  时间和空间的权衡 易读 易编码 易调试 易维护 易扩展    算法选择的过程？
-  要求在时间复杂度 O(n)、空间复杂度 O(1)，使数组元素循环向右移动 K 位
+  要求在时间复杂度 $\mathcal{O}(n)$、空间复杂度 $\mathcal{O}(1)$，使数组元素循环向右移动 K 位
   " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/150-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E4%B8%8E%E5%BA%A6%E9%87%8F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
@@ -75,13 +77,13 @@ if (!doNotTrack) {
 <meta name="twitter:title" content="数据结构与算法——算法效率与度量"/>
 <meta name="twitter:description" content="算法的时间和空间性能非常重要
 一、算法的渐近分析 当 n 增大到一定值后，其他的常数项和低幂次项都可以忽略，只需确定是在什么量级（线性、n 方、指数级等）
-1. 大 O 表式法 函数增长率上限
-2. 大 Ω 表式法 函数增值率的下限
-3. 大 θ 表示法 当上、下限相同时则可用 θ 表示法
+1. 大 $\mathcal{O}$ 表式法 函数增长率上限
+2. 大 $\Omega$ 表式法 函数增值率的下限
+3. 大 $\Theta$ 表示法 当上、下限相同时则可用 $\Theta$ 表示法
 二、增长率曲线 三、数据结构和算法的选择  仔细分析所要解决的问题  特别是求解问题所涉及的数据类型和数据间逻辑关系（问题抽象、数据抽象） 数据结构的初步设计往往先于算法设计   注意数据结构的可扩展性  考虑当输入数据的规模发生改变时，数据结构是否能够适应求解问题的演变和扩展    三、思考题   数据结构的三个要素任何一个发生改变，都是不同的数据结构，请举例讨论
  双向链表和二叉树的存储结构其实是一样的，他们的不同在于逻辑结构。 数组和向量都是线性表，其存储形式不同，成为不同的数据结构。    算法设计目标是什么？
  时间和空间的权衡 易读 易编码 易调试 易维护 易扩展    算法选择的过程？
-  要求在时间复杂度 O(n)、空间复杂度 O(1)，使数组元素循环向右移动 K 位
+  要求在时间复杂度 $\mathcal{O}(n)$、空间复杂度 $\mathcal{O}(1)$，使数组元素循环向右移动 K 位
   "/>
 
 
@@ -111,11 +113,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "数据结构与算法——算法效率与度量",
   "name": "数据结构与算法——算法效率与度量",
-  "description": "算法的时间和空间性能非常重要\n一、算法的渐近分析 当 n 增大到一定值后，其他的常数项和低幂次项都可以忽略，只需确定是在什么量级（线性、n 方、指数级等）\n1. 大 O 表式法 函数增长率上限\n2. 大 Ω 表式法 函数增值率的下限\n3. 大 θ 表示法 当上、下限相同时则可用 θ 表示法\n二、增长率曲线 三、数据结构和算法的选择  仔细分析所要解决的问题  特别是求解问题所涉及的数据类型和数据间逻辑关系（问题抽象、数据抽象） 数据结构的初步设计往往先于算法设计   注意数据结构的可扩展性  考虑当输入数据的规模发生改变时，数据结构是否能够适应求解问题的演变和扩展    三、思考题   数据结构的三个要素任何一个发生改变，都是不同的数据结构，请举例讨论\n 双向链表和二叉树的存储结构其实是一样的，他们的不同在于逻辑结构。 数组和向量都是线性表，其存储形式不同，成为不同的数据结构。    算法设计目标是什么？\n 时间和空间的权衡 易读 易编码 易调试 易维护 易扩展    算法选择的过程？\n  要求在时间复杂度 O(n)、空间复杂度 O(1)，使数组元素循环向右移动 K 位\n  ",
+  "description": "算法的时间和空间性能非常重要\n一、算法的渐近分析 当 n 增大到一定值后，其他的常数项和低幂次项都可以忽略，只需确定是在什么量级（线性、n 方、指数级等）\n1. 大 $\\mathcal{O}$ 表式法 函数增长率上限\n2. 大 $\\Omega$ 表式法 函数增值率的下限\n3. 大 $\\Theta$ 表示法 当上、下限相同时则可用 $\\Theta$ 表示法\n二、增长率曲线 三、数据结构和算法的选择  仔细分析所要解决的问题  特别是求解问题所涉及的数据类型和数据间逻辑关系（问题抽象、数据抽象） 数据结构的初步设计往往先于算法设计   注意数据结构的可扩展性  考虑当输入数据的规模发生改变时，数据结构是否能够适应求解问题的演变和扩展    三、思考题   数据结构的三个要素任何一个发生改变，都是不同的数据结构，请举例讨论\n 双向链表和二叉树的存储结构其实是一样的，他们的不同在于逻辑结构。 数组和向量都是线性表，其存储形式不同，成为不同的数据结构。    算法设计目标是什么？\n 时间和空间的权衡 易读 易编码 易调试 易维护 易扩展    算法选择的过程？\n  要求在时间复杂度 $\\mathcal{O}(n)$、空间复杂度 $\\mathcal{O}(1)$，使数组元素循环向右移动 K 位\n  ",
   "keywords": [
     "数据结构与算法"
   ],
-  "articleBody": "算法的时间和空间性能非常重要\n一、算法的渐近分析 当 n 增大到一定值后，其他的常数项和低幂次项都可以忽略，只需确定是在什么量级（线性、n 方、指数级等）\n1. 大 O 表式法 函数增长率上限\n2. 大 Ω 表式法 函数增值率的下限\n3. 大 θ 表示法 当上、下限相同时则可用 θ 表示法\n二、增长率曲线 三、数据结构和算法的选择  仔细分析所要解决的问题  特别是求解问题所涉及的数据类型和数据间逻辑关系（问题抽象、数据抽象） 数据结构的初步设计往往先于算法设计   注意数据结构的可扩展性  考虑当输入数据的规模发生改变时，数据结构是否能够适应求解问题的演变和扩展    三、思考题   数据结构的三个要素任何一个发生改变，都是不同的数据结构，请举例讨论\n 双向链表和二叉树的存储结构其实是一样的，他们的不同在于逻辑结构。 数组和向量都是线性表，其存储形式不同，成为不同的数据结构。    算法设计目标是什么？\n 时间和空间的权衡 易读 易编码 易调试 易维护 易扩展    算法选择的过程？\n  要求在时间复杂度 O(n)、空间复杂度 O(1)，使数组元素循环向右移动 K 位\n  ",
+  "articleBody": "算法的时间和空间性能非常重要\n一、算法的渐近分析 当 n 增大到一定值后，其他的常数项和低幂次项都可以忽略，只需确定是在什么量级（线性、n 方、指数级等）\n1. 大 $\\mathcal{O}$ 表式法 函数增长率上限\n2. 大 $\\Omega$ 表式法 函数增值率的下限\n3. 大 $\\Theta$ 表示法 当上、下限相同时则可用 $\\Theta$ 表示法\n二、增长率曲线 三、数据结构和算法的选择  仔细分析所要解决的问题  特别是求解问题所涉及的数据类型和数据间逻辑关系（问题抽象、数据抽象） 数据结构的初步设计往往先于算法设计   注意数据结构的可扩展性  考虑当输入数据的规模发生改变时，数据结构是否能够适应求解问题的演变和扩展    三、思考题   数据结构的三个要素任何一个发生改变，都是不同的数据结构，请举例讨论\n 双向链表和二叉树的存储结构其实是一样的，他们的不同在于逻辑结构。 数组和向量都是线性表，其存储形式不同，成为不同的数据结构。    算法设计目标是什么？\n 时间和空间的权衡 易读 易编码 易调试 易维护 易扩展    算法选择的过程？\n  要求在时间复杂度 $\\mathcal{O}(n)$、空间复杂度 $\\mathcal{O}(1)$，使数组元素循环向右移动 K 位\n  ",
   "wordCount" : "47",
   "inLanguage": "en",
   "datePublished": "2022-03-13T16:29:26+08:00",
@@ -137,6 +139,20 @@ if (!doNotTrack) {
     }
   }
 }
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
 </script>
 </head>
 
@@ -226,11 +242,11 @@ if (!doNotTrack) {
                     <a href="#%e4%b8%80%e7%ae%97%e6%b3%95%e7%9a%84%e6%b8%90%e8%bf%91%e5%88%86%e6%9e%90" aria-label="一、算法的渐近分析">一、算法的渐近分析</a><ul>
                         
                 <li>
-                    <a href="#1-%e5%a4%a7-o-%e8%a1%a8%e5%bc%8f%e6%b3%95" aria-label="1. 大 O 表式法">1. 大 O 表式法</a></li>
+                    <a href="#1-%e5%a4%a7-mathcalo-%e8%a1%a8%e5%bc%8f%e6%b3%95" aria-label="1. 大 $\mathcal{O}$ 表式法">1. 大 $\mathcal{O}$ 表式法</a></li>
                 <li>
-                    <a href="#2-%e5%a4%a7-%cf%89-%e8%a1%a8%e5%bc%8f%e6%b3%95" aria-label="2. 大 Ω 表式法">2. 大 Ω 表式法</a></li>
+                    <a href="#2-%e5%a4%a7-omega-%e8%a1%a8%e5%bc%8f%e6%b3%95" aria-label="2. 大 $\Omega$ 表式法">2. 大 $\Omega$ 表式法</a></li>
                 <li>
-                    <a href="#3-%e5%a4%a7-%ce%b8-%e8%a1%a8%e7%a4%ba%e6%b3%95" aria-label="3. 大 θ 表示法">3. 大 θ 表示法</a></li></ul>
+                    <a href="#3-%e5%a4%a7-theta-%e8%a1%a8%e7%a4%ba%e6%b3%95" aria-label="3. 大 $\Theta$ 表示法">3. 大 $\Theta$ 表示法</a></li></ul>
                 </li>
                 <li>
                     <a href="#%e4%ba%8c%e5%a2%9e%e9%95%bf%e7%8e%87%e6%9b%b2%e7%ba%bf" aria-label="二、增长率曲线">二、增长率曲线</a></li>
@@ -249,16 +265,16 @@ if (!doNotTrack) {
 <p><img loading="lazy" src="../img/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-%e5%bc%a0%e9%93%ad-%e7%ae%97%e6%b3%95%e6%b8%90%e8%bf%9b%e5%88%86%e6%9e%90fn.jpg" alt="算法渐进分析fn"  />
 </p>
 <p>当 n 增大到一定值后，其他的常数项和低幂次项都可以忽略，只需确定是在什么量级（线性、n 方、指数级等）</p>
-<h3 id="1-大-o-表式法">1. 大 O 表式法<a hidden class="anchor" aria-hidden="true" href="#1-大-o-表式法">#</a></h3>
+<h3 id="1-大-mathcalo-表式法">1. 大 $\mathcal{O}$ 表式法<a hidden class="anchor" aria-hidden="true" href="#1-大-mathcalo-表式法">#</a></h3>
 <p>函数增长率上限</p>
 <p><img loading="lazy" src="../img/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-%e5%bc%a0%e9%93%ad-%e5%a4%a7O%e8%a1%a8%e7%a4%ba%e6%b3%95.jpg" alt="数据结构-张铭-大O表示法"  />
 </p>
-<h3 id="2-大-ω-表式法">2. 大 Ω 表式法<a hidden class="anchor" aria-hidden="true" href="#2-大-ω-表式法">#</a></h3>
+<h3 id="2-大-omega-表式法">2. 大 $\Omega$ 表式法<a hidden class="anchor" aria-hidden="true" href="#2-大-omega-表式法">#</a></h3>
 <p>函数增值率的下限</p>
 <p><img loading="lazy" src="../img/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-%e5%bc%a0%e9%93%ad-%e5%a4%a7omg%e8%a1%a8%e7%a4%ba%e6%b3%95.jpg" alt="数据结构-张铭-大omg表示法"  />
 </p>
-<h3 id="3-大-θ-表示法">3. 大 θ 表示法<a hidden class="anchor" aria-hidden="true" href="#3-大-θ-表示法">#</a></h3>
-<p>当<strong>上、下限相同</strong>时则可用 θ 表示法</p>
+<h3 id="3-大-theta-表示法">3. 大 $\Theta$ 表示法<a hidden class="anchor" aria-hidden="true" href="#3-大-theta-表示法">#</a></h3>
+<p>当<strong>上、下限相同</strong>时则可用 $\Theta$ 表示法</p>
 <p><img loading="lazy" src="../img/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-%e5%bc%a0%e9%93%ad-%e5%a4%a7zt%e8%a1%a8%e7%a4%ba%e6%b3%95.jpg" alt="数据结构-张铭-大zt表示法"  />
 </p>
 <h2 id="二增长率曲线">二、增长率曲线<a hidden class="anchor" aria-hidden="true" href="#二增长率曲线">#</a></h2>
@@ -302,7 +318,7 @@ if (!doNotTrack) {
 <p>算法选择的过程？</p>
 </li>
 <li>
-<p>要求在时间复杂度 O(n)、空间复杂度 O(1)，使数组元素循环向右移动 K 位</p>
+<p>要求在时间复杂度 $\mathcal{O}(n)$、空间复杂度 $\mathcal{O}(1)$，使数组元素循环向右移动 K 位</p>
 </li>
 </ol>
 <p><img loading="lazy" src="../img/%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84-%e5%bc%a0%e9%93%ad-%e5%be%aa%e7%8e%af%e5%90%91%e5%8f%b3%e7%a7%bb%e5%88%b0K%e4%bd%8d.jpg" alt="数据结构-张铭-循环向右移到K位"  />
@@ -373,15 +389,7 @@ if (!doNotTrack) {
 
 </script>
 
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {

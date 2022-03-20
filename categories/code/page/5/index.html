@@ -13,6 +13,8 @@
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -52,6 +54,7 @@ if (!doNotTrack) {
 
 <meta name="twitter:title" content="Code"/>
 <meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
+
 
 </head>
 
@@ -119,10 +122,42 @@ if (!doNotTrack) {
         </ul>
     </nav>
 </header>
-<main class="main"> 
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
 <header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/categories/">Categories</a></div>
   <h1>Code</h1>
 </header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
+三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
+四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
+所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！
+class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){ p-&gt;setAge(30); return p; } int main() { unique_ptr&lt;Person&gt; pP(new Person); cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl; // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl; cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; if(pP == nullptr){ cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl; } return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr" href="https://874656645.github.io/posts/131-c&#43;&#43;11-auto_ptr-%E8%A2%AB%E5%BA%9F%E5%BC%83%E4%B8%8E-unique_ptr/"></a>
+</article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
@@ -181,19 +216,6 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
   <footer class="entry-footer"><span title='2022-02-19 16:36:47 +0800 CST'>February 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Makefile 使用" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Linux 静态库与动态库
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、库是什么 库是二进制格式的源代码（二进制加密）
-二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-17 22:25:34 +0800 CST'>February 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Linux 静态库与动态库" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/categories/code/page/4/">« Prev Page</a>
@@ -243,15 +265,7 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
 
 </script>
 
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b";
-      var s = document.getElementsByTagName("script")[0]; 
-      s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {
