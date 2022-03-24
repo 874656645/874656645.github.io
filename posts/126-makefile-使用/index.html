@@ -9,24 +9,26 @@
 <meta name="keywords" content="Linux" />
 <meta name="description" content="一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
   规则由三部分组成：目标、依赖、命令
-app:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则
+app:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则
   四、makefile 优化   版本一：
-app:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
+app:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
   版本二：
-app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main.">
+app:main.o add.o sub.o  gcc main.o add.o sub.">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/rick/posts/126-makefile-%E4%BD%BF%E7%94%A8/" />
+<link rel="canonical" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
-<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -52,28 +54,28 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="Makefile 使用" />
 <meta property="og:description" content="一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
   规则由三部分组成：目标、依赖、命令
-app:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则
+app:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则
   四、makefile 优化   版本一：
-app:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
+app:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
   版本二：
-app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main." />
+app:main.o add.o sub.o  gcc main.o add.o sub." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/126-makefile-%E4%BD%BF%E7%94%A8/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-19T16:36:47&#43;08:00" />
 <meta property="article:modified_time" content="2022-02-19T16:36:47&#43;08:00" />
-<meta property="og:see_also" content="https://874656645.github.io/rick/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/rick/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/" /><meta property="og:see_also" content="https://874656645.github.io/rick/posts/124-gcc-%E7%9B%B8%E5%85%B3/" /><meta property="og:see_also" content="https://874656645.github.io/rick/posts/122-vim-%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/rick/posts/120-linux-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D/" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/" /><meta property="og:see_also" content="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/" /><meta property="og:see_also" content="https://874656645.github.io/posts/122-vim-%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/120-linux-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D/" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="Makefile 使用"/>
 <meta name="twitter:description" content="一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
   规则由三部分组成：目标、依赖、命令
-app:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则
+app:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则
   四、makefile 优化   版本一：
-app:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
+app:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
   版本二：
-app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
+app:main.o add.o sub.o  gcc main.o add.o sub."/>
 
 
 <script type="application/ld+json">
@@ -85,13 +87,13 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
       "@type": "ListItem",
       "position":  2 ,
       "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
+      "item": "https://874656645.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "Makefile 使用",
-      "item": "https://874656645.github.io/rick/posts/126-makefile-%E4%BD%BF%E7%94%A8/"
+      "item": "https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"
     }
   ]
 }
@@ -102,11 +104,11 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
   "@type": "BlogPosting",
   "headline": "Makefile 使用",
   "name": "Makefile 使用",
-  "description": "一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app\n  规则由三部分组成：目标、依赖、命令\napp:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则\n  四、makefile 优化   版本一：\napp:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译\n  版本二：\napp:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main.",
+  "description": "一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app\n  规则由三部分组成：目标、依赖、命令\napp:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则\n  四、makefile 优化   版本一：\napp:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译\n  版本二：\napp:main.o add.o sub.o  gcc main.o add.o sub.",
   "keywords": [
     "Linux"
   ],
-  "articleBody": "一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app\n  规则由三部分组成：目标、依赖、命令\napp:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则\n  四、makefile 优化   版本一：\napp:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译\n  版本二：\napp:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main.o:main.c gcc main.c -c -I ./ add.o:add.c gcc add.c -c -I ./ sub.o:sub.c gcc sub.c -c -I ./ 存在的问题： 冗余\n  版本三：\n 自定义变量：obj=a.o b.o c.o 自定义变量取值：tmp=$(obj) makefile 自带的变量，一般都是大写的 自动变量：只能在规则的命令中使用  $@：规则中的目标 $：规则中的第一个依赖 $^：规则中的所有依赖    obj = main.o add.o sub.o target = app $(target):$(obj) gcc $(obj) -o $(target) -I ./ %.o:%.c gcc -c $obj = main.o add.o sub.o target = app $(target):$(obj) gcc $^ -o $@ -I ./ %.o:%.c gcc -c $存在的问题： 可移植性比较差\n  版本四：（makefile 中的函数）\n wildcard：查找指定目录下指定类型的文件 patsubst：匹配替换  src = $(wildcard ./*.c) obj = $(patsubst %.c,%.o,$(src)) target = app $(target):$(obj) gcc $^ -o $@ -I ./ %.o:%.c gcc $存在的问题： 不能自动清除\n  版本五：\n make 目标名：让 make 执行非终极目标 clean:：编写一个清理项目的规则（只有目标，没有依赖项） -f：强制执行 .PHONY:clean：声明伪目标，避免同名文件干扰 -命令：忽略执行失败的命令，继续向下执行  src = $(wildcard ./*.c) obj = $(patsubst %.c,%.o,$(src)) target = app $(target):$(obj) gcc $^ -o $@ -I ./ %.o:%.c gcc $.PHONY:clean clean: -mkdir /abc -rm *.o $(target) -f   ",
+  "articleBody": "一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app\n  规则由三部分组成：目标、依赖、命令\napp:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则\n  四、makefile 优化   版本一：\napp:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译\n  版本二：\napp:main.o add.o sub.o  gcc main.o add.o sub.o -I ./ -o app main.o:main.c  gcc main.c -c -I ./ add.o:add.c  gcc add.c -c -I ./ sub.o:sub.c  gcc sub.c -c -I ./ 存在的问题： 冗余\n  版本三：\n 自定义变量：obj=a.o b.o c.o 自定义变量取值：tmp=$(obj) makefile 自带的变量，一般都是大写的 自动变量：只能在规则的命令中使用  $@：规则中的目标 $：规则中的第一个依赖 $^：规则中的所有依赖    obj = main.o add.o sub.o target = app $(target):$(obj)  gcc $(obj) -o $(target) -I ./ %.o:%.c  gcc -c $obj = main.o add.o sub.o target = app $(target):$(obj)  gcc $^ -o $@ -I ./ %.o:%.c  gcc -c $存在的问题： 可移植性比较差\n  版本四：（makefile 中的函数）\n wildcard：查找指定目录下指定类型的文件 patsubst：匹配替换  src = $(wildcard ./*.c) obj = $(patsubst %.c,%.o,$(src)) target = app $(target):$(obj)  gcc $^ -o $@ -I ./ %.o:%.c  gcc $存在的问题： 不能自动清除\n  版本五：\n make 目标名：让 make 执行非终极目标 clean:：编写一个清理项目的规则（只有目标，没有依赖项） -f：强制执行 .PHONY:clean：声明伪目标，避免同名文件干扰 -命令：忽略执行失败的命令，继续向下执行  src = $(wildcard ./*.c) obj = $(patsubst %.c,%.o,$(src)) target = app $(target):$(obj)  gcc $^ -o $@ -I ./ %.o:%.c  gcc $ .PHONY:clean clean:  -mkdir /abc  -rm *.o $(target) -f   ",
   "wordCount" : "208",
   "inLanguage": "en",
   "datePublished": "2022-02-19T16:36:47+08:00",
@@ -117,18 +119,19 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/126-makefile-%E4%BD%BF%E7%94%A8/"
+    "@id": "https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://874656645.github.io/rick/favicon.ico"
+      "url": "https://874656645.github.io/favicon.ico"
     }
   }
 }
 </script>
+
 </head>
 
 <body class=" dark" id="top">
@@ -142,7 +145,7 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -168,27 +171,27 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
         </div>
         <ul id="menu">
             <li>
-                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                <a href="https://874656645.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                <a href="https://874656645.github.io/categories" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/series" title="Series">
+                <a href="https://874656645.github.io/series" title="Series">
                     <span>Series</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                <a href="https://874656645.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -199,7 +202,7 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       Makefile 使用
     </h1>
@@ -242,9 +245,9 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
 <ul>
 <li>
 <p>规则由三部分组成：目标、依赖、命令</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#a6e22e">app</span><span style="color:#f92672">:</span>a.c b.c c.c
-    gcc a.c b.c c.c -o app
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#a6e22e">app</span><span style="color:#f92672">:</span>a.c b.c c.c
+</span></span><span style="display:flex;"><span>    gcc a.c b.c c.c -o app
+</span></span></code></pre></div></li>
 <li>
 <p>makefile 中可以有多条规则</p>
 </li>
@@ -253,21 +256,21 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
 <ol>
 <li>
 <p>版本一：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#a6e22e">app</span><span style="color:#f92672">:</span>main.c add.c sub.c
-        gcc main.c add.c sub.c -I ./ -o app
-</code></pre></div><p><strong>存在的问题：</strong> 效率低，其中一个文件修改了，剩余的其它文件都要重新编译</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#a6e22e">app</span><span style="color:#f92672">:</span>main.c add.c sub.c
+</span></span><span style="display:flex;"><span>        gcc main.c add.c sub.c -I ./ -o app
+</span></span></code></pre></div><p><strong>存在的问题：</strong> 效率低，其中一个文件修改了，剩余的其它文件都要重新编译</p>
 </li>
 <li>
 <p>版本二：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile"><span style="color:#a6e22e">app</span><span style="color:#f92672">:</span>main.o add.o sub.o
-        gcc main.o add.o sub.o -I ./ -o app
-<span style="color:#a6e22e">main.o</span><span style="color:#f92672">:</span>main.c
-        gcc main.c -c -I ./
-<span style="color:#a6e22e">add.o</span><span style="color:#f92672">:</span>add.c
-        gcc add.c -c -I ./
-<span style="color:#a6e22e">sub.o</span><span style="color:#f92672">:</span>sub.c
-        gcc sub.c -c -I ./
-</code></pre></div><p><strong>存在的问题：</strong> 冗余</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span><span style="color:#a6e22e">app</span><span style="color:#f92672">:</span>main.o add.o sub.o
+</span></span><span style="display:flex;"><span>        gcc main.o add.o sub.o -I ./ -o app
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">main.o</span><span style="color:#f92672">:</span>main.c
+</span></span><span style="display:flex;"><span>        gcc main.c -c -I ./
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">add.o</span><span style="color:#f92672">:</span>add.c
+</span></span><span style="display:flex;"><span>        gcc add.c -c -I ./
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">sub.o</span><span style="color:#f92672">:</span>sub.c
+</span></span><span style="display:flex;"><span>        gcc sub.c -c -I ./
+</span></span></code></pre></div><p><strong>存在的问题：</strong> 冗余</p>
 </li>
 <li>
 <p>版本三：</p>
@@ -283,19 +286,19 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main."/>
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">obj <span style="color:#f92672">=</span> main.o add.o sub.o
-target <span style="color:#f92672">=</span> app
-<span style="color:#a6e22e">$(target)</span><span style="color:#f92672">:</span><span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span>
-    gcc <span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span> -o <span style="color:#66d9ef">$(</span>target<span style="color:#66d9ef">)</span> -I ./ 
-<span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span>%.c
-    gcc -c $&lt; -o $@ -I ./
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">obj <span style="color:#f92672">=</span> main.o add.o sub.o
-target <span style="color:#f92672">=</span> app
-<span style="color:#a6e22e">$(target)</span><span style="color:#f92672">:</span><span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span>
-    gcc $^ -o $@ -I ./ 
-<span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span>%.c
-    gcc -c $&lt; -o $@ -I ./
-</code></pre></div><p><strong>存在的问题：</strong> 可移植性比较差</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span>obj <span style="color:#f92672">=</span> main.o add.o sub.o
+</span></span><span style="display:flex;"><span>target <span style="color:#f92672">=</span> app
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$(target)</span><span style="color:#f92672">:</span><span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    gcc <span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span> -o <span style="color:#66d9ef">$(</span>target<span style="color:#66d9ef">)</span> -I ./ 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span>%.c
+</span></span><span style="display:flex;"><span>    gcc -c $&lt; -o $@ -I ./
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span>obj <span style="color:#f92672">=</span> main.o add.o sub.o
+</span></span><span style="display:flex;"><span>target <span style="color:#f92672">=</span> app
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$(target)</span><span style="color:#f92672">:</span><span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    gcc $^ -o $@ -I ./ 
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span>%.c
+</span></span><span style="display:flex;"><span>    gcc -c $&lt; -o $@ -I ./
+</span></span></code></pre></div><p><strong>存在的问题：</strong> 可移植性比较差</p>
 </li>
 <li>
 <p>版本四：（makefile 中的函数）</p>
@@ -303,14 +306,14 @@ target <span style="color:#f92672">=</span> app
 <li><code>wildcard</code>：查找指定目录下指定类型的文件</li>
 <li><code>patsubst</code>：匹配替换</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">src <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>wildcard ./*.c<span style="color:#66d9ef">)</span>
-obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>patsubst %.c,%.o,<span style="color:#66d9ef">$(</span>src<span style="color:#66d9ef">))</span>
-target <span style="color:#f92672">=</span> app
-<span style="color:#a6e22e">$(target)</span><span style="color:#f92672">:</span><span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span>
-        gcc $^ -o $@ -I ./
-<span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span>%.c
-        gcc $&lt; -c -I ./
-</code></pre></div><p><strong>存在的问题：</strong> 不能自动清除</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span>src <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>wildcard ./*.c<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>patsubst %.c,%.o,<span style="color:#66d9ef">$(</span>src<span style="color:#66d9ef">))</span>
+</span></span><span style="display:flex;"><span>target <span style="color:#f92672">=</span> app
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$(target)</span><span style="color:#f92672">:</span><span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>        gcc $^ -o $@ -I ./
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span>%.c
+</span></span><span style="display:flex;"><span>        gcc $&lt; -c -I ./
+</span></span></code></pre></div><p><strong>存在的问题：</strong> 不能自动清除</p>
 </li>
 <li>
 <p>版本五：</p>
@@ -321,19 +324,19 @@ target <span style="color:#f92672">=</span> app
 <li><code>.PHONY:clean</code>：声明伪目标，避免同名文件干扰</li>
 <li><code>-命令</code>：忽略执行失败的命令，继续向下执行</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-makefile" data-lang="makefile">src <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>wildcard ./*.c<span style="color:#66d9ef">)</span>
-obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>patsubst %.c,%.o,<span style="color:#66d9ef">$(</span>src<span style="color:#66d9ef">))</span>
-target <span style="color:#f92672">=</span> app
-<span style="color:#a6e22e">$(target)</span><span style="color:#f92672">:</span><span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span>
-        gcc $^ -o $@ -I ./
-<span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span>%.c
-        gcc $&lt; -c -I ./
-
-<span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span>clean
-<span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
-        -mkdir /abc
-        -rm *.o <span style="color:#66d9ef">$(</span>target<span style="color:#66d9ef">)</span> -f
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-makefile" data-lang="makefile"><span style="display:flex;"><span>src <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>wildcard ./*.c<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">$(</span>patsubst %.c,%.o,<span style="color:#66d9ef">$(</span>src<span style="color:#66d9ef">))</span>
+</span></span><span style="display:flex;"><span>target <span style="color:#f92672">=</span> app
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">$(target)</span><span style="color:#f92672">:</span><span style="color:#66d9ef">$(</span>obj<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>        gcc $^ -o $@ -I ./
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">%.o</span><span style="color:#f92672">:</span>%.c
+</span></span><span style="display:flex;"><span>        gcc $&lt; -c -I ./
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">.PHONY</span><span style="color:#f92672">:</span>clean
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        -mkdir /abc
+</span></span><span style="display:flex;"><span>        -rm *.o <span style="color:#66d9ef">$(</span>target<span style="color:#66d9ef">)</span> -f
+</span></span></code></pre></div></li>
 </ol>
 
 
@@ -341,15 +344,15 @@ target <span style="color:#f92672">=</span> app
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/rick/tags/linux/">Linux</a></li>
+      <li><a href="https://874656645.github.io/tags/linux/">Linux</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/">
+  <a class="prev" href="https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/">
     <span class="title">« Prev Page</span>
     <br>
     <span>gdb 调试使用</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/">
+  <a class="next" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/">
     <span class="title">Next Page »</span>
     <br>
     <span>Linux 静态库与动态库</span>
@@ -362,7 +365,7 @@ target <span style="color:#f92672">=</span> app
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -400,6 +403,8 @@ target <span style="color:#f92672">=</span> app
     });
 
 </script>
+
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {

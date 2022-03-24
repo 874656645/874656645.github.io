@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>emcc on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/tags/emcc/</link>
+    <description>Recent content in emcc on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 24 Mar 2022 17:45:14 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/emcc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Emscripten——使用 CMake 构建并用 Make 编译</title>
+      <link>https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/</link>
+      <pubDate>Thu, 24 Mar 2022 17:45:14 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/</guid>
+      <description>使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &amp;#34;.html&amp;#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &amp;#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &amp;#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &amp;#34;${PROJECT_BINARY_DIR}&amp;#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget}  PUBLIC &amp;#34;${CMAKE_CURRENT_SOURCE_DIR}&amp;#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .</description>
+    </item>
+    
+    <item>
+      <title>Emscripten——C&#43;&#43; 函数导出</title>
+      <link>https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/</link>
+      <pubDate>Thu, 24 Mar 2022 17:31:30 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/</guid>
+      <description>导出 C++ 函数到 js 有多种方式：
+  方式一：在编译的时候指定
+在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
+  方式二：修改 C++ 函数
+在 C++ 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
+#include &amp;lt;emscripten/emscripten.h&amp;gt; extern &amp;#34;C&amp;#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&amp;#34;我的函数已被调用\n&amp;#34;);  return 0; }  #ifdef __cplusplus extern &amp;#34;C&amp;#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &amp;lt;&amp;lt; &amp;#34;hello from sayHello!&amp;#34; &amp;lt;&amp;lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &amp;lt;&amp;lt; p.</description>
+    </item>
+    
+    <item>
+      <title>Emscripten——Hello World</title>
+      <link>https://874656645.github.io/posts/154-emscripten-hello-world/</link>
+      <pubDate>Thu, 24 Mar 2022 17:03:19 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/154-emscripten-hello-world/</guid>
+      <description>编译   新建 main.cpp 文件
+#include &amp;lt;iostream&amp;gt;using namespace std; int main(){  cout &amp;lt;&amp;lt; &amp;#34;hello world!&amp;#34; &amp;lt;&amp;lt; endl;  return 0; }   使用 emcc 或 em++ 编译 C++ 文件
+执行命令 em++ main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
+  使用 node 测试
+测试命令 node a.out.js，会在控制台输出 cout 的内容
+  使用 html 页面 测试
+执行命令 em++ main.cpp -o hello.html，会在同级目录下生成三个文件：
+ hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件
+在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面</description>
+    </item>
+    
+    <item>
+      <title>Emscripten——安装</title>
+      <link>https://874656645.github.io/posts/153-emscripten-%E5%AE%89%E8%A3%85/</link>
+      <pubDate>Thu, 24 Mar 2022 16:41:50 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/153-emscripten-%E5%AE%89%E8%A3%85/</guid>
+      <description>启用 Linux 环境 这里使用的是 WSL（Windows Subsystem Linux）环境，环境配置参考这里
+Linux 安装 Emscripten Download and install
+  安装 python3
+sudo apt install python3
+  安装 git
+sudo apt install git
+  创建目录并 clone emsdk
+sudo git clone https://github.com/emscripten-core/emsdk.git
+  更新 emsdk 并激活
+cd emsdk  git pull  # Download and install the latest SDK tools. ./emsdk install latest  # Make the &amp;#34;latest&amp;#34; SDK &amp;#34;active&amp;#34; for the current user.</description>
+    </item>
+    
+  </channel>
+</rss>

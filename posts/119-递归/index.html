@@ -8,21 +8,23 @@
 <title>递归 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="逆序打印字符串
-void printReverseString(const char* str){ if(*str == &#39;\0&#39;){ return; } printReverseString(str &#43; 1); printf(&#34;%c&#34;, *str); } int main() { const char* str = &#34;Hello World&#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
-struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&gt;next); printf(&#34;%d\n&#34;, header-&gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&gt;data = 10; node1-&gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&gt;data = 20; node2-&gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&gt;data = 30; node3-&gt;next = NULL; header-&gt;next = node1; node1-&gt;next = node2; node2-&gt;next = node3; printReverseLinkNode(header-&gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3">
+void printReverseString(const char* str){  if(*str == &#39;\0&#39;){  return;  }  printReverseString(str &#43; 1);  printf(&#34;%c&#34;, *str); }  int main() {  const char* str = &#34;Hello World&#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
+struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&gt;next);  printf(&#34;%d\n&#34;, header-&gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&gt;data = 10;  node1-&gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&gt;data = 20;  node2-&gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&gt;data = 30;  node3-&gt;next = NULL;  header-&gt;next = node1;  node1-&gt;next = node2;  node2-&gt;next = node3;  printReverseLinkNode(header-&gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/rick/posts/119-%E9%80%92%E5%BD%92/" />
+<link rel="canonical" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
-<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -47,21 +49,21 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="递归" />
 <meta property="og:description" content="逆序打印字符串
-void printReverseString(const char* str){ if(*str == &#39;\0&#39;){ return; } printReverseString(str &#43; 1); printf(&#34;%c&#34;, *str); } int main() { const char* str = &#34;Hello World&#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
-struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&gt;next); printf(&#34;%d\n&#34;, header-&gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&gt;data = 10; node1-&gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&gt;data = 20; node2-&gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&gt;data = 30; node3-&gt;next = NULL; header-&gt;next = node1; node1-&gt;next = node2; node2-&gt;next = node3; printReverseLinkNode(header-&gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3" />
+void printReverseString(const char* str){  if(*str == &#39;\0&#39;){  return;  }  printReverseString(str &#43; 1);  printf(&#34;%c&#34;, *str); }  int main() {  const char* str = &#34;Hello World&#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
+struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&gt;next);  printf(&#34;%d\n&#34;, header-&gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&gt;data = 10;  node1-&gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&gt;data = 20;  node2-&gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&gt;data = 30;  node3-&gt;next = NULL;  header-&gt;next = node1;  node1-&gt;next = node2;  node2-&gt;next = node3;  printReverseLinkNode(header-&gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/119-%E9%80%92%E5%BD%92/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-07T21:38:53&#43;08:00" />
 <meta property="article:modified_time" content="2022-02-07T21:38:53&#43;08:00" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="递归"/>
 <meta name="twitter:description" content="逆序打印字符串
-void printReverseString(const char* str){ if(*str == &#39;\0&#39;){ return; } printReverseString(str &#43; 1); printf(&#34;%c&#34;, *str); } int main() { const char* str = &#34;Hello World&#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
-struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&gt;next); printf(&#34;%d\n&#34;, header-&gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&gt;data = 10; node1-&gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&gt;data = 20; node2-&gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&gt;data = 30; node3-&gt;next = NULL; header-&gt;next = node1; node1-&gt;next = node2; node2-&gt;next = node3; printReverseLinkNode(header-&gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3"/>
+void printReverseString(const char* str){  if(*str == &#39;\0&#39;){  return;  }  printReverseString(str &#43; 1);  printf(&#34;%c&#34;, *str); }  int main() {  const char* str = &#34;Hello World&#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
+struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&gt;next);  printf(&#34;%d\n&#34;, header-&gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&gt;data = 10;  node1-&gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&gt;data = 20;  node2-&gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&gt;data = 30;  node3-&gt;next = NULL;  header-&gt;next = node1;  node1-&gt;next = node2;  node2-&gt;next = node3;  printReverseLinkNode(header-&gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3"/>
 
 
 <script type="application/ld+json">
@@ -73,13 +75,13 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
       "@type": "ListItem",
       "position":  2 ,
       "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
+      "item": "https://874656645.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "递归",
-      "item": "https://874656645.github.io/rick/posts/119-%E9%80%92%E5%BD%92/"
+      "item": "https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/"
     }
   ]
 }
@@ -90,11 +92,11 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
   "@type": "BlogPosting",
   "headline": "递归",
   "name": "递归",
-  "description": "逆序打印字符串\nvoid printReverseString(const char* str){ if(*str == \u0026#39;\\0\u0026#39;){ return; } printReverseString(str + 1); printf(\u0026#34;%c\u0026#34;, *str); } int main() { const char* str = \u0026#34;Hello World\u0026#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表\nstruct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-\u0026gt;next); printf(\u0026#34;%d\\n\u0026#34;, header-\u0026gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-\u0026gt;data = 10; node1-\u0026gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-\u0026gt;data = 20; node2-\u0026gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-\u0026gt;data = 30; node3-\u0026gt;next = NULL; header-\u0026gt;next = node1; node1-\u0026gt;next = node2; node2-\u0026gt;next = node3; printReverseLinkNode(header-\u0026gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3",
+  "description": "逆序打印字符串\nvoid printReverseString(const char* str){  if(*str == \u0026#39;\\0\u0026#39;){  return;  }  printReverseString(str + 1);  printf(\u0026#34;%c\u0026#34;, *str); }  int main() {  const char* str = \u0026#34;Hello World\u0026#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表\nstruct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-\u0026gt;next);  printf(\u0026#34;%d\\n\u0026#34;, header-\u0026gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-\u0026gt;data = 10;  node1-\u0026gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-\u0026gt;data = 20;  node2-\u0026gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-\u0026gt;data = 30;  node3-\u0026gt;next = NULL;  header-\u0026gt;next = node1;  node1-\u0026gt;next = node2;  node2-\u0026gt;next = node3;  printReverseLinkNode(header-\u0026gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3",
   "keywords": [
     "C++"
   ],
-  "articleBody": "  逆序打印字符串\nvoid printReverseString(const char* str){ if(*str == '\\0'){ return; } printReverseString(str + 1); printf(\"%c\", *str); } int main() { const char* str = \"Hello World\"; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表\nstruct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-next); printf(\"%d\\n\", header-data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-data = 10; node1-next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-data = 20; node2-next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-data = 30; node3-next = NULL; header-next = node1; node1-next = node2; node2-next = node3; printReverseLinkNode(header-next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3\nvoid printNum(int num){ if(num == 0){ return; } int val = num / 10; printNum(val); printf(\"%d \", num % 10); } int main() { int num = 8973; printNum(num); // 8 9 7 3  return 0; }   ",
+  "articleBody": "  逆序打印字符串\nvoid printReverseString(const char* str){  if(*str == '\\0'){  return;  }  printReverseString(str + 1);  printf(\"%c\", *str); }  int main() {  const char* str = \"Hello World\";  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表\nstruct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-next);  printf(\"%d\\n\", header-data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-data = 10;  node1-next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-data = 20;  node2-next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-data = 30;  node3-next = NULL;  header-next = node1;  node1-next = node2;  node2-next = node3;  printReverseLinkNode(header-next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3\nvoid printNum(int num){  if(num == 0){  return;  }  int val = num / 10;  printNum(val);  printf(\"%d \", num % 10); }  int main() {  int num = 8973;  printNum(num); // 8 9 7 3   return 0; }   ",
   "wordCount" : "155",
   "inLanguage": "en",
   "datePublished": "2022-02-07T21:38:53+08:00",
@@ -105,18 +107,19 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/119-%E9%80%92%E5%BD%92/"
+    "@id": "https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://874656645.github.io/rick/favicon.ico"
+      "url": "https://874656645.github.io/favicon.ico"
     }
   }
 }
 </script>
+
 </head>
 
 <body class=" dark" id="top">
@@ -130,7 +133,7 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -156,27 +159,27 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
         </div>
         <ul id="menu">
             <li>
-                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                <a href="https://874656645.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                <a href="https://874656645.github.io/categories" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/series" title="Series">
+                <a href="https://874656645.github.io/series" title="Series">
                     <span>Series</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                <a href="https://874656645.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -187,7 +190,7 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       递归
     </h1>
@@ -199,76 +202,76 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
   <div class="post-content"><ol>
 <li>
 <p>逆序打印字符串</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printReverseString</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> str){
-    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">*</span>str <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\0&#39;</span>){
-        <span style="color:#66d9ef">return</span>;
-    }
-    printReverseString(str <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-    printf(<span style="color:#e6db74">&#34;%c&#34;</span>, <span style="color:#f92672">*</span>str);
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello World&#34;</span>;
-    printReverseString(str);            <span style="color:#75715e">// dlroW olleH
-</span><span style="color:#75715e"></span>
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printReverseString</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> str){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">*</span>str <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\0&#39;</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    printReverseString(str <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%c&#34;</span>, <span style="color:#f92672">*</span>str);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hello World&#34;</span>;
+</span></span><span style="display:flex;"><span>    printReverseString(str);            <span style="color:#75715e">// dlroW olleH
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p>逆序输出链表</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">struct</span> LinkNode{
-    <span style="color:#66d9ef">int</span> data;
-    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> next;
-};
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printReverseLinkNode</span>(<span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> header){
-    <span style="color:#66d9ef">if</span>(header <span style="color:#f92672">==</span> NULL){
-        <span style="color:#66d9ef">return</span>;
-    }
-    printReverseLinkNode(header<span style="color:#f92672">-&gt;</span>next);
-    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, header<span style="color:#f92672">-&gt;</span>data);
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> header <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> LinkNode));
-    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> node1 <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> LinkNode));
-    node1<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
-    node1<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
-    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> node2 <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> LinkNode));
-    node2<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
-    node2<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
-    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> node3 <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> LinkNode));
-    node3<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
-    node3<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
-    header<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> node1;
-    node1<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> node2;
-    node2<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> node3;
-    printReverseLinkNode(header<span style="color:#f92672">-&gt;</span>next);
-
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> LinkNode{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> data;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> next;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printReverseLinkNode</span>(<span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> header){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(header <span style="color:#f92672">==</span> NULL){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    printReverseLinkNode(header<span style="color:#f92672">-&gt;</span>next);
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, header<span style="color:#f92672">-&gt;</span>data);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> header <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> LinkNode));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> node1 <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> LinkNode));
+</span></span><span style="display:flex;"><span>    node1<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    node1<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> node2 <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> LinkNode));
+</span></span><span style="display:flex;"><span>    node2<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>    node2<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> LinkNode<span style="color:#f92672">*</span> node3 <span style="color:#f92672">=</span> malloc(<span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">struct</span> LinkNode));
+</span></span><span style="display:flex;"><span>    node3<span style="color:#f92672">-&gt;</span>data <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
+</span></span><span style="display:flex;"><span>    node3<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    header<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> node1;
+</span></span><span style="display:flex;"><span>    node1<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> node2;
+</span></span><span style="display:flex;"><span>    node2<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> node3;
+</span></span><span style="display:flex;"><span>    printReverseLinkNode(header<span style="color:#f92672">-&gt;</span>next);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p>递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printNum</span>(<span style="color:#66d9ef">int</span> num){
-    <span style="color:#66d9ef">if</span>(num <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
-        <span style="color:#66d9ef">return</span>;
-    }
-    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> num <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
-    printNum(val);
-    printf(<span style="color:#e6db74">&#34;%d &#34;</span>, num <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>);
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">8973</span>;
-    printNum(num);      <span style="color:#75715e">// 8 9 7 3
-</span><span style="color:#75715e"></span>
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C" data-lang="C"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printNum</span>(<span style="color:#66d9ef">int</span> num){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(num <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> num <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    printNum(val);
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%d &#34;</span>, num <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">8973</span>;
+</span></span><span style="display:flex;"><span>    printNum(num);      <span style="color:#75715e">// 8 9 7 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 </ol>
 
 
@@ -276,15 +279,15 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/120-linux-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D/">
+  <a class="prev" href="https://874656645.github.io/posts/120-linux-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D/">
     <span class="title">« Prev Page</span>
     <br>
     <span>Linux 目录介绍</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/">
+  <a class="next" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/">
     <span class="title">Next Page »</span>
     <br>
     <span>常用的宏定义</span>
@@ -297,7 +300,7 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -335,6 +338,8 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
     });
 
 </script>
+
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {

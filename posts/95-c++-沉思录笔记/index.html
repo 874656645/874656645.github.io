@@ -13,20 +13,22 @@
   C&#43;&#43; 哲学：抽象，实用，只为用到的东西付出代价。
   类设计者的核查表：
  你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
-class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* .">
+class Vehicle{ public:  virtual double weight() = 0;  virtual void start() = 0;  virtual Vehicle* copy() const = 0;  virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{  /* .">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
-<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -56,15 +58,15 @@ if (!doNotTrack) {
   C&#43;&#43; 哲学：抽象，实用，只为用到的东西付出代价。
   类设计者的核查表：
  你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
-class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* ." />
+class Vehicle{ public:  virtual double weight() = 0;  virtual void start() = 0;  virtual Vehicle* copy() const = 0;  virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{  /* ." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-26T17:48:58&#43;08:00" />
 <meta property="article:modified_time" content="2022-01-26T17:48:58&#43;08:00" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="C&#43;&#43; 沉思录笔记"/>
 <meta name="twitter:description" content="有的情况下，现在的折衷方案比未来的理想方案好得多
@@ -73,7 +75,7 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
   C&#43;&#43; 哲学：抽象，实用，只为用到的东西付出代价。
   类设计者的核查表：
  你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
-class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* ."/>
+class Vehicle{ public:  virtual double weight() = 0;  virtual void start() = 0;  virtual Vehicle* copy() const = 0;  virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{  /* ."/>
 
 
 <script type="application/ld+json">
@@ -85,13 +87,13 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
       "@type": "ListItem",
       "position":  2 ,
       "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
+      "item": "https://874656645.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "C++ 沉思录笔记",
-      "item": "https://874656645.github.io/rick/posts/95-c++-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"
+      "item": "https://874656645.github.io/posts/95-c++-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"
     }
   ]
 }
@@ -102,11 +104,11 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
   "@type": "BlogPosting",
   "headline": "C++ 沉思录笔记",
   "name": "C\u002b\u002b 沉思录笔记",
-  "description": "有的情况下，现在的折衷方案比未来的理想方案好得多\n  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。\n  只要类定义正确，我就只能按照我编写它的初衷那样去用它。\n  C++ 哲学：抽象，实用，只为用到的东西付出代价。\n  类设计者的核查表：\n 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）\nclass Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* .",
+  "description": "有的情况下，现在的折衷方案比未来的理想方案好得多\n  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。\n  只要类定义正确，我就只能按照我编写它的初衷那样去用它。\n  C++ 哲学：抽象，实用，只为用到的东西付出代价。\n  类设计者的核查表：\n 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）\nclass Vehicle{ public:  virtual double weight() = 0;  virtual void start() = 0;  virtual Vehicle* copy() const = 0;  virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{  /* .",
   "keywords": [
     "C++"
   ],
-  "articleBody": "  有的情况下，现在的折衷方案比未来的理想方案好得多\n  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。\n  只要类定义正确，我就只能按照我编写它的初衷那样去用它。\n  C++ 哲学：抽象，实用，只为用到的东西付出代价。\n  类设计者的核查表：\n 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）\nclass Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* ... */ }; class AutoVehicle: public RoadVehicle{ /* ... */ }; class Aircraft: public Vehicle{ /* ... */ }; class Helicopter: public Aircraft{ /* ... */ }; // 定义代理类 class VehicleSurrogate{ public: VehicleSurrogate(){ // 空代理  vp(0); } VehicleSurrogate(const Vehicle\u0026 v){ vp = v.copy(); } ~VehicleSurrogate(){ delete vp; } VehicleSurrogate(const VehicleSurrogate\u0026 v){ vp(v.vp ? v.vp-copy() : 0); } VehicleSurrogate\u0026 operator=(const VehicleSurrogate\u0026){ if(this != \u0026v){ delete vp; vp = (v.vp ? v.vp-copy() : 0); } return *this; } /* 其实代理类也可以不依依写出 Vehicle 所能支持的其他操作 只需要实现 * 和 - 的操作符重载即可，做一次转发， 但这样就过多地暴露了内存分配方面的策略，不太安全 */ double weight() const{ if(vp == 0){ throw \"empty VehicleSurrogate.weight()\"; } return vp-weight(); } void start() { if(vp == 0){ throw \"empty VehicleSurrogate.start()\"; } return vp-start(); } private: Vehicle* vp; }; int main(){ // Vehicle parking_lot[1000]; // wrong  VehicleSurrogate parking_lot[1000]; // OK  AutoVehicle x; parking_lot[num_vehicles++] = x; return 0; }   Handle 句柄类：就是一种只包含单个对象的容器 与智能指针的理念类似，智能指针更像是 Handle 类的抽象\nclass Point{ public: Point(int x = 0, int y = 0):xval(x), yval(y){ cout  \"Point()\"  endl; } Point(const Point\u0026 p){ cout  \"Point(const Point\u0026 p)\"  endl; xval = p.xval; yval = p.yval; } ~Point(){ cout  \"~Point()\"  endl; } int x() const {return xval;} int y() const {return yval;} Point\u0026 x(int xv){ xval = xv; return *this; } Point\u0026 y(int yv){ yval = yv; return *this; } void print(){ cout  \"x: \"  xval  \" y: \"  yval  endl; } private: int xval, yval; }; class Handle; class UPoint{ friend class Handle; Point p; int u; UPoint():u(1){} UPoint(int x, int y):p(x, y), u(1){} UPoint(const Point\u0026 p0):p(p0), u(1){} }; class Handle{ public: Handle():up(new UPoint){} Handle(int x, int y):up(new UPoint(x, y)){} Handle(const Point \u0026p):up(new UPoint(p)){} Handle(const Handle \u0026h):up(h.up){++up-u;} ~Handle(){ if(--up-u == 0){ delete up; } } Handle\u0026 operator=(const Handle\u0026 h){ ++h.up-u; if(--up-u == 0){ delete up; } up = h.up; cout  up-u  endl; return *this; } int x() const{ return up-p.x(); } int y() const{ return up-p.y(); } /*指针语义 不必复制 UPoint 对象 Handle\u0026 x(int x){ up-p.x(x); return *this; } Handle\u0026 y(int y){ up-p.y(y); return *this; } */ /*值语义 写时复制 */ Handle\u0026 x(int x){ copyWhenWrite(); up-p.x(x); return *this; } Handle\u0026 y(int y){ copyWhenWrite(); up-p.y(y); return *this; } private: void copyWhenWrite(){ if(up-u != 1){ --up-u; up = new UPoint(up-p); } } private: UPoint * up; }; int main() { Point p(10, 20); Handle hp(p); // 通过拷贝构造创建一个p的副本，并将 handle绑定到该副本  Handle hpp(hp); Handle hppp(hp); Handle hpppp; hpppp = hp; hpppp.x(100).y(200); cout  hp.x()  \", \"  hp.y()  endl; cout  hpppp.x()  \", \"  hpppp.y()  endl; return 0; } 输出：\nPoint() Point(const Point\u0026 p) 1 2 3 Point() ~Point() 4 Point(const Point\u0026 p) 10, 20 100, 200 ~Point() ~Point() ~Point()   对象和值之间的差别只在要改变对象时才显现出来。换句话说，就是值和不可变的对象是无法区分的。\n  ",
+  "articleBody": "  有的情况下，现在的折衷方案比未来的理想方案好得多\n  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。\n  只要类定义正确，我就只能按照我编写它的初衷那样去用它。\n  C++ 哲学：抽象，实用，只为用到的东西付出代价。\n  类设计者的核查表：\n 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）\nclass Vehicle{ public:  virtual double weight() = 0;  virtual void start() = 0;  virtual Vehicle* copy() const = 0;  virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{  /* ... */ }; class AutoVehicle: public RoadVehicle{  /* ... */ }; class Aircraft: public Vehicle{  /* ... */ }; class Helicopter: public Aircraft{  /* ... */ };  // 定义代理类 class VehicleSurrogate{ public:  VehicleSurrogate(){ // 空代理  vp(0);  }  VehicleSurrogate(const Vehicle\u0026 v){  vp = v.copy();  }  ~VehicleSurrogate(){  delete vp;  }  VehicleSurrogate(const VehicleSurrogate\u0026 v){  vp(v.vp ? v.vp-copy() : 0);  }  VehicleSurrogate\u0026 operator=(const VehicleSurrogate\u0026){  if(this != \u0026v){  delete vp;  vp = (v.vp ? v.vp-copy() : 0);  }  return *this;  }  /* 其实代理类也可以不依依写出 Vehicle 所能支持的其他操作 只需要实现 * 和 - 的操作符重载即可，做一次转发， 但这样就过多地暴露了内存分配方面的策略，不太安全 */  double weight() const{  if(vp == 0){  throw \"empty VehicleSurrogate.weight()\";  }  return vp-weight();  }  void start() {  if(vp == 0){  throw \"empty VehicleSurrogate.start()\";  }  return vp-start();  } private:  Vehicle* vp; }; int main(){  // Vehicle parking_lot[1000]; // wrong  VehicleSurrogate parking_lot[1000]; // OK  AutoVehicle x;  parking_lot[num_vehicles++] = x;  return 0; }   Handle 句柄类：就是一种只包含单个对象的容器 与智能指针的理念类似，智能指针更像是 Handle 类的抽象\nclass Point{ public:  Point(int x = 0, int y = 0):xval(x), yval(y){  cout  \"Point()\"  endl;  }  Point(const Point\u0026 p){  cout  \"Point(const Point\u0026 p)\"  endl;  xval = p.xval;  yval = p.yval;  }  ~Point(){  cout  \"~Point()\"  endl;  }  int x() const {return xval;}  int y() const {return yval;}  Point\u0026 x(int xv){  xval = xv;  return *this;  }  Point\u0026 y(int yv){  yval = yv;  return *this;  }  void print(){  cout  \"x: \"  xval  \" y: \"  yval  endl;  } private:  int xval, yval; };  class Handle;  class UPoint{  friend class Handle;  Point p;  int u;   UPoint():u(1){}  UPoint(int x, int y):p(x, y), u(1){}  UPoint(const Point\u0026 p0):p(p0), u(1){} };  class Handle{ public:  Handle():up(new UPoint){}  Handle(int x, int y):up(new UPoint(x, y)){}  Handle(const Point \u0026p):up(new UPoint(p)){}  Handle(const Handle \u0026h):up(h.up){++up-u;}  ~Handle(){  if(--up-u == 0){  delete up;  }  }  Handle\u0026 operator=(const Handle\u0026 h){  ++h.up-u;  if(--up-u == 0){  delete up;  }  up = h.up;  cout  up-u  endl;  return *this;  }  int x() const{  return up-p.x();  }  int y() const{  return up-p.y();  }  /*指针语义 不必复制 UPoint 对象 Handle\u0026 x(int x){ up-p.x(x); return *this; } Handle\u0026 y(int y){ up-p.y(y); return *this; } */   /*值语义 写时复制 */  Handle\u0026 x(int x){  copyWhenWrite();  up-p.x(x);  return *this;  }  Handle\u0026 y(int y){  copyWhenWrite();  up-p.y(y);  return *this;  } private:  void copyWhenWrite(){  if(up-u != 1){  --up-u;  up = new UPoint(up-p);  }  } private:  UPoint * up; };  int main() {  Point p(10, 20);  Handle hp(p); // 通过拷贝构造创建一个p的副本，并将 handle绑定到该副本  Handle hpp(hp);  Handle hppp(hp);  Handle hpppp;  hpppp = hp;  hpppp.x(100).y(200);  cout  hp.x()  \", \"  hp.y()  endl;  cout  hpppp.x()  \", \"  hpppp.y()  endl;   return 0; } 输出：\nPoint() Point(const Point\u0026 p) 1 2 3 Point() ~Point() 4 Point(const Point\u0026 p) 10, 20 100, 200 ~Point() ~Point() ~Point()   对象和值之间的差别只在要改变对象时才显现出来。换句话说，就是值和不可变的对象是无法区分的。\n  ",
   "wordCount" : "494",
   "inLanguage": "en",
   "datePublished": "2022-01-26T17:48:58+08:00",
@@ -117,18 +119,19 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/95-c++-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"
+    "@id": "https://874656645.github.io/posts/95-c++-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://874656645.github.io/rick/favicon.ico"
+      "url": "https://874656645.github.io/favicon.ico"
     }
   }
 }
 </script>
+
 </head>
 
 <body class=" dark" id="top">
@@ -142,7 +145,7 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -168,27 +171,27 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
         </div>
         <ul id="menu">
             <li>
-                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                <a href="https://874656645.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                <a href="https://874656645.github.io/categories" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/series" title="Series">
+                <a href="https://874656645.github.io/series" title="Series">
                     <span>Series</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                <a href="https://874656645.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -199,7 +202,7 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       C&#43;&#43; 沉思录笔记
     </h1>
@@ -242,213 +245,213 @@ class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; vi
 </li>
 <li>
 <p>代理类：用类来表示概念（<em>RAII</em>）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Vehicle</span>{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">double</span> weight() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    <span style="color:#66d9ef">virtual</span> Vehicle<span style="color:#f92672">*</span> <span style="color:#a6e22e">copy</span>() <span style="color:#66d9ef">const</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    <span style="color:#66d9ef">virtual</span> <span style="color:#f92672">~</span>Vehicle(){}
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RoadVehicle</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Vehicle{
-    <span style="color:#75715e">/* ... */</span>
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AutoVehicle</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> RoadVehicle{
-    <span style="color:#75715e">/* ... */</span>
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Aircraft</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Vehicle{
-    <span style="color:#75715e">/* ... */</span>
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Helicopter</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Aircraft{
-    <span style="color:#75715e">/* ... */</span>
-};
-
-<span style="color:#75715e">// 定义代理类
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VehicleSurrogate</span>{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    VehicleSurrogate(){     <span style="color:#75715e">// 空代理
-</span><span style="color:#75715e"></span>        vp(<span style="color:#ae81ff">0</span>);
-    }
-    VehicleSurrogate(<span style="color:#66d9ef">const</span> Vehicle<span style="color:#f92672">&amp;</span> v){
-        vp <span style="color:#f92672">=</span> v.copy();
-    }
-    <span style="color:#f92672">~</span>VehicleSurrogate(){
-        <span style="color:#66d9ef">delete</span> vp;
-    }
-    VehicleSurrogate(<span style="color:#66d9ef">const</span> VehicleSurrogate<span style="color:#f92672">&amp;</span> v){
-        vp(v.vp <span style="color:#f92672">?</span> v.vp<span style="color:#f92672">-&gt;</span>copy() <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>);
-    }
-    VehicleSurrogate<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> VehicleSurrogate<span style="color:#f92672">&amp;</span>){
-        <span style="color:#66d9ef">if</span>(<span style="color:#66d9ef">this</span> <span style="color:#f92672">!=</span> <span style="color:#f92672">&amp;</span>v){
-            <span style="color:#66d9ef">delete</span> vp;
-            vp <span style="color:#f92672">=</span> (v.vp <span style="color:#f92672">?</span> v.vp<span style="color:#f92672">-&gt;</span>copy() <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>);
-        }
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-    }
-    <span style="color:#75715e">/*
-</span><span style="color:#75715e">    其实代理类也可以不依依写出 Vehicle 所能支持的其他操作
-</span><span style="color:#75715e">    只需要实现 * 和 -&gt; 的操作符重载即可，做一次转发，
-</span><span style="color:#75715e">    但这样就过多地暴露了内存分配方面的策略，不太安全
-</span><span style="color:#75715e">    */</span>
-    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">weight</span>() <span style="color:#66d9ef">const</span>{
-        <span style="color:#66d9ef">if</span>(vp <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
-            <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;empty VehicleSurrogate.weight()&#34;</span>;
-        }
-        <span style="color:#66d9ef">return</span> vp<span style="color:#f92672">-&gt;</span>weight();
-    }
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>() {
-        <span style="color:#66d9ef">if</span>(vp <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
-            <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;empty VehicleSurrogate.start()&#34;</span>;
-        }
-        <span style="color:#66d9ef">return</span> vp<span style="color:#f92672">-&gt;</span>start();
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    Vehicle<span style="color:#f92672">*</span> vp;
-};
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-    <span style="color:#75715e">// Vehicle parking_lot[1000];  // wrong
-</span><span style="color:#75715e"></span>    VehicleSurrogate parking_lot[<span style="color:#ae81ff">1000</span>];  <span style="color:#75715e">// OK
-</span><span style="color:#75715e"></span>    AutoVehicle x;
-    parking_lot[num_vehicles<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> x;
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Vehicle</span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">double</span> weight() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> Vehicle<span style="color:#f92672">*</span> <span style="color:#a6e22e">copy</span>() <span style="color:#66d9ef">const</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#f92672">~</span>Vehicle(){}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RoadVehicle</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Vehicle{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* ... */</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AutoVehicle</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> RoadVehicle{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* ... */</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Aircraft</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Vehicle{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* ... */</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Helicopter</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Aircraft{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* ... */</span>
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 定义代理类
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VehicleSurrogate</span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    VehicleSurrogate(){     <span style="color:#75715e">// 空代理
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        vp(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    VehicleSurrogate(<span style="color:#66d9ef">const</span> Vehicle<span style="color:#f92672">&amp;</span> v){
+</span></span><span style="display:flex;"><span>        vp <span style="color:#f92672">=</span> v.copy();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>VehicleSurrogate(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">delete</span> vp;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    VehicleSurrogate(<span style="color:#66d9ef">const</span> VehicleSurrogate<span style="color:#f92672">&amp;</span> v){
+</span></span><span style="display:flex;"><span>        vp(v.vp <span style="color:#f92672">?</span> v.vp<span style="color:#f92672">-&gt;</span>copy() <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    VehicleSurrogate<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> VehicleSurrogate<span style="color:#f92672">&amp;</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#66d9ef">this</span> <span style="color:#f92672">!=</span> <span style="color:#f92672">&amp;</span>v){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">delete</span> vp;
+</span></span><span style="display:flex;"><span>            vp <span style="color:#f92672">=</span> (v.vp <span style="color:#f92672">?</span> v.vp<span style="color:#f92672">-&gt;</span>copy() <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    其实代理类也可以不依依写出 Vehicle 所能支持的其他操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    只需要实现 * 和 -&gt; 的操作符重载即可，做一次转发，
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    但这样就过多地暴露了内存分配方面的策略，不太安全
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">weight</span>() <span style="color:#66d9ef">const</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(vp <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;empty VehicleSurrogate.weight()&#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> vp<span style="color:#f92672">-&gt;</span>weight();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">start</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(vp <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;empty VehicleSurrogate.start()&#34;</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> vp<span style="color:#f92672">-&gt;</span>start();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Vehicle<span style="color:#f92672">*</span> vp;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Vehicle parking_lot[1000];  // wrong
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    VehicleSurrogate parking_lot[<span style="color:#ae81ff">1000</span>];  <span style="color:#75715e">// OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    AutoVehicle x;
+</span></span><span style="display:flex;"><span>    parking_lot[num_vehicles<span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p><em>Handle</em> 句柄类：就是一种只包含单个对象的容器
 与智能指针的理念类似，智能指针更像是 <em>Handle</em> 类的抽象</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Point</span>{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    Point(<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">:</span>xval(x), yval(y){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Point()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    Point(<span style="color:#66d9ef">const</span> Point<span style="color:#f92672">&amp;</span> p){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Point(const Point&amp; p)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        xval <span style="color:#f92672">=</span> p.xval;
-        yval <span style="color:#f92672">=</span> p.yval;
-    }
-    <span style="color:#f92672">~</span>Point(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Point()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">x</span>() <span style="color:#66d9ef">const</span> {<span style="color:#66d9ef">return</span> xval;}
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">y</span>() <span style="color:#66d9ef">const</span> {<span style="color:#66d9ef">return</span> yval;}
-    Point<span style="color:#f92672">&amp;</span> x(<span style="color:#66d9ef">int</span> xv){
-        xval <span style="color:#f92672">=</span> xv;
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-    }
-    Point<span style="color:#f92672">&amp;</span> y(<span style="color:#66d9ef">int</span> yv){
-        yval <span style="color:#f92672">=</span> yv;
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-    }
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> xval <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; y: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> yval <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> xval, yval;
-};
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Handle</span>;
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UPoint</span>{
-    <span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Handle</span>;
-    Point p;
-    <span style="color:#66d9ef">int</span> u;
-
-    UPoint()<span style="color:#f92672">:</span>u(<span style="color:#ae81ff">1</span>){}
-    UPoint(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y)<span style="color:#f92672">:</span>p(x, y), u(<span style="color:#ae81ff">1</span>){}
-    UPoint(<span style="color:#66d9ef">const</span> Point<span style="color:#f92672">&amp;</span> p0)<span style="color:#f92672">:</span>p(p0), u(<span style="color:#ae81ff">1</span>){}
-};
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Handle</span>{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    Handle()<span style="color:#f92672">:</span>up(<span style="color:#66d9ef">new</span> UPoint){}
-    Handle(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y)<span style="color:#f92672">:</span>up(<span style="color:#66d9ef">new</span> UPoint(x, y)){}
-    Handle(<span style="color:#66d9ef">const</span> Point <span style="color:#f92672">&amp;</span>p)<span style="color:#f92672">:</span>up(<span style="color:#66d9ef">new</span> UPoint(p)){}
-    Handle(<span style="color:#66d9ef">const</span> Handle <span style="color:#f92672">&amp;</span>h)<span style="color:#f92672">:</span>up(h.up){<span style="color:#f92672">++</span>up<span style="color:#f92672">-&gt;</span>u;}
-    <span style="color:#f92672">~</span>Handle(){
-        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">--</span>up<span style="color:#f92672">-&gt;</span>u <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
-            <span style="color:#66d9ef">delete</span> up;
-        }
-    }
-    Handle<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> Handle<span style="color:#f92672">&amp;</span> h){
-        <span style="color:#f92672">++</span>h.up<span style="color:#f92672">-&gt;</span>u;
-        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">--</span>up<span style="color:#f92672">-&gt;</span>u <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
-            <span style="color:#66d9ef">delete</span> up;
-        }
-        up <span style="color:#f92672">=</span> h.up;
-        cout <span style="color:#f92672">&lt;&lt;</span> up<span style="color:#f92672">-&gt;</span>u <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-    }
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">x</span>() <span style="color:#66d9ef">const</span>{
-        <span style="color:#66d9ef">return</span> up<span style="color:#f92672">-&gt;</span>p.x();
-    }
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">y</span>() <span style="color:#66d9ef">const</span>{
-        <span style="color:#66d9ef">return</span> up<span style="color:#f92672">-&gt;</span>p.y();
-    }
-    <span style="color:#75715e">/*指针语义
-</span><span style="color:#75715e">    不必复制 UPoint 对象
-</span><span style="color:#75715e">    Handle&amp; x(int x){
-</span><span style="color:#75715e">        up-&gt;p.x(x);
-</span><span style="color:#75715e">        return *this;
-</span><span style="color:#75715e">    }
-</span><span style="color:#75715e">    Handle&amp; y(int y){
-</span><span style="color:#75715e">        up-&gt;p.y(y);
-</span><span style="color:#75715e">        return *this;
-</span><span style="color:#75715e">    }
-</span><span style="color:#75715e">    */</span>
-
-    <span style="color:#75715e">/*值语义
-</span><span style="color:#75715e">    写时复制
-</span><span style="color:#75715e">    */</span>
-    Handle<span style="color:#f92672">&amp;</span> x(<span style="color:#66d9ef">int</span> x){
-        copyWhenWrite();
-        up<span style="color:#f92672">-&gt;</span>p.x(x);
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-    }
-    Handle<span style="color:#f92672">&amp;</span> y(<span style="color:#66d9ef">int</span> y){
-        copyWhenWrite();
-        up<span style="color:#f92672">-&gt;</span>p.y(y);
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">void</span> copyWhenWrite(){
-        <span style="color:#66d9ef">if</span>(up<span style="color:#f92672">-&gt;</span>u <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>){
-            <span style="color:#f92672">--</span>up<span style="color:#f92672">-&gt;</span>u;
-            up <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UPoint(up<span style="color:#f92672">-&gt;</span>p);
-        }
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    UPoint <span style="color:#f92672">*</span> up;
-};
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    Point p(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>);
-    Handle hp(p);   <span style="color:#75715e">// 通过拷贝构造创建一个p的副本，并将 handle绑定到该副本
-</span><span style="color:#75715e"></span>    Handle hpp(hp);
-    Handle hppp(hp);
-    Handle hpppp;
-    hpppp <span style="color:#f92672">=</span> hp;
-    hpppp.x(<span style="color:#ae81ff">100</span>).y(<span style="color:#ae81ff">200</span>);
-    cout <span style="color:#f92672">&lt;&lt;</span> hp.x() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> hp.y() <span style="color:#f92672">&lt;&lt;</span> endl; 
-    cout <span style="color:#f92672">&lt;&lt;</span> hpppp.x() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> hpppp.y() <span style="color:#f92672">&lt;&lt;</span> endl; 
-
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Point()
-Point(const Point&amp; p)
-1
-2
-3
-Point()
-~Point()
-4
-Point(const Point&amp; p)
-10, 20
-100, 200
-~Point()
-~Point()
-~Point()
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Point</span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Point(<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">:</span>xval(x), yval(y){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Point()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Point(<span style="color:#66d9ef">const</span> Point<span style="color:#f92672">&amp;</span> p){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Point(const Point&amp; p)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        xval <span style="color:#f92672">=</span> p.xval;
+</span></span><span style="display:flex;"><span>        yval <span style="color:#f92672">=</span> p.yval;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>Point(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Point()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">x</span>() <span style="color:#66d9ef">const</span> {<span style="color:#66d9ef">return</span> xval;}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">y</span>() <span style="color:#66d9ef">const</span> {<span style="color:#66d9ef">return</span> yval;}
+</span></span><span style="display:flex;"><span>    Point<span style="color:#f92672">&amp;</span> x(<span style="color:#66d9ef">int</span> xv){
+</span></span><span style="display:flex;"><span>        xval <span style="color:#f92672">=</span> xv;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Point<span style="color:#f92672">&amp;</span> y(<span style="color:#66d9ef">int</span> yv){
+</span></span><span style="display:flex;"><span>        yval <span style="color:#f92672">=</span> yv;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> xval <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; y: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> yval <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> xval, yval;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Handle</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UPoint</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">friend</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Handle</span>;
+</span></span><span style="display:flex;"><span>    Point p;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> u;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPoint()<span style="color:#f92672">:</span>u(<span style="color:#ae81ff">1</span>){}
+</span></span><span style="display:flex;"><span>    UPoint(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y)<span style="color:#f92672">:</span>p(x, y), u(<span style="color:#ae81ff">1</span>){}
+</span></span><span style="display:flex;"><span>    UPoint(<span style="color:#66d9ef">const</span> Point<span style="color:#f92672">&amp;</span> p0)<span style="color:#f92672">:</span>p(p0), u(<span style="color:#ae81ff">1</span>){}
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Handle</span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Handle()<span style="color:#f92672">:</span>up(<span style="color:#66d9ef">new</span> UPoint){}
+</span></span><span style="display:flex;"><span>    Handle(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y)<span style="color:#f92672">:</span>up(<span style="color:#66d9ef">new</span> UPoint(x, y)){}
+</span></span><span style="display:flex;"><span>    Handle(<span style="color:#66d9ef">const</span> Point <span style="color:#f92672">&amp;</span>p)<span style="color:#f92672">:</span>up(<span style="color:#66d9ef">new</span> UPoint(p)){}
+</span></span><span style="display:flex;"><span>    Handle(<span style="color:#66d9ef">const</span> Handle <span style="color:#f92672">&amp;</span>h)<span style="color:#f92672">:</span>up(h.up){<span style="color:#f92672">++</span>up<span style="color:#f92672">-&gt;</span>u;}
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>Handle(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">--</span>up<span style="color:#f92672">-&gt;</span>u <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">delete</span> up;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Handle<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> Handle<span style="color:#f92672">&amp;</span> h){
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">++</span>h.up<span style="color:#f92672">-&gt;</span>u;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">--</span>up<span style="color:#f92672">-&gt;</span>u <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">delete</span> up;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        up <span style="color:#f92672">=</span> h.up;
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> up<span style="color:#f92672">-&gt;</span>u <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">x</span>() <span style="color:#66d9ef">const</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> up<span style="color:#f92672">-&gt;</span>p.x();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">y</span>() <span style="color:#66d9ef">const</span>{
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> up<span style="color:#f92672">-&gt;</span>p.y();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*指针语义
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    不必复制 UPoint 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Handle&amp; x(int x){
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        up-&gt;p.x(x);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        return *this;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Handle&amp; y(int y){
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        up-&gt;p.y(y);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        return *this;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    */</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*值语义
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    写时复制
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    */</span>
+</span></span><span style="display:flex;"><span>    Handle<span style="color:#f92672">&amp;</span> x(<span style="color:#66d9ef">int</span> x){
+</span></span><span style="display:flex;"><span>        copyWhenWrite();
+</span></span><span style="display:flex;"><span>        up<span style="color:#f92672">-&gt;</span>p.x(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Handle<span style="color:#f92672">&amp;</span> y(<span style="color:#66d9ef">int</span> y){
+</span></span><span style="display:flex;"><span>        copyWhenWrite();
+</span></span><span style="display:flex;"><span>        up<span style="color:#f92672">-&gt;</span>p.y(y);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> copyWhenWrite(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(up<span style="color:#f92672">-&gt;</span>u <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">--</span>up<span style="color:#f92672">-&gt;</span>u;
+</span></span><span style="display:flex;"><span>            up <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UPoint(up<span style="color:#f92672">-&gt;</span>p);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPoint <span style="color:#f92672">*</span> up;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Point p(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>);
+</span></span><span style="display:flex;"><span>    Handle hp(p);   <span style="color:#75715e">// 通过拷贝构造创建一个p的副本，并将 handle绑定到该副本
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Handle hpp(hp);
+</span></span><span style="display:flex;"><span>    Handle hppp(hp);
+</span></span><span style="display:flex;"><span>    Handle hpppp;
+</span></span><span style="display:flex;"><span>    hpppp <span style="color:#f92672">=</span> hp;
+</span></span><span style="display:flex;"><span>    hpppp.x(<span style="color:#ae81ff">100</span>).y(<span style="color:#ae81ff">200</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> hp.x() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> hp.y() <span style="color:#f92672">&lt;&lt;</span> endl; 
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> hpppp.x() <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> hpppp.y() <span style="color:#f92672">&lt;&lt;</span> endl; 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Point()
+</span></span><span style="display:flex;"><span>Point(const Point&amp; p)
+</span></span><span style="display:flex;"><span>1
+</span></span><span style="display:flex;"><span>2
+</span></span><span style="display:flex;"><span>3
+</span></span><span style="display:flex;"><span>Point()
+</span></span><span style="display:flex;"><span>~Point()
+</span></span><span style="display:flex;"><span>4
+</span></span><span style="display:flex;"><span>Point(const Point&amp; p)
+</span></span><span style="display:flex;"><span>10, 20
+</span></span><span style="display:flex;"><span>100, 200
+</span></span><span style="display:flex;"><span>~Point()
+</span></span><span style="display:flex;"><span>~Point()
+</span></span><span style="display:flex;"><span>~Point()
+</span></span></code></pre></div></li>
 <li>
 <p>对象和值之间的差别只在要改变对象时才显现出来。换句话说，就是值和不可变的对象是无法区分的。</p>
 </li>
@@ -459,15 +462,15 @@ Point(const Point&amp; p)
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/">
+  <a class="prev" href="https://874656645.github.io/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/">
     <span class="title">« Prev Page</span>
     <br>
     <span>函数对象适配器</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/">
+  <a class="next" href="https://874656645.github.io/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/">
     <span class="title">Next Page »</span>
     <br>
     <span>机房预约系统案例</span>
@@ -480,7 +483,7 @@ Point(const Point&amp; p)
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -518,6 +521,8 @@ Point(const Point&amp; p)
     });
 
 </script>
+
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {

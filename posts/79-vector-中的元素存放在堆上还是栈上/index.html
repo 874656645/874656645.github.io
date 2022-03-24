@@ -7,20 +7,22 @@
 <meta name="robots" content="index, follow">
 <title>vector 中的元素存放在堆上还是栈上 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;, STL" />
-<meta name="description" content="结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete().">
+<meta name="description" content="结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public:  Person(int age, int id){  m_age = age;  m_id = id;  cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl;  }  Person(const Person&amp; p){  m_age = p.m_age;  m_id = p.m_id;  cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl;  }  ~Person(){  cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl;  }  void* operator new(size_t size){  void* p = malloc(size);  cout &lt;&lt; &#34;new().">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
-<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -44,18 +46,18 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="vector 中的元素存放在堆上还是栈上" />
-<meta property="og:description" content="结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete()." />
+<meta property="og:description" content="结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public:  Person(int age, int id){  m_age = age;  m_id = id;  cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl;  }  Person(const Person&amp; p){  m_age = p.m_age;  m_id = p.m_id;  cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl;  }  ~Person(){  cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl;  }  void* operator new(size_t size){  void* p = malloc(size);  cout &lt;&lt; &#34;new()." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-16T15:50:29&#43;08:00" />
 <meta property="article:modified_time" content="2022-01-16T15:50:29&#43;08:00" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="vector 中的元素存放在堆上还是栈上"/>
-<meta name="twitter:description" content="结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete()."/>
+<meta name="twitter:description" content="结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public:  Person(int age, int id){  m_age = age;  m_id = id;  cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl;  }  Person(const Person&amp; p){  m_age = p.m_age;  m_id = p.m_id;  cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl;  }  ~Person(){  cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl;  }  void* operator new(size_t size){  void* p = malloc(size);  cout &lt;&lt; &#34;new()."/>
 
 
 <script type="application/ld+json">
@@ -67,13 +69,13 @@ if (!doNotTrack) {
       "@type": "ListItem",
       "position":  2 ,
       "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
+      "item": "https://874656645.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "vector 中的元素存放在堆上还是栈上",
-      "item": "https://874656645.github.io/rick/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"
+      "item": "https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"
     }
   ]
 }
@@ -84,11 +86,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "vector 中的元素存放在堆上还是栈上",
   "name": "vector 中的元素存放在堆上还是栈上",
-  "description": "结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout \u0026lt;\u0026lt; \u0026#34;Person(int, int)...\u0026#34; \u0026lt;\u0026lt; endl; } Person(const Person\u0026amp; p){ m_age = p.m_age; m_id = p.m_id; cout \u0026lt;\u0026lt; \u0026#34;Person(const Person\u0026amp; p)...\u0026#34; \u0026lt;\u0026lt; endl; } ~Person(){ cout \u0026lt;\u0026lt; \u0026#34;~Person()...\u0026#34; \u0026lt;\u0026lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout \u0026lt;\u0026lt; \u0026#34;new()...\u0026#34; \u0026lt;\u0026lt; endl; return p; } void operator delete(void *p){ cout \u0026lt;\u0026lt; \u0026#34;delete().",
+  "description": "结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public:  Person(int age, int id){  m_age = age;  m_id = id;  cout \u0026lt;\u0026lt; \u0026#34;Person(int, int)...\u0026#34; \u0026lt;\u0026lt; endl;  }  Person(const Person\u0026amp; p){  m_age = p.m_age;  m_id = p.m_id;  cout \u0026lt;\u0026lt; \u0026#34;Person(const Person\u0026amp; p)...\u0026#34; \u0026lt;\u0026lt; endl;  }  ~Person(){  cout \u0026lt;\u0026lt; \u0026#34;~Person()...\u0026#34; \u0026lt;\u0026lt; endl;  }  void* operator new(size_t size){  void* p = malloc(size);  cout \u0026lt;\u0026lt; \u0026#34;new().",
   "keywords": [
     "C++", "STL"
   ],
-  "articleBody": "结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout  \"Person(int, int)...\"  endl; } Person(const Person\u0026 p){ m_age = p.m_age; m_id = p.m_id; cout  \"Person(const Person\u0026 p)...\"  endl; } ~Person(){ cout  \"~Person()...\"  endl; } void* operator new(size_t size){ void* p = malloc(size); cout  \"new()...\"  endl; return p; } void operator delete(void *p){ cout  \"delete()...\"  endl; if(p != NULL){ free(p); p = NULL; } } void show(){ cout  \"Age: \"  m_age  \" Id: \"  m_id  endl; } private: int m_age; int m_id; }; void printPerson(Person \u0026p){ p.show(); } int main() { // vector 中存放对象类型  std::vectorPerson v; v.reserve(3); v.push_back(Person(10, 20)); v.push_back(Person(30, 40)); v.push_back(Person(50, 60)); // 遍历 vector  for(vectorPerson::iterator it = v.begin(); it != v.end(); it++){ // 迭代器是指针  it-show(); // 也可以这么写  // (*it).show();  } for_each(v.begin(), v.end(), printPerson); // 回调函数不支持函数重载？？  // 测试删除  Person* pp = \u0026v[0]; // 记录 vector 中第一个元素的地址  // 方式一  v.clear(); // 这种释放方式，pp 指针仍然可以访问已释放的地址，存在安全隐患  // 方式二  vectorPerson().swap(v); // 这种方式不仅可以释放内存，还可以防止其它指针对已经释放的内存进行非法访问  // 利用 swap 函数和临时对象交换内存，交换以后，临时对象消失  cout  v.size()  endl; if(pp != NULL){ pp-show(); }else{ cout  \"空指针\"  endl; } return 0; } 方式一输出：\nPerson(int, int)... Person(const Person\u0026 p)... ~Person()... Person(int, int)... Person(const Person\u0026 p)... ~Person()... Person(int, int)... Person(const Person\u0026 p)... ~Person()... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 ~Person()... ~Person()... ~Person()... 0 Age: 10 Id: 20 方式二输出：\nPerson(int, int)... Person(const Person\u0026 p)... ~Person()... Person(int, int)... Person(const Person\u0026 p)... ~Person()... Person(int, int)... Person(const Person\u0026 p)... ~Person()... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 ~Person()... ~Person()... ~Person()... 0 Age: 0 Id: 0 存放指针 void printPerson(Person *\u0026p){ if(p == NULL){ cout  \"指针为空\"  endl; return; } p-show(); } void delPerson(Person *\u0026p){ delete p; p = NULL; } int main() { // vector 中存放对象指针，就必须手动释放内存  vectorPerson* v; v.reserve(3); v.push_back(new Person(10, 20)); v.push_back(new Person(30, 40)); v.push_back(new Person(50, 60)); for_each(v.begin(), v.end(), printPerson); // 不支持函数重载？？  // 手动释放内存  // for_each(v.begin(), v.end(), delPerson);  // for_each(v.begin(), v.end(), printPerson);  // 删除测试  Person *pp = v[0]; // 记录 vector 中第一个元素的地址，实际上是拷贝了指向第一个 Person 对象的地址  // 除非手动 delete 掉 vector 中的指针，否则不管是 clear 还是 swap 都没有真正释放内存  // 这两种方式只是把 vector 对象释放了，存储的指针所指向的空间并没有释放  // 方式一  v.clear(); // 这种情况下，pp 指针仍然可以访问  // 方式二  vectorPerson*().swap(v); cout  v.size()  endl; if(pp != NULL){ pp-show(); }else{ cout  \"空指针\"  endl; } return 0; } 方式一输出：\nnew()... Person(int, int)... new()... Person(int, int)... new()... Person(int, int)... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 0 Age: 10 Id: 20 方式二输出：\nnew()... Person(int, int)... new()... Person(int, int)... new()... Person(int, int)... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 0 Age: 10 Id: 20 手动释放内存输出：\nnew()... Person(int, int)... new()... Person(int, int)... new()... Person(int, int)... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 ~Person()... delete()... ~Person()... delete()... ~Person()... delete()... 指针为空 指针为空 指针为空 0 空指针 ",
+  "articleBody": "结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public:  Person(int age, int id){  m_age = age;  m_id = id;  cout  \"Person(int, int)...\"  endl;  }  Person(const Person\u0026 p){  m_age = p.m_age;  m_id = p.m_id;  cout  \"Person(const Person\u0026 p)...\"  endl;  }  ~Person(){  cout  \"~Person()...\"  endl;  }  void* operator new(size_t size){  void* p = malloc(size);  cout  \"new()...\"  endl;  return p;  }  void operator delete(void *p){  cout  \"delete()...\"  endl;  if(p != NULL){  free(p);  p = NULL;  }  }  void show(){  cout  \"Age: \"  m_age  \" Id: \"  m_id  endl;  } private:  int m_age;  int m_id; }; void printPerson(Person \u0026p){  p.show(); } int main() {  // vector 中存放对象类型  std::vectorPerson v;  v.reserve(3);  v.push_back(Person(10, 20));  v.push_back(Person(30, 40));  v.push_back(Person(50, 60));  // 遍历 vector  for(vectorPerson::iterator it = v.begin(); it != v.end(); it++){  // 迭代器是指针  it-show();  // 也可以这么写  // (*it).show();  }  for_each(v.begin(), v.end(), printPerson); // 回调函数不支持函数重载？？   // 测试删除  Person* pp = \u0026v[0]; // 记录 vector 中第一个元素的地址  // 方式一  v.clear(); // 这种释放方式，pp 指针仍然可以访问已释放的地址，存在安全隐患  // 方式二  vectorPerson().swap(v); // 这种方式不仅可以释放内存，还可以防止其它指针对已经释放的内存进行非法访问  // 利用 swap 函数和临时对象交换内存，交换以后，临时对象消失  cout  v.size()  endl;   if(pp != NULL){  pp-show();  }else{  cout  \"空指针\"  endl;  }   return 0; } 方式一输出：\nPerson(int, int)... Person(const Person\u0026 p)... ~Person()... Person(int, int)... Person(const Person\u0026 p)... ~Person()... Person(int, int)... Person(const Person\u0026 p)... ~Person()... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 ~Person()... ~Person()... ~Person()... 0 Age: 10 Id: 20 方式二输出：\nPerson(int, int)... Person(const Person\u0026 p)... ~Person()... Person(int, int)... Person(const Person\u0026 p)... ~Person()... Person(int, int)... Person(const Person\u0026 p)... ~Person()... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 ~Person()... ~Person()... ~Person()... 0 Age: 0 Id: 0 存放指针 void printPerson(Person *\u0026p){  if(p == NULL){  cout  \"指针为空\"  endl;  return;  }  p-show(); } void delPerson(Person *\u0026p){  delete p;  p = NULL; } int main() {  // vector 中存放对象指针，就必须手动释放内存  vectorPerson* v;  v.reserve(3);  v.push_back(new Person(10, 20));  v.push_back(new Person(30, 40));  v.push_back(new Person(50, 60));  for_each(v.begin(), v.end(), printPerson); // 不支持函数重载？？   // 手动释放内存  // for_each(v.begin(), v.end(), delPerson);  // for_each(v.begin(), v.end(), printPerson);   // 删除测试  Person *pp = v[0]; // 记录 vector 中第一个元素的地址，实际上是拷贝了指向第一个 Person 对象的地址  // 除非手动 delete 掉 vector 中的指针，否则不管是 clear 还是 swap 都没有真正释放内存  // 这两种方式只是把 vector 对象释放了，存储的指针所指向的空间并没有释放  // 方式一  v.clear(); // 这种情况下，pp 指针仍然可以访问  // 方式二  vectorPerson*().swap(v);  cout  v.size()  endl;  if(pp != NULL){  pp-show();  }else{  cout  \"空指针\"  endl;  }   return 0; } 方式一输出：\nnew()... Person(int, int)... new()... Person(int, int)... new()... Person(int, int)... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 0 Age: 10 Id: 20 方式二输出：\nnew()... Person(int, int)... new()... Person(int, int)... new()... Person(int, int)... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 0 Age: 10 Id: 20 手动释放内存输出：\nnew()... Person(int, int)... new()... Person(int, int)... new()... Person(int, int)... Age: 10 Id: 20 Age: 30 Id: 40 Age: 50 Id: 60 ~Person()... delete()... ~Person()... delete()... ~Person()... delete()... 指针为空 指针为空 指针为空 0 空指针 ",
   "wordCount" : "502",
   "inLanguage": "en",
   "datePublished": "2022-01-16T15:50:29+08:00",
@@ -99,18 +101,19 @@ if (!doNotTrack) {
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"
+    "@id": "https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://874656645.github.io/rick/favicon.ico"
+      "url": "https://874656645.github.io/favicon.ico"
     }
   }
 }
 </script>
+
 </head>
 
 <body class=" dark" id="top">
@@ -124,7 +127,7 @@ if (!doNotTrack) {
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -150,27 +153,27 @@ if (!doNotTrack) {
         </div>
         <ul id="menu">
             <li>
-                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                <a href="https://874656645.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                <a href="https://874656645.github.io/categories" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/series" title="Series">
+                <a href="https://874656645.github.io/series" title="Series">
                     <span>Series</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                <a href="https://874656645.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -181,7 +184,7 @@ if (!doNotTrack) {
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       vector 中的元素存放在堆上还是栈上
     </h1>
@@ -214,223 +217,223 @@ if (!doNotTrack) {
 <li><em>vector</em> 中存放指针类型，一定要记得手动释放内存</li>
 </ol>
 <h3 id="存放对象">存放对象<a hidden class="anchor" aria-hidden="true" href="#存放对象">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    Person(<span style="color:#66d9ef">int</span> age, <span style="color:#66d9ef">int</span> id){
-        m_age <span style="color:#f92672">=</span> age;
-        m_id <span style="color:#f92672">=</span> id;
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Person(int, int)...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    Person(<span style="color:#66d9ef">const</span> Person<span style="color:#f92672">&amp;</span> p){
-        m_age <span style="color:#f92672">=</span> p.m_age;
-        m_id <span style="color:#f92672">=</span> p.m_id;
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Person(const Person&amp; p)...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#f92672">~</span>Person(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Person()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">new</span>(size_t size){
-        <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> malloc(size);
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;new()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">return</span> p;
-    }
-    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">delete</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>p){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;delete()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> NULL){
-            free(p);
-            p <span style="color:#f92672">=</span> NULL;
-        }
-    }
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show</span>(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Age: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_age <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; Id: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_id <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> m_age;
-    <span style="color:#66d9ef">int</span> m_id;
-};
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printPerson</span>(Person <span style="color:#f92672">&amp;</span>p){
-    p.show();   
-}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    <span style="color:#75715e">// vector 中存放对象类型
-</span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;</span> v;
-    v.reserve(<span style="color:#ae81ff">3</span>);
-    v.push_back(Person(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>));
-    v.push_back(Person(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>));
-    v.push_back(Person(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>));
-    <span style="color:#75715e">// 遍历 vector
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> v.begin(); it <span style="color:#f92672">!=</span> v.end(); it<span style="color:#f92672">++</span>){
-        <span style="color:#75715e">// 迭代器是指针
-</span><span style="color:#75715e"></span>        it<span style="color:#f92672">-&gt;</span>show();
-        <span style="color:#75715e">// 也可以这么写
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// (*it).show();
-</span><span style="color:#75715e"></span>    }
-    for_each(v.begin(), v.end(), printPerson);      <span style="color:#75715e">// 回调函数不支持函数重载？？
-</span><span style="color:#75715e"></span>    
-    <span style="color:#75715e">// 测试删除
-</span><span style="color:#75715e"></span>    Person<span style="color:#f92672">*</span> pp <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v[<span style="color:#ae81ff">0</span>];         <span style="color:#75715e">// 记录 vector 中第一个元素的地址
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 方式一
-</span><span style="color:#75715e"></span>    v.clear();                  <span style="color:#75715e">// 这种释放方式，pp 指针仍然可以访问已释放的地址，存在安全隐患  
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 方式二             
-</span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;</span>().swap(v);   <span style="color:#75715e">// 这种方式不仅可以释放内存，还可以防止其它指针对已经释放的内存进行非法访问
-</span><span style="color:#75715e"></span>                                <span style="color:#75715e">// 利用 swap 函数和临时对象交换内存，交换以后，临时对象消失
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> v.size() <span style="color:#f92672">&lt;&lt;</span> endl;
-    
-    <span style="color:#66d9ef">if</span>(pp <span style="color:#f92672">!=</span> NULL){
-        pp<span style="color:#f92672">-&gt;</span>show();
-    }<span style="color:#66d9ef">else</span>{
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;空指针&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>方式一输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Person(int, int)...
-Person(const Person&amp; p)...
-~Person()...
-Person(int, int)...
-Person(const Person&amp; p)...
-~Person()...
-Person(int, int)...
-Person(const Person&amp; p)...
-~Person()...
-Age: 10 Id: 20
-Age: 30 Id: 40
-Age: 50 Id: 60
-Age: 10 Id: 20
-Age: 30 Id: 40
-Age: 50 Id: 60
-~Person()...
-~Person()...
-~Person()...
-0
-Age: 10 Id: 20
-</code></pre></div><p>方式二输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Person(int, int)...
-Person(const Person&amp; p)...
-~Person()...
-Person(int, int)...
-Person(const Person&amp; p)...
-~Person()...
-Person(int, int)...
-Person(const Person&amp; p)...
-~Person()...
-Age: 10 Id: 20
-Age: 30 Id: 40
-Age: 50 Id: 60
-Age: 10 Id: 20
-Age: 30 Id: 40
-Age: 50 Id: 60
-~Person()...
-~Person()...
-~Person()...
-0
-Age: 0 Id: 0
-</code></pre></div><h3 id="存放指针">存放指针<a hidden class="anchor" aria-hidden="true" href="#存放指针">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printPerson</span>(Person <span style="color:#f92672">*&amp;</span>p){
-    <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">==</span> NULL){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;指针为空&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">return</span>;
-    }
-    p<span style="color:#f92672">-&gt;</span>show();   
-}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">delPerson</span>(Person <span style="color:#f92672">*&amp;</span>p){
-    <span style="color:#66d9ef">delete</span> p;   
-    p <span style="color:#f92672">=</span> NULL;
-}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    <span style="color:#75715e">// vector 中存放对象指针，就必须手动释放内存
-</span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">*&gt;</span> v;
-    v.reserve(<span style="color:#ae81ff">3</span>);
-    v.push_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>));
-    v.push_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>));
-    v.push_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>));
-    for_each(v.begin(), v.end(), printPerson);      <span style="color:#75715e">// 不支持函数重载？？
-</span><span style="color:#75715e"></span>
-    <span style="color:#75715e">// 手动释放内存
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// for_each(v.begin(), v.end(), delPerson);     
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// for_each(v.begin(), v.end(), printPerson);
-</span><span style="color:#75715e"></span>
-    <span style="color:#75715e">// 删除测试
-</span><span style="color:#75715e"></span>    Person <span style="color:#f92672">*</span>pp <span style="color:#f92672">=</span> v[<span style="color:#ae81ff">0</span>];          <span style="color:#75715e">// 记录 vector 中第一个元素的地址，实际上是拷贝了指向第一个 Person 对象的地址
-</span><span style="color:#75715e"></span>                                <span style="color:#75715e">// 除非手动 delete 掉 vector 中的指针，否则不管是 clear 还是 swap 都没有真正释放内存
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 这两种方式只是把 vector 对象释放了，存储的指针所指向的空间并没有释放
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 方式一
-</span><span style="color:#75715e"></span>    v.clear();               <span style="color:#75715e">// 这种情况下，pp 指针仍然可以访问
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 方式二
-</span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">*&gt;</span>().swap(v);
-    cout <span style="color:#f92672">&lt;&lt;</span> v.size() <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">if</span>(pp <span style="color:#f92672">!=</span> NULL){
-        pp<span style="color:#f92672">-&gt;</span>show();
-    }<span style="color:#66d9ef">else</span>{
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;空指针&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>方式一输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">new()...
-Person(int, int)...
-new()...
-Person(int, int)...
-new()...
-Person(int, int)...
-Age: 10 Id: 20
-Age: 30 Id: 40
-Age: 50 Id: 60
-0
-Age: 10 Id: 20
-</code></pre></div><p>方式二输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">new()...
-Person(int, int)...
-new()...
-Person(int, int)...
-new()...
-Person(int, int)...
-Age: 10 Id: 20
-Age: 30 Id: 40
-Age: 50 Id: 60
-0
-Age: 10 Id: 20
-</code></pre></div><p>手动释放内存输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">new()...
-Person(int, int)...
-new()...
-Person(int, int)...
-new()...
-Person(int, int)...
-Age: 10 Id: 20
-Age: 30 Id: 40
-Age: 50 Id: 60
-~Person()...
-delete()...
-~Person()...
-delete()...
-~Person()...
-delete()...
-指针为空
-指针为空
-指针为空
-0
-空指针
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Person(<span style="color:#66d9ef">int</span> age, <span style="color:#66d9ef">int</span> id){
+</span></span><span style="display:flex;"><span>        m_age <span style="color:#f92672">=</span> age;
+</span></span><span style="display:flex;"><span>        m_id <span style="color:#f92672">=</span> id;
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Person(int, int)...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Person(<span style="color:#66d9ef">const</span> Person<span style="color:#f92672">&amp;</span> p){
+</span></span><span style="display:flex;"><span>        m_age <span style="color:#f92672">=</span> p.m_age;
+</span></span><span style="display:flex;"><span>        m_id <span style="color:#f92672">=</span> p.m_id;
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Person(const Person&amp; p)...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>Person(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Person()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">new</span>(size_t size){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> malloc(size);
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;new()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> p;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">delete</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>p){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;delete()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> NULL){
+</span></span><span style="display:flex;"><span>            free(p);
+</span></span><span style="display:flex;"><span>            p <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show</span>(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Age: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_age <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; Id: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_id <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_age;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_id;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printPerson</span>(Person <span style="color:#f92672">&amp;</span>p){
+</span></span><span style="display:flex;"><span>    p.show();   
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// vector 中存放对象类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;</span> v;
+</span></span><span style="display:flex;"><span>    v.reserve(<span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>    v.push_back(Person(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>));
+</span></span><span style="display:flex;"><span>    v.push_back(Person(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>));
+</span></span><span style="display:flex;"><span>    v.push_back(Person(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 遍历 vector
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;::</span>iterator it <span style="color:#f92672">=</span> v.begin(); it <span style="color:#f92672">!=</span> v.end(); it<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 迭代器是指针
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        it<span style="color:#f92672">-&gt;</span>show();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 也可以这么写
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// (*it).show();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    for_each(v.begin(), v.end(), printPerson);      <span style="color:#75715e">// 回调函数不支持函数重载？？
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 测试删除
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Person<span style="color:#f92672">*</span> pp <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v[<span style="color:#ae81ff">0</span>];         <span style="color:#75715e">// 记录 vector 中第一个元素的地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 方式一
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    v.clear();                  <span style="color:#75715e">// 这种释放方式，pp 指针仍然可以访问已释放的地址，存在安全隐患  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 方式二             
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;</span>().swap(v);   <span style="color:#75715e">// 这种方式不仅可以释放内存，还可以防止其它指针对已经释放的内存进行非法访问
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                <span style="color:#75715e">// 利用 swap 函数和临时对象交换内存，交换以后，临时对象消失
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> v.size() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(pp <span style="color:#f92672">!=</span> NULL){
+</span></span><span style="display:flex;"><span>        pp<span style="color:#f92672">-&gt;</span>show();
+</span></span><span style="display:flex;"><span>    }<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;空指针&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>方式一输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>Person(const Person&amp; p)...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>Person(const Person&amp; p)...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>Person(const Person&amp; p)...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span><span style="display:flex;"><span>Age: 30 Id: 40
+</span></span><span style="display:flex;"><span>Age: 50 Id: 60
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span><span style="display:flex;"><span>Age: 30 Id: 40
+</span></span><span style="display:flex;"><span>Age: 50 Id: 60
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>0
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span></code></pre></div><p>方式二输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>Person(const Person&amp; p)...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>Person(const Person&amp; p)...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>Person(const Person&amp; p)...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span><span style="display:flex;"><span>Age: 30 Id: 40
+</span></span><span style="display:flex;"><span>Age: 50 Id: 60
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span><span style="display:flex;"><span>Age: 30 Id: 40
+</span></span><span style="display:flex;"><span>Age: 50 Id: 60
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>0
+</span></span><span style="display:flex;"><span>Age: 0 Id: 0
+</span></span></code></pre></div><h3 id="存放指针">存放指针<a hidden class="anchor" aria-hidden="true" href="#存放指针">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printPerson</span>(Person <span style="color:#f92672">*&amp;</span>p){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">==</span> NULL){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;指针为空&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">-&gt;</span>show();   
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">delPerson</span>(Person <span style="color:#f92672">*&amp;</span>p){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> p;   
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// vector 中存放对象指针，就必须手动释放内存
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">*&gt;</span> v;
+</span></span><span style="display:flex;"><span>    v.reserve(<span style="color:#ae81ff">3</span>);
+</span></span><span style="display:flex;"><span>    v.push_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>));
+</span></span><span style="display:flex;"><span>    v.push_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>));
+</span></span><span style="display:flex;"><span>    v.push_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">60</span>));
+</span></span><span style="display:flex;"><span>    for_each(v.begin(), v.end(), printPerson);      <span style="color:#75715e">// 不支持函数重载？？
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 手动释放内存
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// for_each(v.begin(), v.end(), delPerson);     
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// for_each(v.begin(), v.end(), printPerson);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 删除测试
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Person <span style="color:#f92672">*</span>pp <span style="color:#f92672">=</span> v[<span style="color:#ae81ff">0</span>];          <span style="color:#75715e">// 记录 vector 中第一个元素的地址，实际上是拷贝了指向第一个 Person 对象的地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                <span style="color:#75715e">// 除非手动 delete 掉 vector 中的指针，否则不管是 clear 还是 swap 都没有真正释放内存
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 这两种方式只是把 vector 对象释放了，存储的指针所指向的空间并没有释放
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 方式一
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    v.clear();               <span style="color:#75715e">// 这种情况下，pp 指针仍然可以访问
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 方式二
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">*&gt;</span>().swap(v);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> v.size() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(pp <span style="color:#f92672">!=</span> NULL){
+</span></span><span style="display:flex;"><span>        pp<span style="color:#f92672">-&gt;</span>show();
+</span></span><span style="display:flex;"><span>    }<span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;空指针&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>方式一输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>new()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>new()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>new()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span><span style="display:flex;"><span>Age: 30 Id: 40
+</span></span><span style="display:flex;"><span>Age: 50 Id: 60
+</span></span><span style="display:flex;"><span>0
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span></code></pre></div><p>方式二输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>new()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>new()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>new()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span><span style="display:flex;"><span>Age: 30 Id: 40
+</span></span><span style="display:flex;"><span>Age: 50 Id: 60
+</span></span><span style="display:flex;"><span>0
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span></code></pre></div><p>手动释放内存输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>new()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>new()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>new()...
+</span></span><span style="display:flex;"><span>Person(int, int)...
+</span></span><span style="display:flex;"><span>Age: 10 Id: 20
+</span></span><span style="display:flex;"><span>Age: 30 Id: 40
+</span></span><span style="display:flex;"><span>Age: 50 Id: 60
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>delete()...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>delete()...
+</span></span><span style="display:flex;"><span>~Person()...
+</span></span><span style="display:flex;"><span>delete()...
+</span></span><span style="display:flex;"><span>指针为空
+</span></span><span style="display:flex;"><span>指针为空
+</span></span><span style="display:flex;"><span>指针为空
+</span></span><span style="display:flex;"><span>0
+</span></span><span style="display:flex;"><span>空指针
+</span></span></code></pre></div>
 
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
-      <li><a href="https://874656645.github.io/rick/tags/stl/">STL</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/stl/">STL</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/">
+  <a class="prev" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/">
     <span class="title">« Prev Page</span>
     <br>
     <span>巧妙收缩 vector 空间</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/78-stl-hello-world/">
+  <a class="next" href="https://874656645.github.io/posts/78-stl-hello-world/">
     <span class="title">Next Page »</span>
     <br>
     <span>STL Hello World</span>
@@ -443,7 +446,7 @@ delete()...
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -481,6 +484,8 @@ delete()...
     });
 
 </script>
+
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {

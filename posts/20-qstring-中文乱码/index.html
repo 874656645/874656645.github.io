@@ -7,22 +7,24 @@
 <meta name="robots" content="index, follow">
 <title>QString 中文乱码 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content=" QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&quot;This is a debug message at 中文&quot;);
+<meta name="description" content="QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&quot;This is a debug message at 中文&quot;);
 以QString做为形参变量传递  qDebug(msg.toUtf8());
-QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } ">
+QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) {  QFile file(logFileName);  file.open(QIODevice::WriteOnly | QIODevice::Append);  QTextStream text_stream(&amp;file);  text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;;  file.flush();  file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;;  QDir dir(fileName);  if (!dir.exists())  {  // 注：不能创建两级文件夹  bool ismkdir = dir.">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" />
+<link rel="canonical" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
-<link crossorigin="anonymous" href="/rick/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/rick/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+
+<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
-<link rel="icon" href="https://874656645.github.io/rick/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/rick/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/rick/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://874656645.github.io/rick/apple-touch-icon.png">
-<link rel="mask-icon" href="https://874656645.github.io/rick/safari-pinned-tab.svg">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
 <noscript>
@@ -46,21 +48,21 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="QString 中文乱码" />
-<meta property="og:description" content=" QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&quot;This is a debug message at 中文&quot;);
+<meta property="og:description" content="QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&quot;This is a debug message at 中文&quot;);
 以QString做为形参变量传递  qDebug(msg.toUtf8());
-QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } " />
+QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) {  QFile file(logFileName);  file.open(QIODevice::WriteOnly | QIODevice::Append);  QTextStream text_stream(&amp;file);  text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;;  file.flush();  file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;;  QDir dir(fileName);  if (!dir.exists())  {  // 注：不能创建两级文件夹  bool ismkdir = dir." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" /><meta property="og:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-06T11:34:27&#43;08:00" />
 <meta property="article:modified_time" content="2021-12-06T11:34:27&#43;08:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://874656645.github.io/rick/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="QString 中文乱码"/>
-<meta name="twitter:description" content=" QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&quot;This is a debug message at 中文&quot;);
+<meta name="twitter:description" content="QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&quot;This is a debug message at 中文&quot;);
 以QString做为形参变量传递  qDebug(msg.toUtf8());
-QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } "/>
+QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) {  QFile file(logFileName);  file.open(QIODevice::WriteOnly | QIODevice::Append);  QTextStream text_stream(&amp;file);  text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;;  file.flush();  file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;;  QDir dir(fileName);  if (!dir.exists())  {  // 注：不能创建两级文件夹  bool ismkdir = dir."/>
 
 
 <script type="application/ld+json">
@@ -72,13 +74,13 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
       "@type": "ListItem",
       "position":  2 ,
       "name": "Posts",
-      "item": "https://874656645.github.io/rick/posts/"
+      "item": "https://874656645.github.io/posts/"
     }, 
     {
       "@type": "ListItem",
       "position":  3 ,
       "name": "QString 中文乱码",
-      "item": "https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"
+      "item": "https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"
     }
   ]
 }
@@ -89,11 +91,11 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
   "@type": "BlogPosting",
   "headline": "QString 中文乱码",
   "name": "QString 中文乱码",
-  "description": " QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(\u0026quot;This is a debug message at 中文\u0026quot;);\n以QString做为形参变量传递  qDebug(msg.toUtf8());\nQString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString \u0026amp;logFileName, const QString \u0026amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(\u0026amp;file); text_stream \u0026lt;\u0026lt; logMsg \u0026lt;\u0026lt; \u0026#34;\\r\\n\u0026#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir + \u0026#34;/Log/\u0026#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } ",
+  "description": "QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(\u0026quot;This is a debug message at 中文\u0026quot;);\n以QString做为形参变量传递  qDebug(msg.toUtf8());\nQString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString \u0026amp;logFileName, const QString \u0026amp;logMsg) {  QFile file(logFileName);  file.open(QIODevice::WriteOnly | QIODevice::Append);  QTextStream text_stream(\u0026amp;file);  text_stream \u0026lt;\u0026lt; logMsg \u0026lt;\u0026lt; \u0026#34;\\r\\n\u0026#34;;  file.flush();  file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir + \u0026#34;/Log/\u0026#34;;  QDir dir(fileName);  if (!dir.exists())  {  // 注：不能创建两级文件夹  bool ismkdir = dir.",
   "keywords": [
     "C++"
   ],
-  "articleBody": " QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(\"This is a debug message at 中文\");\n以QString做为形参变量传递  qDebug(msg.toUtf8());\nQString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString \u0026logFileName, const QString \u0026logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(\u0026file); text_stream  logMsg  \"\\r\\n\"; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir + \"/Log/\"; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } ",
+  "articleBody": " QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(\"This is a debug message at 中文\");\n以QString做为形参变量传递  qDebug(msg.toUtf8());\nQString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString \u0026logFileName, const QString \u0026logMsg) {  QFile file(logFileName);  file.open(QIODevice::WriteOnly | QIODevice::Append);  QTextStream text_stream(\u0026file);  text_stream  logMsg  \"\\r\\n\";  file.flush();  file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir + \"/Log/\";  QDir dir(fileName);  if (!dir.exists())  {  // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName);  } ",
   "wordCount" : "64",
   "inLanguage": "en",
   "datePublished": "2021-12-06T11:34:27+08:00",
@@ -104,18 +106,19 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://874656645.github.io/rick/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"
+    "@id": "https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "Slow is Smooth and Smooth is Fast",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://874656645.github.io/rick/favicon.ico"
+      "url": "https://874656645.github.io/favicon.ico"
     }
   }
 }
 </script>
+
 </head>
 
 <body class=" dark" id="top">
@@ -129,7 +132,7 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://874656645.github.io/rick" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
             <span class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -155,27 +158,27 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
         </div>
         <ul id="menu">
             <li>
-                <a href="https://874656645.github.io/rick/archives" title="Archive">
+                <a href="https://874656645.github.io/archives" title="Archive">
                     <span>Archive</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/categories" title="Categories">
+                <a href="https://874656645.github.io/categories" title="Categories">
                     <span>Categories</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/search/" title="Search (Alt &#43; /)" accesskey=/>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
                     <span>Search</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/series" title="Series">
+                <a href="https://874656645.github.io/series" title="Series">
                     <span>Series</span>
                 </a>
             </li>
             <li>
-                <a href="https://874656645.github.io/rick/tags/" title="Tags">
+                <a href="https://874656645.github.io/tags/" title="Tags">
                     <span>Tags</span>
                 </a>
             </li>
@@ -186,7 +189,7 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
 
 <article class="post-single">
   <header class="post-header">
-    <div class="breadcrumbs"><a href="https://874656645.github.io/rick">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/rick/posts/">Posts</a></div>
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
       QString 中文乱码
     </h1>
@@ -207,38 +210,38 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
 <ol start="4">
 <li>QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> QtLog<span style="color:#f92672">::</span>WriteLine(<span style="color:#66d9ef">const</span> QString <span style="color:#f92672">&amp;</span>logFileName, <span style="color:#66d9ef">const</span> QString <span style="color:#f92672">&amp;</span>logMsg)
-{
-    QFile <span style="color:#a6e22e">file</span>(logFileName);
-    file.open(QIODevice<span style="color:#f92672">::</span>WriteOnly <span style="color:#f92672">|</span> QIODevice<span style="color:#f92672">::</span>Append);
-    QTextStream <span style="color:#a6e22e">text_stream</span>(<span style="color:#f92672">&amp;</span>file);
-    text_stream <span style="color:#f92672">&lt;&lt;</span> logMsg <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>;
-    file.flush();
-    file.close();
-}
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">    QString strAppDir <span style="color:#f92672">=</span> QCoreApplication<span style="color:#f92672">::</span>applicationDirPath();  <span style="color:#75715e">// 不用转码
-</span><span style="color:#75715e"></span>    QString message, text, fileName <span style="color:#f92672">=</span> strAppDir <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/Log/&#34;</span>;
-    QDir <span style="color:#a6e22e">dir</span>(fileName);
-    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>dir.exists())
-    {
-        <span style="color:#75715e">// 注：不能创建两级文件夹
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">bool</span> ismkdir <span style="color:#f92672">=</span> dir.mkdir(fileName);
-    }
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> QtLog<span style="color:#f92672">::</span>WriteLine(<span style="color:#66d9ef">const</span> QString <span style="color:#f92672">&amp;</span>logFileName, <span style="color:#66d9ef">const</span> QString <span style="color:#f92672">&amp;</span>logMsg)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    QFile <span style="color:#a6e22e">file</span>(logFileName);
+</span></span><span style="display:flex;"><span>    file.open(QIODevice<span style="color:#f92672">::</span>WriteOnly <span style="color:#f92672">|</span> QIODevice<span style="color:#f92672">::</span>Append);
+</span></span><span style="display:flex;"><span>    QTextStream <span style="color:#a6e22e">text_stream</span>(<span style="color:#f92672">&amp;</span>file);
+</span></span><span style="display:flex;"><span>    text_stream <span style="color:#f92672">&lt;&lt;</span> logMsg <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\r\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    file.flush();
+</span></span><span style="display:flex;"><span>    file.close();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>    QString strAppDir <span style="color:#f92672">=</span> QCoreApplication<span style="color:#f92672">::</span>applicationDirPath();  <span style="color:#75715e">// 不用转码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    QString message, text, fileName <span style="color:#f92672">=</span> strAppDir <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/Log/&#34;</span>;
+</span></span><span style="display:flex;"><span>    QDir <span style="color:#a6e22e">dir</span>(fileName);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>dir.exists())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 注：不能创建两级文件夹
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">bool</span> ismkdir <span style="color:#f92672">=</span> dir.mkdir(fileName);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div>
 
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/rick/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/rick/posts/21-qprocess-%E4%BD%BF%E7%94%A8/">
+  <a class="prev" href="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/">
     <span class="title">« Prev Page</span>
     <br>
     <span>QProcess 使用</span>
   </a>
-  <a class="next" href="https://874656645.github.io/rick/posts/19-ie64-%E4%BD%8D%E6%8F%92%E4%BB%B6/">
+  <a class="next" href="https://874656645.github.io/posts/19-ie64-%E4%BD%8D%E6%8F%92%E4%BB%B6/">
     <span class="title">Next Page »</span>
     <br>
     <span>IE 64位插件</span>
@@ -251,7 +254,7 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io/rick">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
@@ -289,6 +292,8 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
     });
 
 </script>
+
+
 <script>
     var mybutton = document.getElementById("top-link");
     window.onscroll = function () {
