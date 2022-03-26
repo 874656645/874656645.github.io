@@ -145,6 +145,34 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>stack 栈容器适配器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>先进后出 栈不允许遍历元素 不能随机存取  stack 栈操作:
+size()
+empty()</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 22:17:43 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to stack 栈容器适配器" href="https://874656645.github.io/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>评委打分案例
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
+分析：
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public:  Player(string name){  m_name = name;  m_avgScore = 0;  }  void setAvgScore(int v){  m_avgScore = v;  }  void printInfo()const{  cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl;  } private:  string m_name;  int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){  string nameSeed = &#34;ABCDE&#34;;  for(int i = 0; i &lt; nameSeed....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>生成随机数
     </h2>
   </header>
@@ -177,30 +205,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>vector 中的元素存放在堆上还是栈上
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public:  Person(int age, int id){  m_age = age;  m_id = id;  cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl;  }  Person(const Person&amp; p){  m_age = p.m_age;  m_id = p.m_id;  cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl;  }  ~Person(){  cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl;  }  void* operator new(size_t size){  void* p = malloc(size);  cout &lt;&lt; &#34;new()....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 15:50:29 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to vector 中的元素存放在堆上还是栈上" href="https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>STL Hello World
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> 平时要有容器、算法、迭代器的思维模式 容器提供迭代器，算法使用迭代器  // 算法 int count(int* begin, int* end, int val){  int n = 0;  while(begin != end){  if(*begin == val){  n&#43;&#43;;  }  begin&#43;&#43;;  }  return n; } int main() {  // 容器  int arr[] = {1, 3, 0, 5, 1, 3, 1, 0};  // 迭代器  int* begin = arr;  int* end = *(&amp;arr &#43; 1);   int n = count(begin, end, 1);  cout &lt;&lt; &#34;count: &#34; &lt;&lt; n &lt;&lt; endl;  return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 12:31:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to STL Hello World" href="https://874656645.github.io/posts/78-stl-hello-world/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

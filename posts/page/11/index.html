@@ -160,6 +160,33 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>抽象工厂模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 抽象工厂针对的是产品族，而不是产品等级 产品族：同一产地或者同一厂商，功能不同 产品等级：功能相同，产地或者厂商不同 对于增加产品族，符合开闭原则 对于增加产品等级，不符合开闭原则  // 抽象工厂模式 class AbstractApple{ public:  virtual void showName() = 0; }; class AbstractBanana{ public:  virtual void showName() = 0; }; class AbstractPear{ public:  virtual void showName() = 0; }; class ChinaApple : public AbstractApple{ public:  void showName() override{  cout &lt;&lt; &#34;我是中国苹果！&#34; &lt;&lt; endl;  } }; class ChinaBanana : public AbstractBanana{ public:  void showName() override{  cout &lt;&lt; &#34;我是中国香蕉！&#34; &lt;&lt; endl;  } }; class ChinaPear : public AbstractPear{ public:  void showName() override{  cout &lt;&lt; &#34;我是中国鸭梨！&#34; &lt;&lt; endl;  } }; class USAApple : public AbstractApple{ public:  void showName() override{  cout &lt;&lt; &#34;我是美国苹果！&#34; &lt;&lt; endl;  } }; class USABanana : public AbstractBanana{ public:  void showName() override{  cout &lt;&lt; &#34;我是美国香蕉！&#34; &lt;&lt; endl;  } }; class USAPear : public AbstractPear{ public:  void showName() override{  cout &lt;&lt; &#34;我是美国鸭梨！&#34; &lt;&lt; endl;  } }; class JapanApple : public AbstractApple{ public:  void showName() override{  cout &lt;&lt; &#34;我是日本苹果！&#34; &lt;&lt; endl;  } }; class JapanBanana : public AbstractBanana{ public:  void showName() override{  cout &lt;&lt; &#34;我是日本香蕉！&#34; &lt;&lt; endl;  } }; class JapanPear : public AbstractPear{ public:  void showName() override{  cout &lt;&lt; &#34;我是日本鸭梨！&#34; &lt;&lt; endl;  } }; class AbstractFactory{ public:  virtual AbstractApple* CreateApple() = 0;  virtual AbstractBanana* CreateBanana() = 0;  virtual AbstractPear* CreatePear() = 0; }; class ChinaFactory : public AbstractFactory{ public:  AbstractApple* CreateApple() override{  return new ChinaApple;  }  AbstractBanana* CreateBanana() override{  return new ChinaBanana;  }  AbstractPear* CreatePear() override{  return new ChinaPear;  } }; class USAFactory : public AbstractFactory{ public:  AbstractApple* CreateApple() override{  return new USAApple;  }  AbstractBanana* CreateBanana() override{  return new USABanana;  }  AbstractPear* CreatePear() override{  return new USAPear;  } }; class JapanFactory : public AbstractFactory{ public:  AbstractApple* CreateApple() override{  return new JapanApple;  }  AbstractBanana* CreateBanana() override{  return new JapanBanana;  }  AbstractPear* CreatePear() override{  return new JapanPear;  } }; int main() {  AbstractFactory* factory = nullptr;  AbstractApple* apple = nullptr;  AbstractBanana* banana = nullptr;  AbstractPear* pear = nullptr;  // 中国  factory = new ChinaFactory;  apple = factory-&gt;CreateApple();  apple-&gt;showName();  banana = factory-&gt;CreateBanana();  banana-&gt;showName();  pear = factory-&gt;CreatePear();  pear-&gt;showName();  delete pear;  delete banana;  delete apple;  delete factory;  // 美国  factory = new USAFactory;  apple = factory-&gt;CreateApple();  apple-&gt;showName();  banana = factory-&gt;CreateBanana();  banana-&gt;showName();  pear = factory-&gt;CreatePear();  pear-&gt;showName();  delete pear;  delete banana;  delete apple;  delete factory;  // 日本  factory = new JapanFactory;  apple = factory-&gt;CreateApple();  apple-&gt;showName();  banana = factory-&gt;CreateBanana();  banana-&gt;showName();  pear = factory-&gt;CreatePear();  pear-&gt;showName();  delete pear;  delete banana;  delete apple;  delete factory;  return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-31 17:44:49 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 抽象工厂模式" href="https://874656645.github.io/posts/106-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>工厂方法模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>工厂方法模式 = 简单工厂模式 &#43; 开闭原则
+类的个数成倍增多，维护成本很高
+适用场景：
+ 客户端不知道它所需要的对象的类 抽象工厂类通过其子类来指定创建哪个对象  // 工厂方法模式 class AbstractFruit{ public:  virtual void showName() = 0; }; class Apple : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl;  } }; class Banana : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl;  } }; class Pear : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl;  } }; // 抽象工厂 class AbstractFruitFactory{ public:  virtual AbstractFruit* CreateFruit() = 0; }; class AppleFactory : public AbstractFruitFactory{ public:  AbstractFruit* CreateFruit() override{  return new Apple;  } }; class PearFactory : public AbstractFruitFactory{ public:  AbstractFruit* CreateFruit() override{  return new Pear;  } }; class BananaFactory : public AbstractFruitFactory{ public:  AbstractFruit* CreateFruit() override{  return new Banana;  } }; int main() {  AbstractFruitFactory* factory = nullptr;  AbstractFruit* fruit = nullptr;  factory = new AppleFactory;  fruit = factory-&gt;CreateFruit();  fruit-&gt;showName();  delete fruit;  delete factory;  factory = new BananaFactory;  fruit = factory-&gt;CreateFruit();  fruit-&gt;showName();  delete fruit;  delete factory;  factory = new PearFactory;  fruit = factory-&gt;CreateFruit();  fruit-&gt;showName();  delete fruit;  delete factory;  return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-31 15:51:36 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 工厂方法模式" href="https://874656645.github.io/posts/105-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>简单工厂模式
     </h2>
   </header>
@@ -195,34 +222,6 @@ class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public Abstract
   </section>
   <footer class="entry-footer"><span title='2022-01-30 21:45:22 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 合成复用原则" href="https://874656645.github.io/posts/102-%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>迪米特法则
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>又叫最少知识原则
-封装一个中间层进行隔离
-class AbstractBuilding{ public:  virtual string getQuality()const = 0;  virtual void sale() = 0; }; class BuildingA:public AbstractBuilding{ public:  BuildingA(){  m_quality = &#34;高品质&#34;;  }  string getQuality()const override{  return m_quality;  }  void sale()override{  cout &lt;&lt; &#34;楼盘A：&#34; &lt;&lt; m_quality &lt;&lt; endl;  } private:  string m_quality; }; class BuildingB:public AbstractBuilding{ public:  BuildingB(){  m_quality = &#34;低品质&#34;;  }  string getQuality()const override{  return m_quality;  }  void sale()override{  cout &lt;&lt; &#34;楼盘B：&#34; &lt;&lt; m_quality &lt;&lt; endl;  } private:  string m_quality; }; // 错误的做法 // 客户端 void test1(){  string myRequest = &#34;低品质&#34;;  BuildingA* bA = new BuildingA;  if(bA-&gt;getQuality() == myRequest){  bA-&gt;sale();  delete bA;  }  BuildingB* bB = new BuildingB;  if(bB-&gt;getQuality() == myRequest){  bB-&gt;sale();  delete bB;  } } // 正确做法 // 封装一个中间类 class Mediator{ public:  Mediator(){  AbstractBuilding* b = new BuildingA;  vb....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-30 20:38:36 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 迪米特法则" href="https://874656645.github.io/posts/101-%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>开闭原则
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码
-如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
-class AbstractCalculator{ public:  virtual void setOperatorNum(int a, int b) = 0;  virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public:  void setOperatorNum(int a, int b)override{  m_a = a;  m_b = b;  }  int getResult()override{  return m_a &#43; m_b;  } private:  int m_a{0};  int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public:  void setOperatorNum(int a, int b)override{  m_a = a;  m_b = b;  }  int getResult()override{  return m_a - m_b;  } private:  int m_a{0};  int m_b{0}; }; int main() {  AbstractCalculator* calculator = new PlusCalculator;  calculator-&gt;setOperatorNum(10, 20);  cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl;  delete calculator;  calculator = nullptr;  calculator = new MinusCalculator;  calculator-&gt;setOperatorNum(10, 20);  cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl;  delete calculator;  calculator = nullptr;   return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-30 20:05:30 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 开闭原则" href="https://874656645.github.io/posts/100-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

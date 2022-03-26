@@ -12,7 +12,7 @@
 在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
   方式二：修改 C&#43;&#43; 函数
 在 C&#43;&#43; 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
-#include &lt;emscripten/emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p.">
+#include &lt;emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -56,12 +56,12 @@ if (!doNotTrack) {
 在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
   方式二：修改 C&#43;&#43; 函数
 在 C&#43;&#43; 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
-#include &lt;emscripten/emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p." />
+#include &lt;emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-24T17:31:30&#43;08:00" />
 <meta property="article:modified_time" content="2022-03-24T17:31:30&#43;08:00" />
-<meta property="og:see_also" content="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/" /><meta property="og:see_also" content="https://874656645.github.io/posts/154-emscripten-hello-world/" /><meta property="og:see_also" content="https://874656645.github.io/posts/153-emscripten-%E5%AE%89%E8%A3%85/" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/" /><meta property="og:see_also" content="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/" /><meta property="og:see_also" content="https://874656645.github.io/posts/154-emscripten-hello-world/" /><meta property="og:see_also" content="https://874656645.github.io/posts/153-emscripten-%E5%AE%89%E8%A3%85/" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
@@ -72,7 +72,7 @@ if (!doNotTrack) {
 在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
   方式二：修改 C&#43;&#43; 函数
 在 C&#43;&#43; 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
-#include &lt;emscripten/emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p."/>
+#include &lt;emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p."/>
 
 
 <script type="application/ld+json">
@@ -101,7 +101,7 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "Emscripten——C++ 函数导出",
   "name": "Emscripten——C\u002b\u002b 函数导出",
-  "description": "导出 C++ 函数到 js 有多种方式：\n  方式一：在编译的时候指定\n在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1\n  方式二：修改 C++ 函数\n在 C++ 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义\n#include \u0026lt;emscripten/emscripten.h\u0026gt; extern \u0026#34;C\u0026#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(\u0026#34;我的函数已被调用\\n\u0026#34;);  return 0; }  #ifdef __cplusplus extern \u0026#34;C\u0026#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout \u0026lt;\u0026lt; \u0026#34;hello from sayHello!\u0026#34; \u0026lt;\u0026lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout \u0026lt;\u0026lt; p.",
+  "description": "导出 C++ 函数到 js 有多种方式：\n  方式一：在编译的时候指定\n在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1\n  方式二：修改 C++ 函数\n在 C++ 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义\n#include \u0026lt;emscripten.h\u0026gt; extern \u0026#34;C\u0026#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(\u0026#34;我的函数已被调用\\n\u0026#34;);  return 0; }  #ifdef __cplusplus extern \u0026#34;C\u0026#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout \u0026lt;\u0026lt; \u0026#34;hello from sayHello!\u0026#34; \u0026lt;\u0026lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout \u0026lt;\u0026lt; p.",
   "keywords": [
     "emcc", "js", "c++"
   ],
@@ -217,7 +217,7 @@ if (!doNotTrack) {
 <li>
 <p>方式二：修改 C++ 函数<br>
 在 C++ 代码中需要导出的函数声明前添加 <code>EMSCRIPTEN_KEEPALIVE</code> 宏定义</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten/emscripten.h&gt;</span><span style="color:#75715e">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten.h&gt;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">extern</span> <span style="color:#e6db74">&#34;C&#34;</span> <span style="color:#66d9ef">int</span> EMSCRIPTEN_KEEPALIVE myFunction(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span> argv) {
 </span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;我的函数已被调用</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);

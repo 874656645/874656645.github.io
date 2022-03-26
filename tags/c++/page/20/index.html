@@ -145,6 +145,34 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>inline 内联函数
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
+ 适用于函数体积很小并频繁使用的函数 内联函数中不可以出现循环、递归或开关操作 内联函数的声明必须在函数定义之前 内联函数的定义必须出现在内联函数的第一次调用前 在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数 虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联  优点：
+ 内联函数在被调用处进行代码展开，省去了参数压栈、跳转返回、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度； 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会； 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能； 内联函数在运行时可调试，而宏定义不可以。  缺点：
+ 代码膨胀，消耗了更多的内存空间； inline 函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像 non-inline 可以直接链接； 内联函数其实是不可控的，它只是对编译器的建议，是否对函数内联，决定权在于编译器; 不能对函数进行取址操作  </p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-23 11:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to inline 内联函数" href="https://874656645.github.io/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>fork Unix
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Unix 的 fork 函数 fork函数可以创建一个和当前映像一样的子进程，这个函数会返回两个值：从子进程返回0，从父进程返回子进程的PID；
+ 1）在父进程中，fork返回新创建子进程的进程ID； 2）在子进程中，fork返回0； 3）如果出现错误，fork返回一个负值；  #include &lt;iostream&gt;#include &lt;unistd.h&gt; using namespace std;  int main() {  pid_t fpid; //fpid表示fork函数返回的值  int count = 0;  cout &lt;&lt; &amp;count &lt;&lt; endl;  fpid = fork();  if (fpid &lt; 0)  printf(&#34;error in fork!\n&#34;);  else if (fpid == 0) {  printf(&#34;i am the child process, my process id is %d\n&#34;,getpid());  cout &lt;&lt; &amp;count &lt;&lt; endl;  count&#43;&#43;;  }  else {  printf(&#34;i am the parent process, my process id is %d\n&#34;,getpid());  cout &lt;&lt; &amp;count &lt;&lt; endl;  count&#43;&#43;;  }  printf(&#34;统计结果是: %d\n&#34;,count);   return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-23 10:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to fork Unix" href="https://874656645.github.io/posts/33-fork-unix/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C 与 C&#43;&#43; 的差异
     </h2>
   </header>
@@ -184,30 +212,6 @@ int main() {  int a[] = {1, 2, 3, 4, 5};  // &amp;a是数组指针，其类型�
   </section>
   <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 指针 &#43; 1" href="https://874656645.github.io/posts/30-%E6%8C%87%E9%92%88-&#43;1/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>模板类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>template&lt;class T&gt; class Test { public:  Test(T t){ m_t = t;};  // explicit Test(T t){ m_t = t;};   T getValue(){  return m_t;  };  private:  T m_t; }; int main() {  Test&lt;int&gt; tInt(1);  cout &lt;&lt; tInt.getValue() &lt;&lt; endl;   Test&lt;double&gt; tD(1.15);  cout &lt;&lt; tD.getValue() &lt;&lt; endl;   Test&lt;float&gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换  cout &lt;&lt; tF.getValue() &lt;&lt; endl;   return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-22 10:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板类" href="https://874656645.github.io/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>模板函数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>template &lt;typename T&gt; inline const T&amp; Max (const T&amp; a, const T&amp; b) {  return a &lt; b ? b:a; }; int main() {  int i = 39;  int j = 20;  cout &lt;&lt; &#34;Max(i, j): &#34; &lt;&lt; Max(i, j) &lt;&lt; endl;   double f1 = 13.5;  double f2 = 20.7;  cout &lt;&lt; &#34;Max(f1, f2): &#34; &lt;&lt; Max(f1, f2) &lt;&lt; endl;   string s1 = &#34;Hello&#34;;  string s2 = &#34;World&#34;;  cout &lt;&lt; &#34;Max(s1, s2): &#34; &lt;&lt; Max(s1, s2) &lt;&lt; endl;   return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-22 09:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板函数" href="https://874656645.github.io/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

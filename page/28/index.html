@@ -157,6 +157,33 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>QProcess 使用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>路径中有空格  m_process-&gt;startDetached(strAppDir &#43; &#34;/ThreeDScreen.exe&#34;, QStringList())
+杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&#34;taskkill -t -f /IM iexplore.exe&#34;);</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to QProcess 使用" href="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>QString 中文乱码
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
+以QString做为形参变量传递  qDebug(msg.toUtf8());
+QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) {  QFile file(logFileName);  file.open(QIODevice::WriteOnly | QIODevice::Append);  QTextStream text_stream(&amp;file);  text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;;  file.flush();  file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;;  QDir dir(fileName);  if (!dir.exists())  {  // 注：不能创建两级文件夹  bool ismkdir = dir....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to QString 中文乱码" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>IE 64位插件
     </h2>
   </header>
@@ -192,32 +219,6 @@ total = 0 def accumulate(increment):  global total  if total:  total &#43;= incr
   </section>
   <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to ArcGIS 字段计算（自增、随机数）" href="https://874656645.github.io/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Sqlite 随机数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、随机数 SQL 脚本
-update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#43;9223372036854775808)/2.0/9223372036854775808 * 7); </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:17 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Sqlite 随机数" href="https://874656645.github.io/posts/16-sqlite-%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>查看 dll 版本
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
-2、使用 notepad&#43;&#43; 直接用 记事本 或者 notepad&#43;&#43; 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。</p>
-  </section>
-  <footer class="entry-footer"><span title='2019-06-05 11:36:19 +0800 CST'>June 5, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 查看 dll 版本" href="https://874656645.github.io/posts/15-%E6%9F%A5%E7%9C%8B-dll-%E7%89%88%E6%9C%AC/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

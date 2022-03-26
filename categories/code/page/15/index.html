@@ -145,6 +145,34 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>list 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>注意事项  双向循环链表 不支持随机访问 因为不支持随机访问，所以也不能用全局的排序算法 sort 一般不支持随机访问的容器会自己提供 sort 方法 自定义类型要指定排序规则  排序案例 案例描述：将 Person 自定义数据类型进行排序，Person 中属性有姓名、年龄、身高
+排序规则：按照年龄进行升序，如果年龄相同按照身高进行降序
+class Person{ public:  Person(string name, int age, int height){  this-&gt;m_name = name;  this-&gt;m_age = age;  this-&gt;m_height = height;  }  bool operator&lt;(const Person &amp;p2){  if(this-&gt;m_age == p2.m_age){  return this-&gt;m_height &gt; p2.m_height;  }  return this-&gt;m_age &lt; p2.m_age;  }  void printPerson()const{  cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl;  } private:  string m_name;  int m_age;  int m_height; }; int main() {  list&lt;Person&gt; lp;  lp....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-18 20:26:45 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to list 容器" href="https://874656645.github.io/posts/86-list-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>queue 队列容器适配器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>先进先出 不允许遍历元素  queue 队列操作：
+size()
+empty()</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-17 19:41:48 +0800 CST'>January 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to queue 队列容器适配器" href="https://874656645.github.io/posts/85-queue-%E9%98%9F%E5%88%97%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>stack 栈容器适配器
     </h2>
   </header>
@@ -181,30 +209,6 @@ empty()</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>deque 容器
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>巧妙收缩 vector 空间
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() {  vector&lt;int&gt; v;  for(int i = 0; i &lt; 100000; &#43;&#43;i){  v.push_back(i);  }  cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl;  cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl;   cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl;  v.resize(10);  cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl;  cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl;   cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl;  vector&lt;int&gt;(v)....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

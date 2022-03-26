@@ -9,7 +9,35 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 24 Mar 2022 17:45:14 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Mar 2022 10:34:44 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Emscripten——C&#43;&#43; 调用 Js 回调函数</title>
+      <link>https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Sat, 26 Mar 2022 10:34:44 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</guid>
+      <description>WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C++ 调用 JavaScript 的方法：
+ 使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C++ 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：
+int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&amp;#34;alert(&amp;#39;hi&amp;#39;)&amp;#34;);  emscripten_run_script(&amp;#34;console.log(&amp;#39;hello world!&amp;#39;)&amp;#34;);  return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
+  EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。
+#include &amp;lt;emscripten.h&amp;gt; EM_JS(void, myAlert, (), {  alert(&amp;#39;hello world!</description>
+    </item>
+    
+    <item>
+      <title>Emscripten——js 调用 C&#43;&#43; 接口</title>
+      <link>https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/</link>
+      <pubDate>Fri, 25 Mar 2022 10:06:38 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/</guid>
+      <description>Emscripten 提供了许多方法来在 JavaScript 和编译后的 C 或 c++ 之间连接和交互，我们先来看看 js 调用 WASM 的情况。
+一、使用 ccall 或 cwrap callall() 调用带有指定参数的编译过的 C 函数 并返回结果，而 cwrap() 封装了编译过的 C 函数并返回一个可以正常调用的 JavaScript 函数。因此，如果计划多次调用一个编译后的函数，cwrap() 会更有用。
+例如下面的 C main.cpp 文件：
+#include &amp;lt;math.h&amp;gt; extern &amp;#34;C&amp;#34; {   int int_sqrt(int x) {  return sqrt(x);  }  } 使用下面的命令进行编译：
+emcc main.cpp -o function.html -s EXPORTED_FUNCTIONS=_int_sqrt -s EXPORTED_RUNTIME_METHODS=ccall,cwrap
+EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的函数会被删掉），EXPORTED_RUNTIME_METHODS 告诉编译器我们需要用到的运行时方法 ccall 和 cwrap，否则这些方法也会被优化掉
+编译后就可以在 js 中通过 cwrap 使用了：</description>
+    </item>
+    
     <item>
       <title>Emscripten——使用 CMake 构建并用 Make 编译</title>
       <link>https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/</link>
@@ -31,7 +59,7 @@
 在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
   方式二：修改 C++ 函数
 在 C++ 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
-#include &amp;lt;emscripten/emscripten.h&amp;gt; extern &amp;#34;C&amp;#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&amp;#34;我的函数已被调用\n&amp;#34;);  return 0; }  #ifdef __cplusplus extern &amp;#34;C&amp;#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &amp;lt;&amp;lt; &amp;#34;hello from sayHello!&amp;#34; &amp;lt;&amp;lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &amp;lt;&amp;lt; p.</description>
+#include &amp;lt;emscripten.h&amp;gt; extern &amp;#34;C&amp;#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&amp;#34;我的函数已被调用\n&amp;#34;);  return 0; }  #ifdef __cplusplus extern &amp;#34;C&amp;#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &amp;lt;&amp;lt; &amp;#34;hello from sayHello!&amp;#34; &amp;lt;&amp;lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &amp;lt;&amp;lt; p.</description>
     </item>
     
     <item>
