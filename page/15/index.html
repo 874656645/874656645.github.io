@@ -15,7 +15,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -157,6 +157,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>set multiset 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>关联式容器 底层结构使用红黑树实现（二叉树-&gt;二叉搜索树-&gt;平衡二叉树-&gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
+class Person{ public:  Person(string name, int age, int height){  this-&gt;m_name = name;  this-&gt;m_age = age;  this-&gt;m_height = height;  }  bool operator&lt;(const Person &amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&gt;m_age == p2.m_age){  return this-&gt;m_height &gt; p2.m_height;  }  return this-&gt;m_age &lt; p2.m_age;  }  void printPerson()const{  cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl;  } private:  string m_name;  int m_age;  int m_height; }; int main() {  set&lt;Person&gt; lp;  lp....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-18 21:20:48 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to set multiset 容器" href="https://874656645.github.io/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>list 容器
     </h2>
   </header>
@@ -209,18 +222,6 @@ empty()</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>生成随机数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>#include &lt;ctime&gt;using namespace std;  int main() {  srand((unsigned int)time(NULL));  cout &lt;&lt; rand() % 40 &lt;&lt; endl;  return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

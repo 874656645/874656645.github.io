@@ -23,11 +23,11 @@ int main() {  char arr[] = {0, &amp;#39;\0&amp;#39;, &amp;#39;0&amp;#39;, 48};  
     </item>
     
     <item>
-      <title>递归</title>
-      <link>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/</link>
+      <title>递归与递归树</title>
+      <link>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/</link>
       <pubDate>Mon, 07 Feb 2022 21:38:53 +0800</pubDate>
       
-      <guid>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/</guid>
+      <guid>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/</guid>
       <description>逆序打印字符串
 void printReverseString(const char* str){  if(*str == &amp;#39;\0&amp;#39;){  return;  }  printReverseString(str + 1);  printf(&amp;#34;%c&amp;#34;, *str); }  int main() {  const char* str = &amp;#34;Hello World&amp;#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
 struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&amp;gt;next);  printf(&amp;#34;%d\n&amp;#34;, header-&amp;gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&amp;gt;data = 10;  node1-&amp;gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&amp;gt;data = 20;  node2-&amp;gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&amp;gt;data = 30;  node3-&amp;gt;next = NULL;  header-&amp;gt;next = node1;  node1-&amp;gt;next = node2;  node2-&amp;gt;next = node3;  printReverseLinkNode(header-&amp;gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3</description>

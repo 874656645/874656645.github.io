@@ -14,7 +14,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>巧妙收缩 vector 空间
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() {  vector&lt;int&gt; v;  for(int i = 0; i &lt; 100000; &#43;&#43;i){  v.push_back(i);  }  cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl;  cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl;   cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl;  v.resize(10);  cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl;  cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl;   cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl;  vector&lt;int&gt;(v)....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>vector 中的元素存放在堆上还是栈上
     </h2>
   </header>
@@ -189,19 +201,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-01-16 09:12:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 格式化输出" href="https://874656645.github.io/posts/76-%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>异常接口声明
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>C&#43;&#43; 异常
- C&#43;&#43;11 不再建议使用异常规范  // 异常规范 只能抛出 int float char 三种类型的异常 C&#43;&#43;11以后不再建议使用 void func1() throw(int, float, char){  throw &#34;string&#34;; // terminate called after throwing an instance of &#39;char const*&#39; } // 不能抛出任何类型的异常 OK void func2() throw(){  throw -1; // terminate called after throwing an instance of &#39;int&#39; } // 可以抛出任何类型的异常 void func3(){  throw &#34;error&#34;; } int main() {  try{  func1();  }  catch(char const * e){  cout &lt;&lt; e &lt;&lt; endl;  }  catch(....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-15 18:26:49 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 异常接口声明" href="https://874656645.github.io/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

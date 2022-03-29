@@ -14,7 +14,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 auto 与 decltype 关键字
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。  int main() {  int a = 10;  auto val = a;  cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义模板函数时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
+template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) {  auto v = x * y;  std::cout &lt;&lt; v; } int main() {  int a = 10;  double b = 1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 20:30:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto 与 decltype 关键字" href="https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>2022-02-14 杂记
     </h2>
   </header>
@@ -160,7 +173,7 @@ int main() {  char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48};  printf(&#34;%c\n
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>递归
+    <h2>递归与递归树
     </h2>
   </header>
   <section class="entry-content">
@@ -168,8 +181,8 @@ int main() {  char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48};  printf(&#34;%c\n
 void printReverseString(const char* str){  if(*str == &#39;\0&#39;){  return;  }  printReverseString(str &#43; 1);  printf(&#34;%c&#34;, *str); }  int main() {  const char* str = &#34;Hello World&#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
 struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&gt;next);  printf(&#34;%d\n&#34;, header-&gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&gt;data = 10;  node1-&gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&gt;data = 20;  node2-&gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&gt;data = 30;  node3-&gt;next = NULL;  header-&gt;next = node1;  node1-&gt;next = node2;  node2-&gt;next = node3;  printReverseLinkNode(header-&gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 递归" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/"></a>
+  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
@@ -194,19 +207,6 @@ struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNod
   </section>
   <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>装饰器模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>装饰模式又叫包装模式，通过一种对客户端透明的方式来扩展对象功能，是继承关系的一种替代。
-装饰模式可以动态给一个类增加功能</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

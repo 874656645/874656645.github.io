@@ -14,7 +14,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -145,6 +145,26 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Emscripten——Hello World
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>编译   新建 main.cpp 文件
+#include &lt;iostream&gt;using namespace std; int main(){  cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl;  return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
+执行命令 em&#43;&#43; main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
+  使用 node 测试
+测试命令 node a.out.js，会在控制台输出 cout 的内容
+  使用 html 页面 测试
+执行命令 em&#43;&#43; main.cpp -o hello.html，会在同级目录下生成三个文件：
+ hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件
+在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-24 17:03:19 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——Hello World" href="https://874656645.github.io/posts/154-emscripten-hello-world/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Emscripten——安装
     </h2>
   </header>
@@ -170,9 +190,7 @@ cd emsdk  git pull  # Download and install the latest SDK tools. ./emsdk install
     </h2>
   </header>
   <section class="entry-content">
-    <p>认识C&#43;&#43;移动语义与右值引用
-一文读懂C&#43;&#43;右值引用和std::move
-一、结论  C 中将数据类型分为左值和右值，在 C&#43;&#43;11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C&#43;&#43;11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;&amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
+    <p>一、结论  C 中将数据类型分为左值和右值，在 C&#43;&#43;11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C&#43;&#43;11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;&amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
 const int &amp;ref_a = 5; int a = 5; int &amp;ref_a = a; // 左值引用指向左值，编译通过 int &amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 &amp;&amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值
 int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。...</p>
   </section>
@@ -207,19 +225,6 @@ class Person{ public:  int getAge() const{  m_count&#43;&#43;;  s_count&#43;&#43
   </section>
   <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 mutable 关键字" href="https://874656645.github.io/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 auto 与 decltype 关键字
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。  int main() {  int a = 10;  auto val = a;  cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义模板函数时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
-template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) {  auto v = x * y;  std::cout &lt;&lt; v; } int main() {  int a = 10;  double b = 1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-22 20:30:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto 与 decltype 关键字" href="https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

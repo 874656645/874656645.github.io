@@ -9,7 +9,21 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 26 Mar 2022 10:34:44 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 29 Mar 2022 11:00:18 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码</title>
+      <link>https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Tue, 29 Mar 2022 11:00:18 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/</guid>
+      <description>WebIDL Binder 提供一种简单、轻量级的方法来绑定 C++ 代码。
+WebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C++ 和 JavaScript 粘合在一起。
+该绑定器支持可以用 WebIDL 表达的 c++ 类型的子集。这个子集对于大多数情况来说已经足够了。
+接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：
+ 创建一个 WebIDL 文件，用来描述 C++ 接口； 使用绑定器生成 C++ 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C++ 类型的 WebIDL 接口文件。该文件将复制 C++ 头文件中的一些信息。比如，我们想绑定下面的 C++ 类（my_classes.h）：
+class Foo { public:  int getVal();  void setVal(int v);  private:  int m_val{0}; };  class Bar { public:  Bar(long val);  ~Bar();  void doSomething();  private:  int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes.</description>
+    </item>
+    
     <item>
       <title>Emscripten——C&#43;&#43; 调用 Js 回调函数</title>
       <link>https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</link>
@@ -103,9 +117,7 @@ cd emsdk  git pull  # Download and install the latest SDK tools. ./emsdk install
       <pubDate>Wed, 23 Feb 2022 22:19:35 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/</guid>
-      <description>认识C++移动语义与右值引用
-一文读懂C++右值引用和std::move
-一、结论  C 中将数据类型分为左值和右值，在 C++11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C++11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;amp;&amp;amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
+      <description>一、结论  C 中将数据类型分为左值和右值，在 C++11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C++11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;amp;&amp;amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
 const int &amp;amp;ref_a = 5; int a = 5; int &amp;amp;ref_a = a; // 左值引用指向左值，编译通过 int &amp;amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 &amp;amp;&amp;amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值
 int&amp;amp;&amp;amp; ref_a_right = 5; // ok int a = 5; int&amp;amp;&amp;amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&amp;lt;T&amp;amp;&amp;amp;&amp;gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。</description>
     </item>
@@ -156,11 +168,11 @@ int main() {  char arr[] = {0, &amp;#39;\0&amp;#39;, &amp;#39;0&amp;#39;, 48};  
     </item>
     
     <item>
-      <title>递归</title>
-      <link>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/</link>
+      <title>递归与递归树</title>
+      <link>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/</link>
       <pubDate>Mon, 07 Feb 2022 21:38:53 +0800</pubDate>
       
-      <guid>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92/</guid>
+      <guid>https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/</guid>
       <description>逆序打印字符串
 void printReverseString(const char* str){  if(*str == &amp;#39;\0&amp;#39;){  return;  }  printReverseString(str + 1);  printf(&amp;#34;%c&amp;#34;, *str); }  int main() {  const char* str = &amp;#34;Hello World&amp;#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
 struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&amp;gt;next);  printf(&amp;#34;%d\n&amp;#34;, header-&amp;gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&amp;gt;data = 10;  node1-&amp;gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&amp;gt;data = 20;  node2-&amp;gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&amp;gt;data = 30;  node3-&amp;gt;next = NULL;  header-&amp;gt;next = node1;  node1-&amp;gt;next = node2;  node2-&amp;gt;next = node3;  printReverseLinkNode(header-&amp;gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3</description>

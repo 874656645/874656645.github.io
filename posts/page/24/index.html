@@ -14,7 +14,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -160,6 +160,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>函数默认参数和占位参数
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1. 函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
+// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() {  foo(20);  return 0; } 2. 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
+int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    3....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-26 15:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数默认参数和占位参数" href="https://874656645.github.io/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>内存区间划分
     </h2>
   </header>
@@ -219,25 +233,6 @@ void test(int * a){  a = new int(20);  //*a = 20;  cout &lt;&lt; &#34;test point
   </section>
   <footer class="entry-footer"><span title='2021-12-24 13:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 类的静态成员" href="https://874656645.github.io/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>友元函数与友元类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>友元利弊：
-友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。
-  注意事项：
-（1）友元关系不能被继承；
-（2）友元关系是单向的，不具有交换性；
-（3）友元关系不具有传递性；
-  一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数
-class A {  friend void printA(const A &amp;a); public:  void printA();  private:  string name {&#34;C&#43;&#43;&#34;};  int id {1024};  }; void A::printA(){  cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){  cout &lt;&lt; &#34;name = &#34; &lt;&lt; a....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-24 12:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 友元函数与友元类" href="https://874656645.github.io/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

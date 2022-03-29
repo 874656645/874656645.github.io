@@ -14,7 +14,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -160,6 +160,24 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>const 修饰符
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
+常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：int * const 指针所指的地址不能变（不可以重指向），但地址的内容可以被修改，与引用变量效果类似
+常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
+const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用  b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-10 12:34:27 +0800 CST'>December 10, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to const 修饰符" href="https://874656645.github.io/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>QProcess 使用
     </h2>
   </header>
@@ -208,20 +226,6 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
   </section>
   <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 3DMax 操作" href="https://874656645.github.io/posts/18-3dmax-%E6%93%8D%E4%BD%9C/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>ArcGIS 字段计算（自增、随机数）
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、随机数 python 脚本
-import random def randNum():  res = random.randint(1, 7)  return res 2、自增 python 脚本
-total = 0 def accumulate(increment):  global total  if total:  total &#43;= increment  else:  total = increment  return total </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcGIS 字段计算（自增、随机数）" href="https://874656645.github.io/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

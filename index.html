@@ -15,7 +15,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -194,6 +194,23 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>WebIDL Binder 提供一种简单、轻量级的方法来绑定 C&#43;&#43; 代码。
+WebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C&#43;&#43; 和 JavaScript 粘合在一起。
+该绑定器支持可以用 WebIDL 表达的 c&#43;&#43; 类型的子集。这个子集对于大多数情况来说已经足够了。
+接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：
+ 创建一个 WebIDL 文件，用来描述 C&#43;&#43; 接口； 使用绑定器生成 C&#43;&#43; 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C&#43;&#43; 类型的 WebIDL 接口文件。该文件将复制 C&#43;&#43; 头文件中的一些信息。比如，我们想绑定下面的 C&#43;&#43; 类（my_classes.h）：
+class Foo { public:  int getVal();  void setVal(int v);  private:  int m_val{0}; };  class Bar { public:  Bar(long val);  ~Bar();  void doSomething();  private:  int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-29 11:00:18 +0800 CST'>March 29, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码" href="https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Emscripten——C&#43;&#43; 调用 Js 回调函数
     </h2>
   </header>
@@ -254,26 +271,6 @@ EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的�
   </section>
   <footer class="entry-footer"><span title='2022-03-24 17:31:30 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 函数导出" href="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——Hello World
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>编译   新建 main.cpp 文件
-#include &lt;iostream&gt;using namespace std; int main(){  cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl;  return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
-执行命令 em&#43;&#43; main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
-  使用 node 测试
-测试命令 node a.out.js，会在控制台输出 cout 的内容
-  使用 html 页面 测试
-执行命令 em&#43;&#43; main.cpp -o hello.html，会在同级目录下生成三个文件：
- hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件
-在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-24 17:03:19 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——Hello World" href="https://874656645.github.io/posts/154-emscripten-hello-world/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

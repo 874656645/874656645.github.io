@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="emcc, js, c&#43;&#43;" />
+<meta name="description" content="WebIDL Binder 提供一种简单、轻量级的方法来绑定 C&#43;&#43; 代码。
+WebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C&#43;&#43; 和 JavaScript 粘合在一起。
+该绑定器支持可以用 WebIDL 表达的 c&#43;&#43; 类型的子集。这个子集对于大多数情况来说已经足够了。
+接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：
+ 创建一个 WebIDL 文件，用来描述 C&#43;&#43; 接口； 使用绑定器生成 C&#43;&#43; 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C&#43;&#43; 类型的 WebIDL 接口文件。该文件将复制 C&#43;&#43; 头文件中的一些信息。比如，我们想绑定下面的 C&#43;&#43; 类（my_classes.h）：
+class Foo { public:  int getVal();  void setVal(int v);  private:  int m_val{0}; };  class Bar { public:  Bar(long val);  ~Bar();  void doSomething();  private:  int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码" />
+<meta property="og:description" content="WebIDL Binder 提供一种简单、轻量级的方法来绑定 C&#43;&#43; 代码。
+WebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C&#43;&#43; 和 JavaScript 粘合在一起。
+该绑定器支持可以用 WebIDL 表达的 c&#43;&#43; 类型的子集。这个子集对于大多数情况来说已经足够了。
+接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：
+ 创建一个 WebIDL 文件，用来描述 C&#43;&#43; 接口； 使用绑定器生成 C&#43;&#43; 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C&#43;&#43; 类型的 WebIDL 接口文件。该文件将复制 C&#43;&#43; 头文件中的一些信息。比如，我们想绑定下面的 C&#43;&#43; 类（my_classes.h）：
+class Foo { public:  int getVal();  void setVal(int v);  private:  int m_val{0}; };  class Bar { public:  Bar(long val);  ~Bar();  void doSomething();  private:  int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-29T11:00:18&#43;08:00" />
+<meta property="article:modified_time" content="2022-03-29T11:00:18&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/" /><meta property="og:see_also" content="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/" /><meta property="og:see_also" content="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/" /><meta property="og:see_also" content="https://874656645.github.io/posts/154-emscripten-hello-world/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码"/>
+<meta name="twitter:description" content="WebIDL Binder 提供一种简单、轻量级的方法来绑定 C&#43;&#43; 代码。
+WebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C&#43;&#43; 和 JavaScript 粘合在一起。
+该绑定器支持可以用 WebIDL 表达的 c&#43;&#43; 类型的子集。这个子集对于大多数情况来说已经足够了。
+接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：
+ 创建一个 WebIDL 文件，用来描述 C&#43;&#43; 接口； 使用绑定器生成 C&#43;&#43; 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C&#43;&#43; 类型的 WebIDL 接口文件。该文件将复制 C&#43;&#43; 头文件中的一些信息。比如，我们想绑定下面的 C&#43;&#43; 类（my_classes.h）：
+class Foo { public:  int getVal();  void setVal(int v);  private:  int m_val{0}; };  class Bar { public:  Bar(long val);  ~Bar();  void doSomething();  private:  int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Emscripten——使用 WebIDL Binder 绑定 C++ 代码",
+      "item": "https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c++-%E4%BB%A3%E7%A0%81/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Emscripten——使用 WebIDL Binder 绑定 C++ 代码",
+  "name": "Emscripten——使用 WebIDL Binder 绑定 C\u002b\u002b 代码",
+  "description": "WebIDL Binder 提供一种简单、轻量级的方法来绑定 C++ 代码。\nWebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C++ 和 JavaScript 粘合在一起。\n该绑定器支持可以用 WebIDL 表达的 c++ 类型的子集。这个子集对于大多数情况来说已经足够了。\n接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：\n 创建一个 WebIDL 文件，用来描述 C++ 接口； 使用绑定器生成 C++ 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C++ 类型的 WebIDL 接口文件。该文件将复制 C++ 头文件中的一些信息。比如，我们想绑定下面的 C++ 类（my_classes.h）：\nclass Foo { public:  int getVal();  void setVal(int v);  private:  int m_val{0}; };  class Bar { public:  Bar(long val);  ~Bar();  void doSomething();  private:  int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes.",
+  "keywords": [
+    "emcc", "js", "c++"
+  ],
+  "articleBody": "WebIDL Binder 提供一种简单、轻量级的方法来绑定 C++ 代码。\nWebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C++ 和 JavaScript 粘合在一起。\n该绑定器支持可以用 WebIDL 表达的 c++ 类型的子集。这个子集对于大多数情况来说已经足够了。\n接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：\n 创建一个 WebIDL 文件，用来描述 C++ 接口； 使用绑定器生成 C++ 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C++ 类型的 WebIDL 接口文件。该文件将复制 C++ 头文件中的一些信息。比如，我们想绑定下面的 C++ 类（my_classes.h）：\nclass Foo { public:  int getVal();  void setVal(int v);  private:  int m_val{0}; };  class Bar { public:  Bar(long val);  ~Bar();  void doSomething();  private:  int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes.idl）：\ninterface Foo {  void Foo();  long getVal();  void setVal(long v); };  interface Bar {  void Bar(long val);  void doSomething(); }; 从 IDL 接口文件到 C++ 代码的映射要注意：\n IDL类定义包括了一个与接口同名的且返回值是 void 的函数。这个构造函数允许我们从 JavaScript 中创建对象，并且必须在 IDL 中定义，即使 C++ 中使用的是默认构造函数； WebIDL 中的类型名与 C++ 中的不一样，比如 int 被映射成了 long，具体的类型对应关系参考 WebIDL types struct 与 class 一样，也是使用 interface 关键字  第二步：生成胶水代码 执行命令 webidl_binder my_classes.idl glue，会在同级目录产生 glue.cpp 和 glue.js 两个胶水代码文件\n第三步：编译项目 在项目编译过程中使用胶水代码文件（glue.cpp 和 glue.js）\n  在 emcc 命令中添加 --post-js glue.js。post-js 选项将胶水代码（glue.js）添加到编译后的 js 输出文件的末尾；\n  创建一个包装器文件，比如：my_glue_wrapper.cpp，用来 #include 要绑定的类的头文件和 glue.cpp，比如：\n#include \"my_classes.h\"#include  // size_t#include \"glue.cpp\"  将 my_glue_wrapper.cpp 一起添加到 emcc 编译命令中，最后的 emcc 命令包含 C++ 和 JavaScript 的胶水代码，它们是为了协同工作而构建的\nemcc my_classes.cpp my_glue_wrapper.cpp --post-js glue.js -o output.js\n现在 output.js 文件中就包含通过 JavaScript 使用 C++ 类所需的所有内容了。\n使用方式：\n一旦编译完成，C++ 对象就可以像普通的 JavaScript 对象一样在 JavaScript 中创建和使用了。将 output.js 和 output.wasm 添加到网站中，然后通过以下代码创建 Foo 和 Bar 对象，并调用他们的方法：\nvar f = new Module.Foo(); f.setVal(200); alert(f.getVal());  var b = new Module.Bar(123); b.doSomething(); 注意：\n 总是通过 Module 对象访问对象； 虽然在默认情况下，全局命名空间中的对象也是可用的，但在某些情况下它们是不可用的(例如，如果使用闭包编译器来最小化代码，或将编译后的代码包装在函数中，以避免污染全局命名空间)。当然，也可以通过将模块赋值给一个新变量：var MyModuleName = module;； 只能在 js 调用 WASM 代码是安全的情况下（所需文件都加载完成后），使用上面的代码；  当没有更多的引用时，JavaScript 将自动对任何包装好的 C++ 对象进行垃圾回收。如果 C++ 对象不需要特定的清理（即它没有析构函数），那么不需要采取其他操作。\n如果一个 C++ 对象确实需要清理，就必须显式地调用 Module.destroy(obj) 来调用它的析构函数，然后删除对该对象的所有引用，以便它可以被垃圾收集。例如，如果 Bar 需要清理分配的内存：\nvar b = new Module.Bar(123); b.doSomething(); Module.destroy(b); // If the C++ object requires clean up   模块化输出\n使用 ‘WebIDL Binder’ 时，通常是创建一个库。在这种情况下，就要使用 MODULARIZE 选项。它将整个 JavaScript 输出包装在一个函数中，并返回一个解析为已初始化的 Module 实例的 Promise\nemcc my_classes.cpp my_glue_wrapper.cpp -s MODULARIZE --post-js glue.js -o output.js\n使用方式：\nvar instance; Module().then(module = {  instance = module;  var f = new module.Foo();  f.setVal(200);  alert(f.getVal());   var b = new module.Bar(123);  b.doSomething();  module.destroy(b); }); 当它可以安全运行已编译的代码时，也就是说它已经被下载并实例化之后，promise 才会被解析。promise 是在调用 onRuntimeInitialized 回调函数的同时被解析的，所以在使用 MODULARIZE 时不需要使用 onRuntimeInitialized 回调。\nonRuntimeInitialized 回调：\nscript type='text/javascript'  var Module = {  onRuntimeInitialized: function(){  alert(\"I am ready!\");  }  } script script src = \"hello.js\"script 我们还可以使用 EXPORT_NAME 选项将 Module 更改为其他内容。对于库来说，这是一种很好的实践方式，因为这样它们就不会在全局作用域中包含不必要的内容，而且在某些情况下，我们希望创建多个库。编译命令可参考下面这种：\nemcc my_classes.cpp my_glue_wrapper.cpp -s MODULARIZE -s 'EXPORT_NAME=\"createMyModule\"' --post-js glue.js -o output.js\n我们可以这样使用：\ncreateMyModule(/* optional default settings */).then(function(MyModule) {  // this is reached when everything is ready, and you can call methods on Module  var f = new MyModule.Foo();  f.setVal(200);  alert(f.getVal());   var b = new MyModule.Bar(123);  b.doSomething();  MyModule.destroy(b); }); 注意：在 MODULARIZE 模式中，我们不会寻找一个全局的 Module 对象来获取默认值。默认值必须作为参数传递给工厂函数。(详情见 settings.js)\n  WebIDL Types    C++ IDL     bool boolean   float float   double double   char byte   char* DOMString (represents a JavaScript string)   unsigned char octet   int long   long long   unsigned short unsigned short   unsigned long unsigned long   long long long long   void void   void* any or VoidPtr    ",
+  "wordCount" : "428",
+  "inLanguage": "en",
+  "datePublished": "2022-03-29T11:00:18+08:00",
+  "dateModified": "2022-03-29T11:00:18+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c++-%E4%BB%A3%E7%A0%81/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码
+    </h1>
+    <div class="post-meta"><span title='2022-03-29 11:00:18 +0800 CST'>March 29, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e7%ac%ac%e4%b8%80%e6%ad%a5%e5%88%9b%e5%bb%ba-webidl-%e6%8e%a5%e5%8f%a3%e6%96%87%e4%bb%b6" aria-label="第一步：创建 WebIDL 接口文件">第一步：创建 WebIDL 接口文件</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%ba%8c%e6%ad%a5%e7%94%9f%e6%88%90%e8%83%b6%e6%b0%b4%e4%bb%a3%e7%a0%81" aria-label="第二步：生成胶水代码">第二步：生成胶水代码</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%b8%89%e6%ad%a5%e7%bc%96%e8%af%91%e9%a1%b9%e7%9b%ae" aria-label="第三步：编译项目">第三步：编译项目</a></li>
+                <li>
+                    <a href="#webidl-types" aria-label="WebIDL Types">WebIDL Types</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><code>WebIDL Binder</code> 提供一种简单、轻量级的方法来绑定 C++ 代码。</p>
+<p><code>WebIDL Binder</code> 使用 <a href="www.w3.org/TR/WebIDL/"><code>WebIDL</code></a> 定义了一种 <strong>接口语言</strong> 来把 C++ 和 JavaScript 粘合在一起。</p>
+<p>该绑定器支持可以用 <code>WebIDL</code> 表达的 <strong>c++ 类型的子集</strong>。这个子集对于大多数情况来说已经足够了。</p>
+<p>接下来，通过一个简单的例子来看一下绑定的流程，使用 <code>WebIDL Binder</code> 进行绑定的过程分为三个阶段：</p>
+<ol>
+<li>创建一个 <code>WebIDL</code> 文件，用来描述 C++ 接口；</li>
+<li>使用绑定器生成 C++ 和 JavaScript 的胶水代码；</li>
+<li>使用 <code>EMScripten</code> 编译此胶水代码；</li>
+</ol>
+<h2 id="第一步创建-webidl-接口文件">第一步：创建 WebIDL 接口文件<a hidden class="anchor" aria-hidden="true" href="#第一步创建-webidl-接口文件">#</a></h2>
+<p>创建一个描述将要绑定的 C++ 类型的 WebIDL 接口文件。该文件将复制 C++ 头文件中的一些信息。比如，我们想绑定下面的 C++ 类（<code>my_classes.h</code>）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> getVal();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setVal</span>(<span style="color:#66d9ef">int</span> v);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_val{<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Bar</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Bar(<span style="color:#66d9ef">long</span> val);
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>Bar();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doSomething</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_val;
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>IDL 接口文件就可以写成下面的形式（<code>my_classes.idl</code>）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>interface Foo {
+</span></span><span style="display:flex;"><span>  void Foo();
+</span></span><span style="display:flex;"><span>  long getVal();
+</span></span><span style="display:flex;"><span>  void setVal(long v);
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>interface Bar {
+</span></span><span style="display:flex;"><span>  void Bar(long val);
+</span></span><span style="display:flex;"><span>  void doSomething();
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>从 IDL 接口文件到 C++ 代码的映射要注意：</p>
+<ul>
+<li><strong>IDL类</strong>定义包括了一个与接口同名的且返回值是 void 的函数。这个构造函数允许我们从 JavaScript 中创建对象，并且<strong>必须在 IDL 中定义</strong>，即使 C++ 中使用的是默认构造函数；</li>
+<li>WebIDL 中的类型名与 C++ 中的不一样，比如 <code>int</code> 被映射成了 <code>long</code>，具体的类型对应关系参考 <a href="#webidl-types"><code>WebIDL types</code></a></li>
+<li><code>struct</code> 与 <code>class</code> 一样，也是使用 <code>interface</code> 关键字</li>
+</ul>
+<h2 id="第二步生成胶水代码">第二步：生成胶水代码<a hidden class="anchor" aria-hidden="true" href="#第二步生成胶水代码">#</a></h2>
+<p>执行命令 <code>webidl_binder my_classes.idl glue</code>，会在同级目录产生 <strong>glue.cpp</strong> 和 <strong>glue.js</strong> 两个胶水代码文件</p>
+<h2 id="第三步编译项目">第三步：编译项目<a hidden class="anchor" aria-hidden="true" href="#第三步编译项目">#</a></h2>
+<p>在项目编译过程中使用胶水代码文件（<code>glue.cpp</code> 和 <code>glue.js</code>）</p>
+<ol>
+<li>
+<p>在 <code>emcc</code> 命令中添加 <code>--post-js glue.js</code>。<code>post-js</code> 选项将胶水代码（glue.js）添加到编译后的 js 输出文件的末尾；</p>
+</li>
+<li>
+<p>创建一个包装器文件，比如：<code>my_glue_wrapper.cpp</code>，用来 <code>#include</code> 要绑定的类的头文件和 <code>glue.cpp</code>，比如：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;my_classes.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstddef&gt;      // size_t</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;glue.cpp&#34;</span><span style="color:#75715e">
+</span></span></span></code></pre></div></li>
+<li>
+<p>将 <code>my_glue_wrapper.cpp</code> 一起添加到 <code>emcc</code> 编译命令中，最后的 <code>emcc</code> 命令包含 C++ 和 JavaScript 的胶水代码，它们是为了协同工作而构建的</p>
+<p><code>emcc my_classes.cpp my_glue_wrapper.cpp --post-js glue.js -o output.js</code></p>
+<p>现在 output.js 文件中就包含通过 JavaScript 使用 C++ 类所需的所有内容了。</p>
+<p><strong>使用方式：</strong></p>
+<p>一旦编译完成，C++ 对象就可以像普通的 JavaScript 对象一样在 JavaScript 中创建和使用了。将 <code>output.js</code> 和 <code>output.wasm</code> 添加到网站中，然后通过以下代码创建 <code>Foo</code> 和 <code>Bar</code> 对象，并调用他们的方法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">Foo</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">setVal</span>(<span style="color:#ae81ff">200</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">getVal</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">Bar</span>(<span style="color:#ae81ff">123</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">doSomething</span>();
+</span></span></code></pre></div><p><strong>注意：</strong></p>
+<ul>
+<li>总是通过 <code>Module</code> 对象访问对象；</li>
+<li>虽然在默认情况下，全局命名空间中的对象也是可用的，但在某些情况下它们是不可用的(例如，如果使用闭包编译器来最小化代码，或将编译后的代码包装在函数中，以避免污染全局命名空间)。当然，也可以通过将模块赋值给一个新变量：<code>var MyModuleName = module;</code>；</li>
+<li>只能在 js 调用 <code>WASM</code> 代码是安全的情况下（所需文件都加载完成后），使用上面的代码；</li>
+</ul>
+<p>当没有更多的引用时，JavaScript 将自动对任何包装好的 C++ 对象进行<strong>垃圾回收</strong>。如果 C++ 对象不需要特定的清理（即它没有析构函数），那么不需要采取其他操作。</p>
+<p>如果一个 C++ 对象确实需要清理，就必须显式地调用 <code>Module.destroy(obj)</code> 来调用它的析构函数，然后删除对该对象的所有引用，以便它可以被垃圾收集。例如，如果 Bar 需要清理分配的内存：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">Bar</span>(<span style="color:#ae81ff">123</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">doSomething</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">destroy</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// If the C++ object requires clean up
+</span></span></span></code></pre></div></li>
+<li>
+<p>模块化输出</p>
+<p>使用 &lsquo;WebIDL Binder&rsquo; 时，通常是创建一个库。在这种情况下，就要使用 <code>MODULARIZE</code> 选项。它将整个 JavaScript 输出包装在一个函数中，并返回一个解析为已初始化的 <code>Module</code> 实例的 <code>Promise</code></p>
+<p><code>emcc my_classes.cpp my_glue_wrapper.cpp -s MODULARIZE --post-js glue.js -o output.js</code></p>
+<p><strong>使用方式：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">instance</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Module</span>().<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">module</span> =&gt; {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">instance</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">module</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">Foo</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">setVal</span>(<span style="color:#ae81ff">200</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">getVal</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">Bar</span>(<span style="color:#ae81ff">123</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">doSomething</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">destroy</span>(<span style="color:#a6e22e">b</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>当它可以安全运行已编译的代码时，也就是说它已经被下载并实例化之后，<code>promise</code> 才会被解析。<code>promise</code> 是在调用 <code>onRuntimeInitialized</code> 回调函数的同时被解析的，所以在使用 <code>MODULARIZE</code> 时不需要使用 <code>onRuntimeInitialized</code> 回调。</p>
+<p><strong><code>onRuntimeInitialized</code> 回调：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;text/javascript&#39;</span>&gt;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Module</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">onRuntimeInitialized</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>(){
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">alert</span>(<span style="color:#e6db74">&#34;I am ready!&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">src </span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hello.js&#34;</span>&gt;&lt;/<span style="color:#f92672">script</span>&gt;
+</span></span></code></pre></div><p>我们还可以使用 <code>EXPORT_NAME</code> 选项将 <code>Module</code> 更改为其他内容。对于库来说，这是一种很好的实践方式，因为这样它们就不会在全局作用域中包含不必要的内容，而且在某些情况下，我们希望创建多个库。编译命令可参考下面这种：</p>
+<p><code>emcc my_classes.cpp my_glue_wrapper.cpp -s MODULARIZE -s 'EXPORT_NAME=&quot;createMyModule&quot;' --post-js glue.js -o output.js</code></p>
+<p>我们可以这样使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#a6e22e">createMyModule</span>(<span style="color:#75715e">/* optional default settings */</span>).<span style="color:#a6e22e">then</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">MyModule</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// this is reached when everything is ready, and you can call methods on Module     
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">f</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MyModule</span>.<span style="color:#a6e22e">Foo</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">setVal</span>(<span style="color:#ae81ff">200</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">alert</span>(<span style="color:#a6e22e">f</span>.<span style="color:#a6e22e">getVal</span>());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">MyModule</span>.<span style="color:#a6e22e">Bar</span>(<span style="color:#ae81ff">123</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">b</span>.<span style="color:#a6e22e">doSomething</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">MyModule</span>.<span style="color:#a6e22e">destroy</span>(<span style="color:#a6e22e">b</span>);
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p><strong>注意：<strong>在 <code>MODULARIZE</code> 模式中，我们不会寻找一个全局的 <code>Module</code> 对象来</strong>获取默认值</strong>。默认值必须作为参数传递给工厂函数。(详情见 <a href="https://emscripten.org/docs/api_reference/advanced-apis.html?highlight=settings%20js">settings.js</a>)</p>
+</li>
+</ol>
+<h2 id="webidl-types">WebIDL Types<a hidden class="anchor" aria-hidden="true" href="#webidl-types">#</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">C++</th>
+<th style="text-align:left">IDL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">bool</td>
+<td style="text-align:left">boolean</td>
+</tr>
+<tr>
+<td style="text-align:left">float</td>
+<td style="text-align:left">float</td>
+</tr>
+<tr>
+<td style="text-align:left">double</td>
+<td style="text-align:left">double</td>
+</tr>
+<tr>
+<td style="text-align:left">char</td>
+<td style="text-align:left">byte</td>
+</tr>
+<tr>
+<td style="text-align:left">char*</td>
+<td style="text-align:left">DOMString (represents a JavaScript string)</td>
+</tr>
+<tr>
+<td style="text-align:left">unsigned char</td>
+<td style="text-align:left">octet</td>
+</tr>
+<tr>
+<td style="text-align:left">int</td>
+<td style="text-align:left">long</td>
+</tr>
+<tr>
+<td style="text-align:left">long</td>
+<td style="text-align:left">long</td>
+</tr>
+<tr>
+<td style="text-align:left">unsigned short</td>
+<td style="text-align:left">unsigned short</td>
+</tr>
+<tr>
+<td style="text-align:left">unsigned long</td>
+<td style="text-align:left">unsigned long</td>
+</tr>
+<tr>
+<td style="text-align:left">long long</td>
+<td style="text-align:left">long long</td>
+</tr>
+<tr>
+<td style="text-align:left">void</td>
+<td style="text-align:left">void</td>
+</tr>
+<tr>
+<td style="text-align:left">void*</td>
+<td style="text-align:left">any or VoidPtr</td>
+</tr>
+</tbody>
+</table>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/emcc/">emcc</a></li>
+      <li><a href="https://874656645.github.io/tags/js/">js</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Emscripten——C&#43;&#43; 调用 Js 回调函数</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

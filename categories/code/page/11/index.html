@@ -14,7 +14,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>单例模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>单例在内存中只有一份，在内存中不会占用太多，程序退出时会随着程序统一释放内存，所以可以不必特意释放  一、懒汉式 不是线程安全的，所以多线程使用要加锁
+class Singleton{ public:  static Singleton* getInstance(){  if(s_instance == nullptr){  s_instance = new Singleton;  }  return s_instance;  }   // 可有可无，程序结束时，系统会自动回收程序的所有内存  class Garbo{  ~Garbo(){  if(s_instance){  cout &lt;&lt; &#34;gc...&#34; &lt;&lt; endl;  delete s_instance;  }  }  };  private:  Singleton(){  cout &lt;&lt; &#34;Singleton()...&#34; &lt;&lt; endl;  }  Singleton(const Singleton&amp;) = delete;  Singleton&amp; operator=(const Singleton&amp;) = delete;   static Singleton* s_instance;  static Garbo s_gc; }; Singleton* Singleton::s_instance = nullptr; int main() {  cout &lt;&lt; &#34;main()....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-31 20:43:34 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 单例模式" href="https://874656645.github.io/posts/107-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>抽象工厂模式
     </h2>
   </header>
@@ -194,19 +207,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-01-31 11:35:37 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 依赖倒转原则" href="https://874656645.github.io/posts/103-%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>合成复用原则
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>优先使用组合的方式，而不是继承
-class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl;  } }; class DaZhong:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl;  } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public:  Person(){  car = nullptr;  }  Person(AbstractCar* c){  car = c;  }  void drive(){  car-&gt;run();  delete car;  }  void drive(AbstractCar* car){  car-&gt;run();  delete car;  } private:  AbstractCar* car; }; void test2(){  // 方式一：  Person* p = new Person(new BMW);  p-&gt;drive();  delete p;  p = new Person(new DaZhong);  p-&gt;drive();  delete p;   // 方式二：  Person pp;  pp....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-30 21:45:22 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 合成复用原则" href="https://874656645.github.io/posts/102-%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
