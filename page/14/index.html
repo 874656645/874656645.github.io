@@ -15,7 +15,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -157,68 +157,68 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>queue 队列容器适配器
+    <h2>C&#43;&#43; 沉思录笔记
     </h2>
   </header>
   <section class="entry-content">
-    <p>先进先出 不允许遍历元素  queue 队列操作：
-size()
-empty()</p>
+    <p>有的情况下，现在的折衷方案比未来的理想方案好得多
+  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。
+  只要类定义正确，我就只能按照我编写它的初衷那样去用它。
+  C&#43;&#43; 哲学：抽象，实用，只为用到的东西付出代价。
+  类设计者的核查表：
+ 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
+class Vehicle{ public: virtual double weight() = 0; virtual void start() = 0; virtual Vehicle* copy() const = 0; virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{ /* ....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-17 19:41:48 +0800 CST'>January 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to queue 队列容器适配器" href="https://874656645.github.io/posts/85-queue-%E9%98%9F%E5%88%97%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-26 17:48:58 +0800 CST'>January 26, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 沉思录笔记" href="https://874656645.github.io/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>stack 栈容器适配器
+    <h2>机房预约系统案例
     </h2>
   </header>
   <section class="entry-content">
-    <p>先进后出 栈不允许遍历元素 不能随机存取  stack 栈操作:
-size()
-empty()</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:17:43 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to stack 栈容器适配器" href="https://874656645.github.io/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-24 20:53:57 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 机房预约系统案例" href="https://874656645.github.io/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>评委打分案例
+    <h2>switch 与 if Else 区别
     </h2>
   </header>
   <section class="entry-content">
-    <p>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
-分析：
- 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed....</p>
+    <p> while 循环中的 switch, break 只能中断 switch，不能中断 while 循环  void managerMenue(){ while(true){ cout &lt;&lt; &#34;这是子菜单&#34; &lt;&lt; endl; cout &lt;&lt; &#34;是否返回主菜单？&#34; &lt;&lt; endl; cout &lt;&lt; &#34;1 是&#34; &lt;&lt; endl; cout &lt;&lt; &#34;2 否&#34; &lt;&lt; endl; int i = 0; cin &gt;&gt; i; switch(i){ case 1: break; case 2: return; default: break; } // if(i == 1){  // // system(&#34;reset&#34;);  // break;  // }  // else if(i == 2){  // return;  // }  // else{  // cout &lt;&lt; &#34;输入有误，请重新输入&#34; &lt;&lt; endl;  // }  } cout &lt;&lt; &#34;这是子菜单循环外代码&#34; &lt;&lt; endl; } int main() { while(true){ cout &lt;&lt; &#34;欢迎登陆！&#34; &lt;&lt; endl; cout &lt;&lt; &#34;这是主菜单&#34; &lt;&lt; endl; cout &lt;&lt; &#34;请输入选项：&#34; &lt;&lt; endl; int i = 0; cin &gt;&gt; i; // switch(i)  // {  // case 1:  // system(&#34;reset&#34;);  // managerMenue();  // break;  // case 2:  // break;  // }  if(i == 1){ // system(&#34;reset&#34;);  managerMenue(); // break;  } else{ break; } cout &lt;&lt; &#34;switch 外代码&#34; &lt;&lt; endl; } cout &lt;&lt; &#34;while 外代码&#34; &lt;&lt; endl; return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-24 20:01:08 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to switch 与 if Else 区别" href="https://874656645.github.io/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>生成随机数
+    <h2>演讲比赛流程管理案例
     </h2>
   </header>
   <section class="entry-content">
-    <p>#include &lt;ctime&gt;using namespace std; int main() { srand((unsigned int)time(NULL)); cout &lt;&lt; rand() % 40 &lt;&lt; endl; return 0; } </p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-01-22 17:21:43 +0800 CST'>January 22, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 演讲比赛流程管理案例" href="https://874656645.github.io/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>deque 容器
+    <h2>常用算法
     </h2>
   </header>
   <section class="entry-content">
-    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
+    <p>一、常用遍历算法 1. for_each 2. transform  搬运的目标容器必须要提前开辟空间（resize 而不是 reserve），否则无法正常搬运  int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v.push_back(i); } vector&lt;int&gt; v1; v1.resize(v.size()); // 要用 resize, 不能用 reserve  transform(v.begin(), v.end(), v1.begin(), [](int v){ return v * 2;}); for_each(v1.begin(), v1.end(), [](int v){ cout &lt;&lt; v &lt;&lt; &#34; &#34;; }); cout &lt;&lt; endl; return 0; } 二、常用查找算法 1. find 2. find_if 3. adjacent_find 4. binary_search  无序序列不可用  5....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-22 09:31:07 +0800 CST'>January 22, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 常用算法" href="https://874656645.github.io/posts/91-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

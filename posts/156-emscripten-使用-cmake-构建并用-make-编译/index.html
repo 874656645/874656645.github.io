@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Emscripten——使用 CMake 构建并用 Make 编译 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="emcc, js, c&#43;&#43;" />
+<meta name="description" content="使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Emscripten——使用 CMake 构建并用 Make 编译" />
+<meta property="og:description" content="使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-24T17:45:14&#43;08:00" />
+<meta property="article:modified_time" content="2022-03-24T17:45:14&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/" /><meta property="og:see_also" content="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/" /><meta property="og:see_also" content="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/" /><meta property="og:see_also" content="https://874656645.github.io/posts/154-emscripten-hello-world/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Emscripten——使用 CMake 构建并用 Make 编译"/>
+<meta name="twitter:description" content="使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Emscripten——使用 CMake 构建并用 Make 编译",
+      "item": "https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Emscripten——使用 CMake 构建并用 Make 编译",
+  "name": "Emscripten——使用 CMake 构建并用 Make 编译",
+  "description": "使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件\n# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX \u0026#34;.html\u0026#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS \u0026#34; \\ -s EXIT_RUNTIME=0 \\ -gsource-map \\ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \\ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \\ -s NO_DISABLE_EXCEPTION_CATCHING \\ \u0026#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC \u0026#34;${PROJECT_BINARY_DIR}\u0026#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC \u0026#34;${CMAKE_CURRENT_SOURCE_DIR}\u0026#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .",
+  "keywords": [
+    "emcc", "js", "c++"
+  ],
+  "articleBody": "使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件\n# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX \".html\")# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS \" \\ -s EXIT_RUNTIME=0 \\ -gsource-map \\ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \\ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \\ -s NO_DISABLE_EXCEPTION_CATCHING \\ \")# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC \"${PROJECT_BINARY_DIR}\" # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC \"${CMAKE_CURRENT_SOURCE_DIR}\" )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .. -DCMAKE_BUILD_TYPE=Debug 进行项目构建\n  使用 make 编译  构建完成后，执行命令 emmake make 进行编译  ",
+  "wordCount" : "96",
+  "inLanguage": "en",
+  "datePublished": "2022-03-24T17:45:14+08:00",
+  "dateModified": "2022-03-24T17:45:14+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Emscripten——使用 CMake 构建并用 Make 编译
+    </h1>
+    <div class="post-meta"><span title='2022-03-24 17:45:14 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8-cmake-%e6%9e%84%e5%bb%ba" aria-label="使用 CMake 构建">使用 CMake 构建</a></li>
+                <li>
+                    <a href="#%e4%bd%bf%e7%94%a8-make-%e7%bc%96%e8%af%91" aria-label="使用 make 编译">使用 make 编译</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="使用-cmake-构建">使用 CMake 构建<a hidden class="anchor" aria-hidden="true" href="#使用-cmake-构建">#</a></h2>
+<ol>
+<li>
+<p>在源文件目录添加 <strong>CMakeList.txt</strong> 文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake"><span style="color:#75715e"># 设置CMake版本最低要求
+</span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">MyTarget</span> <span style="color:#e6db74">hello</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>project(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">1.0</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 指定 C++ 标准
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD</span> <span style="color:#e6db74">11</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color:#e6db74">True</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 编译生成.html文件
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_EXECUTABLE_SUFFIX</span> <span style="color:#e6db74">&#34;.html&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
+</span><span style="color:#75715e"># file(GLOB_RECURSE SRC_MAIN ./*.cpp)
+</span><span style="color:#75715e"></span>aux_source_directory(<span style="color:#e6db74">./</span> <span style="color:#e6db74">SRC_MAIN</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>aux_source_directory(<span style="color:#e6db74">./thirdParty/</span> <span style="color:#e6db74">SRC_MAIN</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>add_executable(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>SRC_MAIN<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># add_executable(${MyTarget} main.cpp)
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置Emscripten的编译链接参数
+</span><span style="color:#75715e"></span>set_target_properties(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">LINK_FLAGS</span> <span style="color:#e6db74">&#34; \
+</span><span style="color:#e6db74">    -s EXIT_RUNTIME=0 \
+</span><span style="color:#e6db74">    -gsource-map \
+</span><span style="color:#e6db74">    -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \
+</span><span style="color:#e6db74">    -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \
+</span><span style="color:#e6db74">    -s NO_DISABLE_EXCEPTION_CATCHING \
+</span><span style="color:#e6db74">&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加第三方库路径
+</span><span style="color:#75715e"># target_link_directories(${MyTarget} 
+</span><span style="color:#75715e">#    PUBLIC &#34;${PROJECT_BINARY_DIR}&#34;
+</span><span style="color:#75715e"># )
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 将第三方库与主程序进行链接
+</span><span style="color:#75715e"># set(LIBS cjson)
+</span><span style="color:#75715e"># target_link_libraries(sample ${LIBS})
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加头文件查找路径
+</span><span style="color:#75715e"></span>target_include_directories(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> 
+    <span style="color:#e6db74">PUBLIC</span> <span style="color:#e6db74">&#34;${CMAKE_CURRENT_SOURCE_DIR}&#34;</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div></li>
+<li>
+<p>创建 build 文件夹，并在 build 文件夹内执行命令 <code>emcmake cmake .. -DCMAKE_BUILD_TYPE=Debug</code> 进行项目构建</p>
+</li>
+</ol>
+<h2 id="使用-make-编译">使用 make 编译<a hidden class="anchor" aria-hidden="true" href="#使用-make-编译">#</a></h2>
+<ol>
+<li>构建完成后，执行命令 <code>emmake make</code> 进行编译</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/emcc/">emcc</a></li>
+      <li><a href="https://874656645.github.io/tags/js/">js</a></li>
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Emscripten——js 调用 C&#43;&#43; 接口</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Emscripten——C&#43;&#43; 函数导出</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -14,7 +14,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -160,80 +160,62 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>类模板
+    <h2>巧妙收缩 vector 空间
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ // 友元重载  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Person&lt;T&gt; &amp;p){ cout &lt;&lt; p.m_age; return os; } // 普通友元函数  friend void printP(Person&lt;T&gt; p){ cout &lt;&lt; p.m_age &lt;&lt; endl; } public: Person(T age){ this-&gt;m_age = age; } void Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } private: T m_age; }; int main() { Person&lt;int&gt; p(20); p.Show(); cout &lt;&lt; p &lt;&lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&lt;class T&gt; Person&lt;T&gt;::Person(T age){ this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() { Person&lt;int&gt; p(20); p....</p>
+    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 100000; &#43;&#43;i){ v.push_back(i); } cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; v.resize(10); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; vector&lt;int&gt;(v).swap(v); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>编译过程
+    <h2>vector 中的元素存放在堆上还是栈上
     </h2>
   </header>
   <section class="entry-content">
-    <p>各个 .cpp 文件是独立编译的，如果有其它的类和函数会先在本 .o 文件中生成符号，由最后的链接器去其它 .o 文件找具体的函数定义
- .c .cpp 文件经过 预编译器拷贝头文件、宏展开 生成 .i 文件（文本文件）
-g&#43;&#43; -E main.cpp -o main.i .i 文件经过 编译器 生成汇编程序 .s（文本文件）
-g&#43;&#43; -S main.i -o main.s .s 文件经过 汇编器 生成可定位目标文件 .o （二进制）
-Windows:
-g&#43;&#43; -c main.s -o main.obj
-Linux:
-g&#43;&#43; -c main.s -o main.o .o 文件经过 链接器 生成可执行目标文件 .exe .dll
-g&#43;&#43; main.s -o main  </p>
+    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete()....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-12 20:12:00 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 编译过程" href="https://874656645.github.io/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 15:50:29 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to vector 中的元素存放在堆上还是栈上" href="https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>函数模板
+    <h2>STL Hello World
     </h2>
   </header>
   <section class="entry-content">
-    <p>函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C&#43;&#43; 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
-编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){ return a &#43; b; } // 函数一 int MyAdd(int a, int b){ return a &#43; b; } // 函数二 int MyAdd(int a, char c){ return a &#43; c; } int main() { cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1....</p>
+    <p> 平时要有容器、算法、迭代器的思维模式 容器提供迭代器，算法使用迭代器  // 算法 int count(int* begin, int* end, int val){ int n = 0; while(begin != end){ if(*begin == val){ n&#43;&#43;; } begin&#43;&#43;; } return n; } int main() { // 容器  int arr[] = {1, 3, 0, 5, 1, 3, 1, 0}; // 迭代器  int* begin = arr; int* end = *(&amp;arr &#43; 1); int n = count(begin, end, 1); cout &lt;&lt; &#34;count: &#34; &lt;&lt; n &lt;&lt; endl; return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-11 21:40:09 +0800 CST'>January 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数模板" href="https://874656645.github.io/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 12:31:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL Hello World" href="https://874656645.github.io/posts/78-stl-hello-world/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C 语言面向接口编程
+    <h2>文件操作
     </h2>
   </header>
   <section class="entry-content">
-    <p>通过函数指针实现多态，注册回调函数的方式
-void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char* arrStart = (char*)arr; for(int i = 0; i &lt; len; &#43;&#43;i){ char* eleStart = arrStart &#43; i * eleSize; myPrint(eleStart); } printf(&#34;\n&#34;); } void printInt(void* data){ int* ele = (int*)data; printf(&#34;%d &#34;, *ele); } struct Person{ char name[64]; int age; }; void printPerson(void* data){ struct Person* ele = (struct Person*)data; printf(&#34;Name: %s, Age: %d \n&#34;, ele-&gt;name, ele-&gt;age); } int main() { int arr[] = {1, 2, 3, 4, 5}; printAllArray(arr, sizeof(int), 5, printInt); struct Person personArr[] = { {&#34;aaa&#34;, 20}, {&#34;bbb&#34;, 30}, {&#34;ccc&#34;, 40}, {&#34;ddd&#34;, 50}, {&#34;eee&#34;, 60}, }; printAllArray(personArr, sizeof(struct Person), 5, printPerson); return 0; } 输出：...</p>
+    <p>一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in); ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app); if (!ifs) { cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl; return; } if (!ofs) { cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl; return; } char ch; while (ifs.get(ch)) { cout &lt;&lt; ch; ofs &lt;&lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &lt;&lt; &#34;Age: &#34; &lt;&lt; m_age &lt;&lt; &#34; ID: &#34; &lt;&lt; m_id &lt;&lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-10 22:23:34 +0800 CST'>January 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C 语言面向接口编程" href="https://874656645.github.io/posts/68-c-%E8%AF%AD%E8%A8%80%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 09:47:21 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 文件操作" href="https://874656645.github.io/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>面向抽象类编程
+    <h2>格式化输出
     </h2>
   </header>
   <section class="entry-content">
-    <p>三层架构：业务逻辑层、抽象层、实现层
-原则：依赖倒转
-案例一：动物园 设计实现：
- 抽象层：Animal
-提供接口 voice 实现层：Dog、Cat
-分别实现 voice ，发出不同的声音 业务层：main 函数调用，只通过 Animal 的指针统一实现业务  案例二：编写一个 C&#43;&#43; 程序, 计算程序员( programmer )工资  要求能计算出初级程序员( junior_programmer ) 中级程序员 ( mid_programmer )高级程序员( adv_programmer )的工资 要求利用抽象类统一界面，方便程序的扩展，比如:新增，计算架构师( architect ) 的工资  设计实现：
- 抽象层：Programmer
-提供计算工资的接口 实现层：JuniorProgrammer、MidProgrammer、AdvProgrammer
-分别对计算工资接口进行实现 业务层：通过 Programmer 类统一管理，实现业务逻辑，同时业务的可扩展性更强，如新增架构师类型  案例三：电脑组装，面向抽象层编程  组装电脑有 3 个抽象类，抽象的 cpu，抽象的显卡，抽象的内存。 现在要求组装两台电脑，一台是 Intel 的 CPU，Intel 的显卡和 Intel 的内存。另一台是 Intel 的 CPU、Nvidia 的显卡和 Kingston 的内存条。 针对抽象层编程。  设计实现：...</p>
+    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;#include &lt;cstring&gt;#include &lt;iomanip&gt; // 控制符头文件using namespace std; // 格式化输出 void func(){ // 方式一：使用成员方法  int number = 10; cout &lt;&lt; number &lt;&lt; endl; cout.unsetf(ios::dec); // 八进制  cout.setf(ios::oct); cout.setf(ios::showbase); cout &lt;&lt; number &lt;&lt; endl; // 012  // 十六进制  cout.unsetf(ios::oct); cout.setf(ios::hex); cout &lt;&lt; number &lt;&lt; endl; // 0xa  // 固定宽度  cout.width(10); cout.fill(&#39;*&#39;); cout &lt;&lt; number &lt;&lt; endl; // *******0xa  // 上面的设置只对当前输出有效，下次的输出格式要重新设置  cout.setf(ios::left); cout.width(10); cout....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-09 19:12:37 +0800 CST'>January 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 面向抽象类编程" href="https://874656645.github.io/posts/67-%E9%9D%A2%E5%90%91%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%BC%96%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 09:12:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 格式化输出" href="https://874656645.github.io/posts/76-%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

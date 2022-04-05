@@ -9,7 +9,41 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 19 Mar 2022 15:35:35 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 05 Apr 2022 14:12:42 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据结构与算法——栈的应用</title>
+      <link>https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Tue, 05 Apr 2022 14:12:42 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
+      <description>栈的特点是先进后出，所以常用来处理具有递归结构的数据
+ 深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义
+ 基本符号集：${0，1，…，9，+，-，*，/，（，）}$ 语法成分集：{&amp;lt;表达式&amp;gt; , &amp;lt;项&amp;gt; , &amp;lt;因子&amp;gt; , &amp;lt;常数&amp;gt;, &amp;lt;数字&amp;gt; } 中缀表达式：$23\ +\ (34\ *\ 45)\ /\ (5\ +\ 6\ +\ 7)$ 后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ +\ 7\ +\ /\ +$
+    中缀表达式
+ 运算符在中间 需要括号改变优先级  例如：$4\ *\ x\ *\ (2\ *\ x\ +\ a)\ –\ c$
+  后缀表达式</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——栈的实现方式</title>
+      <link>https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Mon, 04 Apr 2022 20:03:03 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid>
+      <description>栈的物理实现有 顺序栈 和 链式栈
+一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：
+template &amp;lt;class T&amp;gt; class arrStack : public Stack &amp;lt;T&amp;gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack&amp;lt;T&amp;gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &amp;lt;&amp;lt; &amp;#34;栈满溢出&amp;#34; &amp;lt;&amp;lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[++top] = item; return true; } } bool arrStack&amp;lt;T&amp;gt;::pop(T&amp;amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &amp;lt;&amp;lt; &amp;#34;栈为空，不能执行出栈操作&amp;#34;&amp;lt;&amp;lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——栈</title>
+      <link>https://874656645.github.io/posts/160-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88/</link>
+      <pubDate>Thu, 31 Mar 2022 22:04:28 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/160-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88/</guid>
+      <description>一、栈  后进先出  是一种限制访问端口的线性表   主要操作  进栈（push） 出栈（pop）   应用  表达式求值（中缀表达式、后缀表达式） 消除递归 深度优先搜索（树、图）    二、栈的抽象数据类型 template &amp;lt;class T&amp;gt; class Stack { public: // 栈的运算集  void clear(); // 变为空栈  bool push(const T item); // item入栈，成功返回真，否则假  bool pop(T&amp;amp; item); // 返回栈顶内容并弹出，成功返回真，否则假  bool top(T&amp;amp; item); // 返回栈顶但不弹出，成功返回真，否则假  bool isEmpty(); // 若栈已空返回真  bool isFull(); // 若栈已满返回真 }; 三、思考题   若入栈顺序为 1,2,3,4 的话，则出栈的顺序可以有哪些?</description>
+    </item>
+    
     <item>
       <title>数据结构与算法——连续子数组最大和</title>
       <link>https://874656645.github.io/posts/152-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/</link>

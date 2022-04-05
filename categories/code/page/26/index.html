@@ -14,7 +14,7 @@
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
 
-<script defer crossorigin="anonymous" src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -145,72 +145,69 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>explicit（显式）关键字
+    <h2>函数重载、重写、隐藏、模板
     </h2>
   </header>
   <section class="entry-content">
-    <p>修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：...</p>
+    <p>重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写； 重定义： 派生类中函数与基类中的函数同名，但是这个函数在基类中并没有被定义为虚函数 隐藏： 派生类中重定义了父类的函数，此时基类的函数会被隐藏； 模板： 函数模板是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;print()&#34; &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } void freeP(A ** p){ if(p == NULL){ return; } if(*p != NULL){ free(*p); *p = NULL; } } void freeP(A * p){ if(p != NULL){ free(p); p = NULL; } } static void printS(){ cout &lt;&lt; &#34;printS() s_a = &#34; &lt;&lt; s_a &lt;&lt; endl; } static void printS(int s){ cout &lt;&lt; &#34;printS(int s) &#34; &lt;&lt; s_a * s &lt;&lt; endl; } static void printS(void *p, int s){ cout &lt;&lt; &#34;printS(void *p, int s) &#34; &lt;&lt; ((A*)p)-&gt;m_a * s &lt;&lt; endl; } static int s_a; private: int m_a; }; int A::s_a = 0; int main( ) { A *a = new A(1); a-&gt;printS(a, 20); a-&gt;print(); A::s_a = 10; a-&gt;printS(); a-&gt;printS(10); a-&gt;freeP(a); if(a == NULL){ cout &lt;&lt; &#34;*a is not valid&#34; &lt;&lt; endl; return 0; } cout &lt;&lt; &#34;*a is valid&#34; &lt;&lt; endl; a-&gt;print(); return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-15 12:34:27 +0800 CST'>December 15, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to explicit（显式）关键字" href="https://874656645.github.io/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+  <footer class="entry-footer"><span title='2021-12-23 12:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数重载、重写、隐藏、模板" href="https://874656645.github.io/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43; 字符串常量存储
+    <h2>inline 内联函数
     </h2>
   </header>
   <section class="entry-content">
-    <p>局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
- 局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() { char* p1 = &#34;qqq&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  char p[]=&#34;Hello world!&#34;; char* p2 = &#34;w&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  printf(&#34;in s1 p=%p\n&#34;, p); printf(&#34;in s1 p1=%p\n&#34;, p1); printf(&#34;in s1: string&#39;s address: %p\n&#34;, &amp;(&#34;Hello world!&#34;)); printf(&#34;in s1 p2=%p\n&#34;, p2); return p1; // 这里不能返回局部变量 p } //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() { char *q=&#34;Hello world!&#34;; printf(&#34;in s2 q=%p\n&#34;, q); printf(&#34;in s2: string&#39;s address: %p\n&#34;, &amp;(&#34;Hello world!...</p>
+    <p>当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
+ 适用于函数体积很小并频繁使用的函数 内联函数中不可以出现循环、递归或开关操作 内联函数的声明必须在函数定义之前 内联函数的定义必须出现在内联函数的第一次调用前 在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数 虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联  优点：
+ 内联函数在被调用处进行代码展开，省去了参数压栈、跳转返回、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度； 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会； 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能； 内联函数在运行时可调试，而宏定义不可以。  缺点：
+ 代码膨胀，消耗了更多的内存空间； inline 函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像 non-inline 可以直接链接； 内联函数其实是不可控的，它只是对编译器的建议，是否对函数内联，决定权在于编译器; 不能对函数进行取址操作  </p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-13 12:34:27 +0800 CST'>December 13, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 字符串常量存储" href="https://874656645.github.io/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/"></a>
+  <footer class="entry-footer"><span title='2021-12-23 11:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to inline 内联函数" href="https://874656645.github.io/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>const 修饰符
+    <h2>fork Unix
     </h2>
   </header>
   <section class="entry-content">
-    <p>1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
-常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
-指针常量：int * const 指针所指的地址不能变（不可以重指向），但地址的内容可以被修改，与引用变量效果类似
-常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
-const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
-const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
-ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用  b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb....</p>
+    <p>Unix 的 fork 函数 fork函数可以创建一个和当前映像一样的子进程，这个函数会返回两个值：从子进程返回0，从父进程返回子进程的PID；
+ 1）在父进程中，fork返回新创建子进程的进程ID； 2）在子进程中，fork返回0； 3）如果出现错误，fork返回一个负值；  #include &lt;iostream&gt;#include &lt;unistd.h&gt; using namespace std; int main() { pid_t fpid; //fpid表示fork函数返回的值  int count = 0; cout &lt;&lt; &amp;count &lt;&lt; endl; fpid = fork(); if (fpid &lt; 0) printf(&#34;error in fork!\n&#34;); else if (fpid == 0) { printf(&#34;i am the child process, my process id is %d\n&#34;,getpid()); cout &lt;&lt; &amp;count &lt;&lt; endl; count&#43;&#43;; } else { printf(&#34;i am the parent process, my process id is %d\n&#34;,getpid()); cout &lt;&lt; &amp;count &lt;&lt; endl; count&#43;&#43;; } printf(&#34;统计结果是: %d\n&#34;,count); return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-10 12:34:27 +0800 CST'>December 10, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to const 修饰符" href="https://874656645.github.io/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/"></a>
+  <footer class="entry-footer"><span title='2021-12-23 10:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to fork Unix" href="https://874656645.github.io/posts/33-fork-unix/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>QProcess 使用
+    <h2>C 与 C&#43;&#43; 的差异
     </h2>
   </header>
   <section class="entry-content">
-    <p>路径中有空格  m_process-&gt;startDetached(strAppDir &#43; &#34;/ThreeDScreen.exe&#34;, QStringList())
-杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&#34;taskkill -t -f /IM iexplore.exe&#34;);</p>
+    <p>C&#43;&#43; 是 C 的超集和增强，校验更加严格
+C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱动，面向对象是对象驱动
+1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
+故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C&#43;&#43; 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C&#43;&#43; 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C&#43;&#43; 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C&#43;&#43; 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to QProcess 使用" href="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/"></a>
+  <footer class="entry-footer"><span title='2021-12-22 22:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C 与 C&#43;&#43; 的差异" href="https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>QString 中文乱码
+    <h2>函数形参从右到左入栈
     </h2>
   </header>
   <section class="entry-content">
-    <p> QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
-以QString做为形参变量传递  qDebug(msg.toUtf8());
-QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } </p>
+    <p>int add(int count, ...) { // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节）  int intSize = sizeof(int*) / sizeof(int); int sum = 0; // cout &lt;&lt; &amp;count &lt;&lt; endl;  int *p = &amp;count &#43; intSize; // cout &lt;&lt; p &lt;&lt; endl;  for (int i = 0; i &lt; count; &#43;&#43;i) { sum &#43;= *p; cout &lt;&lt; *p &lt;&lt; endl; p &#43;= intSize; } return sum; } int main() { cout &lt;&lt; add(3, 1, 2, 3) &lt;&lt; endl; return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to QString 中文乱码" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
+  <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数形参从右到左入栈" href="https://874656645.github.io/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
