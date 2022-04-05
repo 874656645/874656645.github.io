@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Linux 静态库与动态库 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Linux" />
+<meta name="description" content="一、库是什么 库是二进制格式的源代码（二进制加密）
+二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Linux 静态库与动态库" />
+<meta property="og:description" content="一、库是什么 库是二进制格式的源代码（二进制加密）
+二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-17T22:25:34&#43;08:00" />
+<meta property="article:modified_time" content="2022-02-17T22:25:34&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/" /><meta property="og:see_also" content="https://874656645.github.io/posts/122-vim-%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/120-linux-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Linux 静态库与动态库"/>
+<meta name="twitter:description" content="一、库是什么 库是二进制格式的源代码（二进制加密）
+二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Linux 静态库与动态库",
+      "item": "https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Linux 静态库与动态库",
+  "name": "Linux 静态库与动态库",
+  "description": "一、库是什么 库是二进制格式的源代码（二进制加密）\n二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *.",
+  "keywords": [
+    "Linux"
+  ],
+  "articleBody": "一、库是什么 库是二进制格式的源代码（二进制加密）\n二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *.c 将 .o 文件打包 gcc -shared -o libxxx.so *.o   库的使用  gcc main.c -I ./include -L ./lib -l mycalc -o app2   动态库无法加载（4 种方式）  使用临时环境变量设置：export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH 修改用户级别的配置文件：打开 ~/.bashrc文件，将 export LD_LIBRARY_PATH=~/lib （注：等号两边不要有空格）添加到文件最后，重启 bash 终端或 source ~/.bashrc 修改系统级别的配置文件：/etc/profile，重复上面的步骤 更新 /etc/ld_so_cache 文件列表  将库的绝对路径（注：必需是绝对路径，不能使用类似 ~ 代替）添加到配置文件中 etc/ld.so.conf 执行 sudo ldconfig -v 命令   拓展，使用函数调用：dlopen、dlclose、dlsym Linux动态库路径查找顺序：\n    五、其它命令  file app2\n ldd app2\n  ",
+  "wordCount" : "114",
+  "inLanguage": "en",
+  "datePublished": "2022-02-17T22:25:34+08:00",
+  "dateModified": "2022-02-17T22:25:34+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Linux 静态库与动态库
+    </h1>
+    <div class="post-meta"><span title='2022-02-17 22:25:34 +0800 CST'>February 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e5%ba%93%e6%98%af%e4%bb%80%e4%b9%88" aria-label="一、库是什么">一、库是什么</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%ba%93%e7%9a%84%e4%bd%bf%e7%94%a8" aria-label="二、库的使用">二、库的使用</a></li>
+                <li>
+                    <a href="#%e4%b8%89%e9%9d%99%e6%80%81%e5%ba%93%e7%9a%84%e5%88%b6%e4%bd%9c%e5%92%8c%e4%bd%bf%e7%94%a8" aria-label="三、静态库的制作和使用">三、静态库的制作和使用</a></li>
+                <li>
+                    <a href="#%e5%9b%9b%e5%8a%a8%e6%80%81%e5%ba%93%e7%9a%84%e5%88%b6%e4%bd%9c%e5%92%8c%e4%bd%bf%e7%94%a8" aria-label="四、动态库的制作和使用">四、动态库的制作和使用</a></li>
+                <li>
+                    <a href="#%e4%ba%94%e5%85%b6%e5%ae%83%e5%91%bd%e4%bb%a4" aria-label="五、其它命令">五、其它命令</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="一库是什么">一、库是什么<a hidden class="anchor" aria-hidden="true" href="#一库是什么">#</a></h2>
+<p>库是二进制格式的源代码（二进制加密）</p>
+<h2 id="二库的使用">二、库的使用<a hidden class="anchor" aria-hidden="true" href="#二库的使用">#</a></h2>
+<ul>
+<li>头文件</li>
+<li>制作的库文件</li>
+</ul>
+<h2 id="三静态库的制作和使用">三、静态库的制作和使用<a hidden class="anchor" aria-hidden="true" href="#三静态库的制作和使用">#</a></h2>
+<ol>
+<li>命名规则
+<code>libxxx.a</code></li>
+<li>制作步骤
+<ul>
+<li>准备源代码文件</li>
+<li>将源代码文件生成 .o 文件 <code>gcc -c *.c</code></li>
+<li>将 .o 文件打包（<strong>archive</strong>） <code>ar rcs libxxx.a *.o</code></li>
+<li>查看 lib 文件 <code>nm libxxx.a</code></li>
+</ul>
+</li>
+<li>库的使用
+<code>gcc main.c -I./include -L ./lib -lmyCalc -o app</code>
+<ul>
+<li><code>-L</code>: 库的路径</li>
+<li><code>-l</code>: 库的名称（去掉 lib 前缀和 .a 后缀）</li>
+</ul>
+</li>
+</ol>
+<h2 id="四动态库的制作和使用">四、动态库的制作和使用<a hidden class="anchor" aria-hidden="true" href="#四动态库的制作和使用">#</a></h2>
+<ol>
+<li>命名规则
+<code>libxxx.so</code></li>
+<li>制作步骤
+<ul>
+<li>准备源代码文件</li>
+<li>将源代码文件生成 .o 文件 <code>gcc -c -fpic *.c</code> 或者 <code>gcc -c -fPIC *.c</code></li>
+<li>将 .o 文件打包 <code>gcc -shared -o libxxx.so *.o</code></li>
+</ul>
+</li>
+<li>库的使用
+<ul>
+<li><code>gcc main.c -I ./include -L ./lib -l mycalc -o app2</code></li>
+</ul>
+</li>
+<li>动态库无法加载（4 种方式）
+<ul>
+<li>使用临时环境变量设置：<code>export LD_LIBRARY_PATH=./lib:$LD_LIBRARY_PATH</code></li>
+<li>修改用户级别的配置文件：打开 <code>~/.bashrc</code>文件，将 <code>export LD_LIBRARY_PATH=~/lib</code> （注：等号两边不要有空格）添加到文件最后，重启 bash 终端或 <code>source ~/.bashrc</code></li>
+<li>修改系统级别的配置文件：<code>/etc/profile</code>，重复上面的步骤</li>
+<li>更新 <code>/etc/ld_so_cache</code> 文件列表
+<ul>
+<li>将库的绝对路径（注：必需是绝对路径，不能使用类似 <code>~</code> 代替）添加到配置文件中 <code>etc/ld.so.conf</code></li>
+<li>执行 <code>sudo ldconfig -v</code> 命令</li>
+</ul>
+</li>
+<li>拓展，使用函数调用：<code>dlopen、dlclose、dlsym</code></li>
+<li>Linux动态库路径查找顺序：<br>
+<img loading="lazy" src="../img/Linux%e5%8a%a8%e6%80%81%e5%ba%93%e8%b7%af%e5%be%84%e6%9f%a5%e6%89%be%e9%a1%ba%e5%ba%8f.jpg" alt="Linux动态库路径查找顺序"  />
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="五其它命令">五、其它命令<a hidden class="anchor" aria-hidden="true" href="#五其它命令">#</a></h2>
+<ol>
+<li><code>file app2</code><br>
+<img loading="lazy" src="../img/file%e5%91%bd%e4%bb%a4.jpg" alt="file命令"  />
+</li>
+<li><code>ldd app2</code><br>
+<img loading="lazy" src="../img/ldd%e5%91%bd%e4%bb%a4.jpg" alt="ldd命令"  />
+</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/linux/">Linux</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Makefile 使用</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>gcc 相关</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

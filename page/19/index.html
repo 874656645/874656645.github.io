@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head>
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Blog, Code, C&#43;&#43;" />
+<meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/index.xml">
+<link rel="alternate" type="application/json" href="https://874656645.github.io/index.json">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Slow is Smooth and Smooth is Fast" />
+<meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://874656645.github.io/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Slow is Smooth and Smooth is Fast"/>
+<meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Slow is Smooth and Smooth is Fast",
+  "url": "https://874656645.github.io",
+  "description": "\u0026#34;Take time for all things: great haste makes great waste.\u0026#34; – Benjamin Franklin",
+  "thumbnailUrl": "https://874656645.github.io/favicon.ico",
+  "sameAs": [
+      "https://twitter.com/", "https://stackoverflow.com", "https://github.com/"
+  ]
+}
+</script>
+
+</head>
+
+<body class="list dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>类模板
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ // 友元重载  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Person&lt;T&gt; &amp;p){ cout &lt;&lt; p.m_age; return os; } // 普通友元函数  friend void printP(Person&lt;T&gt; p){ cout &lt;&lt; p.m_age &lt;&lt; endl; } public: Person(T age){ this-&gt;m_age = age; } void Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } private: T m_age; }; int main() { Person&lt;int&gt; p(20); p.Show(); cout &lt;&lt; p &lt;&lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&lt;class T&gt; Person&lt;T&gt;::Person(T age){ this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() { Person&lt;int&gt; p(20); p....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>编译过程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>各个 .cpp 文件是独立编译的，如果有其它的类和函数会先在本 .o 文件中生成符号，由最后的链接器去其它 .o 文件找具体的函数定义
+ .c .cpp 文件经过 预编译器拷贝头文件、宏展开 生成 .i 文件（文本文件）
+g&#43;&#43; -E main.cpp -o main.i .i 文件经过 编译器 生成汇编程序 .s（文本文件）
+g&#43;&#43; -S main.i -o main.s .s 文件经过 汇编器 生成可定位目标文件 .o （二进制）
+Windows:
+g&#43;&#43; -c main.s -o main.obj
+Linux:
+g&#43;&#43; -c main.s -o main.o .o 文件经过 链接器 生成可执行目标文件 .exe .dll
+g&#43;&#43; main.s -o main  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-12 20:12:00 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 编译过程" href="https://874656645.github.io/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>函数模板
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C&#43;&#43; 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
+编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){ return a &#43; b; } // 函数一 int MyAdd(int a, int b){ return a &#43; b; } // 函数二 int MyAdd(int a, char c){ return a &#43; c; } int main() { cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-11 21:40:09 +0800 CST'>January 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数模板" href="https://874656645.github.io/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C 语言面向接口编程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>通过函数指针实现多态，注册回调函数的方式
+void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char* arrStart = (char*)arr; for(int i = 0; i &lt; len; &#43;&#43;i){ char* eleStart = arrStart &#43; i * eleSize; myPrint(eleStart); } printf(&#34;\n&#34;); } void printInt(void* data){ int* ele = (int*)data; printf(&#34;%d &#34;, *ele); } struct Person{ char name[64]; int age; }; void printPerson(void* data){ struct Person* ele = (struct Person*)data; printf(&#34;Name: %s, Age: %d \n&#34;, ele-&gt;name, ele-&gt;age); } int main() { int arr[] = {1, 2, 3, 4, 5}; printAllArray(arr, sizeof(int), 5, printInt); struct Person personArr[] = { {&#34;aaa&#34;, 20}, {&#34;bbb&#34;, 30}, {&#34;ccc&#34;, 40}, {&#34;ddd&#34;, 50}, {&#34;eee&#34;, 60}, }; printAllArray(personArr, sizeof(struct Person), 5, printPerson); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-10 22:23:34 +0800 CST'>January 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C 语言面向接口编程" href="https://874656645.github.io/posts/68-c-%E8%AF%AD%E8%A8%80%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>面向抽象类编程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>三层架构：业务逻辑层、抽象层、实现层
+原则：依赖倒转
+案例一：动物园 设计实现：
+ 抽象层：Animal
+提供接口 voice 实现层：Dog、Cat
+分别实现 voice ，发出不同的声音 业务层：main 函数调用，只通过 Animal 的指针统一实现业务  案例二：编写一个 C&#43;&#43; 程序, 计算程序员( programmer )工资  要求能计算出初级程序员( junior_programmer ) 中级程序员 ( mid_programmer )高级程序员( adv_programmer )的工资 要求利用抽象类统一界面，方便程序的扩展，比如:新增，计算架构师( architect ) 的工资  设计实现：
+ 抽象层：Programmer
+提供计算工资的接口 实现层：JuniorProgrammer、MidProgrammer、AdvProgrammer
+分别对计算工资接口进行实现 业务层：通过 Programmer 类统一管理，实现业务逻辑，同时业务的可扩展性更强，如新增架构师类型  案例三：电脑组装，面向抽象层编程  组装电脑有 3 个抽象类，抽象的 cpu，抽象的显卡，抽象的内存。 现在要求组装两台电脑，一台是 Intel 的 CPU，Intel 的显卡和 Intel 的内存。另一台是 Intel 的 CPU、Nvidia 的显卡和 Kingston 的内存条。 针对抽象层编程。  设计实现：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-09 19:12:37 +0800 CST'>January 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 面向抽象类编程" href="https://874656645.github.io/posts/67-%E9%9D%A2%E5%90%91%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%BC%96%E7%A8%8B/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://874656645.github.io/page/18/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/page/20/">Next Page »</a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

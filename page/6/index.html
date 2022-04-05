@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head>
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Blog, Code, C&#43;&#43;" />
+<meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/index.xml">
+<link rel="alternate" type="application/json" href="https://874656645.github.io/index.json">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Slow is Smooth and Smooth is Fast" />
+<meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://874656645.github.io/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Slow is Smooth and Smooth is Fast"/>
+<meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Slow is Smooth and Smooth is Fast",
+  "url": "https://874656645.github.io",
+  "description": "\u0026#34;Take time for all things: great haste makes great waste.\u0026#34; – Benjamin Franklin",
+  "thumbnailUrl": "https://874656645.github.io/favicon.ico",
+  "sameAs": [
+      "https://twitter.com/", "https://stackoverflow.com", "https://github.com/"
+  ]
+}
+</script>
+
+</head>
+
+<body class="list dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>CMake 添加依赖库和使用条件
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>添加依赖库和使用条件 CMakeLists.txt  注意编译选项、生成配置文件和条件编译三部分的顺序  # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions) list(APPEND EXTRA_INCLUDES &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; ${EXTRA_INCLUDES} )子模块（库）的 CMakeLists.txt 文件 add_library(MathFunctions mysqrt....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-27 14:30:39 +0800 CST'>February 27, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to CMake 添加依赖库和使用条件" href="https://874656645.github.io/posts/137-cmake-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>CMake 配置文件传递设置信息
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>CMakeList # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 2.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 生成一个头文件，传递 CMake 的一些设置到源代码 configue_file(TutorialConfig.h.in TutorialConfig.h)# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# 添加头文件查找路径 target_include_directories(Tutorial PUBLIC &#34;$(PROJECT_BINARY_DIR)&#34;)TutorialConfig.h.in // #define TUTORIAL_VERSION_MAJOR @Tutorial_VERSION_MAJOR@ #define TUTORIAL_VERSION_MINOR @Tutorial_VERSION_MINOR@ </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-26 21:39:32 +0800 CST'>February 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to CMake 配置文件传递设置信息" href="https://874656645.github.io/posts/136-cmake-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BC%A0%E9%80%92%E8%AE%BE%E7%BD%AE%E4%BF%A1%E6%81%AF/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>CMake 使用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、CMakeLists.txt 文件示例 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 1.0)# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)二、CMake 相关命令   cmake .. 含有 CMakeLists.txt 文件的路径，根据 CMakeLists.txt 文件构建对应的工程；
+  cmake .. -DUSE_MYMATH=OFF 将 CMake 编译选项 USE_MYMATH 设置为关闭状态，并构建工程
+  cmake .. -DCMAKE_BUILD_TYPE=Release 在Linux中设定 Release 版本，可设置的类型有 Debug、MinSizeRel、Release、RelWithDebInfo
+  指定编译工具为 MSVC（不同的 CMake 版本，命令写法不同）：
+cmake -G &#34;Visual Studio 14 2015 Win64&#34; cmake -G &#34;Visual Studio 16 2019&#34; -A x64 cmake -G &#34;Visual Studio 16 2019&#34; -A Win32   在 Windows 中使用 MinGW...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-26 20:03:44 +0800 CST'>February 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to CMake 使用" href="https://874656645.github.io/posts/135-cmake-%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>哈希法与冲突处理
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>哈希表及处理冲突的方法
+一、哈希法与哈希表  哈希法又称散列法、杂凑法以及关键字地址计算法等，相应的表称为哈希表。 这种方法的基本思想是：首先在元素的关键字 k 和元素的存储位置 p 之间建立一个对应关系 f，使得 p = f(k)，f 称为哈希函数。 创建哈希表时，把关键字为 k 的元素直接存入地址为 f(k) 的单元；以后当查找关键字为 k 的元素时，再利用哈希函数计算出该元素的存储位置 p=f(k)，从而达到按关键字直接存取元素的目的。  二、冲突 当关键字集合很大时，关键字值不同的元素可能会映象到哈希表的同一地址上，即 k1 ≠ k2，但 f(k1) = f(k2)，这种现象称为冲突，此时称 k1 和 k2 为同义词。
+三、哈希函数构造方法 构造哈希函数的原则是：
+ 函数本身便于计算； 计算出来的地址分布均匀，即对任一关键字 k，f(k) 对应不同地址的概率相等，目的是尽可能减少冲突  常用的构造方法：
+ 数字分析法 平方取中法 分段叠加法 除留余数法：假设哈希表长为 m，p 为小于等于 m 的最大素数，则哈希函数为 f(k)=k % p 伪随机数法  四、冲突处理方法 1. 开放地址法（Open addressing） 这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi
+ 线性探测 二次探测 伪随机探测  线性探测再散列的优点是：只要哈希表不满，就一定能找到一个不冲突的哈希地址，而二次探测再散列和伪随机探测再散列则不一定；缺点是线性探测再散列容易产生二次聚集
+2. 再哈希法 这种方法是同时构造多个不同的哈希函数，当哈希地址Hi=RH1（key）发生冲突时，再计算Hi=RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-25 17:23:49 +0800 CST'>February 25, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 哈希法与冲突处理" href="https://874656645.github.io/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 左值、右值和移动语义
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、结论  C 中将数据类型分为左值和右值，在 C&#43;&#43;11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C&#43;&#43;11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;&amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
+const int &amp;ref_a = 5; int a = 5; int &amp;ref_a = a; // 左值引用指向左值，编译通过 int &amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 &amp;&amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值
+int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-23 22:19:35 +0800 CST'>February 23, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 左值、右值和移动语义" href="https://874656645.github.io/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://874656645.github.io/page/5/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/page/7/">Next Page »</a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

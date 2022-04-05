@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>map multimap 容器 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;, STL" />
+<meta name="description" content="特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
+ 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; m_name &lt;&lt; &#34; 工资：&#34; &lt;&lt; m_salary &lt;&lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&lt;Worker&gt; &amp;v){ string nameSeed = &#34;ABCDEFGHIJ&#34;; for(int i = 0; i &lt; nameSeed.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="map multimap 容器" />
+<meta property="og:description" content="特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
+ 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; m_name &lt;&lt; &#34; 工资：&#34; &lt;&lt; m_salary &lt;&lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&lt;Worker&gt; &amp;v){ string nameSeed = &#34;ABCDEFGHIJ&#34;; for(int i = 0; i &lt; nameSeed." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-20T20:18:25&#43;08:00" />
+<meta property="article:modified_time" content="2022-01-20T20:18:25&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="map multimap 容器"/>
+<meta name="twitter:description" content="特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
+ 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; m_name &lt;&lt; &#34; 工资：&#34; &lt;&lt; m_salary &lt;&lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&lt;Worker&gt; &amp;v){ string nameSeed = &#34;ABCDEFGHIJ&#34;; for(int i = 0; i &lt; nameSeed."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "map multimap 容器",
+      "item": "https://874656645.github.io/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "map multimap 容器",
+  "name": "map multimap 容器",
+  "description": "特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：\n 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout \u0026lt;\u0026lt; \u0026#34;姓名：\u0026#34; \u0026lt;\u0026lt; m_name \u0026lt;\u0026lt; \u0026#34; 工资：\u0026#34; \u0026lt;\u0026lt; m_salary \u0026lt;\u0026lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector\u0026lt;Worker\u0026gt; \u0026amp;v){ string nameSeed = \u0026#34;ABCDEFGHIJ\u0026#34;; for(int i = 0; i \u0026lt; nameSeed.",
+  "keywords": [
+    "C++", "STL"
+  ],
+  "articleBody": "特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：\n 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout  \"姓名：\"  m_name  \" 工资：\"  m_salary  endl; } private: string m_name; int m_salary; }; void createWorkers(vectorWorker \u0026v){ string nameSeed = \"ABCDEFGHIJ\"; for(int i = 0; i  nameSeed.length(); ++i){ string name = \"员工\"; // 注意：不能写成 name = \"员工\" + nameSeed[i]  name += nameSeed[i]; v.push_back(Worker(name, rand() % 10000 + 5000)); } } void groupWorker(vectorWorker \u0026v, multimapint, Worker \u0026m){ for(const auto \u0026w : v){ int depId = rand() % 3; m.insert({depId, w}); } } int main() { srand((unsigned int)time(NULL)); // 创建员工  vectorWorker vWorker; createWorkers(vWorker); // 员工分组  multimapint, Worker mWorker; groupWorker(vWorker, mWorker); // 打印 multimap 结果  for(auto it = mWorker.begin(); it != mWorker.end(); it++){ cout  \"部门：\"  it-first  \" \"; it-second.printWorker(); } cout  \"-----------------------------\"  endl; // 按部门分组打印  cout  \"部门0：\"  endl; auto it = mWorker.find(0); int num = mWorker.count(0); for(int i = 0; it != mWorker.end() \u0026\u0026 i  num; it++, i++){ it-second.printWorker(); } cout  \"-----------------------------\"  endl; cout  \"部门1：\"  endl; it = mWorker.find(1); num = mWorker.count(1); for(int i = 0; it != mWorker.end() \u0026\u0026 i  num; it++, i++){ it-second.printWorker(); } cout  \"-----------------------------\"  endl; cout  \"部门2：\"  endl; it = mWorker.find(2); num = mWorker.count(2); for(int i = 0; it != mWorker.end() \u0026\u0026 i  num; it++, i++){ it-second.printWorker(); } return 0; } 输出：\n部门：0 姓名：员工D 工资：6725 部门：0 姓名：员工H 工资：12290 部门：0 姓名：员工I 工资：8753 部门：1 姓名：员工A 工资：11577 部门：1 姓名：员工C 工资：10892 部门：1 姓名：员工F 工资：12622 部门：2 姓名：员工B 工资：6047 部门：2 姓名：员工E 工资：5629 部门：2 姓名：员工G 工资：8954 部门：2 姓名：员工J 工资：11160 ----------------------------- 部门0： 姓名：员工D 工资：6725 姓名：员工H 工资：12290 姓名：员工I 工资：8753 ----------------------------- 部门1： 姓名：员工A 工资：11577 姓名：员工C 工资：10892 姓名：员工F 工资：12622 ----------------------------- 部门2： 姓名：员工B 工资：6047 姓名：员工E 工资：5629 姓名：员工G 工资：8954 姓名：员工J 工资：11160 ",
+  "wordCount" : "336",
+  "inLanguage": "en",
+  "datePublished": "2022-01-20T20:18:25+08:00",
+  "dateModified": "2022-01-20T20:18:25+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      map multimap 容器
+    </h1>
+    <div class="post-meta"><span title='2022-01-20 20:18:25 +0800 CST'>January 20, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e7%89%b9%e7%82%b9" aria-label="特点">特点</a></li>
+                <li>
+                    <a href="#%e6%a1%88%e4%be%8b" aria-label="案例">案例</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="特点">特点<a hidden class="anchor" aria-hidden="true" href="#特点">#</a></h2>
+<ul>
+<li>所有元素都会根据元素的键值自动排序</li>
+<li>默认排序规则是从小到大，可以通过仿函数指定排序规则</li>
+<li><em>map / multimap</em> 属于关联式容器，底层结构是用<strong>红黑树</strong>实现</li>
+<li>不可以修改键值，可以通过删除再插入的方式实现</li>
+<li>可以根据 <em>key</em> 值快速找到 <em>value</em> 值</li>
+<li>可以通过下标 <code>[]</code> 的方式快速查找、插入和更新对应的 <em>value</em></li>
+</ul>
+<h2 id="案例">案例<a hidden class="anchor" aria-hidden="true" href="#案例">#</a></h2>
+<ul>
+<li>公司今天招聘了10个员工（<em>ABCDEFGHIJ</em>），<em>10</em> 名员工进入公司之后，需要指派员工在哪个部门工作</li>
+<li>员工信息有: 姓名 工资组成；部门分为：策划、美术、研发</li>
+<li>随机给 <em>10</em> 名员工分配部门和工资</li>
+<li>通过 <em>multimap</em> 进行信息的插入 <em>key(部门编号) value(员工)</em></li>
+<li>分部门显示员工信息</li>
+</ul>
+<p><strong>思路：</strong></p>
+<ol>
+<li>创建 <em>10</em> 名员工，放到 <em>vector</em> 中</li>
+<li>遍历 <em>vector</em> 容器，取出每个员工，进行随机分组</li>
+<li>分组后，将员工部门编号作为 <em>key</em>，具体员工作为 <em>value</em>，放入到 <em>multimap</em> 容器中</li>
+<li>分部门显示员工信息</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Worker</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Worker(string name, <span style="color:#66d9ef">int</span> salary){
+        m_name <span style="color:#f92672">=</span> name;
+        m_salary <span style="color:#f92672">=</span> salary;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printWorker</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;姓名：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; 工资：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_salary <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    string m_name;
+    <span style="color:#66d9ef">int</span> m_salary;
+};
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createWorkers</span>(vector<span style="color:#f92672">&lt;</span>Worker<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
+    string nameSeed <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ABCDEFGHIJ&#34;</span>;
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nameSeed.length(); <span style="color:#f92672">++</span>i){
+        string name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;员工&#34;</span>;   <span style="color:#75715e">// 注意：不能写成 name = &#34;员工&#34; + nameSeed[i]
+</span><span style="color:#75715e"></span>        name <span style="color:#f92672">+=</span> nameSeed[i];
+        v.push_back(Worker(name, rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">10000</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">5000</span>));
+    }
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">groupWorker</span>(vector<span style="color:#f92672">&lt;</span>Worker<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v, multimap<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, Worker<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>m){
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>w : v){
+        <span style="color:#66d9ef">int</span> depId <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span>;
+        m.insert({depId, w});
+    }
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    srand((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)time(NULL));
+    <span style="color:#75715e">// 创建员工
+</span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Worker<span style="color:#f92672">&gt;</span> vWorker;
+    createWorkers(vWorker);
+    
+    <span style="color:#75715e">// 员工分组
+</span><span style="color:#75715e"></span>    multimap<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, Worker<span style="color:#f92672">&gt;</span> mWorker;
+    groupWorker(vWorker, mWorker);
+    
+    <span style="color:#75715e">// 打印 multimap 结果 
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> mWorker.begin(); it <span style="color:#f92672">!=</span> mWorker.end(); it<span style="color:#f92672">++</span>){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;部门：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> it<span style="color:#f92672">-&gt;</span>first <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+        it<span style="color:#f92672">-&gt;</span>second.printWorker();
+    }
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-----------------------------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    
+    <span style="color:#75715e">// 按部门分组打印
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;部门0：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> mWorker.find(<span style="color:#ae81ff">0</span>);
+    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> mWorker.count(<span style="color:#ae81ff">0</span>);
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; it <span style="color:#f92672">!=</span> mWorker.end() <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;</span> num; it<span style="color:#f92672">++</span>, i<span style="color:#f92672">++</span>){
+        it<span style="color:#f92672">-&gt;</span>second.printWorker();
+    }
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-----------------------------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;部门1：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    it <span style="color:#f92672">=</span> mWorker.find(<span style="color:#ae81ff">1</span>);
+    num <span style="color:#f92672">=</span> mWorker.count(<span style="color:#ae81ff">1</span>);
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; it <span style="color:#f92672">!=</span> mWorker.end() <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;</span> num; it<span style="color:#f92672">++</span>, i<span style="color:#f92672">++</span>){
+        it<span style="color:#f92672">-&gt;</span>second.printWorker();
+    }
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-----------------------------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;部门2：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    it <span style="color:#f92672">=</span> mWorker.find(<span style="color:#ae81ff">2</span>);
+    num <span style="color:#f92672">=</span> mWorker.count(<span style="color:#ae81ff">2</span>);
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; it <span style="color:#f92672">!=</span> mWorker.end() <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;</span> num; it<span style="color:#f92672">++</span>, i<span style="color:#f92672">++</span>){
+        it<span style="color:#f92672">-&gt;</span>second.printWorker();
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">部门：0 姓名：员工D 工资：6725
+部门：0 姓名：员工H 工资：12290
+部门：0 姓名：员工I 工资：8753
+部门：1 姓名：员工A 工资：11577
+部门：1 姓名：员工C 工资：10892
+部门：1 姓名：员工F 工资：12622
+部门：2 姓名：员工B 工资：6047
+部门：2 姓名：员工E 工资：5629
+部门：2 姓名：员工G 工资：8954
+部门：2 姓名：员工J 工资：11160
+-----------------------------
+部门0：
+姓名：员工D 工资：6725
+姓名：员工H 工资：12290
+姓名：员工I 工资：8753
+-----------------------------
+部门1：
+姓名：员工A 工资：11577
+姓名：员工C 工资：10892
+姓名：员工F 工资：12622
+-----------------------------
+部门2：
+姓名：员工B 工资：6047
+姓名：员工E 工资：5629
+姓名：员工G 工资：8954
+姓名：员工J 工资：11160
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/stl/">STL</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/89-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%B8%8E-predicate-%E8%B0%93%E8%AF%8D/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>函数对象与 predicate 谓词</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>set multiset 容器</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

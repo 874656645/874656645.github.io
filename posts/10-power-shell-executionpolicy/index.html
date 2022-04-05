@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Power Shell ExecutionPolicy | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="" />
+<meta name="description" content="Power shell执行策略 原文网址
+1、查看当前的安全策略 Get-ExecutionPolicy
+2、修改执行策略 ps:这种方法会将执行策略保存到注册表
+Set-ExecutionPolicy UnRestricted
+or
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
+4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
+6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/10-power-shell-executionpolicy/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Power Shell ExecutionPolicy" />
+<meta property="og:description" content="Power shell执行策略 原文网址
+1、查看当前的安全策略 Get-ExecutionPolicy
+2、修改执行策略 ps:这种方法会将执行策略保存到注册表
+Set-ExecutionPolicy UnRestricted
+or
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
+4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
+6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/10-power-shell-executionpolicy/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-02-28T17:01:31&#43;08:00" />
+<meta property="article:modified_time" content="2019-02-28T17:01:31&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Power Shell ExecutionPolicy"/>
+<meta name="twitter:description" content="Power shell执行策略 原文网址
+1、查看当前的安全策略 Get-ExecutionPolicy
+2、修改执行策略 ps:这种方法会将执行策略保存到注册表
+Set-ExecutionPolicy UnRestricted
+or
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
+4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
+6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Power Shell ExecutionPolicy",
+      "item": "https://874656645.github.io/posts/10-power-shell-executionpolicy/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Power Shell ExecutionPolicy",
+  "name": "Power Shell ExecutionPolicy",
+  "description": "Power shell执行策略 原文网址\n1、查看当前的安全策略 Get-ExecutionPolicy\n2、修改执行策略 ps:这种方法会将执行策略保存到注册表\nSet-ExecutionPolicy UnRestricted\nor\nSet-ExecutionPolicy -ExecutionPolicy RemoteSigned\n3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])\n4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List\n6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned",
+  "keywords": [
+    
+  ],
+  "articleBody": "Power shell执行策略 原文网址\n1、查看当前的安全策略 Get-ExecutionPolicy\n2、修改执行策略 ps:这种方法会将执行策略保存到注册表\nSet-ExecutionPolicy UnRestricted\nor\nSet-ExecutionPolicy -ExecutionPolicy RemoteSigned\n3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])\n4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List\n6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned\n",
+  "wordCount" : "25",
+  "inLanguage": "en",
+  "datePublished": "2019-02-28T17:01:31+08:00",
+  "dateModified": "2019-02-28T17:01:31+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/10-power-shell-executionpolicy/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Power Shell ExecutionPolicy
+    </h1>
+    <div class="post-meta"><span title='2019-02-28 17:01:31 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#power-shell%e6%89%a7%e8%a1%8c%e7%ad%96%e7%95%a5" aria-label="Power shell执行策略">Power shell执行策略</a><ul>
+                        
+                <li>
+                    <a href="#1%e6%9f%a5%e7%9c%8b%e5%bd%93%e5%89%8d%e7%9a%84%e5%ae%89%e5%85%a8%e7%ad%96%e7%95%a5" aria-label="1、查看当前的安全策略">1、查看当前的安全策略</a></li>
+                <li>
+                    <a href="#2%e4%bf%ae%e6%94%b9%e6%89%a7%e8%a1%8c%e7%ad%96%e7%95%a5" aria-label="2、修改执行策略">2、修改执行策略</a></li>
+                <li>
+                    <a href="#3%e6%9f%a5%e7%9c%8b%e6%89%80%e6%9c%89%e6%94%af%e6%8c%81%e7%9a%84%e6%89%a7%e8%a1%8c%e7%ad%96%e7%95%a5" aria-label="3、查看所有支持的执行策略">3、查看所有支持的执行策略</a></li>
+                <li>
+                    <a href="#4%e8%8e%b7%e5%8f%96%e5%bd%b1%e5%93%8d%e5%bd%93%e5%89%8d%e4%bc%9a%e8%af%9d%e7%9a%84%e6%89%80%e6%9c%89%e6%89%a7%e8%a1%8c%e7%ad%96%e7%95%a5" aria-label="4、获取影响当前会话的所有执行策略">4、获取影响当前会话的所有执行策略</a></li>
+                <li>
+                    <a href="#6%e4%b8%ba%e5%bd%93%e5%89%8d-windows-powershell-%e4%bc%9a%e8%af%9d%e8%ae%be%e7%bd%ae%e6%89%a7%e8%a1%8c%e7%ad%96%e7%95%a5" aria-label="6、为当前 Windows PowerShell 会话设置执行策略">6、为当前 Windows PowerShell 会话设置执行策略</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="power-shell执行策略">Power shell执行策略<a hidden class="anchor" aria-hidden="true" href="#power-shell执行策略">#</a></h2>
+<p><a href="https://docs.microsoft.com/zh-cn/previous-versions/windows/powershell-scripting/hh847748(v=wps.640)">原文网址</a></p>
+<h3 id="1查看当前的安全策略">1、查看当前的安全策略<a hidden class="anchor" aria-hidden="true" href="#1查看当前的安全策略">#</a></h3>
+<p><code>Get-ExecutionPolicy</code></p>
+<h3 id="2修改执行策略">2、修改执行策略<a hidden class="anchor" aria-hidden="true" href="#2修改执行策略">#</a></h3>
+<p><em>ps:这种方法会将执行策略保存到注册表</em></p>
+<p><code>Set-ExecutionPolicy UnRestricted</code><br>
+or<br>
+<code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned</code></p>
+<h3 id="3查看所有支持的执行策略">3、查看所有支持的执行策略<a hidden class="anchor" aria-hidden="true" href="#3查看所有支持的执行策略">#</a></h3>
+<p><code>[System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])</code></p>
+<h3 id="4获取影响当前会话的所有执行策略">4、获取影响当前会话的所有执行策略<a hidden class="anchor" aria-hidden="true" href="#4获取影响当前会话的所有执行策略">#</a></h3>
+<p><code>Get-ExecutionPolicy -List</code></p>
+<h3 id="6为当前-windows-powershell-会话设置执行策略">6、为当前 Windows PowerShell 会话设置执行策略<a hidden class="anchor" aria-hidden="true" href="#6为当前-windows-powershell-会话设置执行策略">#</a></h3>
+<p><code>PowerShell.exe -ExecutionPolicy RemoteSigned</code></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/11-vcpkg-learn/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Vcpkg Learn</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/9-crawl-pictures-from-website/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Crawl Pictures From Website</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

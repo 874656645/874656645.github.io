@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>C 与 C&#43;&#43; 的差异 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;" />
+<meta name="description" content="C&#43;&#43; 是 C 的超集和增强，校验更加严格
+C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱动，面向对象是对象驱动
+1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
+故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C&#43;&#43; 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C&#43;&#43; 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C&#43;&#43; 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C&#43;&#43; 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="C 与 C&#43;&#43; 的差异" />
+<meta property="og:description" content="C&#43;&#43; 是 C 的超集和增强，校验更加严格
+C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱动，面向对象是对象驱动
+1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
+故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C&#43;&#43; 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C&#43;&#43; 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C&#43;&#43; 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C&#43;&#43; 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-22T22:34:27&#43;08:00" />
+<meta property="article:modified_time" content="2021-12-22T22:34:27&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="C 与 C&#43;&#43; 的差异"/>
+<meta name="twitter:description" content="C&#43;&#43; 是 C 的超集和增强，校验更加严格
+C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱动，面向对象是对象驱动
+1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
+故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C&#43;&#43; 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C&#43;&#43; 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C&#43;&#43; 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C&#43;&#43; 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "C 与 C++ 的差异",
+      "item": "https://874656645.github.io/posts/32-c-%E4%B8%8E-c++-%E7%9A%84%E5%B7%AE%E5%BC%82/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C 与 C++ 的差异",
+  "name": "C 与 C\u002b\u002b 的差异",
+  "description": "C++ 是 C 的超集和增强，校验更加严格\nC 主要是面向过程，C++ 是面向对象，面向过程是函数驱动，面向对象是对象驱动\n1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，\n故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 \u0026amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C++ 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C++ 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C++ 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C++ 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a \u0026lt; b) ?",
+  "keywords": [
+    "C++"
+  ],
+  "articleBody": "C++ 是 C 的超集和增强，校验更加严格\nC 主要是面向过程，C++ 是面向对象，面向过程是函数驱动，面向对象是对象驱动\n1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，\n故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 \u0026 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C++ 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C++ 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C++ 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C++ 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a  b) ? a : b) = 50; // 错误 *((a  b) ? \u0026a : \u0026b) = 50; // 正确，a 此时是50 // C++ 三目运算左值 int a = 10, b = 20; ((a  b) ? a : b) = 50; // 正确，a 此时是50（返回的是引用） 10 const 增强  C中的 const 变量可以通过指针的方式进行修改，是假常量  // C 语言 const int a = 10; int *p = \u0026a; *p = 20; printf(\"a = %d\", a);  C++ 中的 const 变量放在了全局空间的符号表中，是不可更改的  // C++ 语言 const int a = 10; // 常量区符号表中（key value 键值对），编译过程中进行替换  // #define 是在预处理阶段展开，不受作用域限制 int *p = \u0026a; // 在栈中开辟了一个临时变量空间 *p = 20; cout  \"a = \"  a  endl; // a = 10 cout  \"*p = \"  *p  endl; // *p = 20 ",
+  "wordCount" : "272",
+  "inLanguage": "en",
+  "datePublished": "2021-12-22T22:34:27+08:00",
+  "dateModified": "2021-12-22T22:34:27+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/32-c-%E4%B8%8E-c++-%E7%9A%84%E5%B7%AE%E5%BC%82/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      C 与 C&#43;&#43; 的差异
+    </h1>
+    <div class="post-meta"><span title='2021-12-22 22:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-%e6%96%b0%e5%a2%9e%e5%91%bd%e5%90%8d%e7%a9%ba%e9%97%b4" aria-label="1 新增命名空间">1 新增命名空间</a></li>
+                <li>
+                    <a href="#2-%e6%96%b0%e5%a2%9e%e5%bc%95%e7%94%a8%e7%b1%bb%e5%9e%8b" aria-label="2 新增引用类型">2 新增引用类型</a></li>
+                <li>
+                    <a href="#3-%e6%9e%9a%e4%b8%be%e6%a3%80%e6%b5%8b%e5%a2%9e%e5%bc%ba" aria-label="3 枚举检测增强">3 枚举检测增强</a></li>
+                <li>
+                    <a href="#4-%e5%8f%98%e9%87%8f%e5%ae%9a%e4%b9%89%e5%a2%9e%e5%bc%ba" aria-label="4 变量定义增强">4 变量定义增强</a></li>
+                <li>
+                    <a href="#5-%e5%85%a8%e5%b1%80%e5%8f%98%e9%87%8f%e5%ae%9a%e4%b9%89%e6%a3%80%e6%b5%8b%e4%b8%a5%e6%a0%bc" aria-label="5 全局变量定义检测严格">5 全局变量定义检测严格</a></li>
+                <li>
+                    <a href="#6-%e5%87%bd%e6%95%b0%e5%bd%a2%e5%8f%82%e4%b8%aa%e6%95%b0%e5%92%8c%e5%87%bd%e6%95%b0%e8%bf%94%e5%9b%9e%e5%80%bc%e6%a3%80%e6%b5%8b%e5%a2%9e%e5%bc%ba" aria-label="6 函数形参个数和函数返回值检测增强">6 函数形参个数和函数返回值检测增强</a></li>
+                <li>
+                    <a href="#7-struct-%e7%bb%93%e6%9e%84%e4%bd%93%e5%a2%9e%e5%bc%ba" aria-label="7 struct 结构体增强">7 struct 结构体增强</a></li>
+                <li>
+                    <a href="#8-%e6%96%b0%e5%a2%9e-bool-%e5%85%b3%e9%94%ae%e5%ad%971-%e4%b8%aa%e5%ad%97%e8%8a%82" aria-label="8 新增 bool 关键字，1 个字节">8 新增 bool 关键字，1 个字节</a></li>
+                <li>
+                    <a href="#9-%e4%b8%89%e7%9b%ae%e8%bf%90%e7%ae%97%e7%ac%a6%e5%a2%9e%e5%bc%ba%e8%af%ad%e6%b3%95%e7%b3%96" aria-label="9 三目运算符增强（语法糖）">9 三目运算符增强（语法糖）</a></li>
+                <li>
+                    <a href="#10-const-%e5%a2%9e%e5%bc%ba" aria-label="10 const 增强">10 const 增强</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><strong><code>C++</code> 是 <code>C</code> 的超集和增强，校验更加严格</strong><br>
+<strong><code>C</code> 主要是面向过程，<code>C++</code> 是面向对象，面向过程是函数驱动，面向对象是对象驱动</strong></p>
+<h3 id="1-新增命名空间">1 新增命名空间<a hidden class="anchor" aria-hidden="true" href="#1-新增命名空间">#</a></h3>
+<ul>
+<li>给<code>{}</code>作用域起了个名称，后面不用加分号<code>;</code></li>
+<li>命名空间可以嵌套</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">namespace</span> X
+{
+    <span style="color:#66d9ef">namespace</span> Y
+    {
+        
+    }
+}
+</code></pre></div><h3 id="2-新增引用类型">2 新增引用类型<a hidden class="anchor" aria-hidden="true" href="#2-新增引用类型">#</a></h3>
+<ul>
+<li>引用在一定程度上可以替代指针，<strong>作用与常指针类似 <code>int * const a</code></strong></li>
+<li>引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，<br>
+故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址</li>
+<li>声明时必须初始化，一经声明，不可变更</li>
+<li>可对引用再次引用，多次引用的结果是某一变量具有多个别名</li>
+<li>&amp; 符号在 = 号左边是引用，在 = 号右边为取地址</li>
+</ul>
+<h3 id="3-枚举检测增强">3 枚举检测增强<a hidden class="anchor" aria-hidden="true" href="#3-枚举检测增强">#</a></h3>
+<ul>
+<li>不能将整型隐式转化为枚举</li>
+</ul>
+<h3 id="4-变量定义增强">4 变量定义增强<a hidden class="anchor" aria-hidden="true" href="#4-变量定义增强">#</a></h3>
+<ul>
+<li><code>C++</code> 变量不必都声明在函数顶部，可以随使用随定义</li>
+</ul>
+<h3 id="5-全局变量定义检测严格">5 全局变量定义检测严格<a hidden class="anchor" aria-hidden="true" href="#5-全局变量定义检测严格">#</a></h3>
+<ul>
+<li><code>C</code> 全局变量重复定义，<code>C++</code> 不可以，全局变量检测增强</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// C 语言
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> g_val;          <span style="color:#75715e">// bss段
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> g_val <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;     <span style="color:#75715e">// data段
+</span></code></pre></div><h3 id="6-函数形参个数和函数返回值检测增强">6 函数形参个数和函数返回值检测增强<a hidden class="anchor" aria-hidden="true" href="#6-函数形参个数和函数返回值检测增强">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// C 语言
+</span><span style="color:#75715e"></span>f()                     <span style="color:#75715e">// 默认返回值 int
+</span><span style="color:#75715e"></span>{
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">10</span>;
+}
+<span style="color:#66d9ef">int</span> g(<span style="color:#66d9ef">int</span> a)
+{
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">10</span>;
+}
+
+<span style="color:#75715e">// 调用
+</span><span style="color:#75715e"></span>g(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>);      <span style="color:#75715e">// 可编译通过，但是有警告
+</span></code></pre></div><h3 id="7-struct-结构体增强">7 struct 结构体增强<a hidden class="anchor" aria-hidden="true" href="#7-struct-结构体增强">#</a></h3>
+<ul>
+<li>功能与类基本等同，只不过 <code>class</code> 默认是 <code>private</code> 权限，<code>struct</code> 默认是 <code>public</code> 权限</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// C 语言声明结构体变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> Student s;
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// C++ 语言声明结构体变量
+</span><span style="color:#75715e"></span>Student s;
+</code></pre></div><h3 id="8-新增-bool-关键字1-个字节">8 新增 bool 关键字，1 个字节<a hidden class="anchor" aria-hidden="true" href="#8-新增-bool-关键字1-个字节">#</a></h3>
+<ul>
+<li><code>C</code> 用 0 表示 <code>false</code>，非 0 表示 <code>true</code></li>
+<li><code>C++</code> 中 <code>bool</code> 为 1 个字节，但是只有 <code>true</code> 和 <code>false</code> 两个值</li>
+</ul>
+<h3 id="9-三目运算符增强语法糖">9 三目运算符增强（语法糖）<a hidden class="anchor" aria-hidden="true" href="#9-三目运算符增强语法糖">#</a></h3>
+<ul>
+<li><code>C</code> 中三目运算符不可以当左值</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// C 语言
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+((a <span style="color:#f92672">&lt;</span> b) <span style="color:#f92672">?</span> a : b) <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;     <span style="color:#75715e">// 错误
+</span><span style="color:#75715e"></span><span style="color:#f92672">*</span>((a <span style="color:#f92672">&lt;</span> b) <span style="color:#f92672">?</span> <span style="color:#f92672">&amp;</span>a : <span style="color:#f92672">&amp;</span>b) <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;  <span style="color:#75715e">// 正确，a 此时是50
+</span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// C++ 三目运算左值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+((a <span style="color:#f92672">&lt;</span> b) <span style="color:#f92672">?</span> a : b) <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;     <span style="color:#75715e">// 正确，a 此时是50（返回的是引用）
+</span></code></pre></div><h3 id="10-const-增强">10 const 增强<a hidden class="anchor" aria-hidden="true" href="#10-const-增强">#</a></h3>
+<ul>
+<li><code>C</code>中的 <code>const</code> 变量可以通过指针的方式进行修改，是假常量</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C" data-lang="C"><span style="color:#75715e">// C 语言
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+<span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>a;
+<span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+printf(<span style="color:#e6db74">&#34;a = %d&#34;</span>, a);
+</code></pre></div><ul>
+<li><code>C++</code> 中的 <code>const</code> 变量放在了<strong>全局空间的符号表中，是不可更改的</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// C++ 语言
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;           <span style="color:#75715e">// 常量区符号表中（key value 键值对），编译过程中进行替换
+</span><span style="color:#75715e"></span>                            <span style="color:#75715e">// #define 是在预处理阶段展开，不受作用域限制
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>a;                <span style="color:#75715e">// 在栈中开辟了一个临时变量空间
+</span><span style="color:#75715e"></span><span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// a = 10
+</span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;*p = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// *p = 20
+</span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/33-fork-unix/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>fork Unix</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>函数形参从右到左入栈</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

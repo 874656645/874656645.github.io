@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>评委打分案例 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;, STL" />
+<meta name="description" content="有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
+分析：
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="评委打分案例" />
+<meta property="og:description" content="有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
+分析：
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-16T22:10:49&#43;08:00" />
+<meta property="article:modified_time" content="2022-01-16T22:10:49&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="评委打分案例"/>
+<meta name="twitter:description" content="有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
+分析：
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "评委打分案例",
+      "item": "https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "评委打分案例",
+  "name": "评委打分案例",
+  "description": "有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。\n分析：\n 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout \u0026lt;\u0026lt; m_name \u0026lt;\u0026lt; \u0026#34;的平均分为：\u0026#34; \u0026lt;\u0026lt; m_avgScore \u0026lt;\u0026lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector\u0026lt;Player\u0026gt; \u0026amp;v){ string nameSeed = \u0026#34;ABCDE\u0026#34;; for(int i = 0; i \u0026lt; nameSeed.",
+  "keywords": [
+    "C++", "STL"
+  ],
+  "articleBody": "有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。\n分析：\n 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout  m_name  \"的平均分为：\"  m_avgScore  endl; } private: string m_name; int m_avgScore; }; void createPlayers(vectorPlayer \u0026v){ string nameSeed = \"ABCDE\"; for(int i = 0; i  nameSeed.length(); ++i){ string name = \"选手\"; name += nameSeed[i]; v.push_back(Player(name)); } } void scorePlayers(vectorPlayer \u0026v){ for(auto \u0026p : v){ // 把 10 个评委打分存到 deque 容器中  dequeint scores; for(int i = 0; i  10; ++i){ scores.push_back(rand() % 41 + 60); } // sort 算法对 deque 容器中分数排序，去除最高和最低分  sort(scores.begin(), scores.end()); #if 0// 测试打印分数 p.printInfo(); cout for(const auto \u0026s : scores){ cout } cout #endif  scores.pop_back(); scores.pop_front(); // deque 容器遍历一遍，累加总分并计算平均分  int num = 0; for(const auto \u0026s : scores){ num += s; } p.setAvgScore(num / scores.size()); } } void printScore(const vectorPlayer \u0026v){ for(const auto \u0026p : v){ p.printInfo(); } } int main() { srand((unsigned int)time(NULL)); // 创建五名选手  vectorPlayer v; createPlayers(v); // 10 个评委打分  scorePlayers(v); // 打印平均分  printScore(v); return 0; } 输出：\n选手A的平均分为：81 选手B的平均分为：84 选手C的平均分为：82 选手D的平均分为：83 选手E的平均分为：68 ",
+  "wordCount" : "209",
+  "inLanguage": "en",
+  "datePublished": "2022-01-16T22:10:49+08:00",
+  "dateModified": "2022-01-16T22:10:49+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      评委打分案例
+    </h1>
+    <div class="post-meta"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>有 5 名选手：选手 <em>ABCDE</em>，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。</p>
+<p><strong>分析：</strong></p>
+<ol>
+<li>创建五名选手，放到 <em>vector</em> 中</li>
+<li>遍历 <em>vector</em> 容器，取出来每一个选手，执行 <em>for</em> 循环，可以把 10 个评委打分存到 <em>deque</em> 容器中</li>
+<li><em>sort</em> 算法对 <em>deque</em> 容器中分数排序，去除最高和最低分</li>
+<li><em>deque</em> 容器遍历一遍，累加总分</li>
+<li>获取平均分</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Player</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Player(string name){
+        m_name <span style="color:#f92672">=</span> name;
+        m_avgScore <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setAvgScore</span>(<span style="color:#66d9ef">int</span> v){
+        m_avgScore <span style="color:#f92672">=</span> v;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printInfo</span>()<span style="color:#66d9ef">const</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> m_name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;的平均分为：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_avgScore <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    string m_name;
+    <span style="color:#66d9ef">int</span> m_avgScore;
+};
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createPlayers</span>(vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
+    string nameSeed <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ABCDE&#34;</span>;
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nameSeed.length(); <span style="color:#f92672">++</span>i){
+        string name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;选手&#34;</span>;
+        name <span style="color:#f92672">+=</span> nameSeed[i];
+        v.push_back(Player(name));
+    }
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">scorePlayers</span>(vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p : v){
+        <span style="color:#75715e">// 把 10 个评委打分存到 deque 容器中
+</span><span style="color:#75715e"></span>        deque<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> scores;
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>i){
+            scores.push_back(rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">41</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">60</span>);
+        }
+        <span style="color:#75715e">// sort 算法对 deque 容器中分数排序，去除最高和最低分
+</span><span style="color:#75715e"></span>        sort(scores.begin(), scores.end());
+
+<span style="color:#75715e">#if 0</span><span style="color:#75715e">
+</span><span style="color:#75715e">        // 测试打印分数
+</span><span style="color:#75715e">        p.printInfo();
+</span><span style="color:#75715e">        cout &lt;&lt; &#34;------------------&#34; &lt;&lt; endl;
+</span><span style="color:#75715e">        for(const auto &amp;s : scores){
+</span><span style="color:#75715e">            cout &lt;&lt; s &lt;&lt; &#34; &#34;;
+</span><span style="color:#75715e">        }
+</span><span style="color:#75715e">        cout &lt;&lt; endl;
+</span><span style="color:#75715e"></span><span style="color:#75715e">#endif    
+</span><span style="color:#75715e"></span>
+        scores.pop_back();
+        scores.pop_front();
+        <span style="color:#75715e">// deque 容器遍历一遍，累加总分并计算平均分
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>s : scores){
+            num <span style="color:#f92672">+=</span> s;
+        }
+        p.setAvgScore(num <span style="color:#f92672">/</span> scores.size());
+    }
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printScore</span>(<span style="color:#66d9ef">const</span> vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p : v){
+        p.printInfo();
+    }
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    srand((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)time(NULL));
+    <span style="color:#75715e">// 创建五名选手
+</span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> v;
+    createPlayers(v);
+    <span style="color:#75715e">// 10 个评委打分
+</span><span style="color:#75715e"></span>    scorePlayers(v);
+    <span style="color:#75715e">// 打印平均分
+</span><span style="color:#75715e"></span>    printScore(v);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">选手A的平均分为：81
+选手B的平均分为：84
+选手C的平均分为：82
+选手D的平均分为：83
+选手E的平均分为：68
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/stl/">STL</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>stack 栈容器适配器</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>生成随机数</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
