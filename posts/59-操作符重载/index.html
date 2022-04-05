@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>操作符重载 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="#include &lt;iostream&gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c); friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public: Complex(){ cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &lt;&lt; &#34;Complex(int, int)...&#34; &lt;&lt; endl; this-&gt;a = a; this-&gt;b = b; } ~Complex(){ cout &lt;&lt; &#34;~Complex().">
+<meta name="description" content="#include &lt;iostream&gt; using namespace std;  class Complex{  // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c);  friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public:  Complex(){  cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout &lt;&lt; &#34;Complex(int, int).">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -16,7 +16,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="操作符重载" />
-<meta property="og:description" content="#include &lt;iostream&gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c); friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public: Complex(){ cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &lt;&lt; &#34;Complex(int, int)...&#34; &lt;&lt; endl; this-&gt;a = a; this-&gt;b = b; } ~Complex(){ cout &lt;&lt; &#34;~Complex()." />
+<meta property="og:description" content="#include &lt;iostream&gt; using namespace std;  class Complex{  // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c);  friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public:  Complex(){  cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout &lt;&lt; &#34;Complex(int, int)." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-03T13:54:11&#43;08:00" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="操作符重载"/>
-<meta name="twitter:description" content="#include &lt;iostream&gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c); friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public: Complex(){ cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &lt;&lt; &#34;Complex(int, int)...&#34; &lt;&lt; endl; this-&gt;a = a; this-&gt;b = b; } ~Complex(){ cout &lt;&lt; &#34;~Complex()."/>
+<meta name="twitter:description" content="#include &lt;iostream&gt; using namespace std;  class Complex{  // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c);  friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public:  Complex(){  cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout &lt;&lt; &#34;Complex(int, int)."/>
 
 
 <script type="application/ld+json">
@@ -86,11 +86,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "操作符重载",
   "name": "操作符重载",
-  "description": "#include \u0026lt;iostream\u0026gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex \u0026amp;c1, Complex \u0026amp;c2);  // friend Complex operator+(Complex \u0026amp;c1, Complex \u0026amp;c2);  // friend Complex\u0026amp; operator+= (Complex \u0026amp;c1, Complex \u0026amp;c2);  friend ostream\u0026amp; operator\u0026lt;\u0026lt;(ostream \u0026amp;os, Complex \u0026amp;c); friend istream\u0026amp; operator\u0026gt;\u0026gt;(istream \u0026amp;is, Complex \u0026amp;c); public: Complex(){ cout \u0026lt;\u0026lt; \u0026#34;Complex()...\u0026#34; \u0026lt;\u0026lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout \u0026lt;\u0026lt; \u0026#34;Complex(int, int)...\u0026#34; \u0026lt;\u0026lt; endl; this-\u0026gt;a = a; this-\u0026gt;b = b; } ~Complex(){ cout \u0026lt;\u0026lt; \u0026#34;~Complex().",
+  "description": "#include \u0026lt;iostream\u0026gt; using namespace std;  class Complex{  // friend Complex complexAdd(Complex \u0026amp;c1, Complex \u0026amp;c2);  // friend Complex operator+(Complex \u0026amp;c1, Complex \u0026amp;c2);  // friend Complex\u0026amp; operator+= (Complex \u0026amp;c1, Complex \u0026amp;c2);  friend ostream\u0026amp; operator\u0026lt;\u0026lt;(ostream \u0026amp;os, Complex \u0026amp;c);  friend istream\u0026amp; operator\u0026gt;\u0026gt;(istream \u0026amp;is, Complex \u0026amp;c); public:  Complex(){  cout \u0026lt;\u0026lt; \u0026#34;Complex()...\u0026#34; \u0026lt;\u0026lt; endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout \u0026lt;\u0026lt; \u0026#34;Complex(int, int).",
   "keywords": [
     "C++"
   ],
-  "articleBody": "#include  using namespace std; class Complex{ // friend Complex complexAdd(Complex \u0026c1, Complex \u0026c2);  // friend Complex operator+(Complex \u0026c1, Complex \u0026c2);  // friend Complex\u0026 operator+= (Complex \u0026c1, Complex \u0026c2);  friend ostream\u0026 operator(ostream \u0026os, Complex \u0026c); friend istream\u0026 operator(istream \u0026is, Complex \u0026c); public: Complex(){ cout  \"Complex()...\"  endl; a = 0; b = 0; } Complex(int a, int b){ cout  \"Complex(int, int)...\"  endl; this-a = a; this-b = b; } ~Complex(){ cout  \"~Complex()...\"  endl; } void printComplex(){ cout  \"(\"  this-a  \", \"  this-b  \"i)\"  endl; } // 方式二：在类内部实现（方式一和二是一样的，所以只能保留一种）  // c1 + c2 的写法会同时匹配这两种实现方式，如果都有实现就会产生二义性  // 不能返回引用类型  // + 操作符重载  Complex operator+(Complex \u0026c2){ Complex temp(this-a + c2.a, this-b + c2.b); return temp; } // += 操作符重载  Complex\u0026 operator+=(Complex \u0026c2){ cout  \"operator+=()...\"  endl; this-a += c2.a; this-b += c2.b; return *this; } // 单目运算符 前++，因为可以进行连续前++操作，所以返回引用类型  Complex\u0026 operator++(){ this-a++; this-b++; return *this; } // 单目运算符 后++，不能进行连续 后++ 操作，返回类型加const  // 为了与 前++ 进行区分，使用亚元形参  const Complex operator++(int){ Complex temp(this-a, this-b); this-a++; this-b++; return temp; } // = 操作符重载  Complex\u0026 operator=(Complex \u0026c){ // 1、是否与自身相同  if(this == \u0026c) return *this; // 2、如果自身有开辟内存，就清理自己的垃圾  // 3、深拷贝  this-a = c.a; this-b = c.b; return *this; } // [] 操作符重载  int\u0026 operator[](int index){ if(index == 1){ return this-a; } if(index == 2){ return this-b; } throw \"error index\"; } // == 操作符重载  bool operator==(Complex \u0026c){ return (this-a == c.a \u0026\u0026 this-b == c.b); } // != 操作符重载  bool operator!=(Complex \u0026c){ return !(*this == c); } // () 操作符重载，仿函数  bool operator()(){ return (this-a != 0 \u0026\u0026 this-b != 0); } // new 操作符重载，会传入所创对象的大小（sizeof(Complex)）  // 返回的是 void* 的指针  // p-operator new(sizeof(Complex))  void* operator new(size_t n){ void* p = malloc(n); cout  \"重载了 new... 空间大小是：\"  n  \"\\t指针地址是：\"  p  endl; return p; } // new[] 操作符重载，这个 n 多了一个指针的大小，不知道为什么？  void* operator new[](size_t n){ void* p = malloc(n); cout  \"重载了 new[]... 空间大小是：\"  n  \"\\t指针地址是：\"  p  endl; return p; } // delete 操作符重载，会传入所要删除的指针，类型是 void*  void operator delete(void *p){ cout  \"重载了 delete... 指针地址是：\"  p  endl; if(p != NULL){ free((Complex*)p); // 应该也可以不用强转，在 malloc 时会管理一张程序内存分配表，里面有分配指针所对应的大小  p = NULL; } } // delete[] 操作符重载，会传入所要删除的指针，类型是 void*  void operator delete(void *p){ cout  \"重载了 delete[]... 指针地址是：\"  p  endl; if(p != NULL){ free(p); p = NULL; } } // \u0026\u0026 操作符重载（不建议重载，因为不会发生短路现象）  bool operator\u0026\u0026(Complex \u0026c){ return ((*this)()) \u0026\u0026 c(); } // || 操作符重载（不建议重载，因为不会发生短路现象）  bool operator||(Complex \u0026c){ return (*this)() || c(); } private: int a; // 实部  int b; // 虚部 }; #if 0Complex complexAdd(Complex \u0026c1, Complex \u0026c2){ Complex temp(c1.a + c2.a, c1.b + c2.b); return temp; } // 方式一：用全局函数重载(友元重载) Complex operator+(Complex \u0026c1, Complex \u0026c2){ Complex temp(c1.a + c2.a, c1.b + c2.b); return temp; } Complex\u0026 operator+= (Complex \u0026c1, Complex \u0026c2){ c1.a += c2.a; c1.b += c2.b; return c1; } #endif // 左移 // 只能用全局函数实现重载，如果在类内部实现，调用形式就成了 c.operator// 因为可以连续调用，所以返回 ostream 对象引用 ostream\u0026 operator(ostream \u0026os, Complex \u0026c){ os  \"(\"  c.a  \", \"  c.b  \"i)\"  endl; return os; } // 右移同理 istream\u0026 operator(istream \u0026is, Complex \u0026c){ cout  \"a: \"; is  c.a; cout  \"b: \"; is  c.b; return is; } int main( ) { Complex c1(1, 2), c2(3, 4); c1.printComplex(); c2.printComplex(); // Complex c3 = complexAdd(c1, c2);  Complex c3 = c1 + c2 + c1; // 方式一等同于 operator+(c1, c2);  // 方式二等同于 c1.operator+(c2);  c3.printComplex(); cin  c1; // operator(cin, c1)  cout  c1  endl; // operator cout  c1[1]  endl; c1[1] = 5; cout  c1; try{ c1[0] = 0; } catch(char const *e){ cout  e  endl; } if(c1()){ cout  \"c1 is valid\"  endl; } else{ cout  \"c1 is not valid\"  endl; } // 测试数组  cout  \"静态数组大小是：\"  sizeof(Complex[2])  endl; Complex *cArray = new Complex[2]; // 这里的地址比 delete[] 的地址高了一个字节，不知道为什么？  cout  \"首地址是：\"  (cArray - sizeof(char))  endl; delete[] cArray; // 测试 \u0026\u0026 || 是否发生短路  c1[1] = c1[2] = 0; if(c1 \u0026\u0026 (c1 += c2)){ // c1.operator\u0026\u0026(c1 += c2)  cout  \"真\"  endl; } else{ cout  \"假\"  endl; } cout  \"============\"  endl; c1[1] = -3; c2[2] = -4; if(c1 || (c1 += c2)){ // c1.operator||(c1 += c2)  cout  \"真\"  endl; } else{ cout  \"假\"  endl; } return 0; } 输出：\n(1, 2i) (3, 4i) (5, 8i) a: 10 b: 20 (10, 20i) 1 (5, 2i) error index c1 is valid 重载了 new... 空间大小是：8 Complex(int, int)... 对象 c1 的地址是：0x5641c235a2c0 ~Complex()... 重载了 delete... 指针地址是：0x5641c235a2c0 静态数组大小是：16 重载了 new[]... 空间大小是：24 指针地址是：0x5640c52efeb0 Complex()... Complex()... 首地址是：0x5640c52efeb8 ~Complex()... ~Complex()... 重载了 delete[]... 指针地址是：0x5640c52efeb0 operator+=()... 真 ============ operator+=()... 假 ",
+  "articleBody": "#include  using namespace std;  class Complex{  // friend Complex complexAdd(Complex \u0026c1, Complex \u0026c2);  // friend Complex operator+(Complex \u0026c1, Complex \u0026c2);  // friend Complex\u0026 operator+= (Complex \u0026c1, Complex \u0026c2);  friend ostream\u0026 operator(ostream \u0026os, Complex \u0026c);  friend istream\u0026 operator(istream \u0026is, Complex \u0026c); public:  Complex(){  cout  \"Complex()...\"  endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout  \"Complex(int, int)...\"  endl;  this-a = a;  this-b = b;  }  ~Complex(){  cout  \"~Complex()...\"  endl;  }   void printComplex(){  cout  \"(\"  this-a  \", \"  this-b  \"i)\"  endl;  }  // 方式二：在类内部实现（方式一和二是一样的，所以只能保留一种）  // c1 + c2 的写法会同时匹配这两种实现方式，如果都有实现就会产生二义性  // 不能返回引用类型  // + 操作符重载  Complex operator+(Complex \u0026c2){  Complex temp(this-a + c2.a, this-b + c2.b);  return temp;  }  // += 操作符重载  Complex\u0026 operator+=(Complex \u0026c2){  cout  \"operator+=()...\"  endl;  this-a += c2.a;  this-b += c2.b;  return *this;  }  // 单目运算符 前++，因为可以进行连续前++操作，所以返回引用类型  Complex\u0026 operator++(){  this-a++;  this-b++;  return *this;  }  // 单目运算符 后++，不能进行连续 后++ 操作，返回类型加const  // 为了与 前++ 进行区分，使用亚元形参  const Complex operator++(int){  Complex temp(this-a, this-b);  this-a++;  this-b++;  return temp;  }  // = 操作符重载  Complex\u0026 operator=(Complex \u0026c){  // 1、是否与自身相同  if(this == \u0026c) return *this;  // 2、如果自身有开辟内存，就清理自己的垃圾   // 3、深拷贝  this-a = c.a;  this-b = c.b;  return *this;  }  // [] 操作符重载  int\u0026 operator[](int index){  if(index == 1){  return this-a;  }  if(index == 2){  return this-b;  }  throw \"error index\";  }  // == 操作符重载  bool operator==(Complex \u0026c){  return (this-a == c.a \u0026\u0026 this-b == c.b);  }  // != 操作符重载  bool operator!=(Complex \u0026c){  return !(*this == c);  }  // () 操作符重载，仿函数  bool operator()(){  return (this-a != 0 \u0026\u0026 this-b != 0);  }  // new 操作符重载，会传入所创对象的大小（sizeof(Complex)）  // 返回的是 void* 的指针  // p-operator new(sizeof(Complex))  void* operator new(size_t n){  void* p = malloc(n);  cout  \"重载了 new... 空间大小是：\"  n  \"\\t指针地址是：\"  p  endl;  return p;  }  // new[] 操作符重载，这个 n 多了一个指针的大小，不知道为什么？  void* operator new[](size_t n){  void* p = malloc(n);  cout  \"重载了 new[]... 空间大小是：\"  n  \"\\t指针地址是：\"  p  endl;  return p;  }  // delete 操作符重载，会传入所要删除的指针，类型是 void*  void operator delete(void *p){  cout  \"重载了 delete... 指针地址是：\"  p  endl;  if(p != NULL){  free((Complex*)p); // 应该也可以不用强转，在 malloc 时会管理一张程序内存分配表，里面有分配指针所对应的大小  p = NULL;  }  }  // delete[] 操作符重载，会传入所要删除的指针，类型是 void*  void operator delete(void *p){  cout  \"重载了 delete[]... 指针地址是：\"  p  endl;  if(p != NULL){  free(p);  p = NULL;  }  }  // \u0026\u0026 操作符重载（不建议重载，因为不会发生短路现象）  bool operator\u0026\u0026(Complex \u0026c){  return ((*this)()) \u0026\u0026 c();  }  // || 操作符重载（不建议重载，因为不会发生短路现象）  bool operator||(Complex \u0026c){  return (*this)() || c();  }  private:  int a; // 实部  int b; // 虚部 }; #if 0Complex complexAdd(Complex \u0026c1, Complex \u0026c2){ Complex temp(c1.a + c2.a, c1.b + c2.b); return temp; } // 方式一：用全局函数重载(友元重载) Complex operator+(Complex \u0026c1, Complex \u0026c2){ Complex temp(c1.a + c2.a, c1.b + c2.b); return temp; } Complex\u0026 operator+= (Complex \u0026c1, Complex \u0026c2){ c1.a += c2.a; c1.b += c2.b; return c1; } #endif // 左移 // 只能用全局函数实现重载，如果在类内部实现，调用形式就成了 c.operator// 因为可以连续调用，所以返回 ostream 对象引用 ostream\u0026 operator(ostream \u0026os, Complex \u0026c){  os  \"(\"  c.a  \", \"  c.b  \"i)\"  endl;  return os; } // 右移同理 istream\u0026 operator(istream \u0026is, Complex \u0026c){  cout  \"a: \";  is  c.a;  cout  \"b: \";  is  c.b;  return is; }  int main( ) {  Complex c1(1, 2), c2(3, 4);  c1.printComplex();  c2.printComplex();  // Complex c3 = complexAdd(c1, c2);  Complex c3 = c1 + c2 + c1; // 方式一等同于 operator+(c1, c2);  // 方式二等同于 c1.operator+(c2);  c3.printComplex();   cin  c1; // operator(cin, c1)  cout  c1  endl; // operator  cout  c1[1]  endl;  c1[1] = 5;  cout  c1;  try{  c1[0] = 0;  }  catch(char const *e){  cout  e  endl;  }   if(c1()){  cout  \"c1 is valid\"  endl;  }  else{  cout  \"c1 is not valid\"  endl;  }   // 测试数组  cout  \"静态数组大小是：\"  sizeof(Complex[2])  endl;  Complex *cArray = new Complex[2];  // 这里的地址比 delete[] 的地址高了一个字节，不知道为什么？  cout  \"首地址是：\"  (cArray - sizeof(char))  endl;  delete[] cArray;   // 测试 \u0026\u0026 || 是否发生短路  c1[1] = c1[2] = 0;  if(c1 \u0026\u0026 (c1 += c2)){ // c1.operator\u0026\u0026(c1 += c2)  cout  \"真\"  endl;  }  else{  cout  \"假\"  endl;  }  cout  \"============\"  endl;  c1[1] = -3;  c2[2] = -4;  if(c1 || (c1 += c2)){ // c1.operator||(c1 += c2)  cout  \"真\"  endl;  }  else{  cout  \"假\"  endl;  }  return 0; } 输出：\n(1, 2i) (3, 4i) (5, 8i)  a: 10 b: 20 (10, 20i)  1 (5, 2i) error index  c1 is valid  重载了 new... 空间大小是：8 Complex(int, int)... 对象 c1 的地址是：0x5641c235a2c0 ~Complex()... 重载了 delete... 指针地址是：0x5641c235a2c0  静态数组大小是：16 重载了 new[]... 空间大小是：24 指针地址是：0x5640c52efeb0 Complex()... Complex()... 首地址是：0x5640c52efeb8 ~Complex()... ~Complex()... 重载了 delete[]... 指针地址是：0x5640c52efeb0  operator+=()... 真 ============ operator+=()... 假 ",
   "wordCount" : "753",
   "inLanguage": "en",
   "datePublished": "2022-01-03T13:54:11+08:00",
@@ -193,263 +193,263 @@ if (!doNotTrack) {
 </div>
   </header> 
 
-  <div class="post-content"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Complex</span>{
-    <span style="color:#75715e">// friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// friend Complex operator+(Complex &amp;c1, Complex &amp;c2);
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// friend Complex&amp; operator+= (Complex &amp;c1, Complex &amp;c2);
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">friend</span> ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span>os, Complex <span style="color:#f92672">&amp;</span>c);
-    <span style="color:#66d9ef">friend</span> istream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&gt;&gt;</span>(istream <span style="color:#f92672">&amp;</span>is, Complex <span style="color:#f92672">&amp;</span>c);
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    Complex(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Complex()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-        b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    }
-    Complex(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Complex(int, int)...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">=</span> a;
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">=</span> b;
-    }
-    <span style="color:#f92672">~</span>Complex(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Complex()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printComplex</span>(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;i)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#75715e">// 方式二：在类内部实现（方式一和二是一样的，所以只能保留一种）
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// c1 + c2 的写法会同时匹配这两种实现方式，如果都有实现就会产生二义性
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 不能返回引用类型
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// + 操作符重载
-</span><span style="color:#75715e"></span>    Complex <span style="color:#66d9ef">operator</span><span style="color:#f92672">+</span>(Complex <span style="color:#f92672">&amp;</span>c2){
-        Complex <span style="color:#a6e22e">temp</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">+</span> c2.a, <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">+</span> c2.b);
-        <span style="color:#66d9ef">return</span> temp;
-    }
-    <span style="color:#75715e">// += 操作符重载
-</span><span style="color:#75715e"></span>    Complex<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">+=</span>(Complex <span style="color:#f92672">&amp;</span>c2){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;operator+=()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">+=</span> c2.a;
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">+=</span> c2.b;
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-    }
-    <span style="color:#75715e">// 单目运算符 前++，因为可以进行连续前++操作，所以返回引用类型
-</span><span style="color:#75715e"></span>    Complex<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">++</span>(){
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a<span style="color:#f92672">++</span>;
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b<span style="color:#f92672">++</span>;
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-    }
-    <span style="color:#75715e">// 单目运算符 后++，不能进行连续 后++ 操作，返回类型加const
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 为了与 前++ 进行区分，使用亚元形参
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> Complex <span style="color:#66d9ef">operator</span><span style="color:#f92672">++</span>(<span style="color:#66d9ef">int</span>){
-        Complex <span style="color:#a6e22e">temp</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a, <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b);
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a<span style="color:#f92672">++</span>;
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b<span style="color:#f92672">++</span>;
-        <span style="color:#66d9ef">return</span> temp;
-    }
-    <span style="color:#75715e">// = 操作符重载
-</span><span style="color:#75715e"></span>    Complex<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(Complex <span style="color:#f92672">&amp;</span>c){
-        <span style="color:#75715e">// 1、是否与自身相同
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(<span style="color:#66d9ef">this</span> <span style="color:#f92672">==</span> <span style="color:#f92672">&amp;</span>c) <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-        <span style="color:#75715e">// 2、如果自身有开辟内存，就清理自己的垃圾
-</span><span style="color:#75715e"></span>        
-        <span style="color:#75715e">// 3、深拷贝
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">=</span> c.a;
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">=</span> c.b;
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-    }
-    <span style="color:#75715e">// [] 操作符重载
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span>[](<span style="color:#66d9ef">int</span> index){
-        <span style="color:#66d9ef">if</span>(index <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>){
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a;
-        }
-        <span style="color:#66d9ef">if</span>(index <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>){
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b;
-        }
-        <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;error index&#34;</span>;
-    }
-    <span style="color:#75715e">// == 操作符重载
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">==</span>(Complex <span style="color:#f92672">&amp;</span>c){
-        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">==</span> c.a <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">==</span> c.b);
-    }
-    <span style="color:#75715e">// != 操作符重载
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">!=</span>(Complex <span style="color:#f92672">&amp;</span>c){
-        <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>(<span style="color:#f92672">*</span><span style="color:#66d9ef">this</span> <span style="color:#f92672">==</span> c);
-    }
-    <span style="color:#75715e">// () 操作符重载，仿函数
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(){
-        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>);
-    }
-    <span style="color:#75715e">// new 操作符重载，会传入所创对象的大小（sizeof(Complex)）
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 返回的是 void* 的指针
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// p-&gt;operator new(sizeof(Complex))
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">new</span>(size_t n){
-        <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> malloc(n);
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;重载了 new... 空间大小是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">指针地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">return</span> p;
-    }
-    <span style="color:#75715e">// new[] 操作符重载，这个 n 多了一个指针的大小，不知道为什么？
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#66d9ef">operator</span> <span style="color:#66d9ef">new</span>[](size_t n){
-        <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> malloc(n);
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;重载了 new[]... 空间大小是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">指针地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">return</span> p;
-    }
-    <span style="color:#75715e">// delete 操作符重载，会传入所要删除的指针，类型是 void*
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">delete</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>p){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;重载了 delete... 指针地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> NULL){
-            free((Complex<span style="color:#f92672">*</span>)p);      <span style="color:#75715e">// 应该也可以不用强转，在 malloc 时会管理一张程序内存分配表，里面有分配指针所对应的大小
-</span><span style="color:#75715e"></span>            p <span style="color:#f92672">=</span> NULL;
-        }
-    }
-    <span style="color:#75715e">// delete[] 操作符重载，会传入所要删除的指针，类型是 void*
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">delete</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>p){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;重载了 delete[]... 指针地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> NULL){
-            free(p);
-            p <span style="color:#f92672">=</span> NULL;
-        }
-    }
-    <span style="color:#75715e">// &amp;&amp; 操作符重载（不建议重载，因为不会发生短路现象）
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&amp;&amp;</span>(Complex <span style="color:#f92672">&amp;</span>c){
-        <span style="color:#66d9ef">return</span> ((<span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>)()) <span style="color:#f92672">&amp;&amp;</span> c();
-    }
-    <span style="color:#75715e">// || 操作符重载（不建议重载，因为不会发生短路现象）
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">||</span>(Complex <span style="color:#f92672">&amp;</span>c){
-        <span style="color:#66d9ef">return</span> (<span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>)() <span style="color:#f92672">||</span> c();
-    }
-    
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> a;  <span style="color:#75715e">// 实部
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> b;  <span style="color:#75715e">// 虚部
-</span><span style="color:#75715e"></span>};
-<span style="color:#75715e">#if 0</span><span style="color:#75715e">
-</span><span style="color:#75715e">Complex complexAdd(Complex &amp;c1, Complex &amp;c2){
-</span><span style="color:#75715e">    Complex temp(c1.a + c2.a, c1.b + c2.b);
-</span><span style="color:#75715e">    return temp;
-</span><span style="color:#75715e">}
-</span><span style="color:#75715e">// 方式一：用全局函数重载(友元重载)
-</span><span style="color:#75715e">Complex operator+(Complex &amp;c1, Complex &amp;c2){
-</span><span style="color:#75715e">    Complex temp(c1.a + c2.a, c1.b + c2.b);
-</span><span style="color:#75715e">    return temp;
-</span><span style="color:#75715e">}
-</span><span style="color:#75715e">Complex&amp; operator+= (Complex &amp;c1, Complex &amp;c2){
-</span><span style="color:#75715e">    c1.a += c2.a;
-</span><span style="color:#75715e">    c1.b += c2.b;
-</span><span style="color:#75715e">    return c1;
-</span><span style="color:#75715e">}
-</span><span style="color:#75715e"></span><span style="color:#75715e">#endif
-</span><span style="color:#75715e"></span><span style="color:#75715e">// 左移
-</span><span style="color:#75715e">// 只能用全局函数实现重载，如果在类内部实现，调用形式就成了 c.operator&lt;&lt;(cout)
-</span><span style="color:#75715e">// 因为可以连续调用，所以返回 ostream 对象引用
-</span><span style="color:#75715e"></span>ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span>os, Complex <span style="color:#f92672">&amp;</span>c){
-    os <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> c.a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> c.b <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;i)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">return</span> os;
-}
-<span style="color:#75715e">// 右移同理
-</span><span style="color:#75715e"></span>istream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&gt;&gt;</span>(istream <span style="color:#f92672">&amp;</span>is, Complex <span style="color:#f92672">&amp;</span>c){
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a: &#34;</span>;
-    is <span style="color:#f92672">&gt;&gt;</span> c.a;
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;b: &#34;</span>;
-    is <span style="color:#f92672">&gt;&gt;</span> c.b;
-    <span style="color:#66d9ef">return</span> is;
-}
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
-{ 
-    Complex c1(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), c2(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
-    c1.printComplex();
-    c2.printComplex();
-    <span style="color:#75715e">// Complex c3 = complexAdd(c1, c2);
-</span><span style="color:#75715e"></span>    Complex c3 <span style="color:#f92672">=</span> c1 <span style="color:#f92672">+</span> c2 <span style="color:#f92672">+</span> c1;      <span style="color:#75715e">// 方式一等同于 operator+(c1, c2);
-</span><span style="color:#75715e"></span>                                    <span style="color:#75715e">// 方式二等同于 c1.operator+(c2);
-</span><span style="color:#75715e"></span>    c3.printComplex();
-
-    cin <span style="color:#f92672">&gt;&gt;</span> c1;  <span style="color:#75715e">// operator&gt;&gt;(cin, c1)
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c1 <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// operator&lt;&lt;(cout, c1)
-</span><span style="color:#75715e"></span>
-    cout <span style="color:#f92672">&lt;&lt;</span> c1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;&lt;</span> endl;
-    c1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
-    cout <span style="color:#f92672">&lt;&lt;</span> c1;
-    <span style="color:#66d9ef">try</span>{
-        c1[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    }
-    <span style="color:#66d9ef">catch</span>(<span style="color:#66d9ef">char</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">*</span>e){
-        cout <span style="color:#f92672">&lt;&lt;</span> e <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-
-    <span style="color:#66d9ef">if</span>(c1()){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;c1 is valid&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#66d9ef">else</span>{
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;c1 is not valid&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-
-    <span style="color:#75715e">// 测试数组
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;静态数组大小是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(Complex[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">&lt;&lt;</span> endl;
-    Complex <span style="color:#f92672">*</span>cArray <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Complex[<span style="color:#ae81ff">2</span>];
-    <span style="color:#75715e">// 这里的地址比 delete[] 的地址高了一个字节，不知道为什么？
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;首地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> (cArray <span style="color:#f92672">-</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">char</span>)) <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">delete</span>[] cArray;
-
-    <span style="color:#75715e">// 测试 &amp;&amp; || 是否发生短路
-</span><span style="color:#75715e"></span>    c1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> c1[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    <span style="color:#66d9ef">if</span>(c1 <span style="color:#f92672">&amp;&amp;</span> (c1 <span style="color:#f92672">+=</span> c2)){    <span style="color:#75715e">// c1.operator&amp;&amp;(c1 += c2)
-</span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;真&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#66d9ef">else</span>{
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;假&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;============&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    c1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>;
-    c2[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>;
-    <span style="color:#66d9ef">if</span>(c1 <span style="color:#f92672">||</span> (c1 <span style="color:#f92672">+=</span> c2)){   <span style="color:#75715e">// c1.operator||(c1 += c2)
-</span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;真&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#66d9ef">else</span>{
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;假&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">(1, 2i)
-(3, 4i)
-(5, 8i)
-
-a: 10
-b: 20
-(10, 20i)
-
-1
-(5, 2i)
-error index
-
-c1 is valid
-
-重载了 new... 空间大小是：8
-Complex(int, int)...
-对象 c1 的地址是：0x5641c235a2c0
-~Complex()...
-重载了 delete... 指针地址是：0x5641c235a2c0
-
-静态数组大小是：16
-重载了 new[]... 空间大小是：24  指针地址是：0x5640c52efeb0
-Complex()...
-Complex()...
-首地址是：0x5640c52efeb8
-~Complex()...
-~Complex()...
-重载了 delete[]... 指针地址是：0x5640c52efeb0
-
-operator+=()...
-真
-============
-operator+=()...
-假
-</code></pre></div>
+  <div class="post-content"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Complex</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// friend Complex operator+(Complex &amp;c1, Complex &amp;c2);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// friend Complex&amp; operator+= (Complex &amp;c1, Complex &amp;c2);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">friend</span> ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span>os, Complex <span style="color:#f92672">&amp;</span>c);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">friend</span> istream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&gt;&gt;</span>(istream <span style="color:#f92672">&amp;</span>is, Complex <span style="color:#f92672">&amp;</span>c);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Complex(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Complex()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        a <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        b <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Complex(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Complex(int, int)...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">=</span> a;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">=</span> b;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>Complex(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Complex()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printComplex</span>(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;i)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 方式二：在类内部实现（方式一和二是一样的，所以只能保留一种）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// c1 + c2 的写法会同时匹配这两种实现方式，如果都有实现就会产生二义性
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 不能返回引用类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// + 操作符重载
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Complex <span style="color:#66d9ef">operator</span><span style="color:#f92672">+</span>(Complex <span style="color:#f92672">&amp;</span>c2){
+</span></span><span style="display:flex;"><span>        Complex <span style="color:#a6e22e">temp</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">+</span> c2.a, <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">+</span> c2.b);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> temp;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// += 操作符重载
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Complex<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">+=</span>(Complex <span style="color:#f92672">&amp;</span>c2){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;operator+=()...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">+=</span> c2.a;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">+=</span> c2.b;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 单目运算符 前++，因为可以进行连续前++操作，所以返回引用类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Complex<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">++</span>(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 单目运算符 后++，不能进行连续 后++ 操作，返回类型加const
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 为了与 前++ 进行区分，使用亚元形参
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> Complex <span style="color:#66d9ef">operator</span><span style="color:#f92672">++</span>(<span style="color:#66d9ef">int</span>){
+</span></span><span style="display:flex;"><span>        Complex <span style="color:#a6e22e">temp</span>(<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a, <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> temp;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// = 操作符重载
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Complex<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(Complex <span style="color:#f92672">&amp;</span>c){
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 1、是否与自身相同
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(<span style="color:#66d9ef">this</span> <span style="color:#f92672">==</span> <span style="color:#f92672">&amp;</span>c) <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 2、如果自身有开辟内存，就清理自己的垃圾
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 3、深拷贝
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">=</span> c.a;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">=</span> c.b;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// [] 操作符重载
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span>[](<span style="color:#66d9ef">int</span> index){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(index <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(index <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>){
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;error index&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// == 操作符重载
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">==</span>(Complex <span style="color:#f92672">&amp;</span>c){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">==</span> c.a <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">==</span> c.b);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// != 操作符重载
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">!=</span>(Complex <span style="color:#f92672">&amp;</span>c){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">!</span>(<span style="color:#f92672">*</span><span style="color:#66d9ef">this</span> <span style="color:#f92672">==</span> c);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// () 操作符重载，仿函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">operator</span>()(){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>b <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// new 操作符重载，会传入所创对象的大小（sizeof(Complex)）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 返回的是 void* 的指针
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// p-&gt;operator new(sizeof(Complex))
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">new</span>(size_t n){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> malloc(n);
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;重载了 new... 空间大小是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">指针地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> p;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// new[] 操作符重载，这个 n 多了一个指针的大小，不知道为什么？
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> <span style="color:#66d9ef">operator</span> <span style="color:#66d9ef">new</span>[](size_t n){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> malloc(n);
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;重载了 new[]... 空间大小是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">指针地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> p;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// delete 操作符重载，会传入所要删除的指针，类型是 void*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">delete</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>p){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;重载了 delete... 指针地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> NULL){
+</span></span><span style="display:flex;"><span>            free((Complex<span style="color:#f92672">*</span>)p);      <span style="color:#75715e">// 应该也可以不用强转，在 malloc 时会管理一张程序内存分配表，里面有分配指针所对应的大小
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            p <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// delete[] 操作符重载，会传入所要删除的指针，类型是 void*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">delete</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>p){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;重载了 delete[]... 指针地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> NULL){
+</span></span><span style="display:flex;"><span>            free(p);
+</span></span><span style="display:flex;"><span>            p <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// &amp;&amp; 操作符重载（不建议重载，因为不会发生短路现象）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&amp;&amp;</span>(Complex <span style="color:#f92672">&amp;</span>c){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ((<span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>)()) <span style="color:#f92672">&amp;&amp;</span> c();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// || 操作符重载（不建议重载，因为不会发生短路现象）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">||</span>(Complex <span style="color:#f92672">&amp;</span>c){
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>)() <span style="color:#f92672">||</span> c();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a;  <span style="color:#75715e">// 实部
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> b;  <span style="color:#75715e">// 虚部
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#if 0</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Complex complexAdd(Complex &amp;c1, Complex &amp;c2){
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Complex temp(c1.a + c2.a, c1.b + c2.b);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    return temp;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 方式一：用全局函数重载(友元重载)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Complex operator+(Complex &amp;c1, Complex &amp;c2){
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Complex temp(c1.a + c2.a, c1.b + c2.b);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    return temp;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">Complex&amp; operator+= (Complex &amp;c1, Complex &amp;c2){
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    c1.a += c2.a;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    c1.b += c2.b;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    return c1;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#endif
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// 左移
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 只能用全局函数实现重载，如果在类内部实现，调用形式就成了 c.operator&lt;&lt;(cout)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 因为可以连续调用，所以返回 ostream 对象引用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ostream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span>(ostream <span style="color:#f92672">&amp;</span>os, Complex <span style="color:#f92672">&amp;</span>c){
+</span></span><span style="display:flex;"><span>    os <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">&lt;&lt;</span> c.a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">&lt;&lt;</span> c.b <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;i)&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> os;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 右移同理
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>istream<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">&gt;&gt;</span>(istream <span style="color:#f92672">&amp;</span>is, Complex <span style="color:#f92672">&amp;</span>c){
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a: &#34;</span>;
+</span></span><span style="display:flex;"><span>    is <span style="color:#f92672">&gt;&gt;</span> c.a;
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;b: &#34;</span>;
+</span></span><span style="display:flex;"><span>    is <span style="color:#f92672">&gt;&gt;</span> c.b;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> is;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
+</span></span><span style="display:flex;"><span>{ 
+</span></span><span style="display:flex;"><span>    Complex c1(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>), c2(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>);
+</span></span><span style="display:flex;"><span>    c1.printComplex();
+</span></span><span style="display:flex;"><span>    c2.printComplex();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Complex c3 = complexAdd(c1, c2);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Complex c3 <span style="color:#f92672">=</span> c1 <span style="color:#f92672">+</span> c2 <span style="color:#f92672">+</span> c1;      <span style="color:#75715e">// 方式一等同于 operator+(c1, c2);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                    <span style="color:#75715e">// 方式二等同于 c1.operator+(c2);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    c3.printComplex();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    cin <span style="color:#f92672">&gt;&gt;</span> c1;  <span style="color:#75715e">// operator&gt;&gt;(cin, c1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c1 <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// operator&lt;&lt;(cout, c1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> c1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    c1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> c1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>{
+</span></span><span style="display:flex;"><span>        c1[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">catch</span>(<span style="color:#66d9ef">char</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">*</span>e){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> e <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(c1()){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;c1 is valid&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;c1 is not valid&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 测试数组
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;静态数组大小是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(Complex[<span style="color:#ae81ff">2</span>]) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    Complex <span style="color:#f92672">*</span>cArray <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Complex[<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 这里的地址比 delete[] 的地址高了一个字节，不知道为什么？
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;首地址是：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> (cArray <span style="color:#f92672">-</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">char</span>)) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span>[] cArray;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 测试 &amp;&amp; || 是否发生短路
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    c1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> c1[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(c1 <span style="color:#f92672">&amp;&amp;</span> (c1 <span style="color:#f92672">+=</span> c2)){    <span style="color:#75715e">// c1.operator&amp;&amp;(c1 += c2)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;真&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;假&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;============&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    c1[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>    c2[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(c1 <span style="color:#f92672">||</span> (c1 <span style="color:#f92672">+=</span> c2)){   <span style="color:#75715e">// c1.operator||(c1 += c2)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;真&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;假&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>(1, 2i)
+</span></span><span style="display:flex;"><span>(3, 4i)
+</span></span><span style="display:flex;"><span>(5, 8i)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>a: 10
+</span></span><span style="display:flex;"><span>b: 20
+</span></span><span style="display:flex;"><span>(10, 20i)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>1
+</span></span><span style="display:flex;"><span>(5, 2i)
+</span></span><span style="display:flex;"><span>error index
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c1 is valid
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>重载了 new... 空间大小是：8
+</span></span><span style="display:flex;"><span>Complex(int, int)...
+</span></span><span style="display:flex;"><span>对象 c1 的地址是：0x5641c235a2c0
+</span></span><span style="display:flex;"><span>~Complex()...
+</span></span><span style="display:flex;"><span>重载了 delete... 指针地址是：0x5641c235a2c0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>静态数组大小是：16
+</span></span><span style="display:flex;"><span>重载了 new[]... 空间大小是：24  指针地址是：0x5640c52efeb0
+</span></span><span style="display:flex;"><span>Complex()...
+</span></span><span style="display:flex;"><span>Complex()...
+</span></span><span style="display:flex;"><span>首地址是：0x5640c52efeb8
+</span></span><span style="display:flex;"><span>~Complex()...
+</span></span><span style="display:flex;"><span>~Complex()...
+</span></span><span style="display:flex;"><span>重载了 delete[]... 指针地址是：0x5640c52efeb0
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>operator+=()...
+</span></span><span style="display:flex;"><span>真
+</span></span><span style="display:flex;"><span>============
+</span></span><span style="display:flex;"><span>operator+=()...
+</span></span><span style="display:flex;"><span>假
+</span></span></code></pre></div>
 
   </div>
 

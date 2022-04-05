@@ -51,7 +51,7 @@ template &amp;lt;class T&amp;gt; class arrStack : public Stack &amp;lt;T&amp;gt;
       
       <guid>https://874656645.github.io/posts/152-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/</guid>
       <description>一、暴力算法 $\mathcal{O}(n^3)$ 遍历数组的所有子数组集合，并对其求和，筛选出和的最大值
-int maxSumOfSub1(int* array, int length){ int maxSum = 0; int startIndex = 0, endIndex = 0; for(int i = 0; i &amp;lt; length; i++){ for(int j = i; j &amp;lt; length; j++){ int sum = 0; for(int k = i; k &amp;lt;= j; k++) sum += array[k]; if(maxSum &amp;lt; sum){ maxSum = sum; startIndex = i; endIndex = j; } } } cout &amp;lt;&amp;lt; &amp;#34;Begin:&amp;#34; &amp;lt;&amp;lt; startIndex &amp;lt;&amp;lt; &amp;#34; End:&amp;#34; &amp;lt;&amp;lt; endIndex &amp;lt;&amp;lt; &amp;#34; Num:&amp;#34; &amp;lt;&amp;lt; maxSum &amp;lt;&amp;lt; endl; return maxSum; } 二、前缀和 $\mathcal{O}(n^2)$ 先把数组的前 i 项和求出来并将其保存到数组中，然后计算所有子数组集合的和，筛选其中最大的</description>
+int maxSumOfSub1(int* array, int length){  int maxSum = 0;  int startIndex = 0, endIndex = 0;  for(int i = 0; i &amp;lt; length; i++){  for(int j = i; j &amp;lt; length; j++){  int sum = 0;  for(int k = i; k &amp;lt;= j; k++)  sum += array[k];  if(maxSum &amp;lt; sum){  maxSum = sum;  startIndex = i;  endIndex = j;  }  }  }   cout &amp;lt;&amp;lt; &amp;#34;Begin:&amp;#34; &amp;lt;&amp;lt; startIndex &amp;lt;&amp;lt; &amp;#34; End:&amp;#34; &amp;lt;&amp;lt; endIndex &amp;lt;&amp;lt; &amp;#34; Num:&amp;#34; &amp;lt;&amp;lt; maxSum &amp;lt;&amp;lt; endl;  return maxSum; } 二、前缀和 $\mathcal{O}(n^2)$ 先把数组的前 i 项和求出来并将其保存到数组中，然后计算所有子数组集合的和，筛选其中最大的</description>
     </item>
     
     <item>
