@@ -29,11 +29,11 @@ set args 123 abc 456 ddd 查看代码： list 或 l  查看代码显示行数：
       <guid>https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/</guid>
       <description>一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
   规则由三部分组成：目标、依赖、命令
-app:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则
+app:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则
   四、makefile 优化   版本一：
-app:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
+app:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
   版本二：
-app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main.</description>
+app:main.o add.o sub.o  gcc main.o add.o sub.</description>
     </item>
     
     <item>

@@ -12,7 +12,7 @@
   规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
 注意：上面两条规则都需要得到满足
 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
-  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8  cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：">
+  // 64 位程序 struct {  int i;  char c1;  char c2; }x1;  struct{  char c1;  int i;  char c2; }x2;  struct{  char c1;  char c2;  int i; }x3; struct {  short i;  char c1;  char c2; }y1;  struct{  char c1;  short i;  char c2; }y2;  struct{  char c1;  char c2;  short i; }y3;  int main() {  printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8   cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl;  printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -21,7 +21,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -56,7 +56,7 @@ if (!doNotTrack) {
   规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
 注意：上面两条规则都需要得到满足
 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
-  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8  cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：" />
+  // 64 位程序 struct {  int i;  char c1;  char c2; }x1;  struct{  char c1;  int i;  char c2; }x2;  struct{  char c1;  char c2;  int i; }x3; struct {  short i;  char c1;  char c2; }y1;  struct{  char c1;  short i;  char c2; }y2;  struct{  char c1;  char c2;  short i; }y3;  int main() {  printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8   cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl;  printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-06T18:13:09&#43;08:00" />
@@ -71,7 +71,7 @@ if (!doNotTrack) {
   规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
 注意：上面两条规则都需要得到满足
 注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
-  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8  cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体："/>
+  // 64 位程序 struct {  int i;  char c1;  char c2; }x1;  struct{  char c1;  int i;  char c2; }x2;  struct{  char c1;  char c2;  int i; }x3; struct {  short i;  char c1;  char c2; }y1;  struct{  char c1;  short i;  char c2; }y2;  struct{  char c1;  char c2;  short i; }y3;  int main() {  printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8   cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl;  printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体："/>
 
 
 <script type="application/ld+json">
@@ -100,11 +100,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "C++ 内存对齐",
   "name": "C\u002b\u002b 内存对齐",
-  "description": "C/C++内存对齐详解\n内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节\n  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节\n注意：上面两条规则都需要得到满足\n注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者\n  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x1)); // 输出8  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x2)); // 输出12  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x3)); // 输出8  cout \u0026lt;\u0026lt; \u0026#34;----------------\u0026#34; \u0026lt;\u0026lt; endl; printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y1)); // 输出4  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y2)); // 输出6  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：",
+  "description": "C/C++内存对齐详解\n内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节\n  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节\n注意：上面两条规则都需要得到满足\n注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者\n  // 64 位程序 struct {  int i;  char c1;  char c2; }x1;  struct{  char c1;  int i;  char c2; }x2;  struct{  char c1;  char c2;  int i; }x3; struct {  short i;  char c1;  char c2; }y1;  struct{  char c1;  short i;  char c2; }y2;  struct{  char c1;  char c2;  short i; }y3;  int main() {  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x1)); // 输出8  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x2)); // 输出12  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(x3)); // 输出8   cout \u0026lt;\u0026lt; \u0026#34;----------------\u0026#34; \u0026lt;\u0026lt; endl;  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y1)); // 输出4  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y2)); // 输出6  printf(\u0026#34;%ld\\n\u0026#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：",
   "keywords": [
     "C++"
   ],
-  "articleBody": "C/C++内存对齐详解\n内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节\n  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节\n注意：上面两条规则都需要得到满足\n注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者\n  // 64 位程序 struct { int i; char c1; char c2; }x1; struct{ char c1; int i; char c2; }x2; struct{ char c1; char c2; int i; }x3; struct { short i; char c1; char c2; }y1; struct{ char c1; short i; char c2; }y2; struct{ char c1; char c2; short i; }y3; int main() { printf(\"%ld\\n\",sizeof(x1)); // 输出8  printf(\"%ld\\n\",sizeof(x2)); // 输出12  printf(\"%ld\\n\",sizeof(x3)); // 输出8  cout  \"----------------\"  endl; printf(\"%ld\\n\",sizeof(y1)); // 输出4  printf(\"%ld\\n\",sizeof(y2)); // 输出6  printf(\"%ld\\n\",sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：\n以上测试都是在 Linux 环境下进行的，linux 下默认 #pragma pack(4)，且结构体中最长的数据类型为 2 个字节，所以有效对齐单位为 2 字节，下面根据上面所说的规则以 y2 来分析其内存布局：\n首先使用规则 1，对成员变量进行对齐：\nsizeof(c1) = 1 (有效对齐位)，按照 1 字节对齐，占用第 0 单元；\nsizeof(i) = 2 (有效对齐位)，相对于结构体首地址的偏移要为 2 的倍数，占用第 2，3 单元；\nsizeof(c2) = 1 (有效对齐位)，相对于结构体首地址的偏移要为 1 的倍数，占用第 4 单元；\n然后使用规则 2，对结构体整体进行对齐：\ny2 中变量 i 占用内存最大占 2 字节，而有对齐系数为 4 字节，两者较小值就是 2 字节。因此整体也是按照 2 字节对齐。由规则 1 得到 y2 占 5 个字节，此处再按照规则 2 进行整体的 2 字节对齐，所以整个结构体占用 6 个字节。\n",
+  "articleBody": "C/C++内存对齐详解\n内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节\n  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节\n注意：上面两条规则都需要得到满足\n注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者\n  // 64 位程序 struct {  int i;  char c1;  char c2; }x1;  struct{  char c1;  int i;  char c2; }x2;  struct{  char c1;  char c2;  int i; }x3; struct {  short i;  char c1;  char c2; }y1;  struct{  char c1;  short i;  char c2; }y2;  struct{  char c1;  char c2;  short i; }y3;  int main() {  printf(\"%ld\\n\",sizeof(x1)); // 输出8  printf(\"%ld\\n\",sizeof(x2)); // 输出12  printf(\"%ld\\n\",sizeof(x3)); // 输出8   cout  \"----------------\"  endl;  printf(\"%ld\\n\",sizeof(y1)); // 输出4  printf(\"%ld\\n\",sizeof(y2)); // 输出6  printf(\"%ld\\n\",sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：\n以上测试都是在 Linux 环境下进行的，linux 下默认 #pragma pack(4)，且结构体中最长的数据类型为 2 个字节，所以有效对齐单位为 2 字节，下面根据上面所说的规则以 y2 来分析其内存布局：\n首先使用规则 1，对成员变量进行对齐：\nsizeof(c1) = 1 (有效对齐位)，按照 1 字节对齐，占用第 0 单元；\nsizeof(i) = 2 (有效对齐位)，相对于结构体首地址的偏移要为 2 的倍数，占用第 2，3 单元；\nsizeof(c2) = 1 (有效对齐位)，相对于结构体首地址的偏移要为 1 的倍数，占用第 4 单元；\n然后使用规则 2，对结构体整体进行对齐：\ny2 中变量 i 占用内存最大占 2 字节，而有对齐系数为 4 字节，两者较小值就是 2 字节。因此整体也是按照 2 字节对齐。由规则 1 得到 y2 占 5 个字节，此处再按照规则 2 进行整体的 2 字节对齐，所以整个结构体占用 6 个字节。\n",
   "wordCount" : "183",
   "inLanguage": "en",
   "datePublished": "2022-01-06T18:13:09+08:00",
@@ -236,57 +236,57 @@ if (!doNotTrack) {
 <strong>注意：成员变量首地址偏移和对齐都是与<!-- raw HTML omitted -->【有效对齐值】<!-- raw HTML omitted -->进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者</strong></p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 64 位程序
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span>
-{
-    <span style="color:#66d9ef">int</span> i;    
-    <span style="color:#66d9ef">char</span> c1;  
-    <span style="color:#66d9ef">char</span> c2;  
-}x1;
-
-<span style="color:#66d9ef">struct</span>{
-    <span style="color:#66d9ef">char</span> c1;  
-    <span style="color:#66d9ef">int</span> i;    
-    <span style="color:#66d9ef">char</span> c2;  
-}x2;
-
-<span style="color:#66d9ef">struct</span>{
-    <span style="color:#66d9ef">char</span> c1;  
-    <span style="color:#66d9ef">char</span> c2; 
-    <span style="color:#66d9ef">int</span> i;    
-}x3;
-<span style="color:#66d9ef">struct</span>
-{
-    <span style="color:#66d9ef">short</span> i;    
-    <span style="color:#66d9ef">char</span> c1;  
-    <span style="color:#66d9ef">char</span> c2;  
-}y1;
-
-<span style="color:#66d9ef">struct</span>{
-    <span style="color:#66d9ef">char</span> c1;  
-    <span style="color:#66d9ef">short</span> i;    
-    <span style="color:#66d9ef">char</span> c2;  
-}y2;
-
-<span style="color:#66d9ef">struct</span>{
-    <span style="color:#66d9ef">char</span> c1;  
-    <span style="color:#66d9ef">char</span> c2; 
-    <span style="color:#66d9ef">short</span> i;    
-}y3;
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(x1));  <span style="color:#75715e">// 输出8
-</span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(x2));  <span style="color:#75715e">// 输出12
-</span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(x3));  <span style="color:#75715e">// 输出8
-</span><span style="color:#75715e"></span>    
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;----------------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(y1));  <span style="color:#75715e">// 输出4
-</span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(y2));  <span style="color:#75715e">// 输出6
-</span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(y3));  <span style="color:#75715e">// 输出4
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p><strong>既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// 64 位程序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i;    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c1;  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c2;  
+</span></span><span style="display:flex;"><span>}x1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c1;  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i;    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c2;  
+</span></span><span style="display:flex;"><span>}x2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c1;  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c2; 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i;    
+</span></span><span style="display:flex;"><span>}x3;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">short</span> i;    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c1;  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c2;  
+</span></span><span style="display:flex;"><span>}y1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c1;  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">short</span> i;    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c2;  
+</span></span><span style="display:flex;"><span>}y2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c1;  
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> c2; 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">short</span> i;    
+</span></span><span style="display:flex;"><span>}y3;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(x1));  <span style="color:#75715e">// 输出8
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(x2));  <span style="color:#75715e">// 输出12
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(x3));  <span style="color:#75715e">// 输出8
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;----------------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(y1));  <span style="color:#75715e">// 输出4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(y2));  <span style="color:#75715e">// 输出6
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;%ld</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>,<span style="color:#66d9ef">sizeof</span>(y3));  <span style="color:#75715e">// 输出4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍</strong>
 <img loading="lazy" src="../https://pic2.zhimg.com/80/v2-86c644ce29b1e2d3858380aaa631cc1d_720w.jpg" alt="图片显示"  />
 </p>
 <p><strong>y1 y2 y3结构体：</strong><br>

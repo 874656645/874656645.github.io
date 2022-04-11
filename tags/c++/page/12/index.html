@@ -145,66 +145,62 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>异常接口声明
+    <h2>生成随机数
     </h2>
   </header>
   <section class="entry-content">
-    <p>C&#43;&#43; 异常
- C&#43;&#43;11 不再建议使用异常规范  // 异常规范 只能抛出 int float char 三种类型的异常 C&#43;&#43;11以后不再建议使用 void func1() throw(int, float, char){ throw &#34;string&#34;; // terminate called after throwing an instance of &#39;char const*&#39; } // 不能抛出任何类型的异常 OK void func2() throw(){ throw -1; // terminate called after throwing an instance of &#39;int&#39; } // 可以抛出任何类型的异常 void func3(){ throw &#34;error&#34;; } int main() { try{ func1(); } catch(char const * e){ cout &lt;&lt; e &lt;&lt; endl; } catch(....</p>
+    <p>#include &lt;ctime&gt;using namespace std;  int main() {  srand((unsigned int)time(NULL));  cout &lt;&lt; rand() % 40 &lt;&lt; endl;  return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-15 18:26:49 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 异常接口声明" href="https://874656645.github.io/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>栈解旋 Unwinding
+    <h2>deque 容器
     </h2>
   </header>
   <section class="entry-content">
-    <p>异常被抛出后，从进入 try 块起到异常被抛出前，这期间在栈上构造的所有对象都会被自动析构，析构的顺序与构造的顺序相反。
-与 return 类似
-class Test{ public: Test(string name){ m_name = name; cout &lt;&lt; m_name &lt;&lt; &#34;被构造了&#34; &lt;&lt; endl; } ~Test(){ cout &lt;&lt; m_name &lt;&lt; &#34;被析构了&#34; &lt;&lt; endl; } private: string m_name; }; double func1(int x, int y){ Test t1(&#34;t1&#34;), t2(&#34;t2&#34;); if(y == 0){ throw y; } return x / y; } int main() { try{ Test t3(&#34;t3&#34;), t4(&#34;t4&#34;); func1(10, 0); } catch(int e){ cout &lt;&lt; &#34;除数为 &#34; &lt;&lt; e &lt;&lt; endl; } return 0; } t3被构造了 t4被构造了 t1被构造了 t2被构造了 t2被析构了 t1被析构了 t4被析构了 t3被析构了 除数为 0 </p>
+    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-15 18:07:46 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 栈解旋 Unwinding" href="https://874656645.github.io/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>异常
+    <h2>巧妙收缩 vector 空间
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、try、catch、throw  可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型 C&#43;&#43; 异常机制是跨函数的，且是必须处理的。如果中间函数没有处理就一直抛到最顶层，如果 main 函数也不处理，程序就会挂掉  int main( ) { try{ throw &#34;exception&#34;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常  cout &lt;&lt; &#34;...&#34; &lt;&lt; endl; } { cout &lt;&lt; &#34;finally&#34; &lt;&lt; endl; } return 0; } 输出：
-Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：...</p>
+    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() {  vector&lt;int&gt; v;  for(int i = 0; i &lt; 100000; &#43;&#43;i){  v.push_back(i);  }  cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl;  cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl;   cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl;  v.resize(10);  cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl;  cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl;   cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl;  vector&lt;int&gt;(v)....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-15 17:34:27 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 异常" href="https://874656645.github.io/posts/57-%E5%BC%82%E5%B8%B8/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>类型转换
+    <h2>vector 中的元素存放在堆上还是栈上
     </h2>
   </header>
   <section class="entry-content">
-    <p>1. static_cast&lt;&gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&lt;&gt;  // 1. 内置对象  int a = 97; char c = static_cast&lt;char&gt;(a); // OK  cout &lt;&lt; c &lt;&lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;a;  // char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &lt;&lt; pc &lt;&lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4....</p>
+    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public:  Person(int age, int id){  m_age = age;  m_id = id;  cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl;  }  Person(const Person&amp; p){  m_age = p.m_age;  m_id = p.m_id;  cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl;  }  ~Person(){  cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl;  }  void* operator new(size_t size){  void* p = malloc(size);  cout &lt;&lt; &#34;new()....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-15 15:55:28 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类型转换" href="https://874656645.github.io/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 15:50:29 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to vector 中的元素存放在堆上还是栈上" href="https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>自定义数组实现
+    <h2>STL Hello World
     </h2>
   </header>
   <section class="entry-content">
-    <p>要求  可以对内置数据类型以及自定义数据类型的数据进行存储 将数组中的数据存储到堆区 构造函数中可以传入数组的容量 提供对应的拷贝构造函数以及 operator= 防止浅拷贝问题 提供尾插法和尾删法对数组中的数据进行增加和删除 可以通过下标的方式访问数组中的元素 可以获取数组中当前元素个数和数组的容量  实现 template&lt;class T&gt; class MyArray{ public: MyArray(int capacity){ this-&gt;m_capacity = capacity; this-&gt;m_size = 0; this-&gt;m_addr = new T[this-&gt;m_capacity]; } MyArray(const MyArray&amp; arr){ if(arr.m_addr == NULL){ return; } // 深拷贝  this-&gt;m_capacity = arr.m_capacity; this-&gt;m_size = arr.m_size; this-&gt;m_addr = new T[this-&gt;m_capacity]; for(int i = 0; i &lt; m_size; &#43;&#43;i){ // T 类型是可拷贝的，= 运算符也是深拷贝  this-&gt;m_addr[i] = arr.m_addr[i]; } } MyArray&amp; operator=(const MyArray&amp; arr){ if(this == &amp;arr){ return *this; } if(this-&gt;m_addr !...</p>
+    <p> 平时要有容器、算法、迭代器的思维模式 容器提供迭代器，算法使用迭代器  // 算法 int count(int* begin, int* end, int val){  int n = 0;  while(begin != end){  if(*begin == val){  n&#43;&#43;;  }  begin&#43;&#43;;  }  return n; } int main() {  // 容器  int arr[] = {1, 3, 0, 5, 1, 3, 1, 0};  // 迭代器  int* begin = arr;  int* end = *(&amp;arr &#43; 1);   int n = count(begin, end, 1);  cout &lt;&lt; &#34;count: &#34; &lt;&lt; n &lt;&lt; endl;  return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-15 13:36:04 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 自定义数组实现" href="https://874656645.github.io/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 12:31:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL Hello World" href="https://874656645.github.io/posts/78-stl-hello-world/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
