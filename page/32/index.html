@@ -157,87 +157,81 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Learn Electron
+    <h2>3DMax 操作
     </h2>
   </header>
   <section class="entry-content">
-    <p>1. Use npm run example 1.1 Clone repository git clone https://github.com/electron/electron-quick-start
-1.2 Go into the repository cd electron-quick-start
-1.3 Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install
-或者是
-npm install --registry=https://registry.npm.taobao.org
-1.4 Run the app npm start
-2. Use yarn create a electron program 2.1 Create a program folder md electron-yarn-cz
-进入项目文件夹
-cd electron-yarn-cz
-2.2 Create a program config file yarn init
-2.3 Instal electron environment yarn add electron --dev --registry=https://registry.npm.taobao.org
-2.4 Add main....</p>
+    <p>1、查看纹理 渲染——材质编辑器——精简材质编辑器
+2、合并Mesh——附加 3、资源跟踪器快捷键 Shift &#43; T </p>
   </section>
-  <footer class="entry-footer"><span title='2019-01-31 15:44:09 +0800 CST'>January 31, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Learn Electron" href="https://874656645.github.io/posts/5-learn-electron/"></a>
+  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 3DMax 操作" href="https://874656645.github.io/posts/18-3dmax-%E6%93%8D%E4%BD%9C/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Netstat
+    <h2>ArcGIS 字段计算（自增、随机数）
     </h2>
   </header>
   <section class="entry-content">
-    <p>win10查看端口使用情况 1. 察看所有已使用的端口 netstat -ano
-2. 查看特定端口的使用 netstat -ano|findstr &#34;443&#34;
-3. 查看占用端口的进程PID tasklist|findstr &#34;7648&#34;</p>
+    <p>1、随机数 python 脚本
+import random def randNum(): res = random.randint(1, 7) return res 2、自增 python 脚本
+total = 0 def accumulate(increment): global total if total: total &#43;= increment else: total = increment return total </p>
   </section>
-  <footer class="entry-footer"><span title='2018-12-28 16:10:00 +0800 CST'>December 28, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Netstat" href="https://874656645.github.io/posts/4-netstat/"></a>
+  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to ArcGIS 字段计算（自增、随机数）" href="https://874656645.github.io/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Git Commond
+    <h2>查看 dll 版本
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、Git 常用命令 1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git
- 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
- 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
-2、更新远程仓库代码到本地 git pull blog master
-3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
-git commit -am &#34;update&#34;
-4、push推送到远程仓库 git push blog master
-5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
-6、删除配置的远程仓库别名 git remote remove blog...</p>
+    <p>查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
+2、使用 notepad&#43;&#43; 直接用 记事本 或者 notepad&#43;&#43; 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。</p>
   </section>
-  <footer class="entry-footer"><span title='2018-12-15 22:45:47 +0800 CST'>December 15, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git Commond" href="https://874656645.github.io/posts/3-git-commond/"></a>
+  <footer class="entry-footer"><span title='2019-06-05 11:36:19 +0800 CST'>June 5, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 查看 dll 版本" href="https://874656645.github.io/posts/15-%E6%9F%A5%E7%9C%8B-dll-%E7%89%88%E6%9C%AC/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Hugo Create a New Site by Hugo
+    <h2>Conda Learn
     </h2>
   </header>
   <section class="entry-content">
-    <p>使用 Hugo 创建静态网站 Hugo 官网 Hugo 中文网 网站皮肤 Step1：创建站点 进入到 E:/Hugo/Sites文件夹
-hugo new site HugoLearning.com
-cd HugoLearning.com
-git init
-Step2：添加样式主题 在皮肤列表挑选一个心仪的皮肤，找到相关的 GitHub 地址，创建目录 themes，在 themes 目录里把皮肤 git clone 下来
-git submodule add https://github.com/budparr/gohugo-theme-ananke.git themes/ananke
-编辑 config.toml 配置文件
-最后一行添加 theme = &#34;ananke&#34;
-或者在命令行执行 echo &#39;theme = &#34;ananke&#34;&#39; &gt;&gt; config.toml
-Step3：添加markdown文件内容 hugo new posts/Hello-Hugo.md
-hugo new --kind post posts/1-Papermod-Theme-中文.md
-Note: post is a kind of archetypes( post.md )
-Step4: 启动网站 hugo server -D...</p>
+    <p>miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
+set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
+1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
+2、搜索某个库的所有版本 conda search gdal
+3、查看当前环境下已安装的包 conda list
+4、创建一个虚拟环境 conda create --name python34 python=3.4
+5、激活某个环境 activate python34 // for windows
+source activate python34 // for Linux &amp; Mac
+6、取消激活 conda deactivate // for windows...</p>
   </section>
-  <footer class="entry-footer"><span title='2018-12-14 22:40:04 +0800 CST'>December 14, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Hugo Create a New Site by Hugo" href="https://874656645.github.io/posts/2-hugo-create-a-new-site/"></a>
+  <footer class="entry-footer"><span title='2019-06-04 10:16:11 +0800 CST'>June 4, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Conda Learn" href="https://874656645.github.io/posts/14-conda-learn/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Restart Cortana
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
+2.在其中输入下列命令，重新注册激活小娜
+Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &#34;$($_.InstallLocation)\AppXManifest.xml&#34;}</p>
+  </section>
+  <footer class="entry-footer"><span title='2019-04-09 10:35:41 +0800 CST'>April 9, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Restart Cortana" href="https://874656645.github.io/posts/13-restart-cortana/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/page/31/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/page/33/">Next Page »</a>
   </nav>
 </footer>
     </main>

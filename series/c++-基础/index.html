@@ -145,6 +145,33 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>const_cast
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>函数指针和成员函数指针无法用于 const_cast const_cast 使得指向非 const 类型的 const 引用或指针能够被修改 通过 const_cast 修改 const 对象是未定义的行为  struct type { int i; type(): i(3) {} void f(int v) const { // this-&gt;i = v; // compile error: this is a pointer to const  const_cast&lt;type*&gt;(this)-&gt;i = v; // OK as long as the type object isn&#39;t const  } }; int main() { int i = 3; // i is not declared const  const int&amp; rci = i; // const reference  const_cast&lt;int&amp;&gt;(rci) = 4; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;; const int* pci = &amp;i; // *pci = 5; // error: assignment of read-only location ‘* pci’  *const_cast&lt;int*&gt;(pci) = 5; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;; type t; // if this was const type t, then t....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-11 17:51:55 +0800 CST'>April 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to const_cast" href="https://874656645.github.io/posts/172-const_cast/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>类型转换函数
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、转换函数 Conversion Functions(operators) 在 C&#43;&#43; 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C&#43;&#43; 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。
+转换函数写法：operator typeName();
+ 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：
+class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 &#43; f; cout &lt;&lt; d &lt;&lt; endl; return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-10 15:39:37 +0800 CST'>April 10, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类型转换函数" href="https://874656645.github.io/posts/171-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>2022-02-14 杂记
     </h2>
   </header>
@@ -182,30 +209,6 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
   </section>
   <footer class="entry-footer"><span title='2022-02-07 10:11:16 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 常用的宏定义" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>char* 数组
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>void printArr(const char ** p, int len){ for(int i = 0; i &lt; len; &#43;&#43;i){ cout &lt;&lt; p[i] &lt;&lt; endl; } } void sortSelect(const char ** p, int len){ for(int i = 0; i &lt; len - 1; &#43;&#43;i){ int max = i; for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){ if(p[j] &gt; p[max]){ max = j; } } // 交换  if(i != max){ const char* tmp = p[i]; p[i] = p[max]; p[max] = tmp; } } } int main() { const char* arr[] = {&#34;aa&#34;, &#34;bb&#34;, &#34;cc&#34;, &#34;dd&#34;, &#34;ee&#34;}; int len = sizeof(arr) / sizeof(char*); cout &lt;&lt; len &lt;&lt; endl; printArr(arr, len); sortSelect(arr, len); cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printArr(arr, len); return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>switch 与 if Else 区别
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> while 循环中的 switch, break 只能中断 switch，不能中断 while 循环  void managerMenue(){ while(true){ cout &lt;&lt; &#34;这是子菜单&#34; &lt;&lt; endl; cout &lt;&lt; &#34;是否返回主菜单？&#34; &lt;&lt; endl; cout &lt;&lt; &#34;1 是&#34; &lt;&lt; endl; cout &lt;&lt; &#34;2 否&#34; &lt;&lt; endl; int i = 0; cin &gt;&gt; i; switch(i){ case 1: break; case 2: return; default: break; } // if(i == 1){  // // system(&#34;reset&#34;);  // break;  // }  // else if(i == 2){  // return;  // }  // else{  // cout &lt;&lt; &#34;输入有误，请重新输入&#34; &lt;&lt; endl;  // }  } cout &lt;&lt; &#34;这是子菜单循环外代码&#34; &lt;&lt; endl; } int main() { while(true){ cout &lt;&lt; &#34;欢迎登陆！&#34; &lt;&lt; endl; cout &lt;&lt; &#34;这是主菜单&#34; &lt;&lt; endl; cout &lt;&lt; &#34;请输入选项：&#34; &lt;&lt; endl; int i = 0; cin &gt;&gt; i; // switch(i)  // {  // case 1:  // system(&#34;reset&#34;);  // managerMenue();  // break;  // case 2:  // break;  // }  if(i == 1){ // system(&#34;reset&#34;);  managerMenue(); // break;  } else{ break; } cout &lt;&lt; &#34;switch 外代码&#34; &lt;&lt; endl; } cout &lt;&lt; &#34;while 外代码&#34; &lt;&lt; endl; return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-24 20:01:08 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to switch 与 if Else 区别" href="https://874656645.github.io/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -145,6 +145,30 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>char* 数组
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>void printArr(const char ** p, int len){ for(int i = 0; i &lt; len; &#43;&#43;i){ cout &lt;&lt; p[i] &lt;&lt; endl; } } void sortSelect(const char ** p, int len){ for(int i = 0; i &lt; len - 1; &#43;&#43;i){ int max = i; for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){ if(p[j] &gt; p[max]){ max = j; } } // 交换  if(i != max){ const char* tmp = p[i]; p[i] = p[max]; p[max] = tmp; } } } int main() { const char* arr[] = {&#34;aa&#34;, &#34;bb&#34;, &#34;cc&#34;, &#34;dd&#34;, &#34;ee&#34;}; int len = sizeof(arr) / sizeof(char*); cout &lt;&lt; len &lt;&lt; endl; printArr(arr, len); sortSelect(arr, len); cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printArr(arr, len); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>switch 与 if Else 区别
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> while 循环中的 switch, break 只能中断 switch，不能中断 while 循环  void managerMenue(){ while(true){ cout &lt;&lt; &#34;这是子菜单&#34; &lt;&lt; endl; cout &lt;&lt; &#34;是否返回主菜单？&#34; &lt;&lt; endl; cout &lt;&lt; &#34;1 是&#34; &lt;&lt; endl; cout &lt;&lt; &#34;2 否&#34; &lt;&lt; endl; int i = 0; cin &gt;&gt; i; switch(i){ case 1: break; case 2: return; default: break; } // if(i == 1){  // // system(&#34;reset&#34;);  // break;  // }  // else if(i == 2){  // return;  // }  // else{  // cout &lt;&lt; &#34;输入有误，请重新输入&#34; &lt;&lt; endl;  // }  } cout &lt;&lt; &#34;这是子菜单循环外代码&#34; &lt;&lt; endl; } int main() { while(true){ cout &lt;&lt; &#34;欢迎登陆！&#34; &lt;&lt; endl; cout &lt;&lt; &#34;这是主菜单&#34; &lt;&lt; endl; cout &lt;&lt; &#34;请输入选项：&#34; &lt;&lt; endl; int i = 0; cin &gt;&gt; i; // switch(i)  // {  // case 1:  // system(&#34;reset&#34;);  // managerMenue();  // break;  // case 2:  // break;  // }  if(i == 1){ // system(&#34;reset&#34;);  managerMenue(); // break;  } else{ break; } cout &lt;&lt; &#34;switch 外代码&#34; &lt;&lt; endl; } cout &lt;&lt; &#34;while 外代码&#34; &lt;&lt; endl; return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-24 20:01:08 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to switch 与 if Else 区别" href="https://874656645.github.io/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>生成随机数
     </h2>
   </header>
@@ -179,31 +203,6 @@ void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char
   </section>
   <footer class="entry-footer"><span title='2022-01-08 14:01:27 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 实现一个简单的字符串类" href="https://874656645.github.io/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>静态数组初始化
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto &amp; i : da){ cout &lt;&lt; i &lt;&lt; endl; } return 0; } 输出：
-6.95128e-310 4.63759e-310 0 2. C&#43;&#43; 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() { int arr[10]; cout &lt;&lt; arr &lt;&lt; endl; cout &lt;&lt; arr &#43; 1 &lt;&lt; endl; cout &lt;&lt; &#34;----------&#34; &lt;&lt; endl; cout &lt;&lt; &amp;arr &lt;&lt; endl; cout &lt;&lt; &amp;arr &#43; 1 &lt;&lt; endl; return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-08 13:50:12 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 静态数组初始化" href="https://874656645.github.io/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>自定义智能指针
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr; } T&amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &lt;&lt; &#34;A(int)...&#34; &lt;&lt; endl; this-&gt;a = a; } ~A(){ cout &lt;&lt; &#34;~A()....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -157,68 +157,71 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>QString 中文乱码
+    <h2>fork Unix
     </h2>
   </header>
   <section class="entry-content">
-    <p> QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
-以QString做为形参变量传递  qDebug(msg.toUtf8());
-QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } </p>
+    <p>Unix 的 fork 函数 fork函数可以创建一个和当前映像一样的子进程，这个函数会返回两个值：从子进程返回0，从父进程返回子进程的PID；
+ 1）在父进程中，fork返回新创建子进程的进程ID； 2）在子进程中，fork返回0； 3）如果出现错误，fork返回一个负值；  #include &lt;iostream&gt;#include &lt;unistd.h&gt; using namespace std; int main() { pid_t fpid; //fpid表示fork函数返回的值  int count = 0; cout &lt;&lt; &amp;count &lt;&lt; endl; fpid = fork(); if (fpid &lt; 0) printf(&#34;error in fork!\n&#34;); else if (fpid == 0) { printf(&#34;i am the child process, my process id is %d\n&#34;,getpid()); cout &lt;&lt; &amp;count &lt;&lt; endl; count&#43;&#43;; } else { printf(&#34;i am the parent process, my process id is %d\n&#34;,getpid()); cout &lt;&lt; &amp;count &lt;&lt; endl; count&#43;&#43;; } printf(&#34;统计结果是: %d\n&#34;,count); return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to QString 中文乱码" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
+  <footer class="entry-footer"><span title='2021-12-23 10:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to fork Unix" href="https://874656645.github.io/posts/33-fork-unix/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>IE 64位插件
+    <h2>C 与 C&#43;&#43; 的差异
     </h2>
   </header>
   <section class="entry-content">
-    <p>1、设置IE为单进程模式  64位操作系统的 IE 默认每个 Tab 页都是一个进程，并且 Tab 页的进程是 32 位的，主进程是 64 位的，如下图所示  值为0时是单进程模式，1是多进程</p>
+    <p>C&#43;&#43; 是 C 的超集和增强，校验更加严格
+C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱动，面向对象是对象驱动
+1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
+故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C&#43;&#43; 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C&#43;&#43; 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C&#43;&#43; 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C&#43;&#43; 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-04 11:36:17 +0800 CST'>December 4, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to IE 64位插件" href="https://874656645.github.io/posts/19-ie64-%E4%BD%8D%E6%8F%92%E4%BB%B6/"></a>
+  <footer class="entry-footer"><span title='2021-12-22 22:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C 与 C&#43;&#43; 的差异" href="https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>3DMax 操作
+    <h2>函数形参从右到左入栈
     </h2>
   </header>
   <section class="entry-content">
-    <p>1、查看纹理 渲染——材质编辑器——精简材质编辑器
-2、合并Mesh——附加 3、资源跟踪器快捷键 Shift &#43; T </p>
+    <p>int add(int count, ...) { // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节）  int intSize = sizeof(int*) / sizeof(int); int sum = 0; // cout &lt;&lt; &amp;count &lt;&lt; endl;  int *p = &amp;count &#43; intSize; // cout &lt;&lt; p &lt;&lt; endl;  for (int i = 0; i &lt; count; &#43;&#43;i) { sum &#43;= *p; cout &lt;&lt; *p &lt;&lt; endl; p &#43;= intSize; } return sum; } int main() { cout &lt;&lt; add(3, 1, 2, 3) &lt;&lt; endl; return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 3DMax 操作" href="https://874656645.github.io/posts/18-3dmax-%E6%93%8D%E4%BD%9C/"></a>
+  <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数形参从右到左入栈" href="https://874656645.github.io/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>ArcGIS 字段计算（自增、随机数）
+    <h2>指针 &#43; 1
     </h2>
   </header>
   <section class="entry-content">
-    <p>1、随机数 python 脚本
-import random def randNum(): res = random.randint(1, 7) return res 2、自增 python 脚本
-total = 0 def accumulate(increment): global total if total: total &#43;= increment else: total = increment return total </p>
+    <p>1. 32 位和 64 位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
+2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
+int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]；  // &amp;a&#43;1不是首地址&#43;1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）  // 但是prt与(&amp;a&#43;1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int)  int *ptr = (int*)(&amp;a &#43; 1); cout &lt;&lt; *(a &#43; 1) &lt;&lt; endl; cout &lt;&lt; *(ptr - 1) &lt;&lt; endl; return 0; } 输出：
+2 5 注： a，&amp;a的地址是一样的，但意思不一样：
+ a是数组首地址，也就是a[0]的地址，a&#43;1是数组下一元素的地址，即a[1] &amp;a是对象（整个数组作为一个对象）首地址，而&amp;a&#43;1是下一个对象的地址，即a[5].  </p>
   </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcGIS 字段计算（自增、随机数）" href="https://874656645.github.io/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 指针 &#43; 1" href="https://874656645.github.io/posts/30-%E6%8C%87%E9%92%88-&#43;1/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Spatialite 随机数
+    <h2>模板类
     </h2>
   </header>
   <section class="entry-content">
-    <p>1、随机数 SQL 脚本
-update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#43;9223372036854775808)/2.0/9223372036854775808 * 7); </p>
+    <p>template&lt;class T&gt; class Test { public: Test(T t){ m_t = t;}; // explicit Test(T t){ m_t = t;};  T getValue(){ return m_t; }; private: T m_t; }; int main() { Test&lt;int&gt; tInt(1); cout &lt;&lt; tInt.getValue() &lt;&lt; endl; Test&lt;double&gt; tD(1.15); cout &lt;&lt; tD.getValue() &lt;&lt; endl; Test&lt;float&gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换  cout &lt;&lt; tF.getValue() &lt;&lt; endl; return 0; } 输出：
+Start 1 1.15 1.3 0 Finish </p>
   </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:17 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Spatialite 随机数" href="https://874656645.github.io/posts/16-spatialite-%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2021-12-22 10:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 模板类" href="https://874656645.github.io/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

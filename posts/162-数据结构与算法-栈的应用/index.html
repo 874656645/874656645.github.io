@@ -7,9 +7,9 @@
 <meta name="robots" content="index, follow">
 <title>数据结构与算法——栈的应用 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="数据结构与算法" />
-<meta name="description" content="栈的特点是先进后出，所以常用来处理具有递归结构的数据
+<meta name="description" content="栈的特点是后进先出，所以常用来处理具有递归结构的数据
  深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义
- 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$ 后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
+ 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$  后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
     中缀表达式
  运算符在中间 需要括号改变优先级  例如：$4\ *\ x\ *\ (2\ *\ x\ &#43;\ a)\ –\ c$
   后缀表达式">
@@ -51,25 +51,25 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="数据结构与算法——栈的应用" />
-<meta property="og:description" content="栈的特点是先进后出，所以常用来处理具有递归结构的数据
+<meta property="og:description" content="栈的特点是后进先出，所以常用来处理具有递归结构的数据
  深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义
- 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$ 后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
+ 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$  后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
     中缀表达式
  运算符在中间 需要括号改变优先级  例如：$4\ *\ x\ *\ (2\ *\ x\ &#43;\ a)\ –\ c$
   后缀表达式" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-04-05T14:12:42&#43;08:00" />
-<meta property="article:modified_time" content="2022-04-05T14:12:42&#43;08:00" />
+<meta property="article:published_time" content="2022-04-04T14:12:42&#43;08:00" />
+<meta property="article:modified_time" content="2022-04-04T14:12:42&#43;08:00" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="数据结构与算法——栈的应用"/>
-<meta name="twitter:description" content="栈的特点是先进后出，所以常用来处理具有递归结构的数据
+<meta name="twitter:description" content="栈的特点是后进先出，所以常用来处理具有递归结构的数据
  深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义
- 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$ 后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
+ 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$  后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
     中缀表达式
  运算符在中间 需要括号改变优先级  例如：$4\ *\ x\ *\ (2\ *\ x\ &#43;\ a)\ –\ c$
   后缀表达式"/>
@@ -101,15 +101,15 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "数据结构与算法——栈的应用",
   "name": "数据结构与算法——栈的应用",
-  "description": "栈的特点是先进后出，所以常用来处理具有递归结构的数据\n 深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义\n 基本符号集：${0，1，…，9，+，-，*，/，（，）}$ 语法成分集：{\u0026lt;表达式\u0026gt; , \u0026lt;项\u0026gt; , \u0026lt;因子\u0026gt; , \u0026lt;常数\u0026gt;, \u0026lt;数字\u0026gt; } 中缀表达式：$23\\ +\\ (34\\ *\\ 45)\\ /\\ (5\\ +\\ 6\\ +\\ 7)$ 后缀表达式：$23\\ 34\\ 45\\ *\\ 5\\ 6\\ +\\ 7\\ +\\ /\\ +$\n    中缀表达式\n 运算符在中间 需要括号改变优先级  例如：$4\\ *\\ x\\ *\\ (2\\ *\\ x\\ +\\ a)\\ –\\ c$\n  后缀表达式",
+  "description": "栈的特点是后进先出，所以常用来处理具有递归结构的数据\n 深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义\n 基本符号集：${0，1，…，9，+，-，*，/，（，）}$ 语法成分集：{\u0026lt;表达式\u0026gt; , \u0026lt;项\u0026gt; , \u0026lt;因子\u0026gt; , \u0026lt;常数\u0026gt;, \u0026lt;数字\u0026gt; } 中缀表达式：$23\\ +\\ (34\\ *\\ 45)\\ /\\ (5\\ +\\ 6\\ +\\ 7)$  后缀表达式：$23\\ 34\\ 45\\ *\\ 5\\ 6\\ +\\ 7\\ +\\ /\\ +$\n    中缀表达式\n 运算符在中间 需要括号改变优先级  例如：$4\\ *\\ x\\ *\\ (2\\ *\\ x\\ +\\ a)\\ –\\ c$\n  后缀表达式",
   "keywords": [
     "数据结构与算法"
   ],
-  "articleBody": "  栈的特点是先进后出，所以常用来处理具有递归结构的数据\n 深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义\n 基本符号集：${0，1，…，9，+，-，*，/，（，）}$ 语法成分集：{ ,  ,  , ,  } 中缀表达式：$23\\ +\\ (34\\ *\\ 45)\\ /\\ (5\\ +\\ 6\\ +\\ 7)$ 后缀表达式：$23\\ 34\\ 45\\ *\\ 5\\ 6\\ +\\ 7\\ +\\ /\\ +$\n    中缀表达式\n 运算符在中间 需要括号改变优先级  例如：$4\\ *\\ x\\ *\\ (2\\ *\\ x\\ +\\ a)\\ –\\ c$\n  后缀表达式\n 运算符在后面 完全不需要括号  例如：$4\\ x\\ *\\ 2\\ x\\ *\\ a\\ +\\ *\\ c\\ –$\n  后缀表达式求值思路\n循环：依次顺序读入表达式的符号序列（假设以 ＝ 作为输入序列的结束），并根据读入的元素符号逐一分析\n 当遇到的是一个操作数，则压入栈顶 当遇到的是一个运算符, 就从栈中两次取出栈顶（注意两个操作数在符号两侧的顺序，第一个是右操作数，第二个是左操作数），按照运算符对这两个操作数进行计算。然后将计算结果压入栈顶  如此继续，直到遇到符号 ＝，这时栈顶的值就是输入表达式的值\n  部分代码：\n// 计算器类定义 template class T class Calculator { private: stackT s; // 这个栈用于压入保存操作数  // 从栈顶弹出两个操作数 opd1 和 opd2  bool GetTwoOperands(T\u0026 opd1,T\u0026 opd2); // 取两个操作数，并按 op 对两个操作数进行计算  void Compute(char op); public: Calculator(void){} ; // 创建计算器实例，开辟一个空栈  void Run(void); // 读入后缀表达式，遇 “=” 符号结束  void Clear(void); // 清除计算器，为下一次计算做准备 }; template class T bool CalculatorT::GetTwoOperands(T\u0026 opnd1, T\u0026 opnd2) { if (s.empty()) { cerr  \"Missing operand!\" endl; return false; } opnd1 = s.top(); // 右操作数  s.pop(); if (s.empty()) { cerr  \"Missing operand!\" endl; return false; } opnd2 = s.top(); // 左操作数  s.pop(); return true; } template class T void CalculatorT::Compute(char op) { T operand1, operand2; bool result = GetTwoOperands(operand1, operand2); if (result == true) { switch(op) { case '+' : s.push(operand2 + operand1); break; case '-' : s.push(operand2 - operand1); break; case '*' : s.push(operand2 * operand1); break; case '/' : if (operand1 == 0.0) { cerr  \"Divide by 0!\"  endl; stackT().swap(s); } else { s.push(operand2 / operand1); break; } } }else{ stackT().swap(s); } } template class T void CalculatorT::Run(void) { char c; T newoperand; while (cin  c, c != '=') { switch(c) { case '+': case '-': case '*': case '/': Compute(c); break; default: cin.putback(c); cin  newoperand; s.push(newoperand); break; } } if (!s.empty()) cout  s.top()  endl; // 印出求值的最后结果 }   将中缀表达式转换为后缀表达式\n思路：利用栈来记录表达式中的运算符\n  当输入是操作数，直接输出到后缀表达式序列\n  当输入的是左括号时，也把它压栈\n  当输入的是运算符时：\nWhile (以下循环)\nif（栈非空 and 栈顶不是左括号 and 输入运算符的优先级 ≤ 栈顶运算符的优先级）\n将当前栈顶元素弹栈，放到后缀表达式序列中（此步反复循环，直到上述 if 条件不 成立,将输入的运算符压入栈中）；\nelse\n把输入的运算符压栈（ 当前栈顶运算符才压栈！）\n  当输入的是右括号时，先判断栈是否为空\n 若为空（括号不匹配），异常处理，清栈退出； 若非空，则把栈中的元素依次弹出  遇到第一个左括号为止，将弹出的元素输出到后缀表达式的序列中（弹出的 开括号不放到序列中） 若没有遇到开括号，说明括号也不匹配，做异常处理，清栈退出      最后，当中缀表达式的符号序列全部读入时，若栈内仍有元素，把它们全部依次弹 出，都放到后缀表达式序列尾部。\n  若弹出的元素遇到开括号时，则说明括号不匹配，做错误异常处理，清栈退出\n    ",
+  "articleBody": "  栈的特点是后进先出，所以常用来处理具有递归结构的数据\n 深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义\n 基本符号集：${0，1，…，9，+，-，*，/，（，）}$ 语法成分集：{ ,  ,  , ,  } 中缀表达式：$23\\ +\\ (34\\ *\\ 45)\\ /\\ (5\\ +\\ 6\\ +\\ 7)$  后缀表达式：$23\\ 34\\ 45\\ *\\ 5\\ 6\\ +\\ 7\\ +\\ /\\ +$\n    中缀表达式\n 运算符在中间 需要括号改变优先级  例如：$4\\ *\\ x\\ *\\ (2\\ *\\ x\\ +\\ a)\\ –\\ c$\n  后缀表达式\n 运算符在后面 完全不需要括号  例如：$4\\ x\\ *\\ 2\\ x\\ *\\ a\\ +\\ *\\ c\\ –$\n  后缀表达式求值思路\n循环：依次顺序读入表达式的符号序列（假设以 ＝ 作为输入序列的结束），并根据读入的元素符号逐一分析\n 当遇到的是一个操作数，则压入栈顶 当遇到的是一个运算符, 就从栈中两次取出栈顶（注意两个操作数在符号两侧的顺序，第一个是右操作数，第二个是左操作数），按照运算符对这两个操作数进行计算。然后将计算结果压入栈顶  如此继续，直到遇到符号 ＝，这时栈顶的值就是输入表达式的值\n  部分代码：\n// 计算器类定义 template class T class Calculator { private: stackT s; // 这个栈用于压入保存操作数  // 从栈顶弹出两个操作数 opd1 和 opd2  bool GetTwoOperands(T\u0026 opd1,T\u0026 opd2); // 取两个操作数，并按 op 对两个操作数进行计算  void Compute(char op); public: Calculator(void){} ; // 创建计算器实例，开辟一个空栈  void Run(void); // 读入后缀表达式，遇 “=” 符号结束  void Clear(void); // 清除计算器，为下一次计算做准备 }; template class T bool CalculatorT::GetTwoOperands(T\u0026 opnd1, T\u0026 opnd2) { if (s.empty()) { cerr  \"Missing operand!\" endl; return false; } opnd1 = s.top(); // 右操作数  s.pop(); if (s.empty()) { cerr  \"Missing operand!\" endl; return false; } opnd2 = s.top(); // 左操作数  s.pop(); return true; } template class T void CalculatorT::Compute(char op) { T operand1, operand2; bool result = GetTwoOperands(operand1, operand2); if (result == true) { switch(op) { case '+' : s.push(operand2 + operand1); break; case '-' : s.push(operand2 - operand1); break; case '*' : s.push(operand2 * operand1); break; case '/' : if (operand1 == 0.0) { cerr  \"Divide by 0!\"  endl; stackT().swap(s); } else { s.push(operand2 / operand1); break; } } }else{ stackT().swap(s); } } template class T void CalculatorT::Run(void) { char c; T newoperand; while (cin  c, c != '=') { switch(c) { case '+': case '-': case '*': case '/': Compute(c); break; default: cin.putback(c); cin  newoperand; s.push(newoperand); break; } } if (!s.empty()) cout  s.top()  endl; // 印出求值的最后结果 }   将中缀表达式转换为后缀表达式\n思路：利用栈来记录表达式中的运算符\n  当输入是操作数，直接输出到后缀表达式序列\n  当输入的是左括号时，也把它压栈\n  当输入的是运算符时：\nwhile (以下循环)\nif（栈非空 and 栈顶不是左括号 and 输入运算符的优先级 ≤ 栈顶运算符的优先级）\n将当前栈顶元素弹栈，放到后缀表达式序列中（此步反复循环，直到上述 if 条件不 成立,将输入的运算符压入栈中）；\nelse\n把输入的运算符压栈（ 当前栈顶运算符才压栈！）\n  当输入的是右括号时，先判断栈是否为空\n 若为空（括号不匹配），异常处理，清栈退出； 若非空，则把栈中的元素依次弹出  遇到第一个左括号为止，将弹出的元素输出到后缀表达式的序列中（弹出的 开括号不放到序列中） 若没有遇到开括号，说明括号也不匹配，做异常处理，清栈退出      最后，当中缀表达式的符号序列全部读入时，若栈内仍有元素，把它们全部依次弹 出，都放到后缀表达式序列尾部。\n  若弹出的元素遇到开括号时，则说明括号不匹配，做错误异常处理，清栈退出\n    ",
   "wordCount" : "320",
   "inLanguage": "en",
-  "datePublished": "2022-04-05T14:12:42+08:00",
-  "dateModified": "2022-04-05T14:12:42+08:00",
+  "datePublished": "2022-04-04T14:12:42+08:00",
+  "dateModified": "2022-04-04T14:12:42+08:00",
   "author":{
     "@type": "Person",
     "name": "Rick Cui"
@@ -216,14 +216,14 @@ if (!doNotTrack) {
     <h1 class="post-title">
       数据结构与算法——栈的应用
     </h1>
-    <div class="post-meta"><span title='2022-04-05 14:12:42 +0800 CST'>April 5, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+    <div class="post-meta"><span title='2022-04-04 14:12:42 +0800 CST'>April 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> 
 
   <div class="post-content"><ol>
 <li>
-<p>栈的特点是先进后出，所以常用来处理具有<strong>递归结构</strong>的数据</p>
+<p>栈的特点是后进先出，所以常用来处理具有<strong>递归结构</strong>的数据</p>
 <ul>
 <li>深度优先搜索</li>
 <li>表达式求值</li>
@@ -236,7 +236,9 @@ if (!doNotTrack) {
 <ul>
 <li>基本符号集：${0，1，…，9，+，-，*，/，（，）}$</li>
 <li>语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; }</li>
-<li>中缀表达式：$23\ +\ (34\ *\ 45)\ /\ (5\ +\ 6\ +\ 7)$</li>
+<li>中缀表达式：$23\ +\ (34\ *\ 45)\ /\ (5\ +\ 6\ +\ 7)$
+<img loading="lazy" src="../img/%e4%b8%ad%e7%bc%80%e8%a1%a8%e8%be%be%e5%bc%8f%e9%80%92%e5%bd%92%e5%9b%be%e7%a4%ba.jpg" alt="中缀表达式递归图示"  />
+</li>
 <li>后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ +\ 7\ +\ /\ +$<br>
 <img loading="lazy" src="../img/%e5%90%8e%e7%bc%80%e8%a1%a8%e8%be%be%e5%bc%8f.jpg" alt="后缀表达式"  />
 </li>
@@ -369,7 +371,7 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>当输入的是运算符时：</p>
-<p>While (以下循环)<br>
+<p>while (以下循环)<br>
  if（栈非空 and 栈顶不是左括号 and 输入运算符的优先级 <code>≤</code> 栈顶运算符的优先级）<br>
   将当前栈顶元素弹栈，放到后缀表达式序列中（此步反复循环，直到上述 if 条件不
 成立,将输入的运算符压入栈中）；<br>
@@ -410,6 +412,11 @@ if (!doNotTrack) {
       <li><a href="https://874656645.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/163-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>数据结构与算法——队列</span>
+  </a>
   <a class="next" href="https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/">
     <span class="title">Next Page »</span>
     <br>

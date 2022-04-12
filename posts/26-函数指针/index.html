@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>函数指针 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish ">
+<meta name="description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish 成员函数指针：">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="函数指针" />
-<meta property="og:description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish " />
+<meta property="og:description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish 成员函数指针：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-16T14:34:27&#43;08:00" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="函数指针"/>
-<meta name="twitter:description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish "/>
+<meta name="twitter:description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish 成员函数指针："/>
 
 
 <script type="application/ld+json">
@@ -86,12 +86,12 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "函数指针",
   "name": "函数指针",
-  "description": "#include \u0026lt;iostream\u0026gt;#include \u0026lt;cstdlib\u0026gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout \u0026lt;\u0026lt; f(v) \u0026lt;\u0026lt; endl; }; int main() { fn = cal; cout \u0026lt;\u0026lt; (*fn)(10) \u0026lt;\u0026lt; endl; cout \u0026lt;\u0026lt; fn(10) \u0026lt;\u0026lt; endl; Fn f1 = cal; cout \u0026lt;\u0026lt; (*f1)(20) \u0026lt;\u0026lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish ",
+  "description": "#include \u0026lt;iostream\u0026gt;#include \u0026lt;cstdlib\u0026gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout \u0026lt;\u0026lt; f(v) \u0026lt;\u0026lt; endl; }; int main() { fn = cal; cout \u0026lt;\u0026lt; (*fn)(10) \u0026lt;\u0026lt; endl; cout \u0026lt;\u0026lt; fn(10) \u0026lt;\u0026lt; endl; Fn f1 = cal; cout \u0026lt;\u0026lt; (*f1)(20) \u0026lt;\u0026lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish 成员函数指针：",
   "keywords": [
     "C++"
   ],
-  "articleBody": "#include #include using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout  f(v)  endl; }; int main() { fn = cal; cout  (*fn)(10)  endl; cout  fn(10)  endl; Fn f1 = cal; cout  (*f1)(20)  endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish ",
-  "wordCount" : "72",
+  "articleBody": "#include #include using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout  f(v)  endl; }; int main() { fn = cal; cout  (*fn)(10)  endl; cout  fn(10)  endl; Fn f1 = cal; cout  (*f1)(20)  endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish 成员函数指针：\nstruct type { int i; type(): i(3) {} void f(int v) const { // this-i = v; // compile error: this is a pointer to const  const_casttype*(this)-i = v; // OK as long as the type object isn't const  } }; int main() { type t; // if this was const type t, then t.f(4) would be undefined behavior  t.f(4); std::cout  \"type::i = \"  t.i  '\\n'; // type::i = 4  void (type::*pmf)(int) const = \u0026type::f; // pointer to member function  (t.*pmf)(40); std::cout  \"type::i = \"  t.i  '\\n'; // type::i = 40 } ",
+  "wordCount" : "171",
   "inLanguage": "en",
   "datePublished": "2021-12-16T14:34:27+08:00",
   "dateModified": "2021-12-16T14:34:27+08:00",
@@ -231,6 +231,30 @@ if (!doNotTrack) {
 30
 0
 Finish
+</code></pre></div><p><strong>成员函数指针：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">type</span>
+{
+    <span style="color:#66d9ef">int</span> i;
+ 
+    type()<span style="color:#f92672">:</span> i(<span style="color:#ae81ff">3</span>) {}
+ 
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> v) <span style="color:#66d9ef">const</span>
+    {
+        <span style="color:#75715e">// this-&gt;i = v;                 // compile error: this is a pointer to const
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span>type<span style="color:#f92672">*&gt;</span>(<span style="color:#66d9ef">this</span>)<span style="color:#f92672">-&gt;</span>i <span style="color:#f92672">=</span> v; <span style="color:#75715e">// OK as long as the type object isn&#39;t const
+</span><span style="color:#75715e"></span>    }
+};
+ 
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() 
+{
+    type t; <span style="color:#75715e">// if this was const type t, then t.f(4) would be undefined behavior
+</span><span style="color:#75715e"></span>    t.f(<span style="color:#ae81ff">4</span>);
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;type::i = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;       <span style="color:#75715e">// type::i = 4
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">void</span> (type<span style="color:#f92672">::*</span>pmf)(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">const</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>type<span style="color:#f92672">::</span>f; <span style="color:#75715e">// pointer to member function
+</span><span style="color:#75715e"></span>    (t.<span style="color:#f92672">*</span>pmf)(<span style="color:#ae81ff">40</span>);
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;type::i = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;       <span style="color:#75715e">// type::i = 40
+</span><span style="color:#75715e"></span>}
 </code></pre></div>
 
   </div>

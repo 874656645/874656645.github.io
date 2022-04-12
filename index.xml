@@ -9,16 +9,163 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 05 Apr 2022 14:12:42 +0800</lastBuildDate><atom:link href="https://874656645.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 Apr 2022 19:02:36 +0800</lastBuildDate><atom:link href="https://874656645.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;17 使用结构化绑定来解包绑定的返回值</title>
+      <link>https://874656645.github.io/posts/175-c&#43;&#43;17-%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A%E6%9D%A5%E8%A7%A3%E5%8C%85%E7%BB%91%E5%AE%9A%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/</link>
+      <pubDate>Tue, 12 Apr 2022 19:02:36 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/175-c&#43;&#43;17-%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A%E6%9D%A5%E8%A7%A3%E5%8C%85%E7%BB%91%E5%AE%9A%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/</guid>
+      <description>注意：使用结构化绑定时，就不能再使用 std::tie 创建虚拟变量了，所以我们不得不绑定所有值到命名过的变量上。对部分成员进行绑定的做法是高效的，因为编译器可以很容易的对未绑定的变量进行优化
+std::pair&amp;lt;int,int&amp;gt; divide_remainder(int dividend, int divisor){ int f = dividend / divisor; int s = dividend % divisor; return {f, s}; } int main() { auto [dividend, remainder] = divide_remainder(16, 3); std::cout &amp;lt;&amp;lt; &amp;#34;16 / 3 is &amp;#34; &amp;lt;&amp;lt; dividend &amp;lt;&amp;lt; &amp;#34; with a remainder of &amp;#34; &amp;lt;&amp;lt; remainder &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; // 之前的写法  int remainder1; std::tie(std::ignore, remainder1) = divide_remainder(16, 5); std::cout &amp;lt;&amp;lt; &amp;#34;16 % 5 is &amp;#34; &amp;lt;&amp;lt; remainder1 &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; return 0; } </description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;17 大括号初始化</title>
+      <link>https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
+      <pubDate>Tue, 12 Apr 2022 18:51:42 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
+      <description>template &amp;lt;typename T1, typename T2, typename T3&amp;gt; class my_wrapper { T1 t1; T2 t2; T3 t3; public: explicit my_wrapper(T1 t1_, T2 t2_, T3 t3_) : t1{t1_}, t2{t2_}, t3{t3_} { cout &amp;lt;&amp;lt; t1_ &amp;lt;&amp;lt; &amp;#34; &amp;#34; &amp;lt;&amp;lt; t2_ &amp;lt;&amp;lt; &amp;#34; &amp;#34; &amp;lt;&amp;lt; t3_ &amp;lt;&amp;lt; endl; } }; // 工厂函数 template &amp;lt;typename T1, typename T2, typename T3&amp;gt; my_wrapper&amp;lt;T1, T2, T3&amp;gt; make_wrapper(T1 t1, T2 t2, T3 t3) { return my_wrapper{t1, t2, t3}; } int main() { my_wrapper wrapper {123, 1.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;17 constexpr-if 简化编译</title>
+      <link>https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/</link>
+      <pubDate>Tue, 12 Apr 2022 17:16:36 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/</guid>
+      <description>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
+比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
+template &amp;lt;typename T&amp;gt; class addable { T val; public: addable(T v) : val{v} {} template &amp;lt;typename U&amp;gt; T add(U x) const { return val + x; } }; 假设类型 T 是 std::vector&amp;lt;something&amp;gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
+template &amp;lt;typename U&amp;gt; T add(U x) { auto copy (val); // Get a copy of the vector member  for (auto &amp;amp;n : copy) { n += x; } return copy; } 把两种情况结合在一起：</description>
+    </item>
+    
+    <item>
+      <title>const_cast</title>
+      <link>https://874656645.github.io/posts/172-const_cast/</link>
+      <pubDate>Mon, 11 Apr 2022 17:51:55 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/172-const_cast/</guid>
+      <description>函数指针和成员函数指针无法用于 const_cast const_cast 使得指向非 const 类型的 const 引用或指针能够被修改 通过 const_cast 修改 const 对象是未定义的行为  struct type { int i; type(): i(3) {} void f(int v) const { // this-&amp;gt;i = v; // compile error: this is a pointer to const  const_cast&amp;lt;type*&amp;gt;(this)-&amp;gt;i = v; // OK as long as the type object isn&amp;#39;t const  } }; int main() { int i = 3; // i is not declared const  const int&amp;amp; rci = i; // const reference  const_cast&amp;lt;int&amp;amp;&amp;gt;(rci) = 4; // OK: modifies i  std::cout &amp;lt;&amp;lt; &amp;#34;i = &amp;#34; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; const int* pci = &amp;amp;i; // *pci = 5; // error: assignment of read-only location ‘* pci’  *const_cast&amp;lt;int*&amp;gt;(pci) = 5; // OK: modifies i  std::cout &amp;lt;&amp;lt; &amp;#34;i = &amp;#34; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; type t; // if this was const type t, then t.</description>
+    </item>
+    
+    <item>
+      <title>类型转换函数</title>
+      <link>https://874656645.github.io/posts/171-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Sun, 10 Apr 2022 15:39:37 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/171-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/</guid>
+      <description>一、转换函数 Conversion Functions(operators) 在 C++ 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C++ 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。
+转换函数写法：operator typeName();
+ 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：
+class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 + f; cout &amp;lt;&amp;lt; d &amp;lt;&amp;lt; endl; return 0; } 输出：</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;11 constexpr</title>
+      <link>https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/</link>
+      <pubDate>Sat, 09 Apr 2022 10:28:47 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/</guid>
+      <description>在编译过程中就已经把值计算出来，会做类型检查； define 是在预编译过程中进行简单的文本替换，不会做类型检查； 在对象声明时或非静态成员函数中使用 constexpr 关键字(C++ 14)暗示这个对象或非静态成员函数是 const 的； 在函数或静态数据成员(C++ 17)声明中使用的 constexpr 关键字意味着内联； C++11 中 constexpr 函数可以使用递归，?: 三目运算符，从 C++14 开始，constexpr 函数可以在内部使用局部变量、循环和分支等简单语句；    constexpr 修饰变量必须满足以下要求：
+ 它的类型必须是一个LiteralType 它必须立即初始化 其初始化的完整表达式，包括所有隐式转换、构造函数调用等，必须是 constexpr 它必须有 constexpr 析构    constexpr 修饰函数必须满足以下要求：
+ 它不能是 virtual 修饰的(直到 C++20) 它不能是 coroutine 协程(直到 C++20) 它的返回类型（如果有的话）必须是 LiteralType 所有参数必须是 LiteralType    class Test{ public: int x = 10; }; int main() { constexpr Test t; // const  cout &amp;lt;&amp;lt; typeid(t.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;11 std::function</title>
+      <link>https://874656645.github.io/posts/169-c&#43;&#43;11-function/</link>
+      <pubDate>Fri, 08 Apr 2022 16:06:06 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/169-c&#43;&#43;11-function/</guid>
+      <description>替代以前的函数指针 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针    参考：
+std::function</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;11 std::mem_fn</title>
+      <link>https://874656645.github.io/posts/168-c&#43;&#43;11-mem_fn/</link>
+      <pubDate>Fri, 08 Apr 2022 10:20:07 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/168-c&#43;&#43;11-mem_fn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;11 std::reference_wrapper</title>
+      <link>https://874656645.github.io/posts/167-c&#43;&#43;11-reference_wrapper/</link>
+      <pubDate>Thu, 07 Apr 2022 13:43:10 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/167-c&#43;&#43;11-reference_wrapper/</guid>
+      <description>创建一个对象或函数的引用，对象必须是 可复制(CopyConstructible)、可赋值(CopyAssignable) 的。
+  它经常被用作在标准容器(如 std::vector )中存储引用的机制，而标准容器通常不能保存引用。
+  辅助函数 std::ref 与 std::cref 常用于生成 std::reference_wrapper 对象。
+  std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。
+  能隐式转换成 T&amp;amp;。
+    在 vector 中存储引用类型：
+#include &amp;lt;iostream&amp;gt;#include &amp;lt;list&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;random&amp;gt;#include &amp;lt;functional&amp;gt;#include &amp;lt;algorithm&amp;gt; int main() { std::list&amp;lt;int&amp;gt; l(10); std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 +1  std::vector&amp;lt;std::reference_wrapper&amp;lt;int&amp;gt;&amp;gt; v(l.begin(), l.end()); // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;11 std::ref, std::cref 与 std::bind</title>
+      <link>https://874656645.github.io/posts/166-c&#43;&#43;11-refcref-%E4%B8%8E-bind/</link>
+      <pubDate>Thu, 07 Apr 2022 10:40:34 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/166-c&#43;&#43;11-refcref-%E4%B8%8E-bind/</guid>
+      <description>函数模板 ref 与 cref 是生成 std::reference_wrapper 类型对象的帮助函数，主要是与 std::bind 一起使用，默认情况下，std::bind 无法使用变量引用传递，即使原来的函数形参是引用类型的
+void f(int&amp;amp; n1, int&amp;amp; n2, const int&amp;amp; n3) { std::cout &amp;lt;&amp;lt; &amp;#34;In function: &amp;#34; &amp;lt;&amp;lt; n1 &amp;lt;&amp;lt; &amp;#39; &amp;#39; &amp;lt;&amp;lt; n2 &amp;lt;&amp;lt; &amp;#39; &amp;#39; &amp;lt;&amp;lt; n3 &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; ++n1; // 增加存储于函数对象的 n1 副本  ++n2; // 增加 main() 的 n2  // ++n3; // 编译错误 error: increment of read-only reference ‘n3’ } int main() { int n1 = 1, n2 = 2, n3 = 3; // 函数对象 bound_f  // 默认会将此时变量值的副本做为函数对象的参数（函数参数特例化）  std::function&amp;lt;void()&amp;gt; bound_f = std::bind(f, n1, std::ref(n2), std::cref(n3)); n1 = 10; n2 = 11; n3 = 12; std::cout &amp;lt;&amp;lt; &amp;#34;Before function: &amp;#34; &amp;lt;&amp;lt; n1 &amp;lt;&amp;lt; &amp;#39; &amp;#39; &amp;lt;&amp;lt; n2 &amp;lt;&amp;lt; &amp;#39; &amp;#39; &amp;lt;&amp;lt; n3 &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; bound_f(); std::cout &amp;lt;&amp;lt; &amp;#34;After function: &amp;#34; &amp;lt;&amp;lt; n1 &amp;lt;&amp;lt; &amp;#39; &amp;#39; &amp;lt;&amp;lt; n2 &amp;lt;&amp;lt; &amp;#39; &amp;#39; &amp;lt;&amp;lt; n3 &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; } 输出：</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——队列的应用</title>
+      <link>https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/</link>
+      <pubDate>Wed, 06 Apr 2022 08:56:06 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
+      <description>一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构
+ 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）
+ 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
+ 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
+ “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
+ 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status &amp;amp; 0x08) != 0); } bool wolf(int status){ return ((status &amp;amp; 0x04) !</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——队列的实现方式</title>
+      <link>https://874656645.github.io/posts/164-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Tue, 05 Apr 2022 12:22:44 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/164-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid>
+      <description>栈的物理实现有 顺序队列 和 链式队列
+一、顺序队列 用向量存储队列元素，用两个变量分别指向队列的前端(front)和尾端(rear)
+ 关键是如何防止假溢出    队列溢出
+ 上溢 下溢 假溢出：当 rear = mSize-1 时，再作插入运算就会产生溢出，如果这时队列的前端还有许多空位置，这种现象称为假溢出    循环队列
+ 为了解决假溢出的问题，需要采用循环队列的方式： % mSize 另外一个问题就是如何区分空队列还是满队列？空一个队列空间，空队列状态时，令 front = rear，若 (rear + 1) % mSize == front，我们认为此时队列已满，但实际上 rear 指向的空间并没有被利用    循环队列类定义
+  template &amp;lt;class T&amp;gt; class arrQueue: public Queue&amp;lt;T&amp;gt; { private: int mSize; // 存放队列的数组的大小  int front; // 表示队头所在位置的下标  int rear; // 表示待入队元素所在位置的下标  T *qu; // 存放类型为T的队列元素的数组 public: // 队列的运算集  arrQueue(int size) { // 创建队列的实例  mSize = size + 1; // 浪费一个存储空间，以区别队列空和队列满  qu = new T[mSize]; front = rear = 0; } ~arrQueue() { // 消除该实例，并释放其空间  delete[] qu; } } // 入队操作 template&amp;lt;class T&amp;gt; bool arrQueue&amp;lt;T&amp;gt; :: enQueue(const T item) { // item入队，插入队尾  if (((rear + 1 ) % mSize) == front) { cout &amp;lt;&amp;lt; &amp;#34;队列已满，溢出&amp;#34; &amp;lt;&amp;lt; endl; return false; } qu[rear] = item; rear = (rear + 1) % mSize; // 循环后继  return true; } // 出队操作 bool arrQueue&amp;lt;T&amp;gt; :: deQueue(T&amp;amp; item) { // 返回队头元素并从队列中删除  if ( front == rear) { cout &amp;lt;&amp;lt; &amp;#34;队列为空&amp;#34; &amp;lt;&amp;lt; endl; return false; } item = qu[front]; front = (front + 1) % mSize; // 这里并没有真的删除队列空间的元素，而是把头指针循环后移  return true; } 二、链式队列   用单链表方式存储，队列中每个元素对于链表中的一个结点</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——队列</title>
+      <link>https://874656645.github.io/posts/163-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97/</link>
+      <pubDate>Tue, 05 Apr 2022 09:03:06 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/163-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97/</guid>
+      <description>一、队列   队列特点
+ 访问受限的线性表 先进先出 插入在一端进行，删除在另一端进行    主要元素
+ 队头 队尾    主要操作
+ 入队列 出队列 取队首元素 判断队列是否为空    二、队列的抽象数据类型 template &amp;lt;class T&amp;gt; class Queue { // 队列的运算集 public: // 变为空队列  void clear(); // 将item插入队尾，成功则返回真，否则返回假  bool enQueue(const T item); // 返回队头元素并将其从队列中删除，成功则返回真  bool deQueue(T &amp;amp; item); // 返回队头元素，但不删除，成功则返回真  bool getFront(T &amp;amp; item); // 返回真，若队列已空  bool isEmpty(); // 返回真，若队列已满  bool isFull(); }; 三、队列的实现方式 队列的物理实现又分为顺序队列和链式队列</description>
+    </item>
+    
     <item>
       <title>数据结构与算法——栈的应用</title>
       <link>https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/</link>
-      <pubDate>Tue, 05 Apr 2022 14:12:42 +0800</pubDate>
+      <pubDate>Mon, 04 Apr 2022 14:12:42 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/</guid>
-      <description>栈的特点是先进后出，所以常用来处理具有递归结构的数据
+      <description>栈的特点是后进先出，所以常用来处理具有递归结构的数据
  深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义
- 基本符号集：${0，1，…，9，+，-，*，/，（，）}$ 语法成分集：{&amp;lt;表达式&amp;gt; , &amp;lt;项&amp;gt; , &amp;lt;因子&amp;gt; , &amp;lt;常数&amp;gt;, &amp;lt;数字&amp;gt; } 中缀表达式：$23\ +\ (34\ *\ 45)\ /\ (5\ +\ 6\ +\ 7)$ 后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ +\ 7\ +\ /\ +$
+ 基本符号集：${0，1，…，9，+，-，*，/，（，）}$ 语法成分集：{&amp;lt;表达式&amp;gt; , &amp;lt;项&amp;gt; , &amp;lt;因子&amp;gt; , &amp;lt;常数&amp;gt;, &amp;lt;数字&amp;gt; } 中缀表达式：$23\ +\ (34\ *\ 45)\ /\ (5\ +\ 6\ +\ 7)$  后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ +\ 7\ +\ /\ +$
     中缀表达式
  运算符在中间 需要括号改变优先级  例如：$4\ *\ x\ *\ (2\ *\ x\ +\ a)\ –\ c$
   后缀表达式</description>
@@ -27,7 +174,7 @@
     <item>
       <title>数据结构与算法——栈的实现方式</title>
       <link>https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link>
-      <pubDate>Mon, 04 Apr 2022 20:03:03 +0800</pubDate>
+      <pubDate>Sun, 03 Apr 2022 20:03:03 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid>
       <description>栈的物理实现有 顺序栈 和 链式栈
@@ -1205,7 +1352,8 @@ class T{ public: T(int v){ a = v; } T operator+(T &amp;amp;t){ T temp = this-&am
       <pubDate>Mon, 03 Jan 2022 13:54:11 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/</guid>
-      <description>#include &amp;lt;iostream&amp;gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;amp;c1, Complex &amp;amp;c2);  // friend Complex operator+(Complex &amp;amp;c1, Complex &amp;amp;c2);  // friend Complex&amp;amp; operator+= (Complex &amp;amp;c1, Complex &amp;amp;c2);  friend ostream&amp;amp; operator&amp;lt;&amp;lt;(ostream &amp;amp;os, Complex &amp;amp;c); friend istream&amp;amp; operator&amp;gt;&amp;gt;(istream &amp;amp;is, Complex &amp;amp;c); public: Complex(){ cout &amp;lt;&amp;lt; &amp;#34;Complex()...&amp;#34; &amp;lt;&amp;lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &amp;lt;&amp;lt; &amp;#34;Complex(int, int)...&amp;#34; &amp;lt;&amp;lt; endl; this-&amp;gt;a = a; this-&amp;gt;b = b; } ~Complex(){ cout &amp;lt;&amp;lt; &amp;#34;~Complex().</description>
+      <description>还有类型转换函数
+#include &amp;lt;iostream&amp;gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;amp;c1, Complex &amp;amp;c2);  // friend Complex operator+(Complex &amp;amp;c1, Complex &amp;amp;c2);  // friend Complex&amp;amp; operator+= (Complex &amp;amp;c1, Complex &amp;amp;c2);  friend ostream&amp;amp; operator&amp;lt;&amp;lt;(ostream &amp;amp;os, Complex &amp;amp;c); friend istream&amp;amp; operator&amp;gt;&amp;gt;(istream &amp;amp;is, Complex &amp;amp;c); public: Complex(){ cout &amp;lt;&amp;lt; &amp;#34;Complex()...&amp;#34; &amp;lt;&amp;lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &amp;lt;&amp;lt; &amp;#34;Complex(int, int)...&amp;#34; &amp;lt;&amp;lt; endl; this-&amp;gt;a = a; this-&amp;gt;b = b; } ~Complex(){ cout &amp;lt;&amp;lt; &amp;#34;~Complex().</description>
     </item>
     
     <item>
@@ -1254,7 +1402,7 @@ std::stack template&amp;lt;class T, class Container = deque&amp;lt;T&amp;gt;&amp
     </item>
     
     <item>
-      <title>new delete 与内存</title>
+      <title>new、delete 与内存</title>
       <link>https://874656645.github.io/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/</link>
       <pubDate>Wed, 29 Dec 2021 15:34:27 +0800</pubDate>
       
@@ -1574,7 +1722,7 @@ ArcMap WMTS</description>
       <pubDate>Thu, 16 Dec 2021 14:34:27 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/</guid>
-      <description>#include &amp;lt;iostream&amp;gt;#include &amp;lt;cstdlib&amp;gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &amp;lt;&amp;lt; f(v) &amp;lt;&amp;lt; endl; }; int main() { fn = cal; cout &amp;lt;&amp;lt; (*fn)(10) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; fn(10) &amp;lt;&amp;lt; endl; Fn f1 = cal; cout &amp;lt;&amp;lt; (*f1)(20) &amp;lt;&amp;lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish </description>
+      <description>#include &amp;lt;iostream&amp;gt;#include &amp;lt;cstdlib&amp;gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &amp;lt;&amp;lt; f(v) &amp;lt;&amp;lt; endl; }; int main() { fn = cal; cout &amp;lt;&amp;lt; (*fn)(10) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; fn(10) &amp;lt;&amp;lt; endl; Fn f1 = cal; cout &amp;lt;&amp;lt; (*f1)(20) &amp;lt;&amp;lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish 成员函数指针：</description>
     </item>
     
     <item>
@@ -1671,16 +1819,6 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
       <description>1、随机数 python 脚本
 import random def randNum(): res = random.randint(1, 7) return res 2、自增 python 脚本
 total = 0 def accumulate(increment): global total if total: total += increment else: total = increment return total </description>
-    </item>
-    
-    <item>
-      <title>Spatialite 随机数</title>
-      <link>https://874656645.github.io/posts/16-spatialite-%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
-      <pubDate>Thu, 25 Nov 2021 11:36:17 +0800</pubDate>
-      
-      <guid>https://874656645.github.io/posts/16-spatialite-%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
-      <description>1、随机数 SQL 脚本
-update &amp;#34;CYBuildings2&amp;#34; set &amp;#34;imgIndex&amp;#34; = FLOOR(1 + (RANDOM()+9223372036854775808)/2.0/9223372036854775808 * 7); </description>
     </item>
     
     <item>
@@ -1864,6 +2002,16 @@ cd electron-yarn-cz
     </item>
     
     
+    
+    <item>
+      <title>spatialite 随机数</title>
+      <link>https://874656645.github.io/posts/16-spatialite-%E9%9A%8F%E6%9C%BA%E6%95%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://874656645.github.io/posts/16-spatialite-%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
+      <description>1、随机数 SQL 脚本
+update &amp;#34;CYBuildings2&amp;#34; set &amp;#34;imgIndex&amp;#34; = FLOOR(1 + (RANDOM()+9223372036854775808)/2.0/9223372036854775808 * 7); </description>
+    </item>
     
   </channel>
 </rss>

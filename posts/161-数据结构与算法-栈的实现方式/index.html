@@ -53,8 +53,8 @@ if (!doNotTrack) {
 template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item; return true; } } bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2022-04-04T20:03:03&#43;08:00" />
-<meta property="article:modified_time" content="2022-04-04T20:03:03&#43;08:00" />
+<meta property="article:published_time" content="2022-04-03T20:03:03&#43;08:00" />
+<meta property="article:modified_time" content="2022-04-03T20:03:03&#43;08:00" />
 
 
 <meta name="twitter:card" content="summary_large_image"/>
@@ -99,8 +99,8 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
   "articleBody": "栈的物理实现有 顺序栈 和 链式栈\n一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：\ntemplate class T class arrStack : public Stack T { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStackT::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout  \"栈满溢出\"  endl; return false; } else { // 新元素入栈并修改栈顶指针  st[++top] = item; return true; } } bool arrStackT::pop(T\u0026 item) { // 出栈  if (top == -1) { // 栈为空  cout  \"栈为空，不能执行出栈操作\" endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：\ntemplate class T class Link{ private: T data; Link* next{nullptr}; public: Link(T info, Link* nextValue); }; template class T class lnkStack : public Stack T { private: // 栈的链式存储  LinkT* top; // 指向栈顶的指针  int size; // 存放元素的个数 public: // 栈运算的链式实现  lnkStack(int defSize) { // 构造函数  top = nullptr; size = 0; } ~lnkStack() { // 析构函数  clear(); } }; // 具有两个参数的Link构造函数 Link(const T info, Link* nextValue) { data = info; next = nextValue; } // 入栈操作的链式实现 bool lnkStackT:: push(const T item) { LinkT* tmp = new LinkT(item, top); top = tmp; size++; return true; } // 出栈操作的链式实现 bool lnkStackT:: pop(T\u0026 item) { Link T *tmp; if (size == 0) { cout  \"栈为空，不能执行出栈操作\" endl; return false; } item = top-data; tmp = top-next; delete top; top = tmp; size--; return true; } 三、顺序栈与链式栈的比较   时间效率\n顺序栈和链式栈都是 $\\mathcal{O}(1)$ 的时间复杂度\n  空间效率\n 顺序栈须说明一个固定的长度 链式栈的长度可变，但增加了结构性开销（增加了一个指针变量）    实际应用中，顺序栈比链式栈用得更广泛，尤其在能预测栈中最大数据量的情况下，一般是用顺序栈来实现\n  ",
   "wordCount" : "289",
   "inLanguage": "en",
-  "datePublished": "2022-04-04T20:03:03+08:00",
-  "dateModified": "2022-04-04T20:03:03+08:00",
+  "datePublished": "2022-04-03T20:03:03+08:00",
+  "dateModified": "2022-04-03T20:03:03+08:00",
   "author":{
     "@type": "Person",
     "name": "Rick Cui"
@@ -207,7 +207,7 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
     <h1 class="post-title">
       数据结构与算法——栈的实现方式
     </h1>
-    <div class="post-meta"><span title='2022-04-04 20:03:03 +0800 CST'>April 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+    <div class="post-meta"><span title='2022-04-03 20:03:03 +0800 CST'>April 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> <div class="toc">

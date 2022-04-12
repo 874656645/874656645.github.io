@@ -157,65 +157,72 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>装饰器模式
+    <h2>C&#43;&#43;11 auto 与 decltype 关键字
     </h2>
   </header>
   <section class="entry-content">
-    <p>装饰模式又叫包装模式，通过一种对客户端透明的方式来扩展对象功能，是继承关系的一种替代。
-装饰模式可以动态给一个类增加功能</p>
+    <p>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义模板函数时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
+template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1.53; Multiply(a, b); // 15....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-22 20:30:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto 与 decltype 关键字" href="https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>观察者模式
+    <h2>gdb 调试使用
     </h2>
   </header>
   <section class="entry-content">
-    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
+    <p>一、生成带有调试信息的程序 gcc main.c -o app -g
+二、启动调试  启动调试：gdb app 设置参数： set args
+set args 123 abc 456 ddd 查看代码： list 或 l  查看代码显示行数：show listsize 设置代码显示行数：set listsize 20 查看当前文件：  l l 行号 l 函数名   查看非当前文件：  l 文件名:行号 l 文件名:函数名      三、断点相关  设置断点：  break 行号 b 行号 b 函数名 b 文件名:行号 b 文件名:函数名   查看断点：info break 或 i b 删除断点：  del 断点Num d Num d Num1 Num2 d Num1-Num10   设置断点无效：dis Num 断点生效：ena Num 设置条件断点：b 行号 if i == 10  四、调试相关  启动运行：  start - s run - r   退出 gdb 调试：quit - q 打印变量的值：p 变量名 打印变量的类型：ptype 变量名 向下单步调试：  next - n step - s   跳出函数体：finish 从循环中跳出（循环体中不能有断点）：until 设置变量的值：set var 变量名 = value 继续运行到下一个断点：continue - c 监视变量：display 变量名 查看所有的监视变量的信息：info(i) display 取消变量监视：undisplay Num  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-20 08:53:26 +0800 CST'>February 20, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to gdb 调试使用" href="https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>命令模式
+    <h2>Makefile 使用
     </h2>
   </header>
   <section class="entry-content">
-    <p>将一个请求封闭为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。
-命令模式可以将请求者和接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求</p>
+    <p>一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
+  规则由三部分组成：目标、依赖、命令
+app:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则
+  四、makefile 优化   版本一：
+app:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
+  版本二：
+app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-19 16:36:47 +0800 CST'>February 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Makefile 使用" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>策略模式
+    <h2>Linux 静态库与动态库
     </h2>
   </header>
   <section class="entry-content">
-    <p>策略模式定义了一系列的算法，并将每个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
+    <p>一、库是什么 库是二进制格式的源代码（二进制加密）
+二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:59:42 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 策略模式" href="https://874656645.github.io/posts/112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-17 22:25:34 +0800 CST'>February 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 静态库与动态库" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>模板方法模式
+    <h2>gcc 相关
     </h2>
   </header>
   <section class="entry-content">
-    <p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
-class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬....</p>
+    <p>一、gcc 工作流程  预处理 —— -E  宏替换 头文件展开 去掉注释 生成 .i 文件   编译 —— -S  生成 .s 文件 汇编文件   汇编 —— -c  生成 .o 文件 二进制文件   链接   二、gcc 常用参数  -v / --version -I : 编译时指定头文件路径 -c : 生成二进制文件 .o -o : 指定生成的文件名 -g : gdb 调试，生成带有调试信息的二进制文件（Debug模式） -D : 编译时指定一个宏 -Wall : 显示警告信息 -On : 优化代码，n 是优化级别（1，2，3）  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:41:35 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板方法模式" href="https://874656645.github.io/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-16 21:44:06 +0800 CST'>February 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to gcc 相关" href="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
