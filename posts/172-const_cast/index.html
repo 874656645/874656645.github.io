@@ -90,8 +90,8 @@ if (!doNotTrack) {
   "keywords": [
     "C++"
   ],
-  "articleBody": " 函数指针和成员函数指针无法用于 const_cast const_cast 使得指向非 const 类型的 const 引用或指针能够被修改 通过 const_cast 修改 const 对象是未定义的行为  struct type {  int i;   type(): i(3) {}   void f(int v) const  {  // this-i = v; // compile error: this is a pointer to const  const_casttype*(this)-i = v; // OK as long as the type object isn't const  } };  int main() {  int i = 3; // i is not declared const  const int\u0026 rci = i; // const reference  const_castint\u0026(rci) = 4; // OK: modifies i  std::cout  \"i = \"  i  '\\n';   const int* pci = \u0026i;  // *pci = 5; // error: assignment of read-only location ‘* pci’  *const_castint*(pci) = 5; // OK: modifies i  std::cout  \"i = \"  i  '\\n';   type t; // if this was const type t, then t.f(4) would be undefined behavior  t.f(4);  std::cout  \"type::i = \"  t.i  '\\n';   const int j = 3; // j is declared const  int* pj = const_castint*(\u0026j);  // *pj = 4; // undefined behavior   const int\u0026 r2 = j; // 绑定到 const 对象的 const 引用  const_castint\u0026(r2) = 2; // 未定义行为：试图修改 const 对象 j   void (type::* pmf)(int) const = \u0026type::f; // pointer to member function  // const_cast(pmf); // compile error: const_cast does  // not work on function pointers  (t.*pmf)(40); } 输出：\ni = 4 i = 5 type::i = 4 type::i = 40 ",
-  "wordCount" : "228",
+  "articleBody": " 函数指针和成员函数指针无法用于 const_cast const_cast 使得指向非 const 类型的 const 引用或指针能够被修改 通过 const_cast 修改 const 对象是未定义的行为  struct type {  int i;   type(): i(3) {}   void f(int v) const  {  // this-i = v; // compile error: this is a pointer to const  const_casttype*(this)-i = v; // OK as long as the type object isn't const  } };  int main() {  int i = 3; // i is not declared const  const int\u0026 rci = i; // const reference  const_castint\u0026(rci) = 4; // OK: modifies i  std::cout  \"i = \"  i  '\\n';   const int* pci = \u0026i;  // *pci = 5; // error: assignment of read-only location ‘* pci’  *const_castint*(pci) = 5; // OK: modifies i  std::cout  \"i = \"  i  '\\n';   type t; // if this was const type t, then t.f(4) would be undefined behavior  t.f(4);  std::cout  \"type::i = \"  t.i  '\\n';   const int j = 3; // j is declared const  int* pj = const_castint*(\u0026j);  // *pj = 4; // undefined behavior   const int\u0026 r2 = j; // 绑定到 const 对象的 const 引用  const_castint\u0026(r2) = 2; // 未定义行为：试图修改 const 对象 j   void (type::* pmf)(int) const = \u0026type::f; // pointer to member function  // const_cast(pmf); // compile error: const_cast does  // not work on function pointers  (t.*pmf)(40); } 输出：\ni = 4 i = 5 type::i = 4 type::i = 40 参考：\nconst_cast conversion\n",
+  "wordCount" : "231",
   "inLanguage": "en",
   "datePublished": "2022-04-11T17:51:55+08:00",
   "dateModified": "2022-04-11T17:51:55+08:00",
@@ -244,7 +244,9 @@ if (!doNotTrack) {
 </span></span><span style="display:flex;"><span>i = 5
 </span></span><span style="display:flex;"><span>type::i = 4
 </span></span><span style="display:flex;"><span>type::i = 40
-</span></span></code></pre></div>
+</span></span></code></pre></div><p>参考：</p>
+<p><a href="https://en.cppreference.com/w/cpp/language/const_cast">const_cast conversion</a></p>
+
 
   </div>
 
