@@ -145,6 +145,22 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——线性表
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>线性结构  二元组 B = (K, R) , K = {a0, a1, …, an-1 }, R = {r}，其中 r 为前驱后继关系，具有反对称性和传递性 唯一的开始结点（表头）：没有前驱，只有一个唯一的后继 唯一的终止结点（表尾）：没有后继，只有一个唯一的前驱 内部结点：一个唯一的前驱和一个唯一的后继  线性表 线性表简称表，是零个或多个元素的有穷序列
+ 表目：线性表中的元素 文件：含有大量记录的线性表又称为文件 索引（下标） 表的长度 空表：长度为零的线性表(n=0)  线性表分类   按访问方式划分：
+ 直接访问型 顺序访问型 目录索引型    按存储方式：
+ 顺序表（数组） 链表    按操作：
+ 线性表：不限操作 栈：在同一端操作，在深度优先搜索、递归等算法中有很好的应用 队列：在两端操作，在宽度优先搜索、层次化处理中有很好的应用    顺序表  顺序表俗称向量，是用数组实现的（固定长度的一维数组） 按索引值从小到大存放在一片相邻的连续区域 结构紧凑，存储密度为1（存储密度 = 数据本身所占存储 / 整个数据结构所占存储） 物理存储关系就能表示逻辑关联关系  链表  链表需要指针表示逻辑关联关系，存储效率不如顺序表 有头链表和无头链表 在一些边界处理的时候，要注意头结点（head）和尾结点（tail）的特殊处理  讨论   线性表的分类方法有哪些？各种线性表名称中，哪些跟存储结构相关？哪些跟运算相关？...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-14 21:30:45 +0800 CST'>March 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——线性表" href="https://874656645.github.io/posts/151-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%BA%BF%E6%80%A7%E8%A1%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——算法效率与度量
     </h2>
   </header>
@@ -221,23 +237,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-03-08 20:33:08 +0800 CST'>March 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法-简介" href="https://874656645.github.io/posts/147-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%AE%80%E4%BB%8B/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>CMake 打包 Debug 和 Release
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>注意：这个对于单配置生成器是有效的，对于多配置生成器(例如Visual Studio)是无效的。因此在 Windows 平台，通过 MSYS 环境进行演示。
-默认情况下（Linux平台），CMake 的一个构建目录(build dir)只包含一个配置，可以是 Debug、Release、MinSizeRel 或 RelWithDebInfo。但是，可以通过设置 CPack 来绑定多个构建目录，并构造一个包含同一项目的多个配置的发行包。
-首先，我们希望确保 Debug 和 Release 构建对将要安装的可执行文件和库使用不同的名称。让我们使用 d 作为 Debug 可执行文件和库的后缀。在顶层 CMakeLists.txt 的开始部分添加 CMAKE_DEBUG_POSTFIX
-# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 设置 CMAKE_DEBUG_POSTFIX，指定后缀为 d set(CMAKE_DEBUG_POSTFIX d)然后在 Tutorial 可执行文件上添加属性 DEBUG_POSTFIX：
-# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# And the DEBUG_POSTFIX property on the tutorial executable set_target_properties(Tutorial PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})为 MathFunctions 库添加版本号信息，在 Mathfunctions/CMakelists.txt 中，设置 VERSION 和 SOVERSION 属性：
-# add the library that runs add_library(MathFunctions MathFunctions....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-06 14:41:05 +0800 CST'>March 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to CMake 打包 Debug 和 Release" href="https://874656645.github.io/posts/146-cmake-%E6%89%93%E5%8C%85-debug-%E5%92%8C-release/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

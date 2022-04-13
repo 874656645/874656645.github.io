@@ -246,7 +246,7 @@ Start exception finally 0 Finish 二、std::exception class exception { public: 
       <pubDate>Wed, 12 Jan 2022 22:47:51 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/</guid>
-      <description>一、类模板写法 1. 声明和定义写在一起 template&amp;lt;class T&amp;gt; class Person{  // 友元重载  friend ostream&amp;amp; operator&amp;lt;&amp;lt;(ostream &amp;amp;os, Person&amp;lt;T&amp;gt; &amp;amp;p){  cout &amp;lt;&amp;lt; p.m_age;  return os;  }  // 普通友元函数  friend void printP(Person&amp;lt;T&amp;gt; p){  cout &amp;lt;&amp;lt; p.m_age &amp;lt;&amp;lt; endl;  } public:  Person(T age){  this-&amp;gt;m_age = age;  }  void Show(){  cout &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; endl;  }  private:  T m_age; };  int main() {  Person&amp;lt;int&amp;gt; p(20);  p.</description>
+      <description>一、类模板写法 1. 声明和定义写在一起 template&amp;lt;class T&amp;gt; class Person{ public:  Person(T age){  this-&amp;gt;m_age = age;  }  void Show(){  cout &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; endl;  }  private:  T m_age; };  int main() {  Person&amp;lt;int&amp;gt; p(20);  p.Show();  cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl;  printP(p);   return 0; } 2. 声明和定义分开写，但在同一文件中 template&amp;lt;class T&amp;gt; class Person{ public:  Person(T age);  void Show(); private:  T m_age; };  template&amp;lt;class T&amp;gt; Person&amp;lt;T&amp;gt;::Person(T age){  this-&amp;gt;m_age = age; } template&amp;lt;class T&amp;gt; void Person&amp;lt;T&amp;gt;::Show(){  cout &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; endl; } int main() {  Person&amp;lt;int&amp;gt; p(20);  p.</description>
     </item>
     
     <item>

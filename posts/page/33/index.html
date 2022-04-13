@@ -160,6 +160,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Restart Cortana
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>win10 小娜开始菜单无法搜索应用 1.用管理员权限打开 powershell.exe 或者 cmd;
+2.在其中输入下列命令，重新注册激活小娜
+Get-AppXPackage -Name Microsoft.Windows.Cortana | Foreach {Add-AppxPackage -DisableDevelopmentMode -Register &#34;$($_.InstallLocation)\AppXManifest.xml&#34;}</p>
+  </section>
+  <footer class="entry-footer"><span title='2019-04-09 10:35:41 +0800 CST'>April 9, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Restart Cortana" href="https://874656645.github.io/posts/13-restart-cortana/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Cmake Learn
     </h2>
   </header>
@@ -214,30 +228,10 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
     </h2>
   </header>
   <section class="entry-content">
-    <p>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &#34;dmd&#34; save_path = &#39;E:/python/manhuadao/pics/&#39; __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#39;} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath(&#39;//div[@class=&#34;read-bottom&#34;]//a[@class=&#34;next&#34;]/@href&#39;) # print(next) for href in next_urls: nexturl = href....</p>
+    <p>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8  import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request  class DmdSpider(object):  name = &#34;dmd&#34;  save_path = &#39;E:/python/manhuadao/pics/&#39;  __picNo = 0   # 访问漫画岛网页  def start_request(self, url):  header = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#39;}  r = requests.get(url, params=header)  # print(r.text)   self....</p>
   </section>
   <footer class="entry-footer"><span title='2019-02-28 15:00:16 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Crawl Pictures From Website" href="https://874656645.github.io/posts/9-crawl-pictures-from-website/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Python Virtualenv
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>原文网址
-在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell1、使用pip安装 pip install virtualenv
-2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv 3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env
-或者
-virtualenv env
-此命令会在当前目录下创建一个env目录
-4、启动虚拟环境 env\Scripts\activate
-5、离开虚拟环境 deactivate
-6、删除env文件夹即可 </p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-16 11:20:20 +0800 CST'>February 16, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Python Virtualenv" href="https://874656645.github.io/posts/8-python-virtualenv/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

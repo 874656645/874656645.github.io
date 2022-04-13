@@ -9,7 +9,18 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 12 Apr 2022 19:02:36 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/c++17/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Apr 2022 16:50:15 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/c++17/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;17 折叠表达式</title>
+      <link>https://874656645.github.io/posts/176-c&#43;&#43;17-%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <pubDate>Wed, 13 Apr 2022 16:50:15 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/176-c&#43;&#43;17-%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <description>一元折叠表达式
+ ( pack op ... ) : 一元右折叠  (E op ...) 展开后： (E1 op (... op (EN-1 op EN)))   ( ... op pack ) ：一元左折叠  (... op E) 展开后： (((E1 op E2) op ...) op EN)      二元折叠表达式
+ ( pack op ... op init ) ：二元右折叠  (E op ... op I) 展开后： (E1 op (... op (EN−1 op (EN op I))))   ( init op .</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;17 使用结构化绑定来解包绑定的返回值</title>
       <link>https://874656645.github.io/posts/175-c&#43;&#43;17-%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A%E6%9D%A5%E8%A7%A3%E5%8C%85%E7%BB%91%E5%AE%9A%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/</link>
@@ -17,7 +28,7 @@
       
       <guid>https://874656645.github.io/posts/175-c&#43;&#43;17-%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A%E6%9D%A5%E8%A7%A3%E5%8C%85%E7%BB%91%E5%AE%9A%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/</guid>
       <description>注意：使用结构化绑定时，就不能再使用 std::tie 创建虚拟变量了，所以我们不得不绑定所有值到命名过的变量上。对部分成员进行绑定的做法是高效的，因为编译器可以很容易的对未绑定的变量进行优化
-std::pair&amp;lt;int,int&amp;gt; divide_remainder(int dividend, int divisor){ int f = dividend / divisor; int s = dividend % divisor; return {f, s}; } int main() { auto [dividend, remainder] = divide_remainder(16, 3); std::cout &amp;lt;&amp;lt; &amp;#34;16 / 3 is &amp;#34; &amp;lt;&amp;lt; dividend &amp;lt;&amp;lt; &amp;#34; with a remainder of &amp;#34; &amp;lt;&amp;lt; remainder &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; // 之前的写法  int remainder1; std::tie(std::ignore, remainder1) = divide_remainder(16, 5); std::cout &amp;lt;&amp;lt; &amp;#34;16 % 5 is &amp;#34; &amp;lt;&amp;lt; remainder1 &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; return 0; } </description>
+std::pair&amp;lt;int,int&amp;gt; divide_remainder(int dividend, int divisor){  int f = dividend / divisor;  int s = dividend % divisor;  return {f, s}; }  int main() {  auto [dividend, remainder] = divide_remainder(16, 3);  std::cout &amp;lt;&amp;lt; &amp;#34;16 / 3 is &amp;#34; &amp;lt;&amp;lt; dividend &amp;lt;&amp;lt; &amp;#34; with a remainder of &amp;#34; &amp;lt;&amp;lt; remainder &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;;   // 之前的写法  int remainder1;  std::tie(std::ignore, remainder1) = divide_remainder(16, 5);  std::cout &amp;lt;&amp;lt; &amp;#34;16 % 5 is &amp;#34; &amp;lt;&amp;lt; remainder1 &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;;   return 0; } </description>
     </item>
     
     <item>
@@ -26,7 +37,7 @@ std::pair&amp;lt;int,int&amp;gt; divide_remainder(int dividend, int divisor){ in
       <pubDate>Tue, 12 Apr 2022 18:51:42 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
-      <description>template &amp;lt;typename T1, typename T2, typename T3&amp;gt; class my_wrapper { T1 t1; T2 t2; T3 t3; public: explicit my_wrapper(T1 t1_, T2 t2_, T3 t3_) : t1{t1_}, t2{t2_}, t3{t3_} { cout &amp;lt;&amp;lt; t1_ &amp;lt;&amp;lt; &amp;#34; &amp;#34; &amp;lt;&amp;lt; t2_ &amp;lt;&amp;lt; &amp;#34; &amp;#34; &amp;lt;&amp;lt; t3_ &amp;lt;&amp;lt; endl; } }; // 工厂函数 template &amp;lt;typename T1, typename T2, typename T3&amp;gt; my_wrapper&amp;lt;T1, T2, T3&amp;gt; make_wrapper(T1 t1, T2 t2, T3 t3) { return my_wrapper{t1, t2, t3}; } int main() { my_wrapper wrapper {123, 1.</description>
+      <description>template &amp;lt;typename T1, typename T2, typename T3&amp;gt; class my_wrapper {  T1 t1;  T2 t2;  T3 t3; public:  explicit my_wrapper(T1 t1_, T2 t2_, T3 t3_) : t1{t1_}, t2{t2_}, t3{t3_} {  cout &amp;lt;&amp;lt; t1_ &amp;lt;&amp;lt; &amp;#34; &amp;#34; &amp;lt;&amp;lt; t2_ &amp;lt;&amp;lt; &amp;#34; &amp;#34; &amp;lt;&amp;lt; t3_ &amp;lt;&amp;lt; endl;  } };  // 工厂函数 template &amp;lt;typename T1, typename T2, typename T3&amp;gt; my_wrapper&amp;lt;T1, T2, T3&amp;gt; make_wrapper(T1 t1, T2 t2, T3 t3) {  return my_wrapper{t1, t2, t3}; }  int main() {  my_wrapper wrapper {123, 1.</description>
     </item>
     
     <item>
@@ -37,8 +48,8 @@ std::pair&amp;lt;int,int&amp;gt; divide_remainder(int dividend, int divisor){ in
       <guid>https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/</guid>
       <description>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
 比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
-template &amp;lt;typename T&amp;gt; class addable { T val; public: addable(T v) : val{v} {} template &amp;lt;typename U&amp;gt; T add(U x) const { return val + x; } }; 假设类型 T 是 std::vector&amp;lt;something&amp;gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
-template &amp;lt;typename U&amp;gt; T add(U x) { auto copy (val); // Get a copy of the vector member  for (auto &amp;amp;n : copy) { n += x; } return copy; } 把两种情况结合在一起：</description>
+template &amp;lt;typename T&amp;gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &amp;lt;typename U&amp;gt;  T add(U x) const {  return val + x;  } }; 假设类型 T 是 std::vector&amp;lt;something&amp;gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？其应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
+template &amp;lt;typename U&amp;gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;amp;n : copy) {  n += x;  }  return copy; } 把两种情况结合在一起：</description>
     </item>
     
   </channel>

@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>C&#43;&#43;17 | Slow is Smooth and Smooth is Fast</title>
+<title>C&#43;&#43; | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="" />
 <meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/series/c&#43;&#43;17/" />
+<link rel="canonical" href="https://874656645.github.io/tags/c&#43;&#43;/" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
@@ -23,7 +23,7 @@
 <link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/series/c&#43;&#43;17/index.xml">
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/tags/c&#43;&#43;/index.xml">
 <noscript>
     <style>
         #theme-toggle,
@@ -44,15 +44,15 @@ if (!doNotTrack) {
 	
 	ga('send', 'pageview');
 }
-</script><meta property="og:title" content="C&#43;&#43;17" />
+</script><meta property="og:title" content="C&#43;&#43;" />
 <meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://874656645.github.io/series/c&#43;&#43;17/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+<meta property="og:url" content="https://874656645.github.io/tags/c&#43;&#43;/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
-<meta name="twitter:title" content="C&#43;&#43;17"/>
+<meta name="twitter:title" content="C&#43;&#43;"/>
 <meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
 
 
@@ -139,63 +139,28 @@ if (!doNotTrack) {
         });
     });
 </script> 
-<header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/series/">Series</a></div>
-  <h1>C&#43;&#43;17</h1>
+<header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/tags/">Tags</a></div>
+  <h1>C&#43;&#43;</h1>
 </header>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;17 折叠表达式
+    <h2>QString 中文乱码
     </h2>
   </header>
   <section class="entry-content">
-    <p>一元折叠表达式
- ( pack op ... ) : 一元右折叠  (E op ...) 展开后： (E1 op (... op (EN-1 op EN)))   ( ... op pack ) ：一元左折叠  (... op E) 展开后： (((E1 op E2) op ...) op EN)      二元折叠表达式
- ( pack op ... op init ) ：二元右折叠  (E op ... op I) 展开后： (E1 op (... op (EN−1 op (EN op I))))   ( init op ....</p>
+    <p>QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
+以QString做为形参变量传递  qDebug(msg.toUtf8());
+QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) {  QFile file(logFileName);  file.open(QIODevice::WriteOnly | QIODevice::Append);  QTextStream text_stream(&amp;file);  text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;;  file.flush();  file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;;  QDir dir(fileName);  if (!dir.exists())  {  // 注：不能创建两级文件夹  bool ismkdir = dir....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-13 16:50:15 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 折叠表达式" href="https://874656645.github.io/posts/176-c&#43;&#43;17-%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to QString 中文乱码" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 使用结构化绑定来解包绑定的返回值
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>注意：使用结构化绑定时，就不能再使用 std::tie 创建虚拟变量了，所以我们不得不绑定所有值到命名过的变量上。对部分成员进行绑定的做法是高效的，因为编译器可以很容易的对未绑定的变量进行优化
-std::pair&lt;int,int&gt; divide_remainder(int dividend, int divisor){  int f = dividend / divisor;  int s = dividend % divisor;  return {f, s}; }  int main() {  auto [dividend, remainder] = divide_remainder(16, 3);  std::cout &lt;&lt; &#34;16 / 3 is &#34; &lt;&lt; dividend &lt;&lt; &#34; with a remainder of &#34; &lt;&lt; remainder &lt;&lt; &#39;\n&#39;;   // 之前的写法  int remainder1;  std::tie(std::ignore, remainder1) = divide_remainder(16, 5);  std::cout &lt;&lt; &#34;16 % 5 is &#34; &lt;&lt; remainder1 &lt;&lt; &#39;\n&#39;;   return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-12 19:02:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 使用结构化绑定来解包绑定的返回值" href="https://874656645.github.io/posts/175-c&#43;&#43;17-%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A%E6%9D%A5%E8%A7%A3%E5%8C%85%E7%BB%91%E5%AE%9A%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 大括号初始化
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>template &lt;typename T1, typename T2, typename T3&gt; class my_wrapper {  T1 t1;  T2 t2;  T3 t3; public:  explicit my_wrapper(T1 t1_, T2 t2_, T3 t3_) : t1{t1_}, t2{t2_}, t3{t3_} {  cout &lt;&lt; t1_ &lt;&lt; &#34; &#34; &lt;&lt; t2_ &lt;&lt; &#34; &#34; &lt;&lt; t3_ &lt;&lt; endl;  } };  // 工厂函数 template &lt;typename T1, typename T2, typename T3&gt; my_wrapper&lt;T1, T2, T3&gt; make_wrapper(T1 t1, T2 t2, T3 t3) {  return my_wrapper{t1, t2, t3}; }  int main() {  my_wrapper wrapper {123, 1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-12 18:51:42 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 大括号初始化" href="https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 constexpr-if 简化编译
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
-比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
-template &lt;typename T&gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &lt;typename U&gt;  T add(U x) const {  return val &#43; x;  } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？其应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
-template &lt;typename U&gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) {  n &#43;= x;  }  return copy; } 把两种情况结合在一起：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-12 17:16:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 constexpr-if 简化编译" href="https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/"></a>
-</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://874656645.github.io/tags/c&#43;&#43;/page/24/">« Prev Page</a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

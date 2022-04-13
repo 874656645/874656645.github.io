@@ -160,6 +160,26 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Python Virtualenv
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>原文网址
+在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell1、使用pip安装 pip install virtualenv
+2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv 3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env
+或者
+virtualenv env
+此命令会在当前目录下创建一个env目录
+4、启动虚拟环境 env\Scripts\activate
+5、离开虚拟环境 deactivate
+6、删除env文件夹即可 </p>
+  </section>
+  <footer class="entry-footer"><span title='2019-02-16 11:20:20 +0800 CST'>February 16, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Python Virtualenv" href="https://874656645.github.io/posts/8-python-virtualenv/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Scrapy Learn
     </h2>
   </header>
@@ -169,7 +189,7 @@ if (!doNotTrack) {
 详细操作
 2. Creating a new Scrapy project scrapy startproject tutorial
 3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
-import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy....</p>
+import scrapy  class QuotesSpider(scrapy.Spider):  name = &#34;quotes&#34;   def start_requests(self):  urls = [  &#39;http://quotes....</p>
   </section>
   <footer class="entry-footer"><span title='2019-02-15 15:40:48 +0800 CST'>February 15, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Scrapy Learn" href="https://874656645.github.io/posts/7-scrapy-learn/"></a>
@@ -225,26 +245,6 @@ cd electron-yarn-cz
   </section>
   <footer class="entry-footer"><span title='2018-12-28 16:10:00 +0800 CST'>December 28, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Netstat" href="https://874656645.github.io/posts/4-netstat/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Git Commond
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、Git 常用命令 1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git
- 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
- 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
-2、更新远程仓库代码到本地 git pull blog master
-3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
-git commit -am &#34;update&#34;
-4、push推送到远程仓库 git push blog master
-5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
-6、删除配置的远程仓库别名 git remote remove blog...</p>
-  </section>
-  <footer class="entry-footer"><span title='2018-12-15 22:45:47 +0800 CST'>December 15, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git Commond" href="https://874656645.github.io/posts/3-git-commond/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

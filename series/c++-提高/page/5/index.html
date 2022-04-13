@@ -186,7 +186,7 @@ Start exception finally 0 Finish 二、std::exception class exception { public: 
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{  // 友元重载  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Person&lt;T&gt; &amp;p){  cout &lt;&lt; p.m_age;  return os;  }  // 普通友元函数  friend void printP(Person&lt;T&gt; p){  cout &lt;&lt; p.m_age &lt;&lt; endl;  } public:  Person(T age){  this-&gt;m_age = age;  }  void Show(){  cout &lt;&lt; this-&gt;m_age &lt;&lt; endl;  }  private:  T m_age; };  int main() {  Person&lt;int&gt; p(20);  p....</p>
+    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ public:  Person(T age){  this-&gt;m_age = age;  }  void Show(){  cout &lt;&lt; this-&gt;m_age &lt;&lt; endl;  }  private:  T m_age; };  int main() {  Person&lt;int&gt; p(20);  p.Show();  cout &lt;&lt; p &lt;&lt; endl;  printP(p);   return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public:  Person(T age);  void Show(); private:  T m_age; };  template&lt;class T&gt; Person&lt;T&gt;::Person(T age){  this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){  cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() {  Person&lt;int&gt; p(20);  p....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
