@@ -176,9 +176,10 @@ std::pair&lt;int,int&gt; divide_remainder(int dividend, int divisor){  int f = d
     </h2>
   </header>
   <section class="entry-content">
-    <p>template &lt;typename T1, typename T2, typename T3&gt; class my_wrapper {  T1 t1;  T2 t2;  T3 t3; public:  explicit my_wrapper(T1 t1_, T2 t2_, T3 t3_) : t1{t1_}, t2{t2_}, t3{t3_} {  cout &lt;&lt; t1_ &lt;&lt; &#34; &#34; &lt;&lt; t2_ &lt;&lt; &#34; &#34; &lt;&lt; t3_ &lt;&lt; endl;  } };  // 工厂函数 template &lt;typename T1, typename T2, typename T3&gt; my_wrapper&lt;T1, T2, T3&gt; make_wrapper(T1 t1, T2 t2, T3 t3) {  return my_wrapper{t1, t2, t3}; }  int main() {  my_wrapper wrapper {123, 1....</p>
+    <p>( expression-list )：优先调用非聚合初始化，且会存在隐式转换 = expression： { initializer-list }：如果有聚合初始化（initializer_list&lt;&gt;），就调用聚合初始化，没有的话就调用符合条件的非聚合初始化 = { initializer-list }：同上 使用 auto 声明的变量括号初始化，只允许一个参数的情况 {} 与 () 调用构造函数初始化的方式，不同点在于 {} 没有类型的隐式转换，比如 int x(1.2); 和 int x = 1.2; 通过隐式的对浮点值进行向下取整，然后将其转换为整型，从而将 x 的值初始化为 1。相反的， int x{1.2}; 将会遇到编译错误，初始化列表中的初始值，需要与变量声明的类型完全匹配。  测试代码一：
+// #define AGGREGATE_INIT class Test{ public:  Test(int a, float b, char* c){  cout &lt;&lt; &#34;int float char* initialize...&#34; &lt;&lt; endl;  }  Test(int a, int b, int c){  cout &lt;&lt; &#34;int int int initialize....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-12 18:51:42 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <footer class="entry-footer"><span title='2022-04-12 18:51:42 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;17 大括号初始化" href="https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
 </article>
 
