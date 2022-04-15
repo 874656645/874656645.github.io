@@ -238,7 +238,7 @@ install(EXPORT MathFunctionsTargets  FILE MathFunctionsTargets.cmake  DESTINATIO
 </span></span><span style="display:flex;"><span>  <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">lib/cmake/MathFunctions</span>
 </span></span><span style="display:flex;"><span>)<span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>此时构建会有下面的错误：</p>
-<p><img loading="lazy" src="../img/CMakeExportDirError.jpg" alt="CMakeExportDirError"  />
+<p><img loading="lazy" style="margin: auto;" src="../img/CMakeExportDirError.jpg" alt="CMakeExportDirError"  />
 </p>
 <p>这是因为在生成导出信息期间，它将导出内在绑定到当前计算机项目的路径，在其他计算机上路径无效。</p>
 <p><strong>第三步</strong>更新 <code>MathFunctions/CMakeLists.txt</code> 中的 <code>target_include_directories()</code> 用来设置在 <code>build</code> 时和在 <code>install/package</code> 时需要使用不同的 <code>INTERFACE locations</code>。</p>

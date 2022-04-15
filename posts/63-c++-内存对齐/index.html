@@ -287,7 +287,7 @@ if (!doNotTrack) {
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p><strong>既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍</strong>
-<img loading="lazy" src="../https://pic2.zhimg.com/80/v2-86c644ce29b1e2d3858380aaa631cc1d_720w.jpg" alt="图片显示"  />
+<img loading="lazy" style="margin: auto;" src="../https://pic2.zhimg.com/80/v2-86c644ce29b1e2d3858380aaa631cc1d_720w.jpg" alt="图片显示"  />
 </p>
 <p><strong>y1 y2 y3结构体：</strong><br>
 以上测试都是在 <em>Linux</em> 环境下进行的，<em>linux</em> 下默认 <em>#pragma pack(4)</em>，且结构体中最长的数据类型为 2 个字节，所以<strong>有效对齐单位为 2 字节</strong>，下面根据上面所说的规则以 <em>y2</em> 来分析其内存布局：</p>

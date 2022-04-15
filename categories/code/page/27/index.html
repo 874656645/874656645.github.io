@@ -145,6 +145,22 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>抽象类、接口类、聚合类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+1）所有成员都是 public，没有私有和受保护的非静态成员；
+2）没有定义任何构造函数；
+3）没有类内初始化；
+4）没有基类，也没有 virtual 函数  // 接口类 class A {  virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public:  // 覆写接口类的纯虚函数  void printA() override  {  cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl;  }  virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public:  // 覆写父类（抽象类）的纯虚函数  void printAA() override  {  cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl;  }  void printB()  {  cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl;  } }; // 聚合类 class C { public:  int x;  int y;  void print(){  cc();  }  private:  void cc(){  cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl;  }  static int z; }; int C::z = 0; class D { public:  int a;  int b;  C c;   void print(){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl;  c....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-27 16:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 抽象类、接口类、聚合类" href="https://874656645.github.io/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>虚继承和虚基类
     </h2>
   </header>
@@ -200,19 +216,6 @@ C/C&#43;&#43;中extern关键字详解</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-26 14:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 内存区间划分" href="https://874656645.github.io/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>指针引用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
-void test(int * a){  a = new int(20);  //*a = 20;  cout &lt;&lt; &#34;test point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl;  cout &lt;&lt; &#34;test:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; } int main() {  int *a = new int(10);  cout &lt;&lt; &#34;main point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl;  cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl;  test(a);  cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl;   return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-25 21:34:27 +0800 CST'>December 25, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 指针引用" href="https://874656645.github.io/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

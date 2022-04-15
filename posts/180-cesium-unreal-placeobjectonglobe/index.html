@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Cesium4Unreal——Place Objects On Globe | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Cesium, Unreal" />
+<meta name="description" content="一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。
+可以从以下几方面解决（由易到难）：
+ 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置
+当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象
+开始放置的地方：
+修改 CesiumGeoreference 原点后：
+四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。
+现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。
+需要注意两点：
+ 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  ">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Cesium4Unreal——Place Objects On Globe" />
+<meta property="og:description" content="一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。
+可以从以下几方面解决（由易到难）：
+ 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置
+当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象
+开始放置的地方：
+修改 CesiumGeoreference 原点后：
+四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。
+现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。
+需要注意两点：
+ 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-15T10:34:27&#43;08:00" />
+<meta property="article:modified_time" content="2022-04-15T10:34:27&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/" /><meta property="og:see_also" content="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/" /><meta property="og:see_also" content="https://874656645.github.io/posts/179-cesium-unreal-photogrammetry/" /><meta property="og:see_also" content="https://874656645.github.io/posts/178-cesium-unreal-project/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Cesium4Unreal——Place Objects On Globe"/>
+<meta name="twitter:description" content="一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。
+可以从以下几方面解决（由易到难）：
+ 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置
+当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象
+开始放置的地方：
+修改 CesiumGeoreference 原点后：
+四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。
+现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。
+需要注意两点：
+ 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  "/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Cesium4Unreal——Place Objects On Globe",
+      "item": "https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cesium4Unreal——Place Objects On Globe",
+  "name": "Cesium4Unreal——Place Objects On Globe",
+  "description": "一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。\n可以从以下几方面解决（由易到难）：\n 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置\n当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象\n开始放置的地方：\n修改 CesiumGeoreference 原点后：\n四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。\n现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。\n需要注意两点：\n 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  ",
+  "keywords": [
+    "Cesium", "Unreal"
+  ],
+  "articleBody": "一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。\n可以从以下几方面解决（由易到难）：\n 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置\n当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象\n开始放置的地方：\n修改 CesiumGeoreference 原点后：\n四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。\n现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。\n需要注意两点：\n 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  ",
+  "wordCount" : "68",
+  "inLanguage": "en",
+  "datePublished": "2022-04-15T10:34:27+08:00",
+  "dateModified": "2022-04-15T10:34:27+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Cesium4Unreal——Place Objects On Globe
+    </h1>
+    <div class="post-meta"><span title='2022-04-15 10:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e6%b7%bb%e5%8a%a0%e9%9d%99%e6%80%81%e9%a3%8e%e6%a0%bc%e4%bd%93static-meshes" aria-label="一、添加静态风格体（static meshes）">一、添加静态风格体（static meshes）</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e7%9c%9f%e5%ae%9e%e4%b8%96%e7%95%8c%e6%a4%ad%e7%90%83%e4%b8%8e%e6%b8%b8%e6%88%8f%e4%b8%96%e7%95%8c%e5%9d%90%e6%a0%87%e7%b3%bb" aria-label="二、真实世界椭球与游戏世界坐标系">二、真实世界椭球与游戏世界坐标系</a></li>
+                <li>
+                    <a href="#%e4%b8%89%e4%b8%80%e8%88%ac%e7%9a%84%e8%99%9a%e5%b9%bb%e5%bc%95%e6%93%8e%e5%af%b9%e8%b1%a1%e7%9a%84%e4%bd%8d%e7%bd%ae%e9%97%ae%e9%a2%98" aria-label="三、一般的虚幻引擎对象的位置问题">三、一般的虚幻引擎对象的位置问题</a></li>
+                <li>
+                    <a href="#%e5%9b%9b%e5%b0%86%e5%8a%a8%e6%80%81%e5%af%b9%e8%b1%a1%e8%bd%ac%e6%8d%a2%e4%b8%ba%e5%85%b7%e6%9c%89%e5%9c%b0%e7%90%86%e5%9d%90%e6%a0%87%e5%8f%82%e8%80%83%e7%9a%84%e5%af%b9%e8%b1%a1" aria-label="四、将动态对象转换为具有地理坐标参考的对象">四、将动态对象转换为具有地理坐标参考的对象</a><ul>
+                        
+                <li>
+                    <a href="#1-%e4%bf%ae%e6%94%b9%e5%af%b9%e8%b1%a1%e4%b8%ba%e5%8f%af%e7%a7%bb%e5%8a%a8%e7%9a%84" aria-label="1. 修改对象为可移动的">1. 修改对象为可移动的</a></li>
+                <li>
+                    <a href="#2-%e6%b7%bb%e5%8a%a0-cesium-globe-anchor-%e7%bb%84%e4%bb%b6" aria-label="2. 添加 Cesium Globe Anchor 组件">2. 添加 Cesium Globe Anchor 组件</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="一添加静态风格体static-meshes">一、添加静态风格体（static meshes）<a hidden class="anchor" aria-hidden="true" href="#一添加静态风格体static-meshes">#</a></h2>
+<p><img loading="lazy" style="margin: auto;" src=".././img/AddStaticMeshObject.jpg" alt="AddStaticMeshObject"  />
+</p>
+<h2 id="二真实世界椭球与游戏世界坐标系">二、真实世界椭球与游戏世界坐标系<a hidden class="anchor" aria-hidden="true" href="#二真实世界椭球与游戏世界坐标系">#</a></h2>
+<p>由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。</p>
+<p>可以从以下几方面解决（由易到难）：</p>
+<ol>
+<li>待在一个相对较小的区域内，大概100公里左右；</li>
+<li>在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference；</li>
+<li>使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”);</li>
+<li>手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。</li>
+</ol>
+<h2 id="三一般的虚幻引擎对象的位置问题">三、一般的虚幻引擎对象的位置问题<a hidden class="anchor" aria-hidden="true" href="#三一般的虚幻引擎对象的位置问题">#</a></h2>
+<p>一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置</p>
+<p>当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象</p>
+<p>开始放置的地方：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/AConePlaced1.jpg" alt="AConePlaced1"  />
+</p>
+<p>修改 CesiumGeoreference 原点后：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/AConePlaced2.jpg" alt="AConePlaced2"  />
+</p>
+<h2 id="四将动态对象转换为具有地理坐标参考的对象">四、将动态对象转换为具有地理坐标参考的对象<a hidden class="anchor" aria-hidden="true" href="#四将动态对象转换为具有地理坐标参考的对象">#</a></h2>
+<h3 id="1-修改对象为可移动的">1. 修改对象为可移动的<a hidden class="anchor" aria-hidden="true" href="#1-修改对象为可移动的">#</a></h3>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e4%bf%ae%e6%94%b9%e5%af%b9%e8%b1%a1%e4%b8%ba%e5%8f%af%e7%a7%bb%e5%8a%a8.jpg" alt="修改对象为可移动"  />
+</p>
+<h3 id="2-添加-cesium-globe-anchor-组件">2. 添加 Cesium Globe Anchor 组件<a hidden class="anchor" aria-hidden="true" href="#2-添加-cesium-globe-anchor-组件">#</a></h3>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e6%b7%bb%e5%8a%a0CesiumGlobeAnchor%e7%bb%84%e4%bb%b6.jpg" alt="添加CesiumGlobeAnchor组件"  />
+</p>
+<p>通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。</p>
+<p>现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/CesiumGlobeAnchor%e5%b1%9e%e6%80%a7.jpg" alt="CesiumGlobeAnchor属性"  />
+</p>
+<p>需要注意两点：</p>
+<ul>
+<li>只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上；</li>
+<li>并不能解决所有的问题，尤其是重力方向的问题；</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/cesium/">Cesium</a></li>
+      <li><a href="https://874656645.github.io/tags/unreal/">Unreal</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/179-cesium-unreal-photogrammetry/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Cesium4Unreal——Photogrammetry 倾斜摄影</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

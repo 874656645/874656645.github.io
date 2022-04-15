@@ -145,6 +145,22 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
+三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){  // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... }  std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ...  std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
+四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
+所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！
+class Person{ public:  int getAge()const{  return m_age;  }  void setAge(int age){  m_age = age;  } private:  int m_age{20}; };  unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){  p-&gt;setAge(30);  return p; }  int main() {  unique_ptr&lt;Person&gt; pP(new Person);  cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl;  // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP));  // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl;  cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl;  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl;  if(pP == nullptr){  cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl;  }  return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr" href="https://874656645.github.io/posts/131-c&#43;&#43;11-auto_ptr-%E8%A2%AB%E5%BA%9F%E5%BC%83%E4%B8%8E-unique_ptr/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 mutable 关键字
     </h2>
   </header>
@@ -196,18 +212,6 @@ struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNod
   </section>
   <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>常用的宏定义
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>int main() {  printf(&#34;%s\n&#34;, __FILE__); // main.c  printf(&#34;%d\n&#34;, __LINE__); // 14  printf(&#34;%s\n&#34;, __DATE__); // Feb 7 2022  printf(&#34;%s\n&#34;, __TIME__); // 01:59:37   return 0; } // func1.h #ifdef __cplusplus extern &#34;C&#34;{ #endif  void func1();  #ifdef __cplusplus } #endif  // main.h extern &#34;C&#34;{  include &#34;func1.h&#34; } extern &#34;C&#34;{  extern void func1(); } int main() {  func1();   return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-07 10:11:16 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 常用的宏定义" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
