@@ -160,6 +160,34 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;17 大括号初始化
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>( expression-list )：优先调用非聚合初始化，且会存在隐式转换 = expression： { initializer-list }：如果有聚合初始化（initializer_list&lt;&gt;），就调用聚合初始化，没有的话就调用符合条件的非聚合初始化 = { initializer-list }：同上 使用 auto 声明的变量括号初始化，只允许一个参数的情况 {} 与 () 调用构造函数初始化的方式，不同点在于 {} 没有类型的隐式转换，比如 int x(1.2); 和 int x = 1.2; 通过隐式的对浮点值进行向下取整，然后将其转换为整型，从而将 x 的值初始化为 1。相反的， int x{1.2}; 将会遇到编译错误，初始化列表中的初始值，需要与变量声明的类型完全匹配。  测试代码一：
+// #define AGGREGATE_INIT class Test{ public:  Test(int a, float b, char* c){  cout &lt;&lt; &#34;int float char* initialize...&#34; &lt;&lt; endl;  }  Test(int a, int b, int c){  cout &lt;&lt; &#34;int int int initialize....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-12 18:51:42 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 大括号初始化" href="https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;17 constexpr-if 简化编译
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
+比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
+template &lt;typename T&gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &lt;typename U&gt;  T add(U x) const {  return val &#43; x;  } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
+template &lt;typename U&gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) {  n &#43;= x;  }  return copy; } 把两种情况结合在一起：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-12 17:16:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 constexpr-if 简化编译" href="https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>const_cast
     </h2>
   </header>
@@ -197,31 +225,6 @@ class Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numer
   </section>
   <footer class="entry-footer"><span title='2022-04-09 10:28:47 +0800 CST'>April 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 constexpr" href="https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 std::function
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>替代以前的函数指针 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针    参考：
-std::function</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-08 16:06:06 +0800 CST'>April 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::function" href="https://874656645.github.io/posts/169-c&#43;&#43;11-function/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 std::mem_fn
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-08 10:20:07 +0800 CST'>April 8, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::mem_fn" href="https://874656645.github.io/posts/168-c&#43;&#43;11-mem_fn/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

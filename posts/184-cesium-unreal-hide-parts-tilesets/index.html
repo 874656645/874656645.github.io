@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Cesium4Unreal——Hide Parts Tilesets | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Cesium, Unreal" />
+<meta name="description" content="使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。
+在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。
+注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。
+第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置
+第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay
+关连 CesiumCartographicPolygon
+可以手动刷新 tileset （Refresh Tileset）观看效果
+ Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  ">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Cesium4Unreal——Hide Parts Tilesets" />
+<meta property="og:description" content="使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。
+在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。
+注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。
+第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置
+第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay
+关连 CesiumCartographicPolygon
+可以手动刷新 tileset （Refresh Tileset）观看效果
+ Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-16T16:24:27&#43;08:00" />
+<meta property="article:modified_time" content="2022-04-16T16:24:27&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/183-cesium-unreal-using-custom-controllers/" /><meta property="og:see_also" content="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/" /><meta property="og:see_also" content="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/" /><meta property="og:see_also" content="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/" /><meta property="og:see_also" content="https://874656645.github.io/posts/179-cesium-unreal-photogrammetry/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Cesium4Unreal——Hide Parts Tilesets"/>
+<meta name="twitter:description" content="使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。
+在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。
+注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。
+第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置
+第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay
+关连 CesiumCartographicPolygon
+可以手动刷新 tileset （Refresh Tileset）观看效果
+ Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  "/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Cesium4Unreal——Hide Parts Tilesets",
+      "item": "https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cesium4Unreal——Hide Parts Tilesets",
+  "name": "Cesium4Unreal——Hide Parts Tilesets",
+  "description": "使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。\n在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。\n注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。\n第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置\n第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay\n关连 CesiumCartographicPolygon\n可以手动刷新 tileset （Refresh Tileset）观看效果\n Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  ",
+  "keywords": [
+    "Cesium", "Unreal"
+  ],
+  "articleBody": "使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。\n在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。\n注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。\n第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置\n第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay\n关连 CesiumCartographicPolygon\n可以手动刷新 tileset （Refresh Tileset）观看效果\n Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  ",
+  "wordCount" : "71",
+  "inLanguage": "en",
+  "datePublished": "2022-04-16T16:24:27+08:00",
+  "dateModified": "2022-04-16T16:24:27+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Cesium4Unreal——Hide Parts Tilesets
+    </h1>
+    <div class="post-meta"><span title='2022-04-16 16:24:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e7%ac%ac%e4%b8%80%e6%ad%a5%e6%b7%bb%e5%8a%a0-cesiumcartographicpolygon-actor" aria-label="第一步：添加 CesiumCartographicPolygon actor">第一步：添加 CesiumCartographicPolygon actor</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%ba%8c%e6%ad%a5%e5%b0%86-cesiumcartographicpolygon-%e8%bf%9e%e6%8e%a5%e5%88%b0-tileset-%e6%95%b0%e6%8d%ae" aria-label="第二步：将 CesiumCartographicPolygon 连接到 tileset 数据">第二步：将 CesiumCartographicPolygon 连接到 tileset 数据</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/CesiumCartographicPolygon%e6%95%88%e6%9e%9c.jpg" alt="CesiumCartographicPolygon效果"  />
+</p>
+<p>在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。</p>
+<p>注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。</p>
+<h2 id="第一步添加-cesiumcartographicpolygon-actor">第一步：添加 CesiumCartographicPolygon actor<a hidden class="anchor" aria-hidden="true" href="#第一步添加-cesiumcartographicpolygon-actor">#</a></h2>
+<p><img loading="lazy" style="margin: auto;" src=".././img/AddCesiumCartographicPolygon.jpg" alt="AddCesiumCartographicPolygon"  />
+</p>
+<p>可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e4%bf%ae%e6%94%b9CesiumCartographicPolygon.jpg" alt="修改CesiumCartographicPolygon"  />
+</p>
+<h2 id="第二步将-cesiumcartographicpolygon-连接到-tileset-数据">第二步：将 CesiumCartographicPolygon 连接到 tileset 数据<a hidden class="anchor" aria-hidden="true" href="#第二步将-cesiumcartographicpolygon-连接到-tileset-数据">#</a></h2>
+<p>选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/AddCesiumPolygonRasterOverlay.jpg" alt="AddCesiumPolygonRasterOverlay"  />
+</p>
+<p>关连 CesiumCartographicPolygon</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/ConnectCesiumCartographicPolygon.jpg" alt="ConnectCesiumCartographicPolygon"  />
+</p>
+<p>可以手动刷新 tileset （Refresh Tileset）观看效果</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/CesiumPolygonRasterOverlay%e9%87%8d%e8%a6%81%e5%b1%9e%e6%80%a7.jpg" alt="CesiumPolygonRasterOverlay重要属性"  />
+</p>
+<ul>
+<li><strong>Exclude Tiles Inside：</strong> 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。</li>
+<li><strong>Material Layer Key：</strong> 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/cesium/">Cesium</a></li>
+      <li><a href="https://874656645.github.io/tags/unreal/">Unreal</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://874656645.github.io/posts/183-cesium-unreal-using-custom-controllers/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Cesium4Unreal——Using Custom Controllers</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

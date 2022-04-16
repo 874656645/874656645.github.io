@@ -157,6 +157,33 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C 与 C&#43;&#43; 的差异
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>C&#43;&#43; 是 C 的超集和增强，校验更加严格
+C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱动，面向对象是对象驱动
+1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X {  namespace Y  {   } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
+故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C&#43;&#43; 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C&#43;&#43; 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int {  return 10; } int g(int a) {  return 10; }  // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C&#43;&#43; 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C&#43;&#43; 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-22 22:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C 与 C&#43;&#43; 的差异" href="https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>函数形参从右到左入栈
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>int add(int count, ...) {  // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节）  int intSize = sizeof(int*) / sizeof(int);  int sum = 0;  // cout &lt;&lt; &amp;count &lt;&lt; endl;  int *p = &amp;count &#43; intSize;  // cout &lt;&lt; p &lt;&lt; endl;  for (int i = 0; i &lt; count; &#43;&#43;i)  {  sum &#43;= *p;  cout &lt;&lt; *p &lt;&lt; endl;  p &#43;= intSize;  }  return sum; }  int main() {  cout &lt;&lt; add(3, 1, 2, 3) &lt;&lt; endl;   return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数形参从右到左入栈" href="https://874656645.github.io/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>指针 &#43; 1
     </h2>
   </header>
@@ -193,40 +220,6 @@ int main() {  int a[] = {1, 2, 3, 4, 5};  // &amp;a是数组指针，其类型�
   </section>
   <footer class="entry-footer"><span title='2021-12-22 09:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 模板函数" href="https://874656645.github.io/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>ArcMap 加载天地图服务
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是 OGC 标准，会导致 ArcMap 加载影像后，矢量化的坐标不对  影像底图：
-http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
-http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
-http://t0.tianditu.com/img_w/esri/wmts 天地图影像（墨卡托，WGS1984）
-http://t0.tianditu.com/cia_w/esri/wmts 天地图影像注记（墨卡托，WGS1984）
-矢量底图：
-http://t0.tianditu.com/vec_c/esri/wmts 天地图矢量（经纬度，CGCS2000）
-http://t0.tianditu.com/cva_c/esri/wmts 天地图矢量注记（经纬度，CGCS2000）
-http://t0.tianditu.com/vec_w/esri/wmts 天地图矢量（墨卡托，WGS1984）
-http://t0.tianditu.com/cva_w/esri/wmts 天地图矢量注记（墨卡托，WGS1984）
-ArcMap WMTS</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-17 22:34:27 +0800 CST'>December 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcMap 加载天地图服务" href="https://874656645.github.io/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>函数指针
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std;  // 声明函数指针变量 int (*fn)(int) = NULL;  // 定义函数指针类型 typedef int (*Fn)(int);  int cal(int v){  return v; };  // 函数指针做为形参 void proc(int v, Fn f){  cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() {  fn = cal;  cout &lt;&lt; (*fn)(10) &lt;&lt; endl;  cout &lt;&lt; fn(10) &lt;&lt; endl;   Fn f1 = cal;  cout &lt;&lt; (*f1)(20) &lt;&lt; endl;   proc(30, cal);   return 0; } Start 10 10 20 30 0 Finish 成员函数指针：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-16 14:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数指针" href="https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
