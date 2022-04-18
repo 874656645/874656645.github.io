@@ -157,6 +157,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——栈
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、栈  后进先出  是一种限制访问端口的线性表   主要操作  进栈（push） 出栈（pop）   应用  表达式求值（中缀表达式、后缀表达式） 消除递归 深度优先搜索（树、图）    二、栈的抽象数据类型 template &lt;class T&gt; class Stack { public: // 栈的运算集  void clear(); // 变为空栈  bool push(const T item); // item入栈，成功返回真，否则假  bool pop(T&amp; item); // 返回栈顶内容并弹出，成功返回真，否则假  bool top(T&amp; item); // 返回栈顶但不弹出，成功返回真，否则假  bool isEmpty(); // 若栈已空返回真  bool isFull(); // 若栈已满返回真 }; 三、思考题   若入栈顺序为 1,2,3,4 的话，则出栈的顺序可以有哪些?...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-31 22:04:28 +0800 CST'>March 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——栈" href="https://874656645.github.io/posts/160-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码
     </h2>
   </header>
@@ -217,23 +229,6 @@ EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的�
   </section>
   <footer class="entry-footer"><span title='2022-03-24 17:45:14 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——使用 CMake 构建并用 Make 编译" href="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——C&#43;&#43; 函数导出
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>导出 C&#43;&#43; 函数到 js 有多种方式：
-  方式一：在编译的时候指定
-在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
-  方式二：修改 C&#43;&#43; 函数
-在 C&#43;&#43; 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
-#include &lt;emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-24 17:31:30 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 函数导出" href="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

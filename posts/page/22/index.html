@@ -160,6 +160,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>STL Hello World
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 平时要有容器、算法、迭代器的思维模式 容器提供迭代器，算法使用迭代器  // 算法 int count(int* begin, int* end, int val){  int n = 0;  while(begin != end){  if(*begin == val){  n&#43;&#43;;  }  begin&#43;&#43;;  }  return n; } int main() {  // 容器  int arr[] = {1, 3, 0, 5, 1, 3, 1, 0};  // 迭代器  int* begin = arr;  int* end = *(&amp;arr &#43; 1);   int n = count(begin, end, 1);  cout &lt;&lt; &#34;count: &#34; &lt;&lt; n &lt;&lt; endl;  return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 12:31:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL Hello World" href="https://874656645.github.io/posts/78-stl-hello-world/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>文件操作
     </h2>
   </header>
@@ -207,19 +219,6 @@ class Test{ public:  Test(string name){  m_name = name;  cout &lt;&lt; m_name &l
   </section>
   <footer class="entry-footer"><span title='2022-01-15 18:07:46 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 栈解旋 Unwinding" href="https://874656645.github.io/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>异常
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、try、catch、throw  可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型 C&#43;&#43; 异常机制是跨函数的，且是必须处理的。如果中间函数没有处理就一直抛到最顶层，如果 main 函数也不处理，程序就会挂掉  int main( ) {  try{  throw &#34;exception&#34;;  }catch(const char * e){  cout &lt;&lt; e &lt;&lt; endl;  }catch(...){ // 捕获所有异常  cout &lt;&lt; &#34;...&#34; &lt;&lt; endl;  }  {  cout &lt;&lt; &#34;finally&#34; &lt;&lt; endl;  }   return 0; } 输出：
-Start exception finally 0 Finish 二、std::exception class exception { public:  exception() throw();  exception(const exception&amp; rhs) throw();  exception&amp; operator=(const exception&amp; rhs) throw();  virtual ~exception() throw();  virtual const char *what() const throw(); }; 派生了两个异常类：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-15 17:34:27 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 异常" href="https://874656645.github.io/posts/57-%E5%BC%82%E5%B8%B8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -157,6 +157,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>fork Unix
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Unix 的 fork 函数 fork函数可以创建一个和当前映像一样的子进程，这个函数会返回两个值：从子进程返回0，从父进程返回子进程的PID；
+ 1）在父进程中，fork返回新创建子进程的进程ID； 2）在子进程中，fork返回0； 3）如果出现错误，fork返回一个负值；  #include &lt;iostream&gt;#include &lt;unistd.h&gt; using namespace std;  int main() {  pid_t fpid; //fpid表示fork函数返回的值  int count = 0;  cout &lt;&lt; &amp;count &lt;&lt; endl;  fpid = fork();  if (fpid &lt; 0)  printf(&#34;error in fork!\n&#34;);  else if (fpid == 0) {  printf(&#34;i am the child process, my process id is %d\n&#34;,getpid());  cout &lt;&lt; &amp;count &lt;&lt; endl;  count&#43;&#43;;  }  else {  printf(&#34;i am the parent process, my process id is %d\n&#34;,getpid());  cout &lt;&lt; &amp;count &lt;&lt; endl;  count&#43;&#43;;  }  printf(&#34;统计结果是: %d\n&#34;,count);   return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-23 10:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to fork Unix" href="https://874656645.github.io/posts/33-fork-unix/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C 与 C&#43;&#43; 的差异
     </h2>
   </header>
@@ -208,18 +221,6 @@ int main() {  int a[] = {1, 2, 3, 4, 5};  // &amp;a是数组指针，其类型�
   </section>
   <footer class="entry-footer"><span title='2021-12-22 10:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 模板类" href="https://874656645.github.io/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>模板函数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>template &lt;typename T&gt; inline const T&amp; Max (const T&amp; a, const T&amp; b) {  return a &lt; b ? b:a; }; int main() {  int i = 39;  int j = 20;  cout &lt;&lt; &#34;Max(i, j): &#34; &lt;&lt; Max(i, j) &lt;&lt; endl;   double f1 = 13.5;  double f2 = 20.7;  cout &lt;&lt; &#34;Max(f1, f2): &#34; &lt;&lt; Max(f1, f2) &lt;&lt; endl;   string s1 = &#34;Hello&#34;;  string s2 = &#34;World&#34;;  cout &lt;&lt; &#34;Max(s1, s2): &#34; &lt;&lt; Max(s1, s2) &lt;&lt; endl;   return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-22 09:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板函数" href="https://874656645.github.io/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
