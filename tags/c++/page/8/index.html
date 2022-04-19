@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>代理模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-01 07:28:53 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 代理模式" href="https://874656645.github.io/posts/108-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>单例模式
     </h2>
   </header>
@@ -194,19 +206,6 @@ class Singleton{ public:  static Singleton* getInstance(){  if(s_instance == nul
   </section>
   <footer class="entry-footer"><span title='2022-01-31 15:14:38 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 简单工厂模式" href="https://874656645.github.io/posts/104-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>依赖倒转原则
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层
-// 底层实现 class BankWorker{ public:  void saveService(){  cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl;  }  void transferService(){  cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl;  }  void payService(){  cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl;  } }; // 中层封装 void doSaveBusiness(BankWorker* worker){  worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){  worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){  worker-&gt;payService(); } // 高层调用 void test1(){  BankWorker* bw = new BankWorker;  doSaveBusiness(bw);  doPayBusiness(bw);  doTransferBusiness(bw);  delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public:  virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout &lt;&lt; &#34;办理存款业务....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-31 11:35:37 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 依赖倒转原则" href="https://874656645.github.io/posts/103-%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

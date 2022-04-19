@@ -9,7 +9,17 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 17 Apr 2022 16:24:27 +0800</lastBuildDate><atom:link href="https://874656645.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 19 Apr 2022 19:23:40 +0800</lastBuildDate><atom:link href="https://874656645.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;11 内存对齐 alignof alignas max_align_t</title>
+      <link>https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/</link>
+      <pubDate>Tue, 19 Apr 2022 19:23:40 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/</guid>
+      <description>alignof( type-id ) 查询类型的对齐要求，以字节为单位
+struct Storage {  char a;  int b;  double c;  long long d; };  // struct alignas(alignof(long double)) AlignasStorage { // struct alignas(long double) AlignasStorage { struct alignas(std::max_align_t) AlignasStorage { // max_align_t 相当于 alignof(long double) 内存对齐为 16 字节  // 这三种写法都可以  char a;  int b;  double c;  long long d; };  struct Empty {};  struct alignas(64) Empty64 {};  int main() {  std::cout &amp;lt;&amp;lt; alignof(Storage) &amp;lt;&amp;lt; std::endl; // 8  std::cout &amp;lt;&amp;lt; sizeof(Storage) &amp;lt;&amp;lt; std::endl; // 24 内存对齐为 8 字节，所以大小为 8 的整数倍  std::cout &amp;lt;&amp;lt; alignof(AlignasStorage) &amp;lt;&amp;lt; std::endl; // 16  std::cout &amp;lt;&amp;lt; sizeof(AlignasStorage) &amp;lt;&amp;lt; std::endl; // 32 内存对齐为 16 字节，所以大小为 16 的整数倍  int a = 10;  int &amp;amp;b = a;  std::cout &amp;lt;&amp;lt; alignof(b) &amp;lt;&amp;lt; std::endl; // 4 引用类型返回引用类型的对齐要求  int x[10];  std::cout &amp;lt;&amp;lt; alignof(x) &amp;lt;&amp;lt; std::endl; // 4 数组类型返回元素类型的对齐要求   std::cout &amp;lt;&amp;lt; &amp;#34;Alignment of&amp;#34; &amp;#34;\n&amp;#34;  &amp;#34;- char : &amp;#34; &amp;lt;&amp;lt; alignof(char) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34; // 1  &amp;#34;- pointer : &amp;#34; &amp;lt;&amp;lt; alignof(int*) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34; // 8  &amp;#34;- int : &amp;#34; &amp;lt;&amp;lt; alignof(int) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34; // 4  &amp;#34;- long long : &amp;#34; &amp;lt;&amp;lt; alignof(long long) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34; // 8  &amp;#34;- empty class : &amp;#34; &amp;lt;&amp;lt; alignof(Empty) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34; // 1  &amp;#34;- alignas(64) Empty: &amp;#34; &amp;lt;&amp;lt; alignof(Empty64) &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; // 64   return 0; } </description>
+    </item>
+    
     <item>
       <title>Cesium4Unreal——Editing Tileset Materials</title>
       <link>https://874656645.github.io/posts/185-cesium-unreal-editing-tileset-materials/</link>

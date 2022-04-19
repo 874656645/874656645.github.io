@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 std::mem_fn
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p></p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-08 10:20:07 +0800 CST'>April 8, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::mem_fn" href="https://874656645.github.io/posts/168-c&#43;&#43;11-mem_fn/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 std::reference_wrapper
     </h2>
   </header>
@@ -205,24 +217,6 @@ int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&
   </section>
   <footer class="entry-footer"><span title='2022-03-26 10:34:44 +0800 CST'>March 26, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 调用 Js 回调函数" href="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——js 调用 C&#43;&#43; 接口
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Emscripten 提供了许多方法来在 JavaScript 和编译后的 C 或 c&#43;&#43; 之间连接和交互，我们先来看看 js 调用 WASM 的情况。
-一、使用 ccall 或 cwrap callall() 调用带有指定参数的编译过的 C 函数 并返回结果，而 cwrap() 封装了编译过的 C 函数并返回一个可以正常调用的 JavaScript 函数。因此，如果计划多次调用一个编译后的函数，cwrap() 会更有用。
-例如下面的 C main.cpp 文件：
-#include &lt;math.h&gt; extern &#34;C&#34; {   int int_sqrt(int x) {  return sqrt(x);  }  } 使用下面的命令进行编译：
-emcc main.cpp -o function.html -s EXPORTED_FUNCTIONS=_int_sqrt -s EXPORTED_RUNTIME_METHODS=ccall,cwrap
-EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的函数会被删掉），EXPORTED_RUNTIME_METHODS 告诉编译器我们需要用到的运行时方法 ccall 和 cwrap，否则这些方法也会被优化掉
-编译后就可以在 js 中通过 cwrap 使用了：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-25 10:06:38 +0800 CST'>March 25, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——js 调用 C&#43;&#43; 接口" href="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

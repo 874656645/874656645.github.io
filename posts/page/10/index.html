@@ -160,6 +160,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>CMake 打包可安装程序
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC  &#34;${PROJECT_BINARY_DIR}&#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &#34;${PROJECT_BINARY_DIR}/TutorialConfig....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-01 21:45:45 +0800 CST'>March 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to CMake 打包可安装程序" href="https://874656645.github.io/posts/141-cmake-%E6%89%93%E5%8C%85%E5%8F%AF%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>CMake 添加自定义命令和生成文件
     </h2>
   </header>
@@ -207,18 +219,6 @@ add_library(MathFunctions mysqrt.cxx)target_include_directories(MathFunctions IN
   </section>
   <footer class="entry-footer"><span title='2022-02-27 14:30:39 +0800 CST'>February 27, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to CMake 添加依赖库和使用条件" href="https://874656645.github.io/posts/137-cmake-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>CMake 配置文件传递设置信息
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>CMakeList # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 2.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 生成一个头文件，传递 CMake 的一些设置到源代码 configue_file(TutorialConfig.h.in TutorialConfig.h)# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# 添加头文件查找路径 target_include_directories(Tutorial PUBLIC &#34;$(PROJECT_BINARY_DIR)&#34;)TutorialConfig.h.in // #define TUTORIAL_VERSION_MAJOR @Tutorial_VERSION_MAJOR@ #define TUTORIAL_VERSION_MINOR @Tutorial_VERSION_MINOR@ </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-26 21:39:32 +0800 CST'>February 26, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to CMake 配置文件传递设置信息" href="https://874656645.github.io/posts/136-cmake-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BC%A0%E9%80%92%E8%AE%BE%E7%BD%AE%E4%BF%A1%E6%81%AF/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

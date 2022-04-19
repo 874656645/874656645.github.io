@@ -157,6 +157,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>静态数组初始化
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() {  int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0};  double da[3];  bool ba[3];  short sa[3];  float fa[3];  for(auto &amp; i : da){  cout &lt;&lt; i &lt;&lt; endl;  }   return 0; } 输出：
+6.95128e-310 4.63759e-310 0 2. C&#43;&#43; 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() {  int arr[10];  cout &lt;&lt; arr &lt;&lt; endl;  cout &lt;&lt; arr &#43; 1 &lt;&lt; endl;  cout &lt;&lt; &#34;----------&#34; &lt;&lt; endl;  cout &lt;&lt; &amp;arr &lt;&lt; endl;  cout &lt;&lt; &amp;arr &#43; 1 &lt;&lt; endl;   return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-08 13:50:12 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 静态数组初始化" href="https://874656645.github.io/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>VS Code 搭建 c&#43;&#43; gdb 开发环境
     </h2>
   </header>
@@ -209,26 +222,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-01-04 14:02:20 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; 多线程" href="https://874656645.github.io/posts/61-c&#43;&#43;-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>临时变量不能绑定 no-const 左值引用类型
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>error: cannot bind non-const lvalue reference of type ‘T&amp;’ to an rvalue of type ‘T’
-如果一个参数是以非 const 引用传入，c&#43;&#43; 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。
-但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。
-所以，修改一个临时变量是毫无意义的。据此，c&#43;&#43; 编译器加入了临时变量不能作为非 const 引用的这个语义限制。
-c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数
-std::move() 返回的也是一个右值
-对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
-一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
-class T{ public:  T(int v){  a = v;  }  T operator&#43;(T &amp;t){  T temp = this-&gt;a &#43; t.a;  return temp;  }  void printT(T &amp;t){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; t....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-04 10:31:45 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 临时变量不能绑定 no-const 左值引用类型" href="https://874656645.github.io/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

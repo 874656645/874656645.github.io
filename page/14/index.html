@@ -157,6 +157,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>递归与递归树
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>逆序打印字符串
+void printReverseString(const char* str){  if(*str == &#39;\0&#39;){  return;  }  printReverseString(str &#43; 1);  printf(&#34;%c&#34;, *str); }  int main() {  const char* str = &#34;Hello World&#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
+struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&gt;next);  printf(&#34;%d\n&#34;, header-&gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&gt;data = 10;  node1-&gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&gt;data = 20;  node2-&gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&gt;data = 30;  node3-&gt;next = NULL;  header-&gt;next = node1;  node1-&gt;next = node2;  node2-&gt;next = node3;  printReverseLinkNode(header-&gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>常用的宏定义
     </h2>
   </header>
@@ -218,18 +232,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>观察者模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
