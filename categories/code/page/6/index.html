@@ -145,6 +145,26 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Emscripten——Hello World
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>编译   新建 main.cpp 文件
+#include &lt;iostream&gt;using namespace std; int main(){  cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl;  return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
+执行命令 em&#43;&#43; main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
+  使用 node 测试
+测试命令 node a.out.js，会在控制台输出 cout 的内容
+  使用 html 页面 测试
+执行命令 em&#43;&#43; main.cpp -o hello.html，会在同级目录下生成三个文件：
+ hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件
+在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-24 17:03:19 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——Hello World" href="https://874656645.github.io/posts/154-emscripten-hello-world/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Emscripten——安装
     </h2>
   </header>
@@ -212,23 +232,6 @@ int maxSumOfSub1(int* array, int length){  int maxSum = 0;  int startIndex = 0, 
   </section>
   <footer class="entry-footer"><span title='2022-03-13 16:29:26 +0800 CST'>March 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——算法效率与度量" href="https://874656645.github.io/posts/150-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E6%95%88%E7%8E%87%E4%B8%8E%E5%BA%A6%E9%87%8F/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——算法特性及分类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、问题——算法——程序  问题：一个函数，从输入到输出在一种映射 算法：对特定问题求解过程的描述，是指令的有限序列 程序：算法在计算机程序设计语言中的具体实现  二、算法的特性  通用性：参数化的，能对一类问题进行参数化输入并问题求解 有效性：有限条有效指令组成的指令序列，保证计算结果的正确性 确定性：算法的下一步执行步骤必须明确 有穷性：执行必须在有限步内结束，不能有死循环  三、基本算法分类  穷举法：
-遍历每一个元素，比较低效，但是是一种万能的算法；对于一个问题，如果一时想不出好的算法的话，可对小规模数据采用穷举法剖析问题的特性和数据的特性，进而寻求更高效的算法 回溯、搜索：
-能进则进，不能进则换，不能换则退，如树和图的遍历 递归分治：
-二分查找，以及快速排序、归并排序，都是经典的分治算法思想 贪心法：
-其数据具有贪心性质，每次求解的时候都采用当前的最佳解，最终得到最优解，如 Huffman 编码树、最短路径 Dijkstra 算法、最小生成树 Prim 算法 动态规划：
-得到小规模问题的最优解，然后在更大规模的时候去组合这些最优解，最后得到全局的最优解，如图的两两结点之间最短路 Floyd 算法。要求具有最优子结构性质以及无后效性，动态规划的子结构有重叠，而递归分治子结构不重叠。  四、“监视哨”顺序检索 设置“监视哨”后，在查找过程中不用判断 i 是否越界，少一次判断，算法的运行效率会更高</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-11 22:26:22 +0800 CST'>March 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——算法特性及分类" href="https://874656645.github.io/posts/149-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E7%89%B9%E6%80%A7%E5%8F%8A%E5%88%86%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

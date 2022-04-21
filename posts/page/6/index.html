@@ -160,6 +160,23 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——栈的应用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>栈的特点是后进先出，所以常用来处理具有递归结构的数据
+ 深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义
+ 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$  后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
+    中缀表达式
+ 运算符在中间 需要括号改变优先级  例如：$4\ *\ x\ *\ (2\ *\ x\ &#43;\ a)\ –\ c$
+  后缀表达式...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-04 14:12:42 +0800 CST'>April 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——栈的应用" href="https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——栈的实现方式
     </h2>
   </header>
@@ -215,24 +232,6 @@ int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&
   </section>
   <footer class="entry-footer"><span title='2022-03-26 10:34:44 +0800 CST'>March 26, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 调用 Js 回调函数" href="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——js 调用 C&#43;&#43; 接口
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Emscripten 提供了许多方法来在 JavaScript 和编译后的 C 或 c&#43;&#43; 之间连接和交互，我们先来看看 js 调用 WASM 的情况。
-一、使用 ccall 或 cwrap callall() 调用带有指定参数的编译过的 C 函数 并返回结果，而 cwrap() 封装了编译过的 C 函数并返回一个可以正常调用的 JavaScript 函数。因此，如果计划多次调用一个编译后的函数，cwrap() 会更有用。
-例如下面的 C main.cpp 文件：
-#include &lt;math.h&gt; extern &#34;C&#34; {   int int_sqrt(int x) {  return sqrt(x);  }  } 使用下面的命令进行编译：
-emcc main.cpp -o function.html -s EXPORTED_FUNCTIONS=_int_sqrt -s EXPORTED_RUNTIME_METHODS=ccall,cwrap
-EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的函数会被删掉），EXPORTED_RUNTIME_METHODS 告诉编译器我们需要用到的运行时方法 ccall 和 cwrap，否则这些方法也会被优化掉
-编译后就可以在 js 中通过 cwrap 使用了：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-25 10:06:38 +0800 CST'>March 25, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——js 调用 C&#43;&#43; 接口" href="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

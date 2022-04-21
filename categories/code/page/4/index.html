@@ -145,6 +145,23 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——队列的实现方式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>栈的物理实现有 顺序队列 和 链式队列
+一、顺序队列 用向量存储队列元素，用两个变量分别指向队列的前端(front)和尾端(rear)
+ 关键是如何防止假溢出    队列溢出
+ 上溢 下溢 假溢出：当 rear = mSize-1 时，再作插入运算就会产生溢出，如果这时队列的前端还有许多空位置，这种现象称为假溢出    循环队列
+ 为了解决假溢出的问题，需要采用循环队列的方式： % mSize 另外一个问题就是如何区分空队列还是满队列？空一个队列空间，空队列状态时，令 front = rear，若 (rear &#43; 1) % mSize == front，我们认为此时队列已满，但实际上 rear 指向的空间并没有被利用    循环队列类定义
+  template &lt;class T&gt; class arrQueue: public Queue&lt;T&gt; { private:  int mSize; // 存放队列的数组的大小  int front; // 表示队头所在位置的下标  int rear; // 表示待入队元素所在位置的下标  T *qu; // 存放类型为T的队列元素的数组 public: // 队列的运算集  arrQueue(int size) { // 创建队列的实例  mSize = size &#43; 1; // 浪费一个存储空间，以区别队列空和队列满  qu = new T[mSize];  front = rear = 0;  }  ~arrQueue() { // 消除该实例，并释放其空间  delete[] qu;  } }  // 入队操作 template&lt;class T&gt; bool arrQueue&lt;T&gt; :: enQueue(const T item) {  // item入队，插入队尾  if (((rear &#43; 1 ) % mSize) == front) {  cout &lt;&lt; &#34;队列已满，溢出&#34; &lt;&lt; endl;  return false;  }  qu[rear] = item;  rear = (rear &#43; 1) % mSize; // 循环后继  return true; }  // 出队操作 bool arrQueue&lt;T&gt; :: deQueue(T&amp; item) {  // 返回队头元素并从队列中删除  if ( front == rear) {  cout &lt;&lt; &#34;队列为空&#34; &lt;&lt; endl;  return false;  }  item = qu[front];  front = (front &#43; 1) % mSize; // 这里并没有真的删除队列空间的元素，而是把头指针循环后移  return true; } 二、链式队列   用单链表方式存储，队列中每个元素对于链表中的一个结点...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-05 12:22:44 +0800 CST'>April 5, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——队列的实现方式" href="https://874656645.github.io/posts/164-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——队列
     </h2>
   </header>
@@ -199,23 +216,6 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
   </section>
   <footer class="entry-footer"><span title='2022-03-31 22:04:28 +0800 CST'>March 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——栈" href="https://874656645.github.io/posts/160-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>WebIDL Binder 提供一种简单、轻量级的方法来绑定 C&#43;&#43; 代码。
-WebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C&#43;&#43; 和 JavaScript 粘合在一起。
-该绑定器支持可以用 WebIDL 表达的 c&#43;&#43; 类型的子集。这个子集对于大多数情况来说已经足够了。
-接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：
- 创建一个 WebIDL 文件，用来描述 C&#43;&#43; 接口； 使用绑定器生成 C&#43;&#43; 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C&#43;&#43; 类型的 WebIDL 接口文件。该文件将复制 C&#43;&#43; 头文件中的一些信息。比如，我们想绑定下面的 C&#43;&#43; 类（my_classes.h）：
-class Foo { public:  int getVal();  void setVal(int v);  private:  int m_val{0}; };  class Bar { public:  Bar(long val);  ~Bar();  void doSomething();  private:  int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-29 11:00:18 +0800 CST'>March 29, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码" href="https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

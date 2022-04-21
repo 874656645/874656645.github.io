@@ -157,6 +157,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;17 折叠表达式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一元折叠表达式
+ ( pack op ... ) : 一元右折叠  (E op ...) 展开后： (E1 op (... op (EN-1 op EN)))   ( ... op pack ) ：一元左折叠  (... op E) 展开后： (((E1 op E2) op ...) op EN)      二元折叠表达式
+ ( pack op ... op init ) ：二元右折叠  (E op ... op I) 展开后： (E1 op (... op (EN−1 op (EN op I))))   ( init op ....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-13 16:50:15 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 折叠表达式" href="https://874656645.github.io/posts/177-c&#43;&#43;17-%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;17 变长参数模板
     </h2>
   </header>
@@ -208,18 +222,6 @@ template &lt;typename U&gt; T add(U x) {  auto copy (val); // Get a copy of the 
   </section>
   <footer class="entry-footer"><span title='2022-04-12 17:16:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;17 constexpr-if 简化编译" href="https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>const_cast
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>函数指针和成员函数指针无法用于 const_cast const_cast 使得指向非 const 类型的 const 引用或指针能够被修改 通过 const_cast 修改 const 对象是未定义的行为  struct type {  int i;   type(): i(3) {}   void f(int v) const  {  // this-&gt;i = v; // compile error: this is a pointer to const  const_cast&lt;type*&gt;(this)-&gt;i = v; // OK as long as the type object isn&#39;t const  } };  int main() {  int i = 3; // i is not declared const  const int&amp; rci = i; // const reference  const_cast&lt;int&amp;&gt;(rci) = 4; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;;   const int* pci = &amp;i;  // *pci = 5; // error: assignment of read-only location ‘* pci’  *const_cast&lt;int*&gt;(pci) = 5; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;;   type t; // if this was const type t, then t....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-11 17:51:55 +0800 CST'>April 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to const_cast" href="https://874656645.github.io/posts/172-const_cast/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
