@@ -9,7 +9,37 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 21 Apr 2022 16:04:58 +0800</lastBuildDate><atom:link href="https://874656645.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 13 May 2022 16:30:07 +0800</lastBuildDate><atom:link href="https://874656645.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;11 继承构造</title>
+      <link>https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/</link>
+      <pubDate>Fri, 13 May 2022 16:30:07 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/</guid>
+      <description>通过 using 可以方便的使用父类的构造函数和其他函数； 优先使用子类的构造和函数，如果没有找到匹配的才会调用基类的； 可在子类的初始化列表中调用父类的构造函数，并对子类的成员进行列表初始化；  class BS {  int q;  double w; public:  BS() : q(0), w(0) {}  BS(int k) : q(k), w(100) {}  BS(double x) : q(-1), w(x) {}  BS(int k, double x) : q(k), w(x) {}  void Show() const {  std::cout &amp;lt;&amp;lt; q &amp;lt;&amp;lt;&amp;#34;, &amp;#34; &amp;lt;&amp;lt; w &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;;  }   int fn(int j) {  cout &amp;lt;&amp;lt; &amp;#34;BS::fn(int)\n&amp;#34;;  return 0;  }  double fn(double w) {  cout &amp;lt;&amp;lt; &amp;#34;BS::fn(double)\n&amp;#34;;  return 0;  }  void fn(const char * s) {  cout &amp;lt;&amp;lt; &amp;#34;BS::fn(const char *)\n&amp;#34;;  } }; class DR : public BS {  short j; public:  using BS::BS;  DR() : j(-100) {} // DR needs its own default constructor  DR(double x) : BS(2*x), j(int(x)) {}  DR(int i) : j(-2), BS(i, 0.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;11 委托构造</title>
+      <link>https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/</link>
+      <pubDate>Fri, 13 May 2022 15:37:16 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/</guid>
+      <description>委托构造的使用方法类似成员列表初始化的变种；
+注意：
+ 如果在一个构造函数中使用了本类的委托构造，就不能再对成员使用列表初始化了； 会先执行委托构造函数的函数体，然后再执行本身的函数体； 虽然可以再构造函数中调用其他的构造函数，但已经被初始化的成员变量还会被当前的构造函数进行重置，有可能导致又变为原来的未初始化状态；  class Test{ public:  Test():Test(0, 0.1){  s = &amp;#34;Ah&amp;#34;;  cout &amp;lt;&amp;lt; &amp;#34;Test()\n&amp;#34;;  }  Test(int ii):Test(ii, 0.1, &amp;#34;Hi&amp;#34;){  cout &amp;lt;&amp;lt; &amp;#34;Test(int)\n&amp;#34;;  }  Test(int ii, double dd):Test(ii, dd, &amp;#34;Hi&amp;#34;){  cout &amp;lt;&amp;lt; &amp;#34;Test(int, double)\n&amp;#34;;  }  Test(int ii, double dd, string ss):i(ii), d(dd), s(ss){  cout &amp;lt;&amp;lt; &amp;#34;Test(int, double, string)\n&amp;#34;;  }   void print(){  cout &amp;lt;&amp;lt; &amp;#34;i = &amp;#34; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;#34;\td = &amp;#34; &amp;lt;&amp;lt; d &amp;lt;&amp;lt; &amp;#34;\ts = &amp;#34; &amp;lt;&amp;lt; s &amp;lt;&amp;lt; endl;  } private:  int i;  double d;  string s; }; int main() {  Test t(10);  t.</description>
+    </item>
+    
+    <item>
+      <title>main 函数执行完后所执行的代码</title>
+      <link>https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Thu, 12 May 2022 16:02:52 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/</guid>
+      <description> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &amp;lt;&amp;lt; &amp;#34;after main exit.\n&amp;#34;;  cout &amp;lt;&amp;lt; &amp;#34;state: &amp;#34; &amp;lt;&amp;lt; state &amp;lt;&amp;lt; &amp;#34;\tmessage: &amp;#34; &amp;lt;&amp;lt; (char*)msg &amp;lt;&amp;lt; endl; } int main() {  cout &amp;lt;&amp;lt; &amp;#34;Hello World\n&amp;#34;;  on_exit(f, (char*)&amp;#34;this is message&amp;#34;);  cout &amp;lt;&amp;lt; &amp;#34;end of main.\n&amp;#34;;  return 0; } 输出：
+Hello World end of main. after main exit. state: 0	message: this is message </description>
+    </item>
+    
     <item>
       <title>大端、小端字节序</title>
       <link>https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/</link>
@@ -268,7 +298,7 @@ class Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numer
       <pubDate>Fri, 08 Apr 2022 16:06:06 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/169-c&#43;&#43;11-function/</guid>
-      <description>替代以前的函数指针 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针    参考：
+      <description>包装指定调用标签（如 double(double) 返回值类型为 double，参数也是 double 类型）的函数； 替代以前的函数指针、函数对象和 lambda 表达式； 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针   可以减少生成的模板函数实例化代码的数量，缩小可执行文件的大小；  参考：
 std::function</description>
     </item>
     

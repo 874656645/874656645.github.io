@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>函数重载、重写、隐藏、模板
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写（覆盖）： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写或覆盖； 重定义： 派生类中函数与基类中的函数同名（形参没有要求），但是这个函数在基类中并没有被定义为虚函数 隐藏： 派生类中重定义了父类的函数，此时基类的函数会被隐藏； 模板： 函数模板是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public:  A(int a){  m_a = a;  }  void print(){  cout &lt;&lt; &#34;print()&#34; &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl;  }  void freeP(A ** p){  if(p == NULL){  return;  }  if(*p != NULL){  free(*p);  *p = NULL;  }  }  void freeP(A * p){  if(p !...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-23 12:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数重载、重写、隐藏、模板" href="https://874656645.github.io/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>inline 内联函数
     </h2>
   </header>
@@ -199,18 +211,6 @@ int main() {  int a[] = {1, 2, 3, 4, 5};  // &amp;a是数组指针，其类型�
   </section>
   <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 指针 &#43; 1" href="https://874656645.github.io/posts/30-%E6%8C%87%E9%92%88-&#43;1/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>模板类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>template&lt;class T&gt; class Test { public:  Test(T t){ m_t = t;};  // explicit Test(T t){ m_t = t;};   T getValue(){  return m_t;  };  private:  T m_t; }; int main() {  Test&lt;int&gt; tInt(1);  cout &lt;&lt; tInt.getValue() &lt;&lt; endl;   Test&lt;double&gt; tD(1.15);  cout &lt;&lt; tD.getValue() &lt;&lt; endl;   Test&lt;float&gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换  cout &lt;&lt; tF.getValue() &lt;&lt; endl;   return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-22 10:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板类" href="https://874656645.github.io/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

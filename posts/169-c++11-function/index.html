@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>C&#43;&#43;11 std::function | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="替代以前的函数指针 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针    参考：
+<meta name="description" content="包装指定调用标签（如 double(double) 返回值类型为 double，参数也是 double 类型）的函数； 替代以前的函数指针、函数对象和 lambda 表达式； 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针   可以减少生成的模板函数实例化代码的数量，缩小可执行文件的大小；  参考：
 std::function">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/169-c&#43;&#43;11-function/" />
@@ -47,19 +47,19 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="C&#43;&#43;11 std::function" />
-<meta property="og:description" content="替代以前的函数指针 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针    参考：
+<meta property="og:description" content="包装指定调用标签（如 double(double) 返回值类型为 double，参数也是 double 类型）的函数； 替代以前的函数指针、函数对象和 lambda 表达式； 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针   可以减少生成的模板函数实例化代码的数量，缩小可执行文件的大小；  参考：
 std::function" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/169-c&#43;&#43;11-function/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-08T16:06:06&#43;08:00" />
 <meta property="article:modified_time" content="2022-04-08T16:06:06&#43;08:00" />
-<meta property="og:see_also" content="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/" /><meta property="og:see_also" content="https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/" /><meta property="og:see_also" content="https://874656645.github.io/posts/168-c&#43;&#43;11-mem_fn/" /><meta property="og:see_also" content="https://874656645.github.io/posts/167-c&#43;&#43;11-reference_wrapper/" /><meta property="og:see_also" content="https://874656645.github.io/posts/166-c&#43;&#43;11-refcref-%E4%B8%8E-bind/" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/" /><meta property="og:see_also" content="https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/" /><meta property="og:see_also" content="https://874656645.github.io/posts/168-c&#43;&#43;11-mem_fn/" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="C&#43;&#43;11 std::function"/>
-<meta name="twitter:description" content="替代以前的函数指针 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针    参考：
+<meta name="twitter:description" content="包装指定调用标签（如 double(double) 返回值类型为 double，参数也是 double 类型）的函数； 替代以前的函数指针、函数对象和 lambda 表达式； 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针   可以减少生成的模板函数实例化代码的数量，缩小可执行文件的大小；  参考：
 std::function"/>
 
 
@@ -89,12 +89,12 @@ std::function"/>
   "@type": "BlogPosting",
   "headline": "C++11 std::function",
   "name": "C\u002b\u002b11 std::function",
-  "description": "替代以前的函数指针 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针    参考：\nstd::function",
+  "description": "包装指定调用标签（如 double(double) 返回值类型为 double，参数也是 double 类型）的函数； 替代以前的函数指针、函数对象和 lambda 表达式； 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针   可以减少生成的模板函数实例化代码的数量，缩小可执行文件的大小；  参考：\nstd::function",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 替代以前的函数指针 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针    参考：\nstd::function\n",
-  "wordCount" : "19",
+  "articleBody": " 包装指定调用标签（如 double(double) 返回值类型为 double，参数也是 double 类型）的函数； 替代以前的函数指针、函数对象和 lambda 表达式； 类模板 std::function 是一个通用的多态函数包装器。 function 的实例可以存储、复制和调用任何 CopyConstructible Callable 目标：  函数 lambda 表达式 std::bind 表达式 函数对象 指向成员函数的指针 指向成员属性的指针   可以减少生成的模板函数实例化代码的数量，缩小可执行文件的大小；  参考：\nstd::function\n",
+  "wordCount" : "28",
   "inLanguage": "en",
   "datePublished": "2022-04-08T16:06:06+08:00",
   "dateModified": "2022-04-08T16:06:06+08:00",
@@ -197,7 +197,8 @@ std::function"/>
   </header> 
 
   <div class="post-content"><ol>
-<li>替代以前的函数指针</li>
+<li>包装指定调用标签（如 <code>double(double)</code> 返回值类型为 double，参数也是 double 类型）的函数；</li>
+<li>替代以前的函数指针、函数对象和 lambda 表达式；</li>
 <li>类模板 <code>std::function</code> 是一个通用的多态函数包装器。</li>
 <li>function 的实例可以存储、复制和调用任何 <code>CopyConstructible Callable</code> 目标：
 <ul>
@@ -209,6 +210,7 @@ std::function"/>
 <li>指向成员属性的指针</li>
 </ul>
 </li>
+<li>可以减少生成的模板函数实例化代码的数量，缩小可执行文件的大小；</li>
 </ol>
 <p>参考：</p>
 <p><a href="https://en.cppreference.com/w/cpp/utility/functional/function">std::function</a></p>

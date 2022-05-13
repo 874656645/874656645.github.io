@@ -160,6 +160,50 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43; 字符串常量存储
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+ 局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() {  char* p1 = &#34;qqq&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  char p[]=&#34;Hello world!&#34;;  char* p2 = &#34;w&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  printf(&#34;in s1 p=%p\n&#34;, p);  printf(&#34;in s1 p1=%p\n&#34;, p1);  printf(&#34;in s1: string&#39;s address: %p\n&#34;, &amp;(&#34;Hello world!&#34;));  printf(&#34;in s1 p2=%p\n&#34;, p2);  return p1; // 这里不能返回局部变量 p }  //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() {  char *q=&#34;Hello world!...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-13 12:34:27 +0800 CST'>December 13, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 字符串常量存储" href="https://874656645.github.io/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>const 修饰符
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
+常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
+指针常量：int * const 指针所指的地址不能变（不可以重指向），但地址的内容可以被修改，与引用变量效果类似
+常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
+const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
+const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
+ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用  b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-10 12:34:27 +0800 CST'>December 10, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to const 修饰符" href="https://874656645.github.io/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>QProcess 使用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>路径中有空格  m_process-&gt;startDetached(strAppDir &#43; &#34;/ThreeDScreen.exe&#34;, QStringList())
+杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&#34;taskkill -t -f /IM iexplore.exe&#34;);</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to QProcess 使用" href="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>QString 中文乱码
     </h2>
   </header>
@@ -182,46 +226,6 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
   </section>
   <footer class="entry-footer"><span title='2021-12-04 11:36:17 +0800 CST'>December 4, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to IE 64位插件" href="https://874656645.github.io/posts/19-ie64-%E4%BD%8D%E6%8F%92%E4%BB%B6/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>3DMax 操作
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、查看纹理 渲染——材质编辑器——精简材质编辑器
-2、合并Mesh——附加 3、资源跟踪器快捷键 Shift &#43; T </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 3DMax 操作" href="https://874656645.github.io/posts/18-3dmax-%E6%93%8D%E4%BD%9C/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>ArcGIS 字段计算（自增、随机数）
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、随机数 python 脚本
-import random def randNum():  res = random.randint(1, 7)  return res 2、自增 python 脚本
-total = 0 def accumulate(increment):  global total  if total:  total &#43;= increment  else:  total = increment  return total </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcGIS 字段计算（自增、随机数）" href="https://874656645.github.io/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>查看 dll 版本
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>查看库的版本（win32 or 64） 1、通过 vs 自带工具 dumpbin.exe dumpbin.exe /headers dll文件路径
-2、使用 notepad&#43;&#43; 直接用 记事本 或者 notepad&#43;&#43; 打开exe文件（dll文件），会有很多乱码，不要头疼，接下来只需要在第二段中找到 PE 两个字母，在其后的不远出会出现d 或者L。若是d，则证明该程序是64位；若是L，则证明是32位。</p>
-  </section>
-  <footer class="entry-footer"><span title='2019-06-05 11:36:19 +0800 CST'>June 5, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 查看 dll 版本" href="https://874656645.github.io/posts/15-%E6%9F%A5%E7%9C%8B-dll-%E7%89%88%E6%9C%AC/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

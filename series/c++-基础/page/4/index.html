@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>操作符重载
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>还有类型转换函数
+#include &lt;iostream&gt; using namespace std;  class Complex{  // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c);  friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public:  Complex(){  cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout &lt;&lt; &#34;Complex(int, int)....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-03 13:54:11 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 操作符重载" href="https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>具有链表特性的类
     </h2>
   </header>
@@ -197,18 +210,6 @@ class Person{ public:  Person(){  id = 0;  score = 0;  cout &lt;&lt; &#34;Person
   </section>
   <footer class="entry-footer"><span title='2021-12-28 17:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 类其它总结" href="https://874656645.github.io/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>构造函数重载与互调
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 构造函数中不要写业务逻辑 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public:  Test(int a, int b, int c){  _a = a;  _b = b;  _c = c;  }  // 正确  Test(int a, int b):Test(a, b, 100){  }  /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */  int getA(){  return _a;  }  int getB(){  return _b;  }  int getC(){  return _c;  } private:  int _a;  int _b;  int _c; }; int main( ) {  Test t1(10, 20);  cout &lt;&lt; t1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-28 16:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 构造函数重载与互调" href="https://874656645.github.io/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

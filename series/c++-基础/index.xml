@@ -9,7 +9,17 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 21 Apr 2022 16:04:58 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/c++-%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 May 2022 16:02:52 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/c++-%E5%9F%BA%E7%A1%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>main 函数执行完后所执行的代码</title>
+      <link>https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/</link>
+      <pubDate>Thu, 12 May 2022 16:02:52 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/</guid>
+      <description> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &amp;lt;&amp;lt; &amp;#34;after main exit.\n&amp;#34;;  cout &amp;lt;&amp;lt; &amp;#34;state: &amp;#34; &amp;lt;&amp;lt; state &amp;lt;&amp;lt; &amp;#34;\tmessage: &amp;#34; &amp;lt;&amp;lt; (char*)msg &amp;lt;&amp;lt; endl; } int main() {  cout &amp;lt;&amp;lt; &amp;#34;Hello World\n&amp;#34;;  on_exit(f, (char*)&amp;#34;this is message&amp;#34;);  cout &amp;lt;&amp;lt; &amp;#34;end of main.\n&amp;#34;;  return 0; } 输出：
+Hello World end of main. after main exit. state: 0	message: this is message </description>
+    </item>
+    
     <item>
       <title>大端、小端字节序</title>
       <link>https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/</link>

@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>main 函数执行完后所执行的代码
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &lt;&lt; &#34;after main exit.\n&#34;;  cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() {  cout &lt;&lt; &#34;Hello World\n&#34;;  on_exit(f, (char*)&#34;this is message&#34;);  cout &lt;&lt; &#34;end of main.\n&#34;;  return 0; } 输出：
+Hello World end of main. after main exit. state: 0	message: this is message </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-05-12 16:02:52 +0800 CST'>May 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to main 函数执行完后所执行的代码" href="https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>大端、小端字节序
     </h2>
   </header>
@@ -198,20 +211,6 @@ int main() {  char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48};  printf(&#34;%c\n
   </section>
   <footer class="entry-footer"><span title='2022-02-15 15:29:35 +0800 CST'>February 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 2022-02-14 杂记" href="https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>递归与递归树
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>逆序打印字符串
-void printReverseString(const char* str){  if(*str == &#39;\0&#39;){  return;  }  printReverseString(str &#43; 1);  printf(&#34;%c&#34;, *str); }  int main() {  const char* str = &#34;Hello World&#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
-struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&gt;next);  printf(&#34;%d\n&#34;, header-&gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&gt;data = 10;  node1-&gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&gt;data = 20;  node2-&gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&gt;data = 30;  node3-&gt;next = NULL;  header-&gt;next = node1;  node1-&gt;next = node2;  node2-&gt;next = node3;  printReverseLinkNode(header-&gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
