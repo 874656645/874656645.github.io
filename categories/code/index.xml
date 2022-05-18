@@ -9,7 +9,29 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 13 May 2022 16:30:07 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 May 2022 12:02:56 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用 VS2022 部署、运行和调试 Linux MSBuild 项目</title>
+      <link>https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Wed, 18 May 2022 12:02:56 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/</guid>
+      <description>一、设置 Linux 环境 1. 确保已安装用于 Visual Studio 的 Linux 开发工作负荷 2. Linux 所需环境 sudo apt-get install openssh-server g++ gdb make ninja-build rsync zip
+确保 ssh 服务在 Linux 计算机上运行
+sudo service ssh start
+参考官方文档
+二、连接到远程 Linux 打开【工具】&amp;gt;【选项】&amp;gt;【跨平台】&amp;gt;【连接管理器】进行添加设置
+也可以连接到 WSL，参考官方文档
+三、创建 Linux MSBuild 项目 四、配置 Linux MSBuild 项目 大部分的默认配置都不需要修改，只需关注几个地方
+调试设置
+包含目录是 Linux 上项目的路径
+库目录可使用相对路径
+如果依赖的是动态库，需要在 Linux 端设置 LD_LIBRARY_PATH
+最后在 Linux 环境中生成的项目目录如下
+还可以在【调试】中打开【Linux控制台】
+参考官方文档</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;11 继承构造</title>
       <link>https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/</link>
@@ -27,7 +49,7 @@
       <guid>https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/</guid>
       <description>委托构造的使用方法类似成员列表初始化的变种；
 注意：
- 如果在一个构造函数中使用了本类的委托构造，就不能再对成员使用列表初始化了； 会先执行委托构造函数的函数体，然后再执行本身的函数体； 虽然可以再构造函数中调用其他的构造函数，但已经被初始化的成员变量还会被当前的构造函数进行重置，有可能导致又变为原来的未初始化状态；  class Test{ public:  Test():Test(0, 0.1){  s = &amp;#34;Ah&amp;#34;;  cout &amp;lt;&amp;lt; &amp;#34;Test()\n&amp;#34;;  }  Test(int ii):Test(ii, 0.1, &amp;#34;Hi&amp;#34;){  cout &amp;lt;&amp;lt; &amp;#34;Test(int)\n&amp;#34;;  }  Test(int ii, double dd):Test(ii, dd, &amp;#34;Hi&amp;#34;){  cout &amp;lt;&amp;lt; &amp;#34;Test(int, double)\n&amp;#34;;  }  Test(int ii, double dd, string ss):i(ii), d(dd), s(ss){  cout &amp;lt;&amp;lt; &amp;#34;Test(int, double, string)\n&amp;#34;;  }   void print(){  cout &amp;lt;&amp;lt; &amp;#34;i = &amp;#34; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;#34;\td = &amp;#34; &amp;lt;&amp;lt; d &amp;lt;&amp;lt; &amp;#34;\ts = &amp;#34; &amp;lt;&amp;lt; s &amp;lt;&amp;lt; endl;  } private:  int i;  double d;  string s; }; int main() {  Test t(10);  t.</description>
+ 如果在一个构造函数中使用了本类的委托构造，就不能再对成员使用列表初始化了； 会先执行委托构造函数的函数体，然后再执行本身的函数体； 虽然可以在构造函数中调用其他的构造函数，但已经被初始化的成员变量还会被当前的构造函数进行重置，有可能导致又变为原来的未初始化状态；  class Test{ public:  Test():Test(0, 0.1){  s = &amp;#34;Ah&amp;#34;;  cout &amp;lt;&amp;lt; &amp;#34;Test()\n&amp;#34;;  }  Test(int ii):Test(ii, 0.1, &amp;#34;Hi&amp;#34;){  cout &amp;lt;&amp;lt; &amp;#34;Test(int)\n&amp;#34;;  }  Test(int ii, double dd):Test(ii, dd, &amp;#34;Hi&amp;#34;){  cout &amp;lt;&amp;lt; &amp;#34;Test(int, double)\n&amp;#34;;  }  Test(int ii, double dd, string ss):i(ii), d(dd), s(ss){  cout &amp;lt;&amp;lt; &amp;#34;Test(int, double, string)\n&amp;#34;;  }   void print(){  cout &amp;lt;&amp;lt; &amp;#34;i = &amp;#34; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; &amp;#34;\td = &amp;#34; &amp;lt;&amp;lt; d &amp;lt;&amp;lt; &amp;#34;\ts = &amp;#34; &amp;lt;&amp;lt; s &amp;lt;&amp;lt; endl;  } private:  int i;  double d;  string s; }; int main() {  Test t(10);  t.</description>
     </item>
     
     <item>
@@ -786,6 +808,9 @@ struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNod
 一、更新和升级包 1. 更新和升级包 sudo apt update &amp;amp;&amp;amp; sudo apt upgrade
 2. 安装软件 sudo apt install tree
 3. 删除不需要的包 sudo apt autoremove
+4. 查看已安装的软件 dpkg -l | grep openssh-server
+5. 查看软件安装的路径 dpkg -L openssh-server
+whereis gdb
 二、shell 操作和常用命令 1、查看输入的命令历史 history
 2、删除光标前面的字符串 ctrl + u
 3、删除光标后面的字符串 ctrl + k
@@ -795,10 +820,7 @@ struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNod
 7、缩写别名 alias
 8、查看说明 man 5 passwd
 9、宿主目录 ~
-10、查看目录内容 tree ~
-11、打印工作目录 pwd
-12、表示当前用户是普通用户 $ 13、表示当前用户是超级用户 # 14、切换超级用户 sudo su
-15、 查看文件和目录 ls ls -a ls -l # -rwxrw-r-- 1 rick rick 0 Feb 12 18:37 test ls -lh ls -alF # drwxr-xr-x 1 rick rick 4096 Feb 12 18:37 rick/ ll 16、 cd cd /home/rick cd ~ cd cd - # 切换到上一个的历史目录 17、 mkdir 目录名 mkdir aa mkdir aa/bb rm aa -r mkdir aa/bb/cc -p 18、 touch 文件名  如果文件不存在，则创建文件 如果文件存在，更新文件时间  19、 rmdir 删除空目录  只能删除空目录  20、 rm 删除目录和文件  删除后很难恢复  rm -r # 用递归的方式删除目录 rm -ri # 提示 rm aa/* -r # 删除 aa 目录下的所有文件和目录 21、 cp 拷贝 cp file file1 # file1 不存在，则创建 file1 并把 file 中的内容拷贝进去 cp file file1 # file1 存在，则会用 file 中的内容覆盖 file1 中的内容 cp file dir # 将 file 拷贝到 dir 目录下 cp dir dir1 # dir1 目录不存在，则把 dir 的所有子目录拷贝到 dir1 目录下 rm dir1/* -r cp dir dir1 # dir1 目录存在，则把 dir 整个目录拷贝到 dir1 目录下 22、 mv mv file file1 # file1 不存在，则是将 file 文件改名为 file1 mv file file1 # file1 存在，则用 file 中的内容覆盖 file1 中的内容，并删除 file mv file dir # dir 存在，将 file 移动到 dir 目录下 mv dir dir1 # dir1 不存在，就是将 dir 改名为 dir1 mv dir dir1 # dir1 存在，则将 dir 目录移动到 dir1下 23、 cat 将文件内容打印到终端  适用文件内容较小的情况  23、 more 将文件内容打印到终端  不能向上翻页 Enter 向下滚动一行 空格：向下翻页 退出：q  23、 less 将文件内容打印到终端  Enter 或 ctrl + n : 向下滚动一行 ctrl + p : 向上滚动一行 pgdn : 向下翻页 空格 : 向下翻页 pgup : 向上翻页 q : 退出  23、 head 打印文件内容的前 10 行到终端 24、 tail 打印文件内容的后 10 行到终端 25、 ln 创建软硬链接  创建软链接 ln -s 全文件名 链接名称 创建硬链接（在其他多个目录中管理文件，并且能时时同步修改） ln 文件名 链接名  26、 chmod 修改权限 chmod uo-rw program chmod u+r,g-x program chmod -440 program chmod 777 program 27、 chown 修改所有者或所属组 sudo chown sys program sudo chown rick:sys program 28、 chgrp 所属组 sudo chgrp rick program</description>
+10、查看目录内容 tree ~</description>
     </item>
     
     <item>

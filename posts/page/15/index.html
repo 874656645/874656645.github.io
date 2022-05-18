@@ -160,6 +160,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>递归与递归树
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>逆序打印字符串
+void printReverseString(const char* str){  if(*str == &#39;\0&#39;){  return;  }  printReverseString(str &#43; 1);  printf(&#34;%c&#34;, *str); }  int main() {  const char* str = &#34;Hello World&#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
+struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&gt;next);  printf(&#34;%d\n&#34;, header-&gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&gt;data = 10;  node1-&gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&gt;data = 20;  node2-&gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&gt;data = 30;  node3-&gt;next = NULL;  header-&gt;next = node1;  node1-&gt;next = node2;  node2-&gt;next = node3;  printReverseLinkNode(header-&gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>常用的宏定义
     </h2>
   </header>
@@ -180,6 +194,9 @@ if (!doNotTrack) {
 一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
 2. 安装软件 sudo apt install tree
 3. 删除不需要的包 sudo apt autoremove
+4. 查看已安装的软件 dpkg -l | grep openssh-server
+5. 查看软件安装的路径 dpkg -L openssh-server
+whereis gdb
 二、shell 操作和常用命令 1、查看输入的命令历史 history
 2、删除光标前面的字符串 ctrl &#43; u
 3、删除光标后面的字符串 ctrl &#43; k
@@ -189,10 +206,7 @@ if (!doNotTrack) {
 7、缩写别名 alias
 8、查看说明 man 5 passwd
 9、宿主目录 ~
-10、查看目录内容 tree ~
-11、打印工作目录 pwd
-12、表示当前用户是普通用户 $ 13、表示当前用户是超级用户 # 14、切换超级用户 sudo su
-15、 查看文件和目录 ls ls -a ls -l # -rwxrw-r-- 1 rick rick 0 Feb 12 18:37 test ls -lh ls -alF # drwxr-xr-x 1 rick rick 4096 Feb 12 18:37 rick/ ll 16、 cd cd /home/rick cd ~ cd cd - # 切换到上一个的历史目录 17、 mkdir 目录名 mkdir aa mkdir aa/bb rm aa -r mkdir aa/bb/cc -p 18、 touch 文件名  如果文件不存在，则创建文件 如果文件存在，更新文件时间  19、 rmdir 删除空目录  只能删除空目录  20、 rm 删除目录和文件  删除后很难恢复  rm -r # 用递归的方式删除目录 rm -ri # 提示 rm aa/* -r # 删除 aa 目录下的所有文件和目录 21、 cp 拷贝 cp file file1 # file1 不存在，则创建 file1 并把 file 中的内容拷贝进去 cp file file1 # file1 存在，则会用 file 中的内容覆盖 file1 中的内容 cp file dir # 将 file 拷贝到 dir 目录下 cp dir dir1 # dir1 目录不存在，则把 dir 的所有子目录拷贝到 dir1 目录下 rm dir1/* -r cp dir dir1 # dir1 目录存在，则把 dir 整个目录拷贝到 dir1 目录下 22、 mv mv file file1 # file1 不存在，则是将 file 文件改名为 file1 mv file file1 # file1 存在，则用 file 中的内容覆盖 file1 中的内容，并删除 file mv file dir # dir 存在，将 file 移动到 dir 目录下 mv dir dir1 # dir1 不存在，就是将 dir 改名为 dir1 mv dir dir1 # dir1 存在，则将 dir 目录移动到 dir1下 23、 cat 将文件内容打印到终端  适用文件内容较小的情况  23、 more 将文件内容打印到终端  不能向上翻页 Enter 向下滚动一行 空格：向下翻页 退出：q  23、 less 将文件内容打印到终端  Enter 或 ctrl &#43; n : 向下滚动一行 ctrl &#43; p : 向上滚动一行 pgdn : 向下翻页 空格 : 向下翻页 pgup : 向上翻页 q : 退出  23、 head 打印文件内容的前 10 行到终端 24、 tail 打印文件内容的后 10 行到终端 25、 ln 创建软硬链接  创建软链接 ln -s 全文件名 链接名称 创建硬链接（在其他多个目录中管理文件，并且能时时同步修改） ln 文件名 链接名  26、 chmod 修改权限 chmod uo-rw program chmod u&#43;r,g-x program chmod -440 program chmod 777 program 27、 chown 修改所有者或所属组 sudo chown sys program sudo chown rick:sys program 28、 chgrp 所属组 sudo chgrp rick program...</p>
+10、查看目录内容 tree ~...</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Linux 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
@@ -221,18 +235,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>观察者模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
