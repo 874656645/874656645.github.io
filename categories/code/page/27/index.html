@@ -164,7 +164,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 构造函数中不要写业务逻辑 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public:  Test(int a, int b, int c){  _a = a;  _b = b;  _c = c;  }  // 正确  Test(int a, int b):Test(a, b, 100){  }  /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */  int getA(){  return _a;  }  int getB(){  return _b;  }  int getC(){  return _c;  } private:  int _a;  int _b;  int _c; }; int main( ) {  Test t1(10, 20);  cout &lt;&lt; t1....</p>
+    <p>构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 构造函数中不要写业务逻辑 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public: Test(int a, int b, int c){ _a = a; _b = b; _c = c; } // 正确  Test(int a, int b):Test(a, b, 100){ } /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */ int getA(){ return _a; } int getB(){ return _b; } int getC(){ return _c; } private: int _a; int _b; int _c; }; int main( ) { Test t1(10, 20); cout &lt;&lt; t1....</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-28 16:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 构造函数重载与互调" href="https://874656645.github.io/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/"></a>
@@ -178,7 +178,8 @@ if (!doNotTrack) {
   <section class="entry-content">
     <p>思路是借助类的静态成员函数
 方式一：
-class A{ public:  A(int a){  m_a = a;  }  void print(){  cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl;  }  void setCur(){  s_curA = this;  }   static void callback(){  s_curA-&gt;print();  } private:  static A* s_curA;  int m_a; }; A* A::s_curA = nullptr;  typedef void (*FUN_S)(); void Handle(FUN_S call){  call(); }  int main( ) {  A a(10), b(20);  a....</p>
+class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback); b.setCur(); Handle(A::callback); return 0; } 方式二：
+class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } static void callback(void *a){ ((A*)a)-&gt;print(); } private: int m_a; }; typedef void (*FUN)(void *); void Handle(void *a, FUN call){ call(a); } int main( ) { A a(10), b(20); Handle(&amp;a, A::callback); Handle(&amp;b, A::callback); return 0; } 输出：...</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-28 14:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 类的成员函数作为回调函数" href="https://874656645.github.io/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
@@ -192,7 +193,7 @@ class A{ public:  A(int a){  m_a = a;  }  void print(){  cout &lt;&lt; &#34;m_a 
   <section class="entry-content">
     <p>父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
 Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
-Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public:  void printA(){  cout &lt;&lt; &#34;printA()&#34; &lt;&lt; endl;  }  virtual void print(){  cout &lt;&lt; &#34;A::print()&#34; &lt;&lt; endl;  } }; class B:public A{ public:  void printB(){  cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl;  }  virtual void print() override{  cout &lt;&lt; &#34;B::print() b = &#34; &lt;&lt; b &lt;&lt; endl;  }  private:  int b; }; int main( ) {  // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A;  // 1....</p>
+Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &lt;&lt; &#34;printA()&#34; &lt;&lt; endl; } virtual void print(){ cout &lt;&lt; &#34;A::print()&#34; &lt;&lt; endl; } }; class B:public A{ public: void printB(){ cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } virtual void print() override{ cout &lt;&lt; &#34;B::print() b = &#34; &lt;&lt; b &lt;&lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A; // 1....</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-28 11:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 类的兼容性原则" href="https://874656645.github.io/posts/48-%E7%B1%BB%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8E%9F%E5%88%99/"></a>
@@ -204,8 +205,8 @@ Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也
     </h2>
   </header>
   <section class="entry-content">
-    <p>如果类的内部没有专门创建实例的代码，则是无法创建任何实例的 如果父类构造函数设置成了私有的，则子类无法编译，因为在初始化子类时会先执行父类的构造  class A{ public: private:  A(int ){   } }; class B:public A{ public:  int x; }; int main( ) {  B b;  b.x = 0;  return 0; } 输出：
-Start prog.cc:19:7: error: call to implicitly-deleted default constructor of &#39;B&#39;  B b;  ^ prog.cc:13:9: note: default constructor of &#39;B&#39; is implicitly deleted because base class &#39;A&#39; has an inaccessible default constructor class B:public A{  ^ 1 error generated....</p>
+    <p> 如果类的内部没有专门创建实例的代码，则是无法创建任何实例的 如果父类构造函数设置成了私有的，则子类无法编译，因为在初始化子类时会先执行父类的构造  class A{ public: private: A(int ){ } }; class B:public A{ public: int x; }; int main( ) { B b; b.x = 0; return 0; } 输出：
+Start prog.cc:19:7: error: call to implicitly-deleted default constructor of &#39;B&#39; B b; ^ prog.cc:13:9: note: default constructor of &#39;B&#39; is implicitly deleted because base class &#39;A&#39; has an inaccessible default constructor class B:public A{ ^ 1 error generated. 1 Finish </p>
   </section>
   <footer class="entry-footer"><span title='2021-12-28 10:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 构造函数私有" href="https://874656645.github.io/posts/47-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E7%A7%81%E6%9C%89/"></a>

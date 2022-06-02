@@ -8,7 +8,7 @@
 <title>依赖倒转原则 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;, 设计模式" />
 <meta name="description" content="传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层
-// 底层实现 class BankWorker{ public:  void saveService(){  cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl;  }  void transferService(){  cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl;  }  void payService(){  cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl;  } }; // 中层封装 void doSaveBusiness(BankWorker* worker){  worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){  worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){  worker-&gt;payService(); } // 高层调用 void test1(){  BankWorker* bw = new BankWorker;  doSaveBusiness(bw);  doPayBusiness(bw);  doTransferBusiness(bw);  delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public:  virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout &lt;&lt; &#34;办理存款业务.">
+// 底层实现 class BankWorker{ public: void saveService(){ cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl; } void transferService(){ cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl; } void payService(){ cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl; } }; // 中层封装 void doSaveBusiness(BankWorker* worker){ worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){ worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){ worker-&gt;payService(); } // 高层调用 void test1(){ BankWorker* bw = new BankWorker; doSaveBusiness(bw); doPayBusiness(bw); doTransferBusiness(bw); delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public: virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout &lt;&lt; &#34;办理存款业务.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -17,7 +17,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="依赖倒转原则" />
 <meta property="og:description" content="传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层
-// 底层实现 class BankWorker{ public:  void saveService(){  cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl;  }  void transferService(){  cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl;  }  void payService(){  cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl;  } }; // 中层封装 void doSaveBusiness(BankWorker* worker){  worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){  worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){  worker-&gt;payService(); } // 高层调用 void test1(){  BankWorker* bw = new BankWorker;  doSaveBusiness(bw);  doPayBusiness(bw);  doTransferBusiness(bw);  delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public:  virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout &lt;&lt; &#34;办理存款业务." />
+// 底层实现 class BankWorker{ public: void saveService(){ cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl; } void transferService(){ cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl; } void payService(){ cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl; } }; // 中层封装 void doSaveBusiness(BankWorker* worker){ worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){ worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){ worker-&gt;payService(); } // 高层调用 void test1(){ BankWorker* bw = new BankWorker; doSaveBusiness(bw); doPayBusiness(bw); doTransferBusiness(bw); delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public: virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout &lt;&lt; &#34;办理存款业务." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/103-%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-31T11:35:37&#43;08:00" />
@@ -60,7 +60,7 @@ if (!doNotTrack) {
 
 <meta name="twitter:title" content="依赖倒转原则"/>
 <meta name="twitter:description" content="传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层
-// 底层实现 class BankWorker{ public:  void saveService(){  cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl;  }  void transferService(){  cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl;  }  void payService(){  cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl;  } }; // 中层封装 void doSaveBusiness(BankWorker* worker){  worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){  worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){  worker-&gt;payService(); } // 高层调用 void test1(){  BankWorker* bw = new BankWorker;  doSaveBusiness(bw);  doPayBusiness(bw);  doTransferBusiness(bw);  delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public:  virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout &lt;&lt; &#34;办理存款业务."/>
+// 底层实现 class BankWorker{ public: void saveService(){ cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl; } void transferService(){ cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl; } void payService(){ cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl; } }; // 中层封装 void doSaveBusiness(BankWorker* worker){ worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){ worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){ worker-&gt;payService(); } // 高层调用 void test1(){ BankWorker* bw = new BankWorker; doSaveBusiness(bw); doPayBusiness(bw); doTransferBusiness(bw); delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public: virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout &lt;&lt; &#34;办理存款业务."/>
 
 
 <script type="application/ld+json">
@@ -89,11 +89,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "依赖倒转原则",
   "name": "依赖倒转原则",
-  "description": "传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层\n// 底层实现 class BankWorker{ public:  void saveService(){  cout \u0026lt;\u0026lt; \u0026#34;办理存款业务...\u0026#34; \u0026lt;\u0026lt; endl;  }  void transferService(){  cout \u0026lt;\u0026lt; \u0026#34;办理转账业务...\u0026#34; \u0026lt;\u0026lt; endl;  }  void payService(){  cout \u0026lt;\u0026lt; \u0026#34;办理支付业务...\u0026#34; \u0026lt;\u0026lt; endl;  } }; // 中层封装 void doSaveBusiness(BankWorker* worker){  worker-\u0026gt;saveService(); } void doTransferBusiness(BankWorker* worker){  worker-\u0026gt;transferService(); } void doPayBusiness(BankWorker* worker){  worker-\u0026gt;payService(); } // 高层调用 void test1(){  BankWorker* bw = new BankWorker;  doSaveBusiness(bw);  doPayBusiness(bw);  doTransferBusiness(bw);  delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public:  virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout \u0026lt;\u0026lt; \u0026#34;办理存款业务.",
+  "description": "传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层\n// 底层实现 class BankWorker{ public: void saveService(){ cout \u0026lt;\u0026lt; \u0026#34;办理存款业务...\u0026#34; \u0026lt;\u0026lt; endl; } void transferService(){ cout \u0026lt;\u0026lt; \u0026#34;办理转账业务...\u0026#34; \u0026lt;\u0026lt; endl; } void payService(){ cout \u0026lt;\u0026lt; \u0026#34;办理支付业务...\u0026#34; \u0026lt;\u0026lt; endl; } }; // 中层封装 void doSaveBusiness(BankWorker* worker){ worker-\u0026gt;saveService(); } void doTransferBusiness(BankWorker* worker){ worker-\u0026gt;transferService(); } void doPayBusiness(BankWorker* worker){ worker-\u0026gt;payService(); } // 高层调用 void test1(){ BankWorker* bw = new BankWorker; doSaveBusiness(bw); doPayBusiness(bw); doTransferBusiness(bw); delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public: virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout \u0026lt;\u0026lt; \u0026#34;办理存款业务.",
   "keywords": [
     "C++", "设计模式"
   ],
-  "articleBody": "传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层\n// 底层实现 class BankWorker{ public:  void saveService(){  cout  \"办理存款业务...\"  endl;  }  void transferService(){  cout  \"办理转账业务...\"  endl;  }  void payService(){  cout  \"办理支付业务...\"  endl;  } }; // 中层封装 void doSaveBusiness(BankWorker* worker){  worker-saveService(); } void doTransferBusiness(BankWorker* worker){  worker-transferService(); } void doPayBusiness(BankWorker* worker){  worker-payService(); } // 高层调用 void test1(){  BankWorker* bw = new BankWorker;  doSaveBusiness(bw);  doPayBusiness(bw);  doTransferBusiness(bw);  delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public:  virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout  \"办理存款业务...\"  endl;  } }; class PayBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout  \"办理支付业务...\"  endl;  } }; class TransferBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout  \"办理转账业务...\"  endl;  } }; // 业务封装 void doBusiness(AbstractWorker* aw){  aw-doBusiness();  delete aw; } // 高层调用 void test2(){  doBusiness(new SaveBankWorker);  doBusiness(new PayBankWorker);  doBusiness(new TransferBankWorker); } ",
+  "articleBody": "传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层\n// 底层实现 class BankWorker{ public: void saveService(){ cout  \"办理存款业务...\"  endl; } void transferService(){ cout  \"办理转账业务...\"  endl; } void payService(){ cout  \"办理支付业务...\"  endl; } }; // 中层封装 void doSaveBusiness(BankWorker* worker){ worker-saveService(); } void doTransferBusiness(BankWorker* worker){ worker-transferService(); } void doPayBusiness(BankWorker* worker){ worker-payService(); } // 高层调用 void test1(){ BankWorker* bw = new BankWorker; doSaveBusiness(bw); doPayBusiness(bw); doTransferBusiness(bw); delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public: virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout  \"办理存款业务...\"  endl; } }; class PayBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout  \"办理支付业务...\"  endl; } }; class TransferBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout  \"办理转账业务...\"  endl; } }; // 业务封装 void doBusiness(AbstractWorker* aw){ aw-doBusiness(); delete aw; } // 高层调用 void test2(){ doBusiness(new SaveBankWorker); doBusiness(new PayBankWorker); doBusiness(new TransferBankWorker); } ",
   "wordCount" : "137",
   "inLanguage": "en",
   "datePublished": "2022-01-31T11:35:37+08:00",
@@ -215,76 +215,76 @@ if (!doNotTrack) {
 <p><img loading="lazy" style="margin: auto;" src="../img/%e4%bc%a0%e7%bb%9f%e4%be%9d%e8%b5%96%e5%85%b3%e7%b3%bb.png" alt="传统依赖关系"  />
 </p>
 <p>传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// 底层实现
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BankWorker</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> saveService(){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理存款业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">transferService</span>(){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理转账业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">payService</span>(){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理支付业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 中层封装
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doSaveBusiness</span>(BankWorker<span style="color:#f92672">*</span> worker){
-</span></span><span style="display:flex;"><span>    worker<span style="color:#f92672">-&gt;</span>saveService();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doTransferBusiness</span>(BankWorker<span style="color:#f92672">*</span> worker){
-</span></span><span style="display:flex;"><span>    worker<span style="color:#f92672">-&gt;</span>transferService();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doPayBusiness</span>(BankWorker<span style="color:#f92672">*</span> worker){
-</span></span><span style="display:flex;"><span>    worker<span style="color:#f92672">-&gt;</span>payService();
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 高层调用
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span>(){
-</span></span><span style="display:flex;"><span>    BankWorker<span style="color:#f92672">*</span> bw <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BankWorker;
-</span></span><span style="display:flex;"><span>    doSaveBusiness(bw);
-</span></span><span style="display:flex;"><span>    doPayBusiness(bw);
-</span></span><span style="display:flex;"><span>    doTransferBusiness(bw);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> bw;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="依赖倒转">依赖倒转<a hidden class="anchor" aria-hidden="true" href="#依赖倒转">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 底层实现
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BankWorker</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> saveService(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理存款业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">transferService</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理转账业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">payService</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理支付业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#75715e">// 中层封装
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doSaveBusiness</span>(BankWorker<span style="color:#f92672">*</span> worker){
+    worker<span style="color:#f92672">-&gt;</span>saveService();
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doTransferBusiness</span>(BankWorker<span style="color:#f92672">*</span> worker){
+    worker<span style="color:#f92672">-&gt;</span>transferService();
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doPayBusiness</span>(BankWorker<span style="color:#f92672">*</span> worker){
+    worker<span style="color:#f92672">-&gt;</span>payService();
+}
+<span style="color:#75715e">// 高层调用
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span>(){
+    BankWorker<span style="color:#f92672">*</span> bw <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> BankWorker;
+    doSaveBusiness(bw);
+    doPayBusiness(bw);
+    doTransferBusiness(bw);
+    <span style="color:#66d9ef">delete</span> bw;
+}
+</code></pre></div><h2 id="依赖倒转">依赖倒转<a hidden class="anchor" aria-hidden="true" href="#依赖倒转">#</a></h2>
 <p><img loading="lazy" style="margin: auto;" src="../img/%e4%be%9d%e8%b5%96%e5%80%92%e8%bd%ac.png" alt="依赖倒转"  />
 </p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// 抽象层
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractWorker</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> doBusiness() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 实现层
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SaveBankWorker</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractWorker{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> doBusiness()<span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理存款业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PayBankWorker</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractWorker{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> doBusiness()<span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理支付业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TransferBankWorker</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractWorker{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> doBusiness()<span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理转账业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 业务封装
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doBusiness</span>(AbstractWorker<span style="color:#f92672">*</span> aw){
-</span></span><span style="display:flex;"><span>    aw<span style="color:#f92672">-&gt;</span>doBusiness();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> aw;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 高层调用
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span>(){
-</span></span><span style="display:flex;"><span>    doBusiness(<span style="color:#66d9ef">new</span> SaveBankWorker);
-</span></span><span style="display:flex;"><span>    doBusiness(<span style="color:#66d9ef">new</span> PayBankWorker);
-</span></span><span style="display:flex;"><span>    doBusiness(<span style="color:#66d9ef">new</span> TransferBankWorker);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 抽象层
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractWorker</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> doBusiness() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+};
+<span style="color:#75715e">// 实现层
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SaveBankWorker</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractWorker{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> doBusiness()<span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理存款业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PayBankWorker</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractWorker{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> doBusiness()<span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理支付业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TransferBankWorker</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractWorker{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> doBusiness()<span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;办理转账业务...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#75715e">// 业务封装
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">doBusiness</span>(AbstractWorker<span style="color:#f92672">*</span> aw){
+    aw<span style="color:#f92672">-&gt;</span>doBusiness();
+    <span style="color:#66d9ef">delete</span> aw;
+}
+<span style="color:#75715e">// 高层调用
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span>(){
+    doBusiness(<span style="color:#66d9ef">new</span> SaveBankWorker);
+    doBusiness(<span style="color:#66d9ef">new</span> PayBankWorker);
+    doBusiness(<span style="color:#66d9ef">new</span> TransferBankWorker);
+}
+</code></pre></div>
 
   </div>
 

@@ -189,7 +189,7 @@ virtualenv env
 详细操作
 2. Creating a new Scrapy project scrapy startproject tutorial
 3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
-import scrapy  class QuotesSpider(scrapy.Spider):  name = &#34;quotes&#34;   def start_requests(self):  urls = [  &#39;http://quotes....</p>
+import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy....</p>
   </section>
   <footer class="entry-footer"><span title='2019-02-15 15:40:48 +0800 CST'>February 15, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Scrapy Learn" href="https://874656645.github.io/posts/7-scrapy-learn/"></a>

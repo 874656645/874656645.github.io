@@ -8,7 +8,7 @@
 <title>合成复用原则 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;, 设计模式" />
 <meta name="description" content="优先使用组合的方式，而不是继承
-class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl;  } }; class DaZhong:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl;  } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public:  Person(){  car = nullptr;  }  Person(AbstractCar* c){  car = c;  }  void drive(){  car-&gt;run();  delete car;  }  void drive(AbstractCar* car){  car-&gt;run();  delete car;  } private:  AbstractCar* car; }; void test2(){  // 方式一：  Person* p = new Person(new BMW);  p-&gt;drive();  delete p;  p = new Person(new DaZhong);  p-&gt;drive();  delete p;   // 方式二：  Person pp;  pp.">
+class AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-&gt;run(); delete car; } void drive(AbstractCar* car){ car-&gt;run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-&gt;drive(); delete p; p = new Person(new DaZhong); p-&gt;drive(); delete p; // 方式二：  Person pp; pp.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -17,7 +17,7 @@ class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public Abstract
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="合成复用原则" />
 <meta property="og:description" content="优先使用组合的方式，而不是继承
-class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl;  } }; class DaZhong:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl;  } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public:  Person(){  car = nullptr;  }  Person(AbstractCar* c){  car = c;  }  void drive(){  car-&gt;run();  delete car;  }  void drive(AbstractCar* car){  car-&gt;run();  delete car;  } private:  AbstractCar* car; }; void test2(){  // 方式一：  Person* p = new Person(new BMW);  p-&gt;drive();  delete p;  p = new Person(new DaZhong);  p-&gt;drive();  delete p;   // 方式二：  Person pp;  pp." />
+class AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-&gt;run(); delete car; } void drive(AbstractCar* car){ car-&gt;run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-&gt;drive(); delete p; p = new Person(new DaZhong); p-&gt;drive(); delete p; // 方式二：  Person pp; pp." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/102-%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-30T21:45:22&#43;08:00" />
@@ -60,7 +60,7 @@ class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public Abstract
 
 <meta name="twitter:title" content="合成复用原则"/>
 <meta name="twitter:description" content="优先使用组合的方式，而不是继承
-class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl;  } }; class DaZhong:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl;  } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public:  Person(){  car = nullptr;  }  Person(AbstractCar* c){  car = c;  }  void drive(){  car-&gt;run();  delete car;  }  void drive(AbstractCar* car){  car-&gt;run();  delete car;  } private:  AbstractCar* car; }; void test2(){  // 方式一：  Person* p = new Person(new BMW);  p-&gt;drive();  delete p;  p = new Person(new DaZhong);  p-&gt;drive();  delete p;   // 方式二：  Person pp;  pp."/>
+class AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-&gt;run(); delete car; } void drive(AbstractCar* car){ car-&gt;run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-&gt;drive(); delete p; p = new Person(new DaZhong); p-&gt;drive(); delete p; // 方式二：  Person pp; pp."/>
 
 
 <script type="application/ld+json">
@@ -89,11 +89,11 @@ class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public Abstract
   "@type": "BlogPosting",
   "headline": "合成复用原则",
   "name": "合成复用原则",
-  "description": "优先使用组合的方式，而不是继承\nclass AbstractCar{ public:  virtual void run() = 0; }; class BMW:public AbstractCar{ public:  void run()override{  cout \u0026lt;\u0026lt; \u0026#34;BMW run\u0026#34; \u0026lt;\u0026lt; endl;  } }; class DaZhong:public AbstractCar{ public:  void run()override{  cout \u0026lt;\u0026lt; \u0026#34;DaZhong run\u0026#34; \u0026lt;\u0026lt; endl;  } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public:  Person(){  car = nullptr;  }  Person(AbstractCar* c){  car = c;  }  void drive(){  car-\u0026gt;run();  delete car;  }  void drive(AbstractCar* car){  car-\u0026gt;run();  delete car;  } private:  AbstractCar* car; }; void test2(){  // 方式一：  Person* p = new Person(new BMW);  p-\u0026gt;drive();  delete p;  p = new Person(new DaZhong);  p-\u0026gt;drive();  delete p;   // 方式二：  Person pp;  pp.",
+  "description": "优先使用组合的方式，而不是继承\nclass AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout \u0026lt;\u0026lt; \u0026#34;BMW run\u0026#34; \u0026lt;\u0026lt; endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout \u0026lt;\u0026lt; \u0026#34;DaZhong run\u0026#34; \u0026lt;\u0026lt; endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-\u0026gt;run(); delete car; } void drive(AbstractCar* car){ car-\u0026gt;run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-\u0026gt;drive(); delete p; p = new Person(new DaZhong); p-\u0026gt;drive(); delete p; // 方式二：  Person pp; pp.",
   "keywords": [
     "C++", "设计模式"
   ],
-  "articleBody": "优先使用组合的方式，而不是继承\nclass AbstractCar{ public:  virtual void run() = 0; }; class BMW:public AbstractCar{ public:  void run()override{  cout  \"BMW run\"  endl;  } }; class DaZhong:public AbstractCar{ public:  void run()override{  cout  \"DaZhong run\"  endl;  } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public:  Person(){  car = nullptr;  }  Person(AbstractCar* c){  car = c;  }  void drive(){  car-run();  delete car;  }  void drive(AbstractCar* car){  car-run();  delete car;  } private:  AbstractCar* car; }; void test2(){  // 方式一：  Person* p = new Person(new BMW);  p-drive();  delete p;  p = new Person(new DaZhong);  p-drive();  delete p;   // 方式二：  Person pp;  pp.drive(new BMW);  pp.drive(new DaZhong); } int main() {  test2();  return 0; } ",
+  "articleBody": "优先使用组合的方式，而不是继承\nclass AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout  \"BMW run\"  endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout  \"DaZhong run\"  endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-run(); delete car; } void drive(AbstractCar* car){ car-run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-drive(); delete p; p = new Person(new DaZhong); p-drive(); delete p; // 方式二：  Person pp; pp.drive(new BMW); pp.drive(new DaZhong); } int main() { test2(); return 0; } ",
   "wordCount" : "129",
   "inLanguage": "en",
   "datePublished": "2022-01-30T21:45:22+08:00",
@@ -197,75 +197,75 @@ class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public Abstract
   </header> 
 
   <div class="post-content"><p>优先使用组合的方式，而不是继承</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractCar</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> run() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BMW</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractCar{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> run()<span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;BMW run&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DaZhong</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractCar{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> run()<span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;DaZhong run&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#if 0</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 错误的做法
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">class Person : public BMW{
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">public:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    void drive(){
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        run();
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    }
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">};
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">void test1(){
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Person p;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    p.drive();
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#endif
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">// 正确做法
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    Person(){
-</span></span><span style="display:flex;"><span>        car <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    Person(AbstractCar<span style="color:#f92672">*</span> c){
-</span></span><span style="display:flex;"><span>        car <span style="color:#f92672">=</span> c;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drive</span>(){
-</span></span><span style="display:flex;"><span>        car<span style="color:#f92672">-&gt;</span>run();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">delete</span> car;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drive</span>(AbstractCar<span style="color:#f92672">*</span> car){
-</span></span><span style="display:flex;"><span>        car<span style="color:#f92672">-&gt;</span>run();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">delete</span> car;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    AbstractCar<span style="color:#f92672">*</span> car;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span>(){
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 方式一：
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Person<span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Person(<span style="color:#66d9ef">new</span> BMW);
-</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">-&gt;</span>drive();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> p;
-</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Person(<span style="color:#66d9ef">new</span> DaZhong);
-</span></span><span style="display:flex;"><span>    p<span style="color:#f92672">-&gt;</span>drive();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> p;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 方式二：
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Person pp;
-</span></span><span style="display:flex;"><span>    pp.drive(<span style="color:#66d9ef">new</span> BMW);
-</span></span><span style="display:flex;"><span>    pp.drive(<span style="color:#66d9ef">new</span> DaZhong);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    test2();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractCar</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> run() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BMW</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractCar{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> run()<span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;BMW run&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DaZhong</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> AbstractCar{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> run()<span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;DaZhong run&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#75715e">#if 0</span><span style="color:#75715e">
+</span><span style="color:#75715e">// 错误的做法
+</span><span style="color:#75715e">class Person : public BMW{
+</span><span style="color:#75715e">public:
+</span><span style="color:#75715e">    void drive(){
+</span><span style="color:#75715e">        run();
+</span><span style="color:#75715e">    }
+</span><span style="color:#75715e">};
+</span><span style="color:#75715e">void test1(){
+</span><span style="color:#75715e">    Person p;
+</span><span style="color:#75715e">    p.drive();
+</span><span style="color:#75715e">}
+</span><span style="color:#75715e"></span><span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span><span style="color:#75715e">// 正确做法
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Person(){
+        car <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    }
+    Person(AbstractCar<span style="color:#f92672">*</span> c){
+        car <span style="color:#f92672">=</span> c;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drive</span>(){
+        car<span style="color:#f92672">-&gt;</span>run();
+        <span style="color:#66d9ef">delete</span> car;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drive</span>(AbstractCar<span style="color:#f92672">*</span> car){
+        car<span style="color:#f92672">-&gt;</span>run();
+        <span style="color:#66d9ef">delete</span> car;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    AbstractCar<span style="color:#f92672">*</span> car;
+};
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test2</span>(){
+    <span style="color:#75715e">// 方式一：
+</span><span style="color:#75715e"></span>    Person<span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Person(<span style="color:#66d9ef">new</span> BMW);
+    p<span style="color:#f92672">-&gt;</span>drive();
+    <span style="color:#66d9ef">delete</span> p;
+    p <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Person(<span style="color:#66d9ef">new</span> DaZhong);
+    p<span style="color:#f92672">-&gt;</span>drive();
+    <span style="color:#66d9ef">delete</span> p;
+
+    <span style="color:#75715e">// 方式二：
+</span><span style="color:#75715e"></span>    Person pp;
+    pp.drive(<span style="color:#66d9ef">new</span> BMW);
+    pp.drive(<span style="color:#66d9ef">new</span> DaZhong);
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    test2();
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div>
 
   </div>
 
