@@ -160,6 +160,31 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>自定义智能指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr; } T&amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &lt;&lt; &#34;A(int)...&#34; &lt;&lt; endl; this-&gt;a = a; } ~A(){ cout &lt;&lt; &#34;~A()....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43; 多线程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、进程与线程  进程是资源分配和调度的一个独立单位；而线程是进程的一个实体，是 CPU 调度和分配的基本单位 同一个进程中的多个线程的内存资源是共享的，各线程都可以改变进程中的变量。因此在执行多线程运算的时候要注意执行顺序  二、并行与并发  并行（parallellism）指的是多个任务在同一时刻同时在执行 并发（concurrency）是指在一个时间段内，多个任务交替进行。虽然看起来像在同时执行，但其实是交替的  三、多任务处理 多线程是多任务处理的一种特殊形式，一般情况下，有基于进程和基于线程的两种类型的多任务处理方式。
+ 基于进程的多任务处理是程序的并发执行 基于线程的多任务处理是同一程序的片段的并发执行  四、C&#43;&#43;11 线程管理 thread 库  C&#43;&#43;11 提供了多线程库，使用时需要 #include &lt;thread&gt; 头文件，该头文件主要包含了对线程的管理类 std::thread 以及其他管理线程相关的类 每个应用程序至少有一个进程，而每个进程至少有一个主线程，除了主线程外，在一个进程中还可以创建多个子线程。每个线程都需要一个入口函数，入口函数返回退出，该线程也会退出，主线程就是以 main 函数作为入口函数的线程 主线程退出后，运行中的子线程也会被销毁 std::thread 的构造函数需要的是可调用（callable）类型，除了函数外，还可以调用 lambda 表达式、重载了 () 运算符的类的实例 把函数对象传入 std::thread 时，应传入函数名称（不带括号） 当启动一个线程后，一定要在该线程 thread 销毁前，调用 join() 或者 detach()，确定以何种方式等待线程执行结束  detach 方式，启动的线程自主在后台运行，当前的代码继续往下执行，不等待新线程结束 join 方式，等待关联的线程完成，才会继续执行 join() 后的代码 在以 detach 的方式执行线程时，要将线程访问的局部数据复制到线程的空间（使用按值传递），一定要确保线程没有使用局部变量的引用或者指针，除非你能肯定该线程会在局部作用域结束前执行结束    1、调用全局函数启动线程 #include &lt;thread&gt; using namespace std; void func(int i){ cout &lt;&lt; i &lt;&lt; endl; } int main() { for(int i = 0; i &lt; 4; &#43;&#43;i){ // 创建一个线程t，第一个参数为调用的函数，第二个参数为传递的参数  thread t(func, i); // 表示允许该线程在后台运行  t....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-04 14:02:20 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 多线程" href="https://874656645.github.io/posts/61-c&#43;&#43;-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>临时变量不能绑定 no-const 左值引用类型
     </h2>
   </header>
@@ -202,30 +227,6 @@ class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt
   </section>
   <footer class="entry-footer"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 具有链表特性的类" href="https://874656645.github.io/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>STL 总结
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL 常用的容器有哪些以及各自的特点是什么?    名称 特点     vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector 扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-30 10:34:27 +0800 CST'>December 30, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to STL 总结" href="https://874656645.github.io/posts/56-stl-%E6%80%BB%E7%BB%93/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>vector
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>vector 常用操作 #include &lt;iostream&gt;#include &lt;vector&gt; int main() { //1.定义和初始化  vector&lt;int&gt; vec1; //默认初始化，vec1为空  vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2  vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&lt;int&gt; vec4(10); //10个值为0的元素  vector&lt;int&gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); // 尾部添加元素  vec1.insert(vec1.end(),5,3); // 从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); // 删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()&#43;2); // 删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); // 清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&lt;int&gt;().swap(V); // 利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  // 且只有存储对象时才有效  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-29 19:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to vector" href="https://874656645.github.io/posts/55-vector/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

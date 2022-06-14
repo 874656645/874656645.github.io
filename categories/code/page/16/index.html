@@ -145,6 +145,31 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>代理模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-01 07:28:53 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 代理模式" href="https://874656645.github.io/posts/108-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>单例模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>单例在内存中只有一份，在内存中不会占用太多，程序退出时会随着程序统一释放内存，所以可以不必特意释放  一、懒汉式 不是线程安全的，所以多线程使用要加锁
+class Singleton{ public: static Singleton* getInstance(){ if(s_instance == nullptr){ s_instance = new Singleton; } return s_instance; } // 可有可无，程序结束时，系统会自动回收程序的所有内存  class Garbo{ ~Garbo(){ if(s_instance){ cout &lt;&lt; &#34;gc...&#34; &lt;&lt; endl; delete s_instance; } } }; private: Singleton(){ cout &lt;&lt; &#34;Singleton()...&#34; &lt;&lt; endl; } Singleton(const Singleton&amp;) = delete; Singleton&amp; operator=(const Singleton&amp;) = delete; static Singleton* s_instance; static Garbo s_gc; }; Singleton* Singleton::s_instance = nullptr; int main() { cout &lt;&lt; &#34;main()....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-31 20:43:34 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 单例模式" href="https://874656645.github.io/posts/107-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>抽象工厂模式
     </h2>
   </header>
@@ -181,32 +206,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-01-31 15:14:38 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 简单工厂模式" href="https://874656645.github.io/posts/104-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>依赖倒转原则
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层
-// 底层实现 class BankWorker{ public: void saveService(){ cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl; } void transferService(){ cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl; } void payService(){ cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl; } }; // 中层封装 void doSaveBusiness(BankWorker* worker){ worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){ worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){ worker-&gt;payService(); } // 高层调用 void test1(){ BankWorker* bw = new BankWorker; doSaveBusiness(bw); doPayBusiness(bw); doTransferBusiness(bw); delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public: virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout &lt;&lt; &#34;办理存款业务....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-31 11:35:37 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 依赖倒转原则" href="https://874656645.github.io/posts/103-%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>合成复用原则
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>优先使用组合的方式，而不是继承
-class AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-&gt;run(); delete car; } void drive(AbstractCar* car){ car-&gt;run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-&gt;drive(); delete p; p = new Person(new DaZhong); p-&gt;drive(); delete p; // 方式二：  Person pp; pp....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-30 21:45:22 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 合成复用原则" href="https://874656645.github.io/posts/102-%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

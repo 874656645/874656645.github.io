@@ -7,8 +7,8 @@
 <meta name="robots" content="index, follow">
 <title>C&#43;&#43;11 auto 与 decltype 关键字 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义模板函数时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
-template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1.53; Multiply(a, b); // 15.">
+<meta name="description" content="一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
+template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -47,20 +47,20 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="C&#43;&#43;11 auto 与 decltype 关键字" />
-<meta property="og:description" content="一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义模板函数时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
-template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1.53; Multiply(a, b); // 15." />
+<meta property="og:description" content="一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
+template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-22T20:30:33&#43;08:00" />
 <meta property="article:modified_time" content="2022-02-22T20:30:33&#43;08:00" />
-<meta property="og:see_also" content="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/" /><meta property="og:see_also" content="https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/" /><meta property="og:see_also" content="https://874656645.github.io/posts/169-c&#43;&#43;11-function/" /><meta property="og:see_also" content="https://874656645.github.io/posts/168-c&#43;&#43;11-mem_fn/" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/" /><meta property="og:see_also" content="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/" /><meta property="og:see_also" content="https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/" /><meta property="og:see_also" content="https://874656645.github.io/posts/169-c&#43;&#43;11-function/" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="C&#43;&#43;11 auto 与 decltype 关键字"/>
-<meta name="twitter:description" content="一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义模板函数时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
-template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1.53; Multiply(a, b); // 15."/>
+<meta name="twitter:description" content="一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
+template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1."/>
 
 
 <script type="application/ld+json">
@@ -89,12 +89,12 @@ template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * 
   "@type": "BlogPosting",
   "headline": "C++11 auto 与 decltype 关键字",
   "name": "C\u002b\u002b11 auto 与 decltype 关键字",
-  "description": "一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。  int main() { int a = 10; auto val = a; cout \u0026lt;\u0026lt; typeid(val).name() \u0026lt;\u0026lt; endl; // i  return 0; } 二、在定义模板函数时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定\ntemplate \u0026lt;class _Tx,class _Ty\u0026gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout \u0026lt;\u0026lt; v; } int main() { int a = 10; double b = 1.53; Multiply(a, b); // 15.",
+  "description": "一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout \u0026lt;\u0026lt; typeid(val).name() \u0026lt;\u0026lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定\ntemplate \u0026lt;class _Tx,class _Ty\u0026gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout \u0026lt;\u0026lt; v; } int main() { int a = 10; double b = 1.",
   "keywords": [
     "C++"
   ],
-  "articleBody": "一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。  int main() { int a = 10; auto val = a; cout  typeid(val).name()  endl; // i  return 0; } 二、在定义模板函数时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定\ntemplate class _Tx,class _Ty void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout  v; } int main() { int a = 10; double b = 1.53; Multiply(a, b); // 15.3  return 0; } 三、函数模板返回值依赖于模板参数 auto 在这里的作用也称为返回值占位，真正的返回值是后面的 decltype(x * y)。为何要将返回值后置呢？如果没有后置，则函数声明时为：decltype(x * y) multiply(_Tx x, _Ty y)，而此时 x, y 还没声明呢，编译无法通过。\ntemplate class _Tx,class _Ty auto Multiply(_Tx x, _Ty y) - decltype(x * y) { return x * y; } int main() { int a = 10; double b = 1.53; cout  Multiply(a, b)  endl; return 0; } 四、与匿名函数结合使用 int main() { auto f = [](int a, int b) - int { return a * b; }; decltype(f) g = f; // lambda 的类型是独有且无名的  // 也不用定义函数指针了  cout  typeid(f).name()  endl; auto i = f(2, 2); decltype(g(3, 3)) j = g(3, 3); cout  \"i = \"  i  \", \"  \"j = \"  j  '\\n'; return 0; } 输出：\nZ4mainEUliiE_ i = 4, j = 9 五、auto 注意事项   auto 变量必须在声明时初始化，这类似于 const 关键字。\n  定义在一个 auto 序列的变量必须始终推导成同一类型。\nauto a4 = 10, a5 = 20, a6 = 30; //正确 auto b4 = 10, b5 = 20.0, b6 = 'a'; //错误   如果初始化表达式是引用，则去除引用语义。\nint main() { int a = 10; int \u0026b = a; auto c = b; // c的类型为int而非int\u0026（去除引用）  auto \u0026d = b; // 此时c的类型才为int\u0026  c = 100; //a = 10;  cout  \"c = \"  c  \" a = \"  a  endl; d = 100; //a = 100;  cout  \"d = \"  d  \" a = \"  a  endl; return 0; } 输出：\nc = 100 a = 10 d = 100 a = 100   如果初始化表达式为 const 或 volatile（或者两者兼有），则除去 const/volatile 语义\n  如果 auto 关键字带上 \u0026 号，则不去除 const 语义\nint main() { const int a1 = 10; auto b1= a1; // b1的类型为int而非const int（去除const）  // 与指针类似，只是为新变量开辟了新的空间  int* pB1 = (int*)\u0026a1; b1 = 100; // 合法  *pB1 = 1000; // 合法  cout  \"b1 = \"  b1  endl; cout  \"a1 = \"  a1  endl; cout  \"*pB1 = \"  *pB1  endl; const auto c1 = a1; // 此时c1的类型为const int  // c1 = 100; // 非法  auto\u0026 b2 = a1; // 因为auto带上\u0026，故不去除const，b2类型为const int  // b2 = 100; // 非法  return 0; } 输出：\nb1 = 100 a1 = 10 *pB1 = 1000   初始化表达式为数组时，auto 关键字推导类型为指针。\n  若表达式为数组且 auto 带上 \u0026，则推导类型为数组类型。\nint main() { int a3[3] = { 1, 2, 3 }; auto b3 = a3; cout  typeid(b3).name()  endl; auto\u0026 c3 = a3; cout  typeid(c3).name()  endl; return 0; } 输出：\nPi A3_i   函数形参或者模板参数不能被声明为 auto。\n  六、decltype 声明引用类型 struct A { double x; }; const A* a; decltype(a-x) y; // y 的类型是 double（其声明类型） decltype((a-x)) z = y; // z 的类型是 const double\u0026（左值表达式） ",
-  "wordCount" : "493",
+  "articleBody": "一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout  typeid(val).name()  endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定\ntemplate class _Tx,class _Ty void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout  v; } int main() { int a = 10; double b = 1.53; Multiply(a, b); // 15.3  return 0; } 三、函数模板返回值依赖于模板参数 auto 在这里的作用也称为返回值占位，真正的返回值是后面的 decltype(x * y)。为何要将返回值后置呢？如果没有后置，则函数声明时为：decltype(x * y) multiply(_Tx x, _Ty y)，而此时 x, y 还没声明呢，编译无法通过。\ntemplate class _Tx,class _Ty auto Multiply(_Tx x, _Ty y) - decltype(x * y) { return x * y; } int main() { int a = 10; double b = 1.53; cout  Multiply(a, b)  endl; return 0; } 四、与匿名函数结合使用 int main() { auto f = [](int a, int b) - int { return a * b; }; decltype(f) g = f; // lambda 的类型是独有且无名的  // 也不用定义函数指针了  cout  typeid(f).name()  endl; auto i = f(2, 2); decltype(g(3, 3)) j = g(3, 3); cout  \"i = \"  i  \", \"  \"j = \"  j  '\\n'; return 0; } 输出：\nZ4mainEUliiE_ i = 4, j = 9 五、auto 注意事项   auto 变量必须在声明时初始化，这类似于 const 关键字。\n  定义在一个 auto 序列的变量必须始终推导成同一类型。\nauto a4 = 10, a5 = 20, a6 = 30; //正确 auto b4 = 10, b5 = 20.0, b6 = 'a'; //错误   如果初始化表达式是引用，则去除引用语义。\nint main() { int a = 10; int \u0026b = a; auto c = b; // c的类型为int而非int\u0026（去除引用）  auto \u0026d = b; // 此时c的类型才为int\u0026  c = 100; //a = 10;  cout  \"c = \"  c  \" a = \"  a  endl; d = 100; //a = 100;  cout  \"d = \"  d  \" a = \"  a  endl; return 0; } 输出：\nc = 100 a = 10 d = 100 a = 100   如果初始化表达式为 const 或 volatile（或者两者兼有），则除去 const/volatile 语义\n  如果 auto 关键字带上 \u0026 号，则不去除 const 语义\nint main() { const int a1 = 10; auto b1= a1; // b1的类型为int而非const int（去除const）  // 与指针类似，只是为新变量开辟了新的空间  int* pB1 = (int*)\u0026a1; b1 = 100; // 合法  *pB1 = 1000; // 合法  cout  \"b1 = \"  b1  endl; cout  \"a1 = \"  a1  endl; cout  \"*pB1 = \"  *pB1  endl; const auto c1 = a1; // 此时c1的类型为const int  // c1 = 100; // 非法  auto\u0026 b2 = a1; // 因为auto带上\u0026，故不去除const，b2类型为const int  // b2 = 100; // 非法  return 0; } 输出：\nb1 = 100 a1 = 10 *pB1 = 1000   初始化表达式为数组时，auto 关键字推导类型为指针。\n  若表达式为数组且 auto 带上 \u0026，则推导类型为数组类型。\nint main() { int a3[3] = { 1, 2, 3 }; auto b3 = a3; cout  typeid(b3).name()  endl; auto\u0026 c3 = a3; // int (\u0026)[3]  cout  typeid(c3).name()  endl; return 0; } 输出：\nPi A3_i   函数形参或者模板参数不能被声明为 auto。\n  六、decltype 声明引用类型 struct A { double x; }; const A* a; decltype(a-x) y; // y 的类型是 double（其声明类型） decltype((a-x)) z = y; // z 的类型是 const double\u0026（左值表达式） ",
+  "wordCount" : "500",
   "inLanguage": "en",
   "datePublished": "2022-02-22T20:30:33+08:00",
   "dateModified": "2022-02-22T20:30:33+08:00",
@@ -204,7 +204,7 @@ template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * 
                 <li>
                     <a href="#%e4%b8%80%e8%bf%9b%e8%a1%8c%e8%87%aa%e5%8a%a8%e7%b1%bb%e5%9e%8b%e6%8e%a8%e5%af%bc" aria-label="一、进行自动类型推导">一、进行自动类型推导</a></li>
                 <li>
-                    <a href="#%e4%ba%8c%e5%9c%a8%e5%ae%9a%e4%b9%89%e6%a8%a1%e6%9d%bf%e5%87%bd%e6%95%b0%e6%97%b6%e7%94%a8%e4%ba%8e%e5%a3%b0%e6%98%8e%e4%be%9d%e8%b5%96%e6%a8%a1%e6%9d%bf%e5%8f%82%e6%95%b0%e7%9a%84%e5%8f%98%e9%87%8f%e7%b1%bb%e5%9e%8b" aria-label="二、在定义模板函数时，用于声明依赖模板参数的变量类型">二、在定义模板函数时，用于声明依赖模板参数的变量类型</a></li>
+                    <a href="#%e4%ba%8c%e5%9c%a8%e5%ae%9a%e4%b9%89%e5%87%bd%e6%95%b0%e6%a8%a1%e6%9d%bf%e6%97%b6%e7%94%a8%e4%ba%8e%e5%a3%b0%e6%98%8e%e4%be%9d%e8%b5%96%e6%a8%a1%e6%9d%bf%e5%8f%82%e6%95%b0%e7%9a%84%e5%8f%98%e9%87%8f%e7%b1%bb%e5%9e%8b" aria-label="二、在定义函数模板时，用于声明依赖模板参数的变量类型">二、在定义函数模板时，用于声明依赖模板参数的变量类型</a></li>
                 <li>
                     <a href="#%e4%b8%89%e5%87%bd%e6%95%b0%e6%a8%a1%e6%9d%bf%e8%bf%94%e5%9b%9e%e5%80%bc%e4%be%9d%e8%b5%96%e4%ba%8e%e6%a8%a1%e6%9d%bf%e5%8f%82%e6%95%b0" aria-label="三、函数模板返回值依赖于模板参数">三、函数模板返回值依赖于模板参数</a></li>
                 <li>
@@ -223,6 +223,8 @@ template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * 
 <ul>
 <li>auto 的自动类型推断发生在<strong>编译期</strong>，所以使用 auto 并不会造成程序运行时效率的降低。</li>
 <li>而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。</li>
+<li>auto 属于类类型推导</li>
+<li>decltype 是包含声明修饰符的声明类型推导</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
 {
@@ -231,7 +233,7 @@ template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * 
     cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">typeid</span>(val).name() <span style="color:#f92672">&lt;&lt;</span> endl;       <span style="color:#75715e">// i
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
-</code></pre></div><h2 id="二在定义模板函数时用于声明依赖模板参数的变量类型">二、在定义模板函数时，用于声明依赖模板参数的变量类型<a hidden class="anchor" aria-hidden="true" href="#二在定义模板函数时用于声明依赖模板参数的变量类型">#</a></h2>
+</code></pre></div><h2 id="二在定义函数模板时用于声明依赖模板参数的变量类型">二、在定义函数模板时，用于声明依赖模板参数的变量类型<a hidden class="anchor" aria-hidden="true" href="#二在定义函数模板时用于声明依赖模板参数的变量类型">#</a></h2>
 <p>不到编译的时候，<code>x * y</code> 的真正类型很难确定</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">_Tx</span>,<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">_Ty</span><span style="color:#f92672">&gt;</span>
 <span style="color:#66d9ef">void</span> Multiply(_Tx x, _Ty y)
@@ -354,8 +356,8 @@ a1 = 10
     <span style="color:#66d9ef">auto</span> b3 <span style="color:#f92672">=</span> a3;
     cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">typeid</span>(b3).name() <span style="color:#f92672">&lt;&lt;</span> endl;
 
-    <span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> c3 <span style="color:#f92672">=</span> a3;
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">typeid</span>(c3).name() <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> c3 <span style="color:#f92672">=</span> a3;  <span style="color:#75715e">// int (&amp;)[3]
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">typeid</span>(c3).name() <span style="color:#f92672">&lt;&lt;</span> endl;
     <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
 }
 </code></pre></div><p>输出：</p>

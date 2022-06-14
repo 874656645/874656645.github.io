@@ -5,10 +5,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>QProcess 使用 | Slow is Smooth and Smooth is Fast</title>
-<meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="路径中有空格  m_process-&gt;startDetached(strAppDir &#43; &quot;/ThreeDScreen.exe&quot;, QStringList())
-杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);">
+<title>Qt QProcess 使用 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Qt" />
+<meta name="description" content="  路径中有空格
+m_process-&gt;startDetached(strAppDir &#43; &quot;/ThreeDScreen.exe&quot;, QStringList())
+  杀死一个进程（注：-t 参数会将创建的子进程一起杀死）
+QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);
+  ">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -46,20 +49,27 @@ if (!doNotTrack) {
 	
 	ga('send', 'pageview');
 }
-</script><meta property="og:title" content="QProcess 使用" />
-<meta property="og:description" content="路径中有空格  m_process-&gt;startDetached(strAppDir &#43; &quot;/ThreeDScreen.exe&quot;, QStringList())
-杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);" />
+</script><meta property="og:title" content="Qt QProcess 使用" />
+<meta property="og:description" content="  路径中有空格
+m_process-&gt;startDetached(strAppDir &#43; &quot;/ThreeDScreen.exe&quot;, QStringList())
+  杀死一个进程（注：-t 参数会将创建的子进程一起杀死）
+QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);
+  " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-06T12:34:27&#43;08:00" />
 <meta property="article:modified_time" content="2021-12-06T12:34:27&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/" /><meta property="og:see_also" content="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
-<meta name="twitter:title" content="QProcess 使用"/>
-<meta name="twitter:description" content="路径中有空格  m_process-&gt;startDetached(strAppDir &#43; &quot;/ThreeDScreen.exe&quot;, QStringList())
-杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);"/>
+<meta name="twitter:title" content="Qt QProcess 使用"/>
+<meta name="twitter:description" content="  路径中有空格
+m_process-&gt;startDetached(strAppDir &#43; &quot;/ThreeDScreen.exe&quot;, QStringList())
+  杀死一个进程（注：-t 参数会将创建的子进程一起杀死）
+QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);
+  "/>
 
 
 <script type="application/ld+json">
@@ -76,7 +86,7 @@ if (!doNotTrack) {
     {
       "@type": "ListItem",
       "position":  3 ,
-      "name": "QProcess 使用",
+      "name": "Qt QProcess 使用",
       "item": "https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/"
     }
   ]
@@ -86,13 +96,13 @@ if (!doNotTrack) {
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "QProcess 使用",
-  "name": "QProcess 使用",
-  "description": "路径中有空格  m_process-\u0026gt;startDetached(strAppDir + \u0026quot;/ThreeDScreen.exe\u0026quot;, QStringList())\n杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(\u0026quot;taskkill -t -f /IM iexplore.exe\u0026quot;);",
+  "headline": "Qt QProcess 使用",
+  "name": "Qt QProcess 使用",
+  "description": "  路径中有空格\nm_process-\u0026gt;startDetached(strAppDir + \u0026quot;/ThreeDScreen.exe\u0026quot;, QStringList())\n  杀死一个进程（注：-t 参数会将创建的子进程一起杀死）\nQProcess::startDetached(\u0026quot;taskkill -t -f /IM iexplore.exe\u0026quot;);\n  ",
   "keywords": [
-    "C++"
+    "Qt"
   ],
-  "articleBody": " 路径中有空格  m_process-startDetached(strAppDir + \"/ThreeDScreen.exe\", QStringList())\n杀死一个进程（注：-t 参数会将创建的子进程一起杀死）  QProcess::startDetached(\"taskkill -t -f /IM iexplore.exe\");\n",
+  "articleBody": "  路径中有空格\nm_process-startDetached(strAppDir + \"/ThreeDScreen.exe\", QStringList())\n  杀死一个进程（注：-t 参数会将创建的子进程一起杀死）\nQProcess::startDetached(\"taskkill -t -f /IM iexplore.exe\");\n  ",
   "wordCount" : "12",
   "inLanguage": "en",
   "datePublished": "2021-12-06T12:34:27+08:00",
@@ -188,7 +198,7 @@ if (!doNotTrack) {
   <header class="post-header">
     <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
     <h1 class="post-title">
-      QProcess 使用
+      Qt QProcess 使用
     </h1>
     <div class="post-meta"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
 
@@ -196,20 +206,22 @@ if (!doNotTrack) {
   </header> 
 
   <div class="post-content"><ol>
-<li>路径中有空格</li>
-</ol>
+<li>
+<p>路径中有空格</p>
 <p><code>m_process-&gt;startDetached(strAppDir + &quot;/ThreeDScreen.exe&quot;, QStringList())</code></p>
-<ol start="2">
-<li>杀死一个进程（<!-- raw HTML omitted -->注：-t 参数会将创建的子进程一起杀死<!-- raw HTML omitted -->）</li>
-</ol>
+</li>
+<li>
+<p>杀死一个进程（<!-- raw HTML omitted -->注：-t 参数会将创建的子进程一起杀死<!-- raw HTML omitted -->）</p>
 <p><code>QProcess::startDetached(&quot;taskkill -t -f /IM iexplore.exe&quot;);</code></p>
+</li>
+</ol>
 
 
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/qt/">Qt</a></li>
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://874656645.github.io/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/">
@@ -220,7 +232,7 @@ if (!doNotTrack) {
   <a class="next" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">
     <span class="title">Next Page »</span>
     <br>
-    <span>QString 中文乱码</span>
+    <span>Qt QString 中文乱码</span>
   </a>
 </nav>
 

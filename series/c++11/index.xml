@@ -9,7 +9,16 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 13 May 2022 16:30:07 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/c++11/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jun 2022 20:48:22 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/c++11/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考</title>
+      <link>https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/</link>
+      <pubDate>Sat, 11 Jun 2022 20:48:22 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/</guid>
+      <description>一、通用引用  类型声明形式为 type&amp;amp;&amp;amp; 其中 type 类型是要进行推导的，如果类型推导没有发生，那么 type&amp;amp;&amp;amp; 代表一个右值引用 如果一个对象被声明为 auto&amp;amp;&amp;amp;，这个形参或者对象就是一个通用引用 通用引用，如果它被右值初始化，就会对应地成为右值引用；如果它被左值初始化，就会成为左值引用 如果在一个类模板里面看见了一个函数形参类型为 T&amp;amp;&amp;amp;，也不一定就是通用引用，可能并没有发生类型推导  void f(Widget&amp;amp;&amp;amp; param); //右值引用 Widget&amp;amp;&amp;amp; var1 = Widget(); //右值引用 auto&amp;amp;&amp;amp; var2 = var1; //通用引用（不是右值引用）  template&amp;lt;typename T&amp;gt; void f(std::vector&amp;lt;T&amp;gt;&amp;amp;&amp;amp; param); //右值引用  template&amp;lt;typename T&amp;gt; void f(T&amp;amp;&amp;amp; param); //通用引用（不是右值引用）  template &amp;lt;typename T&amp;gt; void f(const T&amp;amp;&amp;amp; param); //param是一个右值引用，因为添加了 const 限定符  // 函数模板 一般可能是通用引用 template &amp;lt;typename T&amp;gt; void print_reference_type(T &amp;amp;&amp;amp;i) { // T&amp;amp;&amp;amp; 或是 auto&amp;amp;&amp;amp;  if (std::is_lvalue_reference&amp;lt;decltype(i)&amp;gt;::value) { std::cout &amp;lt;&amp;lt; &amp;#34;lvalue: &amp;#34; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; std::endl; } else if (std::is_rvalue_reference&amp;lt;decltype(i)&amp;gt;::value) { std::cout &amp;lt;&amp;lt; &amp;#34;rvalue: &amp;#34; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; std::endl; } else { std::cout &amp;lt;&amp;lt; &amp;#34;unknown value: &amp;#34; &amp;lt;&amp;lt; i &amp;lt;&amp;lt; std::endl; } } // 因为 push_back 在有一个特定的 vector 实例之前不可能存在， // 而实例化 vector 时的类型已经决定了 push_back 的声明 // 所以在这里并没有发生类型推导 template&amp;lt;class T, class Allocator = allocator&amp;lt;T&amp;gt;&amp;gt; //来自C++标准 class vector { public: void push_back(T&amp;amp;&amp;amp; x); … } 一个记录任意函数调用的时间开销的函数模板</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;11 继承构造</title>
       <link>https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/</link>
@@ -135,8 +144,8 @@ class Person{ public: int getAge() const{ m_count++; s_count++; return m_age; } 
       <pubDate>Tue, 22 Feb 2022 20:30:33 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
-      <description>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。  int main() { int a = 10; auto val = a; cout &amp;lt;&amp;lt; typeid(val).name() &amp;lt;&amp;lt; endl; // i  return 0; } 二、在定义模板函数时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
-template &amp;lt;class _Tx,class _Ty&amp;gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &amp;lt;&amp;lt; v; } int main() { int a = 10; double b = 1.53; Multiply(a, b); // 15.</description>
+      <description>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout &amp;lt;&amp;lt; typeid(val).name() &amp;lt;&amp;lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
+template &amp;lt;class _Tx,class _Ty&amp;gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &amp;lt;&amp;lt; v; } int main() { int a = 10; double b = 1.</description>
     </item>
     
   </channel>

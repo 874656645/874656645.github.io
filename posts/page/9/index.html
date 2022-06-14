@@ -160,6 +160,40 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Emscripten——安装
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>启用 Linux 环境 这里使用的是 WSL（Windows Subsystem Linux）环境，环境配置参考这里
+Linux 安装 Emscripten Download and install
+  安装 python3
+sudo apt install python3
+  安装 git
+sudo apt install git
+  创建目录并 clone emsdk
+sudo git clone https://github.com/emscripten-core/emsdk.git
+  更新 emsdk 并激活
+cd emsdk git pull # Download and install the latest SDK tools. ./emsdk install latest # Make the &#34;latest&#34; SDK &#34;active&#34; for the current user. (writes .emscripten file) ....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-24 16:41:50 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——安装" href="https://874656645.github.io/posts/153-emscripten-%E5%AE%89%E8%A3%85/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>数据结构与算法——连续子数组最大和
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、暴力算法 $\mathcal{O}(n^3)$ 遍历数组的所有子数组集合，并对其求和，筛选出和的最大值
+int maxSumOfSub1(int* array, int length){ int maxSum = 0; int startIndex = 0, endIndex = 0; for(int i = 0; i &lt; length; i&#43;&#43;){ for(int j = i; j &lt; length; j&#43;&#43;){ int sum = 0; for(int k = i; k &lt;= j; k&#43;&#43;) sum &#43;= array[k]; if(maxSum &lt; sum){ maxSum = sum; startIndex = i; endIndex = j; } } } cout &lt;&lt; &#34;Begin:&#34; &lt;&lt; startIndex &lt;&lt; &#34; End:&#34; &lt;&lt; endIndex &lt;&lt; &#34; Num:&#34; &lt;&lt; maxSum &lt;&lt; endl; return maxSum; } 二、前缀和 $\mathcal{O}(n^2)$ 先把数组的前 i 项和求出来并将其保存到数组中，然后计算所有子数组集合的和，筛选其中最大的...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-19 15:35:35 +0800 CST'>March 19, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——连续子数组最大和" href="https://874656645.github.io/posts/152-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——线性表
     </h2>
   </header>
@@ -210,48 +244,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-03-11 22:26:22 +0800 CST'>March 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——算法特性及分类" href="https://874656645.github.io/posts/149-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E7%89%B9%E6%80%A7%E5%8F%8A%E5%88%86%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——数据结构定义
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、什么是数据结构   结构：实体 &#43; 关系，比如分子结构，关系图等
-  数据结构：按照逻辑关系组织起来的一批数据，按一定的存储方法所把它存储在计算机中，并在这些数据上定义了一个运算的集合
-  二、数据的逻辑结构  线性结构
-线性表（表、栈、队列、串等） 非线性结构
-树（二叉树、Huffman树、二叉检索树等）
-图（有向图、无向图等） 图 ⊇ 树 ⊇ 二叉树 ⊇ 线性表  三、数据的存储结构   将逻辑结构的结点映射到内存中，每一个结点都对应一个唯一的连续存储区域
-  内存可以看作从低地址到高地址的一个编码的线性结构，可以根据地址立即访问想要访问的内存单元，不需要搜索
-  存储结构主要有顺序、链接、索引和散列四种形式
- 顺序存储对应于数组 链接存储对应于链表 索引是对数据建立一个索引表，通过这个表有效的找到相应数据的存储地址 散列是一种特殊的索引结构，本身也是一种存储结构，通过关键码的映射关系，在整个散列表中用单位时间快速地找到其存储地址    四、抽象数据类型 ADT（Abstract Data Type）  定义了一组运算的数学模型 与物理存储结构无关 使软件系统建立在数据之上(面向对象)  五、定义抽象数据类型 抽象数据类型就是在逻辑结构上的运算，可以理解为抽象数据结构二元组 &lt;数据对象D, 数据操作P&gt;
-先定义逻辑结构，再定义运算
- 逻辑结构：数据对象及其关系 运算：数据操作  就像面向对象语言中所定义的类（特别是抽象类），封装了数据成员和函数成员</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-10 21:10:53 +0800 CST'>March 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——数据结构定义" href="https://874656645.github.io/posts/148-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——简介
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>算法 &#43; 数据结构 = 程序   数据结构与算法是程序的灵魂，以问题求解为导向，进行问题抽象、数据抽象、算法抽象，通过有效地组织数据、设计高效的算法、完成高质量的程序，从而解决实际应用的问题。
-  流程：问题 =&gt; 数据 =&gt; 算法
-  理论（离散数学、概率统计、图论等） =&gt; 抽象（问题抽象、数据抽象、算法抽象等面向对象思想） =&gt; 设计（实现的某种具体编程语言）
-  逻辑抽象 &#43; 运算抽象 =&gt; ADT
-  运算 &#43; 存储 =&gt; 算法分析（时间和空间复杂度）
-  问题抽象：分析和抽象任务需求，建立问题模型
-  数据抽象：确定恰当的数据结构表示数学模型
-  算法抽象：在数据模型的基础上设计合适的算法
-  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-08 20:33:08 +0800 CST'>March 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——简介" href="https://874656645.github.io/posts/147-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%AE%80%E4%BB%8B/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
