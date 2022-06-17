@@ -145,6 +145,25 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
+参考快速入门，删除【世界大纲试图】中的所有默认的 actors
+  创建持久关卡(Persistent Level)
+在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
+这个关卡就是 Persistent Level，它代表了整个地球。
+  世界场景设置
+打开【世界场景设置】面板，勾选【启用场景合成】
+禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Cesium4Unreal——Place Objects On Globe
     </h2>
   </header>
@@ -228,20 +247,6 @@ ArcMap WMTS</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-17 22:34:27 +0800 CST'>December 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to ArcMap 加载天地图服务" href="https://874656645.github.io/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>ArcGIS 字段计算（自增、随机数）
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、随机数 python 脚本
-import random def randNum(): res = random.randint(1, 7) return res 2、自增 python 脚本
-total = 0 def accumulate(increment): global total if total: total &#43;= increment else: total = increment return total </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcGIS 字段计算（自增、随机数）" href="https://874656645.github.io/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -19,7 +19,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -99,7 +99,7 @@ if (!doNotTrack) {
   "keywords": [
     "C++"
   ],
-  "articleBody": "一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）\n  有些类型的长度是超过 1 个字节的，比如 C/C++ 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。\n 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：\n            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：\n Intel 的 80×86 系列芯片使用小端存储模式 ARM 芯片默认采用小端，但可以切换为大端 MIPS 芯片采用大端，但可以在大小端之间切换 在网络上传输的数据普遍采用的都是大端    二、判断字节序  不同的 CPU 有不同的字节序类型，这些字节序是指整数在内存中保存的顺序，也叫做主机序 内存的读写永远从低地址开始读/写（起始地址），从低到高 对一个对象取地址，这个指针是对象使用的最低字节地址（对象的起始地址） 大端模式（Big endian）：将高序字节存储在起始地址 小端模式（Little endian）：将低序字节存储在起始地址    通过将多字节数据强制类型转换成单字节数据，再通过判断起始存储位置是数据高字节还是低字节进行检测\nint i = 1; char *p = (char*)\u0026i; // 读取 int 的第一个字节（起始地址） if(*p == 1){ printf(\"Little Endian\"); } else{ printf(\"Big Endian\"); }   利用联合体 union 的存放顺序是所有成员都从低地址开始存放这一特性进行检测\nbool isBigEndian() { union uendian { int nNum; char cLowAddressValue; }; uendian u; u.nNum = 0x12345678; if ( u.cLowAddressValue == 0x12 ) return true; return false; }   Linux 操作系统中相关的源代码\nstatic union { char c[4]; unsigned long mylong; } endian_test = {{ 'l', '?', '?', 'b' } }; #define ENDIANNESS ((char)endian_test.mylong)   测试\n  void show_bytes(unsigned char* start, size_t len){ for(size_t i = 0; i  len; ++i){ printf(\" %.2x\", start[i]); } printf(\"\\n\"); } void show_int(int x){ show_bytes((unsigned char*)\u0026x, sizeof(int)); } void show_float(float x){ show_bytes((unsigned char*)\u0026x, sizeof(float)); } void show_pointer(void* x){ show_bytes((unsigned char*)\u0026x, sizeof(void*)); } void test_show_bytes(int val){ int ival = val; float fval = (float)ival; int* pval = \u0026ival; cout  hex  ival  endl; show_int(ival); cout  hex  fval  endl; show_float(fval); cout  hex  pval  endl; show_pointer(pval); } int main() { int i = 12345; test_show_bytes(i); return 0; } 输出：\n3039\r39 30 00 00\r12345\r00 e4 40 46\r0x7fffbf791af8\rf8 1a 79 bf ff 7f 00 00\r参考：\n 关于高位字节与低位字节简洁明了的说明，以及高低字节序转换函数 大端模式、小端模式、高字节序、低字节序、MSB、LSB 大端和小端（Big endian and Little endian） 大端小端。。。 二进制、16进制、大端小端  ",
+  "articleBody": "一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）\n  有些类型的长度是超过 1 个字节的，比如 C/C++ 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。\n 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：\n            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：\n Intel 的 80×86 系列芯片使用小端存储模式 ARM 芯片默认采用小端，但可以切换为大端 MIPS 芯片采用大端，但可以在大小端之间切换 在网络上传输的数据普遍采用的都是大端    二、判断字节序  不同的 CPU 有不同的字节序类型，这些字节序是指整数在内存中保存的顺序，也叫做主机序 内存的读写永远从低地址开始读/写（起始地址），从低到高 对一个对象取地址，这个指针是对象使用的最低字节地址（对象的起始地址） 大端模式（Big endian）：将高序字节存储在起始地址 小端模式（Little endian）：将低序字节存储在起始地址    通过将多字节数据强制类型转换成单字节数据，再通过判断起始存储位置是数据高字节还是低字节进行检测\nint i = 1; char *p = (char*)\u0026i; // 读取 int 的第一个字节（起始地址） if(*p == 1){  printf(\"Little Endian\"); } else{  printf(\"Big Endian\"); }   利用联合体 union 的存放顺序是所有成员都从低地址开始存放这一特性进行检测\nbool isBigEndian() {  union uendian  {  int nNum;  char cLowAddressValue;  };   uendian u;  u.nNum = 0x12345678;   if ( u.cLowAddressValue == 0x12 ) return true;   return false; }   Linux 操作系统中相关的源代码\nstatic union { char c[4]; unsigned long mylong; } endian_test = {{ 'l', '?', '?', 'b' } };  #define ENDIANNESS ((char)endian_test.mylong)   测试\n  void show_bytes(unsigned char* start, size_t len){  for(size_t i = 0; i  len; ++i){  printf(\" %.2x\", start[i]);  }  printf(\"\\n\"); } void show_int(int x){  show_bytes((unsigned char*)\u0026x, sizeof(int)); } void show_float(float x){  show_bytes((unsigned char*)\u0026x, sizeof(float)); } void show_pointer(void* x){  show_bytes((unsigned char*)\u0026x, sizeof(void*)); } void test_show_bytes(int val){  int ival = val;  float fval = (float)ival;  int* pval = \u0026ival;   cout  hex  ival  endl;  show_int(ival);   cout  hex  fval  endl;  show_float(fval);   cout  hex  pval  endl;  show_pointer(pval); } int main() {  int i = 12345;  test_show_bytes(i);   return 0; } 输出：\n3039\r39 30 00 00\r12345\r00 e4 40 46\r0x7fffbf791af8\rf8 1a 79 bf ff 7f 00 00 参考：\n 关于高位字节与低位字节简洁明了的说明，以及高低字节序转换函数 大端模式、小端模式、高字节序、低字节序、MSB、LSB 大端和小端（Big endian and Little endian） 大端小端。。。 二进制、16进制、大端小端  ",
   "wordCount" : "265",
   "inLanguage": "en",
   "datePublished": "2022-04-21T16:04:58+08:00",
@@ -287,80 +287,80 @@ if (!doNotTrack) {
 <ol>
 <li>
 <p>通过将多字节数据强制类型转换成单字节数据，再通过判断起始存储位置是数据高字节还是低字节进行检测</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;   
-<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>i; <span style="color:#75715e">// 读取 int 的第一个字节（起始地址）  
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">*</span>p <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>){    
-    printf(<span style="color:#e6db74">&#34;Little Endian&#34;</span>); 
-}
-<span style="color:#66d9ef">else</span>{
-    printf(<span style="color:#e6db74">&#34;Big Endian&#34;</span>);
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;   
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>i; <span style="color:#75715e">// 读取 int 的第一个字节（起始地址）  
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">*</span>p <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>){    
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Little Endian&#34;</span>); 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;Big Endian&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p>利用联合体 <code>union</code> 的存放顺序是所有成员都从低地址开始存放这一特性进行检测</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isBigEndian</span>()
-{
-    <span style="color:#66d9ef">union</span> <span style="color:#a6e22e">uendian</span>
-    {
-        <span style="color:#66d9ef">int</span> nNum;
-        <span style="color:#66d9ef">char</span> cLowAddressValue;
-    };
-
-    uendian u;
-    u.nNum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x12345678</span>;
-
-    <span style="color:#66d9ef">if</span> ( u.cLowAddressValue <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x12</span> )     <span style="color:#66d9ef">return</span> true;
-
-    <span style="color:#66d9ef">return</span> false;
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isBigEndian</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">union</span> <span style="color:#a6e22e">uendian</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> nNum;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span> cLowAddressValue;
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    uendian u;
+</span></span><span style="display:flex;"><span>    u.nNum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x12345678</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ( u.cLowAddressValue <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x12</span> )     <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p>Linux 操作系统中相关的源代码</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">union</span> { <span style="color:#66d9ef">char</span> c[<span style="color:#ae81ff">4</span>]; <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> mylong; } endian_test <span style="color:#f92672">=</span> {{ <span style="color:#e6db74">&#39;l&#39;</span>, <span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span> } };
-
-<span style="color:#75715e">#define ENDIANNESS ((char)endian_test.mylong)
-</span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">union</span> { <span style="color:#66d9ef">char</span> c[<span style="color:#ae81ff">4</span>]; <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> mylong; } endian_test <span style="color:#f92672">=</span> {{ <span style="color:#e6db74">&#39;l&#39;</span>, <span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span> } };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define ENDIANNESS ((char)endian_test.mylong)
+</span></span></span></code></pre></div></li>
 <li>
 <p>测试</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_bytes</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> start, size_t len){
-    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; <span style="color:#f92672">++</span>i){
-        printf(<span style="color:#e6db74">&#34; %.2x&#34;</span>, start[i]);
-    }
-    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
-}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_int</span>(<span style="color:#66d9ef">int</span> x){
-    show_bytes((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
-}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_float</span>(<span style="color:#66d9ef">float</span> x){
-    show_bytes((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">float</span>));
-}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_pointer</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> x){
-    show_bytes((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>));
-}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test_show_bytes</span>(<span style="color:#66d9ef">int</span> val){
-    <span style="color:#66d9ef">int</span> ival <span style="color:#f92672">=</span> val;
-    <span style="color:#66d9ef">float</span> fval <span style="color:#f92672">=</span> (<span style="color:#66d9ef">float</span>)ival;
-    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> pval <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>ival;
-    
-    cout <span style="color:#f92672">&lt;&lt;</span> hex <span style="color:#f92672">&lt;&lt;</span> ival <span style="color:#f92672">&lt;&lt;</span> endl;
-    show_int(ival);
-    
-    cout <span style="color:#f92672">&lt;&lt;</span> hex <span style="color:#f92672">&lt;&lt;</span> fval <span style="color:#f92672">&lt;&lt;</span> endl;
-    show_float(fval);
-    
-    cout <span style="color:#f92672">&lt;&lt;</span> hex <span style="color:#f92672">&lt;&lt;</span> pval <span style="color:#f92672">&lt;&lt;</span> endl;
-    show_pointer(pval);
-}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">12345</span>;
-    test_show_bytes(i);
-    
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_bytes</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> start, size_t len){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; <span style="color:#f92672">++</span>i){
+</span></span><span style="display:flex;"><span>        printf(<span style="color:#e6db74">&#34; %.2x&#34;</span>, start[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_int</span>(<span style="color:#66d9ef">int</span> x){
+</span></span><span style="display:flex;"><span>    show_bytes((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_float</span>(<span style="color:#66d9ef">float</span> x){
+</span></span><span style="display:flex;"><span>    show_bytes((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">float</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_pointer</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> x){
+</span></span><span style="display:flex;"><span>    show_bytes((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test_show_bytes</span>(<span style="color:#66d9ef">int</span> val){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ival <span style="color:#f92672">=</span> val;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> fval <span style="color:#f92672">=</span> (<span style="color:#66d9ef">float</span>)ival;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> pval <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>ival;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> hex <span style="color:#f92672">&lt;&lt;</span> ival <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    show_int(ival);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> hex <span style="color:#f92672">&lt;&lt;</span> fval <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    show_float(fval);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> hex <span style="color:#f92672">&lt;&lt;</span> pval <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    show_pointer(pval);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">12345</span>;
+</span></span><span style="display:flex;"><span>    test_show_bytes(i);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
 <pre tabindex="0"><code class="language-test" data-lang="test">3039
  39 30 00 00
 12345

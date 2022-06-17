@@ -145,13 +145,28 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>2022-02-14 杂记
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>NULL，0，’\0’，‘0’
+int main() {  char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48};  printf(&#34;%c\n&#34;, arr[0]);  printf(&#34;%c\n&#34;, arr[1]);  printf(&#34;%c\n&#34;, arr[2]);  printf(&#34;%c\n&#34;, arr[3]);  printf(&#34;---------------\n&#34;);  printf(&#34;%d\n&#34;, arr[0]);  printf(&#34;%d\n&#34;, arr[1]);  printf(&#34;%d\n&#34;, arr[2]);  printf(&#34;%d\n&#34;, arr[3]);   return 0; } 输出：
+  0 0 --------------- 0 0 48 48   UTF-8 向下兼容 ASCII 编码，UTF-8 编码中，一个英文字为一个字节，一个中文一般为三个字节（ASCII、Unicode、UTF-8）
+ 0xxxxxxx：单字节编码形式，这和 ASCII 编码完全一样，因此 UTF-8 是兼容 ASCII 的； 110xxxxx 10xxxxxx：双字节编码形式； 1110xxxx 10xxxxxx 10xxxxxx：三字节编码形式； 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx：四字节编码形式； UTF-8：每字 1 ~ 6 字节 Unicode（UCS-2）：每字都是 2 bytes UTF-16：每字 2 ~ 4 字节 UTF-32（UCS-4）：每字都是 4 bytes    float 单精度，浮点数在内存中是按科学计数法来存储的，小数点后6位能确定表示，float 是由 1 bit 符号位，8 bit 指数位和 23 bit 尾数位组成，精度是由尾数位决定的（2^23 = 8388608）...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-15 15:29:35 +0800 CST'>February 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 2022-02-14 杂记" href="https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>递归与递归树
     </h2>
   </header>
   <section class="entry-content">
     <p>逆序打印字符串
-void printReverseString(const char* str){ if(*str == &#39;\0&#39;){ return; } printReverseString(str &#43; 1); printf(&#34;%c&#34;, *str); } int main() { const char* str = &#34;Hello World&#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
-struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&gt;next); printf(&#34;%d\n&#34;, header-&gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&gt;data = 10; node1-&gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&gt;data = 20; node2-&gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&gt;data = 30; node3-&gt;next = NULL; header-&gt;next = node1; node1-&gt;next = node2; node2-&gt;next = node3; printReverseLinkNode(header-&gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
+void printReverseString(const char* str){  if(*str == &#39;\0&#39;){  return;  }  printReverseString(str &#43; 1);  printf(&#34;%c&#34;, *str); }  int main() {  const char* str = &#34;Hello World&#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
+struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&gt;next);  printf(&#34;%d\n&#34;, header-&gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&gt;data = 10;  node1-&gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&gt;data = 20;  node2-&gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&gt;data = 30;  node3-&gt;next = NULL;  header-&gt;next = node1;  node1-&gt;next = node2;  node2-&gt;next = node3;  printReverseLinkNode(header-&gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
@@ -163,7 +178,7 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
     </h2>
   </header>
   <section class="entry-content">
-    <p>int main() { printf(&#34;%s\n&#34;, __FILE__); // main.c  printf(&#34;%d\n&#34;, __LINE__); // 14  printf(&#34;%s\n&#34;, __DATE__); // Feb 7 2022  printf(&#34;%s\n&#34;, __TIME__); // 01:59:37  return 0; } // func1.h #ifdef __cplusplus extern &#34;C&#34;{ #endif  void func1(); #ifdef __cplusplus } #endif  // main.h extern &#34;C&#34;{ include &#34;func1.h&#34; } extern &#34;C&#34;{ extern void func1(); } int main() { func1(); return 0; } </p>
+    <p>int main() {  printf(&#34;%s\n&#34;, __FILE__); // main.c  printf(&#34;%d\n&#34;, __LINE__); // 14  printf(&#34;%s\n&#34;, __DATE__); // Feb 7 2022  printf(&#34;%s\n&#34;, __TIME__); // 01:59:37   return 0; } // func1.h #ifdef __cplusplus extern &#34;C&#34;{ #endif  void func1();  #ifdef __cplusplus } #endif  // main.h extern &#34;C&#34;{  include &#34;func1.h&#34; } extern &#34;C&#34;{  extern void func1(); } int main() {  func1();   return 0; } </p>
   </section>
   <footer class="entry-footer"><span title='2022-02-07 10:11:16 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 常用的宏定义" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/"></a>
@@ -175,7 +190,7 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
     </h2>
   </header>
   <section class="entry-content">
-    <p>void printArr(const char ** p, int len){ for(int i = 0; i &lt; len; &#43;&#43;i){ cout &lt;&lt; p[i] &lt;&lt; endl; } } void sortSelect(const char ** p, int len){ for(int i = 0; i &lt; len - 1; &#43;&#43;i){ int max = i; for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){ if(p[j] &gt; p[max]){ max = j; } } // 交换  if(i != max){ const char* tmp = p[i]; p[i] = p[max]; p[max] = tmp; } } } int main() { const char* arr[] = {&#34;aa&#34;, &#34;bb&#34;, &#34;cc&#34;, &#34;dd&#34;, &#34;ee&#34;}; int len = sizeof(arr) / sizeof(char*); cout &lt;&lt; len &lt;&lt; endl; printArr(arr, len); sortSelect(arr, len); cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printArr(arr, len); return 0; } 输出：...</p>
+    <p>void printArr(const char ** p, int len){  for(int i = 0; i &lt; len; &#43;&#43;i){  cout &lt;&lt; p[i] &lt;&lt; endl;  } }  void sortSelect(const char ** p, int len){  for(int i = 0; i &lt; len - 1; &#43;&#43;i){  int max = i;  for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){  if(p[j] &gt; p[max]){  max = j;  }  }  // 交换  if(i !...</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>
@@ -192,18 +207,6 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
   </section>
   <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>观察者模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
