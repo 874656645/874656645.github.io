@@ -157,6 +157,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>类模板
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ public:  Person(T age){  this-&gt;m_age = age;  }  void Show(){  cout &lt;&lt; this-&gt;m_age &lt;&lt; endl;  }  private:  T m_age; };  int main() {  Person&lt;int&gt; p(20);  p.Show();  cout &lt;&lt; p &lt;&lt; endl;  printP(p);   return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public:  Person(T age);  void Show(); private:  T m_age; };  template&lt;class T&gt; Person&lt;T&gt;::Person(T age){  this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){  cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() {  Person&lt;int&gt; p(20);  p....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>编译过程
     </h2>
   </header>
@@ -219,19 +231,6 @@ void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){  cha
   </section>
   <footer class="entry-footer"><span title='2022-01-09 19:12:37 +0800 CST'>January 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 面向抽象类编程" href="https://874656645.github.io/posts/67-%E9%9D%A2%E5%90%91%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%BC%96%E7%A8%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>实现一个简单的字符串类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>MyString.h
-#ifndef __MYSTRING_H_ #define __MYSTRING_H_  #include &lt;stdlib.h&gt;#include &lt;iostream&gt;#include &lt;cstring&gt; using namespace std;  class MyString {  // 重载 &lt;&lt;  // 最好是 const 的，可以输出匿名变量（匿名变量不能被非 const 的左值引用接收）  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, const MyString &amp;s);  // 重载 &gt;&gt;  friend istream&amp; operator&gt;&gt;(istream &amp;is, MyString &amp;s); private:  // 字符串的有效长度  int m_len;  // 字符串指针  char* m_pStr; public:  MyString();  MyString(const char *);  MyString(const MyString &amp;);  ~MyString();  // 重载 =  MyString&amp; operator=(const MyString &amp;);  // 重载 []  char&amp; operator[](int index);  // 重载 &#43;  MyString operator&#43;(const MyString &amp;);  // 重载 &#43;=  MyString&amp; operator&#43;=(const MyString &amp;);  // 重载 ==  bool operator==(const MyString &amp;);  // 重载 !...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-08 14:01:27 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 实现一个简单的字符串类" href="https://874656645.github.io/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

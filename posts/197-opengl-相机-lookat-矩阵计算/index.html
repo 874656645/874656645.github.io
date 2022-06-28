@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>OpenGL 相机 LookAt 矩阵计算 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="OpenGL" />
+<meta name="description" content="原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { 	// 1.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="OpenGL 相机 LookAt 矩阵计算" />
+<meta property="og:description" content="原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { 	// 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-28T14:23:38&#43;08:00" />
+<meta property="article:modified_time" content="2022-06-28T14:23:38&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="OpenGL 相机 LookAt 矩阵计算"/>
+<meta name="twitter:description" content="原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { 	// 1."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "OpenGL 相机 LookAt 矩阵计算",
+      "item": "https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OpenGL 相机 LookAt 矩阵计算",
+  "name": "OpenGL 相机 LookAt 矩阵计算",
+  "description": "原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\\begin{equation} T = \\begin{bmatrix*}[c] R \u0026amp; t \\newline 0^T \u0026amp; 1 \\end{bmatrix*} \\end{equation}$$ 分块矩阵求逆公式 $$\\begin{equation} M = \\begin{bmatrix*}[c] A \u0026amp; B \\newline 0 \u0026amp; D \\end{bmatrix*} \\space\\space\\space\\space M^{-1} = \\begin{bmatrix*}[c] A^{-1} \u0026amp; -A^{-1}BD^{-1} \\newline 0 \u0026amp; D^{-1} \\end{bmatrix*} \\end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\\begin{equation} T^{-1} = \\begin{bmatrix*}[c] R^{-1} \u0026amp; -R^{-1}t \\newline 0^T \u0026amp; 1 \\end{bmatrix*} = \\begin{bmatrix*}[c] R^T \u0026amp; -R^Tt \\newline 0^T \u0026amp; 1 \\end{bmatrix*} \\end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { \t// 1.",
+  "keywords": [
+    "OpenGL"
+  ],
+  "articleBody": " 原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\\begin{equation} T = \\begin{bmatrix*}[c] R \u0026 t \\newline 0^T \u0026 1 \\end{bmatrix*} \\end{equation}$$ 分块矩阵求逆公式 $$\\begin{equation} M = \\begin{bmatrix*}[c] A \u0026 B \\newline 0 \u0026 D \\end{bmatrix*} \\space\\space\\space\\space M^{-1} = \\begin{bmatrix*}[c] A^{-1} \u0026 -A^{-1}BD^{-1} \\newline 0 \u0026 D^{-1} \\end{bmatrix*} \\end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\\begin{equation} T^{-1} = \\begin{bmatrix*}[c] R^{-1} \u0026 -R^{-1}t \\newline 0^T \u0026 1 \\end{bmatrix*} = \\begin{bmatrix*}[c] R^T \u0026 -R^Tt \\newline 0^T \u0026 1 \\end{bmatrix*} \\end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { \t// 1. 计算方向 \tglm::vec3 zAxis = glm::normalize(camPos - target); \t// 2. 计算相机右轴 \tglm::vec3 xAxis = glm::normalize(glm::cross(camUp, zAxis)); \t// 3. 计算相机向上的向量 \tglm::vec3 yAxis = glm::normalize(glm::cross(zAxis, xAxis)); \t// 创建位移和旋转矩阵 \t// glm 中采用 [col][row] 方式存储 \tglm::mat4 trans = glm::mat4(1.f); \ttrans[3][0] = -camPos.x; \ttrans[3][1] = -camPos.y; \ttrans[3][2] = -camPos.z; \tglm::mat4 rotation = glm::mat4(1.f); \trotation[0][0] = xAxis.x; \trotation[1][0] = xAxis.y; \trotation[2][0] = xAxis.z; \trotation[0][1] = yAxis.x; \trotation[1][1] = yAxis.y; \trotation[2][1] = yAxis.z; \trotation[0][2] = zAxis.x; \trotation[1][2] = zAxis.y; \trotation[2][2] = zAxis.z; \t// 先平移再旋转 \treturn rotation * trans; } 方法二：  先构建相机的变换矩阵，然后对矩阵求逆\nglm::mat4 Camera::calculateLookAtMatrix() { \t// 相机位移矩阵 \tglm::mat4 camTrans = glm::mat4(1.f); \tcamTrans = glm::translate(camTrans, camPos); \t// 相机旋转矩阵 \tglm::vec3 zAxis = glm::normalize(-camFront);\t// 相机的Z轴是从目标点指向相机点，与相机照射的方向相反 \tglm::vec3 xAxis = glm::normalize(glm::cross(camUp, zAxis)); \tglm::vec3 yAxis = glm::normalize(glm::cross(zAxis, xAxis)); \t// 用相机的 X Y Z 轴单位向量构建旋转矩阵（列向量优先） \tglm::mat4 camRotate = glm::mat4(glm::vec4(xAxis, 0.f), glm::vec4(yAxis, 0.f) \t, glm::vec4(zAxis, 0.f), glm::vec4(0.f, 0.f, 0.f, 1.f)); \tglm::mat4 camMat = camTrans * camRotate; \treturn glm::inverse(camMat); } 参考：\n刚体运动中变换矩阵的逆\n",
+  "wordCount" : "231",
+  "inLanguage": "en",
+  "datePublished": "2022-06-28T14:23:38+08:00",
+  "dateModified": "2022-06-28T14:23:38+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      OpenGL 相机 LookAt 矩阵计算
+    </h1>
+    <div class="post-meta"><span title='2022-06-28 14:23:38 +0800 CST'>June 28, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><ol>
+<li><strong>原理：</strong></li>
+</ol>
+<ul>
+<li>相机的运动实际上是对世界坐标系中的物体进行反向运动变换</li>
+<li>相机的运动矩阵与其他物体的变换矩阵类似
+<ul>
+<li>先缩放变换，再进行旋转，最后进行平移</li>
+</ul>
+</li>
+<li>所以 <code>glm::lookAt</code> 函数返回的是<strong>相机变换矩阵的逆矩阵</strong>
+<ul>
+<li>先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><strong>注意事项：</strong></li>
+</ol>
+<ul>
+<li>相机矩阵的 <code>Z轴</code> 与相机的<strong>照射方向相反</strong></li>
+<li><code>glm</code> 中的矩阵是列向量优先</li>
+<li>正交矩阵的逆矩阵等于它的转置</li>
+</ul>
+<ol start="3">
+<li><strong>刚体运动中变换矩阵的逆矩阵求解：</strong></li>
+</ol>
+<ul>
+<li>刚体运动变换矩阵：
+$$\begin{equation}
+T = \begin{bmatrix*}[c]
+R &amp; t \newline
+0^T &amp; 1
+\end{bmatrix*}
+\end{equation}$$</li>
+<li>分块矩阵求逆公式
+$$\begin{equation}
+M = \begin{bmatrix*}[c]
+A &amp; B \newline
+0 &amp; D
+\end{bmatrix*} \space\space\space\space
+M^{-1} = \begin{bmatrix*}[c]
+A^{-1} &amp; -A^{-1}BD^{-1} \newline
+0 &amp; D^{-1}
+\end{bmatrix*}
+\end{equation}$$</li>
+<li>刚体运动变换矩阵的逆矩阵：
+$$\begin{equation}
+T^{-1} = \begin{bmatrix*}[c]
+R^{-1} &amp; -R^{-1}t \newline
+0^T &amp; 1
+\end{bmatrix*}
+= \begin{bmatrix*}[c]
+R^T &amp; -R^Tt \newline
+0^T &amp; 1
+\end{bmatrix*}
+\end{equation}$$</li>
+</ul>
+<ol start="4">
+<li><strong>方法一：</strong></li>
+</ol>
+<p><img loading="lazy" style="margin: auto;" src=".././img/lookat%e7%9f%a9%e9%98%b5%e8%ae%a1%e7%ae%97.jpg" alt="lookat矩阵计算"  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>glm<span style="color:#f92672">::</span>mat4 Camera<span style="color:#f92672">::</span>calculateLookAtMatrix()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 1. 计算方向
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 zAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(camPos <span style="color:#f92672">-</span> target);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 2. 计算相机右轴
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 xAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(camUp, zAxis));
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 3. 计算相机向上的向量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 yAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(zAxis, xAxis));
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 创建位移和旋转矩阵
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// glm 中采用 [col][row] 方式存储
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>mat4 trans <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(<span style="color:#ae81ff">1.f</span>);
+</span></span><span style="display:flex;"><span>	trans[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>camPos.x;
+</span></span><span style="display:flex;"><span>	trans[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>camPos.y;
+</span></span><span style="display:flex;"><span>	trans[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>camPos.z;
+</span></span><span style="display:flex;"><span>	glm<span style="color:#f92672">::</span>mat4 rotation <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(<span style="color:#ae81ff">1.f</span>);
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> xAxis.x;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> xAxis.y;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> xAxis.z;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> yAxis.x;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> yAxis.y;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> yAxis.z;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> zAxis.x;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> zAxis.y;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> zAxis.z;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 先平移再旋转
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> rotation <span style="color:#f92672">*</span> trans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="5">
+<li><strong>方法二：</strong></li>
+</ol>
+<p>先构建相机的变换矩阵，然后对矩阵求逆</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>glm<span style="color:#f92672">::</span>mat4 Camera<span style="color:#f92672">::</span>calculateLookAtMatrix()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 相机位移矩阵
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>mat4 camTrans <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(<span style="color:#ae81ff">1.f</span>);
+</span></span><span style="display:flex;"><span>	camTrans <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>translate(camTrans, camPos);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 相机旋转矩阵
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 zAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(<span style="color:#f92672">-</span>camFront);	<span style="color:#75715e">// 相机的Z轴是从目标点指向相机点，与相机照射的方向相反
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 xAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(camUp, zAxis));
+</span></span><span style="display:flex;"><span>	glm<span style="color:#f92672">::</span>vec3 yAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(zAxis, xAxis));
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 用相机的 X Y Z 轴单位向量构建旋转矩阵（列向量优先）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>mat4 camRotate <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(glm<span style="color:#f92672">::</span>vec4(xAxis, <span style="color:#ae81ff">0.f</span>), glm<span style="color:#f92672">::</span>vec4(yAxis, <span style="color:#ae81ff">0.f</span>)
+</span></span><span style="display:flex;"><span>		, glm<span style="color:#f92672">::</span>vec4(zAxis, <span style="color:#ae81ff">0.f</span>), glm<span style="color:#f92672">::</span>vec4(<span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">1.f</span>));
+</span></span><span style="display:flex;"><span>	glm<span style="color:#f92672">::</span>mat4 camMat <span style="color:#f92672">=</span> camTrans <span style="color:#f92672">*</span> camRotate;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> glm<span style="color:#f92672">::</span>inverse(camMat);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>参考：</p>
+<p><a href="https://blog.csdn.net/weixin_39329788/article/details/115671344">刚体运动中变换矩阵的逆</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/opengl/">OpenGL</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://874656645.github.io/posts/196-opengl-%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>OpenGL 渲染管线</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
