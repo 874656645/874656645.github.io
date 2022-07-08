@@ -157,6 +157,21 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>CMake 安装和测试
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Install Rules 在库的 CMakeLists.txt 文件末尾添加 install
+add_library(MathFunctions mysqrt.cxx)target_include_directories(MathFunctions INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})install(TARGETS MathFunctions DESTINATION lib)install(FILES MathFunctions.h DESTINATION include)在顶层 CMakeLists.txt 的末尾添加
+... ... ## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &#34;${PROJECT_BINARY_DIR}/TutorialConfig.h&#34;  DESTINATION include )Testing Support 在顶层 CMakeLists.txt 的末尾添加
+... ... ## 测试 enable_testing()# does the application run add_test(NAME Runs COMMAND Tutorial 25)# does the usage message work? add_test(NAME Usage COMMAND Tutorial)# 设置校验信息 set_tests_properties(Usage  PROPERTIES PASS_REGULAR_EXPRESSION &#34;Usage:.*number&#34; )# define a function to simplify adding tests function(do_test target arg result) add_test(NAME Comp${arg} COMMAND ${target} ${arg}) set_tests_properties(Comp${arg}  PROPERTIES PASS_REGULAR_EXPRESSION ${result}  )endfunction()# do a bunch of result based tests do_test(Tutorial 4 &#34;4 is 2&#34;)do_test(Tutorial 9 &#34;9 is 3&#34;)do_test(Tutorial 5 &#34;5 is 2....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-27 15:56:29 +0800 CST'>February 27, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to CMake 安装和测试" href="https://874656645.github.io/posts/138-cmake-%E5%AE%89%E8%A3%85%E5%92%8C%E6%B5%8B%E8%AF%95/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>CMake 添加依赖库和使用条件
     </h2>
   </header>
@@ -211,20 +226,6 @@ cmake -G &#34;Visual Studio 14 2015 Win64&#34; cmake -G &#34;Visual Studio 16 20
   </section>
   <footer class="entry-footer"><span title='2022-02-25 17:23:49 +0800 CST'>February 25, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 哈希法与冲突处理" href="https://874656645.github.io/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 左值、右值和移动语义
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、结论  C 中将数据类型分为左值和右值，在 C&#43;&#43;11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C&#43;&#43;11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;&amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
-const int &amp;ref_a = 5; int a = 5; int &amp;ref_a = a; // 左值引用指向左值，编译通过 int &amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 &amp;&amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值
-int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-23 22:19:35 +0800 CST'>February 23, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 左值、右值和移动语义" href="https://874656645.github.io/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

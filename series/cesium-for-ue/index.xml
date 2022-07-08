@@ -9,7 +9,23 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 08 Jul 2022 15:50:34 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/cesium-for-ue/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 08 Jul 2022 17:50:31 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/cesium-for-ue/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unreal——像素流送播放器页面与 UE 通信</title>
+      <link>https://874656645.github.io/posts/203-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81%E6%92%AD%E6%94%BE%E5%99%A8%E9%A1%B5%E9%9D%A2%E4%B8%8E-ue-%E9%80%9A%E4%BF%A1/</link>
+      <pubDate>Fri, 08 Jul 2022 17:50:31 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/203-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81%E6%92%AD%E6%94%BE%E5%99%A8%E9%A1%B5%E9%9D%A2%E4%B8%8E-ue-%E9%80%9A%E4%BF%A1/</guid>
+      <description>一、HTML 页面  必须包含 webRtcPlayer.js 脚本文件，该文件处理浏览器和虚幻引擎应用间的通信，接受并显示来自服务器的媒体流。在非必要的情况下，请勿修改此JavaScript文件。
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;scripts/webRtcPlayer.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; 建议包含 app.js 脚本文件，此文件将设置处理键盘、鼠标和触摸事件的事件监听器，其还包含数个可在播放器页面使用的函数。
+&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;scripts/app.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; 页面必须含有一个 ID 为 player 的 div 元素。该元素可被流送自 UE4 应用的视频帧所替换。
+&amp;lt;div id=&amp;quot;player&amp;quot;&amp;gt;&amp;lt;/div&amp;gt; 页面加载时必须调用 app.js 文件提供的 load 函数。  二、访问像素流送蓝图 API 在虚幻引擎中运行的像素流送插件会公开一个蓝图API，可在 gameplay 逻辑中使用该 API 处理播放器 HTML 页面发送的自定义 UI 事件，并将事件从虚幻引擎发送到播放器页面，实现网页客户端与 UE 运行程序之间的交互通信。
+推荐将 像素流送插件（Pixel Streaming Input） 组件添加到 PlayerController 中。
+三、从播放器页面到 UE 的通信 app.js 文件提供两个可在 HTML 播放器页面进行调用的 JavaScript 函数，以便用户从浏览器向虚幻引擎程序发送事件和命令：emitCommand 和 emitUIInteraction 函数。
+  js 代码：
+ // 从播放器页面到UE4的通信  let testButton = document.</description>
+    </item>
+    
     <item>
       <title>Unreal——像素流送</title>
       <link>https://874656645.github.io/posts/202-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81/</link>

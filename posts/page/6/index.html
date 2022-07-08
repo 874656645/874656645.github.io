@@ -160,6 +160,24 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Cesium4Unreal——Hello Cesium for UE
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> Ureal Engin 版本 4.27  第一步：安装 Cesium 插件 Cesium for Unreal 插件地址
+启动 Epic Games Launcher，搜索 Cesium for Unreal
+第二步：新建项目关卡 1. 项目类型——&gt;游戏，模板——&gt;空白，选择不带初学者内容包 2. 激活 Cesium for Unreal 插件 3. 删除【世界大纲视图】中的所有内容，这样就有了一个空的关卡 保存当前关卡
+将你上面保存的关卡设置为编辑器开始地图和游戏默认地图
+第三步：Connect to Cesium ion 第四步：在场景中添加球 开始会有创建 token 的对话框，完成后，在世界大纲视图中会添加下面几个 Actor 对象
+第五步：使用 CesiumSunSky 添加照明 启用【项目设置】【扩展自动曝光设置中的默认亮度范围】
+第六步：添加 DynamicPawn  确保 DynamicPawn 自动控制玩家属性为玩家0 设置相对位置变换为 (0, 0, 0)  第七步：通过 CesiumGeoreference 修改场景的初始位置 第八步：通过 CesiumSunSky 设置光照 </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-14 10:34:27 +0800 CST'>April 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Hello Cesium for UE" href="https://874656645.github.io/posts/178-cesium-unreal-project/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;17 折叠表达式
     </h2>
   </header>
@@ -210,21 +228,6 @@ std::pair&lt;int,int&gt; divide_remainder(int dividend, int divisor){  int f = d
   </section>
   <footer class="entry-footer"><span title='2022-04-12 18:51:42 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;17 大括号初始化" href="https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 constexpr-if 简化编译
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
-比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
-template &lt;typename T&gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &lt;typename U&gt;  T add(U x) const {  return val &#43; x;  } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
-template &lt;typename U&gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) {  n &#43;= x;  }  return copy; } 把两种情况结合在一起：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-12 17:16:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 constexpr-if 简化编译" href="https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

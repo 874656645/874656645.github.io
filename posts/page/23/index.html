@@ -160,6 +160,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>常用算法
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、常用遍历算法 1. for_each 2. transform  搬运的目标容器必须要提前开辟空间（resize 而不是 reserve），否则无法正常搬运  int main() {  vector&lt;int&gt; v;  for(int i = 0; i &lt; 10; &#43;&#43;i){  v.push_back(i);  }   vector&lt;int&gt; v1;  v1.resize(v.size()); // 要用 resize, 不能用 reserve  transform(v.begin(), v.end(), v1.begin(), [](int v){ return v * 2;});  for_each(v1.begin(), v1.end(), [](int v){ cout &lt;&lt; v &lt;&lt; &#34; &#34;; });  cout &lt;&lt; endl;  return 0; } 二、常用查找算法 1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-22 09:31:07 +0800 CST'>January 22, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 常用算法" href="https://874656645.github.io/posts/91-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>内建函数对象 functional
     </h2>
   </header>
@@ -211,20 +223,6 @@ class Person{ public:  Person(string name, int age, int height){  this-&gt;m_nam
   </section>
   <footer class="entry-footer"><span title='2022-01-18 21:20:48 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to set multiset 容器" href="https://874656645.github.io/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>list 容器
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>注意事项  双向循环链表 不支持随机访问 因为不支持随机访问，所以也不能用全局的排序算法 sort 一般不支持随机访问的容器会自己提供 sort 方法 自定义类型要指定排序规则  排序案例 案例描述：将 Person 自定义数据类型进行排序，Person 中属性有姓名、年龄、身高
-排序规则：按照年龄进行升序，如果年龄相同按照身高进行降序
-class Person{ public:  Person(string name, int age, int height){  this-&gt;m_name = name;  this-&gt;m_age = age;  this-&gt;m_height = height;  }  bool operator&lt;(const Person &amp;p2){  if(this-&gt;m_age == p2.m_age){  return this-&gt;m_height &gt; p2.m_height;  }  return this-&gt;m_age &lt; p2.m_age;  }  void printPerson()const{  cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl;  } private:  string m_name;  int m_age;  int m_height; }; int main() {  list&lt;Person&gt; lp;  lp....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-18 20:26:45 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to list 容器" href="https://874656645.github.io/posts/86-list-%E5%AE%B9%E5%99%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -157,6 +157,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>函数形参从右到左入栈
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>int add(int count, ...) {  // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节）  int intSize = sizeof(int*) / sizeof(int);  int sum = 0;  // cout &lt;&lt; &amp;count &lt;&lt; endl;  int *p = &amp;count &#43; intSize;  // cout &lt;&lt; p &lt;&lt; endl;  for (int i = 0; i &lt; count; &#43;&#43;i)  {  sum &#43;= *p;  cout &lt;&lt; *p &lt;&lt; endl;  p &#43;= intSize;  }  return sum; }  int main() {  cout &lt;&lt; add(3, 1, 2, 3) &lt;&lt; endl;   return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数形参从右到左入栈" href="https://874656645.github.io/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>指针 &#43; 1
     </h2>
   </header>
@@ -215,18 +227,6 @@ ArcMap WMTS</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-17 22:34:27 +0800 CST'>December 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to ArcMap 加载天地图服务" href="https://874656645.github.io/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>函数指针
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std;  // 声明函数指针变量 int (*fn)(int) = NULL;  // 定义函数指针类型 typedef int (*Fn)(int);  int cal(int v){  return v; };  // 函数指针做为形参 void proc(int v, Fn f){  cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() {  fn = cal;  cout &lt;&lt; (*fn)(10) &lt;&lt; endl;  cout &lt;&lt; fn(10) &lt;&lt; endl;   Fn f1 = cal;  cout &lt;&lt; (*f1)(20) &lt;&lt; endl;   proc(30, cal);   return 0; } Start 10 10 20 30 0 Finish 成员函数指针：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-16 14:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数指针" href="https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
