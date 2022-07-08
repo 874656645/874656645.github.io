@@ -160,71 +160,68 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>内建函数对象 functional
+    <h2>C&#43;&#43; 沉思录笔记
     </h2>
   </header>
   <section class="entry-content">
-    <p>算术仿函数 template&lt;class T&gt; T plus&lt;T&gt; //加法仿函数 template&lt;class T&gt; T minus&lt;T&gt; //减法仿函数 template&lt;class T&gt; T multiplies&lt;T&gt; //乘法仿函数 template&lt;class T&gt; T divides&lt;T&gt; //除法仿函数 template&lt;class T&gt; T modulus&lt;T&gt; //取模仿函数 template&lt;class T&gt; T negate&lt;T&gt; //取反仿函数 一元谓词 关系仿函数 template&lt;class T&gt; bool equal_to&lt;T&gt; //等于 template&lt;class T&gt; bool not_equal_to&lt;T&gt; //不等于 template&lt;class T&gt; bool greater&lt;T&gt; //大于 template&lt;class T&gt; bool greater_equal&lt;T&gt; //大于等于 template&lt;class T&gt; bool less&lt;T&gt; //小于 template&lt;class T&gt; bool less_equal&lt;T&gt; //小于等于 逻辑仿函数 template&lt;class T&gt; bool logical_and&lt;T&gt; //逻辑与 template&lt;class T&gt; bool logical_or&lt;T&gt; //逻辑或 template&lt;class T&gt; bool logical_not&lt;T&gt; //逻辑非 </p>
+    <p>有的情况下，现在的折衷方案比未来的理想方案好得多
+  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。
+  只要类定义正确，我就只能按照我编写它的初衷那样去用它。
+  C&#43;&#43; 哲学：抽象，实用，只为用到的东西付出代价。
+  类设计者的核查表：
+ 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
+class Vehicle{ public:  virtual double weight() = 0;  virtual void start() = 0;  virtual Vehicle* copy() const = 0;  virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{  /* ....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-20 21:28:13 +0800 CST'>January 20, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 内建函数对象 functional" href="https://874656645.github.io/posts/90-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1-functional/"></a>
+  <footer class="entry-footer"><span title='2022-01-26 17:48:58 +0800 CST'>January 26, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 沉思录笔记" href="https://874656645.github.io/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>函数对象与 predicate 谓词
+    <h2>机房预约系统案例
     </h2>
   </header>
   <section class="entry-content">
-    <p>函数对象 重载函数调用操作符 () 的 类，其对象常称为函数对象
- 函数对象可以有自己的状态 函数对象可以作为参数传递 一个参数的函数对象叫做一元仿函数 两个参数的函数对象叫做二元仿函数  什么是谓词 返回 bool 类型的仿函数称为谓词
-一元谓词 如果 operator() 接受一个参数，那么叫做一元谓词
-比如 find_if 算法
-二元谓词 如果 operator() 接受两个参数，那么叫做二元谓词
-比如 sort 算法</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-20 21:04:13 +0800 CST'>January 20, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数对象与 predicate 谓词" href="https://874656645.github.io/posts/89-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E4%B8%8E-predicate-%E8%B0%93%E8%AF%8D/"></a>
+  <footer class="entry-footer"><span title='2022-01-24 20:53:57 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 机房预约系统案例" href="https://874656645.github.io/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>map multimap 容器
+    <h2>switch 与 if Else 区别
     </h2>
   </header>
   <section class="entry-content">
-    <p>特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
- 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public:  Worker(string name, int salary){  m_name = name;  m_salary = salary;  }  void printWorker(){  cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; m_name &lt;&lt; &#34; 工资：&#34; &lt;&lt; m_salary &lt;&lt; endl;  } private:  string m_name;  int m_salary; }; void createWorkers(vector&lt;Worker&gt; &amp;v){  string nameSeed = &#34;ABCDEFGHIJ&#34;;  for(int i = 0; i &lt; nameSeed....</p>
+    <p> while 循环中的 switch, break 只能中断 switch，不能中断 while 循环  void managerMenue(){  while(true){  cout &lt;&lt; &#34;这是子菜单&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;是否返回主菜单？&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;1 是&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;2 否&#34; &lt;&lt; endl;  int i = 0;  cin &gt;&gt; i;  switch(i){  case 1:  break;  case 2:  return;  default:  break;  }  // if(i == 1){  // // system(&#34;reset&#34;);  // break;  // }  // else if(i == 2){  // return;  // }  // else{  // cout &lt;&lt; &#34;输入有误，请重新输入&#34; &lt;&lt; endl;  // }  }  cout &lt;&lt; &#34;这是子菜单循环外代码&#34; &lt;&lt; endl; }  int main() {  while(true){  cout &lt;&lt; &#34;欢迎登陆！&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;这是主菜单&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;请输入选项：&#34; &lt;&lt; endl;  int i = 0;  cin &gt;&gt; i;  // switch(i)  // {  // case 1:  // system(&#34;reset&#34;);  // managerMenue();  // break;  // case 2:  // break;  // }  if(i == 1){  // system(&#34;reset&#34;);  managerMenue();  // break;  }  else{  break;  }  cout &lt;&lt; &#34;switch 外代码&#34; &lt;&lt; endl;  }   cout &lt;&lt; &#34;while 外代码&#34; &lt;&lt; endl;   return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-20 20:18:25 +0800 CST'>January 20, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to map multimap 容器" href="https://874656645.github.io/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-24 20:01:08 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to switch 与 if Else 区别" href="https://874656645.github.io/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>set multiset 容器
+    <h2>演讲比赛流程管理案例
     </h2>
   </header>
   <section class="entry-content">
-    <p>关联式容器 底层结构使用红黑树实现（二叉树-&gt;二叉搜索树-&gt;平衡二叉树-&gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
-class Person{ public:  Person(string name, int age, int height){  this-&gt;m_name = name;  this-&gt;m_age = age;  this-&gt;m_height = height;  }  bool operator&lt;(const Person &amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&gt;m_age == p2.m_age){  return this-&gt;m_height &gt; p2.m_height;  }  return this-&gt;m_age &lt; p2.m_age;  }  void printPerson()const{  cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl;  } private:  string m_name;  int m_age;  int m_height; }; int main() {  set&lt;Person&gt; lp;  lp....</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-18 21:20:48 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to set multiset 容器" href="https://874656645.github.io/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-22 17:21:43 +0800 CST'>January 22, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 演讲比赛流程管理案例" href="https://874656645.github.io/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>list 容器
+    <h2>常用算法
     </h2>
   </header>
   <section class="entry-content">
-    <p>注意事项  双向循环链表 不支持随机访问 因为不支持随机访问，所以也不能用全局的排序算法 sort 一般不支持随机访问的容器会自己提供 sort 方法 自定义类型要指定排序规则  排序案例 案例描述：将 Person 自定义数据类型进行排序，Person 中属性有姓名、年龄、身高
-排序规则：按照年龄进行升序，如果年龄相同按照身高进行降序
-class Person{ public:  Person(string name, int age, int height){  this-&gt;m_name = name;  this-&gt;m_age = age;  this-&gt;m_height = height;  }  bool operator&lt;(const Person &amp;p2){  if(this-&gt;m_age == p2.m_age){  return this-&gt;m_height &gt; p2.m_height;  }  return this-&gt;m_age &lt; p2.m_age;  }  void printPerson()const{  cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl;  } private:  string m_name;  int m_age;  int m_height; }; int main() {  list&lt;Person&gt; lp;  lp....</p>
+    <p>一、常用遍历算法 1. for_each 2. transform  搬运的目标容器必须要提前开辟空间（resize 而不是 reserve），否则无法正常搬运  int main() {  vector&lt;int&gt; v;  for(int i = 0; i &lt; 10; &#43;&#43;i){  v.push_back(i);  }   vector&lt;int&gt; v1;  v1.resize(v.size()); // 要用 resize, 不能用 reserve  transform(v.begin(), v.end(), v1.begin(), [](int v){ return v * 2;});  for_each(v1.begin(), v1.end(), [](int v){ cout &lt;&lt; v &lt;&lt; &#34; &#34;; });  cout &lt;&lt; endl;  return 0; } 二、常用查找算法 1....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-18 20:26:45 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to list 容器" href="https://874656645.github.io/posts/86-list-%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-22 09:31:07 +0800 CST'>January 22, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 常用算法" href="https://874656645.github.io/posts/91-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
