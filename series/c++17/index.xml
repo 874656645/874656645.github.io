@@ -28,8 +28,8 @@
       
       <guid>https://874656645.github.io/posts/176-c&#43;&#43;17-%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF/</guid>
       <description>任意个数、任意类别的模板参数
-template&amp;lt;typename... Ts&amp;gt; class Magic;  // 计算参数的个数 template&amp;lt;typename... Ts&amp;gt; void magic(Ts... args) {  std::cout &amp;lt;&amp;lt; sizeof...(args) &amp;lt;&amp;lt; std::endl; }   递归解包：
- C++17 之前  template&amp;lt;typename T0&amp;gt; void my_printf(T0 value) {  std::cout &amp;lt;&amp;lt; value &amp;lt;&amp;lt; std::endl; } template&amp;lt;typename T, typename... Ts&amp;gt; void my_printf(T value, Ts... args) {  std::cout &amp;lt;&amp;lt; value &amp;lt;&amp;lt; std::endl;  my_printf(args...); } int main() {  my_printf(1, 2.2, &amp;#34;abc&amp;#34;, &amp;#39;a&amp;#39;);  return 0; }  C++17 变参模板展开：  template&amp;lt;typename T, typename.</description>
+template&amp;lt;typename... Ts&amp;gt; class Magic; // 计算参数的个数 template&amp;lt;typename... Ts&amp;gt; void magic(Ts... args) { std::cout &amp;lt;&amp;lt; sizeof...(args) &amp;lt;&amp;lt; std::endl; }   递归解包：
+ C++17 之前  template&amp;lt;typename T0&amp;gt; void my_printf(T0 value) { std::cout &amp;lt;&amp;lt; value &amp;lt;&amp;lt; std::endl; } template&amp;lt;typename T, typename... Ts&amp;gt; void my_printf(T value, Ts... args) { std::cout &amp;lt;&amp;lt; value &amp;lt;&amp;lt; std::endl; my_printf(args...); } int main() { my_printf(1, 2.2, &amp;#34;abc&amp;#34;, &amp;#39;a&amp;#39;); return 0; }  C++17 变参模板展开：  template&amp;lt;typename T, typename.</description>
     </item>
     
     <item>
@@ -39,7 +39,7 @@ template&amp;lt;typename... Ts&amp;gt; class Magic;  // 计算参数的个数 te
       
       <guid>https://874656645.github.io/posts/175-c&#43;&#43;17-%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A%E6%9D%A5%E8%A7%A3%E5%8C%85%E7%BB%91%E5%AE%9A%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/</guid>
       <description>注意：使用结构化绑定时，就不能再使用 std::tie 创建虚拟变量了，所以我们不得不绑定所有值到命名过的变量上。对部分成员进行绑定的做法是高效的，因为编译器可以很容易的对未绑定的变量进行优化
-std::pair&amp;lt;int,int&amp;gt; divide_remainder(int dividend, int divisor){  int f = dividend / divisor;  int s = dividend % divisor;  return {f, s}; }  int main() {  auto [dividend, remainder] = divide_remainder(16, 3);  std::cout &amp;lt;&amp;lt; &amp;#34;16 / 3 is &amp;#34; &amp;lt;&amp;lt; dividend &amp;lt;&amp;lt; &amp;#34; with a remainder of &amp;#34; &amp;lt;&amp;lt; remainder &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;;   // 之前的写法  int remainder1;  std::tie(std::ignore, remainder1) = divide_remainder(16, 5);  std::cout &amp;lt;&amp;lt; &amp;#34;16 % 5 is &amp;#34; &amp;lt;&amp;lt; remainder1 &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;;   return 0; } </description>
+std::pair&amp;lt;int,int&amp;gt; divide_remainder(int dividend, int divisor){ int f = dividend / divisor; int s = dividend % divisor; return {f, s}; } int main() { auto [dividend, remainder] = divide_remainder(16, 3); std::cout &amp;lt;&amp;lt; &amp;#34;16 / 3 is &amp;#34; &amp;lt;&amp;lt; dividend &amp;lt;&amp;lt; &amp;#34; with a remainder of &amp;#34; &amp;lt;&amp;lt; remainder &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; // 之前的写法  int remainder1; std::tie(std::ignore, remainder1) = divide_remainder(16, 5); std::cout &amp;lt;&amp;lt; &amp;#34;16 % 5 is &amp;#34; &amp;lt;&amp;lt; remainder1 &amp;lt;&amp;lt; &amp;#39;\n&amp;#39;; return 0; } </description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@ std::pair&amp;lt;int,int&amp;gt; divide_remainder(int dividend, int divisor){  i
       
       <guid>https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
       <description>( expression-list )：优先调用非聚合初始化，且会存在隐式转换 = expression： { initializer-list }：如果有聚合初始化（initializer_list&amp;lt;&amp;gt;），就调用聚合初始化，没有的话就调用符合条件的非聚合初始化 = { initializer-list }：同上 使用 auto 声明的变量括号初始化，只允许一个参数的情况 {} 与 () 调用构造函数初始化的方式，不同点在于 {} 没有类型的隐式转换，比如 int x(1.2); 和 int x = 1.2; 通过隐式的对浮点值进行向下取整，然后将其转换为整型，从而将 x 的值初始化为 1。相反的， int x{1.2}; 将会遇到编译错误，初始化列表中的初始值，需要与变量声明的类型完全匹配。  测试代码一：
-// #define AGGREGATE_INIT class Test{ public:  Test(int a, float b, char* c){  cout &amp;lt;&amp;lt; &amp;#34;int float char* initialize...&amp;#34; &amp;lt;&amp;lt; endl;  }  Test(int a, int b, int c){  cout &amp;lt;&amp;lt; &amp;#34;int int int initialize.</description>
+// #define AGGREGATE_INIT class Test{ public: Test(int a, float b, char* c){ cout &amp;lt;&amp;lt; &amp;#34;int float char* initialize...&amp;#34; &amp;lt;&amp;lt; endl; } Test(int a, int b, int c){ cout &amp;lt;&amp;lt; &amp;#34;int int int initialize.</description>
     </item>
     
     <item>
@@ -60,8 +60,8 @@ std::pair&amp;lt;int,int&amp;gt; divide_remainder(int dividend, int divisor){  i
       <guid>https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/</guid>
       <description>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
 比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
-template &amp;lt;typename T&amp;gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &amp;lt;typename U&amp;gt;  T add(U x) const {  return val + x;  } }; 假设类型 T 是 std::vector&amp;lt;something&amp;gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
-template &amp;lt;typename U&amp;gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;amp;n : copy) {  n += x;  }  return copy; } 把两种情况结合在一起：</description>
+template &amp;lt;typename T&amp;gt; class addable { T val; public: addable(T v) : val{v} {} template &amp;lt;typename U&amp;gt; T add(U x) const { return val + x; } }; 假设类型 T 是 std::vector&amp;lt;something&amp;gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
+template &amp;lt;typename U&amp;gt; T add(U x) { auto copy (val); // Get a copy of the vector member  for (auto &amp;amp;n : copy) { n += x; } return copy; } 把两种情况结合在一起：</description>
     </item>
     
   </channel>

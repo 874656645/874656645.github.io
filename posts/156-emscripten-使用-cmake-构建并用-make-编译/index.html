@@ -8,7 +8,7 @@
 <title>Emscripten——使用 CMake 构建并用 Make 编译 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="emcc, js, c&#43;&#43;" />
 <meta name="description" content="使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
-# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget}  PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .">
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -17,7 +17,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="Emscripten——使用 CMake 构建并用 Make 编译" />
 <meta property="og:description" content="使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
-# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget}  PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ." />
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-24T17:45:14&#43;08:00" />
@@ -60,7 +60,7 @@ if (!doNotTrack) {
 
 <meta name="twitter:title" content="Emscripten——使用 CMake 构建并用 Make 编译"/>
 <meta name="twitter:description" content="使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
-# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget}  PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ."/>
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ."/>
 
 
 <script type="application/ld+json">
@@ -89,11 +89,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "Emscripten——使用 CMake 构建并用 Make 编译",
   "name": "Emscripten——使用 CMake 构建并用 Make 编译",
-  "description": "使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件\n# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX \u0026#34;.html\u0026#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS \u0026#34; \\ -s EXIT_RUNTIME=0 \\ -gsource-map \\ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \\ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \\ -s NO_DISABLE_EXCEPTION_CATCHING \\ \u0026#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC \u0026#34;${PROJECT_BINARY_DIR}\u0026#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget}  PUBLIC \u0026#34;${CMAKE_CURRENT_SOURCE_DIR}\u0026#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .",
+  "description": "使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件\n# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX \u0026#34;.html\u0026#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS \u0026#34; \\ -s EXIT_RUNTIME=0 \\ -gsource-map \\ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \\ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \\ -s NO_DISABLE_EXCEPTION_CATCHING \\ \u0026#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC \u0026#34;${PROJECT_BINARY_DIR}\u0026#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC \u0026#34;${CMAKE_CURRENT_SOURCE_DIR}\u0026#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .",
   "keywords": [
     "emcc", "js", "c++"
   ],
-  "articleBody": "使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件\n# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX \".html\")# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS \" \\ -s EXIT_RUNTIME=0 \\ -gsource-map \\ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \\ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \\ -s NO_DISABLE_EXCEPTION_CATCHING \\ \")# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC \"${PROJECT_BINARY_DIR}\" # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget}  PUBLIC \"${CMAKE_CURRENT_SOURCE_DIR}\" )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .. -DCMAKE_BUILD_TYPE=Debug 进行项目构建\n  使用 make 编译  构建完成后，执行命令 emmake make 进行编译  ",
+  "articleBody": "使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件\n# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX \".html\")# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS \" \\ -s EXIT_RUNTIME=0 \\ -gsource-map \\ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \\ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \\ -s NO_DISABLE_EXCEPTION_CATCHING \\ \")# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC \"${PROJECT_BINARY_DIR}\" # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC \"${CMAKE_CURRENT_SOURCE_DIR}\" )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake .. -DCMAKE_BUILD_TYPE=Debug 进行项目构建\n  使用 make 编译  构建完成后，执行命令 emmake make 进行编译  ",
   "wordCount" : "96",
   "inLanguage": "en",
   "datePublished": "2022-03-24T17:45:14+08:00",
@@ -215,50 +215,50 @@ if (!doNotTrack) {
 <ol>
 <li>
 <p>在源文件目录添加 <strong>CMakeList.txt</strong> 文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span><span style="color:#75715e"># 设置CMake版本最低要求
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set(<span style="color:#e6db74">MyTarget</span> <span style="color:#e6db74">hello</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>project(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">1.0</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 指定 C++ 标准
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD</span> <span style="color:#e6db74">11</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color:#e6db74">True</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 编译生成.html文件
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_EXECUTABLE_SUFFIX</span> <span style="color:#e6db74">&#34;.html&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># file(GLOB_RECURSE SRC_MAIN ./*.cpp)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>aux_source_directory(<span style="color:#e6db74">./</span> <span style="color:#e6db74">SRC_MAIN</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>aux_source_directory(<span style="color:#e6db74">./thirdParty/</span> <span style="color:#e6db74">SRC_MAIN</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>add_executable(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>SRC_MAIN<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># add_executable(${MyTarget} main.cpp)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置Emscripten的编译链接参数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set_target_properties(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">LINK_FLAGS</span> <span style="color:#e6db74">&#34; \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -s EXIT_RUNTIME=0 \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -gsource-map \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    -s NO_DISABLE_EXCEPTION_CATCHING \
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加第三方库路径
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># target_link_directories(${MyTarget} 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#    PUBLIC &#34;${PROJECT_BINARY_DIR}&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># )
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 将第三方库与主程序进行链接
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># set(LIBS cjson)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># target_link_libraries(sample ${LIBS})
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加头文件查找路径
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>target_include_directories(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">PUBLIC</span> <span style="color:#e6db74">&#34;${CMAKE_CURRENT_SOURCE_DIR}&#34;</span>
-</span></span><span style="display:flex;"><span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake"><span style="color:#75715e"># 设置CMake版本最低要求
+</span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">MyTarget</span> <span style="color:#e6db74">hello</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>project(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">1.0</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 指定 C++ 标准
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD</span> <span style="color:#e6db74">11</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color:#e6db74">True</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 编译生成.html文件
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_EXECUTABLE_SUFFIX</span> <span style="color:#e6db74">&#34;.html&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
+</span><span style="color:#75715e"># file(GLOB_RECURSE SRC_MAIN ./*.cpp)
+</span><span style="color:#75715e"></span>aux_source_directory(<span style="color:#e6db74">./</span> <span style="color:#e6db74">SRC_MAIN</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>aux_source_directory(<span style="color:#e6db74">./thirdParty/</span> <span style="color:#e6db74">SRC_MAIN</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>add_executable(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>SRC_MAIN<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># add_executable(${MyTarget} main.cpp)
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置Emscripten的编译链接参数
+</span><span style="color:#75715e"></span>set_target_properties(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">LINK_FLAGS</span> <span style="color:#e6db74">&#34; \
+</span><span style="color:#e6db74">    -s EXIT_RUNTIME=0 \
+</span><span style="color:#e6db74">    -gsource-map \
+</span><span style="color:#e6db74">    -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \
+</span><span style="color:#e6db74">    -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \
+</span><span style="color:#e6db74">    -s NO_DISABLE_EXCEPTION_CATCHING \
+</span><span style="color:#e6db74">&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加第三方库路径
+</span><span style="color:#75715e"># target_link_directories(${MyTarget} 
+</span><span style="color:#75715e">#    PUBLIC &#34;${PROJECT_BINARY_DIR}&#34;
+</span><span style="color:#75715e"># )
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 将第三方库与主程序进行链接
+</span><span style="color:#75715e"># set(LIBS cjson)
+</span><span style="color:#75715e"># target_link_libraries(sample ${LIBS})
+</span><span style="color:#75715e"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加头文件查找路径
+</span><span style="color:#75715e"></span>target_include_directories(<span style="color:#f92672">${</span>MyTarget<span style="color:#f92672">}</span> 
+    <span style="color:#e6db74">PUBLIC</span> <span style="color:#e6db74">&#34;${CMAKE_CURRENT_SOURCE_DIR}&#34;</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div></li>
 <li>
 <p>创建 build 文件夹，并在 build 文件夹内执行命令 <code>emcmake cmake .. -DCMAKE_BUILD_TYPE=Debug</code> 进行项目构建</p>
 </li>
