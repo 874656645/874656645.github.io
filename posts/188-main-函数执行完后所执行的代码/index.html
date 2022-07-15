@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>main 函数执行完后所执行的代码 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content=" 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){ cout &lt;&lt; &#34;after main exit.\n&#34;; cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() { cout &lt;&lt; &#34;Hello World\n&#34;; on_exit(f, (char*)&#34;this is message&#34;); cout &lt;&lt; &#34;end of main.\n&#34;; return 0; } 输出：
+<meta name="description" content=" 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &lt;&lt; &#34;after main exit.\n&#34;;  cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() {  cout &lt;&lt; &#34;Hello World\n&#34;;  on_exit(f, (char*)&#34;this is message&#34;);  cout &lt;&lt; &#34;end of main.\n&#34;;  return 0; } 输出：
 Hello World end of main. after main exit. state: 0	message: this is message ">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/" />
@@ -17,7 +17,7 @@ Hello World end of main. after main exit. state: 0	message: this is message ">
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -47,7 +47,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="main 函数执行完后所执行的代码" />
-<meta property="og:description" content=" 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){ cout &lt;&lt; &#34;after main exit.\n&#34;; cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() { cout &lt;&lt; &#34;Hello World\n&#34;; on_exit(f, (char*)&#34;this is message&#34;); cout &lt;&lt; &#34;end of main.\n&#34;; return 0; } 输出：
+<meta property="og:description" content=" 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &lt;&lt; &#34;after main exit.\n&#34;;  cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() {  cout &lt;&lt; &#34;Hello World\n&#34;;  on_exit(f, (char*)&#34;this is message&#34;);  cout &lt;&lt; &#34;end of main.\n&#34;;  return 0; } 输出：
 Hello World end of main. after main exit. state: 0	message: this is message " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
@@ -59,7 +59,7 @@ Hello World end of main. after main exit. state: 0	message: this is message " />
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="main 函数执行完后所执行的代码"/>
-<meta name="twitter:description" content=" 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){ cout &lt;&lt; &#34;after main exit.\n&#34;; cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() { cout &lt;&lt; &#34;Hello World\n&#34;; on_exit(f, (char*)&#34;this is message&#34;); cout &lt;&lt; &#34;end of main.\n&#34;; return 0; } 输出：
+<meta name="twitter:description" content=" 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &lt;&lt; &#34;after main exit.\n&#34;;  cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() {  cout &lt;&lt; &#34;Hello World\n&#34;;  on_exit(f, (char*)&#34;this is message&#34;);  cout &lt;&lt; &#34;end of main.\n&#34;;  return 0; } 输出：
 Hello World end of main. after main exit. state: 0	message: this is message "/>
 
 
@@ -89,11 +89,11 @@ Hello World end of main. after main exit. state: 0	message: this is message "/>
   "@type": "BlogPosting",
   "headline": "main 函数执行完后所执行的代码",
   "name": "main 函数执行完后所执行的代码",
-  "description": " 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){ cout \u0026lt;\u0026lt; \u0026#34;after main exit.\\n\u0026#34;; cout \u0026lt;\u0026lt; \u0026#34;state: \u0026#34; \u0026lt;\u0026lt; state \u0026lt;\u0026lt; \u0026#34;\\tmessage: \u0026#34; \u0026lt;\u0026lt; (char*)msg \u0026lt;\u0026lt; endl; } int main() { cout \u0026lt;\u0026lt; \u0026#34;Hello World\\n\u0026#34;; on_exit(f, (char*)\u0026#34;this is message\u0026#34;); cout \u0026lt;\u0026lt; \u0026#34;end of main.\\n\u0026#34;; return 0; } 输出：\nHello World end of main. after main exit. state: 0\tmessage: this is message ",
+  "description": " 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout \u0026lt;\u0026lt; \u0026#34;after main exit.\\n\u0026#34;;  cout \u0026lt;\u0026lt; \u0026#34;state: \u0026#34; \u0026lt;\u0026lt; state \u0026lt;\u0026lt; \u0026#34;\\tmessage: \u0026#34; \u0026lt;\u0026lt; (char*)msg \u0026lt;\u0026lt; endl; } int main() {  cout \u0026lt;\u0026lt; \u0026#34;Hello World\\n\u0026#34;;  on_exit(f, (char*)\u0026#34;this is message\u0026#34;);  cout \u0026lt;\u0026lt; \u0026#34;end of main.\\n\u0026#34;;  return 0; } 输出：\nHello World end of main. after main exit. state: 0\tmessage: this is message ",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){ cout  \"after main exit.\\n\"; cout  \"state: \"  state  \"\\tmessage: \"  (char*)msg  endl; } int main() { cout  \"Hello World\\n\"; on_exit(f, (char*)\"this is message\"); cout  \"end of main.\\n\"; return 0; } 输出：\nHello World end of main. after main exit. state: 0\tmessage: this is message ",
+  "articleBody": " 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout  \"after main exit.\\n\";  cout  \"state: \"  state  \"\\tmessage: \"  (char*)msg  endl; } int main() {  cout  \"Hello World\\n\";  on_exit(f, (char*)\"this is message\");  cout  \"end of main.\\n\";  return 0; } 输出：\nHello World end of main. after main exit. state: 0\tmessage: this is message ",
   "wordCount" : "65",
   "inLanguage": "en",
   "datePublished": "2022-05-12T16:02:52+08:00",
@@ -200,23 +200,23 @@ Hello World end of main. after main exit. state: 0	message: this is message "/>
 <li>静态变量在 <code>main</code> 函数前执行初始化</li>
 <li><code>on_exit</code> 注册的函数在 <code>main</code> 执行后再执行</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> state, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> msg){
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;after main exit.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;state: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> state <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74"> message: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)msg <span style="color:#f92672">&lt;&lt;</span> endl;
-}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Hello World</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-    on_exit(f, (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#e6db74">&#34;this is message&#34;</span>);
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;end of main.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Hello World
-end of main.
-after main exit.
-state: 0	 message: this is message
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> state, <span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> msg){
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;after main exit.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;state: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> state <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74"> message: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)msg <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Hello World</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    on_exit(f, (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#e6db74">&#34;this is message&#34;</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;end of main.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Hello World
+</span></span><span style="display:flex;"><span>end of main.
+</span></span><span style="display:flex;"><span>after main exit.
+</span></span><span style="display:flex;"><span>state: 0	 message: this is message
+</span></span></code></pre></div>
 
   </div>
 

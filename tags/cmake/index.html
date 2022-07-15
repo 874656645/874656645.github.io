@@ -145,6 +145,42 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Qt UDP
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;)....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-15 21:44:52 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt UDP" href="https://874656645.github.io/posts/209-qt-udp/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Qt TCP
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、总结  TCP 就像打电话，安全，不会丢包 Linux TCP 通信  Qt TCP 通信   二、服务器端  TCP 服务器端有两个套接字，一个是监听套接字，一个是通信套接字   tcpServer = nullptr; // 服务监听套接字  tcpSocket = nullptr; // 通信套接字   // 创建tcp服务监听套接字  tcpServer = new QTcpServer(this);  // tcp服务开启监听（bind端口号并开启监听）  tcpServer-&gt;listen(QHostAddress::Any, 8008);  // 绑定连接成功信号  connect(tcpServer, &amp;QTcpServer::newConnection,[=](){  // 获取通信套接字  tcpSocket = tcpServer-&gt;nextPendingConnection();  // 获取客户端 IP 和 端口  QString ip = tcpSocket-&gt;peerAddress().toString();  quint16 port = tcpSocket-&gt;peerPort();  QString msg = QString(&#34;[%1:%2] 连接成功&#34;)....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-15 21:13:10 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt TCP" href="https://874656645.github.io/posts/208-qt-tcp/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Qt CMake
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>cmake_minimum_required(VERSION 3.5)project(07_TCP LANGUAGES CXX)# 将编译目录包含到Include目录 set(CMAKE_INCLUDE_CURRENT_DIR ON)set(CMAKE_AUTOUIC ON)set(CMAKE_AUTOMOC ON)set(CMAKE_AUTORCC ON)# 根据 Qt 版本的环境变量，设置使用的 Qt 版本 set(CMAKE_PREFIX_PATH $ENV{QTDIR5141_64})set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED ON)# QtCreator supports the following variables for Android, which are identical to qmake Android variables. # Check http://doc.qt.io/qt-5/deployment-android.html for more information. # They need to be set before the find_package(Qt5 ...) call. #if(ANDROID) # set(ANDROID_PACKAGE_SOURCE_DIR &#34;${CMAKE_CURRENT_SOURCE_DIR}/android&#34;) # if (ANDROID_ABI STREQUAL &#34;armeabi-v7a&#34;) # set(ANDROID_EXTRA_LIBS # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so) # endif() #endif() # 工程中会用到的Qt模块 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)if(ANDROID) add_library(07_TCP SHARED  main....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-15 16:10:27 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt CMake" href="https://874656645.github.io/posts/207-qt-cmake/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>CMake 打包 Debug 和 Release
     </h2>
   </header>
@@ -170,60 +206,14 @@ if (!doNotTrack) {
 接下来是如何添加必要的信息，以便其他 CMake 项目可以使用我们的项目，无论是在构建目录、本地安装还是打包的时候
 第一步是更新我们的 install(TARGETS) 命令，不仅指定 DESTINATION，还指定 EXPORT。EXPORT 关键字生成一个 CMake 文件，其中包含从安装树导入安装命令中列出的所有目标的代码。
 修改 MathFunctions/CMakeLists.txt 文件代码：
-# install rules set(installable_libs MathFunctions tutorial_compiler_flags)if(TARGET SqrtLibrary) list(APPEND installable_libs SqrtLibrary)endif()install(TARGETS ${installable_libs} EXPORT MathFunctionsTargets DESTINATION lib)install(FILES MathFunctions.h DESTINATION include)第二步我们还需要显式地安装生成的 MathFunctionsTargets.cmake 文件。在顶层的 CMakeLists.txt 文件底部添加如下代码：
-install(EXPORT MathFunctionsTargets FILE MathFunctionsTargets.cmake DESTINATION lib/cmake/MathFunctions )此时构建会有下面的错误：
+# install rules set(installable_libs MathFunctions tutorial_compiler_flags)if(TARGET SqrtLibrary) list(APPEND installable_libs SqrtLibrary)endif()install(TARGETS ${installable_libs}  EXPORT MathFunctionsTargets  DESTINATION lib)install(FILES MathFunctions.h DESTINATION include)第二步我们还需要显式地安装生成的 MathFunctionsTargets.cmake 文件。在顶层的 CMakeLists.txt 文件底部添加如下代码：
+install(EXPORT MathFunctionsTargets  FILE MathFunctionsTargets.cmake  DESTINATION lib/cmake/MathFunctions )此时构建会有下面的错误：
 这是因为在生成导出信息期间，它将导出内在绑定到当前计算机项目的路径，在其他计算机上路径无效。
 第三步更新 MathFunctions/CMakeLists.txt 中的 target_include_directories() 用来设置在 build 时和在 install/package 时需要使用不同的 INTERFACE locations。
-# 将当前二进制目录添加到包含目录列表中 target_include_directories(MathFunctions # INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}  INTERFACE $&lt;BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}&gt; $&lt;INSTALL_INTERFACE:include&gt; )第四步我们还需要生成一个 MathFunctionsConfig.cmake，这样 CMake 的 find_package() 命令就可以找到我们的项目。在顶层的项目目录添加 Config....</p>
+# 将当前二进制目录添加到包含目录列表中 target_include_directories(MathFunctions  # INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}  INTERFACE  $&lt;BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}&gt;  $&lt;INSTALL_INTERFACE:include&gt; )第四步我们还需要生成一个 MathFunctionsConfig....</p>
   </section>
   <footer class="entry-footer"><span title='2022-03-06 10:37:40 +0800 CST'>March 6, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to CMake 添加导出配置" href="https://874656645.github.io/posts/145-cmake-%E6%B7%BB%E5%8A%A0%E5%AF%BC%E5%87%BA%E9%85%8D%E7%BD%AE/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>CMake 添加生成器表达式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>target_compile_features target_compile_options COMPILE_LANG_AND_ID BUILD_INTERFACE  生成器表达式(Generator expressions)允许在许多目标属性的上下文中使用，比如 LINK LIBRARIES、INCLUDE DIRECTORIES、COMPILE DEFINITIONS 等。当使用命令来填充这些属性时，它们也可以被使用，例如 target_link_libraries()、target_include_directories()、target_compile_definitions() 等。
-生成器表达式可以用于启用条件链接、编译时使用的条件定义、条件包含目录等。这些条件可能基于构建配置、目标属性、平台信息或任何其他可查询的信息。
-有不同类型的生成器表达式，包括逻辑表达式、信息表达式和输出表达式。
-逻辑表达式用于创建条件输出。基本的表达式是 0 和 1 表达式。
-生成器表达式的一个常见用法是有条件地添加编译器标志，比如那些用于语言级别或警告的标志。一个很好的模式是将该信息关联到一个 INTERFACE 目标，从而允许该信息传播。让我们先构造一个接口目标，并指定所需的 c&#43;&#43; 标准 11，而不是使用 CMAKE CXX 标准。
-# 指定 C&#43;&#43; 标准 # set(CMAKE_CXX_STANDARD 11) # set(CMAKE_CXX_STANDARD_REQUIRED True) # 将上面的代码替换为 add_library(tutorial_compiler_flags INTERFACE)target_compile_features(tutorial_compiler_flags INTERFACE cxx_std_11)接下来，我们为项目添加所需的编译器警告标志。由于警告标志因编译器的不同而不同，我们使用 COMPILE_LANG_AND_ID 生成器表达式来控制给定语言和一组编译器 ID 要应用哪些标志（注：将要使用的生成器表达式是在 3.15 中引入的，所以要更新 cmake_minimum_required 的版本为 3.15），如下所示：
-set(gcc_like_cxx &#34;$&lt;COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC&gt;&#34;)set(msvc_cxx &#34;$&lt;COMPILE_LANG_AND_ID:CXX,MSVC&gt;&#34;)target_compile_options(tutorial_compiler_flags INTERFACE &#34;$&lt;${gcc_like_cxx}:$&lt;BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused&gt;&gt;&#34; &#34;$&lt;${msvc_cxx}:$&lt;BUILD_INTERFACE:-W3&gt;&gt;&#34; )我们看到警告标志被封装在一个 BUILD_INTERFACE 条件中。这样做是为了让我们已安装项目的使用者不会继承我们的警告标志。
-修改 Mathfunctions/cmakelists.txt，以便所有编译目标都有一个 target_link_libraries() 调用我们设置的编译条件标识 tutorial_compiler_flags。...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-06 07:42:05 +0800 CST'>March 6, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to CMake 添加生成器表达式" href="https://874656645.github.io/posts/144-cmake-%E6%B7%BB%E5%8A%A0%E7%94%9F%E6%88%90%E5%99%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>CMake 静态库和动态库混合使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>将原来的 静态库 MathFunctions拆分为动态库 MathFunctions.dll 和静态库 SqrtLibrary.lib 两个库。MathFunctions.dll 动态库会使用 SqrtLibrary.lib 静态库。 BUILD_SHARED_LIBS  在顶层的 CMakeLists.txt 文件中添加 BUILD_SHARED_LIBS，如果这个标记存在且为真，则将导致所有库都被构建为共享库，除非该库被显式地设置为静态库。这个变量通常作为 option() 添加到项目中，以便项目的每个用户可以决定他们是要使用共享库还是静态库构建项目。
-顶层的 CMakeLists.txt 文件修改如下：
-# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.2)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# control where the static and shared libraries are built so that on windows # we don&#39;t need to tinker with the path to run the executable # 指定静态库和动态库的生成路径 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY &#34;${PROJECT_BINARY_DIR}&#34;)set(CMAKE_LIBRARY_OUTPUT_DIRECTORY &#34;${PROJECT_BINARY_DIR}&#34;)set(CMAKE_RUNTIME_OUTPUT_DIRECTORY &#34;${PROJECT_BINARY_DIR}&#34;)# 生成共享库选项 option(BUILD_SHARED_LIBS &#34;Build using shared libraries&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-05 19:28:43 +0800 CST'>March 5, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to CMake 静态库和动态库混合使用" href="https://874656645.github.io/posts/143-cmake-%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>CMake 添加对测试仪表板的支持
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>向仪表板提交测试结果 1. 修改最上层的 CMakeLists.txt 文件 将 enable_testing() 替换为 include(CTest)，CTest 模块会自动调用 enable_testing()
-# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &#34;${PROJECT_BINARY_DIR}/TutorialConfig....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-03 20:12:47 +0800 CST'>March 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to CMake 添加对测试仪表板的支持" href="https://874656645.github.io/posts/142-cmake-%E6%B7%BB%E5%8A%A0%E5%AF%B9%E6%B5%8B%E8%AF%95%E4%BB%AA%E8%A1%A8%E6%9D%BF%E7%9A%84%E6%94%AF%E6%8C%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

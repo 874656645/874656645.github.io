@@ -18,7 +18,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -96,7 +96,7 @@ if (!doNotTrack) {
   "keywords": [
     "C++"
   ],
-  "articleBody": "  一元折叠表达式\n ( pack op ... ) : 一元右折叠  (E op ...) 展开后： (E1 op (... op (EN-1 op EN)))   ( ... op pack ) ：一元左折叠  (... op E) 展开后： (((E1 op E2) op ...) op EN)      二元折叠表达式\n ( pack op ... op init ) ：二元右折叠  (E op ... op I) 展开后： (E1 op (... op (EN−1 op (EN op I))))   ( init op ... op pack ) ：二元左折叠  (I op ... op E) 展开后： ((((I op E1) op E2) op ...) op EN)      折叠表达式 op 支持如下二元操作符： + - * / % ^ \u0026 | =  += -= *= /= %= ^= \u0026= |= = == != = \u0026\u0026 || , .* -*\n  当一元折叠表达式的元素个数为 0 （空包）时，只能使用下列运算符：\n 逻辑与（\u0026\u0026），空包的默认值为 true 逻辑或（||），空包的默认值为 false 逗号运算符（,），空包的默认值为 void()    当二元折叠表达式中的 init 的运算符优先级高于 op 运算符时，要用 () 把 init 表达式括起来\ntemplatetypename ...Args int sum(Args\u0026\u0026... args) { // return (args + ... + 1 * 2); // Error: operator with precedence below cast  return (args + ... + (1 * 2)); // OK }   一些示例：\ntemplatetypename ... Ts auto sum(Ts ... ts){ // 右折叠（ ... 在操作符右侧）1+(2+(3+(4+5)))  // return (ts + ...);  // 左折叠（... 在操作符左侧） (((1+2)+3)+4)+5  return (... + ts); } // 匹配范围内的单个元素 template typename T, typename ... Ts auto matches(const T\u0026 range, Ts ... ts) { return (std::count(std::begin(range), std::end(range), ts) + ...); } // 检查集合中的多个插入操作是否成功 template typename T, typename ... Ts bool insert_all(T\u0026 set, Ts ... ts) { return (set.insert(ts).second \u0026\u0026 ...); } // 检查所有参数是否在范围内 template typename T, typename ... Ts bool within(T min, T max, Ts ...ts) { return ((min  ts \u0026\u0026 ts  max) \u0026\u0026 ...); } // 将多个元素插入vector中 template typename T, typename ... Ts void insert_all(std::vectorT \u0026vec, Ts ... ts){ (vec.push_back(ts), ...); } // 打印 templatetypename... Ts void my_printf(Ts ... ts) { ((std::cout  ts  std::endl), ...); } int main() { int x = sum(1,2,3,4,5); cout  x  endl; string y = sum(string(\"abc\"),string(\"def\"),string(\"gh\")); cout  y  endl; auto z = sum(1, 2.2f, 3.3, 'a'); cout  z  endl; std::vectorint v{1, 2, 3, 4, 5}; int c = 0; c = matches(v, 2, 5); // return 2  cout  c  endl; c = matches(v, 100, 200); // return 0  cout  c  endl; c = matches(\"abcdefg\", 'x', 'y', 'z'); // return 0  cout  c  endl; c = matches(\"abcdefg\", 'a', 'b', 'f'); // return 3  cout  c  endl; std::setint my_set{1, 2, 3}; insert_all(my_set, 4, 5, 6); // Returns true  for_each(my_set.begin(), my_set.end(), [](const auto \u0026t){cout  t  \" \";}); cout  endl; insert_all(my_set, 7, 2, 8); // Returns false, because the 2 collides  // 由于短路，8并没有被插入  for_each(my_set.begin(), my_set.end(), [](const auto \u0026t){cout  t  \" \";}); cout  endl; bool b = false; b = within(10, 20, 1, 15, 30); // -- false  cout  boolalpha  b  endl; b = within(10, 20, 11, 12, 13); // -- true  cout  b  endl; b = within(5.0, 5.5, 5.1, 5.2, 5.3); // -- true  cout  b  endl; std::string aaa {\"aaa\"}; std::string bcd {\"bcd\"}; std::string def {\"def\"}; std::string zzz {\"zzz\"}; b = within(aaa, zzz, bcd, def); // -- true  cout  b  endl; b = within(aaa, def, bcd, zzz); // -- false  cout  b  endl; std::vectorint my_vec{1, 2, 3}; insert_all(my_vec, 4, 5, 6); for_each(my_vec.begin(), my_vec.end(), [](const auto \u0026t){cout  t  \" \";}); cout  endl; return 0; } 输出：\n15 abcdefgh 103.5 2 0 0 3 1 2 3 4 5 6 1 2 3 4 5 6 7 false true true true false 1 2 3 4 5 6   参考：\nfold expression\n",
+  "articleBody": "  一元折叠表达式\n ( pack op ... ) : 一元右折叠  (E op ...) 展开后： (E1 op (... op (EN-1 op EN)))   ( ... op pack ) ：一元左折叠  (... op E) 展开后： (((E1 op E2) op ...) op EN)      二元折叠表达式\n ( pack op ... op init ) ：二元右折叠  (E op ... op I) 展开后： (E1 op (... op (EN−1 op (EN op I))))   ( init op ... op pack ) ：二元左折叠  (I op ... op E) 展开后： ((((I op E1) op E2) op ...) op EN)      折叠表达式 op 支持如下二元操作符： + - * / % ^ \u0026 | =  += -= *= /= %= ^= \u0026= |= = == != = \u0026\u0026 || , .* -*\n  当一元折叠表达式的元素个数为 0 （空包）时，只能使用下列运算符：\n 逻辑与（\u0026\u0026），空包的默认值为 true 逻辑或（||），空包的默认值为 false 逗号运算符（,），空包的默认值为 void()    当二元折叠表达式中的 init 的运算符优先级高于 op 运算符时，要用 () 把 init 表达式括起来\ntemplatetypename ...Args int sum(Args\u0026\u0026... args) {  // return (args + ... + 1 * 2); // Error: operator with precedence below cast  return (args + ... + (1 * 2)); // OK }   一些示例：\ntemplatetypename ... Ts auto sum(Ts ... ts){  // 右折叠（ ... 在操作符右侧）1+(2+(3+(4+5)))  // return (ts + ...);  // 左折叠（... 在操作符左侧） (((1+2)+3)+4)+5  return (... + ts); } // 匹配范围内的单个元素 template typename T, typename ... Ts auto matches(const T\u0026 range, Ts ... ts) {  return (std::count(std::begin(range), std::end(range), ts) + ...); } // 检查集合中的多个插入操作是否成功 template typename T, typename ... Ts bool insert_all(T\u0026 set, Ts ... ts) {  return (set.insert(ts).second \u0026\u0026 ...); } // 检查所有参数是否在范围内 template typename T, typename ... Ts bool within(T min, T max, Ts ...ts) {  return ((min  ts \u0026\u0026 ts  max) \u0026\u0026 ...); } // 将多个元素插入vector中 template typename T, typename ... Ts void insert_all(std::vectorT \u0026vec, Ts ... ts){  (vec.push_back(ts), ...); } // 打印 templatetypename... Ts void my_printf(Ts ... ts) {  ((std::cout  ts  std::endl), ...); } int main() {  int x = sum(1,2,3,4,5);  cout  x  endl;  string y = sum(string(\"abc\"),string(\"def\"),string(\"gh\"));  cout  y  endl;  auto z = sum(1, 2.2f, 3.3, 'a');  cout  z  endl;   std::vectorint v{1, 2, 3, 4, 5};  int c = 0;  c = matches(v, 2, 5); // return 2  cout  c  endl;  c = matches(v, 100, 200); // return 0  cout  c  endl;  c = matches(\"abcdefg\", 'x', 'y', 'z'); // return 0  cout  c  endl;  c = matches(\"abcdefg\", 'a', 'b', 'f'); // return 3  cout  c  endl;   std::setint my_set{1, 2, 3};  insert_all(my_set, 4, 5, 6); // Returns true  for_each(my_set.begin(), my_set.end(), [](const auto \u0026t){cout  t  \" \";});  cout  endl;  insert_all(my_set, 7, 2, 8); // Returns false, because the 2 collides  // 由于短路，8并没有被插入  for_each(my_set.begin(), my_set.end(), [](const auto \u0026t){cout  t  \" \";});  cout  endl;   bool b = false;  b = within(10, 20, 1, 15, 30); // -- false  cout  boolalpha  b  endl;  b = within(10, 20, 11, 12, 13); // -- true  cout  b  endl;  b = within(5.0, 5.5, 5.1, 5.2, 5.3); // -- true  cout  b  endl;  std::string aaa {\"aaa\"};  std::string bcd {\"bcd\"};  std::string def {\"def\"};  std::string zzz {\"zzz\"};  b = within(aaa, zzz, bcd, def); // -- true  cout  b  endl;  b = within(aaa, def, bcd, zzz); // -- false  cout  b  endl;   std::vectorint my_vec{1, 2, 3};  insert_all(my_vec, 4, 5, 6);  for_each(my_vec.begin(), my_vec.end(), [](const auto \u0026t){cout  t  \" \";});  cout  endl;  return 0; } 输出：\n15 abcdefgh 103.5 2 0 0 3 1 2 3 4 5 6 1 2 3 4 5 6 7 false true true true false 1 2 3 4 5 6   参考：\nfold expression\n",
   "wordCount" : "595",
   "inLanguage": "en",
   "datePublished": "2022-04-13T16:50:15+08:00",
@@ -245,115 +245,115 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>当二元折叠表达式中的 <code>init</code> 的运算符优先级高于 <code>op</code> 运算符时，要用 <code>()</code> 把 <code>init</code> 表达式括起来</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> ...Args<span style="color:#f92672">&gt;</span>
-<span style="color:#66d9ef">int</span> sum(Args<span style="color:#f92672">&amp;&amp;</span>... args)
-{
-    <span style="color:#75715e">//  return (args + ... + 1 * 2);   // Error: operator with precedence below cast
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> (args <span style="color:#f92672">+</span> ... <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)); <span style="color:#75715e">// OK
-</span><span style="color:#75715e"></span>}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> ...Args<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum(Args<span style="color:#f92672">&amp;&amp;</span>... args)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//  return (args + ... + 1 * 2);   // Error: operator with precedence below cast
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> (args <span style="color:#f92672">+</span> ... <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)); <span style="color:#75715e">// OK
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
 <li>
 <p>一些示例：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span>
-<span style="color:#66d9ef">auto</span> sum(Ts ... ts){
-    <span style="color:#75715e">// 右折叠（ ... 在操作符右侧）1+(2+(3+(4+5)))
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// return (ts + ...);
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 左折叠（... 在操作符左侧） (((1+2)+3)+4)+5
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> (... <span style="color:#f92672">+</span> ts);
-}
-<span style="color:#75715e">// 匹配范围内的单个元素
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span> 
-<span style="color:#66d9ef">auto</span> matches(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> range, Ts ... ts) { 
-    <span style="color:#66d9ef">return</span> (std<span style="color:#f92672">::</span>count(std<span style="color:#f92672">::</span>begin(range), std<span style="color:#f92672">::</span>end(range), ts) <span style="color:#f92672">+</span> ...); 
-}
-<span style="color:#75715e">// 检查集合中的多个插入操作是否成功
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span> 
-<span style="color:#66d9ef">bool</span> insert_all(T<span style="color:#f92672">&amp;</span> set, Ts ... ts) { 
-    <span style="color:#66d9ef">return</span> (set.insert(ts).second <span style="color:#f92672">&amp;&amp;</span> ...); 
-}
-<span style="color:#75715e">// 检查所有参数是否在范围内
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span> 
-<span style="color:#66d9ef">bool</span> within(T min, T max, Ts ...ts) { 
-    <span style="color:#66d9ef">return</span> ((min <span style="color:#f92672">&lt;=</span> ts <span style="color:#f92672">&amp;&amp;</span> ts <span style="color:#f92672">&lt;=</span> max) <span style="color:#f92672">&amp;&amp;</span> ...); 
-}
-<span style="color:#75715e">// 将多个元素插入vector中
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span> 
-<span style="color:#66d9ef">void</span> insert_all(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>vec, Ts ... ts){ 
-    (vec.push_back(ts), ...); 
-}
-<span style="color:#75715e">// 打印
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
-<span style="color:#66d9ef">void</span> my_printf(Ts ... ts) {
-    ((std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> ts <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl), ...);
-}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> sum(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>);
-    cout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
-    string y <span style="color:#f92672">=</span> sum(string(<span style="color:#e6db74">&#34;abc&#34;</span>),string(<span style="color:#e6db74">&#34;def&#34;</span>),string(<span style="color:#e6db74">&#34;gh&#34;</span>));
-    cout <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">auto</span> z <span style="color:#f92672">=</span> sum(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2.2f</span>, <span style="color:#ae81ff">3.3</span>, <span style="color:#e6db74">&#39;a&#39;</span>);
-    cout <span style="color:#f92672">&lt;&lt;</span> z <span style="color:#f92672">&lt;&lt;</span> endl;
-
-    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>}; 
-    <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    c <span style="color:#f92672">=</span> matches(v, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>); <span style="color:#75715e">// return 2 
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl;
-    c <span style="color:#f92672">=</span> matches(v, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">200</span>); <span style="color:#75715e">// return 0 
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl;
-    c <span style="color:#f92672">=</span> matches(<span style="color:#e6db74">&#34;abcdefg&#34;</span>, <span style="color:#e6db74">&#39;x&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>, <span style="color:#e6db74">&#39;z&#39;</span>); <span style="color:#75715e">// return 0
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl; 
-    c <span style="color:#f92672">=</span> matches(<span style="color:#e6db74">&#34;abcdefg&#34;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;f&#39;</span>); <span style="color:#75715e">// return 3
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl;
-
-    std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> my_set{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>}; 
-    insert_all(my_set, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>); <span style="color:#75715e">// Returns true 
-</span><span style="color:#75715e"></span>    for_each(my_set.begin(), my_set.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>t){cout <span style="color:#f92672">&lt;&lt;</span> t <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});
-    cout <span style="color:#f92672">&lt;&lt;</span> endl;
-    insert_all(my_set, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">8</span>); <span style="color:#75715e">// Returns false, because the 2 collides 
-</span><span style="color:#75715e"></span>                                <span style="color:#75715e">// 由于短路，8并没有被插入
-</span><span style="color:#75715e"></span>    for_each(my_set.begin(), my_set.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>t){cout <span style="color:#f92672">&lt;&lt;</span> t <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});  
-    cout <span style="color:#f92672">&lt;&lt;</span> endl;
-
-    <span style="color:#66d9ef">bool</span> b <span style="color:#f92672">=</span> false;
-    b <span style="color:#f92672">=</span> within(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">30</span>); <span style="color:#75715e">// --&gt; false 
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> boolalpha <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-    b <span style="color:#f92672">=</span> within(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>); <span style="color:#75715e">// --&gt; true 
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-    b <span style="color:#f92672">=</span> within(<span style="color:#ae81ff">5.0</span>, <span style="color:#ae81ff">5.5</span>, <span style="color:#ae81ff">5.1</span>, <span style="color:#ae81ff">5.2</span>, <span style="color:#ae81ff">5.3</span>); <span style="color:#75715e">// --&gt; true
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-    std<span style="color:#f92672">::</span>string aaa {<span style="color:#e6db74">&#34;aaa&#34;</span>}; 
-    std<span style="color:#f92672">::</span>string bcd {<span style="color:#e6db74">&#34;bcd&#34;</span>}; 
-    std<span style="color:#f92672">::</span>string def {<span style="color:#e6db74">&#34;def&#34;</span>}; 
-    std<span style="color:#f92672">::</span>string zzz {<span style="color:#e6db74">&#34;zzz&#34;</span>}; 
-    b <span style="color:#f92672">=</span> within(aaa, zzz, bcd, def); <span style="color:#75715e">// --&gt; true 
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-    b <span style="color:#f92672">=</span> within(aaa, def, bcd, zzz); <span style="color:#75715e">// --&gt; false
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-
-    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> my_vec{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>}; 
-    insert_all(my_vec, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>);
-    for_each(my_vec.begin(), my_vec.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>t){cout <span style="color:#f92672">&lt;&lt;</span> t <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});  
-    cout <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">15
-abcdefgh
-103.5
-2
-0
-0
-3
-1 2 3 4 5 6 
-1 2 3 4 5 6 7 
-false
-true
-true
-true
-false
-1 2 3 4 5 6 
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> sum(Ts ... ts){
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 右折叠（ ... 在操作符右侧）1+(2+(3+(4+5)))
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// return (ts + ...);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 左折叠（... 在操作符左侧） (((1+2)+3)+4)+5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> (... <span style="color:#f92672">+</span> ts);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 匹配范围内的单个元素
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> matches(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> range, Ts ... ts) { 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (std<span style="color:#f92672">::</span>count(std<span style="color:#f92672">::</span>begin(range), std<span style="color:#f92672">::</span>end(range), ts) <span style="color:#f92672">+</span> ...); 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 检查集合中的多个插入操作是否成功
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> insert_all(T<span style="color:#f92672">&amp;</span> set, Ts ... ts) { 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (set.insert(ts).second <span style="color:#f92672">&amp;&amp;</span> ...); 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 检查所有参数是否在范围内
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> within(T min, T max, Ts ...ts) { 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ((min <span style="color:#f92672">&lt;=</span> ts <span style="color:#f92672">&amp;&amp;</span> ts <span style="color:#f92672">&lt;=</span> max) <span style="color:#f92672">&amp;&amp;</span> ...); 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 将多个元素插入vector中
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span> ... Ts<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> insert_all(std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>vec, Ts ... ts){ 
+</span></span><span style="display:flex;"><span>    (vec.push_back(ts), ...); 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 打印
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> my_printf(Ts ... ts) {
+</span></span><span style="display:flex;"><span>    ((std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> ts <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl), ...);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> sum(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    string y <span style="color:#f92672">=</span> sum(string(<span style="color:#e6db74">&#34;abc&#34;</span>),string(<span style="color:#e6db74">&#34;def&#34;</span>),string(<span style="color:#e6db74">&#34;gh&#34;</span>));
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> z <span style="color:#f92672">=</span> sum(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2.2f</span>, <span style="color:#ae81ff">3.3</span>, <span style="color:#e6db74">&#39;a&#39;</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> z <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>}; 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> matches(v, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>); <span style="color:#75715e">// return 2 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> matches(v, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">200</span>); <span style="color:#75715e">// return 0 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> matches(<span style="color:#e6db74">&#34;abcdefg&#34;</span>, <span style="color:#e6db74">&#39;x&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>, <span style="color:#e6db74">&#39;z&#39;</span>); <span style="color:#75715e">// return 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl; 
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> matches(<span style="color:#e6db74">&#34;abcdefg&#34;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;f&#39;</span>); <span style="color:#75715e">// return 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> c <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> my_set{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>}; 
+</span></span><span style="display:flex;"><span>    insert_all(my_set, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>); <span style="color:#75715e">// Returns true 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    for_each(my_set.begin(), my_set.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>t){cout <span style="color:#f92672">&lt;&lt;</span> t <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    insert_all(my_set, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">8</span>); <span style="color:#75715e">// Returns false, because the 2 collides 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                <span style="color:#75715e">// 由于短路，8并没有被插入
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    for_each(my_set.begin(), my_set.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>t){cout <span style="color:#f92672">&lt;&lt;</span> t <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});  
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> b <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">=</span> within(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">15</span>, <span style="color:#ae81ff">30</span>); <span style="color:#75715e">// --&gt; false 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> boolalpha <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">=</span> within(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">11</span>, <span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">13</span>); <span style="color:#75715e">// --&gt; true 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">=</span> within(<span style="color:#ae81ff">5.0</span>, <span style="color:#ae81ff">5.5</span>, <span style="color:#ae81ff">5.1</span>, <span style="color:#ae81ff">5.2</span>, <span style="color:#ae81ff">5.3</span>); <span style="color:#75715e">// --&gt; true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string aaa {<span style="color:#e6db74">&#34;aaa&#34;</span>}; 
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string bcd {<span style="color:#e6db74">&#34;bcd&#34;</span>}; 
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string def {<span style="color:#e6db74">&#34;def&#34;</span>}; 
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>string zzz {<span style="color:#e6db74">&#34;zzz&#34;</span>}; 
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">=</span> within(aaa, zzz, bcd, def); <span style="color:#75715e">// --&gt; true 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    b <span style="color:#f92672">=</span> within(aaa, def, bcd, zzz); <span style="color:#75715e">// --&gt; false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> my_vec{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>}; 
+</span></span><span style="display:flex;"><span>    insert_all(my_vec, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>);
+</span></span><span style="display:flex;"><span>    for_each(my_vec.begin(), my_vec.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>t){cout <span style="color:#f92672">&lt;&lt;</span> t <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});  
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>15
+</span></span><span style="display:flex;"><span>abcdefgh
+</span></span><span style="display:flex;"><span>103.5
+</span></span><span style="display:flex;"><span>2
+</span></span><span style="display:flex;"><span>0
+</span></span><span style="display:flex;"><span>0
+</span></span><span style="display:flex;"><span>3
+</span></span><span style="display:flex;"><span>1 2 3 4 5 6 
+</span></span><span style="display:flex;"><span>1 2 3 4 5 6 7 
+</span></span><span style="display:flex;"><span>false
+</span></span><span style="display:flex;"><span>true
+</span></span><span style="display:flex;"><span>true
+</span></span><span style="display:flex;"><span>true
+</span></span><span style="display:flex;"><span>false
+</span></span><span style="display:flex;"><span>1 2 3 4 5 6 
+</span></span></code></pre></div></li>
 </ol>
 <p>参考：</p>
 <p><a href="https://en.cppreference.com/w/cpp/language/fold">fold expression</a></p>

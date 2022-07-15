@@ -9,8 +9,8 @@
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
 比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
-template &lt;typename T&gt; class addable { T val; public: addable(T v) : val{v} {} template &lt;typename U&gt; T add(U x) const { return val &#43; x; } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
-template &lt;typename U&gt; T add(U x) { auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) { n &#43;= x; } return copy; } 把两种情况结合在一起：">
+template &lt;typename T&gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &lt;typename U&gt;  T add(U x) const {  return val &#43; x;  } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
+template &lt;typename U&gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) {  n &#43;= x;  }  return copy; } 把两种情况结合在一起：">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -19,7 +19,7 @@ template &lt;typename U&gt; T add(U x) { auto copy (val); // Get a copy of the v
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -51,8 +51,8 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="C&#43;&#43;17 constexpr-if 简化编译" />
 <meta property="og:description" content="它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
 比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
-template &lt;typename T&gt; class addable { T val; public: addable(T v) : val{v} {} template &lt;typename U&gt; T add(U x) const { return val &#43; x; } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
-template &lt;typename U&gt; T add(U x) { auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) { n &#43;= x; } return copy; } 把两种情况结合在一起：" />
+template &lt;typename T&gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &lt;typename U&gt;  T add(U x) const {  return val &#43; x;  } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
+template &lt;typename U&gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) {  n &#43;= x;  }  return copy; } 把两种情况结合在一起：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-12T17:16:36&#43;08:00" />
@@ -65,8 +65,8 @@ template &lt;typename U&gt; T add(U x) { auto copy (val); // Get a copy of the v
 <meta name="twitter:title" content="C&#43;&#43;17 constexpr-if 简化编译"/>
 <meta name="twitter:description" content="它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
 比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
-template &lt;typename T&gt; class addable { T val; public: addable(T v) : val{v} {} template &lt;typename U&gt; T add(U x) const { return val &#43; x; } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
-template &lt;typename U&gt; T add(U x) { auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) { n &#43;= x; } return copy; } 把两种情况结合在一起："/>
+template &lt;typename T&gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &lt;typename U&gt;  T add(U x) const {  return val &#43; x;  } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
+template &lt;typename U&gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) {  n &#43;= x;  }  return copy; } 把两种情况结合在一起："/>
 
 
 <script type="application/ld+json">
@@ -95,11 +95,11 @@ template &lt;typename U&gt; T add(U x) { auto copy (val); // Get a copy of the v
   "@type": "BlogPosting",
   "headline": "C++17 constexpr-if 简化编译",
   "name": "C\u002b\u002b17 constexpr-if 简化编译",
-  "description": "它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化\n比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法\ntemplate \u0026lt;typename T\u0026gt; class addable { T val; public: addable(T v) : val{v} {} template \u0026lt;typename U\u0026gt; T add(U x) const { return val + x; } }; 假设类型 T 是 std::vector\u0026lt;something\u0026gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行\ntemplate \u0026lt;typename U\u0026gt; T add(U x) { auto copy (val); // Get a copy of the vector member  for (auto \u0026amp;n : copy) { n += x; } return copy; } 把两种情况结合在一起：",
+  "description": "它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化\n比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法\ntemplate \u0026lt;typename T\u0026gt; class addable {  T val; public:  addable(T v) : val{v} {}   template \u0026lt;typename U\u0026gt;  T add(U x) const {  return val + x;  } }; 假设类型 T 是 std::vector\u0026lt;something\u0026gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行\ntemplate \u0026lt;typename U\u0026gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto \u0026amp;n : copy) {  n += x;  }  return copy; } 把两种情况结合在一起：",
   "keywords": [
     "C++"
   ],
-  "articleBody": "它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化\n比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法\ntemplate typename T class addable { T val; public: addable(T v) : val{v} {} template typename U T add(U x) const { return val + x; } }; 假设类型 T 是 std::vector ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行\ntemplate typename U T add(U x) { auto copy (val); // Get a copy of the vector member  for (auto \u0026n : copy) { n += x; } return copy; } 把两种情况结合在一起：\ntemplate typename U T add(U x) const{ if constexpr(std::is_sameT, std::vectorU::value){ auto copy(val); for (auto \u0026n : copy){ n += x; } return copy; } else { return val + x; } } 使用 constexpr-if 的代码在编译完成后，程序的这一部分其实就不会有分支存在。有种方式类似于 constexpr-if，那就是 #if-#else 的预编译方式进行宏替换，不过这种方式在代码的构成方面不是那么优雅。\n在一个 constexpr-if-else 代码块中，可以有多个条件(注意：a 和 b 也可以依赖于模板参数，并不需要其为编译时常量)：\nif constexpr(a){ // do something } else if constexpr(b){ // do something else } else { // do something completely different } 之前的写法：\ntemplate typename T class addable{ T val; public: addable(T v):val{v}{} template typename U std::enable_if_tstd::is_sameT, std::vectorU::value, T add(U x) const { return val + x; } template typename U std::enable_if_tstd::is_sameT, std::vectorU::value, std::vectorU add (U x) const{ auto copy(val); for (auto \u0026n: copy){ n += x; } return copy; } }; 当编译器看到具有相同名称的不同模板函数并不得不选择其中一个时，一个重要的原则就起作用了：替换失败不是错误(SFINAE, Substitution Failure is not An Error)。这个例子中，就意味着如果函数的返回值来源一个错误的模板表示，无法推断得出，这时编译器不会将这种情况视为错误(和 std::enable_if 中的条件为 false 时的状态一样)。这样编译器就会去找函数的另外的实现。\n测试：\nint main() { auto t1 = addableint {1}.add(2); // is 3  cout  t1  endl; auto t2 = addablefloat {1.f}.add(2); // is 3.0  cout  t2  endl; auto t3 = addablestd::string {\"aa\"}.add(\"bb\"); // is \"aabb\"  cout  t3  endl; std::vectorint v{1, 2, 3}; auto t4 = addablestd::vectorint {v}.add(10); // is std::vector {11, 12, 13}  for_each(t4.begin(), t4.end(), [](const auto \u0026i){cout  i  \" \";}); cout  endl; std::vectorstd::string sv{\"a\", \"b\", \"c\"}; auto t5 = addablestd::vectorstd::string {sv}.add(std::string{\"z\"}); // is {\"az\", \"bz\", \"cz\"}  for_each(t5.begin(), t5.end(), [](const auto \u0026i){cout  i  \" \";}); cout  endl; return 0; } 输出：\n3 3 aabb 11 12 13 az bz cz ",
+  "articleBody": "它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化\n比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法\ntemplate typename T class addable {  T val; public:  addable(T v) : val{v} {}   template typename U  T add(U x) const {  return val + x;  } }; 假设类型 T 是 std::vector ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行\ntemplate typename U T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto \u0026n : copy) {  n += x;  }  return copy; } 把两种情况结合在一起：\ntemplate typename U T add(U x) const{  if constexpr(std::is_sameT, std::vectorU::value){  auto copy(val);  for (auto \u0026n : copy){  n += x;  }  return copy;  } else {  return val + x;  } } 使用 constexpr-if 的代码在编译完成后，程序的这一部分其实就不会有分支存在。有种方式类似于 constexpr-if，那就是 #if-#else 的预编译方式进行宏替换，不过这种方式在代码的构成方面不是那么优雅。\n在一个 constexpr-if-else 代码块中，可以有多个条件(注意：a 和 b 也可以依赖于模板参数，并不需要其为编译时常量)：\nif constexpr(a){  // do something } else if constexpr(b){  // do something else } else {  // do something completely different } 之前的写法：\ntemplate typename T class addable{  T val; public:  addable(T v):val{v}{}   template typename U  std::enable_if_tstd::is_sameT, std::vectorU::value, T  add(U x) const {  return val + x;  }   template typename U  std::enable_if_tstd::is_sameT, std::vectorU::value, std::vectorU  add (U x) const{  auto copy(val);  for (auto \u0026n: copy){  n += x;  }  return copy;  } }; 当编译器看到具有相同名称的不同模板函数并不得不选择其中一个时，一个重要的原则就起作用了：替换失败不是错误(SFINAE, Substitution Failure is not An Error)。这个例子中，就意味着如果函数的返回值来源一个错误的模板表示，无法推断得出，这时编译器不会将这种情况视为错误(和 std::enable_if 中的条件为 false 时的状态一样)。这样编译器就会去找函数的另外的实现。\n测试：\nint main() {  auto t1 = addableint {1}.add(2); // is 3  cout  t1  endl;  auto t2 = addablefloat {1.f}.add(2); // is 3.0  cout  t2  endl;  auto t3 = addablestd::string {\"aa\"}.add(\"bb\"); // is \"aabb\"  cout  t3  endl;  std::vectorint v{1, 2, 3};  auto t4 = addablestd::vectorint {v}.add(10); // is std::vector {11, 12, 13}  for_each(t4.begin(), t4.end(), [](const auto \u0026i){cout  i  \" \";});  cout  endl;  std::vectorstd::string sv{\"a\", \"b\", \"c\"};  auto t5 = addablestd::vectorstd::string {sv}.add(std::string{\"z\"}); // is {\"az\", \"bz\", \"cz\"}  for_each(t5.begin(), t5.end(), [](const auto \u0026i){cout  i  \" \";});  cout  endl;   return 0; } 输出：\n3 3 aabb 11 12 13 az bz cz ",
   "wordCount" : "319",
   "inLanguage": "en",
   "datePublished": "2022-04-12T17:16:36+08:00",
@@ -204,100 +204,100 @@ template &lt;typename U&gt; T add(U x) { auto copy (val); // Get a copy of the v
 
   <div class="post-content"><p>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化</p>
 <p>比如我们有一个简单的类，它的成员函数 add ，支持对 <code>U</code> 类型值与 <code>T</code> 类型值的加法</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">addable</span> { 
-    T val; 
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span> 
-    addable(T v) <span style="color:#f92672">:</span> val{v} {} 
-    
-    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
-    T add(U x) <span style="color:#66d9ef">const</span> { 
-        <span style="color:#66d9ef">return</span> val <span style="color:#f92672">+</span> x; 
-    }
-};
-</code></pre></div><p>假设类型 T 是 <code>std::vector&lt;something&gt;</code> ，而类型 <code>U</code> 是 <code>int</code>。这里就有问题了，为整个 <code>vector</code> 添加整数是为
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">addable</span> { 
+</span></span><span style="display:flex;"><span>    T val; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span> 
+</span></span><span style="display:flex;"><span>    addable(T v) <span style="color:#f92672">:</span> val{v} {} 
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span>    T add(U x) <span style="color:#66d9ef">const</span> { 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> val <span style="color:#f92672">+</span> x; 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>假设类型 T 是 <code>std::vector&lt;something&gt;</code> ，而类型 <code>U</code> 是 <code>int</code>。这里就有问题了，为整个 <code>vector</code> 添加整数是为
 了什么呢？应该是对 <code>vector</code> 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
-T add(U x) { 
-    <span style="color:#66d9ef">auto</span> <span style="color:#a6e22e">copy</span> (val); <span style="color:#75715e">// Get a copy of the vector member 
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>n : copy) { 
-        n <span style="color:#f92672">+=</span> x; 
-    }
-    <span style="color:#66d9ef">return</span> copy; 
-}
-</code></pre></div><p>把两种情况结合在一起：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
-T add(U x) <span style="color:#66d9ef">const</span>{ 
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">constexpr</span>(std<span style="color:#f92672">::</span>is_same<span style="color:#f92672">&lt;</span>T, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;&gt;::</span>value){ 
-        <span style="color:#66d9ef">auto</span> copy(val); 
-        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>n : copy){ 
-            n <span style="color:#f92672">+=</span> x; 
-        }
-        <span style="color:#66d9ef">return</span> copy; 
-    } <span style="color:#66d9ef">else</span> { 
-        <span style="color:#66d9ef">return</span> val <span style="color:#f92672">+</span> x; 
-    } 
-}
-</code></pre></div><p>使用 <code>constexpr-if</code> 的代码在编译完成后，程序的这一部分其实就不会有分支存在。有种方式类似于 <code>constexpr-if</code>，那就是 <code>#if-#else</code> 的预编译方式进行宏替换，不过这种方式在代码的构成方面不是那么优雅。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span>T add(U x) { 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> <span style="color:#a6e22e">copy</span> (val); <span style="color:#75715e">// Get a copy of the vector member 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>n : copy) { 
+</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">+=</span> x; 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> copy; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>把两种情况结合在一起：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span>T add(U x) <span style="color:#66d9ef">const</span>{ 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">constexpr</span>(std<span style="color:#f92672">::</span>is_same<span style="color:#f92672">&lt;</span>T, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;&gt;::</span>value){ 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> copy(val); 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>n : copy){ 
+</span></span><span style="display:flex;"><span>            n <span style="color:#f92672">+=</span> x; 
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> copy; 
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> { 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> val <span style="color:#f92672">+</span> x; 
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>使用 <code>constexpr-if</code> 的代码在编译完成后，程序的这一部分其实就不会有分支存在。有种方式类似于 <code>constexpr-if</code>，那就是 <code>#if-#else</code> 的预编译方式进行宏替换，不过这种方式在代码的构成方面不是那么优雅。</p>
 <p>在一个 <code>constexpr-if-else</code> 代码块中，可以有多个条件(注意：<code>a</code> 和 <code>b</code> 也可以依赖于模板参数，并不需要其为<strong>编译时常量</strong>)：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">constexpr</span>(a){ 
-    <span style="color:#75715e">// do something } 
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">constexpr</span>(b){ 
-    <span style="color:#75715e">// do something else 
-</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> { 
-    <span style="color:#75715e">// do something completely different 
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p>之前的写法：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> 
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">addable</span>{ 
-    T val; 
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span> 
-    addable(T v)<span style="color:#f92672">:</span>val{v}{} 
-    
-    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
-    std<span style="color:#f92672">::</span>enable_if_t<span style="color:#f92672">&lt;!</span>std<span style="color:#f92672">::</span>is_same<span style="color:#f92672">&lt;</span>T, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;&gt;::</span>value, T<span style="color:#f92672">&gt;</span> 
-    add(U x) <span style="color:#66d9ef">const</span> { 
-        <span style="color:#66d9ef">return</span> val <span style="color:#f92672">+</span> x; 
-    }
-    
-    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
-    std<span style="color:#f92672">::</span>enable_if_t<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>is_same<span style="color:#f92672">&lt;</span>T, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;&gt;::</span>value, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;&gt;</span> 
-    add (U x) <span style="color:#66d9ef">const</span>{ 
-        <span style="color:#66d9ef">auto</span> <span style="color:#a6e22e">copy</span>(val); 
-        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>n: copy){ 
-            n <span style="color:#f92672">+=</span> x; 
-        }
-        <span style="color:#66d9ef">return</span> copy; 
-    } 
-};
-</code></pre></div><p>当编译器看到具有相同名称的不同模板函数并不得不选择其中一个时，一个重要的原则就起作用了：<strong>替换失败不是错误</strong>(<code>SFINAE, Substitution Failure is not An Error</code>)。这个例子中，就意味着如果函数的返回值来源一个错误的模板表示，无法推断得出，这时编译器不会将这种情况视为错误(和 <code>std::enable_if</code> 中的条件为 <code>false</code> 时的状态一样)。这样编译器就会去找函数的另外的实现。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">constexpr</span>(a){ 
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// do something } 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#66d9ef">constexpr</span>(b){ 
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// do something else 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> { 
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// do something completely different 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>之前的写法：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">addable</span>{ 
+</span></span><span style="display:flex;"><span>    T val; 
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span> 
+</span></span><span style="display:flex;"><span>    addable(T v)<span style="color:#f92672">:</span>val{v}{} 
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>enable_if_t<span style="color:#f92672">&lt;!</span>std<span style="color:#f92672">::</span>is_same<span style="color:#f92672">&lt;</span>T, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;&gt;::</span>value, T<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span>    add(U x) <span style="color:#66d9ef">const</span> { 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> val <span style="color:#f92672">+</span> x; 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> U<span style="color:#f92672">&gt;</span> 
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>enable_if_t<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>is_same<span style="color:#f92672">&lt;</span>T, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;&gt;::</span>value, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>U<span style="color:#f92672">&gt;&gt;</span> 
+</span></span><span style="display:flex;"><span>    add (U x) <span style="color:#66d9ef">const</span>{ 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> <span style="color:#a6e22e">copy</span>(val); 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>n: copy){ 
+</span></span><span style="display:flex;"><span>            n <span style="color:#f92672">+=</span> x; 
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> copy; 
+</span></span><span style="display:flex;"><span>    } 
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>当编译器看到具有相同名称的不同模板函数并不得不选择其中一个时，一个重要的原则就起作用了：<strong>替换失败不是错误</strong>(<code>SFINAE, Substitution Failure is not An Error</code>)。这个例子中，就意味着如果函数的返回值来源一个错误的模板表示，无法推断得出，这时编译器不会将这种情况视为错误(和 <code>std::enable_if</code> 中的条件为 <code>false</code> 时的状态一样)。这样编译器就会去找函数的另外的实现。</p>
 <p>测试：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{    
-    <span style="color:#66d9ef">auto</span> t1 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> {<span style="color:#ae81ff">1</span>}.add(<span style="color:#ae81ff">2</span>); <span style="color:#75715e">// is 3
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> t1 <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">auto</span> t2 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span> {<span style="color:#ae81ff">1.f</span>}.add(<span style="color:#ae81ff">2</span>); <span style="color:#75715e">// is 3.0 
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> t2 <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">auto</span> t3 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> {<span style="color:#e6db74">&#34;aa&#34;</span>}.add(<span style="color:#e6db74">&#34;bb&#34;</span>); <span style="color:#75715e">// is &#34;aabb&#34;
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> t3 <span style="color:#f92672">&lt;&lt;</span> endl; 
-    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>}; 
-    <span style="color:#66d9ef">auto</span> t4 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> {v}.add(<span style="color:#ae81ff">10</span>); <span style="color:#75715e">// is std::vector&lt;int&gt; {11, 12, 13} 
-</span><span style="color:#75715e"></span>    for_each(t4.begin(), t4.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>i){cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});
-    cout <span style="color:#f92672">&lt;&lt;</span> endl;
-    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> sv{<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>, <span style="color:#e6db74">&#34;c&#34;</span>}; 
-    <span style="color:#66d9ef">auto</span> t5 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;&gt;</span> {sv}.add(std<span style="color:#f92672">::</span>string{<span style="color:#e6db74">&#34;z&#34;</span>}); <span style="color:#75715e">// is {&#34;az&#34;, &#34;bz&#34;, &#34;cz&#34;} 
-</span><span style="color:#75715e"></span>    for_each(t5.begin(), t5.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>i){cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});
-    cout <span style="color:#f92672">&lt;&lt;</span> endl;
-    
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">3
-3
-aabb
-11 12 13
-az bz cz 
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> t1 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> {<span style="color:#ae81ff">1</span>}.add(<span style="color:#ae81ff">2</span>); <span style="color:#75715e">// is 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> t1 <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> t2 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span> {<span style="color:#ae81ff">1.f</span>}.add(<span style="color:#ae81ff">2</span>); <span style="color:#75715e">// is 3.0 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> t2 <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> t3 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> {<span style="color:#e6db74">&#34;aa&#34;</span>}.add(<span style="color:#e6db74">&#34;bb&#34;</span>); <span style="color:#75715e">// is &#34;aabb&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> t3 <span style="color:#f92672">&lt;&lt;</span> endl; 
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>}; 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> t4 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> {v}.add(<span style="color:#ae81ff">10</span>); <span style="color:#75715e">// is std::vector&lt;int&gt; {11, 12, 13} 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    for_each(t4.begin(), t4.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>i){cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;</span> sv{<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;b&#34;</span>, <span style="color:#e6db74">&#34;c&#34;</span>}; 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> t5 <span style="color:#f92672">=</span> addable<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>string<span style="color:#f92672">&gt;&gt;</span> {sv}.add(std<span style="color:#f92672">::</span>string{<span style="color:#e6db74">&#34;z&#34;</span>}); <span style="color:#75715e">// is {&#34;az&#34;, &#34;bz&#34;, &#34;cz&#34;} 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    for_each(t5.begin(), t5.end(), [](<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>i){cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;});
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>3
+</span></span><span style="display:flex;"><span>3
+</span></span><span style="display:flex;"><span>aabb
+</span></span><span style="display:flex;"><span>11 12 13
+</span></span><span style="display:flex;"><span>az bz cz 
+</span></span></code></pre></div>
 
   </div>
 

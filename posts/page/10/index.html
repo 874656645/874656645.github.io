@@ -160,13 +160,62 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——队列的实现方式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>栈的物理实现有 顺序队列 和 链式队列
+一、顺序队列 用向量存储队列元素，用两个变量分别指向队列的前端(front)和尾端(rear)
+ 关键是如何防止假溢出    队列溢出
+ 上溢 下溢 假溢出：当 rear = mSize-1 时，再作插入运算就会产生溢出，如果这时队列的前端还有许多空位置，这种现象称为假溢出    循环队列
+ 为了解决假溢出的问题，需要采用循环队列的方式： % mSize 另外一个问题就是如何区分空队列还是满队列？空一个队列空间，空队列状态时，令 front = rear，若 (rear &#43; 1) % mSize == front，我们认为此时队列已满，但实际上 rear 指向的空间并没有被利用    循环队列类定义
+  template &lt;class T&gt; class arrQueue: public Queue&lt;T&gt; { private:  int mSize; // 存放队列的数组的大小  int front; // 表示队头所在位置的下标  int rear; // 表示待入队元素所在位置的下标  T *qu; // 存放类型为T的队列元素的数组 public: // 队列的运算集  arrQueue(int size) { // 创建队列的实例  mSize = size &#43; 1; // 浪费一个存储空间，以区别队列空和队列满  qu = new T[mSize];  front = rear = 0;  }  ~arrQueue() { // 消除该实例，并释放其空间  delete[] qu;  } }  // 入队操作 template&lt;class T&gt; bool arrQueue&lt;T&gt; :: enQueue(const T item) {  // item入队，插入队尾  if (((rear &#43; 1 ) % mSize) == front) {  cout &lt;&lt; &#34;队列已满，溢出&#34; &lt;&lt; endl;  return false;  }  qu[rear] = item;  rear = (rear &#43; 1) % mSize; // 循环后继  return true; }  // 出队操作 bool arrQueue&lt;T&gt; :: deQueue(T&amp; item) {  // 返回队头元素并从队列中删除  if ( front == rear) {  cout &lt;&lt; &#34;队列为空&#34; &lt;&lt; endl;  return false;  }  item = qu[front];  front = (front &#43; 1) % mSize; // 这里并没有真的删除队列空间的元素，而是把头指针循环后移  return true; } 二、链式队列   用单链表方式存储，队列中每个元素对于链表中的一个结点...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-05 12:22:44 +0800 CST'>April 5, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——队列的实现方式" href="https://874656645.github.io/posts/164-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>数据结构与算法——队列
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、队列   队列特点
+ 访问受限的线性表 先进先出 插入在一端进行，删除在另一端进行    主要元素
+ 队头 队尾    主要操作
+ 入队列 出队列 取队首元素 判断队列是否为空    二、队列的抽象数据类型 template &lt;class T&gt; class Queue {  // 队列的运算集 public:  // 变为空队列  void clear();  // 将item插入队尾，成功则返回真，否则返回假  bool enQueue(const T item);  // 返回队头元素并将其从队列中删除，成功则返回真  bool deQueue(T &amp; item);  // 返回队头元素，但不删除，成功则返回真  bool getFront(T &amp; item);  // 返回真，若队列已空  bool isEmpty();  // 返回真，若队列已满  bool isFull(); }; 三、队列的实现方式 队列的物理实现又分为顺序队列和链式队列</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-05 09:03:06 +0800 CST'>April 5, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——队列" href="https://874656645.github.io/posts/163-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>数据结构与算法——栈的应用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>栈的特点是后进先出，所以常用来处理具有递归结构的数据
+ 深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义
+ 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$  后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
+    中缀表达式
+ 运算符在中间 需要括号改变优先级  例如：$4\ *\ x\ *\ (2\ *\ x\ &#43;\ a)\ –\ c$
+  后缀表达式...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-04 14:12:42 +0800 CST'>April 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——栈的应用" href="https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——栈的实现方式
     </h2>
   </header>
   <section class="entry-content">
     <p>栈的物理实现有 顺序栈 和 链式栈
 一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：
-template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item; return true; } } bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：...</p>
+template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size;  top = -1;  st = new T[mSize];  }  arrStack() { // 创建一个顺序栈的实例  top = -1;  }  ~arrStack() {  delete [] st;  }  void clear() {  top = -1;  } // 清空栈 };  bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl;  return false;  } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item;  return true;  } }  bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl;  return false;  } else {  item = st[top--]; // 返回栈顶，并缩减1  return true;  } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：...</p>
   </section>
   <footer class="entry-footer"><span title='2022-04-03 20:03:03 +0800 CST'>April 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——栈的实现方式" href="https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/"></a>
@@ -182,58 +231,6 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
   </section>
   <footer class="entry-footer"><span title='2022-03-31 22:04:28 +0800 CST'>March 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——栈" href="https://874656645.github.io/posts/160-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>WebIDL Binder 提供一种简单、轻量级的方法来绑定 C&#43;&#43; 代码。
-WebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C&#43;&#43; 和 JavaScript 粘合在一起。
-该绑定器支持可以用 WebIDL 表达的 c&#43;&#43; 类型的子集。这个子集对于大多数情况来说已经足够了。
-接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：
- 创建一个 WebIDL 文件，用来描述 C&#43;&#43; 接口； 使用绑定器生成 C&#43;&#43; 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C&#43;&#43; 类型的 WebIDL 接口文件。该文件将复制 C&#43;&#43; 头文件中的一些信息。比如，我们想绑定下面的 C&#43;&#43; 类（my_classes.h）：
-class Foo { public: int getVal(); void setVal(int v); private: int m_val{0}; }; class Bar { public: Bar(long val); ~Bar(); void doSomething(); private: int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-29 11:00:18 +0800 CST'>March 29, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码" href="https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——C&#43;&#43; 调用 Js 回调函数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C&#43;&#43; 调用 JavaScript 的方法：
- 使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C&#43;&#43; 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：
-int EMSCRIPTEN_KEEPALIVE runScript(){ emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;); emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;); return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
-  EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。
-#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), { alert(&#39;hello world!&#39;); throw &#39;all done&#39;; // exception }); EM_JS(void, take_args, (int x, float y), { console....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-26 10:34:44 +0800 CST'>March 26, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 调用 Js 回调函数" href="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——js 调用 C&#43;&#43; 接口
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Emscripten 提供了许多方法来在 JavaScript 和编译后的 C 或 c&#43;&#43; 之间连接和交互，我们先来看看 js 调用 WASM 的情况。
-一、使用 ccall 或 cwrap callall() 调用带有指定参数的编译过的 C 函数 并返回结果，而 cwrap() 封装了编译过的 C 函数并返回一个可以正常调用的 JavaScript 函数。因此，如果计划多次调用一个编译后的函数，cwrap() 会更有用。
-例如下面的 C main.cpp 文件：
-#include &lt;math.h&gt; extern &#34;C&#34; { int int_sqrt(int x) { return sqrt(x); } } 使用下面的命令进行编译：
-emcc main.cpp -o function.html -s EXPORTED_FUNCTIONS=_int_sqrt -s EXPORTED_RUNTIME_METHODS=ccall,cwrap
-EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的函数会被删掉），EXPORTED_RUNTIME_METHODS 告诉编译器我们需要用到的运行时方法 ccall 和 cwrap，否则这些方法也会被优化掉
-编译后就可以在 js 中通过 cwrap 使用了：
-int_sqrt = Module.cwrap(&#39;int_sqrt&#39;, &#39;number&#39;, [&#39;number&#39;]) int_sqrt(12) // return 3 int_sqrt(28) // return 5 第一个参数是被 wrap 的 C 函数的名字（没有下划线），第二个参数是函数返回值在类型（如果没有返回值，使用 JavaScript 的 null 类型），第三个参数是一个参数数组（如果没有参数，可以省略）。...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-25 10:06:38 +0800 CST'>March 25, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——js 调用 C&#43;&#43; 接口" href="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

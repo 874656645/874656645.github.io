@@ -23,7 +23,7 @@
 推荐将 像素流送插件（Pixel Streaming Input） 组件添加到 PlayerController 中。
 三、从播放器页面到 UE 的通信 app.js 文件提供两个可在 HTML 播放器页面进行调用的 JavaScript 函数，以便用户从浏览器向虚幻引擎程序发送事件和命令：emitCommand 和 emitUIInteraction 函数。
   js 代码：
-// 从播放器页面到UE4的通信  let testButton = document.</description>
+ // 从播放器页面到UE4的通信  let testButton = document.</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@
       <description>有两种方式启动三维渲染服务器  一、方式一：使用 UE Editor 作为渲染服务器  启用像素流送插件
 【Pixel Streaming】 启用触控设备输入（可选）
 【编辑（Edit）】 &amp;gt; 【项目设置（Project Settings）】 &amp;gt; 【引擎（Engine）】 &amp;gt; 【输入（Input category）】 下启用 【固定显示触控界面（Always Show Touch Interface）】 设置 设置额外启动参数
-【编辑（Edit）】 &amp;gt; 【编辑器偏好（Editor Preferences&amp;hellip;）】 &amp;gt; 【关卡编辑器（Level Editor）】 &amp;gt; 【播放（Play）】 &amp;gt; 【额外启动参数（Additional Launch Parameters）】中添加参数 -AudioMixer -PixelStreamingIP=localhost -PixelStreamingPort=8888 启动游戏
+【编辑（Edit）】 &amp;gt; 【编辑器偏好（Editor Preferences&amp;hellip;）】 &amp;gt; 【关卡编辑器（Level Editor）】 &amp;gt; 【播放（Play）】 &amp;gt; 【额外启动参数（Additional Launch Parameters）】中添加参数 -AudioMixer -PixelStreamingIP=localhost -PixelStreamingPort=8888 -AllowPixelStreamingCommands 启动游戏
 通过独立进程游戏的模式启动游戏
   二、方式二：通过打包的程序  打包前对 UE Editor 进行配置，参照方式一的前两步 启动【打包项目】
  设置启动程序的命令行标签  按住 Alt 键并拖动 .exe 文件即可在相同文件夹中（或在其他任意处）新建一个快捷方式 右键点击快捷方式并从上下文菜单中选择 属性（Properties） 在 快捷方式属性（Shortcut Properties） 窗口的 快捷方式（Shortcut） 选项卡中，在 目标（Target） 域的末尾附加文本 -AudioMixer -PixelStreamingIP=localhost -PixelStreamingPort=8888 -RenderOffScreen 并点击 确认    三、启动服务器 启动一个服务，在虚幻引擎应用程序和客户端浏览器间建立点对点的连接（WebRTC）</description>
@@ -80,7 +80,7 @@
       
       <guid>https://874656645.github.io/posts/198-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF%E5%92%8C%E8%BD%AF%E4%BB%B6/</guid>
       <description>软件和插件：
- Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&#39; `CityEngine VR Experience for Unreal Engine&#39; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera  蓝图开发：
+ Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&amp;rsquo; `CityEngine VR Experience for Unreal Engine&amp;rsquo; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera  蓝图开发：
  通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：
  材质 PBR 粒子效果（magic_circle_creator） 光影效果 天气模拟（天气插件 Ultra Dynamic Sky） 后处理：环境光遮蔽、MSAA、景深与镜头效果、屏幕空间反射、扫描线、泛光 自发光材质  数据：</description>
     </item>
@@ -94,7 +94,7 @@
       <description>注：ArcMap 版本为 10.6.1
 一、将 shape 字段处理为 WKT 文本
  在属性表中添加一个 Text 类型的字段，大小尽量大一些； 使用字段计算功能 shape file 的字符串类型字段的大小有限制（254）  二、
-def MySub(feat): partnum = 0 # Count the number of points in the current multipart feature partcount = feat.partCount pntcount = 0 str = &amp;#39;&amp;#39; # Enter while loop for each part in the feature (if a singlepart  # feature, this will occur only once) while partnum &amp;lt; partcount: part = feat.</description>
+def MySub(feat):  partnum = 0   # Count the number of points in the current multipart feature  partcount = feat.partCount  pntcount = 0  str = &amp;#39;&amp;#39;   # Enter while loop for each part in the feature (if a singlepart   # feature, this will occur only once)  while partnum &amp;lt; partcount:  part = feat.</description>
     </item>
     
     <item>
@@ -267,8 +267,8 @@ ArcMap WMTS</description>
       
       <guid>https://874656645.github.io/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/</guid>
       <description>1、随机数 python 脚本
-import random def randNum(): res = random.randint(1, 7) return res 2、自增 python 脚本
-total = 0 def accumulate(increment): global total if total: total += increment else: total = increment return total </description>
+import random def randNum():  res = random.randint(1, 7)  return res 2、自增 python 脚本
+total = 0 def accumulate(increment):  global total  if total:  total += increment  else:  total = increment  return total </description>
     </item>
     
     <item>

@@ -145,6 +145,48 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43; 内存对齐
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>C/C&#43;&#43;内存对齐详解
+内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
+  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
+注意：上面两条规则都需要得到满足
+注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
+  // 64 位程序 struct {  int i;  char c1;  char c2; }x1;  struct{  char c1;  int i;  char c2; }x2;  struct{  char c1;  char c2;  int i; }x3; struct {  short i;  char c1;  char c2; }y1;  struct{  char c1;  short i;  char c2; }y2;  struct{  char c1;  char c2;  short i; }y3;  int main() {  printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8   cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl;  printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-06 18:13:09 +0800 CST'>January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 内存对齐" href="https://874656645.github.io/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>自定义智能指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public:  MyAutoPtr(T * t){  ptr = t;  }  ~MyAutoPtr(){  if(ptr != NULL){  delete ptr;  ptr = NULL;  }  }  T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr;  }  T&amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr;  } private:  T* ptr; }; class A{ public:  A(int a){  cout &lt;&lt; &#34;A(int)....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43; 多线程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、进程与线程  进程是资源分配和调度的一个独立单位；而线程是进程的一个实体，是 CPU 调度和分配的基本单位 同一个进程中的多个线程的内存资源是共享的，各线程都可以改变进程中的变量。因此在执行多线程运算的时候要注意执行顺序  二、并行与并发  并行（parallellism）指的是多个任务在同一时刻同时在执行 并发（concurrency）是指在一个时间段内，多个任务交替进行。虽然看起来像在同时执行，但其实是交替的  三、多任务处理 多线程是多任务处理的一种特殊形式，一般情况下，有基于进程和基于线程的两种类型的多任务处理方式。
+ 基于进程的多任务处理是程序的并发执行 基于线程的多任务处理是同一程序的片段的并发执行  四、C&#43;&#43;11 线程管理 thread 库  C&#43;&#43;11 提供了多线程库，使用时需要 #include &lt;thread&gt; 头文件，该头文件主要包含了对线程的管理类 std::thread 以及其他管理线程相关的类 每个应用程序至少有一个进程，而每个进程至少有一个主线程，除了主线程外，在一个进程中还可以创建多个子线程。每个线程都需要一个入口函数，入口函数返回退出，该线程也会退出，主线程就是以 main 函数作为入口函数的线程 主线程退出后，运行中的子线程也会被销毁 std::thread 的构造函数需要的是可调用（callable）类型，除了函数外，还可以调用 lambda 表达式、重载了 () 运算符的类的实例 把函数对象传入 std::thread 时，应传入函数名称（不带括号） 当启动一个线程后，一定要在该线程 thread 销毁前，调用 join() 或者 detach()，确定以何种方式等待线程执行结束  detach 方式，启动的线程自主在后台运行，当前的代码继续往下执行，不等待新线程结束 join 方式，等待关联的线程完成，才会继续执行 join() 后的代码 在以 detach 的方式执行线程时，要将线程访问的局部数据复制到线程的空间（使用按值传递），一定要确保线程没有使用局部变量的引用或者指针，除非你能肯定该线程会在局部作用域结束前执行结束    1、调用全局函数启动线程 #include &lt;thread&gt; using namespace std;  void func(int i){  cout &lt;&lt; i &lt;&lt; endl; } int main() {  for(int i = 0; i &lt; 4; &#43;&#43;i){  // 创建一个线程t，第一个参数为调用的函数，第二个参数为传递的参数  thread t(func, i);  // 表示允许该线程在后台运行  t....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-04 14:02:20 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 多线程" href="https://874656645.github.io/posts/61-c&#43;&#43;-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>临时变量不能绑定 no-const 左值引用类型
     </h2>
   </header>
@@ -157,7 +199,7 @@ c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前�
 std::move() 返回的也是一个右值
 对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
 一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
-class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt;a &#43; t.a; return temp; } void printT(T &amp;t){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; t....</p>
+class T{ public:  T(int v){  a = v;  }  T operator&#43;(T &amp;t){  T temp = this-&gt;a &#43; t.a;  return temp;  }  void printT(T &amp;t){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; t....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-04 10:31:45 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 临时变量不能绑定 no-const 左值引用类型" href="https://874656645.github.io/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/"></a>
@@ -170,47 +212,10 @@ class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt
   </header>
   <section class="entry-content">
     <p>还有类型转换函数
-#include &lt;iostream&gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c); friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public: Complex(){ cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &lt;&lt; &#34;Complex(int, int)...&#34; &lt;&lt; endl; this-&gt;a = a; this-&gt;b = b; } ~Complex(){ cout &lt;&lt; &#34;~Complex()....</p>
+#include &lt;iostream&gt; using namespace std;  class Complex{  // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c);  friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public:  Complex(){  cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout &lt;&lt; &#34;Complex(int, int)....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-03 13:54:11 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 操作符重载" href="https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>具有链表特性的类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>买卖货物问题：
-#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 具有链表特性的类" href="https://874656645.github.io/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>STL 总结
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL 常用的容器有哪些以及各自的特点是什么?    名称 特点     vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector 扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-30 10:34:27 +0800 CST'>December 30, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to STL 总结" href="https://874656645.github.io/posts/56-stl-%E6%80%BB%E7%BB%93/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>vector
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>vector 常用操作 #include &lt;iostream&gt;#include &lt;vector&gt; int main() { //1.定义和初始化  vector&lt;int&gt; vec1; //默认初始化，vec1为空  vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2  vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&lt;int&gt; vec4(10); //10个值为0的元素  vector&lt;int&gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); // 尾部添加元素  vec1.insert(vec1.end(),5,3); // 从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); // 删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()&#43;2); // 删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); // 清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&lt;int&gt;().swap(V); // 利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  // 且只有存储对象时才有效  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-29 19:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to vector" href="https://874656645.github.io/posts/55-vector/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
