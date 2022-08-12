@@ -160,68 +160,80 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>单例模式
+    <h2>Linux 常用命令
     </h2>
   </header>
   <section class="entry-content">
-    <p>单例在内存中只有一份，在内存中不会占用太多，程序退出时会随着程序统一释放内存，所以可以不必特意释放  一、懒汉式 不是线程安全的，所以多线程使用要加锁
-class Singleton{ public:  static Singleton* getInstance(){  if(s_instance == nullptr){  s_instance = new Singleton;  }  return s_instance;  }   // 可有可无，程序结束时，系统会自动回收程序的所有内存  class Garbo{  ~Garbo(){  if(s_instance){  cout &lt;&lt; &#34;gc...&#34; &lt;&lt; endl;  delete s_instance;  }  }  };  private:  Singleton(){  cout &lt;&lt; &#34;Singleton()...&#34; &lt;&lt; endl;  }  Singleton(const Singleton&amp;) = delete;  Singleton&amp; operator=(const Singleton&amp;) = delete;   static Singleton* s_instance;  static Garbo s_gc; }; Singleton* Singleton::s_instance = nullptr; int main() {  cout &lt;&lt; &#34;main()....</p>
+    <p>Linux 命令大全
+一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装软件 sudo apt install tree
+3. 删除不需要的包 sudo apt autoremove
+4. 查看已安装的软件 dpkg -l | grep openssh-server
+5. 查看软件安装的路径 dpkg -L openssh-server
+whereis gdb
+二、shell 操作和常用命令 1、查看输入的命令历史 history
+2、删除光标前面的字符串 ctrl &#43; u
+3、删除光标后面的字符串 ctrl &#43; k
+4、光标定位到头部 ctrl &#43; a
+5、光标定位到尾部 ctrl &#43; e
+6、命令、路径补全 Tab
+7、缩写别名 alias
+8、查看说明 man 5 passwd
+9、宿主目录 ~
+10、查看目录内容 tree ~...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 20:43:34 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 单例模式" href="https://874656645.github.io/posts/107-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>抽象工厂模式
+    <h2>char* 数组
     </h2>
   </header>
   <section class="entry-content">
-    <p> 抽象工厂针对的是产品族，而不是产品等级 产品族：同一产地或者同一厂商，功能不同 产品等级：功能相同，产地或者厂商不同 对于增加产品族，符合开闭原则 对于增加产品等级，不符合开闭原则  // 抽象工厂模式 class AbstractApple{ public:  virtual void showName() = 0; }; class AbstractBanana{ public:  virtual void showName() = 0; }; class AbstractPear{ public:  virtual void showName() = 0; }; class ChinaApple : public AbstractApple{ public:  void showName() override{  cout &lt;&lt; &#34;我是中国苹果！&#34; &lt;&lt; endl;  } }; class ChinaBanana : public AbstractBanana{ public:  void showName() override{  cout &lt;&lt; &#34;我是中国香蕉！&#34; &lt;&lt; endl;  } }; class ChinaPear : public AbstractPear{ public:  void showName() override{  cout &lt;&lt; &#34;我是中国鸭梨！&#34; &lt;&lt; endl;  } }; class USAApple : public AbstractApple{ public:  void showName() override{  cout &lt;&lt; &#34;我是美国苹果！&#34; &lt;&lt; endl;  } }; class USABanana : public AbstractBanana{ public:  void showName() override{  cout &lt;&lt; &#34;我是美国香蕉！&#34; &lt;&lt; endl;  } }; class USAPear : public AbstractPear{ public:  void showName() override{  cout &lt;&lt; &#34;我是美国鸭梨！&#34; &lt;&lt; endl;  } }; class JapanApple : public AbstractApple{ public:  void showName() override{  cout &lt;&lt; &#34;我是日本苹果！&#34; &lt;&lt; endl;  } }; class JapanBanana : public AbstractBanana{ public:  void showName() override{  cout &lt;&lt; &#34;我是日本香蕉！&#34; &lt;&lt; endl;  } }; class JapanPear : public AbstractPear{ public:  void showName() override{  cout &lt;&lt; &#34;我是日本鸭梨！&#34; &lt;&lt; endl;  } }; class AbstractFactory{ public:  virtual AbstractApple* CreateApple() = 0;  virtual AbstractBanana* CreateBanana() = 0;  virtual AbstractPear* CreatePear() = 0; }; class ChinaFactory : public AbstractFactory{ public:  AbstractApple* CreateApple() override{  return new ChinaApple;  }  AbstractBanana* CreateBanana() override{  return new ChinaBanana;  }  AbstractPear* CreatePear() override{  return new ChinaPear;  } }; class USAFactory : public AbstractFactory{ public:  AbstractApple* CreateApple() override{  return new USAApple;  }  AbstractBanana* CreateBanana() override{  return new USABanana;  }  AbstractPear* CreatePear() override{  return new USAPear;  } }; class JapanFactory : public AbstractFactory{ public:  AbstractApple* CreateApple() override{  return new JapanApple;  }  AbstractBanana* CreateBanana() override{  return new JapanBanana;  }  AbstractPear* CreatePear() override{  return new JapanPear;  } }; int main() {  AbstractFactory* factory = nullptr;  AbstractApple* apple = nullptr;  AbstractBanana* banana = nullptr;  AbstractPear* pear = nullptr;  // 中国  factory = new ChinaFactory;  apple = factory-&gt;CreateApple();  apple-&gt;showName();  banana = factory-&gt;CreateBanana();  banana-&gt;showName();  pear = factory-&gt;CreatePear();  pear-&gt;showName();  delete pear;  delete banana;  delete apple;  delete factory;  // 美国  factory = new USAFactory;  apple = factory-&gt;CreateApple();  apple-&gt;showName();  banana = factory-&gt;CreateBanana();  banana-&gt;showName();  pear = factory-&gt;CreatePear();  pear-&gt;showName();  delete pear;  delete banana;  delete apple;  delete factory;  // 日本  factory = new JapanFactory;  apple = factory-&gt;CreateApple();  apple-&gt;showName();  banana = factory-&gt;CreateBanana();  banana-&gt;showName();  pear = factory-&gt;CreatePear();  pear-&gt;showName();  delete pear;  delete banana;  delete apple;  delete factory;  return 0; } </p>
+    <p>void printArr(const char ** p, int len){  for(int i = 0; i &lt; len; &#43;&#43;i){  cout &lt;&lt; p[i] &lt;&lt; endl;  } }  void sortSelect(const char ** p, int len){  for(int i = 0; i &lt; len - 1; &#43;&#43;i){  int max = i;  for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){  if(p[j] &gt; p[max]){  max = j;  }  }  // 交换  if(i !...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 17:44:49 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 抽象工厂模式" href="https://874656645.github.io/posts/106-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>工厂方法模式
+    <h2>装饰器模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>工厂方法模式 = 简单工厂模式 &#43; 开闭原则
-类的个数成倍增多，维护成本很高
-适用场景：
- 客户端不知道它所需要的对象的类 抽象工厂类通过其子类来指定创建哪个对象  // 工厂方法模式 class AbstractFruit{ public:  virtual void showName() = 0; }; class Apple : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl;  } }; class Banana : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl;  } }; class Pear : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl;  } }; // 抽象工厂 class AbstractFruitFactory{ public:  virtual AbstractFruit* CreateFruit() = 0; }; class AppleFactory : public AbstractFruitFactory{ public:  AbstractFruit* CreateFruit() override{  return new Apple;  } }; class PearFactory : public AbstractFruitFactory{ public:  AbstractFruit* CreateFruit() override{  return new Pear;  } }; class BananaFactory : public AbstractFruitFactory{ public:  AbstractFruit* CreateFruit() override{  return new Banana;  } }; int main() {  AbstractFruitFactory* factory = nullptr;  AbstractFruit* fruit = nullptr;  factory = new AppleFactory;  fruit = factory-&gt;CreateFruit();  fruit-&gt;showName();  delete fruit;  delete factory;  factory = new BananaFactory;  fruit = factory-&gt;CreateFruit();  fruit-&gt;showName();  delete fruit;  delete factory;  factory = new PearFactory;  fruit = factory-&gt;CreateFruit();  fruit-&gt;showName();  delete fruit;  delete factory;  return 0; } </p>
+    <p>装饰模式又叫包装模式，通过一种对客户端透明的方式来扩展对象功能，是继承关系的一种替代。
+装饰模式可以动态给一个类增加功能</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 15:51:36 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 工厂方法模式" href="https://874656645.github.io/posts/105-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>简单工厂模式
+    <h2>观察者模式
     </h2>
   </header>
   <section class="entry-content">
-    <p> 实现了客户端与功能类的解耦 但是违反了类的单一职责原则，整个类的代码冗长，阅读难度、维护难度和测试难度也很大 违反了开闭原则，增添功能要修改源代码  适用场景：
- 工厂类负责创建的对象比较少，不会造成工厂方法中的业务逻辑太过复杂 客户端只知道传入工厂类的参数，对于如何创建对象并不关心  // 简单工厂模式 class AbstractFruit{ public:  virtual void showName() = 0; }; class Apple : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl;  } }; class Banana : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl;  } }; class Pear : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl;  } }; class FruitFactory{ public:  static AbstractFruit* CreateFruit(string flag){  if(flag == &#34;apple&#34;){  return new Apple;  }  else if(flag == &#34;banana&#34;){  return new Banana;  }  else if(flag == &#34;pear&#34;){  return new Pear;  }  else{  return nullptr;  }  } }; int main() {  AbstractFruit* fruit = FruitFactory::CreateFruit(&#34;apple&#34;);  fruit-&gt;showName();  delete fruit;  fruit = FruitFactory::CreateFruit(&#34;banana&#34;);  fruit-&gt;showName();  delete fruit;  fruit = FruitFactory::CreateFruit(&#34;pear&#34;);  fruit-&gt;showName();  delete fruit;  return 0; } </p>
+    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 15:14:38 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 简单工厂模式" href="https://874656645.github.io/posts/104-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>依赖倒转原则
+    <h2>命令模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层
-// 底层实现 class BankWorker{ public:  void saveService(){  cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl;  }  void transferService(){  cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl;  }  void payService(){  cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl;  } }; // 中层封装 void doSaveBusiness(BankWorker* worker){  worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){  worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){  worker-&gt;payService(); } // 高层调用 void test1(){  BankWorker* bw = new BankWorker;  doSaveBusiness(bw);  doPayBusiness(bw);  doTransferBusiness(bw);  delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public:  virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout &lt;&lt; &#34;办理存款业务....</p>
+    <p>将一个请求封闭为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。
+命令模式可以将请求者和接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 11:35:37 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 依赖倒转原则" href="https://874656645.github.io/posts/103-%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/"></a>
+  <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

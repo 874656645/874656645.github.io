@@ -160,107 +160,78 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Hide Parts Tilesets
+    <h2>C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考
     </h2>
   </header>
   <section class="entry-content">
-    <p>使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。
-在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。
-注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。
-第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置
-第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay
-关连 CesiumCartographicPolygon
-可以手动刷新 tileset （Refresh Tileset）观看效果
- Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  </p>
+    <p>一、通用引用  类型声明形式为 type&amp;&amp; 其中 type 类型是要进行推导的，如果类型推导没有发生，那么 type&amp;&amp; 代表一个右值引用 如果一个对象被声明为 auto&amp;&amp;，这个形参或者对象就是一个通用引用 通用引用，如果它被右值初始化，就会对应地成为右值引用；如果它被左值初始化，就会成为左值引用 如果在一个类模板里面看见了一个函数形参类型为 T&amp;&amp;，也不一定就是通用引用，可能并没有发生类型推导  void f(Widget&amp;&amp; param); //右值引用 Widget&amp;&amp; var1 = Widget(); //右值引用 auto&amp;&amp; var2 = var1; //通用引用（不是右值引用）  template&lt;typename T&gt; void f(std::vector&lt;T&gt;&amp;&amp; param); //右值引用  template&lt;typename T&gt; void f(T&amp;&amp; param); //通用引用（不是右值引用）  template &lt;typename T&gt; void f(const T&amp;&amp; param); //param是一个右值引用，因为添加了 const 限定符  // 函数模板 一般可能是通用引用 template &lt;typename T&gt; void print_reference_type(T &amp;&amp;i) { // T&amp;&amp; 或是 auto&amp;&amp;  if (std::is_lvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;lvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else if (std::is_rvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;rvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else {  std::cout &lt;&lt; &#34;unknown value: &#34; &lt;&lt; i &lt;&lt; std::endl;  } }  // 因为 push_back 在有一个特定的 vector 实例之前不可能存在， // 而实例化 vector 时的类型已经决定了 push_back 的声明 // 所以在这里并没有发生类型推导 template&lt;class T, class Allocator = allocator&lt;T&gt;&gt; //来自C&#43;&#43;标准 class vector { public:  void push_back(T&amp;&amp; x);  … } 一个记录任意函数调用的时间开销的函数模板...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-16 16:24:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Hide Parts Tilesets" href="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/"></a>
+  <footer class="entry-footer"><span title='2022-06-11 20:48:22 +0800 CST'>June 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考" href="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Using Custom Controllers
+    <h2>C 实现继承和多态
     </h2>
   </header>
   <section class="entry-content">
-    <p>目标 此步骤将学习如何设置控制器，而不是使用 Cesium 的 DynamicPawn。
-第一步：添加摄影测量数据 为了防止地形和摄影测量数据交叉，将 Aerometrex Denver Photogrammetry 的 actor 的位置的 Z 值设置为 600。
-第二步：定位到摄影测量数据  方式一：如果有经纬度坐标和高程数据，直接设置 CesiumGeoreference 的数据  Origin Latitude = 39.752827
-Origin Longitude = -104.999689
-Origin Height = 1570.879421
-方式二：在【世界大纲视图】中双击 Aerometrex Denver Photogrammetry，使用场景视图导航到想要放置世界原点的位置，并点击【Place Georeference origin Here】按钮  第三步：导入第三人称角色 可以添加 UE 自带的【Third Person】资源，也可以添加自己做的角色。添加自带的小白人资源有两种方式：
- 方式一：通过【添加/导入】中的【添加功能或内容包】  方式二：从其他有【第三人称游戏模板】的项目中，将 ThirdPersonCharacter 迁移到本项目中。  第四步：将 ThirdPersonCharacter 放入到场景中 找到 ThirdPersonCharacter 并将其拖拽到场景里，并调整合适的朝向
-效果如下：
-设置【自动控制玩家】为【玩家0】，这样在点击【运行】的时候就可以看到小白人了
-注意：如果你现在试着玩这个关卡，你会注意到你的演员可能会在丹佛摄影测量完全加载之前开始下降。继续阅读，看看如何解决这个问题。出于这个原因，还建议禁用当前未与之交互的任何物理对象的物理功能。
-第五步：设置一个安全的起始位置 在小白人的脚下放置一个立方体，防止开始游戏时，由于 3DTiles 数据在加载过程中，小白人由于受重力影响而掉下去。
-第六步：在场景中添加一个车辆控制器 第七步：设置关卡蓝图 通过 C 和 V 切换小白人和车辆控制器的控制权。...</p>
+    <p>C中的继承和多态</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-16 10:34:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Using Custom Controllers" href="https://874656645.github.io/posts/183-cesium-unreal-using-custom-controllers/"></a>
+  <footer class="entry-footer"><span title='2022-05-24 09:15:13 +0800 CST'>May 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C 实现继承和多态" href="https://874656645.github.io/posts/195-c-%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Transition Between Locations
+    <h2>ArcGIS 处理 Shape 字段
     </h2>
   </header>
   <section class="entry-content">
-    <p>目标 学习使用虚幻引擎的蓝图系统编程，实现在地球上的两个位置之间平稳飞行。
- 在虚幻引擎中使用地图坐标 在感兴趣的位置创建 viewpoints 创建一个蓝图，使位置的切换变得平滑  第一步：创建一个关卡 参考前面的步骤创关卡，并定位到澳大利亚悉尼
-Origin Latitude = -33.871799 Origin Longitude = 151.206696 Origin Height = 3000.0
-第二步：添加 DynamicPawn actor 第三步：在蓝图中设置转换   打开关卡蓝图
-  蓝图联接图
-  创建墨尔本经纬度向量
-longitude = 144.9631
-latitude = -37.8136
-height = 2000
-第四步：自定义飞行过渡 设置飞行曲线：
- Fly To Altitude Profile Curve Fly to Maximum Altitude Curve Fly to Progress Curve  添加 Fly To Curves actor，这是一个UCurveFloat，这个函数用来控制计算从源头到目的地的路径插值。
-  在【内容】面板右击，选择【其他】【曲线】，选择【CurveFloat】，并命名...</p>
+    <p>注：ArcMap 版本为 10.6.1
+一、将 shape 字段处理为 WKT 文本
+ 在属性表中添加一个 Text 类型的字段，大小尽量大一些； 使用字段计算功能 shape file 的字符串类型字段的大小有限制（254）  二、
+def MySub(feat):  partnum = 0   # Count the number of points in the current multipart feature  partcount = feat.partCount  pntcount = 0  str = &#39;&#39;   # Enter while loop for each part in the feature (if a singlepart   # feature, this will occur only once)  while partnum &lt; partcount:  part = feat....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-15 16:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Transition Between Locations" href="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/"></a>
+  <footer class="entry-footer"><span title='2022-05-23 17:41:51 +0800 CST'>May 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to ArcGIS 处理 Shape 字段" href="https://874656645.github.io/posts/194-arcgis-%E5%A4%84%E7%90%86-shape-%E5%AD%97%E6%AE%B5/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
+    <h2>使用 VS2022 部署、运行和调试 Linux MSBuild 项目
     </h2>
   </header>
   <section class="entry-content">
-    <p>目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
-参考快速入门，删除【世界大纲试图】中的所有默认的 actors
-  创建持久关卡(Persistent Level)
-在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
-这个关卡就是 Persistent Level，它代表了整个地球。
-  世界场景设置
-打开【世界场景设置】面板，勾选【启用场景合成】
-禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体...</p>
+    <p>一、设置 Linux 环境 1. 确保已安装用于 Visual Studio 的 Linux 开发工作负荷 2. Linux 所需环境 sudo apt-get install openssh-server g&#43;&#43; gdb make ninja-build rsync zip
+确保 ssh 服务在 Linux 计算机上运行
+sudo service ssh start
+参考官方文档
+二、连接到远程 Linux 打开【工具】&gt;【选项】&gt;【跨平台】&gt;【连接管理器】进行添加设置
+也可以连接到 WSL，参考官方文档
+三、创建 Linux MSBuild 项目 四、配置 Linux MSBuild 项目 大部分的默认配置都不需要修改，只需关注几个地方
+调试设置
+包含目录是 Linux 上项目的路径
+库目录可使用相对路径
+如果依赖的是动态库，需要在 Linux 端设置 LD_LIBRARY_PATH
+最后在 Linux 环境中生成的项目目录如下
+还可以在【调试】中打开【Linux控制台】
+参考官方文档</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"></a>
+  <footer class="entry-footer"><span title='2022-05-18 12:02:56 +0800 CST'>May 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 使用 VS2022 部署、运行和调试 Linux MSBuild 项目" href="https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Place Objects On Globe
+    <h2>C&#43;&#43;11 继承构造
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。
-可以从以下几方面解决（由易到难）：
- 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置
-当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象
-开始放置的地方：
-修改 CesiumGeoreference 原点后：
-四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。
-现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。
-需要注意两点：
- 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  </p>
+    <p>通过 using 可以方便的使用父类的构造函数和其他函数； 优先使用子类的构造和函数，如果没有找到匹配的才会调用基类的； 可在子类的初始化列表中调用父类的构造函数，并对子类的成员进行列表初始化；  class BS {  int q;  double w; public:  BS() : q(0), w(0) {}  BS(int k) : q(k), w(100) {}  BS(double x) : q(-1), w(x) {}  BS(int k, double x) : q(k), w(x) {}  void Show() const {  std::cout &lt;&lt; q &lt;&lt;&#34;, &#34; &lt;&lt; w &lt;&lt; &#39;\n&#39;;  }   int fn(int j) {  cout &lt;&lt; &#34;BS::fn(int)\n&#34;;  return 0;  }  double fn(double w) {  cout &lt;&lt; &#34;BS::fn(double)\n&#34;;  return 0;  }  void fn(const char * s) {  cout &lt;&lt; &#34;BS::fn(const char *)\n&#34;;  } }; class DR : public BS {  short j; public:  using BS::BS;  DR() : j(-100) {} // DR needs its own default constructor  DR(double x) : BS(2*x), j(int(x)) {}  DR(int i) : j(-2), BS(i, 0....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-15 10:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Place Objects On Globe" href="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/"></a>
+  <footer class="entry-footer"><span title='2022-05-13 16:30:07 +0800 CST'>May 13, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 继承构造" href="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

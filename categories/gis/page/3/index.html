@@ -145,108 +145,93 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
+    <h2>Unreal——智慧城市项目技术路线和软件
     </h2>
   </header>
   <section class="entry-content">
-    <p>目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
-参考快速入门，删除【世界大纲试图】中的所有默认的 actors
-  创建持久关卡(Persistent Level)
-在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
-这个关卡就是 Persistent Level，它代表了整个地球。
-  世界场景设置
-打开【世界场景设置】面板，勾选【启用场景合成】
-禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体...</p>
+    <p>软件和插件：
+ Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine’ `CityEngine VR Experience for Unreal Engine’ datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera  蓝图开发：
+ 通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：
+ 材质 PBR 粒子效果（magic_circle_creator） 光影效果 天气模拟（天气插件 Ultra Dynamic Sky） 后处理：环境光遮蔽、MSAA、景深与镜头效果、屏幕空间反射、扫描线、泛光 自发光材质  数据：...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"></a>
+  <footer class="entry-footer"><span title='2022-06-29 10:18:09 +0800 CST'>June 29, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——智慧城市项目技术路线和软件" href="https://874656645.github.io/posts/198-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF%E5%92%8C%E8%BD%AF%E4%BB%B6/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Place Objects On Globe
+    <h2>ArcGIS 处理 Shape 字段
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。
-可以从以下几方面解决（由易到难）：
- 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置
-当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象
-开始放置的地方：
-修改 CesiumGeoreference 原点后：
-四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。
-现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。
-需要注意两点：
- 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  </p>
+    <p>注：ArcMap 版本为 10.6.1
+一、将 shape 字段处理为 WKT 文本
+ 在属性表中添加一个 Text 类型的字段，大小尽量大一些； 使用字段计算功能 shape file 的字符串类型字段的大小有限制（254）  二、
+def MySub(feat):  partnum = 0   # Count the number of points in the current multipart feature  partcount = feat.partCount  pntcount = 0  str = &#39;&#39;   # Enter while loop for each part in the feature (if a singlepart   # feature, this will occur only once)  while partnum &lt; partcount:  part = feat....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-15 10:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Place Objects On Globe" href="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/"></a>
+  <footer class="entry-footer"><span title='2022-05-23 17:41:51 +0800 CST'>May 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to ArcGIS 处理 Shape 字段" href="https://874656645.github.io/posts/194-arcgis-%E5%A4%84%E7%90%86-shape-%E5%AD%97%E6%AE%B5/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Photogrammetry 倾斜摄影
+    <h2>Cesium4Unreal——Editing Tileset Materials
     </h2>
   </header>
   <section class="entry-content">
-    <p>第一步：新建空白关卡 第二步：添加倾斜摄影数据 去网站将数据资产添加到自己的账户
-第三步：以倾斜摄影数据为中心 看起来怪怪的是因为球心坐标系与游戏的坐标系统有所不同， 虚幻编辑器的摄像机 Z 方向是向上的。在地球上（与大多数游戏不同）以地球为中心的坐标系统的向上方向取决于你在世界的位置。
-通过点击 CesiumGeoreference 的 Place Georeference Origin Here 按钮快速设置场景坐标原点到当前相机位置
-此按钮将重新定位虚幻引擎当前关卡的坐标系统，使其中心点(0,0,0)准确地位于摄像机之前的位置，并对齐虚幻引擎的坐标轴，使&#43;X指向东方，&#43;Y指向南方，&#43;Z指向上方
-第四步：添加光照 CesiumSunSky 添加照明并调整时区和时间
-第五步：添加地球影像地形 修改摄影测量数据的位置
-第六步：从本地目录添加 3D Tileset 1. 在场景中添加了一个新的空白 Cesium3DTileset Actor 2. 设置本地 Tileset 文件路径 定位到添加的 tileset actor，场景和数据朝向很可能是错误的
-这是因为 CesiumGeoreference actor 的原点距离 LocalTileset actor 很远。
-3. 重新设置原点 修改 3D Tileset 数据的 Z 值
-影像地形数据 可以通过在本场发布数据服务的方式，类似这种 http://localhost:portNumber/terrainAsset
-经度和时区 摘自知乎
-经度与纬度组成了一个坐标系统，称为地理坐标系统。通过经纬度表示地球上的任何一个位置。
-国际上规定以通过英国伦敦近郊的格林尼治天文台旧址的经线作为计算经度的起点，即经度零度零分零秒，也称“本初子午线”。在它东面的为东经，共180度；在它西面的为西经，共180度。因为地球是圆的，所以东经180度和西经180度的经线是同一条经线。各国公定180度经线为“国际日期变更线”。为了避免同一地区使用两个不同的日期，国际日期变线在遇陆地时略有偏离。
-地球自西向东转，东边时间就要比西边早。规定将全球分为24时区，东西各12时区，每个时区跨经度15度，以英国格林尼治天文台旧址为零时区，两个相邻时区之间相差1小时。
-不同时区的时间按照同减异加、东加西减的原则计算。比如，北京位于东8区，纽约在西5区，北京时间要比纽约早13个小时。</p>
+    <p>Cesium for Unreal 插件的材质被设计成模块化的，所以可以被很容易地添加和删除。
+目标  浏览和理解现有的 Cesium for Unreal 3D Tileset 的材质 基于包含在 Cesium for Unreal 插件内的材质实例文件创建自定义材质 修改 tileset 的材质 了解 tileset mesh 的材质限制  Material Instances Cesium for Unreal 通过使用 Material Instances 实现最大的灵活度，每个材质实例通过使用更多的材质图层来应用图像叠加，水，或其他材质效果。
+![MaterialInstances](./img/MaterialInstances.jpg)  图层资产：包含将显示在给定层上的材质图层节点 混合资产：包含一个节点，该节点确定该材质图层将如何与下面的图层混合 每个材质图层和材质图层混合都可以像其他材质对象一样在材质编辑器中编辑  创建应用到整个 tileset 的材质   在插件目录找到 MI_CesiumThreeOverlaysAndClipping 材质实例文件，并把它拷贝到项目的内容文件夹中，将其改名为 MI_GroundTint。
+  在【内容】面板右击，创建一个【材质图层】资产，并将其命名为 ML_GroundTint。
+  双击 ML_GroundTint，打开材质编辑窗口，点击【SetMaterialAttributes】节点，在【细节】面板中的【属性设置类型】数组中添加两个元素，第一个元素设置为默认值【BaseColor】，第二个元素设置为【Opacity】。
+  添加一个【Constant3Vector】节点，并右击节点，将其【转换为参数】，并命名为 Color。
+  添加一个【Constant】节点，，将其【转换为参数】，并命名为 Opacity。
+  右击 Color 节点，在【细节】面板设置默认颜色，比如红色，设置 Opacity 的默认值为 0....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-14 15:34:27 +0800 CST'>April 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Photogrammetry 倾斜摄影" href="https://874656645.github.io/posts/179-cesium-unreal-photogrammetry/"></a>
+  <footer class="entry-footer"><span title='2022-04-17 16:24:27 +0800 CST'>April 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Editing Tileset Materials" href="https://874656645.github.io/posts/185-cesium-unreal-editing-tileset-materials/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Hello Cesium for UE
+    <h2>Cesium4Unreal——Hide Parts Tilesets
     </h2>
   </header>
   <section class="entry-content">
-    <p> Ureal Engin 版本 4.27  第一步：安装 Cesium 插件 Cesium for Unreal 插件地址
-启动 Epic Games Launcher，搜索 Cesium for Unreal
-第二步：新建项目关卡 1. 项目类型——&gt;游戏，模板——&gt;空白，选择不带初学者内容包 2. 激活 Cesium for Unreal 插件 3. 删除【世界大纲视图】中的所有内容，这样就有了一个空的关卡 保存当前关卡
-将你上面保存的关卡设置为编辑器开始地图和游戏默认地图
-第三步：Connect to Cesium ion 第四步：在场景中添加球 开始会有创建 token 的对话框，完成后，在世界大纲视图中会添加下面几个 Actor 对象
-第五步：使用 CesiumSunSky 添加照明 启用【项目设置】【扩展自动曝光设置中的默认亮度范围】
-第六步：添加 DynamicPawn  确保 DynamicPawn 自动控制玩家属性为玩家0 设置相对位置变换为 (0, 0, 0)  第七步：通过 CesiumGeoreference 修改场景的初始位置 第八步：通过 CesiumSunSky 设置光照 </p>
+    <p>使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。
+在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。
+注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。
+第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置
+第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay
+关连 CesiumCartographicPolygon
+可以手动刷新 tileset （Refresh Tileset）观看效果
+ Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-14 10:34:27 +0800 CST'>April 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Hello Cesium for UE" href="https://874656645.github.io/posts/178-cesium-unreal-project/"></a>
+  <footer class="entry-footer"><span title='2022-04-16 16:24:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Hide Parts Tilesets" href="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>ArcMap 加载天地图服务
+    <h2>Cesium4Unreal——Using Custom Controllers
     </h2>
   </header>
   <section class="entry-content">
-    <p>注：软件版本为10.6，需要 服务端 token 注：天地图官网的服务（https://t0.tianditu.gov.cn/img_w/wmts）使用的 dpi 大小采用的是国家标准，并不是 OGC 标准，会导致 ArcMap 加载影像后，矢量化的坐标不对  影像底图：
-http://t0.tianditu.com/img_c/esri/wmts 天地图影像（经纬度，CGCS2000）
-http://t0.tianditu.com/cia_c/esri/wmts 天地图影像注记（经纬度，CGCS2000）
-http://t0.tianditu.com/img_w/esri/wmts 天地图影像（墨卡托，WGS1984）
-http://t0.tianditu.com/cia_w/esri/wmts 天地图影像注记（墨卡托，WGS1984）
-矢量底图：
-http://t0.tianditu.com/vec_c/esri/wmts 天地图矢量（经纬度，CGCS2000）
-http://t0.tianditu.com/cva_c/esri/wmts 天地图矢量注记（经纬度，CGCS2000）
-http://t0.tianditu.com/vec_w/esri/wmts 天地图矢量（墨卡托，WGS1984）
-http://t0.tianditu.com/cva_w/esri/wmts 天地图矢量注记（墨卡托，WGS1984）
-ArcMap WMTS</p>
+    <p>目标 此步骤将学习如何设置控制器，而不是使用 Cesium 的 DynamicPawn。
+第一步：添加摄影测量数据 为了防止地形和摄影测量数据交叉，将 Aerometrex Denver Photogrammetry 的 actor 的位置的 Z 值设置为 600。
+第二步：定位到摄影测量数据  方式一：如果有经纬度坐标和高程数据，直接设置 CesiumGeoreference 的数据  Origin Latitude = 39.752827
+Origin Longitude = -104.999689
+Origin Height = 1570.879421
+方式二：在【世界大纲视图】中双击 Aerometrex Denver Photogrammetry，使用场景视图导航到想要放置世界原点的位置，并点击【Place Georeference origin Here】按钮  第三步：导入第三人称角色 可以添加 UE 自带的【Third Person】资源，也可以添加自己做的角色。添加自带的小白人资源有两种方式：
+ 方式一：通过【添加/导入】中的【添加功能或内容包】  方式二：从其他有【第三人称游戏模板】的项目中，将 ThirdPersonCharacter 迁移到本项目中。  第四步：将 ThirdPersonCharacter 放入到场景中 找到 ThirdPersonCharacter 并将其拖拽到场景里，并调整合适的朝向
+效果如下：
+设置【自动控制玩家】为【玩家0】，这样在点击【运行】的时候就可以看到小白人了
+注意：如果你现在试着玩这个关卡，你会注意到你的演员可能会在丹佛摄影测量完全加载之前开始下降。继续阅读，看看如何解决这个问题。出于这个原因，还建议禁用当前未与之交互的任何物理对象的物理功能。
+第五步：设置一个安全的起始位置 在小白人的脚下放置一个立方体，防止开始游戏时，由于 3DTiles 数据在加载过程中，小白人由于受重力影响而掉下去。
+第六步：在场景中添加一个车辆控制器 第七步：设置关卡蓝图 通过 C 和 V 切换小白人和车辆控制器的控制权。...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-17 22:34:27 +0800 CST'>December 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcMap 加载天地图服务" href="https://874656645.github.io/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
+  <footer class="entry-footer"><span title='2022-04-16 10:34:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Using Custom Controllers" href="https://874656645.github.io/posts/183-cesium-unreal-using-custom-controllers/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

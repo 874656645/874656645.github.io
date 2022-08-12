@@ -145,11 +145,26 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Qt 多线程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、注意事项：  线程处理类继承于 QObject 线程处理类对象不能有父对象 处理完成后向外发信号 即使 QThread 线程内部的处理对象运行结束了，QThread 线程对象也不会自动释放，需要手动 quit() &#43; wait() 线程处理类对象创建成功后，需要通过 moveToThread() 函数移动到 QThread 对象中 需要通过其他线程发信号来启动另外线程中的处理类对象的处理函数 子线程中不要操作图形界面  二、connect 第五个参数的作用 指定信号和槽的连接方式：自动连接、直接连接、队列连接，多线程时才有意义，默认为 Qt::AutoConnection。
+ Qt::AutoConnection（自动连接）：多线程时是 Qt::QueuedConnection（队列连接），单线程时是 Qt::DirectConnection（直接连接） Qt::QueuedConnection（队列连接）：槽函数所在线程和信号接收者所在线程相同 Qt::DirectConnection（直接连接）：槽函数所在线程和信号发送者所在线程相同  三、代码示例   线程处理类
+class MyThreadPro : public QObject {  Q_OBJECT public:  explicit MyThreadPro(QObject *parent = nullptr);  // 后台处理函数  void startProcessing();  // 是否结束标识位  void setFlag(bool b = false);  signals:  // 向其他线程发送信号  void myTimeout();  private:  bool stopRunning; };   主窗口类...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-18 22:17:00 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt 多线程" href="https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Qt UDP
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;)....</p>
+    <p>一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址
+ 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;)....</p>
   </section>
   <footer class="entry-footer"><span title='2022-07-15 21:44:52 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt UDP" href="https://874656645.github.io/posts/209-qt-udp/"></a>
@@ -189,22 +204,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-06-14 09:45:15 +0800 CST'>June 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt 信号和槽" href="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Qt QProcess 使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  路径中有空格
-m_process-&gt;startDetached(strAppDir &#43; &#34;/ThreeDScreen.exe&#34;, QStringList())
-  杀死一个进程（注：-t 参数会将创建的子进程一起杀死）
-QProcess::startDetached(&#34;taskkill -t -f /IM iexplore.exe&#34;);
-  </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Qt QProcess 使用" href="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -157,69 +157,77 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>new 二维数组
+    <h2>C&#43;&#43; 内存对齐
     </h2>
   </header>
   <section class="entry-content">
-    <p>在堆上声明一个数组 int main( ) { #if 0// 方式一： int** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &lt; 4; i&#43;&#43;){ pArr[i] = new int[8]; } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ pArr[i][j] = i * j; } } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ if(j == 0) cout &lt;&lt; endl; cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;; } } // 删除 for(int i = 0; i &lt; 4; &#43;&#43;i){ delete [] pArr[i]; } delete [] pArr; #endif  // 方式二：  cout &lt;&lt; sizeof(int[5]) &lt;&lt; endl;  // 初始化  int(*pArr)[8] = new int[4][8];  memset(pArr, 0, sizeof(int[4][8]));  // 或者  // int(*pArr)[8] = new int[4][8]{{0}};  cout &lt;&lt; sizeof(int[4][8]) &lt;&lt; endl;   for(int i = 0; i &lt; 4; &#43;&#43;i){  for(int j = 0; j &lt; 8; &#43;&#43;j){  pArr[i][j] = i * j;  }  }  for(int i = 0; i &lt; 4; &#43;&#43;i){  for(int j = 0; j &lt; 8; &#43;&#43;j){  cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;;  }  cout &lt;&lt; endl;  }  cout &lt;&lt; endl;  delete[] pArr;   // 取地址  int arr[3][4]{{0}};  int(*p)[3][4] = &amp;arr;  cout &lt;&lt; arr[2][3] &lt;&lt; endl;  cout &lt;&lt; *p[2][3] &lt;&lt; endl;   return 0; } 输出：...</p>
+    <p>C/C&#43;&#43;内存对齐详解
+内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
+  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
+注意：上面两条规则都需要得到满足
+注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
+  // 64 位程序 struct {  int i;  char c1;  char c2; }x1;  struct{  char c1;  int i;  char c2; }x2;  struct{  char c1;  char c2;  int i; }x3; struct {  short i;  char c1;  char c2; }y1;  struct{  char c1;  short i;  char c2; }y2;  struct{  char c1;  char c2;  short i; }y3;  int main() {  printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8   cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl;  printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-29 14:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to new 二维数组" href="https://874656645.github.io/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"></a>
+  <footer class="entry-footer"><span title='2022-01-06 18:13:09 +0800 CST'>January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 内存对齐" href="https://874656645.github.io/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>类其它总结
+    <h2>自定义智能指针
     </h2>
   </header>
   <section class="entry-content">
-    <p>1. this指针 this 指针是一个隐含于每一个非静态成员函数中的特殊指针，它指向调用该成员函数的对象的首地址
- 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 this 指针，然后调用成员函数，每次成员函数存取数据成员时，都隐式使用 this 指针 this 指针被隐含地声明为: ClassName *const this，这意味着不能给 this 指针赋值 this 是个右值，所以不能取 this 的地址  2. delete this  类的成员函数中可以调用 delete this，但是在释放后，对象后续调用的方法不能再用到 this 指针 delete this 释放了类对象的内存空间，但是内存空间却并不是马上被回收到系统中，此时其中的值是不确定的 delete 的本质是为将被释放的内存调用一个或多个析构函数，如果在类的析构函数中调用 delete this，会陷入无限递归，造成栈溢出  3. 一个空类class中有什么？ 构造函数、拷贝构造函数、析构函数、赋值运算符重载、取地址操作符重载、被 const 修饰的取地址操作符重载
-4. C&#43;&#43; 计算一个类的 sizeof  一个空的类 sizeof 返回 1，因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址 类内的普通成员函数不参与 sizeof 的统计，因为 sizeof 是针对实例的，而普通成员函数，是针对类体的 一个类如果含有虚函数，则这个类中有一个指向虚函数表的指针（虚函数指针），32位程序占4个字节，64位程序占8个字节 静态成员不影响类的大小，被编译器放在程序的数据段中 普通继承的类sizeof，会得到基类的大小加上派生类自身成员的大小 当存在虚拟继承时，派生类中会有一个指向虚基类表的指针。所以其大小应为普通继承的大小，再加上虚基类表的指针大小  5. 构造函数和析构函数能被继承吗? 不能。构造函数和析构函数是用来处理对象的创建和析构的，它们只知道对在它们的特殊层次的对象做什么
-6. 构造函数能不能是虚函数？ 不能。虚函数对应一个虚函数表，可是这个虚函数表存储在对象的内存空间的。问题就在于，如果构造函数是虚的，就需要通过 虚函数表来调用，可是对象还没有实例化，也就是内存空间还没有，就不会有虚函数表...</p>
+    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public:  MyAutoPtr(T * t){  ptr = t;  }  ~MyAutoPtr(){  if(ptr != NULL){  delete ptr;  ptr = NULL;  }  }  T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr;  }  T&amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr;  } private:  T* ptr; }; class A{ public:  A(int a){  cout &lt;&lt; &#34;A(int)....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-28 17:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类其它总结" href="https://874656645.github.io/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/"></a>
+  <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>构造函数重载与互调
+    <h2>C&#43;&#43; 多线程
     </h2>
   </header>
   <section class="entry-content">
-    <p>构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 构造函数中不要写业务逻辑 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public:  Test(int a, int b, int c){  _a = a;  _b = b;  _c = c;  }  // 正确  Test(int a, int b):Test(a, b, 100){  }  /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */  int getA(){  return _a;  }  int getB(){  return _b;  }  int getC(){  return _c;  } private:  int _a;  int _b;  int _c; }; int main( ) {  Test t1(10, 20);  cout &lt;&lt; t1....</p>
+    <p>一、进程与线程  进程是资源分配和调度的一个独立单位；而线程是进程的一个实体，是 CPU 调度和分配的基本单位 同一个进程中的多个线程的内存资源是共享的，各线程都可以改变进程中的变量。因此在执行多线程运算的时候要注意执行顺序  二、并行与并发  并行（parallellism）指的是多个任务在同一时刻同时在执行 并发（concurrency）是指在一个时间段内，多个任务交替进行。虽然看起来像在同时执行，但其实是交替的  三、多任务处理 多线程是多任务处理的一种特殊形式，一般情况下，有基于进程和基于线程的两种类型的多任务处理方式。
+ 基于进程的多任务处理是程序的并发执行 基于线程的多任务处理是同一程序的片段的并发执行  四、C&#43;&#43;11 线程管理 thread 库  C&#43;&#43;11 提供了多线程库，使用时需要 #include &lt;thread&gt; 头文件，该头文件主要包含了对线程的管理类 std::thread 以及其他管理线程相关的类 每个应用程序至少有一个进程，而每个进程至少有一个主线程，除了主线程外，在一个进程中还可以创建多个子线程。每个线程都需要一个入口函数，入口函数返回退出，该线程也会退出，主线程就是以 main 函数作为入口函数的线程 主线程退出后，运行中的子线程也会被销毁 std::thread 的构造函数需要的是可调用（callable）类型，除了函数外，还可以调用 lambda 表达式、重载了 () 运算符的类的实例 把函数对象传入 std::thread 时，应传入函数名称（不带括号） 当启动一个线程后，一定要在该线程 thread 销毁前，调用 join() 或者 detach()，确定以何种方式等待线程执行结束  detach 方式，启动的线程自主在后台运行，当前的代码继续往下执行，不等待新线程结束 join 方式，等待关联的线程完成，才会继续执行 join() 后的代码 在以 detach 的方式执行线程时，要将线程访问的局部数据复制到线程的空间（使用按值传递），一定要确保线程没有使用局部变量的引用或者指针，除非你能肯定该线程会在局部作用域结束前执行结束    1、调用全局函数启动线程 #include &lt;thread&gt; using namespace std;  void func(int i){  cout &lt;&lt; i &lt;&lt; endl; } int main() {  for(int i = 0; i &lt; 4; &#43;&#43;i){  // 创建一个线程t，第一个参数为调用的函数，第二个参数为传递的参数  thread t(func, i);  // 表示允许该线程在后台运行  t....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-28 16:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 构造函数重载与互调" href="https://874656645.github.io/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/"></a>
+  <footer class="entry-footer"><span title='2022-01-04 14:02:20 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 多线程" href="https://874656645.github.io/posts/61-c&#43;&#43;-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>类的成员函数作为回调函数
+    <h2>临时变量不能绑定 no-const 左值引用类型
     </h2>
   </header>
   <section class="entry-content">
-    <p>思路是借助类的静态成员函数
-方式一：
-class A{ public:  A(int a){  m_a = a;  }  void print(){  cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl;  }  void setCur(){  s_curA = this;  }   static void callback(){  s_curA-&gt;print();  } private:  static A* s_curA;  int m_a; }; A* A::s_curA = nullptr;  typedef void (*FUN_S)(); void Handle(FUN_S call){  call(); }  int main( ) {  A a(10), b(20);  a....</p>
+    <p>error: cannot bind non-const lvalue reference of type ‘T&amp;’ to an rvalue of type ‘T’
+如果一个参数是以非 const 引用传入，c&#43;&#43; 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。
+但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。
+所以，修改一个临时变量是毫无意义的。据此，c&#43;&#43; 编译器加入了临时变量不能作为非 const 引用的这个语义限制。
+c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数
+std::move() 返回的也是一个右值
+对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
+一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
+class T{ public:  T(int v){  a = v;  }  T operator&#43;(T &amp;t){  T temp = this-&gt;a &#43; t.a;  return temp;  }  void printT(T &amp;t){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; t....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-28 14:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类的成员函数作为回调函数" href="https://874656645.github.io/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-01-04 10:31:45 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 临时变量不能绑定 no-const 左值引用类型" href="https://874656645.github.io/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>类的兼容性原则
+    <h2>操作符重载
     </h2>
   </header>
   <section class="entry-content">
-    <p>父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
-Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
-Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public:  void printA(){  cout &lt;&lt; &#34;printA()&#34; &lt;&lt; endl;  }  virtual void print(){  cout &lt;&lt; &#34;A::print()&#34; &lt;&lt; endl;  } }; class B:public A{ public:  void printB(){  cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl;  }  virtual void print() override{  cout &lt;&lt; &#34;B::print() b = &#34; &lt;&lt; b &lt;&lt; endl;  }  private:  int b; }; int main( ) {  // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A;  // 1....</p>
+    <p>还有类型转换函数
+#include &lt;iostream&gt; using namespace std;  class Complex{  // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c);  friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public:  Complex(){  cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout &lt;&lt; &#34;Complex(int, int)....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-28 11:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类的兼容性原则" href="https://874656645.github.io/posts/48-%E7%B1%BB%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8E%9F%E5%88%99/"></a>
+  <footer class="entry-footer"><span title='2022-01-03 13:54:11 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 操作符重载" href="https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

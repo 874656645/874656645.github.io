@@ -157,77 +157,71 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43; 内存对齐
+    <h2>类型转换
     </h2>
   </header>
   <section class="entry-content">
-    <p>C/C&#43;&#43;内存对齐详解
-内存对齐规则  对齐系数（也叫对齐模数）：gcc中默认 #pragma pack(4)，可以通过预编译命令 #pragma pack(n)，n = 1,2,4,8,16 来改变这一系数 有效对齐值：是给定值 #pragma pack(n) 和结构体中 最长数据类型长度中较小的那个。有效对齐值也叫 对齐单位    规则一：结构体第一个成员的偏移量 offset 为 0，以后每个成员相对于结构体首地址的 offset 都是该成员大小与有效对齐值中较小那个的整数倍，如有需要编译器会在成员之间加上填充字节
-  规则二：结构体的总大小为 有效对齐值 的整数倍，如有需要编译器会在最末一个成员之后加上填充字节
-注意：上面两条规则都需要得到满足
-注意：成员变量首地址偏移和对齐都是与【有效对齐值】进行比较，而有效对齐值是对齐系数与结构体中最长数据类型中的较小者
-  // 64 位程序 struct {  int i;  char c1;  char c2; }x1;  struct{  char c1;  int i;  char c2; }x2;  struct{  char c1;  char c2;  int i; }x3; struct {  short i;  char c1;  char c2; }y1;  struct{  char c1;  short i;  char c2; }y2;  struct{  char c1;  char c2;  short i; }y3;  int main() {  printf(&#34;%ld\n&#34;,sizeof(x1)); // 输出8  printf(&#34;%ld\n&#34;,sizeof(x2)); // 输出12  printf(&#34;%ld\n&#34;,sizeof(x3)); // 输出8   cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl;  printf(&#34;%ld\n&#34;,sizeof(y1)); // 输出4  printf(&#34;%ld\n&#34;,sizeof(y2)); // 输出6  printf(&#34;%ld\n&#34;,sizeof(y3)); // 输出4  return 0; } 既要考虑首地址偏移，又要是有效对齐值（对齐单位）的整数倍 y1 y2 y3结构体：...</p>
+    <p>1. static_cast&lt;&gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；   // static_cast&lt;&gt;   // 1. 内置对象  int a = 97;  char c = static_cast&lt;char&gt;(a); // OK  cout &lt;&lt; c &lt;&lt; endl;  // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;a;  // char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &lt;&lt; pc &lt;&lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-06 18:13:09 +0800 CST'>January 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 内存对齐" href="https://874656645.github.io/posts/63-c&#43;&#43;-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/"></a>
+  <footer class="entry-footer"><span title='2022-01-15 15:55:28 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类型转换" href="https://874656645.github.io/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>自定义智能指针
+    <h2>自定义数组实现
     </h2>
   </header>
   <section class="entry-content">
-    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public:  MyAutoPtr(T * t){  ptr = t;  }  ~MyAutoPtr(){  if(ptr != NULL){  delete ptr;  ptr = NULL;  }  }  T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr;  }  T&amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr;  } private:  T* ptr; }; class A{ public:  A(int a){  cout &lt;&lt; &#34;A(int)....</p>
+    <p>要求  可以对内置数据类型以及自定义数据类型的数据进行存储 将数组中的数据存储到堆区 构造函数中可以传入数组的容量 提供对应的拷贝构造函数以及 operator= 防止浅拷贝问题 提供尾插法和尾删法对数组中的数据进行增加和删除 可以通过下标的方式访问数组中的元素 可以获取数组中当前元素个数和数组的容量  实现 template&lt;class T&gt; class MyArray{ public:  MyArray(int capacity){  this-&gt;m_capacity = capacity;  this-&gt;m_size = 0;  this-&gt;m_addr = new T[this-&gt;m_capacity];  }  MyArray(const MyArray&amp; arr){  if(arr.m_addr == NULL){  return;  }  // 深拷贝  this-&gt;m_capacity = arr.m_capacity;  this-&gt;m_size = arr.m_size;  this-&gt;m_addr = new T[this-&gt;m_capacity];  for(int i = 0; i &lt; m_size; &#43;&#43;i){  // T 类型是可拷贝的，= 运算符也是深拷贝  this-&gt;m_addr[i] = arr....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>
+  <footer class="entry-footer"><span title='2022-01-15 13:36:04 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 自定义数组实现" href="https://874656645.github.io/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43; 多线程
+    <h2>类模板
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、进程与线程  进程是资源分配和调度的一个独立单位；而线程是进程的一个实体，是 CPU 调度和分配的基本单位 同一个进程中的多个线程的内存资源是共享的，各线程都可以改变进程中的变量。因此在执行多线程运算的时候要注意执行顺序  二、并行与并发  并行（parallellism）指的是多个任务在同一时刻同时在执行 并发（concurrency）是指在一个时间段内，多个任务交替进行。虽然看起来像在同时执行，但其实是交替的  三、多任务处理 多线程是多任务处理的一种特殊形式，一般情况下，有基于进程和基于线程的两种类型的多任务处理方式。
- 基于进程的多任务处理是程序的并发执行 基于线程的多任务处理是同一程序的片段的并发执行  四、C&#43;&#43;11 线程管理 thread 库  C&#43;&#43;11 提供了多线程库，使用时需要 #include &lt;thread&gt; 头文件，该头文件主要包含了对线程的管理类 std::thread 以及其他管理线程相关的类 每个应用程序至少有一个进程，而每个进程至少有一个主线程，除了主线程外，在一个进程中还可以创建多个子线程。每个线程都需要一个入口函数，入口函数返回退出，该线程也会退出，主线程就是以 main 函数作为入口函数的线程 主线程退出后，运行中的子线程也会被销毁 std::thread 的构造函数需要的是可调用（callable）类型，除了函数外，还可以调用 lambda 表达式、重载了 () 运算符的类的实例 把函数对象传入 std::thread 时，应传入函数名称（不带括号） 当启动一个线程后，一定要在该线程 thread 销毁前，调用 join() 或者 detach()，确定以何种方式等待线程执行结束  detach 方式，启动的线程自主在后台运行，当前的代码继续往下执行，不等待新线程结束 join 方式，等待关联的线程完成，才会继续执行 join() 后的代码 在以 detach 的方式执行线程时，要将线程访问的局部数据复制到线程的空间（使用按值传递），一定要确保线程没有使用局部变量的引用或者指针，除非你能肯定该线程会在局部作用域结束前执行结束    1、调用全局函数启动线程 #include &lt;thread&gt; using namespace std;  void func(int i){  cout &lt;&lt; i &lt;&lt; endl; } int main() {  for(int i = 0; i &lt; 4; &#43;&#43;i){  // 创建一个线程t，第一个参数为调用的函数，第二个参数为传递的参数  thread t(func, i);  // 表示允许该线程在后台运行  t....</p>
+    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ public:  Person(T age){  this-&gt;m_age = age;  }  void Show(){  cout &lt;&lt; this-&gt;m_age &lt;&lt; endl;  }  private:  T m_age; };  int main() {  Person&lt;int&gt; p(20);  p.Show();  cout &lt;&lt; p &lt;&lt; endl;  printP(p);   return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public:  Person(T age);  void Show(); private:  T m_age; };  template&lt;class T&gt; Person&lt;T&gt;::Person(T age){  this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){  cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() {  Person&lt;int&gt; p(20);  p....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-04 14:02:20 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 多线程" href="https://874656645.github.io/posts/61-c&#43;&#43;-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>临时变量不能绑定 no-const 左值引用类型
+    <h2>编译过程
     </h2>
   </header>
   <section class="entry-content">
-    <p>error: cannot bind non-const lvalue reference of type ‘T&amp;’ to an rvalue of type ‘T’
-如果一个参数是以非 const 引用传入，c&#43;&#43; 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。
-但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。
-所以，修改一个临时变量是毫无意义的。据此，c&#43;&#43; 编译器加入了临时变量不能作为非 const 引用的这个语义限制。
-c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数
-std::move() 返回的也是一个右值
-对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
-一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
-class T{ public:  T(int v){  a = v;  }  T operator&#43;(T &amp;t){  T temp = this-&gt;a &#43; t.a;  return temp;  }  void printT(T &amp;t){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; t....</p>
+    <p>各个 .cpp 文件是独立编译的，如果有其它的类和函数会先在本 .o 文件中生成符号，由最后的链接器去其它 .o 文件找具体的函数定义
+ .c .cpp 文件经过 预编译器拷贝头文件、宏展开 生成 .i 文件（文本文件）
+g&#43;&#43; -E main.cpp -o main.i .i 文件经过 编译器 生成汇编程序 .s（文本文件）
+g&#43;&#43; -S main.i -o main.s .s 文件经过 汇编器 生成可定位目标文件 .o （二进制）
+Windows:
+g&#43;&#43; -c main.s -o main.obj
+Linux:
+g&#43;&#43; -c main.s -o main.o .o 文件经过 链接器 生成可执行目标文件 .exe .dll
+g&#43;&#43; main.s -o main  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-04 10:31:45 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 临时变量不能绑定 no-const 左值引用类型" href="https://874656645.github.io/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-01-12 20:12:00 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 编译过程" href="https://874656645.github.io/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>操作符重载
+    <h2>函数模板
     </h2>
   </header>
   <section class="entry-content">
-    <p>还有类型转换函数
-#include &lt;iostream&gt; using namespace std;  class Complex{  // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c);  friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public:  Complex(){  cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout &lt;&lt; &#34;Complex(int, int)....</p>
+    <p>函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C&#43;&#43; 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
+编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){  return a &#43; b; } // 函数一 int MyAdd(int a, int b){  return a &#43; b; } // 函数二 int MyAdd(int a, char c){  return a &#43; c; } int main() {  cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-03 13:54:11 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 操作符重载" href="https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
+  <footer class="entry-footer"><span title='2022-01-11 21:40:09 +0800 CST'>January 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数模板" href="https://874656645.github.io/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

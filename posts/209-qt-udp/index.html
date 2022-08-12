@@ -7,7 +7,8 @@
 <meta name="robots" content="index, follow">
 <title>Qt UDP | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="Qt, CMake" />
-<meta name="description" content="一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;).">
+<meta name="description" content="一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址
+ 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;).">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/209-qt-udp/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -46,18 +47,20 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="Qt UDP" />
-<meta property="og:description" content="一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;)." />
+<meta property="og:description" content="一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址
+ 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;)." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/209-qt-udp/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-07-15T21:44:52&#43;08:00" />
 <meta property="article:modified_time" content="2022-07-15T21:44:52&#43;08:00" />
-<meta property="og:see_also" content="https://874656645.github.io/posts/208-qt-tcp/" /><meta property="og:see_also" content="https://874656645.github.io/posts/207-qt-cmake/" /><meta property="og:see_also" content="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/" /><meta property="og:see_also" content="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/" /><meta property="og:see_also" content="https://874656645.github.io/posts/208-qt-tcp/" /><meta property="og:see_also" content="https://874656645.github.io/posts/207-qt-cmake/" /><meta property="og:see_also" content="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/" /><meta property="og:see_also" content="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="Qt UDP"/>
-<meta name="twitter:description" content="一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;)."/>
+<meta name="twitter:description" content="一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址
+ 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;)."/>
 
 
 <script type="application/ld+json">
@@ -86,12 +89,12 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "Qt UDP",
   "name": "Qt UDP",
-  "description": "一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(\u0026#34;服务器端口为：%1\u0026#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-\u0026gt;bind(port);  connect(udpSocket, \u0026amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-\u0026gt;readDatagram(buf, sizeof (buf), \u0026amp;clientAddr, \u0026amp;clientPort);  qDebug() \u0026lt;\u0026lt; \u0026#34;接收到\u0026#34; \u0026lt;\u0026lt; len;  if(len \u0026gt; 0){  QString str = QString(\u0026#34;[%1:%2] %3\u0026#34;).",
+  "description": "一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址\n 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(\u0026#34;服务器端口为：%1\u0026#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-\u0026gt;bind(port);  connect(udpSocket, \u0026amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-\u0026gt;readDatagram(buf, sizeof (buf), \u0026amp;clientAddr, \u0026amp;clientPort);  qDebug() \u0026lt;\u0026lt; \u0026#34;接收到\u0026#34; \u0026lt;\u0026lt; len;  if(len \u0026gt; 0){  QString str = QString(\u0026#34;[%1:%2] %3\u0026#34;).",
   "keywords": [
     "Qt", "CMake"
   ],
-  "articleBody": "一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(\"服务器端口为：%1\").arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-bind(port);  connect(udpSocket, \u0026QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-readDatagram(buf, sizeof (buf), \u0026clientAddr, \u0026clientPort);  qDebug()  \"接收到\"  len;  if(len  0){  QString str = QString(\"[%1:%2] %3\").arg(clientAddr.toString()).arg(clientPort).arg(buf);  ui-textEditRead-append(str);  }  });  发送消息   QString ip = ui-lineEditIP-text();  int port = ui-lineEditPort-text().toInt();  QString str = ui-textEditWrite-toPlainText();  // 注意：使用 QByteArray 传递，通过.data()转为char*后中文乱码  udpSocket-writeDatagram(str.toUtf8(), QHostAddress(ip), port);  关闭连接   udpSocket-disconnect();  udpSocket-close(); ",
-  "wordCount" : "83",
+  "articleBody": "一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址\n 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(\"服务器端口为：%1\").arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-bind(port);  connect(udpSocket, \u0026QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-readDatagram(buf, sizeof (buf), \u0026clientAddr, \u0026clientPort);  qDebug()  \"接收到\"  len;  if(len  0){  QString str = QString(\"[%1:%2] %3\").arg(clientAddr.toString()).arg(clientPort).arg(buf);  ui-textEditRead-append(str);  }  });  发送消息   QString ip = ui-lineEditIP-text();  int port = ui-lineEditPort-text().toInt();  QString str = ui-textEditWrite-toPlainText();  // 注意：使用 QByteArray 传递，通过.data()转为char*后中文乱码  udpSocket-writeDatagram(str.toUtf8(), QHostAddress(ip), port);  关闭连接   udpSocket-disconnect();  udpSocket-close(); ",
+  "wordCount" : "87",
   "inLanguage": "en",
   "datePublished": "2022-07-15T21:44:52+08:00",
   "dateModified": "2022-07-15T21:44:52+08:00",
@@ -217,7 +220,10 @@ if (!doNotTrack) {
 <li><code>Qt UDP</code> 通信过程
 <img loading="lazy" style="margin: auto;" src=".././img/QtUDP%e9%80%9a%e4%bf%a1.jpg" alt="QtUDP通信.jpg"  />
 </li>
-<li>支持多路组播</li>
+<li>支持多路组播：<strong>D 类地址</strong><br>
+<img loading="lazy" style="margin: auto;" src=".././img/%e7%bb%84%e6%92%ad%e5%9c%b0%e5%9d%80%e5%88%86%e7%b1%bb.jpg" alt="组播地址分类.jpg"  />
+</li>
+<li>局域网广播 IP： 255.255.255.255</li>
 </ul>
 <h2 id="二每个实例都可以是服务端">二、每个实例都可以是服务端<a hidden class="anchor" aria-hidden="true" href="#二每个实例都可以是服务端">#</a></h2>
 <ul>
@@ -262,6 +268,11 @@ if (!doNotTrack) {
       <li><a href="https://874656645.github.io/tags/cmake/">CMake</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/210-opengl-gamma-%E6%A0%A1%E6%AD%A3%E5%92%8C%E7%BA%BF%E6%80%A7%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>OpenGL Gamma 校正和线性工作流</span>
+  </a>
   <a class="next" href="https://874656645.github.io/posts/208-qt-tcp/">
     <span class="title">Next Page »</span>
     <br>

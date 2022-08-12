@@ -9,14 +9,60 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 15 Jul 2022 21:44:52 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Aug 2022 17:43:53 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>判断点是否在多边形内部</title>
+      <link>https://874656645.github.io/posts/213-%E5%88%A4%E6%96%AD%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E9%83%A8/</link>
+      <pubDate>Tue, 02 Aug 2022 17:43:53 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/213-%E5%88%A4%E6%96%AD%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E9%83%A8/</guid>
+      <description>  射线法：不需考虑精度误差和多边形点给出的顺序。
+  转角法：要求多边形是有顺序的，按照多边形顶点逆时针顺序，从 P 点到顶点 Vi 分别做连线，其中 αi 为 Vi 和 Vi+1 之间的夹角。其中 α 角度逆时针为正，顺时针为负，这样所有到顶点做连线之间夹角和为(环绕数)0，这点P在多边形外部，否则在内部。
+  射线法改进：针对有方向的多边形，通过判断射线穿过的边和点的位置（比如点在线的左侧为正，右侧为负），和为 0 则点在外部。
+  叉积法：适用凸多边形，如果一个点在多边形所有有向边的左边，那么这个点一定在多边形内部。
+  面积法：类似叉积法，适用凸多边形。如果点在多边形内部或者边上，那么点与多边形所有边组成的三角形面积和等于多边形面积。
+  参考：
+ 详谈判断点在多边形内的七种方法（最全面） hdu1756 hrbust1429 为例  </description>
+    </item>
+    
+    <item>
+      <title>Qt 多线程</title>
+      <link>https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+      <pubDate>Mon, 18 Jul 2022 22:17:00 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+      <description>一、注意事项：  线程处理类继承于 QObject 线程处理类对象不能有父对象 处理完成后向外发信号 即使 QThread 线程内部的处理对象运行结束了，QThread 线程对象也不会自动释放，需要手动 quit() + wait() 线程处理类对象创建成功后，需要通过 moveToThread() 函数移动到 QThread 对象中 需要通过其他线程发信号来启动另外线程中的处理类对象的处理函数 子线程中不要操作图形界面  二、connect 第五个参数的作用 指定信号和槽的连接方式：自动连接、直接连接、队列连接，多线程时才有意义，默认为 Qt::AutoConnection。
+ Qt::AutoConnection（自动连接）：多线程时是 Qt::QueuedConnection（队列连接），单线程时是 Qt::DirectConnection（直接连接） Qt::QueuedConnection（队列连接）：槽函数所在线程和信号接收者所在线程相同 Qt::DirectConnection（直接连接）：槽函数所在线程和信号发送者所在线程相同  三、代码示例   线程处理类
+class MyThreadPro : public QObject {  Q_OBJECT public:  explicit MyThreadPro(QObject *parent = nullptr);  // 后台处理函数  void startProcessing();  // 是否结束标识位  void setFlag(bool b = false);  signals:  // 向其他线程发送信号  void myTimeout();  private:  bool stopRunning; };   主窗口类</description>
+    </item>
+    
+    <item>
+      <title>OpenGL 视差贴图（Parallax Mapping）</title>
+      <link>https://874656645.github.io/posts/211-opengl-%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BEparallax-mapping/</link>
+      <pubDate>Mon, 18 Jul 2022 16:06:56 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/211-opengl-%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BEparallax-mapping/</guid>
+      <description>参考：
+ 视差贴图（Parallax Mapping）学习笔记 视差映射（Parallax Mapping） Learn about Parallax(视差贴图)  </description>
+    </item>
+    
+    <item>
+      <title>OpenGL Gamma 校正和线性工作流</title>
+      <link>https://874656645.github.io/posts/210-opengl-gamma-%E6%A0%A1%E6%AD%A3%E5%92%8C%E7%BA%BF%E6%80%A7%E5%B7%A5%E4%BD%9C%E6%B5%81/</link>
+      <pubDate>Mon, 18 Jul 2022 14:40:32 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/210-opengl-gamma-%E6%A0%A1%E6%AD%A3%E5%92%8C%E7%BA%BF%E6%80%A7%E5%B7%A5%E4%BD%9C%E6%B5%81/</guid>
+      <description> sRGBA 和 RGBA  </description>
+    </item>
+    
     <item>
       <title>Qt UDP</title>
       <link>https://874656645.github.io/posts/209-qt-udp/</link>
       <pubDate>Fri, 15 Jul 2022 21:44:52 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/209-qt-udp/</guid>
-      <description>一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&amp;#34;服务器端口为：%1&amp;#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&amp;gt;bind(port);  connect(udpSocket, &amp;amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&amp;gt;readDatagram(buf, sizeof (buf), &amp;amp;clientAddr, &amp;amp;clientPort);  qDebug() &amp;lt;&amp;lt; &amp;#34;接收到&amp;#34; &amp;lt;&amp;lt; len;  if(len &amp;gt; 0){  QString str = QString(&amp;#34;[%1:%2] %3&amp;#34;).</description>
+      <description>一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址
+ 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&amp;#34;服务器端口为：%1&amp;#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&amp;gt;bind(port);  connect(udpSocket, &amp;amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&amp;gt;readDatagram(buf, sizeof (buf), &amp;amp;clientAddr, &amp;amp;clientPort);  qDebug() &amp;lt;&amp;lt; &amp;#34;接收到&amp;#34; &amp;lt;&amp;lt; len;  if(len &amp;gt; 0){  QString str = QString(&amp;#34;[%1:%2] %3&amp;#34;).</description>
     </item>
     
     <item>

@@ -9,7 +9,103 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 08 Jul 2022 17:50:31 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/unreal/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Aug 2022 17:40:41 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/unreal/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unreal——使用蓝图获取 uasset 资源</title>
+      <link>https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/</link>
+      <pubDate>Thu, 11 Aug 2022 17:40:41 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/</guid>
+      <description>方法一：   可以通过 获取资产注册表（Get Asset Registry） + 按路径获取资产（Get Asset by Path） 获取路径下的所有类型资产；
+  通过 获取完整名称（GetFullName） + 包含（Contains） 筛选需要的资产；
+  通过 获取资产（GetAsset） 获取资产对象
+  资产对象的属性：
+  方法二：   可以通过 获取资产注册表（Get Asset Registry） + 按对象路径获取资产（Get Asset by Object Path） 直接获取想要的资产对象；
+  再通过 获取资产（GetAsset） + cast 将资产对象转换为需要的对象类型；
+  注意：资产路径的格式：
+ map : World&#39;/Game/Maps/NewWorld.NewWorld&#39; 蓝图类 : 要加 _C 例如 Blueprint&#39;/Game/Blueprints/MySpringArmPawn.MySpringArmPawn_C&#39;  参考：
+ UE4 | BP | 使用蓝图获取Uasset资源 关于UE4动态资源加载(蓝图类)  </description>
+    </item>
+    
+    <item>
+      <title>Unreal——蓝图接口</title>
+      <link>https://874656645.github.io/posts/218-unreal-%E8%93%9D%E5%9B%BE%E6%8E%A5%E5%8F%A3/</link>
+      <pubDate>Wed, 10 Aug 2022 11:27:36 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/218-unreal-%E8%93%9D%E5%9B%BE%E6%8E%A5%E5%8F%A3/</guid>
+      <description>  蓝图接口（Blueprint Interface） 是一个或多个函数的集合——只有名称，没有实现。
+  由于接口函数没有实现，作为设计人员，所能做的就是指定一系列类型化输入和输出。
+  蓝图接口也有一定的局限性：
+ 不能包含变量 不能编辑图标 不能添加组件    其他蓝图类 Actor 实现蓝图接口：
+在 类设置 中添加接口
+  参考：
+ 蓝图接口 【教程】UE4中接口的使用&amp;ndash;蓝图篇（一）  </description>
+    </item>
+    
+    <item>
+      <title>Unreal——Actor 蓝图类</title>
+      <link>https://874656645.github.io/posts/217-unreal-actor-%E8%93%9D%E5%9B%BE%E7%B1%BB/</link>
+      <pubDate>Wed, 10 Aug 2022 11:23:12 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/217-unreal-actor-%E8%93%9D%E5%9B%BE%E7%B1%BB/</guid>
+      <description>  所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。
+  Actor支持三维变换，例如平移、旋转和缩放。
+  可以通过游戏逻辑代码（C++或蓝图）创建（在蓝图中使用 从类生成Actor 节点）或 销毁Actor。
+  每一个 Actor 均有一个 DefaultSceneRoot 组件，它是默认情况下的场景组件（SceneComponent），该组件不支持可视化，在场景中是看不到的，也不可分配网格，只是 Actor 的默认场景根。
+  Actor 必须有一个默认场景根。可以使用其他的组件替换默认场景根，但是只要删除所有的其他组件，场景默认根（DefaultSceneRoot）就会自动显示，这个变量名是系统保留，不能用来命名他组件。
+  当设置Actor的位置、旋转、缩放时，同时也在设置默认场景根的位置、旋转、缩放。
+  注意：
+ Actor 不直接保存变换（位置、旋转和缩放）数据，只是一个可以挂载Component的类而已 在某种意义上，Actor 可被视为包含特殊类型 对象（称作组件 Component）的容器 如果 Actor 的根组件存在，则使用它的变换数据    参考：
+ Actors UE4-Actor  </description>
+    </item>
+    
+    <item>
+      <title>Unreal——通用基类（Actor、Pawn、Character等）</title>
+      <link>https://874656645.github.io/posts/216-unreal-%E9%80%9A%E7%94%A8%E5%9F%BA%E7%B1%BBactorpawncharacter%E7%AD%89/</link>
+      <pubDate>Wed, 10 Aug 2022 10:02:42 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/216-unreal-%E9%80%9A%E7%94%A8%E5%9F%BA%E7%B1%BBactorpawncharacter%E7%AD%89/</guid>
+      <description>Actor
+  Actor 是可以放到关卡中的任何对象，例如摄像机、静态网格体或玩家出生点位置
+  Actor 支持 3D 变换，例如转换、旋转和缩放
+  Actor 在 UE 中是只是一个可以挂载 Component的类而已。所以，需要挂载组件的时候，才应该继承自 Actor 类。很多时候，写一个 Manager 或者一个 Data 又或者只是解析一个Config，只需要写一个 C++ 类就可以了
+  可以通过 gameplay 代码（C++ 或蓝图）创建（生成）或销毁 Actor，在蓝图中使用 从类生成Actor 节点，生成后就自动添加到场景中并能在场景中看到
+    Pawn
+Pawn 是 Actor 的子类，作为游戏内的形象或人像（例如游戏中的角色）。玩家或游戏的 AI 可以控制 Pawn，将其作为非玩家角色（NPC），可以理解为在游戏中的肉体。
+  Character
+ 角色（Character） 是计划用作玩家角色的 Pawn Actor 的子类。角色子类包括碰撞设置、双足运动的输入绑定以及用于玩家控制动作的其他代码 相比于 Pawn 类，Character 类提供了一个Movement 组件，这个组件提供了角色移动基本逻辑功能，包括角色的移动和跳跃，还可以依据需求扩展出不同的移动状态，比如爬行、蹲伏 当对象逻辑简单、不需要过多的逻辑动作（比如方块、飞船）那么可以选择继承 Pawn 而不是继承 Character 类    Controller</description>
+    </item>
+    
+    <item>
+      <title>Unreal——蓝图函数、事件和宏</title>
+      <link>https://874656645.github.io/posts/215-unreal-%E8%93%9D%E5%9B%BE%E5%87%BD%E6%95%B0%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%AE%8F/</link>
+      <pubDate>Tue, 09 Aug 2022 19:38:55 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/215-unreal-%E8%93%9D%E5%9B%BE%E5%87%BD%E6%95%B0%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%AE%8F/</guid>
+      <description>  函数调用会等待函数执行结果，事件调用只是触发但不会等待
+事件是异步执行，触发后，会在新的线程中执行，所以可以使用 Delay，函数和宏的调用是同步执行，是单线程的，所以在函数中不能使用 Timeline、Delay 和 Http 请求 等操作。
+  事件没有返回值，函数和宏可以有返回值
+  函数和事件可以跨蓝图类访问，而宏只可以在定义的蓝图类内访问（宏库可以跨蓝图类访问）
+  函数可以用局部变量，事件没有局部变量
+  因为函数执行顺序有保证，所以优先使用函数
+  函数可以被继承，而宏不可以被继承，子类无法使用父类的宏
+  没有返回值的函数，在被子类 Overide 时，会变成事件
+  参考：
+ UE4蓝图之函数、事件、宏的区别 【UE4笔记】Event&amp;amp;Function事件和函数的区别 [UE4]函数和事件的区别  </description>
+    </item>
+    
+    <item>
+      <title>Unreal——DefaultGraphicsRHI</title>
+      <link>https://874656645.github.io/posts/214-unreal-defaultgraphicsrhi/</link>
+      <pubDate>Thu, 04 Aug 2022 14:57:18 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/214-unreal-defaultgraphicsrhi/</guid>
+      <description>注意： UE5 默认使用的是 DX12，有可能会在渲染方面出现奇怪的问题，需要特别注意。
+RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个平台的图形 API 包装成统一接口，供上层渲染来使用，让业务不用过多的关注 API 细节（实际还得关注RHI 细节）。从代码结构上来看，RHI 封装的比较贴合于现代的图形 API(vulkan, metal, DX12)，也支持 opengl/opengles。这个接口是广义上的概念，不仅指 C++ 的纯虚基类，也包括一些全局变量，全局函数等。
+参考：
+ UE4/UE5的RHI(Vulkan为例)  </description>
+    </item>
+    
     <item>
       <title>Unreal——像素流送播放器页面与 UE 通信</title>
       <link>https://874656645.github.io/posts/203-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81%E6%92%AD%E6%94%BE%E5%99%A8%E9%A1%B5%E9%9D%A2%E4%B8%8E-ue-%E9%80%9A%E4%BF%A1/</link>
@@ -49,7 +145,7 @@
       <guid>https://874656645.github.io/posts/201-unreal-engine-5-%E6%89%93%E5%8C%85/</guid>
       <description>UE5 打包：
 如果平台前面有感叹号表示缺少 SDK 环境
- 注意： 安装完 SDK 后要重启电脑   Windows SDK 18362 or later .NET Core 3.1  </description>
+ 注意： 安装完 SDK 后要重启电脑   Windows SDK 18362 or Newer .NET Core 3.1  </description>
     </item>
     
     <item>

@@ -145,101 +145,92 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>ArcGIS 处理 Shape 字段
+    <h2>Unreal——DefaultGraphicsRHI
     </h2>
   </header>
   <section class="entry-content">
-    <p>注：ArcMap 版本为 10.6.1
-一、将 shape 字段处理为 WKT 文本
- 在属性表中添加一个 Text 类型的字段，大小尽量大一些； 使用字段计算功能 shape file 的字符串类型字段的大小有限制（254）  二、
-def MySub(feat):  partnum = 0   # Count the number of points in the current multipart feature  partcount = feat.partCount  pntcount = 0  str = &#39;&#39;   # Enter while loop for each part in the feature (if a singlepart   # feature, this will occur only once)  while partnum &lt; partcount:  part = feat....</p>
+    <p>注意： UE5 默认使用的是 DX12，有可能会在渲染方面出现奇怪的问题，需要特别注意。
+RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个平台的图形 API 包装成统一接口，供上层渲染来使用，让业务不用过多的关注 API 细节（实际还得关注RHI 细节）。从代码结构上来看，RHI 封装的比较贴合于现代的图形 API(vulkan, metal, DX12)，也支持 opengl/opengles。这个接口是广义上的概念，不仅指 C&#43;&#43; 的纯虚基类，也包括一些全局变量，全局函数等。
+参考：
+ UE4/UE5的RHI(Vulkan为例)  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-05-23 17:41:51 +0800 CST'>May 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcGIS 处理 Shape 字段" href="https://874656645.github.io/posts/194-arcgis-%E5%A4%84%E7%90%86-shape-%E5%AD%97%E6%AE%B5/"></a>
+  <footer class="entry-footer"><span title='2022-08-04 14:57:18 +0800 CST'>August 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——DefaultGraphicsRHI" href="https://874656645.github.io/posts/214-unreal-defaultgraphicsrhi/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Editing Tileset Materials
+    <h2>Unreal——像素流送播放器页面与 UE 通信
     </h2>
   </header>
   <section class="entry-content">
-    <p>Cesium for Unreal 插件的材质被设计成模块化的，所以可以被很容易地添加和删除。
-目标  浏览和理解现有的 Cesium for Unreal 3D Tileset 的材质 基于包含在 Cesium for Unreal 插件内的材质实例文件创建自定义材质 修改 tileset 的材质 了解 tileset mesh 的材质限制  Material Instances Cesium for Unreal 通过使用 Material Instances 实现最大的灵活度，每个材质实例通过使用更多的材质图层来应用图像叠加，水，或其他材质效果。
-![MaterialInstances](./img/MaterialInstances.jpg)  图层资产：包含将显示在给定层上的材质图层节点 混合资产：包含一个节点，该节点确定该材质图层将如何与下面的图层混合 每个材质图层和材质图层混合都可以像其他材质对象一样在材质编辑器中编辑  创建应用到整个 tileset 的材质   在插件目录找到 MI_CesiumThreeOverlaysAndClipping 材质实例文件，并把它拷贝到项目的内容文件夹中，将其改名为 MI_GroundTint。
-  在【内容】面板右击，创建一个【材质图层】资产，并将其命名为 ML_GroundTint。
-  双击 ML_GroundTint，打开材质编辑窗口，点击【SetMaterialAttributes】节点，在【细节】面板中的【属性设置类型】数组中添加两个元素，第一个元素设置为默认值【BaseColor】，第二个元素设置为【Opacity】。
-  添加一个【Constant3Vector】节点，并右击节点，将其【转换为参数】，并命名为 Color。
-  添加一个【Constant】节点，，将其【转换为参数】，并命名为 Opacity。
-  右击 Color 节点，在【细节】面板设置默认颜色，比如红色，设置 Opacity 的默认值为 0....</p>
+    <p>一、HTML 页面  必须包含 webRtcPlayer.js 脚本文件，该文件处理浏览器和虚幻引擎应用间的通信，接受并显示来自服务器的媒体流。在非必要的情况下，请勿修改此JavaScript文件。
+&lt;script type=&#34;text/javascript&#34; src=&#34;scripts/webRtcPlayer.js&#34;&gt;&lt;/script&gt; 建议包含 app.js 脚本文件，此文件将设置处理键盘、鼠标和触摸事件的事件监听器，其还包含数个可在播放器页面使用的函数。
+&lt;script type=&#34;text/javascript&#34; src=&#34;scripts/app.js&#34;&gt;&lt;/script&gt; 页面必须含有一个 ID 为 player 的 div 元素。该元素可被流送自 UE4 应用的视频帧所替换。
+&lt;div id=&#34;player&#34;&gt;&lt;/div&gt; 页面加载时必须调用 app.js 文件提供的 load 函数。  二、访问像素流送蓝图 API 在虚幻引擎中运行的像素流送插件会公开一个蓝图API，可在 gameplay 逻辑中使用该 API 处理播放器 HTML 页面发送的自定义 UI 事件，并将事件从虚幻引擎发送到播放器页面，实现网页客户端与 UE 运行程序之间的交互通信。
+推荐将 像素流送插件（Pixel Streaming Input） 组件添加到 PlayerController 中。
+三、从播放器页面到 UE 的通信 app.js 文件提供两个可在 HTML 播放器页面进行调用的 JavaScript 函数，以便用户从浏览器向虚幻引擎程序发送事件和命令：emitCommand 和 emitUIInteraction 函数。
+  js 代码：
+ // 从播放器页面到UE4的通信  let testButton = document....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-17 16:24:27 +0800 CST'>April 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Editing Tileset Materials" href="https://874656645.github.io/posts/185-cesium-unreal-editing-tileset-materials/"></a>
+  <footer class="entry-footer"><span title='2022-07-08 17:50:31 +0800 CST'>July 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——像素流送播放器页面与 UE 通信" href="https://874656645.github.io/posts/203-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81%E6%92%AD%E6%94%BE%E5%99%A8%E9%A1%B5%E9%9D%A2%E4%B8%8E-ue-%E9%80%9A%E4%BF%A1/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Hide Parts Tilesets
+    <h2>Unreal——像素流送
     </h2>
   </header>
   <section class="entry-content">
-    <p>使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。
-在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。
-注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。
-第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置
-第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay
-关连 CesiumCartographicPolygon
-可以手动刷新 tileset （Refresh Tileset）观看效果
- Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  </p>
+    <p>有两种方式启动三维渲染服务器  一、方式一：使用 UE Editor 作为渲染服务器  启用像素流送插件
+【Pixel Streaming】 启用触控设备输入（可选）
+【编辑（Edit）】 &gt; 【项目设置（Project Settings）】 &gt; 【引擎（Engine）】 &gt; 【输入（Input category）】 下启用 【固定显示触控界面（Always Show Touch Interface）】 设置 设置额外启动参数
+【编辑（Edit）】 &gt; 【编辑器偏好（Editor Preferences…）】 &gt; 【关卡编辑器（Level Editor）】 &gt; 【播放（Play）】 &gt; 【额外启动参数（Additional Launch Parameters）】中添加参数 -AudioMixer -PixelStreamingIP=localhost -PixelStreamingPort=8888 -AllowPixelStreamingCommands 启动游戏
+通过独立进程游戏的模式启动游戏
+  二、方式二：通过打包的程序  打包前对 UE Editor 进行配置，参照方式一的前两步 启动【打包项目】
+ 设置启动程序的命令行标签  按住 Alt 键并拖动 .exe 文件即可在相同文件夹中（或在其他任意处）新建一个快捷方式 右键点击快捷方式并从上下文菜单中选择 属性（Properties） 在 快捷方式属性（Shortcut Properties） 窗口的 快捷方式（Shortcut） 选项卡中，在 目标（Target） 域的末尾附加文本 -AudioMixer -PixelStreamingIP=localhost -PixelStreamingPort=8888 -RenderOffScreen 并点击 确认    三、启动服务器 启动一个服务，在虚幻引擎应用程序和客户端浏览器间建立点对点的连接（WebRTC）...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-16 16:24:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Hide Parts Tilesets" href="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/"></a>
+  <footer class="entry-footer"><span title='2022-07-08 15:50:34 +0800 CST'>July 8, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——像素流送" href="https://874656645.github.io/posts/202-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Using Custom Controllers
+    <h2>Unreal Engine 5 打包
     </h2>
   </header>
   <section class="entry-content">
-    <p>目标 此步骤将学习如何设置控制器，而不是使用 Cesium 的 DynamicPawn。
-第一步：添加摄影测量数据 为了防止地形和摄影测量数据交叉，将 Aerometrex Denver Photogrammetry 的 actor 的位置的 Z 值设置为 600。
-第二步：定位到摄影测量数据  方式一：如果有经纬度坐标和高程数据，直接设置 CesiumGeoreference 的数据  Origin Latitude = 39.752827
-Origin Longitude = -104.999689
-Origin Height = 1570.879421
-方式二：在【世界大纲视图】中双击 Aerometrex Denver Photogrammetry，使用场景视图导航到想要放置世界原点的位置，并点击【Place Georeference origin Here】按钮  第三步：导入第三人称角色 可以添加 UE 自带的【Third Person】资源，也可以添加自己做的角色。添加自带的小白人资源有两种方式：
- 方式一：通过【添加/导入】中的【添加功能或内容包】  方式二：从其他有【第三人称游戏模板】的项目中，将 ThirdPersonCharacter 迁移到本项目中。  第四步：将 ThirdPersonCharacter 放入到场景中 找到 ThirdPersonCharacter 并将其拖拽到场景里，并调整合适的朝向
-效果如下：
-设置【自动控制玩家】为【玩家0】，这样在点击【运行】的时候就可以看到小白人了
-注意：如果你现在试着玩这个关卡，你会注意到你的演员可能会在丹佛摄影测量完全加载之前开始下降。继续阅读，看看如何解决这个问题。出于这个原因，还建议禁用当前未与之交互的任何物理对象的物理功能。
-第五步：设置一个安全的起始位置 在小白人的脚下放置一个立方体，防止开始游戏时，由于 3DTiles 数据在加载过程中，小白人由于受重力影响而掉下去。
-第六步：在场景中添加一个车辆控制器 第七步：设置关卡蓝图 通过 C 和 V 切换小白人和车辆控制器的控制权。...</p>
+    <p>UE5 打包：
+如果平台前面有感叹号表示缺少 SDK 环境
+ 注意： 安装完 SDK 后要重启电脑   Windows SDK 18362 or Newer .NET Core 3.1  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-16 10:34:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Using Custom Controllers" href="https://874656645.github.io/posts/183-cesium-unreal-using-custom-controllers/"></a>
+  <footer class="entry-footer"><span title='2022-07-07 10:23:08 +0800 CST'>July 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal Engine 5 打包" href="https://874656645.github.io/posts/201-unreal-engine-5-%E6%89%93%E5%8C%85/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Cesium4Unreal——Transition Between Locations
+    <h2>Unreal——智慧城市项目搭建
     </h2>
   </header>
   <section class="entry-content">
-    <p>目标 学习使用虚幻引擎的蓝图系统编程，实现在地球上的两个位置之间平稳飞行。
- 在虚幻引擎中使用地图坐标 在感兴趣的位置创建 viewpoints 创建一个蓝图，使位置的切换变得平滑  第一步：创建一个关卡 参考前面的步骤创关卡，并定位到澳大利亚悉尼
-Origin Latitude = -33.871799 Origin Longitude = 151.206696 Origin Height = 3000.0
-第二步：添加 DynamicPawn actor 第三步：在蓝图中设置转换   打开关卡蓝图
-  蓝图联接图
-  创建墨尔本经纬度向量
-longitude = 144.9631
-latitude = -37.8136
-height = 2000
-第四步：自定义飞行过渡 设置飞行曲线：
- Fly To Altitude Profile Curve Fly to Maximum Altitude Curve Fly to Progress Curve  添加 Fly To Curves actor，这是一个UCurveFloat，这个函数用来控制计算从源头到目的地的路径插值。
-  在【内容】面板右击，选择【其他】【曲线】，选择【CurveFloat】，并命名...</p>
+    <p>一、项目目录 —— 内容
+—— Maps
+—— UMG
+—— Mesh
+—— 材质
+—— 蓝图
+—— 贴图
+—— 团队人员
+—— 产品经理
+—— 平面
+—— UE 美术 —— UE 技术美术 —— 模型师
+—— UE 程序
+学习网址  可视化展示系列教程 基础  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-15 16:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Transition Between Locations" href="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/"></a>
+  <footer class="entry-footer"><span title='2022-06-30 15:12:06 +0800 CST'>June 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——智慧城市项目搭建" href="https://874656645.github.io/posts/199-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
