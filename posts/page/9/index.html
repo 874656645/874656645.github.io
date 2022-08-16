@@ -160,6 +160,25 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
+参考快速入门，删除【世界大纲试图】中的所有默认的 actors
+  创建持久关卡(Persistent Level)
+在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
+这个关卡就是 Persistent Level，它代表了整个地球。
+  世界场景设置
+打开【世界场景设置】面板，勾选【启用场景合成】
+禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Cesium4Unreal——Place Objects On Globe
     </h2>
   </header>
@@ -235,20 +254,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-04-13 16:50:15 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;17 折叠表达式" href="https://874656645.github.io/posts/177-c&#43;&#43;17-%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 变长参数模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>任意个数、任意类别的模板参数
-template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) {  std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
- C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) {  std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) {  std::cout &lt;&lt; value &lt;&lt; std::endl;  my_printf(args...); } int main() {  my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;);  return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-13 10:49:20 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 变长参数模板" href="https://874656645.github.io/posts/176-c&#43;&#43;17-%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

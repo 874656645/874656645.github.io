@@ -16,7 +16,7 @@
       <pubDate>Thu, 28 Feb 2019 15:00:16 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/9-crawl-pictures-from-website/</guid>
-      <description>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8  import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request  class DmdSpider(object):  name = &amp;#34;dmd&amp;#34;  save_path = &amp;#39;E:/python/manhuadao/pics/&amp;#39;  __picNo = 0   # 访问漫画岛网页  def start_request(self, url):  header = {&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&amp;#39;}  r = requests.get(url, params=header)  # print(r.text)   self.</description>
+      <description>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &amp;#34;dmd&amp;#34; save_path = &amp;#39;E:/python/manhuadao/pics/&amp;#39; __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&amp;#39;} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath(&amp;#39;//div[@class=&amp;#34;read-bottom&amp;#34;]//a[@class=&amp;#34;next&amp;#34;]/@href&amp;#39;) # print(next) for href in next_urls: nexturl = href.</description>
     </item>
     
     <item>

@@ -145,11 +145,25 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43; 杂记
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：
+#include &lt;iostream&gt; int etn = 100;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } main.cpp：
+// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout &lt;&lt; ::x &lt;&lt; endl; // 11  static int y = 10; // 局部静态变量  cout&lt;&lt; y &lt;&lt; endl; // 10  cout &lt;&lt; x &lt;&lt; endl; // 11  cout &lt;&lt; ::y &lt;&lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(&#34;%#o\n&#34;, xx); // 01053  // 十六进制格式化打印  z = printf(&#34;%#x\n&#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, &#34;%d&#34;, xx); cout &lt;&lt; z &lt;&lt; endl; // 3  // 5 个固定宽度 左对齐  printf(&#34;l%-5cr\n&#34;, &#39;A&#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(&#34;l%08....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Compile FFmpeg on CentOS
     </h2>
   </header>
   <section class="entry-content">
-    <p>0. 编译的版本：  ffmpeg-4.4 nasm-2.14.02 yasm-1.3.0 H.264 H.265 fdk-aac-2.0.0  1. Get the Dependencies   需要 superuser 或者 root 用户
+    <p>0. 编译的版本  ffmpeg-4.4 nasm-2.14.02 yasm-1.3.0 H.264 H.265 fdk-aac-2.0.0  1. Get the Dependencies   需要 superuser 或者 root 用户
 # yum install autoconf automake bzip2 bzip2-devel cmake freetype-devel gcc gcc-c&#43;&#43; git libtool make pkgconfig zlib-devel
   新建 ffmpeg_sources 文件夹，把需要的源代码都放到这个文件夹中
 mkdir ~/ffmpeg_sources
@@ -190,7 +204,7 @@ cd ~/ffmpeg_sources curl -O -L https://www....</p>
   <section class="entry-content">
     <p>一、注意事项：  线程处理类继承于 QObject 线程处理类对象不能有父对象 处理完成后向外发信号 即使 QThread 线程内部的处理对象运行结束了，QThread 线程对象也不会自动释放，需要手动 quit() &#43; wait() 线程处理类对象创建成功后，需要通过 moveToThread() 函数移动到 QThread 对象中 需要通过其他线程发信号来启动另外线程中的处理类对象的处理函数 子线程中不要操作图形界面  二、connect 第五个参数的作用 指定信号和槽的连接方式：自动连接、直接连接、队列连接，多线程时才有意义，默认为 Qt::AutoConnection。
  Qt::AutoConnection（自动连接）：多线程时是 Qt::QueuedConnection（队列连接），单线程时是 Qt::DirectConnection（直接连接） Qt::QueuedConnection（队列连接）：槽函数所在线程和信号接收者所在线程相同 Qt::DirectConnection（直接连接）：槽函数所在线程和信号发送者所在线程相同  三、代码示例   线程处理类
-class MyThreadPro : public QObject {  Q_OBJECT public:  explicit MyThreadPro(QObject *parent = nullptr);  // 后台处理函数  void startProcessing();  // 是否结束标识位  void setFlag(bool b = false);  signals:  // 向其他线程发送信号  void myTimeout();  private:  bool stopRunning; };   主窗口类...</p>
+class MyThreadPro : public QObject { Q_OBJECT public: explicit MyThreadPro(QObject *parent = nullptr); // 后台处理函数  void startProcessing(); // 是否结束标识位  void setFlag(bool b = false); signals: // 向其他线程发送信号  void myTimeout(); private: bool stopRunning; };   主窗口类...</p>
   </section>
   <footer class="entry-footer"><span title='2022-07-18 22:17:00 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt 多线程" href="https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
@@ -207,18 +221,6 @@ class MyThreadPro : public QObject {  Q_OBJECT public:  explicit MyThreadPro(QOb
   </section>
   <footer class="entry-footer"><span title='2022-07-18 16:06:56 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to OpenGL 视差贴图（Parallax Mapping）" href="https://874656645.github.io/posts/211-opengl-%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BEparallax-mapping/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>OpenGL Gamma 校正和线性工作流
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> sRGBA 和 RGBA  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-18 14:40:32 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to OpenGL Gamma 校正和线性工作流" href="https://874656645.github.io/posts/210-opengl-gamma-%E6%A0%A1%E6%AD%A3%E5%92%8C%E7%BA%BF%E6%80%A7%E5%B7%A5%E4%BD%9C%E6%B5%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

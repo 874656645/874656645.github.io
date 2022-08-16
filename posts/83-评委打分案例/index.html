@@ -9,7 +9,7 @@
 <meta name="keywords" content="C&#43;&#43;, STL" />
 <meta name="description" content="有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
 分析：
- 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public:  Player(string name){  m_name = name;  m_avgScore = 0;  }  void setAvgScore(int v){  m_avgScore = v;  }  void printInfo()const{  cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl;  } private:  string m_name;  int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){  string nameSeed = &#34;ABCDE&#34;;  for(int i = 0; i &lt; nameSeed.">
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -18,7 +18,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -50,7 +50,7 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="评委打分案例" />
 <meta property="og:description" content="有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
 分析：
- 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public:  Player(string name){  m_name = name;  m_avgScore = 0;  }  void setAvgScore(int v){  m_avgScore = v;  }  void printInfo()const{  cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl;  } private:  string m_name;  int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){  string nameSeed = &#34;ABCDE&#34;;  for(int i = 0; i &lt; nameSeed." />
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-16T22:10:49&#43;08:00" />
@@ -63,7 +63,7 @@ if (!doNotTrack) {
 <meta name="twitter:title" content="评委打分案例"/>
 <meta name="twitter:description" content="有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
 分析：
- 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public:  Player(string name){  m_name = name;  m_avgScore = 0;  }  void setAvgScore(int v){  m_avgScore = v;  }  void printInfo()const{  cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl;  } private:  string m_name;  int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){  string nameSeed = &#34;ABCDE&#34;;  for(int i = 0; i &lt; nameSeed."/>
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed."/>
 
 
 <script type="application/ld+json">
@@ -92,11 +92,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "评委打分案例",
   "name": "评委打分案例",
-  "description": "有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。\n分析：\n 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public:  Player(string name){  m_name = name;  m_avgScore = 0;  }  void setAvgScore(int v){  m_avgScore = v;  }  void printInfo()const{  cout \u0026lt;\u0026lt; m_name \u0026lt;\u0026lt; \u0026#34;的平均分为：\u0026#34; \u0026lt;\u0026lt; m_avgScore \u0026lt;\u0026lt; endl;  } private:  string m_name;  int m_avgScore; }; void createPlayers(vector\u0026lt;Player\u0026gt; \u0026amp;v){  string nameSeed = \u0026#34;ABCDE\u0026#34;;  for(int i = 0; i \u0026lt; nameSeed.",
+  "description": "有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。\n分析：\n 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout \u0026lt;\u0026lt; m_name \u0026lt;\u0026lt; \u0026#34;的平均分为：\u0026#34; \u0026lt;\u0026lt; m_avgScore \u0026lt;\u0026lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector\u0026lt;Player\u0026gt; \u0026amp;v){ string nameSeed = \u0026#34;ABCDE\u0026#34;; for(int i = 0; i \u0026lt; nameSeed.",
   "keywords": [
     "C++", "STL"
   ],
-  "articleBody": "有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。\n分析：\n 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public:  Player(string name){  m_name = name;  m_avgScore = 0;  }  void setAvgScore(int v){  m_avgScore = v;  }  void printInfo()const{  cout  m_name  \"的平均分为：\"  m_avgScore  endl;  } private:  string m_name;  int m_avgScore; }; void createPlayers(vectorPlayer \u0026v){  string nameSeed = \"ABCDE\";  for(int i = 0; i  nameSeed.length(); ++i){  string name = \"选手\";  name += nameSeed[i];  v.push_back(Player(name));  } } void scorePlayers(vectorPlayer \u0026v){  for(auto \u0026p : v){  // 把 10 个评委打分存到 deque 容器中  dequeint scores;  for(int i = 0; i  10; ++i){  scores.push_back(rand() % 41 + 60);  }  // sort 算法对 deque 容器中分数排序，去除最高和最低分  sort(scores.begin(), scores.end());  #if 0// 测试打印分数 p.printInfo(); cout for(const auto \u0026s : scores){ cout } cout #endif   scores.pop_back();  scores.pop_front();  // deque 容器遍历一遍，累加总分并计算平均分  int num = 0;  for(const auto \u0026s : scores){  num += s;  }  p.setAvgScore(num / scores.size());  } } void printScore(const vectorPlayer \u0026v){  for(const auto \u0026p : v){  p.printInfo();  } } int main() {  srand((unsigned int)time(NULL));  // 创建五名选手  vectorPlayer v;  createPlayers(v);  // 10 个评委打分  scorePlayers(v);  // 打印平均分  printScore(v);  return 0; } 输出：\n选手A的平均分为：81 选手B的平均分为：84 选手C的平均分为：82 选手D的平均分为：83 选手E的平均分为：68 ",
+  "articleBody": "有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。\n分析：\n 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout  m_name  \"的平均分为：\"  m_avgScore  endl; } private: string m_name; int m_avgScore; }; void createPlayers(vectorPlayer \u0026v){ string nameSeed = \"ABCDE\"; for(int i = 0; i  nameSeed.length(); ++i){ string name = \"选手\"; name += nameSeed[i]; v.push_back(Player(name)); } } void scorePlayers(vectorPlayer \u0026v){ for(auto \u0026p : v){ // 把 10 个评委打分存到 deque 容器中  dequeint scores; for(int i = 0; i  10; ++i){ scores.push_back(rand() % 41 + 60); } // sort 算法对 deque 容器中分数排序，去除最高和最低分  sort(scores.begin(), scores.end()); #if 0// 测试打印分数 p.printInfo(); cout for(const auto \u0026s : scores){ cout } cout #endif  scores.pop_back(); scores.pop_front(); // deque 容器遍历一遍，累加总分并计算平均分  int num = 0; for(const auto \u0026s : scores){ num += s; } p.setAvgScore(num / scores.size()); } } void printScore(const vectorPlayer \u0026v){ for(const auto \u0026p : v){ p.printInfo(); } } int main() { srand((unsigned int)time(NULL)); // 创建五名选手  vectorPlayer v; createPlayers(v); // 10 个评委打分  scorePlayers(v); // 打印平均分  printScore(v); return 0; } 输出：\n选手A的平均分为：81 选手B的平均分为：84 选手C的平均分为：82 选手D的平均分为：83 选手E的平均分为：68 ",
   "wordCount" : "209",
   "inLanguage": "en",
   "datePublished": "2022-01-16T22:10:49+08:00",
@@ -208,84 +208,84 @@ if (!doNotTrack) {
 <li><em>deque</em> 容器遍历一遍，累加总分</li>
 <li>获取平均分</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Player</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    Player(string name){
-</span></span><span style="display:flex;"><span>        m_name <span style="color:#f92672">=</span> name;
-</span></span><span style="display:flex;"><span>        m_avgScore <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setAvgScore</span>(<span style="color:#66d9ef">int</span> v){
-</span></span><span style="display:flex;"><span>        m_avgScore <span style="color:#f92672">=</span> v;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printInfo</span>()<span style="color:#66d9ef">const</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> m_name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;的平均分为：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_avgScore <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    string m_name;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_avgScore;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createPlayers</span>(vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
-</span></span><span style="display:flex;"><span>    string nameSeed <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ABCDE&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nameSeed.length(); <span style="color:#f92672">++</span>i){
-</span></span><span style="display:flex;"><span>        string name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;选手&#34;</span>;
-</span></span><span style="display:flex;"><span>        name <span style="color:#f92672">+=</span> nameSeed[i];
-</span></span><span style="display:flex;"><span>        v.push_back(Player(name));
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">scorePlayers</span>(vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p : v){
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 把 10 个评委打分存到 deque 容器中
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        deque<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> scores;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>i){
-</span></span><span style="display:flex;"><span>            scores.push_back(rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">41</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">60</span>);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// sort 算法对 deque 容器中分数排序，去除最高和最低分
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        sort(scores.begin(), scores.end());
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">#if 0</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        // 测试打印分数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        p.printInfo();
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        cout &lt;&lt; &#34;------------------&#34; &lt;&lt; endl;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        for(const auto &amp;s : scores){
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            cout &lt;&lt; s &lt;&lt; &#34; &#34;;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        }
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        cout &lt;&lt; endl;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#endif    
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>        scores.pop_back();
-</span></span><span style="display:flex;"><span>        scores.pop_front();
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// deque 容器遍历一遍，累加总分并计算平均分
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>s : scores){
-</span></span><span style="display:flex;"><span>            num <span style="color:#f92672">+=</span> s;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        p.setAvgScore(num <span style="color:#f92672">/</span> scores.size());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printScore</span>(<span style="color:#66d9ef">const</span> vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p : v){
-</span></span><span style="display:flex;"><span>        p.printInfo();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    srand((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)time(NULL));
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 创建五名选手
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> v;
-</span></span><span style="display:flex;"><span>    createPlayers(v);
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 10 个评委打分
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    scorePlayers(v);
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 打印平均分
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    printScore(v);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>选手A的平均分为：81
-</span></span><span style="display:flex;"><span>选手B的平均分为：84
-</span></span><span style="display:flex;"><span>选手C的平均分为：82
-</span></span><span style="display:flex;"><span>选手D的平均分为：83
-</span></span><span style="display:flex;"><span>选手E的平均分为：68
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Player</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Player(string name){
+        m_name <span style="color:#f92672">=</span> name;
+        m_avgScore <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setAvgScore</span>(<span style="color:#66d9ef">int</span> v){
+        m_avgScore <span style="color:#f92672">=</span> v;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printInfo</span>()<span style="color:#66d9ef">const</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> m_name <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;的平均分为：&#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_avgScore <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    string m_name;
+    <span style="color:#66d9ef">int</span> m_avgScore;
+};
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">createPlayers</span>(vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
+    string nameSeed <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ABCDE&#34;</span>;
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nameSeed.length(); <span style="color:#f92672">++</span>i){
+        string name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;选手&#34;</span>;
+        name <span style="color:#f92672">+=</span> nameSeed[i];
+        v.push_back(Player(name));
+    }
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">scorePlayers</span>(vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p : v){
+        <span style="color:#75715e">// 把 10 个评委打分存到 deque 容器中
+</span><span style="color:#75715e"></span>        deque<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> scores;
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>i){
+            scores.push_back(rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">41</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">60</span>);
+        }
+        <span style="color:#75715e">// sort 算法对 deque 容器中分数排序，去除最高和最低分
+</span><span style="color:#75715e"></span>        sort(scores.begin(), scores.end());
+
+<span style="color:#75715e">#if 0</span><span style="color:#75715e">
+</span><span style="color:#75715e">        // 测试打印分数
+</span><span style="color:#75715e">        p.printInfo();
+</span><span style="color:#75715e">        cout &lt;&lt; &#34;------------------&#34; &lt;&lt; endl;
+</span><span style="color:#75715e">        for(const auto &amp;s : scores){
+</span><span style="color:#75715e">            cout &lt;&lt; s &lt;&lt; &#34; &#34;;
+</span><span style="color:#75715e">        }
+</span><span style="color:#75715e">        cout &lt;&lt; endl;
+</span><span style="color:#75715e"></span><span style="color:#75715e">#endif    
+</span><span style="color:#75715e"></span>
+        scores.pop_back();
+        scores.pop_front();
+        <span style="color:#75715e">// deque 容器遍历一遍，累加总分并计算平均分
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>s : scores){
+            num <span style="color:#f92672">+=</span> s;
+        }
+        p.setAvgScore(num <span style="color:#f92672">/</span> scores.size());
+    }
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printScore</span>(<span style="color:#66d9ef">const</span> vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p : v){
+        p.printInfo();
+    }
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    srand((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)time(NULL));
+    <span style="color:#75715e">// 创建五名选手
+</span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Player<span style="color:#f92672">&gt;</span> v;
+    createPlayers(v);
+    <span style="color:#75715e">// 10 个评委打分
+</span><span style="color:#75715e"></span>    scorePlayers(v);
+    <span style="color:#75715e">// 打印平均分
+</span><span style="color:#75715e"></span>    printScore(v);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">选手A的平均分为：81
+选手B的平均分为：84
+选手C的平均分为：82
+选手D的平均分为：83
+选手E的平均分为：68
+</code></pre></div>
 
   </div>
 

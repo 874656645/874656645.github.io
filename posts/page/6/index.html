@@ -160,11 +160,34 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>OpenGL 渲染管线
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>红宝书第九版，OpenGL Version 4.5
+Games101 闫令琪
+顶点数据-&gt;顶点着色器（MVP 矩阵变换，NDC 标准化设备坐标）-&gt;细分控制着色器-&gt;细分计算着色器-&gt;几何着色器-&gt;图元装配-&gt;裁剪和剔除-&gt;光栅化-&gt;片元着色器
+片元着色器后，可能还有混色、测试等流程，最后将渲染结果输入到 Frame Buffer 中
+  顶点着色器： 将传入的顶点坐标进行 MVP 矩阵变换，经过顶点着色器，它们就该是标准化设备坐标。
+  细分着色： 细分着色包括细分控制着色器和细分计算着色器，细分控制着色器和细分计算着色器是相互依存的，要么都不要，要么都要。细分着色的作用就是通过面片（patch）来描述一个物体的形状。顶点着色器只能处理每个顶点关联的数据，而细分着色能通过面片的形式分割更多的数据点（比如曲面细分）  细分控制着色器：细分控制着色器的一个常见应用就是将输入面片顶点（控制点）传递给细分计算着色器和通过设置细分层次因素，告诉 OpenGL 怎么生成顶点，每个顶点的标注化二维坐标（细分坐标）以二维向量（也就是说只有其 x 和 y 分量是有效的）的方式保存在变量 gl_TessCorrd 内，该变量会被传递到细分计算着色器中（注：gl_TessCorrd 保存的是一个线段的因子，如一个线段的 0.5 横坐标处，那么 gl_TessCorrd.x=0.5）； 细分计算着色器：细分控制着色器完成后，细分计算着色器就通过控制点和细分坐标生成一系列顶点坐标，输出跟顶点着色器是一样的。 更多细节：可以看文章OpenGL 图元处理    几何着色器： 几何着色器提供了一种更加灵活的图元生成方法，它能够将（这一组）顶点变换为完全不同的图元，并且还能生成比原来更多的顶点。原理上来说，几何着色器通过一些手段也可以完成细分着色器的任务，但是为什么需要细分着色器呢？这是因为在某些图元生成上，细分着色器可以更加精确或者方便，比如生成三角形网格顶点，更多介绍参见几何着色器。可以看到，顶点着色器，细分着色器和几何着色器本质上都是对顶点进行处理。
+  图元装配： 前面的着色阶段都对顶点进行操作，关于这些顶点如何被组织成几何图元的信息并传到到 OpenGL 的下个阶段。图元组装阶段将顶点组织成它们相关的几何图形，为裁剪和光栅化做准备。
+  裁剪和剔除： 偶尔，顶点会在视口之外（窗口的区域），并对与顶点相关的图元进行修改，使其像素都不在视口之外。这个操作被称为裁剪，并由 OpenGL 自动处理。
+  光栅化： 经过以上步骤，基本上一个图形就形成了，但是这个图形的坐标还是在自己的坐标系中，光栅化就是将图形的坐标转化为屏幕像素坐标，最终将图元的数学描述转化为用于显示在屏幕上的片段，然后通过帧缓存就可以在电脑上看到一个个美丽的图形。
+  片元着色器： 片元着色器是opengl渲染的最后一个流程，它的主要作用就是赋予我们图形最终的颜色，纹理渲染也在这个阶段
+  参考：
+ 顶点着色器到片元着色器的过程，varying变量 opengl基本流程 OpenGL学习脚印: 投影矩阵和视口变换矩阵(math-projection and viewport matrix) OpenGL入门（五）– OpenGL渲染流程图解析 Opengl复习笔记（一）——顶点着色器、片段着色器（内含代码） GPU是如何工作的？Shader图形编程入门 GAMES101-现代计算机图形学入门-闫令琪  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-17 16:45:02 +0800 CST'>June 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to OpenGL 渲染管线" href="https://874656645.github.io/posts/196-opengl-%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Qt 信号和槽
     </h2>
   </header>
   <section class="entry-content">
-    <p> 信号函数没有返回值，且只是一个函数声明，必须有 signals: 声明 槽函数的函数标签必须和信号函数相同（相同的返回值类型和形参列表） Qt5 后成员函数也可作为 slots，可以不用 slots: 声明 slots: 声明前要添加访问权限修饰符 信号函数和槽函数其实都可以被重载   // signal 和 slots 都可以重载  // Qt5的方式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot1)() = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun1, this, pSlot1);  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot2)(int,QString) = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun2, this, pSlot2);   // Qt4的方式  // 1. SIGNAL、SLOT宏会把信号和槽转成字符串，所以就不能进行编译期错误检查  // 2. 槽函数前面必须有 slots 标签，否则无法识别为槽函数  connect(&amp;sw, SIGNAL(showMainWindow()), this, SLOT(onShowMainWindow()));  connect(&amp;sw, SIGNAL(showMainWindow(int,QString))  , this, SLOT(onShowMainWindow(int,QString)));   // Lambda 表达式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun1,  [](){  qDebug()&lt;&lt;&#34;没有参数的信号&#34;;  }  );  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun2,  [](int a, QString msg){  qDebug()&lt;&lt;a&lt;&lt;msg;  }  );   // Lambda 表达式使用注意事项  // 如果b3是局部变量或者成员变量，lambda不要使用引用传值  QPushButton *b3 = new QPushButton(this);  b3-&gt;setText(&#34;Lambda&#34;);  int a = 10, b = 100;  connect(&amp;b2/*b3*/, &amp;QPushButton::clicked,  [=](){ // 此处使用 &amp; 传值会有问题  qDebug()&lt;&lt;a&lt;&lt;b;  }  ); </p>
+    <p> 信号函数没有返回值，且只是一个函数声明，必须有 signals: 声明 槽函数的函数标签必须和信号函数相同（相同的返回值类型和形参列表） Qt5 后成员函数也可作为 slots，可以不用 slots: 声明 slots: 声明前要添加访问权限修饰符 信号函数和槽函数其实都可以被重载  // signal 和 slots 都可以重载  // Qt5的方式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow; void(MainWindow::*pSlot1)() = &amp;MainWindow::onShowMainWindow; connect(&amp;sw, pFun1, this, pSlot1); void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow; void(MainWindow::*pSlot2)(int,QString) = &amp;MainWindow::onShowMainWindow; connect(&amp;sw, pFun2, this, pSlot2); // Qt4的方式  // 1. SIGNAL、SLOT宏会把信号和槽转成字符串，所以就不能进行编译期错误检查  // 2. 槽函数前面必须有 slots 标签，否则无法识别为槽函数  connect(&amp;sw, SIGNAL(showMainWindow()), this, SLOT(onShowMainWindow())); connect(&amp;sw, SIGNAL(showMainWindow(int,QString)) , this, SLOT(onShowMainWindow(int,QString))); // Lambda 表达式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow; connect(&amp;sw, pFun1, [](){ qDebug()&lt;&lt;&#34;没有参数的信号&#34;; } ); void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow; connect(&amp;sw, pFun2, [](int a, QString msg){ qDebug()&lt;&lt;a&lt;&lt;msg; } ); // Lambda 表达式使用注意事项  // 如果b3是局部变量或者成员变量，lambda不要使用引用传值  QPushButton *b3 = new QPushButton(this); b3-&gt;setText(&#34;Lambda&#34;); int a = 10, b = 100; connect(&amp;b2/*b3*/, &amp;QPushButton::clicked, [=](){ // 此处使用 &amp; 传值会有问题  qDebug()&lt;&lt;a&lt;&lt;b; } ); </p>
   </section>
   <footer class="entry-footer"><span title='2022-06-14 09:45:15 +0800 CST'>June 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt 信号和槽" href="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/"></a>
@@ -176,7 +199,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、通用引用  类型声明形式为 type&amp;&amp; 其中 type 类型是要进行推导的，如果类型推导没有发生，那么 type&amp;&amp; 代表一个右值引用 如果一个对象被声明为 auto&amp;&amp;，这个形参或者对象就是一个通用引用 通用引用，如果它被右值初始化，就会对应地成为右值引用；如果它被左值初始化，就会成为左值引用 如果在一个类模板里面看见了一个函数形参类型为 T&amp;&amp;，也不一定就是通用引用，可能并没有发生类型推导  void f(Widget&amp;&amp; param); //右值引用 Widget&amp;&amp; var1 = Widget(); //右值引用 auto&amp;&amp; var2 = var1; //通用引用（不是右值引用）  template&lt;typename T&gt; void f(std::vector&lt;T&gt;&amp;&amp; param); //右值引用  template&lt;typename T&gt; void f(T&amp;&amp; param); //通用引用（不是右值引用）  template &lt;typename T&gt; void f(const T&amp;&amp; param); //param是一个右值引用，因为添加了 const 限定符  // 函数模板 一般可能是通用引用 template &lt;typename T&gt; void print_reference_type(T &amp;&amp;i) { // T&amp;&amp; 或是 auto&amp;&amp;  if (std::is_lvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;lvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else if (std::is_rvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;rvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else {  std::cout &lt;&lt; &#34;unknown value: &#34; &lt;&lt; i &lt;&lt; std::endl;  } }  // 因为 push_back 在有一个特定的 vector 实例之前不可能存在， // 而实例化 vector 时的类型已经决定了 push_back 的声明 // 所以在这里并没有发生类型推导 template&lt;class T, class Allocator = allocator&lt;T&gt;&gt; //来自C&#43;&#43;标准 class vector { public:  void push_back(T&amp;&amp; x);  … } 一个记录任意函数调用的时间开销的函数模板...</p>
+    <p>一、通用引用  类型声明形式为 type&amp;&amp; 其中 type 类型是要进行推导的，如果类型推导没有发生，那么 type&amp;&amp; 代表一个右值引用 如果一个对象被声明为 auto&amp;&amp;，这个形参或者对象就是一个通用引用 通用引用，如果它被右值初始化，就会对应地成为右值引用；如果它被左值初始化，就会成为左值引用 如果在一个类模板里面看见了一个函数形参类型为 T&amp;&amp;，也不一定就是通用引用，可能并没有发生类型推导  void f(Widget&amp;&amp; param); //右值引用 Widget&amp;&amp; var1 = Widget(); //右值引用 auto&amp;&amp; var2 = var1; //通用引用（不是右值引用）  template&lt;typename T&gt; void f(std::vector&lt;T&gt;&amp;&amp; param); //右值引用  template&lt;typename T&gt; void f(T&amp;&amp; param); //通用引用（不是右值引用）  template &lt;typename T&gt; void f(const T&amp;&amp; param); //param是一个右值引用，因为添加了 const 限定符  // 函数模板 一般可能是通用引用 template &lt;typename T&gt; void print_reference_type(T &amp;&amp;i) { // T&amp;&amp; 或是 auto&amp;&amp;  if (std::is_lvalue_reference&lt;decltype(i)&gt;::value) { std::cout &lt;&lt; &#34;lvalue: &#34; &lt;&lt; i &lt;&lt; std::endl; } else if (std::is_rvalue_reference&lt;decltype(i)&gt;::value) { std::cout &lt;&lt; &#34;rvalue: &#34; &lt;&lt; i &lt;&lt; std::endl; } else { std::cout &lt;&lt; &#34;unknown value: &#34; &lt;&lt; i &lt;&lt; std::endl; } } // 因为 push_back 在有一个特定的 vector 实例之前不可能存在， // 而实例化 vector 时的类型已经决定了 push_back 的声明 // 所以在这里并没有发生类型推导 template&lt;class T, class Allocator = allocator&lt;T&gt;&gt; //来自C&#43;&#43;标准 class vector { public: void push_back(T&amp;&amp; x); … } 一个记录任意函数调用的时间开销的函数模板...</p>
   </section>
   <footer class="entry-footer"><span title='2022-06-11 20:48:22 +0800 CST'>June 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考" href="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/"></a>
@@ -203,35 +226,10 @@ if (!doNotTrack) {
     <p>注：ArcMap 版本为 10.6.1
 一、将 shape 字段处理为 WKT 文本
  在属性表中添加一个 Text 类型的字段，大小尽量大一些； 使用字段计算功能 shape file 的字符串类型字段的大小有限制（254）  二、
-def MySub(feat):  partnum = 0   # Count the number of points in the current multipart feature  partcount = feat.partCount  pntcount = 0  str = &#39;&#39;   # Enter while loop for each part in the feature (if a singlepart   # feature, this will occur only once)  while partnum &lt; partcount:  part = feat....</p>
+def MySub(feat): partnum = 0 # Count the number of points in the current multipart feature partcount = feat.partCount pntcount = 0 str = &#39;&#39; # Enter while loop for each part in the feature (if a singlepart  # feature, this will occur only once) while partnum &lt; partcount: part = feat....</p>
   </section>
   <footer class="entry-footer"><span title='2022-05-23 17:41:51 +0800 CST'>May 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to ArcGIS 处理 Shape 字段" href="https://874656645.github.io/posts/194-arcgis-%E5%A4%84%E7%90%86-shape-%E5%AD%97%E6%AE%B5/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>使用 VS2022 部署、运行和调试 Linux MSBuild 项目
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、设置 Linux 环境 1. 确保已安装用于 Visual Studio 的 Linux 开发工作负荷 2. Linux 所需环境 sudo apt-get install openssh-server g&#43;&#43; gdb make ninja-build rsync zip
-确保 ssh 服务在 Linux 计算机上运行
-sudo service ssh start
-参考官方文档
-二、连接到远程 Linux 打开【工具】&gt;【选项】&gt;【跨平台】&gt;【连接管理器】进行添加设置
-也可以连接到 WSL，参考官方文档
-三、创建 Linux MSBuild 项目 四、配置 Linux MSBuild 项目 大部分的默认配置都不需要修改，只需关注几个地方
-调试设置
-包含目录是 Linux 上项目的路径
-库目录可使用相对路径
-如果依赖的是动态库，需要在 Linux 端设置 LD_LIBRARY_PATH
-最后在 Linux 环境中生成的项目目录如下
-还可以在【调试】中打开【Linux控制台】
-参考官方文档</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-05-18 12:02:56 +0800 CST'>May 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 使用 VS2022 部署、运行和调试 Linux MSBuild 项目" href="https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

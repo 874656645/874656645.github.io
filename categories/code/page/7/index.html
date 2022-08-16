@@ -145,6 +145,20 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 constexpr
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>在编译过程中就已经把值计算出来，会做类型检查； define 是在预编译过程中进行简单的文本替换，不会做类型检查； 在对象声明时或非静态成员函数中使用 constexpr 关键字(C&#43;&#43; 14)暗示这个对象或非静态成员函数是 const 的； 在函数或静态数据成员(C&#43;&#43; 17)声明中使用的 constexpr 关键字意味着内联； C&#43;&#43;11 中 constexpr 函数可以使用递归，?: 三目运算符，从 C&#43;&#43;14 开始，constexpr 函数可以在内部使用局部变量、循环和分支等简单语句；    constexpr 修饰变量必须满足以下要求：
+ 它的类型必须是一个LiteralType 它必须立即初始化 其初始化的完整表达式，包括所有隐式转换、构造函数调用等，必须是 constexpr 它必须有 constexpr 析构    constexpr 修饰函数必须满足以下要求：
+ 它不能是 virtual 修饰的(直到 C&#43;&#43;20) 它不能是 coroutine 协程(直到 C&#43;&#43;20) 它的返回类型（如果有的话）必须是 LiteralType 所有参数必须是 LiteralType    class Test{ public: int x = 10; }; int main() { constexpr Test t; // const  cout &lt;&lt; typeid(t....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-09 10:28:47 +0800 CST'>April 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 constexpr" href="https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 std::function
     </h2>
   </header>
@@ -180,7 +194,7 @@ std::function</p>
   std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。
   能隐式转换成 T&amp;。
     在 vector 中存储引用类型：
-#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() {  std::list&lt;int&gt; l(10);  std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1   std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end());  // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v....</p>
+#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() { std::list&lt;int&gt; l(10); std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1  std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end()); // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v....</p>
   </section>
   <footer class="entry-footer"><span title='2022-04-07 13:43:10 +0800 CST'>April 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::reference_wrapper" href="https://874656645.github.io/posts/167-c&#43;&#43;11-reference_wrapper/"></a>
@@ -193,27 +207,10 @@ std::function</p>
   </header>
   <section class="entry-content">
     <p>函数模板 ref 与 cref 是生成 std::reference_wrapper 类型对象的帮助函数，主要是与 std::bind 一起使用，默认情况下，std::bind 无法使用变量引用传递，即使原来的函数形参是引用类型的
-void f(int&amp; n1, int&amp; n2, const int&amp; n3) {  std::cout &lt;&lt; &#34;In function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;;  &#43;&#43;n1; // 增加存储于函数对象的 n1 副本  &#43;&#43;n2; // 增加 main() 的 n2  // &#43;&#43;n3; // 编译错误 error: increment of read-only reference ‘n3’ }  int main() {  int n1 = 1, n2 = 2, n3 = 3;  // 函数对象 bound_f  // 默认会将此时变量值的副本做为函数对象的参数（函数参数特例化）  std::function&lt;void()&gt; bound_f = std::bind(f, n1, std::ref(n2), std::cref(n3));  n1 = 10;  n2 = 11;  n3 = 12;  std::cout &lt;&lt; &#34;Before function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;;  bound_f();  std::cout &lt;&lt; &#34;After function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;; } 输出：...</p>
+void f(int&amp; n1, int&amp; n2, const int&amp; n3) { std::cout &lt;&lt; &#34;In function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;; &#43;&#43;n1; // 增加存储于函数对象的 n1 副本  &#43;&#43;n2; // 增加 main() 的 n2  // &#43;&#43;n3; // 编译错误 error: increment of read-only reference ‘n3’ } int main() { int n1 = 1, n2 = 2, n3 = 3; // 函数对象 bound_f  // 默认会将此时变量值的副本做为函数对象的参数（函数参数特例化）  std::function&lt;void()&gt; bound_f = std::bind(f, n1, std::ref(n2), std::cref(n3)); n1 = 10; n2 = 11; n3 = 12; std::cout &lt;&lt; &#34;Before function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;; bound_f(); std::cout &lt;&lt; &#34;After function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;; } 输出：...</p>
   </section>
   <footer class="entry-footer"><span title='2022-04-07 10:40:34 +0800 CST'>April 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::ref, std::cref 与 std::bind" href="https://874656645.github.io/posts/166-c&#43;&#43;11-refcref-%E4%B8%8E-bind/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——队列的应用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构
- 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）
- 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
- 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
- “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
- 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){  return ((status &amp; 0x08) != 0); } bool wolf(int status){  return ((status &amp; 0x04) !...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-06 08:56:06 +0800 CST'>April 6, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——队列的应用" href="https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

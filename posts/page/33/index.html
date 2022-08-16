@@ -160,12 +160,32 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>临时变量不能绑定 no-const 左值引用类型
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>error: cannot bind non-const lvalue reference of type ‘T&amp;’ to an rvalue of type ‘T’
+如果一个参数是以非 const 引用传入，c&#43;&#43; 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。
+但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。
+所以，修改一个临时变量是毫无意义的。据此，c&#43;&#43; 编译器加入了临时变量不能作为非 const 引用的这个语义限制。
+c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数
+std::move() 返回的也是一个右值
+对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
+一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
+class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt;a &#43; t.a; return temp; } void printT(T &amp;t){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; t....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-04 10:31:45 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 临时变量不能绑定 no-const 左值引用类型" href="https://874656645.github.io/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>操作符重载
     </h2>
   </header>
   <section class="entry-content">
     <p>还有类型转换函数
-#include &lt;iostream&gt; using namespace std;  class Complex{  // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c);  friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public:  Complex(){  cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl;  a = 0;  b = 0;  }  Complex(int a, int b){  cout &lt;&lt; &#34;Complex(int, int)....</p>
+#include &lt;iostream&gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c); friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public: Complex(){ cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &lt;&lt; &#34;Complex(int, int)...&#34; &lt;&lt; endl; this-&gt;a = a; this-&gt;b = b; } ~Complex(){ cout &lt;&lt; &#34;~Complex()....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-03 13:54:11 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 操作符重载" href="https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
@@ -178,7 +198,7 @@ if (!doNotTrack) {
   </header>
   <section class="entry-content">
     <p>买卖货物问题：
-#include &lt;iostream&gt; using namespace std;  class Goods{ public:  Goods(){  m_pNext = nullptr;  m_weight = 0;  cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl;  }  Goods(int weight){  m_pNext = nullptr;  m_weight = weight;  total_weight &#43;= m_weight;  cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl;  }  ~Goods(){  total_weight -= m_weight;  // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr;  cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl;  }  static int getTotalWeight(){  return total_weight;  }  Goods *m_pNext; private:  int m_weight;  static int total_weight; }; int Goods::total_weight = 0;  void buy(Goods *&amp;head, int weight){  Goods *pNewGoods = new Goods(weight);  if(head == nullptr){  head = pNewGoods;  }  else{  pNewGoods-&gt;m_pNext = head;  head = pNewGoods;  } } void sale(Goods *&amp;head){  if(head == nullptr){  cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl;  return;  }  Goods *temp = head;  head = head-&gt;m_pNext;  delete temp;  temp = nullptr; } int main( ) {  Goods *head = nullptr;  int choice;  do{  // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl;   cin &gt;&gt; choice;  switch(choice){  case 0:  // 退出  return 0;  case 1:  {  // 进货  int w = 0;  cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl;  cin &gt;&gt; w;  buy(head, w);  break;  }  case 2:  // 出货  sale(head);  break;  }  cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl;  }while(1);   return 0; } 输出：...</p>
+#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出：...</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 具有链表特性的类" href="https://874656645.github.io/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"></a>
@@ -202,30 +222,10 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>vector 常用操作 #include &lt;iostream&gt;#include &lt;vector&gt; int main() {  //1.定义和初始化  vector&lt;int&gt; vec1; //默认初始化，vec1为空  vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2  vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&lt;int&gt; vec4(10); //10个值为0的元素  vector&lt;int&gt; vec5(10,4); //10个值为4的元素   //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); // 尾部添加元素  vec1.insert(vec1.end(),5,3); // 从vec1.back位置插入5个值为3的元素   //2.2 删除函数  vec1.pop_back(); // 删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()&#43;2); // 删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); // 清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&lt;int&gt;().swap(V); // 利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  // 且只有存储对象时才有效   //2....</p>
+    <p>vector 常用操作 #include &lt;iostream&gt;#include &lt;vector&gt; int main() { //1.定义和初始化  vector&lt;int&gt; vec1; //默认初始化，vec1为空  vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2  vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&lt;int&gt; vec4(10); //10个值为0的元素  vector&lt;int&gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); // 尾部添加元素  vec1.insert(vec1.end(),5,3); // 从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); // 删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()&#43;2); // 删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); // 清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&lt;int&gt;().swap(V); // 利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  // 且只有存储对象时才有效  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1....</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-29 19:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to vector" href="https://874656645.github.io/posts/55-vector/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43; STL
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>STL六大组件
-STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、算法、迭代器、适配器、仿函数、空间配置器
-适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
-一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
-1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
-2. deque deque 是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
-3. list list 是 STL 实现的双向链表，与 vector 相比, 它允许快速的插入和删除，但是随机访问却比较慢
-4. map、multimap、unordered_map、unordered_multimap  map 是 STL 的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似 list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然 stack、queue、priority_queue 中也可以存放元素，但在 STL 中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而 stack、queue、priority_queue 只是在底层将其他容器进行了封装
-std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack;  std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue;  std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择 deque 作为 stack 和 queue 的底层默认容器？...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-29 17:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; STL" href="https://874656645.github.io/posts/54-c&#43;&#43;-stl/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

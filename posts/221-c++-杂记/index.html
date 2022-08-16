@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>C&#43;&#43; 杂记 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;" />
+<meta name="description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：
+#include &lt;iostream&gt; int etn = 100;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } main.cpp：
+// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout &lt;&lt; ::x &lt;&lt; endl; // 11  static int y = 10; // 局部静态变量  cout&lt;&lt; y &lt;&lt; endl; // 10  cout &lt;&lt; x &lt;&lt; endl; // 11  cout &lt;&lt; ::y &lt;&lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(&#34;%#o\n&#34;, xx); // 01053  // 十六进制格式化打印  z = printf(&#34;%#x\n&#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, &#34;%d&#34;, xx); cout &lt;&lt; z &lt;&lt; endl; // 3  // 5 个固定宽度 左对齐  printf(&#34;l%-5cr\n&#34;, &#39;A&#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(&#34;l%08.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="C&#43;&#43; 杂记" />
+<meta property="og:description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：
+#include &lt;iostream&gt; int etn = 100;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } main.cpp：
+// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout &lt;&lt; ::x &lt;&lt; endl; // 11  static int y = 10; // 局部静态变量  cout&lt;&lt; y &lt;&lt; endl; // 10  cout &lt;&lt; x &lt;&lt; endl; // 11  cout &lt;&lt; ::y &lt;&lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(&#34;%#o\n&#34;, xx); // 01053  // 十六进制格式化打印  z = printf(&#34;%#x\n&#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, &#34;%d&#34;, xx); cout &lt;&lt; z &lt;&lt; endl; // 3  // 5 个固定宽度 左对齐  printf(&#34;l%-5cr\n&#34;, &#39;A&#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(&#34;l%08." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-15T21:45:13&#43;08:00" />
+<meta property="article:modified_time" content="2022-08-15T21:45:13&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="C&#43;&#43; 杂记"/>
+<meta name="twitter:description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：
+#include &lt;iostream&gt; int etn = 100;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } main.cpp：
+// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout &lt;&lt; ::x &lt;&lt; endl; // 11  static int y = 10; // 局部静态变量  cout&lt;&lt; y &lt;&lt; endl; // 10  cout &lt;&lt; x &lt;&lt; endl; // 11  cout &lt;&lt; ::y &lt;&lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(&#34;%#o\n&#34;, xx); // 01053  // 十六进制格式化打印  z = printf(&#34;%#x\n&#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, &#34;%d&#34;, xx); cout &lt;&lt; z &lt;&lt; endl; // 3  // 5 个固定宽度 左对齐  printf(&#34;l%-5cr\n&#34;, &#39;A&#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(&#34;l%08."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "C++ 杂记",
+      "item": "https://874656645.github.io/posts/221-c++-%E6%9D%82%E8%AE%B0/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C++ 杂记",
+  "name": "C\u002b\u002b 杂记",
+  "description": "应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：\n#include \u0026lt;iostream\u0026gt; int etn = 100;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { std::cout \u0026lt;\u0026lt; \u0026#34;test.cpp\\tetn=\u0026#34; \u0026lt;\u0026lt; etn \u0026lt;\u0026lt; std::endl; } main.cpp：\n// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout \u0026lt;\u0026lt; ::x \u0026lt;\u0026lt; endl; // 11  static int y = 10; // 局部静态变量  cout\u0026lt;\u0026lt; y \u0026lt;\u0026lt; endl; // 10  cout \u0026lt;\u0026lt; x \u0026lt;\u0026lt; endl; // 11  cout \u0026lt;\u0026lt; ::y \u0026lt;\u0026lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(\u0026#34;%#o\\n\u0026#34;, xx); // 01053  // 十六进制格式化打印  z = printf(\u0026#34;%#x\\n\u0026#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, \u0026#34;%d\u0026#34;, xx); cout \u0026lt;\u0026lt; z \u0026lt;\u0026lt; endl; // 3  // 5 个固定宽度 左对齐  printf(\u0026#34;l%-5cr\\n\u0026#34;, \u0026#39;A\u0026#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(\u0026#34;l%08.",
+  "keywords": [
+    "C++"
+  ],
+  "articleBody": " 应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：\n#include  int etn = 100;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { std::cout  \"test.cpp\\tetn=\"  etn  std::endl; } main.cpp：\n// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout  ::x  endl; // 11  static int y = 10; // 局部静态变量  cout y  endl; // 10  cout  x  endl; // 11  cout  ::y  endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(\"%#o\\n\", xx); // 01053  // 十六进制格式化打印  z = printf(\"%#x\\n\", xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, \"%d\", xx); cout  z  endl; // 3  // 5 个固定宽度 左对齐  printf(\"l%-5cr\\n\", 'A'); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(\"l%08.2fr\\n\", -20.405); // l-0020.41r  cout  strlen(\"abc\")  endl; // 3  cout  sizeof(\"abc\")  endl; // 4  string s = \"abc\"s; cout  s.length()  endl; // 3  cout  sizeof(s)  endl; // x86 28  // x64 32(Linux)  layout(); return 0; } ",
+  "wordCount" : "233",
+  "inLanguage": "en",
+  "datePublished": "2022-08-15T21:45:13+08:00",
+  "dateModified": "2022-08-15T21:45:13+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/221-c++-%E6%9D%82%E8%AE%B0/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      C&#43;&#43; 杂记
+    </h1>
+    <div class="post-meta"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><ul>
+<li>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放</li>
+<li>公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏</li>
+<li><code>extern</code> 不能修饰其他模块的静态变量</li>
+<li>函数内用 <code>extern</code> 修饰的变量要么来自全局变量，要么来自本身模块的静态变量</li>
+</ul>
+<p><strong>test.cpp：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;		<span style="color:#75715e">// 全局变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> s_m;		<span style="color:#75715e">// 模块静态变量
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">layout</span>() {
+	std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;test.cpp</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">etn=&#34;</span> <span style="color:#f92672">&lt;&lt;</span> etn <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+}
+</code></pre></div><p><strong>main.cpp：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 模块静态变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;
+<span style="color:#75715e">// 全局变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> i;
+<span style="color:#75715e">// extern 全局变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> etn;
+<span style="color:#75715e">// 错误，不能 extern 其他模块的静态变量
+</span><span style="color:#75715e">// extern int s_m;
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// x y 也是全局变量，只不过共用一块内存
+</span><span style="color:#75715e">// 所以会与上面的 x y 冲突
+</span><span style="color:#75715e">// static union{
+</span><span style="color:#75715e">//     int x = 97;
+</span><span style="color:#75715e">//     char y;
+</span><span style="color:#75715e">// };
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">layout</span>();
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> x;           <span style="color:#75715e">// OK 自身模块的静态变量
+</span><span style="color:#75715e"></span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>x <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 11
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;      <span style="color:#75715e">// 局部静态变量
+</span><span style="color:#75715e"></span>    cout<span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;       <span style="color:#75715e">// 10
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;      <span style="color:#75715e">// 11
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>y <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// -2 访问模块静态变量
+</span><span style="color:#75715e"></span>    
+    <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">555</span>;
+    <span style="color:#75715e">// 八进制格式化打印
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> z <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%#o</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, xx);     <span style="color:#75715e">// 01053
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 十六进制格式化打印
+</span><span style="color:#75715e"></span>    z <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%#x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, xx);         <span style="color:#75715e">// 0x22b
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 打印数字 x 的位数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">256</span>];
+    z <span style="color:#f92672">=</span> sprintf(buf, <span style="color:#e6db74">&#34;%d&#34;</span>, xx);
+    cout <span style="color:#f92672">&lt;&lt;</span> z <span style="color:#f92672">&lt;&lt;</span> endl;              <span style="color:#75715e">// 3
+</span><span style="color:#75715e"></span>    
+    <span style="color:#75715e">// 5 个固定宽度 左对齐
+</span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;l%-5cr</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">&#39;A&#39;</span>);        <span style="color:#75715e">// lA    r
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位
+</span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;l%08.2fr</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">20.405</span>);  <span style="color:#75715e">// l-0020.41r
+</span><span style="color:#75715e"></span>    
+    cout <span style="color:#f92672">&lt;&lt;</span> strlen(<span style="color:#e6db74">&#34;abc&#34;</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 3
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#e6db74">&#34;abc&#34;</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 4
+</span><span style="color:#75715e"></span>    string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abc&#34;</span>s;
+    cout <span style="color:#f92672">&lt;&lt;</span> s.length() <span style="color:#f92672">&lt;&lt;</span> endl;     <span style="color:#75715e">// 3
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(s) <span style="color:#f92672">&lt;&lt;</span> endl;      <span style="color:#75715e">// x86 28
+</span><span style="color:#75715e"></span>                                    <span style="color:#75715e">// x64 32(Linux)
+</span><span style="color:#75715e"></span>    layout();
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://874656645.github.io/posts/220-compile-ffmpeg-on-centos/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Compile FFmpeg on CentOS</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -160,6 +160,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>OpenGL 视差贴图（Parallax Mapping）
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>参考：
+ 视差贴图（Parallax Mapping）学习笔记 视差映射（Parallax Mapping） Learn about Parallax(视差贴图)  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-18 16:06:56 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to OpenGL 视差贴图（Parallax Mapping）" href="https://874656645.github.io/posts/211-opengl-%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BEparallax-mapping/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>OpenGL Gamma 校正和线性工作流
     </h2>
   </header>
@@ -177,7 +190,7 @@ if (!doNotTrack) {
   </header>
   <section class="entry-content">
     <p>一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址
- 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;)....</p>
+ 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可  setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port)); udpSocket = new QUdpSocket(this); // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port); connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){ char buf[1024] = {0}; QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort); qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len; if(len &gt; 0){ QString str = QString(&#34;[%1:%2] %3&#34;)....</p>
   </section>
   <footer class="entry-footer"><span title='2022-07-15 21:44:52 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt UDP" href="https://874656645.github.io/posts/209-qt-udp/"></a>
@@ -189,7 +202,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、总结  TCP 就像打电话，安全，不会丢包 Linux TCP 通信  Qt TCP 通信   二、服务器端  TCP 服务器端有两个套接字，一个是监听套接字，一个是通信套接字   tcpServer = nullptr; // 服务监听套接字  tcpSocket = nullptr; // 通信套接字   // 创建tcp服务监听套接字  tcpServer = new QTcpServer(this);  // tcp服务开启监听（bind端口号并开启监听）  tcpServer-&gt;listen(QHostAddress::Any, 8008);  // 绑定连接成功信号  connect(tcpServer, &amp;QTcpServer::newConnection,[=](){  // 获取通信套接字  tcpSocket = tcpServer-&gt;nextPendingConnection();  // 获取客户端 IP 和 端口  QString ip = tcpSocket-&gt;peerAddress().toString();  quint16 port = tcpSocket-&gt;peerPort();  QString msg = QString(&#34;[%1:%2] 连接成功&#34;)....</p>
+    <p>一、总结  TCP 就像打电话，安全，不会丢包 Linux TCP 通信  Qt TCP 通信   二、服务器端  TCP 服务器端有两个套接字，一个是监听套接字，一个是通信套接字  tcpServer = nullptr; // 服务监听套接字  tcpSocket = nullptr; // 通信套接字  // 创建tcp服务监听套接字  tcpServer = new QTcpServer(this); // tcp服务开启监听（bind端口号并开启监听）  tcpServer-&gt;listen(QHostAddress::Any, 8008); // 绑定连接成功信号  connect(tcpServer, &amp;QTcpServer::newConnection,[=](){ // 获取通信套接字  tcpSocket = tcpServer-&gt;nextPendingConnection(); // 获取客户端 IP 和 端口  QString ip = tcpSocket-&gt;peerAddress().toString(); quint16 port = tcpSocket-&gt;peerPort(); QString msg = QString(&#34;[%1:%2] 连接成功&#34;)....</p>
   </section>
   <footer class="entry-footer"><span title='2022-07-15 21:13:10 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt TCP" href="https://874656645.github.io/posts/208-qt-tcp/"></a>
@@ -201,22 +214,10 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>cmake_minimum_required(VERSION 3.5)project(07_TCP LANGUAGES CXX)# 将编译目录包含到Include目录 set(CMAKE_INCLUDE_CURRENT_DIR ON)set(CMAKE_AUTOUIC ON)set(CMAKE_AUTOMOC ON)set(CMAKE_AUTORCC ON)# 根据 Qt 版本的环境变量，设置使用的 Qt 版本 set(CMAKE_PREFIX_PATH $ENV{QTDIR5141_64})set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED ON)# QtCreator supports the following variables for Android, which are identical to qmake Android variables. # Check http://doc.qt.io/qt-5/deployment-android.html for more information. # They need to be set before the find_package(Qt5 ...) call. #if(ANDROID) # set(ANDROID_PACKAGE_SOURCE_DIR &#34;${CMAKE_CURRENT_SOURCE_DIR}/android&#34;) # if (ANDROID_ABI STREQUAL &#34;armeabi-v7a&#34;) # set(ANDROID_EXTRA_LIBS # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so) # endif() #endif() # 工程中会用到的Qt模块 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)if(ANDROID) add_library(07_TCP SHARED  main....</p>
+    <p>cmake_minimum_required(VERSION 3.5)project(07_TCP LANGUAGES CXX)# 将编译目录包含到Include目录 set(CMAKE_INCLUDE_CURRENT_DIR ON)set(CMAKE_AUTOUIC ON)set(CMAKE_AUTOMOC ON)set(CMAKE_AUTORCC ON)# 根据 Qt 版本的环境变量，设置使用的 Qt 版本 set(CMAKE_PREFIX_PATH $ENV{QTDIR5141_64})set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED ON)# QtCreator supports the following variables for Android, which are identical to qmake Android variables. # Check http://doc.qt.io/qt-5/deployment-android.html for more information. # They need to be set before the find_package(Qt5 ...) call. #if(ANDROID) # set(ANDROID_PACKAGE_SOURCE_DIR &#34;${CMAKE_CURRENT_SOURCE_DIR}/android&#34;) # if (ANDROID_ABI STREQUAL &#34;armeabi-v7a&#34;) # set(ANDROID_EXTRA_LIBS # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so) # endif() #endif() # 工程中会用到的Qt模块 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)if(ANDROID) add_library(07_TCP SHARED main....</p>
   </section>
   <footer class="entry-footer"><span title='2022-07-15 16:10:27 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt CMake" href="https://874656645.github.io/posts/207-qt-cmake/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>OpenGL Shading Frequencies
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-10 19:54:49 +0800 CST'>July 10, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to OpenGL Shading Frequencies" href="https://874656645.github.io/posts/206-opengl-shading-frequencies/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
