@@ -149,9 +149,10 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：
-#include &lt;iostream&gt; int etn = 100;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } main.cpp：
-// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout &lt;&lt; ::x &lt;&lt; endl; // 11  static int y = 10; // 局部静态变量  cout&lt;&lt; y &lt;&lt; endl; // 10  cout &lt;&lt; x &lt;&lt; endl; // 11  cout &lt;&lt; ::y &lt;&lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(&#34;%#o\n&#34;, xx); // 01053  // 十六进制格式化打印  z = printf(&#34;%#x\n&#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, &#34;%d&#34;, xx); cout &lt;&lt; z &lt;&lt; endl; // 3  // 5 个固定宽度 左对齐  printf(&#34;l%-5cr\n&#34;, &#39;A&#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(&#34;l%08....</p>
+    <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 	} } charTest.cpp：
+#include &lt;iostream&gt;#include &lt;locale&gt;void myPrint(){ setlocale(LC_ALL, &#34;chs&#34;); char16_t c1 = u&#39;马&#39;; char32_t c2 = U&#39;马&#39;; wchar_t x = u&#39;马&#39;; wcout &lt;&lt; x &lt;&lt; endl; } main....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>

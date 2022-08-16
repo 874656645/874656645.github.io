@@ -16,9 +16,10 @@
       <pubDate>Mon, 15 Aug 2022 21:45:13 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/</guid>
-      <description>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：
-#include &amp;lt;iostream&amp;gt; int etn = 100;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &amp;lt;&amp;lt; &amp;#34;test.cpp\tetn=&amp;#34; &amp;lt;&amp;lt; etn &amp;lt;&amp;lt; std::endl; } main.cpp：
-// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout &amp;lt;&amp;lt; ::x &amp;lt;&amp;lt; endl; // 11  static int y = 10; // 局部静态变量  cout&amp;lt;&amp;lt; y &amp;lt;&amp;lt; endl; // 10  cout &amp;lt;&amp;lt; x &amp;lt;&amp;lt; endl; // 11  cout &amp;lt;&amp;lt; ::y &amp;lt;&amp;lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(&amp;#34;%#o\n&amp;#34;, xx); // 01053  // 十六进制格式化打印  z = printf(&amp;#34;%#x\n&amp;#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, &amp;#34;%d&amp;#34;, xx); cout &amp;lt;&amp;lt; z &amp;lt;&amp;lt; endl; // 3  // 5 个固定宽度 左对齐  printf(&amp;#34;l%-5cr\n&amp;#34;, &amp;#39;A&amp;#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(&amp;#34;l%08.</description>
+      <description>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
+#include &amp;lt;iostream&amp;gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &amp;lt;&amp;lt; &amp;#34;test.cpp\tetn=&amp;#34; &amp;lt;&amp;lt; etn &amp;lt;&amp;lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 	} } charTest.cpp：
+#include &amp;lt;iostream&amp;gt;#include &amp;lt;locale&amp;gt;void myPrint(){ setlocale(LC_ALL, &amp;#34;chs&amp;#34;); char16_t c1 = u&amp;#39;马&amp;#39;; char32_t c2 = U&amp;#39;马&amp;#39;; wchar_t x = u&amp;#39;马&amp;#39;; wcout &amp;lt;&amp;lt; x &amp;lt;&amp;lt; endl; } main.</description>
     </item>
     
     <item>

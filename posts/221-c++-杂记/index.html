@@ -7,9 +7,10 @@
 <meta name="robots" content="index, follow">
 <title>C&#43;&#43; 杂记 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：
-#include &lt;iostream&gt; int etn = 100;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } main.cpp：
-// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout &lt;&lt; ::x &lt;&lt; endl; // 11  static int y = 10; // 局部静态变量  cout&lt;&lt; y &lt;&lt; endl; // 10  cout &lt;&lt; x &lt;&lt; endl; // 11  cout &lt;&lt; ::y &lt;&lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(&#34;%#o\n&#34;, xx); // 01053  // 十六进制格式化打印  z = printf(&#34;%#x\n&#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, &#34;%d&#34;, xx); cout &lt;&lt; z &lt;&lt; endl; // 3  // 5 个固定宽度 左对齐  printf(&#34;l%-5cr\n&#34;, &#39;A&#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(&#34;l%08.">
+<meta name="description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 	} } charTest.cpp：
+#include &lt;iostream&gt;#include &lt;locale&gt;void myPrint(){ setlocale(LC_ALL, &#34;chs&#34;); char16_t c1 = u&#39;马&#39;; char32_t c2 = U&#39;马&#39;; wchar_t x = u&#39;马&#39;; wcout &lt;&lt; x &lt;&lt; endl; } main.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -48,9 +49,10 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="C&#43;&#43; 杂记" />
-<meta property="og:description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：
-#include &lt;iostream&gt; int etn = 100;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } main.cpp：
-// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout &lt;&lt; ::x &lt;&lt; endl; // 11  static int y = 10; // 局部静态变量  cout&lt;&lt; y &lt;&lt; endl; // 10  cout &lt;&lt; x &lt;&lt; endl; // 11  cout &lt;&lt; ::y &lt;&lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(&#34;%#o\n&#34;, xx); // 01053  // 十六进制格式化打印  z = printf(&#34;%#x\n&#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, &#34;%d&#34;, xx); cout &lt;&lt; z &lt;&lt; endl; // 3  // 5 个固定宽度 左对齐  printf(&#34;l%-5cr\n&#34;, &#39;A&#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(&#34;l%08." />
+<meta property="og:description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 	} } charTest.cpp：
+#include &lt;iostream&gt;#include &lt;locale&gt;void myPrint(){ setlocale(LC_ALL, &#34;chs&#34;); char16_t c1 = u&#39;马&#39;; char32_t c2 = U&#39;马&#39;; wchar_t x = u&#39;马&#39;; wcout &lt;&lt; x &lt;&lt; endl; } main." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-08-15T21:45:13&#43;08:00" />
@@ -61,9 +63,10 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="C&#43;&#43; 杂记"/>
-<meta name="twitter:description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：
-#include &lt;iostream&gt; int etn = 100;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } main.cpp：
-// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout &lt;&lt; ::x &lt;&lt; endl; // 11  static int y = 10; // 局部静态变量  cout&lt;&lt; y &lt;&lt; endl; // 10  cout &lt;&lt; x &lt;&lt; endl; // 11  cout &lt;&lt; ::y &lt;&lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(&#34;%#o\n&#34;, xx); // 01053  // 十六进制格式化打印  z = printf(&#34;%#x\n&#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, &#34;%d&#34;, xx); cout &lt;&lt; z &lt;&lt; endl; // 3  // 5 个固定宽度 左对齐  printf(&#34;l%-5cr\n&#34;, &#39;A&#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(&#34;l%08."/>
+<meta name="twitter:description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 	} } charTest.cpp：
+#include &lt;iostream&gt;#include &lt;locale&gt;void myPrint(){ setlocale(LC_ALL, &#34;chs&#34;); char16_t c1 = u&#39;马&#39;; char32_t c2 = U&#39;马&#39;; wchar_t x = u&#39;马&#39;; wcout &lt;&lt; x &lt;&lt; endl; } main."/>
 
 
 <script type="application/ld+json">
@@ -92,12 +95,12 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "C++ 杂记",
   "name": "C\u002b\u002b 杂记",
-  "description": "应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：\n#include \u0026lt;iostream\u0026gt; int etn = 100;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { std::cout \u0026lt;\u0026lt; \u0026#34;test.cpp\\tetn=\u0026#34; \u0026lt;\u0026lt; etn \u0026lt;\u0026lt; std::endl; } main.cpp：\n// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout \u0026lt;\u0026lt; ::x \u0026lt;\u0026lt; endl; // 11  static int y = 10; // 局部静态变量  cout\u0026lt;\u0026lt; y \u0026lt;\u0026lt; endl; // 10  cout \u0026lt;\u0026lt; x \u0026lt;\u0026lt; endl; // 11  cout \u0026lt;\u0026lt; ::y \u0026lt;\u0026lt; endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(\u0026#34;%#o\\n\u0026#34;, xx); // 01053  // 十六进制格式化打印  z = printf(\u0026#34;%#x\\n\u0026#34;, xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, \u0026#34;%d\u0026#34;, xx); cout \u0026lt;\u0026lt; z \u0026lt;\u0026lt; endl; // 3  // 5 个固定宽度 左对齐  printf(\u0026#34;l%-5cr\\n\u0026#34;, \u0026#39;A\u0026#39;); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(\u0026#34;l%08.",
+  "description": "应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：\n#include \u0026lt;iostream\u0026gt; int etn = 3;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { std::cout \u0026lt;\u0026lt; \u0026#34;test.cpp\\tetn=\u0026#34; \u0026lt;\u0026lt; etn \u0026lt;\u0026lt; std::endl; } another.cpp：\nstatic int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 \t{ extern int etn; int x = etn;// x 是 4 \t} } charTest.cpp：\n#include \u0026lt;iostream\u0026gt;#include \u0026lt;locale\u0026gt;void myPrint(){ setlocale(LC_ALL, \u0026#34;chs\u0026#34;); char16_t c1 = u\u0026#39;马\u0026#39;; char32_t c2 = U\u0026#39;马\u0026#39;; wchar_t x = u\u0026#39;马\u0026#39;; wcout \u0026lt;\u0026lt; x \u0026lt;\u0026lt; endl; } main.",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量  test.cpp：\n#include  int etn = 100;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { std::cout  \"test.cpp\\tetn=\"  etn  std::endl; } main.cpp：\n// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout  ::x  endl; // 11  static int y = 10; // 局部静态变量  cout y  endl; // 10  cout  x  endl; // 11  cout  ::y  endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(\"%#o\\n\", xx); // 01053  // 十六进制格式化打印  z = printf(\"%#x\\n\", xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, \"%d\", xx); cout  z  endl; // 3  // 5 个固定宽度 左对齐  printf(\"l%-5cr\\n\", 'A'); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(\"l%08.2fr\\n\", -20.405); // l-0020.41r  cout  strlen(\"abc\")  endl; // 3  cout  sizeof(\"abc\")  endl; // 4  string s = \"abc\"s; cout  s.length()  endl; // 3  cout  sizeof(s)  endl; // x86 28  // x64 32(Linux)  layout(); return 0; } ",
-  "wordCount" : "233",
+  "articleBody": " 应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：\n#include  int etn = 3;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { std::cout  \"test.cpp\\tetn=\"  etn  std::endl; } another.cpp：\nstatic int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 \t{ extern int etn; int x = etn;// x 是 4 \t} } charTest.cpp：\n#include #include void myPrint(){ setlocale(LC_ALL, \"chs\"); char16_t c1 = u'马'; char32_t c2 = U'马'; wchar_t x = u'马'; wcout  x  endl; } main.cpp：\n// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout  ::x  endl; // 11  static int y = 10; // 局部静态变量  cout y  endl; // 10  cout  x  endl; // 11  cout  ::y  endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(\"%#o\\n\", xx); // 01053  // 十六进制格式化打印  z = printf(\"%#x\\n\", xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, \"%d\", xx); cout  z  endl; // 3  // 5 个固定宽度 左对齐  printf(\"l%-5cr\\n\", 'A'); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(\"l%08.2fr\\n\", -20.405); // l-0020.41r  cout  strlen(\"abc\")  endl; // 3  cout  sizeof(\"abc\")  endl; // 4  string s = \"abc\"s; cout  s.length()  endl; // 3  cout  sizeof(s)  endl; // x86 28  // x64 32(Linux)  layout(); return 0; } ",
+  "wordCount" : "289",
   "inLanguage": "en",
   "datePublished": "2022-08-15T21:45:13+08:00",
   "dateModified": "2022-08-15T21:45:13+08:00",
@@ -204,15 +207,35 @@ if (!doNotTrack) {
 <li>公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏</li>
 <li><code>extern</code> 不能修饰其他模块的静态变量</li>
 <li>函数内用 <code>extern</code> 修饰的变量要么来自全局变量，要么来自本身模块的静态变量</li>
+<li><code>extern</code> 只能修饰外部变量（就近原则），不能修饰局部变量</li>
 </ul>
 <p><strong>test.cpp：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
 </span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;		<span style="color:#75715e">// 全局变量
+<span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;		<span style="color:#75715e">// 全局变量
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> s_m;		<span style="color:#75715e">// 模块静态变量
 </span><span style="color:#75715e"></span>
 <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">layout</span>() {
 	std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;test.cpp</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">etn=&#34;</span> <span style="color:#f92672">&lt;&lt;</span> etn <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+}
+</code></pre></div><p><strong>another.cpp：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// 模块静态变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">myFunc</span>(){
+    <span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;    <span style="color:#75715e">// 局部自动变量
+</span><span style="color:#75715e"></span>	{
+		<span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> etn;
+		<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> etn;<span style="color:#75715e">// x 是 4
+</span><span style="color:#75715e"></span>	}
+}
+</code></pre></div><p><strong>charTest.cpp：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;locale&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">myPrint</span>(){
+    setlocale(LC_ALL, <span style="color:#e6db74">&#34;chs&#34;</span>);
+    <span style="color:#66d9ef">char16_t</span> c1 <span style="color:#f92672">=</span> u<span style="color:#e6db74">&#39;马&#39;</span>;
+    <span style="color:#66d9ef">char32_t</span> c2 <span style="color:#f92672">=</span> U<span style="color:#e6db74">&#39;马&#39;</span>;
+	<span style="color:#66d9ef">wchar_t</span> x <span style="color:#f92672">=</span> u<span style="color:#e6db74">&#39;马&#39;</span>;
+	wcout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
 }
 </code></pre></div><p><strong>main.cpp：</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 模块静态变量
