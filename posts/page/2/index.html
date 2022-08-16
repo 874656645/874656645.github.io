@@ -160,6 +160,27 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Unreal——蓝图函数、事件和宏
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  函数调用会等待函数执行结果，事件调用只是触发但不会等待
+事件是异步执行，触发后，会在新的线程中执行，所以可以使用 Delay，函数和宏的调用是同步执行，是单线程的，所以在函数中不能使用 Timeline、Delay 和 Http 请求 等操作。
+  事件没有返回值，函数和宏可以有返回值
+  函数和事件可以跨蓝图类访问，而宏只可以在定义的蓝图类内访问（宏库可以跨蓝图类访问）
+  函数可以用局部变量，事件没有局部变量
+  因为函数执行顺序有保证，所以优先使用函数
+  函数可以被继承，而宏不可以被继承，子类无法使用父类的宏
+  没有返回值的函数，在被子类 Overide 时，会变成事件
+  参考：
+ UE4蓝图之函数、事件、宏的区别 【UE4笔记】Event&amp;Function事件和函数的区别 [UE4]函数和事件的区别  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-09 19:38:55 +0800 CST'>August 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——蓝图函数、事件和宏" href="https://874656645.github.io/posts/215-unreal-%E8%93%9D%E5%9B%BE%E5%87%BD%E6%95%B0%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%AE%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Unreal——DefaultGraphicsRHI
     </h2>
   </header>
@@ -216,18 +237,6 @@ class MyThreadPro : public QObject {  Q_OBJECT public:  explicit MyThreadPro(QOb
   </section>
   <footer class="entry-footer"><span title='2022-07-18 16:06:56 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to OpenGL 视差贴图（Parallax Mapping）" href="https://874656645.github.io/posts/211-opengl-%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BEparallax-mapping/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>OpenGL Gamma 校正和线性工作流
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> sRGBA 和 RGBA  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-18 14:40:32 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to OpenGL Gamma 校正和线性工作流" href="https://874656645.github.io/posts/210-opengl-gamma-%E6%A0%A1%E6%AD%A3%E5%92%8C%E7%BA%BF%E6%80%A7%E5%B7%A5%E4%BD%9C%E6%B5%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

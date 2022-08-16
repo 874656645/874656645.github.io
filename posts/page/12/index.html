@@ -160,6 +160,23 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——队列的应用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构
+ 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）
+ 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
+ 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
+ “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
+ 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){  return ((status &amp; 0x08) != 0); } bool wolf(int status){  return ((status &amp; 0x04) !...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-06 08:56:06 +0800 CST'>April 6, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——队列的应用" href="https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——队列的实现方式
     </h2>
   </header>
@@ -219,18 +236,6 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
   </section>
   <footer class="entry-footer"><span title='2022-04-03 20:03:03 +0800 CST'>April 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——栈的实现方式" href="https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——栈
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、栈  后进先出  是一种限制访问端口的线性表   主要操作  进栈（push） 出栈（pop）   应用  表达式求值（中缀表达式、后缀表达式） 消除递归 深度优先搜索（树、图）    二、栈的抽象数据类型 template &lt;class T&gt; class Stack { public: // 栈的运算集  void clear(); // 变为空栈  bool push(const T item); // item入栈，成功返回真，否则假  bool pop(T&amp; item); // 返回栈顶内容并弹出，成功返回真，否则假  bool top(T&amp; item); // 返回栈顶但不弹出，成功返回真，否则假  bool isEmpty(); // 若栈已空返回真  bool isFull(); // 若栈已满返回真 }; 三、思考题   若入栈顺序为 1,2,3,4 的话，则出栈的顺序可以有哪些?...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-31 22:04:28 +0800 CST'>March 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——栈" href="https://874656645.github.io/posts/160-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

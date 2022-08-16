@@ -160,6 +160,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>类的静态成员
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A {  string name {&#34;C&#43;&#43;&#34;};  int id {1024};  static int objCount;  public:  A();  friend void printA(const A &amp;a);  void printA();  static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){  objCount&#43;&#43;; } void A::printA(){  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; &#34;\tname = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } void A::printC(){  // 静态函数内没有this指针  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; objCount &lt;&lt; endl;   // error: &#39;this&#39; is unavailable for static member functions  // cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; endl; } void printA(const A &amp;a){  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; a....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-24 13:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类的静态成员" href="https://874656645.github.io/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>友元函数与友元类
     </h2>
   </header>
@@ -215,19 +227,6 @@ class A {  friend void printA(const A &amp;a); public:  void printA();  private:
   </section>
   <footer class="entry-footer"><span title='2021-12-23 11:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to inline 内联函数" href="https://874656645.github.io/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>fork Unix
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Unix 的 fork 函数 fork函数可以创建一个和当前映像一样的子进程，这个函数会返回两个值：从子进程返回0，从父进程返回子进程的PID；
- 1）在父进程中，fork返回新创建子进程的进程ID； 2）在子进程中，fork返回0； 3）如果出现错误，fork返回一个负值；  #include &lt;iostream&gt;#include &lt;unistd.h&gt; using namespace std;  int main() {  pid_t fpid; //fpid表示fork函数返回的值  int count = 0;  cout &lt;&lt; &amp;count &lt;&lt; endl;  fpid = fork();  if (fpid &lt; 0)  printf(&#34;error in fork!\n&#34;);  else if (fpid == 0) {  printf(&#34;i am the child process, my process id is %d\n&#34;,getpid());  cout &lt;&lt; &amp;count &lt;&lt; endl;  count&#43;&#43;;  }  else {  printf(&#34;i am the parent process, my process id is %d\n&#34;,getpid());  cout &lt;&lt; &amp;count &lt;&lt; endl;  count&#43;&#43;;  }  printf(&#34;统计结果是: %d\n&#34;,count);   return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-23 10:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to fork Unix" href="https://874656645.github.io/posts/33-fork-unix/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -160,6 +160,21 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>PowerShell 修改脚本执行策略
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 参考asdfasdfabout_Execution_Policies    get-executionpolicy 命令查看
+ Restricted 执行策略不允许任何脚本运行 RemoteSigned    执行策略修改
+以管理员身份打开 PowerShell， 输入 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser 修改执行策略
+  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-06 17:49:14 +0800 CST'>July 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to PowerShell 修改脚本执行策略" href="https://874656645.github.io/posts/200-powershell-%E4%BF%AE%E6%94%B9%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E7%AD%96%E7%95%A5/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Unreal——智慧城市项目搭建
     </h2>
   </header>
@@ -230,18 +245,6 @@ Games101 闫令琪
   </section>
   <footer class="entry-footer"><span title='2022-06-17 16:45:02 +0800 CST'>June 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to OpenGL 渲染管线" href="https://874656645.github.io/posts/196-opengl-%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Qt 信号和槽
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> 信号函数没有返回值，且只是一个函数声明，必须有 signals: 声明 槽函数的函数标签必须和信号函数相同（相同的返回值类型和形参列表） Qt5 后成员函数也可作为 slots，可以不用 slots: 声明 slots: 声明前要添加访问权限修饰符 信号函数和槽函数其实都可以被重载   // signal 和 slots 都可以重载  // Qt5的方式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot1)() = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun1, this, pSlot1);  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot2)(int,QString) = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun2, this, pSlot2);   // Qt4的方式  // 1. SIGNAL、SLOT宏会把信号和槽转成字符串，所以就不能进行编译期错误检查  // 2. 槽函数前面必须有 slots 标签，否则无法识别为槽函数  connect(&amp;sw, SIGNAL(showMainWindow()), this, SLOT(onShowMainWindow()));  connect(&amp;sw, SIGNAL(showMainWindow(int,QString))  , this, SLOT(onShowMainWindow(int,QString)));   // Lambda 表达式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun1,  [](){  qDebug()&lt;&lt;&#34;没有参数的信号&#34;;  }  );  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun2,  [](int a, QString msg){  qDebug()&lt;&lt;a&lt;&lt;msg;  }  );   // Lambda 表达式使用注意事项  // 如果b3是局部变量或者成员变量，lambda不要使用引用传值  QPushButton *b3 = new QPushButton(this);  b3-&gt;setText(&#34;Lambda&#34;);  int a = 10, b = 100;  connect(&amp;b2/*b3*/, &amp;QPushButton::clicked,  [=](){ // 此处使用 &amp; 传值会有问题  qDebug()&lt;&lt;a&lt;&lt;b;  }  ); </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-06-14 09:45:15 +0800 CST'>June 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Qt 信号和槽" href="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -157,6 +157,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43; 字符串常量存储
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
+ 局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() {  char* p1 = &#34;qqq&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  char p[]=&#34;Hello world!&#34;;  char* p2 = &#34;w&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  printf(&#34;in s1 p=%p\n&#34;, p);  printf(&#34;in s1 p1=%p\n&#34;, p1);  printf(&#34;in s1: string&#39;s address: %p\n&#34;, &amp;(&#34;Hello world!&#34;));  printf(&#34;in s1 p2=%p\n&#34;, p2);  return p1; // 这里不能返回局部变量 p }  //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() {  char *q=&#34;Hello world!...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-13 12:34:27 +0800 CST'>December 13, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 字符串常量存储" href="https://874656645.github.io/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>const 修饰符
     </h2>
   </header>
@@ -213,19 +226,6 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
   </section>
   <footer class="entry-footer"><span title='2021-12-04 11:36:17 +0800 CST'>December 4, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to IE 64位插件" href="https://874656645.github.io/posts/19-ie64-%E4%BD%8D%E6%8F%92%E4%BB%B6/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>3DMax 操作
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、查看纹理 渲染——材质编辑器——精简材质编辑器
-2、合并Mesh——附加 3、资源跟踪器快捷键 Shift &#43; T </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 3DMax 操作" href="https://874656645.github.io/posts/18-3dmax-%E6%93%8D%E4%BD%9C/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
