@@ -8,9 +8,8 @@
 <title>C&#43;&#43; 杂记 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
-#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
-static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 	} } charTest.cpp：
-#include &lt;iostream&gt;#include &lt;locale&gt;void myPrint(){ setlocale(LC_ALL, &#34;chs&#34;); char16_t c1 = u&#39;马&#39;; char32_t c2 = U&#39;马&#39;; wchar_t x = u&#39;马&#39;; wcout &lt;&lt; x &lt;&lt; endl; } main.">
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { 	std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 	{ 	extern int etn; 	int x = etn;// x 是 4 而不是 5 	} } charTest.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -19,7 +18,7 @@ static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部�
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -50,9 +49,8 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="C&#43;&#43; 杂记" />
 <meta property="og:description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
-#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
-static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 	} } charTest.cpp：
-#include &lt;iostream&gt;#include &lt;locale&gt;void myPrint(){ setlocale(LC_ALL, &#34;chs&#34;); char16_t c1 = u&#39;马&#39;; char32_t c2 = U&#39;马&#39;; wchar_t x = u&#39;马&#39;; wcout &lt;&lt; x &lt;&lt; endl; } main." />
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { 	std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 	{ 	extern int etn; 	int x = etn;// x 是 4 而不是 5 	} } charTest." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-08-15T21:45:13&#43;08:00" />
@@ -64,9 +62,8 @@ static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部�
 
 <meta name="twitter:title" content="C&#43;&#43; 杂记"/>
 <meta name="twitter:description" content="应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
-#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
-static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 	} } charTest.cpp：
-#include &lt;iostream&gt;#include &lt;locale&gt;void myPrint(){ setlocale(LC_ALL, &#34;chs&#34;); char16_t c1 = u&#39;马&#39;; char32_t c2 = U&#39;马&#39;; wchar_t x = u&#39;马&#39;; wcout &lt;&lt; x &lt;&lt; endl; } main."/>
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { 	std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 	{ 	extern int etn; 	int x = etn;// x 是 4 而不是 5 	} } charTest."/>
 
 
 <script type="application/ld+json">
@@ -95,12 +92,12 @@ static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部�
   "@type": "BlogPosting",
   "headline": "C++ 杂记",
   "name": "C\u002b\u002b 杂记",
-  "description": "应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：\n#include \u0026lt;iostream\u0026gt; int etn = 3;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { std::cout \u0026lt;\u0026lt; \u0026#34;test.cpp\\tetn=\u0026#34; \u0026lt;\u0026lt; etn \u0026lt;\u0026lt; std::endl; } another.cpp：\nstatic int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 \t{ extern int etn; int x = etn;// x 是 4 \t} } charTest.cpp：\n#include \u0026lt;iostream\u0026gt;#include \u0026lt;locale\u0026gt;void myPrint(){ setlocale(LC_ALL, \u0026#34;chs\u0026#34;); char16_t c1 = u\u0026#39;马\u0026#39;; char32_t c2 = U\u0026#39;马\u0026#39;; wchar_t x = u\u0026#39;马\u0026#39;; wcout \u0026lt;\u0026lt; x \u0026lt;\u0026lt; endl; } main.",
+  "description": "应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：\n#include \u0026lt;iostream\u0026gt; int etn = 3;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { \tstd::cout \u0026lt;\u0026lt; \u0026#34;test.cpp\\tetn=\u0026#34; \u0026lt;\u0026lt; etn \u0026lt;\u0026lt; std::endl; } another.cpp：\nstatic int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 \t{ \textern int etn; \tint x = etn;// x 是 4 而不是 5 \t} } charTest.",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：\n#include  int etn = 3;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { std::cout  \"test.cpp\\tetn=\"  etn  std::endl; } another.cpp：\nstatic int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 \t{ extern int etn; int x = etn;// x 是 4 \t} } charTest.cpp：\n#include #include void myPrint(){ setlocale(LC_ALL, \"chs\"); char16_t c1 = u'马'; char32_t c2 = U'马'; wchar_t x = u'马'; wcout  x  endl; } main.cpp：\n// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout(); int main() { extern int x; // OK 自身模块的静态变量  x = 11; cout  ::x  endl; // 11  static int y = 10; // 局部静态变量  cout y  endl; // 10  cout  x  endl; // 11  cout  ::y  endl; // -2 访问模块静态变量  int xx = 555; // 八进制格式化打印  int z = printf(\"%#o\\n\", xx); // 01053  // 十六进制格式化打印  z = printf(\"%#x\\n\", xx); // 0x22b  // 打印数字 x 的位数  char buf[256]; z = sprintf(buf, \"%d\", xx); cout  z  endl; // 3  // 5 个固定宽度 左对齐  printf(\"l%-5cr\\n\", 'A'); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(\"l%08.2fr\\n\", -20.405); // l-0020.41r  cout  strlen(\"abc\")  endl; // 3  cout  sizeof(\"abc\")  endl; // 4  string s = \"abc\"s; cout  s.length()  endl; // 3  cout  sizeof(s)  endl; // x86 28  // x64 32(Linux)  layout(); return 0; } ",
-  "wordCount" : "289",
+  "articleBody": " 应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：\n#include  int etn = 3;\t// 全局变量 static int s_m;\t// 模块静态变量  void layout() { \tstd::cout  \"test.cpp\\tetn=\"  etn  std::endl; } another.cpp：\nstatic int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 \t{ \textern int etn; \tint x = etn;// x 是 4 而不是 5 \t} } charTest.cpp：\n#include #include void myPrint(){  setlocale(LC_ALL, \"chs\");  char16_t c1 = u'马';  char32_t c2 = U'马'; \twchar_t x = u'马'; \twcout  x  endl; } main.cpp：\n// 模块静态变量 static int x = -1, y = -2; // 全局变量 int i; // extern 全局变量 extern int etn; // 错误，不能 extern 其他模块的静态变量 // extern int s_m;  // x y 也是全局变量，只不过共用一块内存 // 所以会与上面的 x y 冲突 // static union{ // int x = 97; // char y; // };  void layout();  int main() {  extern int x; // OK 自身模块的静态变量  x = 11;  cout  ::x  endl; // 11  static int y = 10; // 局部静态变量  cout y  endl; // 10  cout  x  endl; // 11  cout  ::y  endl; // -2 访问模块静态变量   int xx = 555;  // 八进制格式化打印  int z = printf(\"%#o\\n\", xx); // 01053  // 十六进制格式化打印  z = printf(\"%#x\\n\", xx); // 0x22b  // 打印数字 x 的位数  char buf[256];  z = sprintf(buf, \"%d\", xx);  cout  z  endl; // 3   // 5 个固定宽度 左对齐  printf(\"l%-5cr\\n\", 'A'); // lA r  // 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位  printf(\"l%08.2fr\\n\", -20.405); // l-0020.41r   cout  strlen(\"abc\")  endl; // 3  cout  sizeof(\"abc\")  endl; // 4  string s = \"abc\"s;  cout  s.length()  endl; // 3  cout  sizeof(s)  endl; // x86 28  // x64 32(Linux)   etn = 4;  layout(); // test.cpp etn=4   return 0; } ",
+  "wordCount" : "297",
   "inLanguage": "en",
   "datePublished": "2022-08-15T21:45:13+08:00",
   "dateModified": "2022-08-15T21:45:13+08:00",
@@ -210,88 +207,90 @@ static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部�
 <li><code>extern</code> 只能修饰外部变量（就近原则），不能修饰局部变量</li>
 </ul>
 <p><strong>test.cpp：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;		<span style="color:#75715e">// 全局变量
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> s_m;		<span style="color:#75715e">// 模块静态变量
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">layout</span>() {
-	std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;test.cpp</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">etn=&#34;</span> <span style="color:#f92672">&lt;&lt;</span> etn <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-}
-</code></pre></div><p><strong>another.cpp：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// 模块静态变量
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">myFunc</span>(){
-    <span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;    <span style="color:#75715e">// 局部自动变量
-</span><span style="color:#75715e"></span>	{
-		<span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> etn;
-		<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> etn;<span style="color:#75715e">// x 是 4
-</span><span style="color:#75715e"></span>	}
-}
-</code></pre></div><p><strong>charTest.cpp：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;locale&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">myPrint</span>(){
-    setlocale(LC_ALL, <span style="color:#e6db74">&#34;chs&#34;</span>);
-    <span style="color:#66d9ef">char16_t</span> c1 <span style="color:#f92672">=</span> u<span style="color:#e6db74">&#39;马&#39;</span>;
-    <span style="color:#66d9ef">char32_t</span> c2 <span style="color:#f92672">=</span> U<span style="color:#e6db74">&#39;马&#39;</span>;
-	<span style="color:#66d9ef">wchar_t</span> x <span style="color:#f92672">=</span> u<span style="color:#e6db74">&#39;马&#39;</span>;
-	wcout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
-}
-</code></pre></div><p><strong>main.cpp：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 模块静态变量
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;
-<span style="color:#75715e">// 全局变量
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> i;
-<span style="color:#75715e">// extern 全局变量
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> etn;
-<span style="color:#75715e">// 错误，不能 extern 其他模块的静态变量
-</span><span style="color:#75715e">// extern int s_m;
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">// x y 也是全局变量，只不过共用一块内存
-</span><span style="color:#75715e">// 所以会与上面的 x y 冲突
-</span><span style="color:#75715e">// static union{
-</span><span style="color:#75715e">//     int x = 97;
-</span><span style="color:#75715e">//     char y;
-</span><span style="color:#75715e">// };
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">layout</span>();
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> x;           <span style="color:#75715e">// OK 自身模块的静态变量
-</span><span style="color:#75715e"></span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
-    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>x <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 11
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;      <span style="color:#75715e">// 局部静态变量
-</span><span style="color:#75715e"></span>    cout<span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;       <span style="color:#75715e">// 10
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;      <span style="color:#75715e">// 11
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>y <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// -2 访问模块静态变量
-</span><span style="color:#75715e"></span>    
-    <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">555</span>;
-    <span style="color:#75715e">// 八进制格式化打印
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> z <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%#o</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, xx);     <span style="color:#75715e">// 01053
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 十六进制格式化打印
-</span><span style="color:#75715e"></span>    z <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%#x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, xx);         <span style="color:#75715e">// 0x22b
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 打印数字 x 的位数
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">256</span>];
-    z <span style="color:#f92672">=</span> sprintf(buf, <span style="color:#e6db74">&#34;%d&#34;</span>, xx);
-    cout <span style="color:#f92672">&lt;&lt;</span> z <span style="color:#f92672">&lt;&lt;</span> endl;              <span style="color:#75715e">// 3
-</span><span style="color:#75715e"></span>    
-    <span style="color:#75715e">// 5 个固定宽度 左对齐
-</span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;l%-5cr</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">&#39;A&#39;</span>);        <span style="color:#75715e">// lA    r
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位
-</span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;l%08.2fr</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">20.405</span>);  <span style="color:#75715e">// l-0020.41r
-</span><span style="color:#75715e"></span>    
-    cout <span style="color:#f92672">&lt;&lt;</span> strlen(<span style="color:#e6db74">&#34;abc&#34;</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 3
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#e6db74">&#34;abc&#34;</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 4
-</span><span style="color:#75715e"></span>    string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abc&#34;</span>s;
-    cout <span style="color:#f92672">&lt;&lt;</span> s.length() <span style="color:#f92672">&lt;&lt;</span> endl;     <span style="color:#75715e">// 3
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(s) <span style="color:#f92672">&lt;&lt;</span> endl;      <span style="color:#75715e">// x86 28
-</span><span style="color:#75715e"></span>                                    <span style="color:#75715e">// x64 32(Linux)
-</span><span style="color:#75715e"></span>    layout();
-
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;		<span style="color:#75715e">// 全局变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> s_m;		<span style="color:#75715e">// 模块静态变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">layout</span>() {
+</span></span><span style="display:flex;"><span>	std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;test.cpp</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">etn=&#34;</span> <span style="color:#f92672">&lt;&lt;</span> etn <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>another.cpp：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// 模块静态变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">myFunc</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;    <span style="color:#75715e">// 局部自动变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	{
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> etn;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> etn;<span style="color:#75715e">// x 是 4 而不是 5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>charTest.cpp：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;locale&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">myPrint</span>(){
+</span></span><span style="display:flex;"><span>    setlocale(LC_ALL, <span style="color:#e6db74">&#34;chs&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char16_t</span> c1 <span style="color:#f92672">=</span> u<span style="color:#e6db74">&#39;马&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char32_t</span> c2 <span style="color:#f92672">=</span> U<span style="color:#e6db74">&#39;马&#39;</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">wchar_t</span> x <span style="color:#f92672">=</span> u<span style="color:#e6db74">&#39;马&#39;</span>;
+</span></span><span style="display:flex;"><span>	wcout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>main.cpp：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// 模块静态变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, y <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 全局变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> i;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// extern 全局变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> etn;
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 错误，不能 extern 其他模块的静态变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// extern int s_m;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// x y 也是全局变量，只不过共用一块内存
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 所以会与上面的 x y 冲突
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// static union{
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     int x = 97;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     char y;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// };
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">layout</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> x;           <span style="color:#75715e">// OK 自身模块的静态变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>x <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 11
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;      <span style="color:#75715e">// 局部静态变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout<span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;       <span style="color:#75715e">// 10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;      <span style="color:#75715e">// 11
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>y <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// -2 访问模块静态变量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">555</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 八进制格式化打印
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> z <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%#o</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, xx);     <span style="color:#75715e">// 01053
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 十六进制格式化打印
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    z <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%#x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, xx);         <span style="color:#75715e">// 0x22b
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 打印数字 x 的位数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">256</span>];
+</span></span><span style="display:flex;"><span>    z <span style="color:#f92672">=</span> sprintf(buf, <span style="color:#e6db74">&#34;%d&#34;</span>, xx);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> z <span style="color:#f92672">&lt;&lt;</span> endl;              <span style="color:#75715e">// 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 5 个固定宽度 左对齐
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;l%-5cr</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#e6db74">&#39;A&#39;</span>);        <span style="color:#75715e">// lA    r
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 8 位显示浮点数（包括小数点） 用 0 填充 小数位精确到 2 位
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    printf(<span style="color:#e6db74">&#34;l%08.2fr</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">20.405</span>);  <span style="color:#75715e">// l-0020.41r
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> strlen(<span style="color:#e6db74">&#34;abc&#34;</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(<span style="color:#e6db74">&#34;abc&#34;</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abc&#34;</span>s;
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> s.length() <span style="color:#f92672">&lt;&lt;</span> endl;     <span style="color:#75715e">// 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(s) <span style="color:#f92672">&lt;&lt;</span> endl;      <span style="color:#75715e">// x86 28
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                    <span style="color:#75715e">// x64 32(Linux)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    etn <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>    layout();                       <span style="color:#75715e">// test.cpp        etn=4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
 
   </div>
 
@@ -300,6 +299,11 @@ static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部�
       <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/222-compile-nginx-on-centos/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Compile Nginx on CentOS</span>
+  </a>
   <a class="next" href="https://874656645.github.io/posts/220-compile-ffmpeg-on-centos/">
     <span class="title">Next Page »</span>
     <br>

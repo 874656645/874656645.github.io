@@ -149,7 +149,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>#include &lt;ctime&gt;using namespace std; int main() { srand((unsigned int)time(NULL)); cout &lt;&lt; rand() % 40 &lt;&lt; endl; return 0; } </p>
+    <p>#include &lt;ctime&gt;using namespace std;  int main() {  srand((unsigned int)time(NULL));  cout &lt;&lt; rand() % 40 &lt;&lt; endl;  return 0; } </p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
@@ -162,7 +162,7 @@ if (!doNotTrack) {
   </header>
   <section class="entry-content">
     <p>通过函数指针实现多态，注册回调函数的方式
-void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char* arrStart = (char*)arr; for(int i = 0; i &lt; len; &#43;&#43;i){ char* eleStart = arrStart &#43; i * eleSize; myPrint(eleStart); } printf(&#34;\n&#34;); } void printInt(void* data){ int* ele = (int*)data; printf(&#34;%d &#34;, *ele); } struct Person{ char name[64]; int age; }; void printPerson(void* data){ struct Person* ele = (struct Person*)data; printf(&#34;Name: %s, Age: %d \n&#34;, ele-&gt;name, ele-&gt;age); } int main() { int arr[] = {1, 2, 3, 4, 5}; printAllArray(arr, sizeof(int), 5, printInt); struct Person personArr[] = { {&#34;aaa&#34;, 20}, {&#34;bbb&#34;, 30}, {&#34;ccc&#34;, 40}, {&#34;ddd&#34;, 50}, {&#34;eee&#34;, 60}, }; printAllArray(personArr, sizeof(struct Person), 5, printPerson); return 0; } 输出：...</p>
+void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){  char* arrStart = (char*)arr;  for(int i = 0; i &lt; len; &#43;&#43;i){  char* eleStart = arrStart &#43; i * eleSize;  myPrint(eleStart);  }  printf(&#34;\n&#34;); } void printInt(void* data){  int* ele = (int*)data;  printf(&#34;%d &#34;, *ele); } struct Person{  char name[64];  int age; }; void printPerson(void* data){  struct Person* ele = (struct Person*)data;  printf(&#34;Name: %s, Age: %d \n&#34;, ele-&gt;name, ele-&gt;age); } int main() {  int arr[] = {1, 2, 3, 4, 5};  printAllArray(arr, sizeof(int), 5, printInt);   struct Person personArr[] = {  {&#34;aaa&#34;, 20},  {&#34;bbb&#34;, 30},  {&#34;ccc&#34;, 40},  {&#34;ddd&#34;, 50},  {&#34;eee&#34;, 60},  };  printAllArray(personArr, sizeof(struct Person), 5, printPerson);   return 0; } 输出：...</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-10 22:23:34 +0800 CST'>January 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C 语言面向接口编程" href="https://874656645.github.io/posts/68-c-%E8%AF%AD%E8%A8%80%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/"></a>
@@ -175,7 +175,7 @@ void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char
   </header>
   <section class="entry-content">
     <p>MyString.h
-#ifndef __MYSTRING_H_ #define __MYSTRING_H_  #include &lt;stdlib.h&gt;#include &lt;iostream&gt;#include &lt;cstring&gt; using namespace std; class MyString { // 重载 &lt;&lt;  // 最好是 const 的，可以输出匿名变量（匿名变量不能被非 const 的左值引用接收）  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, const MyString &amp;s); // 重载 &gt;&gt;  friend istream&amp; operator&gt;&gt;(istream &amp;is, MyString &amp;s); private: // 字符串的有效长度  int m_len; // 字符串指针  char* m_pStr; public: MyString(); MyString(const char *); MyString(const MyString &amp;); ~MyString(); // 重载 =  MyString&amp; operator=(const MyString &amp;); // 重载 []  char&amp; operator[](int index); // 重载 &#43;  MyString operator&#43;(const MyString &amp;); // 重载 &#43;=  MyString&amp; operator&#43;=(const MyString &amp;); // 重载 ==  bool operator==(const MyString &amp;); // 重载 !...</p>
+#ifndef __MYSTRING_H_ #define __MYSTRING_H_  #include &lt;stdlib.h&gt;#include &lt;iostream&gt;#include &lt;cstring&gt; using namespace std;  class MyString {  // 重载 &lt;&lt;  // 最好是 const 的，可以输出匿名变量（匿名变量不能被非 const 的左值引用接收）  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, const MyString &amp;s);  // 重载 &gt;&gt;  friend istream&amp; operator&gt;&gt;(istream &amp;is, MyString &amp;s); private:  // 字符串的有效长度  int m_len;  // 字符串指针  char* m_pStr; public:  MyString();  MyString(const char *);  MyString(const MyString &amp;);  ~MyString();  // 重载 =  MyString&amp; operator=(const MyString &amp;);  // 重载 []  char&amp; operator[](int index);  // 重载 &#43;  MyString operator&#43;(const MyString &amp;);  // 重载 &#43;=  MyString&amp; operator&#43;=(const MyString &amp;);  // 重载 ==  bool operator==(const MyString &amp;);  // 重载 !...</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-08 14:01:27 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 实现一个简单的字符串类" href="https://874656645.github.io/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/"></a>
@@ -187,8 +187,8 @@ void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char
     </h2>
   </header>
   <section class="entry-content">
-    <p>1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto &amp; i : da){ cout &lt;&lt; i &lt;&lt; endl; } return 0; } 输出：
-6.95128e-310 4.63759e-310 0 2. C&#43;&#43; 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() { int arr[10]; cout &lt;&lt; arr &lt;&lt; endl; cout &lt;&lt; arr &#43; 1 &lt;&lt; endl; cout &lt;&lt; &#34;----------&#34; &lt;&lt; endl; cout &lt;&lt; &amp;arr &lt;&lt; endl; cout &lt;&lt; &amp;arr &#43; 1 &lt;&lt; endl; return 0; } 输出：...</p>
+    <p>1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() {  int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0};  double da[3];  bool ba[3];  short sa[3];  float fa[3];  for(auto &amp; i : da){  cout &lt;&lt; i &lt;&lt; endl;  }   return 0; } 输出：
+6.95128e-310 4.63759e-310 0 2. C&#43;&#43; 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() {  int arr[10];  cout &lt;&lt; arr &lt;&lt; endl;  cout &lt;&lt; arr &#43; 1 &lt;&lt; endl;  cout &lt;&lt; &#34;----------&#34; &lt;&lt; endl;  cout &lt;&lt; &amp;arr &lt;&lt; endl;  cout &lt;&lt; &amp;arr &#43; 1 &lt;&lt; endl;   return 0; } 输出：...</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-08 13:50:12 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 静态数组初始化" href="https://874656645.github.io/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
@@ -200,7 +200,7 @@ void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char
     </h2>
   </header>
   <section class="entry-content">
-    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr; } T&amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &lt;&lt; &#34;A(int)...&#34; &lt;&lt; endl; this-&gt;a = a; } ~A(){ cout &lt;&lt; &#34;~A()....</p>
+    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public:  MyAutoPtr(T * t){  ptr = t;  }  ~MyAutoPtr(){  if(ptr != NULL){  delete ptr;  ptr = NULL;  }  }  T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr;  }  T&amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr;  } private:  T* ptr; }; class A{ public:  A(int a){  cout &lt;&lt; &#34;A(int)....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>

@@ -145,6 +145,21 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Compile Nginx on CentOS
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>安装相关依赖
+yum install -y perl-ExtUtils-Embed \ readline-devel zlib-devel pam-devel \ libxml2-devel libxslt-devel openldap-devel \ python-devel openssl-devel cmakepcre-develnanowget \ gcc gcc-c&#43;&#43; ncurses-devel perl git `
+  编译命令：
+mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/winshining/nginx-http-flv-module.git curl -O -L http://hg.nginx.org/nginx/archive/stable-1.22.tar.gz # 其他版本 http://hg.nginx.org/nginx/archive/release-1.23.1.zip tar xzvf stable-1.22.tar.gz cd nginx-stable-1.22 ./auto/configure --prefix=&#34;$HOME/nginx&#34; --sbin-path=&#34;$HOME/nginx&#34; \ --with-select_module \ --with-poll_module \ --with-file-aio \ --with-http_ssl_module \ --with-http_realip_module \ --with-http_sub_module \ --with-http_flv_module \ --add-module=&#34;../nginx-http-flv-module&#34; \ --with-http_mp4_module \ --with-http_gzip_static_module \ --with-http_secure_link_module \ --with-http_stub_status_module \ --with-http_perl_module \ --with-ld-opt=&#34;-Wl,-E&#34; make make install   注意事项：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-17 14:33:56 +0800 CST'>August 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Compile Nginx on CentOS" href="https://874656645.github.io/posts/222-compile-nginx-on-centos/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Compile FFmpeg on CentOS
     </h2>
   </header>

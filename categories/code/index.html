@@ -145,14 +145,28 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Compile Nginx on CentOS
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>安装相关依赖
+yum install -y perl-ExtUtils-Embed \ readline-devel zlib-devel pam-devel \ libxml2-devel libxslt-devel openldap-devel \ python-devel openssl-devel cmakepcre-develnanowget \ gcc gcc-c&#43;&#43; ncurses-devel perl git `
+  编译命令：
+mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/winshining/nginx-http-flv-module.git curl -O -L http://hg.nginx.org/nginx/archive/stable-1.22.tar.gz # 其他版本 http://hg.nginx.org/nginx/archive/release-1.23.1.zip tar xzvf stable-1.22.tar.gz cd nginx-stable-1.22 ./auto/configure --prefix=&#34;$HOME/nginx&#34; --sbin-path=&#34;$HOME/nginx&#34; \ --with-select_module \ --with-poll_module \ --with-file-aio \ --with-http_ssl_module \ --with-http_realip_module \ --with-http_sub_module \ --with-http_flv_module \ --add-module=&#34;../nginx-http-flv-module&#34; \ --with-http_mp4_module \ --with-http_gzip_static_module \ --with-http_secure_link_module \ --with-http_stub_status_module \ --with-http_perl_module \ --with-ld-opt=&#34;-Wl,-E&#34; make make install   注意事项：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-17 14:33:56 +0800 CST'>August 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Compile Nginx on CentOS" href="https://874656645.github.io/posts/222-compile-nginx-on-centos/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43; 杂记
     </h2>
   </header>
   <section class="entry-content">
     <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
-#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
-static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 	} } charTest.cpp：
-#include &lt;iostream&gt;#include &lt;locale&gt;void myPrint(){ setlocale(LC_ALL, &#34;chs&#34;); char16_t c1 = u&#39;马&#39;; char32_t c2 = U&#39;马&#39;; wchar_t x = u&#39;马&#39;; wcout &lt;&lt; x &lt;&lt; endl; } main....</p>
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { 	std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 	{ 	extern int etn; 	int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>
@@ -205,23 +219,10 @@ cd ~/ffmpeg_sources curl -O -L https://www....</p>
   <section class="entry-content">
     <p>一、注意事项：  线程处理类继承于 QObject 线程处理类对象不能有父对象 处理完成后向外发信号 即使 QThread 线程内部的处理对象运行结束了，QThread 线程对象也不会自动释放，需要手动 quit() &#43; wait() 线程处理类对象创建成功后，需要通过 moveToThread() 函数移动到 QThread 对象中 需要通过其他线程发信号来启动另外线程中的处理类对象的处理函数 子线程中不要操作图形界面  二、connect 第五个参数的作用 指定信号和槽的连接方式：自动连接、直接连接、队列连接，多线程时才有意义，默认为 Qt::AutoConnection。
  Qt::AutoConnection（自动连接）：多线程时是 Qt::QueuedConnection（队列连接），单线程时是 Qt::DirectConnection（直接连接） Qt::QueuedConnection（队列连接）：槽函数所在线程和信号接收者所在线程相同 Qt::DirectConnection（直接连接）：槽函数所在线程和信号发送者所在线程相同  三、代码示例   线程处理类
-class MyThreadPro : public QObject { Q_OBJECT public: explicit MyThreadPro(QObject *parent = nullptr); // 后台处理函数  void startProcessing(); // 是否结束标识位  void setFlag(bool b = false); signals: // 向其他线程发送信号  void myTimeout(); private: bool stopRunning; };   主窗口类...</p>
+class MyThreadPro : public QObject {  Q_OBJECT public:  explicit MyThreadPro(QObject *parent = nullptr);  // 后台处理函数  void startProcessing();  // 是否结束标识位  void setFlag(bool b = false);  signals:  // 向其他线程发送信号  void myTimeout();  private:  bool stopRunning; };   主窗口类...</p>
   </section>
   <footer class="entry-footer"><span title='2022-07-18 22:17:00 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt 多线程" href="https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>OpenGL 视差贴图（Parallax Mapping）
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>参考：
- 视差贴图（Parallax Mapping）学习笔记 视差映射（Parallax Mapping） Learn about Parallax(视差贴图)  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-18 16:06:56 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to OpenGL 视差贴图（Parallax Mapping）" href="https://874656645.github.io/posts/211-opengl-%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BEparallax-mapping/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
