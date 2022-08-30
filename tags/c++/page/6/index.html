@@ -145,6 +145,23 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Emscripten——C&#43;&#43; 函数导出
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>导出 C&#43;&#43; 函数到 js 有多种方式：
+  方式一：在编译的时候指定
+在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
+  方式二：修改 C&#43;&#43; 函数
+在 C&#43;&#43; 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
+#include &lt;emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-24 17:31:30 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 函数导出" href="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Emscripten——Hello World
     </h2>
   </header>
@@ -212,19 +229,6 @@ class Person{ public:  int getAge()const{  return m_age;  }  void setAge(int age
   </section>
   <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr" href="https://874656645.github.io/posts/131-c&#43;&#43;11-auto_ptr-%E8%A2%AB%E5%BA%9F%E5%BC%83%E4%B8%8E-unique_ptr/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 mutable 关键字
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、修饰类成员变量 此关键字只能应用于类的非静态和非常量数据成员，mutable 是为了让 const 对象的某些数据成员可以被修改。static 是类的成员，不属于对象，常对象和常函数只会限制类的成员变量修改，所以类的 static 数据成员不需要 mutable 修饰，在常对象和常函数中也能被修改。
-class Person{ public:  int getAge() const{  m_count&#43;&#43;;  s_count&#43;&#43;;  return m_age;  }  int getCount()const{  return m_count;  } private:  int m_age{20};  mutable int m_count{0}; public:  static int s_count; }; int Person::s_count = 0;  int main() {  Person p;  p.getAge();  p.getAge();  p.getAge();  cout &lt;&lt; p.getCount() &lt;&lt; endl; // 3  cout &lt;&lt; p....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 mutable 关键字" href="https://874656645.github.io/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

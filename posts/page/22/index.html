@@ -160,6 +160,58 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>常用的宏定义
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>int main() {  printf(&#34;%s\n&#34;, __FILE__); // main.c  printf(&#34;%d\n&#34;, __LINE__); // 14  printf(&#34;%s\n&#34;, __DATE__); // Feb 7 2022  printf(&#34;%s\n&#34;, __TIME__); // 01:59:37   return 0; } // func1.h #ifdef __cplusplus extern &#34;C&#34;{ #endif  void func1();  #ifdef __cplusplus } #endif  // main.h extern &#34;C&#34;{  include &#34;func1.h&#34; } extern &#34;C&#34;{  extern void func1(); } int main() {  func1();   return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-07 10:11:16 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 常用的宏定义" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Linux 常用命令
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Linux 命令大全
+一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装软件 sudo apt install tree
+3. 删除不需要的包 sudo apt autoremove
+4. 查看已安装的软件 dpkg -l | grep openssh-server
+5. 查看软件安装的路径 dpkg -L openssh-server
+whereis gdb
+二、shell 操作和常用命令 1、查看输入的命令历史 history
+2、删除光标前面的字符串 ctrl &#43; u
+3、删除光标后面的字符串 ctrl &#43; k
+4、光标定位到头部 ctrl &#43; a
+5、光标定位到尾部 ctrl &#43; e
+6、命令、路径补全 Tab
+7、缩写别名 alias
+8、查看说明 man 5 passwd
+9、宿主目录 ~
+10、查看目录内容 tree ~...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>char* 数组
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>void printArr(const char ** p, int len){  for(int i = 0; i &lt; len; &#43;&#43;i){  cout &lt;&lt; p[i] &lt;&lt; endl;  } }  void sortSelect(const char ** p, int len){  for(int i = 0; i &lt; len - 1; &#43;&#43;i){  int max = i;  for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){  if(p[j] &gt; p[max]){  max = j;  }  }  // 交换  if(i !...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>装饰器模式
     </h2>
   </header>
@@ -181,44 +233,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>命令模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>将一个请求封闭为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。
-命令模式可以将请求者和接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>策略模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>策略模式定义了一系列的算法，并将每个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:59:42 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 策略模式" href="https://874656645.github.io/posts/112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>模板方法模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
-class TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew() = 0;  virtual void pourCup() = 0;  virtual void addSomething() = 0;   void make(){  boilWater();  drew();  pourCup();  addSomething();  } }; class Tea : public TemplateDrink{ public:  void boilWater() override{  cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl;  }  void drew() override{  cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl;  }  void pourCup() override{  cout &lt;&lt; &#34;倒入茶杯中....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:41:35 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板方法模式" href="https://874656645.github.io/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>GIS——GeoServer 地图服务 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="GeoServer" />
+<meta name="description" content="GeoServer Version 2.21.1 一、WMS 服务   获取服务能力元数据：
+  可在网址中指定 version=1.1.0 和 service=WMS 参数
+  获取整个 geoserver 的服务能力，默认 WMS_Capabilities 的 version 是 1.3.0 的
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中不包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中不包含工作空间的 1.3.0 版本的 xml 样例
+  获取其中某个工作空间的服务能力，需要在 geoserver 后面添加工作空间名称
+http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中包含工作空间的 1.3.0 版本的 xml 样例
+  注意：
+ 1.3.0 版本的空间参考标签为 &lt;CRS&gt;，而 1.1.0 版本的空间参考标签为 &lt;SRS&gt; 如果请求的网址指定了工作空间，图层名中就不需要有工作空间名了（比如：cite:hl_2017 和 hl_2017） 1.1.0 版本的图层中包含 geoserver 以图层组方式发布的服务图层，而 1.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/223-gis-geoserver-%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="GIS——GeoServer 地图服务" />
+<meta property="og:description" content="GeoServer Version 2.21.1 一、WMS 服务   获取服务能力元数据：
+  可在网址中指定 version=1.1.0 和 service=WMS 参数
+  获取整个 geoserver 的服务能力，默认 WMS_Capabilities 的 version 是 1.3.0 的
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中不包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中不包含工作空间的 1.3.0 版本的 xml 样例
+  获取其中某个工作空间的服务能力，需要在 geoserver 后面添加工作空间名称
+http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中包含工作空间的 1.3.0 版本的 xml 样例
+  注意：
+ 1.3.0 版本的空间参考标签为 &lt;CRS&gt;，而 1.1.0 版本的空间参考标签为 &lt;SRS&gt; 如果请求的网址指定了工作空间，图层名中就不需要有工作空间名了（比如：cite:hl_2017 和 hl_2017） 1.1.0 版本的图层中包含 geoserver 以图层组方式发布的服务图层，而 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/223-gis-geoserver-%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-23T10:34:42&#43;08:00" />
+<meta property="article:modified_time" content="2022-08-23T10:34:42&#43;08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="GIS——GeoServer 地图服务"/>
+<meta name="twitter:description" content="GeoServer Version 2.21.1 一、WMS 服务   获取服务能力元数据：
+  可在网址中指定 version=1.1.0 和 service=WMS 参数
+  获取整个 geoserver 的服务能力，默认 WMS_Capabilities 的 version 是 1.3.0 的
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中不包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中不包含工作空间的 1.3.0 版本的 xml 样例
+  获取其中某个工作空间的服务能力，需要在 geoserver 后面添加工作空间名称
+http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中包含工作空间的 1.3.0 版本的 xml 样例
+  注意：
+ 1.3.0 版本的空间参考标签为 &lt;CRS&gt;，而 1.1.0 版本的空间参考标签为 &lt;SRS&gt; 如果请求的网址指定了工作空间，图层名中就不需要有工作空间名了（比如：cite:hl_2017 和 hl_2017） 1.1.0 版本的图层中包含 geoserver 以图层组方式发布的服务图层，而 1."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "GIS——GeoServer 地图服务",
+      "item": "https://874656645.github.io/posts/223-gis-geoserver-%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "GIS——GeoServer 地图服务",
+  "name": "GIS——GeoServer 地图服务",
+  "description": "GeoServer Version 2.21.1 一、WMS 服务   获取服务能力元数据：\n  可在网址中指定 version=1.1.0 和 service=WMS 参数\n  获取整个 geoserver 的服务能力，默认 WMS_Capabilities 的 version 是 1.3.0 的\nhttp://172.16.17.127:8066/geoserver/wms?request=getCapabilities\nhttp://172.16.17.127:8066/geoserver/wms?request=getCapabilities\u0026amp;version=1.1.0\n请求网址中不包含工作空间的 1.1.1 版本的 xml 样例\n请求网址中不包含工作空间的 1.3.0 版本的 xml 样例\n  获取其中某个工作空间的服务能力，需要在 geoserver 后面添加工作空间名称\nhttp://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities\u0026amp;version=1.1.0\n请求网址中包含工作空间的 1.1.1 版本的 xml 样例\n请求网址中包含工作空间的 1.3.0 版本的 xml 样例\n  注意：\n 1.3.0 版本的空间参考标签为 \u0026lt;CRS\u0026gt;，而 1.1.0 版本的空间参考标签为 \u0026lt;SRS\u0026gt; 如果请求的网址指定了工作空间，图层名中就不需要有工作空间名了（比如：cite:hl_2017 和 hl_2017） 1.1.0 版本的图层中包含 geoserver 以图层组方式发布的服务图层，而 1.",
+  "keywords": [
+    "GeoServer"
+  ],
+  "articleBody": "GeoServer Version 2.21.1 一、WMS 服务   获取服务能力元数据：\n  可在网址中指定 version=1.1.0 和 service=WMS 参数\n  获取整个 geoserver 的服务能力，默认 WMS_Capabilities 的 version 是 1.3.0 的\nhttp://172.16.17.127:8066/geoserver/wms?request=getCapabilities\nhttp://172.16.17.127:8066/geoserver/wms?request=getCapabilities\u0026version=1.1.0\n请求网址中不包含工作空间的 1.1.1 版本的 xml 样例\n请求网址中不包含工作空间的 1.3.0 版本的 xml 样例\n  获取其中某个工作空间的服务能力，需要在 geoserver 后面添加工作空间名称\nhttp://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities\u0026version=1.1.0\n请求网址中包含工作空间的 1.1.1 版本的 xml 样例\n请求网址中包含工作空间的 1.3.0 版本的 xml 样例\n  注意：\n 1.3.0 版本的空间参考标签为 ，而 1.1.0 版本的空间参考标签为  如果请求的网址指定了工作空间，图层名中就不需要有工作空间名了（比如：cite:hl_2017 和 hl_2017） 1.1.0 版本的图层中包含 geoserver 以图层组方式发布的服务图层，而 1.3.0 版本中就没有了      GeoServer WMS 服务网址请求示例：\n  bbox、width、height、format、srs（version=1.3.0 时为 crs） 为必选参数，styles 参数不是必选\n  OpenLayers 方式浏览：\n不指定工作空间：  http://172.16.17.127:8066/geoserver/wms?service=WMS\u0026version=1.1.0\u0026request=GetMap\u0026layers=cite:hl_2017\u0026bbox=3.751160022702132E7%2C4433325.154871847%2C3.757928272385144E7%2C4531336.518872064\u0026width=530\u0026height=768\u0026srs=EPSG%3A4525\u0026styles=\u0026format=application/openlayers  指定工作空间：  http://172.16.17.127:8066/geoserver/cite/wms?service=WMS\u0026version=1.1.0\u0026request=GetMap\u0026layers=hl_2017\u0026bbox=3.751160022702132E7%2C4433325.154871847%2C3.757928272385144E7%2C4531336.518872064\u0026width=530\u0026height=768\u0026srs=EPSG%3A4525\u0026styles=\u0026format=application/openlayers   JPEG 格式浏览：\n不指定工作空间：  http://172.16.17.127:8066/geoserver/wms?service=WMS\u0026version=1.1.0\u0026request=GetMap\u0026layers=cite:hl_2017\u0026bbox=3.751160022702132E7%2C4433325.154871847%2C3.757928272385144E7%2C4531336.518872064\u0026width=530\u0026height=768\u0026srs=EPSG%3A4525\u0026styles=\u0026format=image/jpeg  指定工作空间：  http://172.16.17.127:8066/geoserver/cite/wms?service=WMS\u0026version=1.1.0\u0026request=GetMap\u0026layers=hl_2017\u0026bbox=3.751160022702132E7%2C4433325.154871847%2C3.757928272385144E7%2C4531336.518872064\u0026width=530\u0026height=768\u0026srs=EPSG%3A4525\u0026styles=\u0026format=image/jpeg   PNG 格式浏览：\n不指定工作空间：  http://172.16.17.127:8066/geoserver/wms?service=WMS\u0026version=1.1.0\u0026request=GetMap\u0026layers=cite:FHZTGHXZ\u0026bbox=111.37794952600007%2C40.405213106000076%2C111.94963258800004%2C40.86023666700006\u0026width=768\u0026height=611\u0026srs=EPSG%3A4326\u0026styles=\u0026format=image/png  指定工作空间：  http://172.16.17.127:8066/geoserver/cite/wms?service=WMS\u0026version=1.1.0\u0026request=GetMap\u0026layers=FHZTGHXZ\u0026bbox=111.37794952600007%2C40.405213106000076%2C111.94963258800004%2C40.86023666700006\u0026width=768\u0026height=611\u0026srs=EPSG%3A4326\u0026styles=\u0026format=image/png ···     平台组织的 WMS 请求网址\nhttp://172.16.17.127:8066/geoserver/cite/wms?service=WMS\u0026version=1.1.0\u0026request=GetMap\u0026layers=hl_2017\u0026srs=EPSG:4326\u0026format=png\u0026width=256\u0026height=256\u0026styles=\u0026bbox=111.37794952600007%2C40.405213106000076%2C111.94963258800004%2C40.86023666700006\n  二、WMTS 服务   获取服务能力的元数据：\nhttp://172.16.17.127:8066/geoserver/gwc/service/wmts?service=WMTS\u0026request=getCapabilities\u0026virsion=1.0.0\n  瓦片访问示例：\nhttp://172.16.17.127:8066/geoserver/gwc/service/wmts?layer=cite%3Ahl_2017\u0026style=\u0026tilematrixset=EPSG%3A4326\u0026Service=WMTS\u0026Request=GetTile\u0026Version=1.0.0\u0026Format=image%2Fpng\u0026TileMatrix=EPSG:4326:9\u0026TileCol=829\u0026TileRow=140\n  平台网址：\nhttp://172.16.17.127:8066/geoserver/gwc/service/wmts?service=WMTS\u0026version=1.0.0\u0026request=GetTile\u0026layer=hl_2017\u0026tilematrixset=EPSG:4326\u0026format=image/png\n三、GeoServer   管理界面：\n  存储仓库：数据的存放目录\n  工作空间：类似 mxd 文档，对图层进行组织\n  图层：地图数据\n  图层组：功能类似工作空间，可以添加多个图层的数据\n  参考：\nOGC标准WMTS服务概念与地图商的瓦片编号流派-web地图切片加载\n",
+  "wordCount" : "111",
+  "inLanguage": "en",
+  "datePublished": "2022-08-23T10:34:42+08:00",
+  "dateModified": "2022-08-23T10:34:42+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/223-gis-geoserver-%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      GIS——GeoServer 地图服务
+    </h1>
+    <div class="post-meta"><span title='2022-08-23 10:34:42 +0800 CST'>August 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80wms-%e6%9c%8d%e5%8a%a1" aria-label="一、WMS 服务">一、WMS 服务</a></li>
+                <li>
+                    <a href="#%e4%ba%8cwmts-%e6%9c%8d%e5%8a%a1" aria-label="二、WMTS 服务">二、WMTS 服务</a></li>
+                <li>
+                    <a href="#%e4%b8%89geoserver" aria-label="三、GeoServer">三、GeoServer</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>GeoServer Version
+</span></span><span style="display:flex;"><span>2.21.1
+</span></span></code></pre></div><h2 id="一wms-服务">一、WMS 服务<a hidden class="anchor" aria-hidden="true" href="#一wms-服务">#</a></h2>
+<ol>
+<li>
+<p>获取服务能力元数据：</p>
+<ul>
+<li>
+<p>可在网址中指定 <code>version=1.1.0</code> 和 <code>service=WMS</code> 参数</p>
+</li>
+<li>
+<p>获取整个 <code>geoserver</code> 的服务能力，默认 <code>WMS_Capabilities</code> 的 <code>version</code> 是 <strong>1.3.0</strong> 的</p>
+<p><code>http://172.16.17.127:8066/geoserver/wms?request=getCapabilities</code></p>
+<p><code>http://172.16.17.127:8066/geoserver/wms?request=getCapabilities&amp;version=1.1.0</code></p>
+<p><a href="../getcapabilities_1.1.0_%E6%97%A0%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.xml">请求网址中不包含工作空间的 1.1.1 版本的 <code>xml</code> 样例</a></p>
+<p><a href="../getcapabilities_1.3.0_%E6%97%A0%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.xml">请求网址中不包含工作空间的 1.3.0 版本的 <code>xml</code> 样例</a></p>
+</li>
+<li>
+<p>获取其中某个工作空间的服务能力，需要在 <code>geoserver</code> 后面添加<strong>工作空间</strong>名称</p>
+<p><code>http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version=1.1.0</code></p>
+<p><a href="../getcapabilities_1.1.0_%E6%9C%89%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.xml">请求网址中包含工作空间的 1.1.1 版本的 <code>xml</code> 样例</a></p>
+<p><a href="../getcapabilities_1.3.0_%E6%9C%89%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4.xml">请求网址中包含工作空间的 1.3.0 版本的 <code>xml</code> 样例</a></p>
+</li>
+<li>
+<p><strong>注意</strong>：</p>
+<ul>
+<li><strong>1.3.0</strong> 版本的空间参考标签为 <code>&lt;CRS&gt;</code>，而 <strong>1.1.0</strong> 版本的空间参考标签为 <code>&lt;SRS&gt;</code></li>
+<li>如果请求的网址指定了<strong>工作空间</strong>，图层名中就不需要有工作空间名了（比如：<code>cite:hl_2017</code> 和 <code>hl_2017</code>）</li>
+<li><strong>1.1.0 版本</strong>的图层中包含 <code>geoserver</code> 以<strong>图层组</strong>方式发布的服务图层，而 <strong>1.3.0 版本</strong>中就没有了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><code>GeoServer WMS</code> 服务网址请求示例：</p>
+<ul>
+<li>
+<p><code>bbox、width、height、format、srs（version=1.3.0 时为 crs）</code> 为必选参数，<code>styles</code> 参数不是必选</p>
+</li>
+<li>
+<p><code>OpenLayers</code> 方式浏览：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>不指定工作空间：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>http://172.16.17.127:8066/geoserver/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers=cite:hl_2017&amp;bbox=3.751160022702132E7%2C4433325.154871847%2C3.757928272385144E7%2C4531336.518872064&amp;width=530&amp;height=768&amp;srs=EPSG%3A4525&amp;styles=&amp;format=application/openlayers
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>指定工作空间：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>http://172.16.17.127:8066/geoserver/cite/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers=hl_2017&amp;bbox=3.751160022702132E7%2C4433325.154871847%2C3.757928272385144E7%2C4531336.518872064&amp;width=530&amp;height=768&amp;srs=EPSG%3A4525&amp;styles=&amp;format=application/openlayers
+</span></span></code></pre></div></li>
+<li>
+<p><code>JPEG</code> 格式浏览：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>不指定工作空间：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>http://172.16.17.127:8066/geoserver/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers=cite:hl_2017&amp;bbox=3.751160022702132E7%2C4433325.154871847%2C3.757928272385144E7%2C4531336.518872064&amp;width=530&amp;height=768&amp;srs=EPSG%3A4525&amp;styles=&amp;format=image/jpeg
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>指定工作空间：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>http://172.16.17.127:8066/geoserver/cite/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers=hl_2017&amp;bbox=3.751160022702132E7%2C4433325.154871847%2C3.757928272385144E7%2C4531336.518872064&amp;width=530&amp;height=768&amp;srs=EPSG%3A4525&amp;styles=&amp;format=image/jpeg
+</span></span></code></pre></div></li>
+<li>
+<p><code>PNG</code> 格式浏览：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>不指定工作空间：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>http://172.16.17.127:8066/geoserver/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers=cite:FHZTGHXZ&amp;bbox=111.37794952600007%2C40.405213106000076%2C111.94963258800004%2C40.86023666700006&amp;width=768&amp;height=611&amp;srs=EPSG%3A4326&amp;styles=&amp;format=image/png
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>指定工作空间：
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>http://172.16.17.127:8066/geoserver/cite/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers=FHZTGHXZ&amp;bbox=111.37794952600007%2C40.405213106000076%2C111.94963258800004%2C40.86023666700006&amp;width=768&amp;height=611&amp;srs=EPSG%3A4326&amp;styles=&amp;format=image/png
+</span></span><span style="display:flex;"><span>···
+</span></span></code></pre></div></li>
+</ul>
+</li>
+<li>
+<p>平台组织的 <code>WMS</code> 请求网址</p>
+<p>http://172.16.17.127:8066/geoserver/cite/wms?service=WMS&amp;version=1.1.0&amp;request=GetMap&amp;layers=hl_2017&amp;srs=EPSG:4326&amp;format=png&amp;width=256&amp;height=256&amp;styles=&amp;bbox=111.37794952600007%2C40.405213106000076%2C111.94963258800004%2C40.86023666700006</p>
+</li>
+</ol>
+<h2 id="二wmts-服务">二、WMTS 服务<a hidden class="anchor" aria-hidden="true" href="#二wmts-服务">#</a></h2>
+<ol>
+<li>
+<p>获取服务能力的元数据：</p>
+<p><code>http://172.16.17.127:8066/geoserver/gwc/service/wmts?service=WMTS&amp;request=getCapabilities&amp;virsion=1.0.0</code></p>
+</li>
+<li>
+<p>瓦片访问示例：</p>
+<p><code>http://172.16.17.127:8066/geoserver/gwc/service/wmts?layer=cite%3Ahl_2017&amp;style=&amp;tilematrixset=EPSG%3A4326&amp;Service=WMTS&amp;Request=GetTile&amp;Version=1.0.0&amp;Format=image%2Fpng&amp;TileMatrix=EPSG:4326:9&amp;TileCol=829&amp;TileRow=140</code></p>
+</li>
+</ol>
+<p>平台网址：</p>
+<p>http://172.16.17.127:8066/geoserver/gwc/service/wmts?service=WMTS&amp;version=1.0.0&amp;request=GetTile&amp;layer=hl_2017&amp;tilematrixset=EPSG:4326&amp;format=image/png</p>
+<h2 id="三geoserver">三、GeoServer<a hidden class="anchor" aria-hidden="true" href="#三geoserver">#</a></h2>
+<ol>
+<li>
+<p>管理界面：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/geoserver-%e7%ae%a1%e7%90%86%e7%95%8c%e9%9d%a2.jpg" alt="geoserver-管理界面"  />
+</p>
+</li>
+<li>
+<p>存储仓库：数据的存放目录</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/geoserver-%e5%ad%98%e5%82%a8%e4%bb%93%e5%ba%93.jpg" alt="geoserver-存储仓库"  />
+</p>
+</li>
+<li>
+<p>工作空间：类似 mxd 文档，对图层进行组织</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/geoserver-%e5%b7%a5%e4%bd%9c%e7%a9%ba%e9%97%b4%e5%88%97%e8%a1%a8.jpg" alt="geoserver-工作空间"  />
+
+<img loading="lazy" style="margin: auto;" src=".././img/geoserver-%e5%b7%a5%e4%bd%9c%e7%a9%ba%e9%97%b4-basic-info.jpg" alt="geoserver-工作空间-basic-info"  />
+
+<img loading="lazy" style="margin: auto;" src=".././img/geoserver-%e5%b7%a5%e4%bd%9c%e7%a9%ba%e9%97%b4-security.jpg" alt="geoserver-工作空间-security"  />
+</p>
+</li>
+<li>
+<p>图层：地图数据</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/geoserver-%e5%9b%be%e5%b1%82%e4%bf%a1%e6%81%af%e5%88%97%e8%a1%a8.jpg" alt="geoserver-图层信息"  />
+</p>
+</li>
+<li>
+<p>图层组：功能类似工作空间，可以添加多个图层的数据</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/geoserver-%e5%9b%be%e5%b1%82%e7%bb%84%e5%88%97%e8%a1%a8.jpg" alt="geoserver-图层组列表"  />
+</p>
+</li>
+</ol>
+<p>参考：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/393081170">OGC标准WMTS服务概念与地图商的瓦片编号流派-web地图切片加载</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/geoserver/">GeoServer</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/224-arcgis-desktop-%E5%88%B6%E4%BD%9C%E5%BD%B1%E5%83%8F%E5%88%87%E7%89%87/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>ArcGIS Desktop 制作影像切片</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/222-compile-nginx-on-centos/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Compile Nginx on CentOS</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

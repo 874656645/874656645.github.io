@@ -160,6 +160,60 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Unreal——蓝图函数、事件和宏
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  函数调用会等待函数执行结果，事件调用只是触发但不会等待
+事件是异步执行，触发后，会在新的线程中执行，所以可以使用 Delay，函数和宏的调用是同步执行，是单线程的，所以在函数中不能使用 Timeline、Delay 和 Http 请求 等操作。
+  事件没有返回值，函数和宏可以有返回值
+  函数和事件可以跨蓝图类访问，而宏只可以在定义的蓝图类内访问（宏库可以跨蓝图类访问）
+  函数可以用局部变量，事件没有局部变量
+  因为函数执行顺序有保证，所以优先使用函数
+  函数可以被继承，而宏不可以被继承，子类无法使用父类的宏
+  没有返回值的函数，在被子类 Overide 时，会变成事件
+  参考：
+ UE4蓝图之函数、事件、宏的区别 【UE4笔记】Event&amp;Function事件和函数的区别 [UE4]函数和事件的区别  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-09 19:38:55 +0800 CST'>August 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——蓝图函数、事件和宏" href="https://874656645.github.io/posts/215-unreal-%E8%93%9D%E5%9B%BE%E5%87%BD%E6%95%B0%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%AE%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Unreal——DefaultGraphicsRHI
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>注意： UE5 默认使用的是 DX12，有可能会在渲染方面出现奇怪的问题，需要特别注意。
+RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个平台的图形 API 包装成统一接口，供上层渲染来使用，让业务不用过多的关注 API 细节（实际还得关注RHI 细节）。从代码结构上来看，RHI 封装的比较贴合于现代的图形 API(vulkan, metal, DX12)，也支持 opengl/opengles。这个接口是广义上的概念，不仅指 C&#43;&#43; 的纯虚基类，也包括一些全局变量，全局函数等。
+参考：
+ UE4/UE5的RHI(Vulkan为例)  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-04 14:57:18 +0800 CST'>August 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——DefaultGraphicsRHI" href="https://874656645.github.io/posts/214-unreal-defaultgraphicsrhi/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>判断点是否在多边形内部
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  射线法：不需考虑精度误差和多边形点给出的顺序。
+  转角法：要求多边形是有顺序的，按照多边形顶点逆时针顺序，从 P 点到顶点 Vi 分别做连线，其中 αi 为 Vi 和 Vi&#43;1 之间的夹角。其中 α 角度逆时针为正，顺时针为负，这样所有到顶点做连线之间夹角和为(环绕数)0，这点P在多边形外部，否则在内部。
+  射线法改进：针对有方向的多边形，通过判断射线穿过的边和点的位置（比如点在线的左侧为正，右侧为负），和为 0 则点在外部。
+  叉积法：适用凸多边形，如果一个点在多边形所有有向边的左边，那么这个点一定在多边形内部。
+  面积法：类似叉积法，适用凸多边形。如果点在多边形内部或者边上，那么点与多边形所有边组成的三角形面积和等于多边形面积。
+  参考：
+ 详谈判断点在多边形内的七种方法（最全面） hdu1756 hrbust1429 为例  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-02 17:43:53 +0800 CST'>August 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 判断点是否在多边形内部" href="https://874656645.github.io/posts/213-%E5%88%A4%E6%96%AD%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E9%83%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Qt 多线程
     </h2>
   </header>
@@ -183,43 +237,6 @@ class MyThreadPro : public QObject {  Q_OBJECT public:  explicit MyThreadPro(QOb
   </section>
   <footer class="entry-footer"><span title='2022-07-18 16:06:56 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to OpenGL 视差贴图（Parallax Mapping）" href="https://874656645.github.io/posts/211-opengl-%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BEparallax-mapping/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>OpenGL Gamma 校正和线性工作流
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> sRGBA 和 RGBA  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-18 14:40:32 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to OpenGL Gamma 校正和线性工作流" href="https://874656645.github.io/posts/210-opengl-gamma-%E6%A0%A1%E6%AD%A3%E5%92%8C%E7%BA%BF%E6%80%A7%E5%B7%A5%E4%BD%9C%E6%B5%81/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Qt UDP
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址
- 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可   setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port));   udpSocket = new QUdpSocket(this);  // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port);  connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){  char buf[1024] = {0};  QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort);  qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len;  if(len &gt; 0){  QString str = QString(&#34;[%1:%2] %3&#34;)....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-15 21:44:52 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Qt UDP" href="https://874656645.github.io/posts/209-qt-udp/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Qt TCP
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、总结  TCP 就像打电话，安全，不会丢包 Linux TCP 通信  Qt TCP 通信   二、服务器端  TCP 服务器端有两个套接字，一个是监听套接字，一个是通信套接字   tcpServer = nullptr; // 服务监听套接字  tcpSocket = nullptr; // 通信套接字   // 创建tcp服务监听套接字  tcpServer = new QTcpServer(this);  // tcp服务开启监听（bind端口号并开启监听）  tcpServer-&gt;listen(QHostAddress::Any, 8008);  // 绑定连接成功信号  connect(tcpServer, &amp;QTcpServer::newConnection,[=](){  // 获取通信套接字  tcpSocket = tcpServer-&gt;nextPendingConnection();  // 获取客户端 IP 和 端口  QString ip = tcpSocket-&gt;peerAddress().toString();  quint16 port = tcpSocket-&gt;peerPort();  QString msg = QString(&#34;[%1:%2] 连接成功&#34;)....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-15 21:13:10 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Qt TCP" href="https://874656645.github.io/posts/208-qt-tcp/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -145,6 +145,20 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>指针函数和函数指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  指针函数本质是一个函数，返回值是一个指针；
+  函数指针是指向函数的一个指针变量；
+  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std;  // 指针函数fun char * fun(const char * p) {  cout &lt;&lt; &#34;fun: &#34; &lt;&lt; p &lt;&lt; endl;  return nullptr; };  // 函数指针pf char * (*pf)(const char * p);  int main() {  pf = fun; // 函数指针pf指向函数fun  pf(&#34;Hello&#34;);   return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-16 12:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 指针函数和函数指针" href="https://874656645.github.io/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>explicit（显式）关键字
     </h2>
   </header>

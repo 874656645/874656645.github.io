@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 mutable 关键字
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、修饰类成员变量 此关键字只能应用于类的非静态和非常量数据成员，mutable 是为了让 const 对象的某些数据成员可以被修改。static 是类的成员，不属于对象，常对象和常函数只会限制类的成员变量修改，所以类的 static 数据成员不需要 mutable 修饰，在常对象和常函数中也能被修改。
+class Person{ public:  int getAge() const{  m_count&#43;&#43;;  s_count&#43;&#43;;  return m_age;  }  int getCount()const{  return m_count;  } private:  int m_age{20};  mutable int m_count{0}; public:  static int s_count; }; int Person::s_count = 0;  int main() {  Person p;  p.getAge();  p.getAge();  p.getAge();  cout &lt;&lt; p.getCount() &lt;&lt; endl; // 3  cout &lt;&lt; p....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 mutable 关键字" href="https://874656645.github.io/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 auto 与 decltype 关键字
     </h2>
   </header>
@@ -195,18 +208,6 @@ struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNod
   </section>
   <footer class="entry-footer"><span title='2022-02-07 10:11:16 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 常用的宏定义" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>char* 数组
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>void printArr(const char ** p, int len){  for(int i = 0; i &lt; len; &#43;&#43;i){  cout &lt;&lt; p[i] &lt;&lt; endl;  } }  void sortSelect(const char ** p, int len){  for(int i = 0; i &lt; len - 1; &#43;&#43;i){  int max = i;  for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){  if(p[j] &gt; p[max]){  max = j;  }  }  // 交换  if(i !...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

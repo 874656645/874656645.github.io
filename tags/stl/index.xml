@@ -9,7 +9,17 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 27 Jan 2022 21:55:47 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/stl/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Aug 2022 14:22:02 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/stl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>STL——map 排序相关</title>
+      <link>https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/</link>
+      <pubDate>Tue, 30 Aug 2022 14:22:02 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/</guid>
+      <description>声明变量时指定排序规则  通过指定模板的第三个参数，对象类型，C++ 2a 支持 lambda 对象
+struct MyCom{  bool operator()(const string key1, const string key2)const{  return key1 &amp;gt; key2;  } };  int main() {  // lambda 表达式对象  auto cmp = [](const auto&amp;amp; key1, const auto&amp;amp; key2){return key1 &amp;lt; key2;};  map&amp;lt;string, int, decltype(cmp)&amp;gt; myMap1 = {{&amp;#34;RAM&amp;#34;, 20}, {&amp;#34;GPU&amp;#34;, 15}, {&amp;#34;CPU&amp;#34;, 10} };   // 函数对象  map&amp;lt;string, int, MyCom&amp;gt; myMap2 = {{&amp;#34;CPU&amp;#34;, 10}, {&amp;#34;GPU&amp;#34;, 15}, {&amp;#34;RAM&amp;#34;, 20}};   for(const auto&amp;amp; item : myMap1){  cout &amp;lt;&amp;lt; item.</description>
+    </item>
+    
     <item>
       <title>函数对象适配器</title>
       <link>https://874656645.github.io/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/</link>

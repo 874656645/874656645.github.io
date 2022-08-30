@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 std::ref, std::cref 与 std::bind
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>函数模板 ref 与 cref 是生成 std::reference_wrapper 类型对象的帮助函数，主要是与 std::bind 一起使用，默认情况下，std::bind 无法使用变量引用传递，即使原来的函数形参是引用类型的
+void f(int&amp; n1, int&amp; n2, const int&amp; n3) {  std::cout &lt;&lt; &#34;In function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;;  &#43;&#43;n1; // 增加存储于函数对象的 n1 副本  &#43;&#43;n2; // 增加 main() 的 n2  // &#43;&#43;n3; // 编译错误 error: increment of read-only reference ‘n3’ }  int main() {  int n1 = 1, n2 = 2, n3 = 3;  // 函数对象 bound_f  // 默认会将此时变量值的副本做为函数对象的参数（函数参数特例化）  std::function&lt;void()&gt; bound_f = std::bind(f, n1, std::ref(n2), std::cref(n3));  n1 = 10;  n2 = 11;  n3 = 12;  std::cout &lt;&lt; &#34;Before function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;;  bound_f();  std::cout &lt;&lt; &#34;After function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-07 10:40:34 +0800 CST'>April 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::ref, std::cref 与 std::bind" href="https://874656645.github.io/posts/166-c&#43;&#43;11-refcref-%E4%B8%8E-bind/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码
     </h2>
   </header>
@@ -205,23 +218,6 @@ EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的�
   </section>
   <footer class="entry-footer"><span title='2022-03-24 17:45:14 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——使用 CMake 构建并用 Make 编译" href="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——C&#43;&#43; 函数导出
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>导出 C&#43;&#43; 函数到 js 有多种方式：
-  方式一：在编译的时候指定
-在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
-  方式二：修改 C&#43;&#43; 函数
-在 C&#43;&#43; 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
-#include &lt;emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-24 17:31:30 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 函数导出" href="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

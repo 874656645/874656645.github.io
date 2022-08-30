@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>STL——map 排序相关
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>声明变量时指定排序规则  通过指定模板的第三个参数，对象类型，C&#43;&#43; 2a 支持 lambda 对象
+struct MyCom{  bool operator()(const string key1, const string key2)const{  return key1 &gt; key2;  } };  int main() {  // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;};  map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} };   // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}};   for(const auto&amp; item : myMap1){  cout &lt;&lt; item....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-30 14:22:02 +0800 CST'>August 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL——map 排序相关" href="https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>函数对象适配器
     </h2>
   </header>
@@ -193,18 +206,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-01-22 09:31:07 +0800 CST'>January 22, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 常用算法" href="https://874656645.github.io/posts/91-%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>内建函数对象 functional
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>算术仿函数 template&lt;class T&gt; T plus&lt;T&gt; //加法仿函数 template&lt;class T&gt; T minus&lt;T&gt; //减法仿函数 template&lt;class T&gt; T multiplies&lt;T&gt; //乘法仿函数 template&lt;class T&gt; T divides&lt;T&gt; //除法仿函数 template&lt;class T&gt; T modulus&lt;T&gt; //取模仿函数 template&lt;class T&gt; T negate&lt;T&gt; //取反仿函数 一元谓词 关系仿函数 template&lt;class T&gt; bool equal_to&lt;T&gt; //等于 template&lt;class T&gt; bool not_equal_to&lt;T&gt; //不等于 template&lt;class T&gt; bool greater&lt;T&gt; //大于 template&lt;class T&gt; bool greater_equal&lt;T&gt; //大于等于 template&lt;class T&gt; bool less&lt;T&gt; //小于 template&lt;class T&gt; bool less_equal&lt;T&gt; //小于等于 逻辑仿函数 template&lt;class T&gt; bool logical_and&lt;T&gt; //逻辑与 template&lt;class T&gt; bool logical_or&lt;T&gt; //逻辑或 template&lt;class T&gt; bool logical_not&lt;T&gt; //逻辑非 </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-20 21:28:13 +0800 CST'>January 20, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 内建函数对象 functional" href="https://874656645.github.io/posts/90-%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1-functional/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

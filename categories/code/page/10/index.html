@@ -145,6 +145,24 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Emscripten——js 调用 C&#43;&#43; 接口
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Emscripten 提供了许多方法来在 JavaScript 和编译后的 C 或 c&#43;&#43; 之间连接和交互，我们先来看看 js 调用 WASM 的情况。
+一、使用 ccall 或 cwrap callall() 调用带有指定参数的编译过的 C 函数 并返回结果，而 cwrap() 封装了编译过的 C 函数并返回一个可以正常调用的 JavaScript 函数。因此，如果计划多次调用一个编译后的函数，cwrap() 会更有用。
+例如下面的 C main.cpp 文件：
+#include &lt;math.h&gt; extern &#34;C&#34; {   int int_sqrt(int x) {  return sqrt(x);  }  } 使用下面的命令进行编译：
+emcc main.cpp -o function.html -s EXPORTED_FUNCTIONS=_int_sqrt -s EXPORTED_RUNTIME_METHODS=ccall,cwrap
+EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的函数会被删掉），EXPORTED_RUNTIME_METHODS 告诉编译器我们需要用到的运行时方法 ccall 和 cwrap，否则这些方法也会被优化掉
+编译后就可以在 js 中通过 cwrap 使用了：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-25 10:06:38 +0800 CST'>March 25, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——js 调用 C&#43;&#43; 接口" href="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Emscripten——使用 CMake 构建并用 Make 编译
     </h2>
   </header>
@@ -212,19 +230,6 @@ cd emsdk  git pull  # Download and install the latest SDK tools. ./emsdk install
   </section>
   <footer class="entry-footer"><span title='2022-03-24 16:41:50 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——安装" href="https://874656645.github.io/posts/153-emscripten-%E5%AE%89%E8%A3%85/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——连续子数组最大和
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、暴力算法 $\mathcal{O}(n^3)$ 遍历数组的所有子数组集合，并对其求和，筛选出和的最大值
-int maxSumOfSub1(int* array, int length){  int maxSum = 0;  int startIndex = 0, endIndex = 0;  for(int i = 0; i &lt; length; i&#43;&#43;){  for(int j = i; j &lt; length; j&#43;&#43;){  int sum = 0;  for(int k = i; k &lt;= j; k&#43;&#43;)  sum &#43;= array[k];  if(maxSum &lt; sum){  maxSum = sum;  startIndex = i;  endIndex = j;  }  }  }   cout &lt;&lt; &#34;Begin:&#34; &lt;&lt; startIndex &lt;&lt; &#34; End:&#34; &lt;&lt; endIndex &lt;&lt; &#34; Num:&#34; &lt;&lt; maxSum &lt;&lt; endl;  return maxSum; } 二、前缀和 $\mathcal{O}(n^2)$ 先把数组的前 i 项和求出来并将其保存到数组中，然后计算所有子数组集合的和，筛选其中最大的...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-19 15:35:35 +0800 CST'>March 19, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——连续子数组最大和" href="https://874656645.github.io/posts/152-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

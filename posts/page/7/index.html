@@ -160,6 +160,42 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Qt 信号和槽
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 信号函数没有返回值，且只是一个函数声明，必须有 signals: 声明 槽函数的函数标签必须和信号函数相同（相同的返回值类型和形参列表） Qt5 后成员函数也可作为 slots，可以不用 slots: 声明 slots: 声明前要添加访问权限修饰符 信号函数和槽函数其实都可以被重载   // signal 和 slots 都可以重载  // Qt5的方式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot1)() = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun1, this, pSlot1);  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot2)(int,QString) = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun2, this, pSlot2);   // Qt4的方式  // 1. SIGNAL、SLOT宏会把信号和槽转成字符串，所以就不能进行编译期错误检查  // 2. 槽函数前面必须有 slots 标签，否则无法识别为槽函数  connect(&amp;sw, SIGNAL(showMainWindow()), this, SLOT(onShowMainWindow()));  connect(&amp;sw, SIGNAL(showMainWindow(int,QString))  , this, SLOT(onShowMainWindow(int,QString)));   // Lambda 表达式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun1,  [](){  qDebug()&lt;&lt;&#34;没有参数的信号&#34;;  }  );  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun2,  [](int a, QString msg){  qDebug()&lt;&lt;a&lt;&lt;msg;  }  );   // Lambda 表达式使用注意事项  // 如果b3是局部变量或者成员变量，lambda不要使用引用传值  QPushButton *b3 = new QPushButton(this);  b3-&gt;setText(&#34;Lambda&#34;);  int a = 10, b = 100;  connect(&amp;b2/*b3*/, &amp;QPushButton::clicked,  [=](){ // 此处使用 &amp; 传值会有问题  qDebug()&lt;&lt;a&lt;&lt;b;  }  ); </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-14 09:45:15 +0800 CST'>June 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt 信号和槽" href="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、通用引用  类型声明形式为 type&amp;&amp; 其中 type 类型是要进行推导的，如果类型推导没有发生，那么 type&amp;&amp; 代表一个右值引用 如果一个对象被声明为 auto&amp;&amp;，这个形参或者对象就是一个通用引用 通用引用，如果它被右值初始化，就会对应地成为右值引用；如果它被左值初始化，就会成为左值引用 如果在一个类模板里面看见了一个函数形参类型为 T&amp;&amp;，也不一定就是通用引用，可能并没有发生类型推导  void f(Widget&amp;&amp; param); //右值引用 Widget&amp;&amp; var1 = Widget(); //右值引用 auto&amp;&amp; var2 = var1; //通用引用（不是右值引用）  template&lt;typename T&gt; void f(std::vector&lt;T&gt;&amp;&amp; param); //右值引用  template&lt;typename T&gt; void f(T&amp;&amp; param); //通用引用（不是右值引用）  template &lt;typename T&gt; void f(const T&amp;&amp; param); //param是一个右值引用，因为添加了 const 限定符  // 函数模板 一般可能是通用引用 template &lt;typename T&gt; void print_reference_type(T &amp;&amp;i) { // T&amp;&amp; 或是 auto&amp;&amp;  if (std::is_lvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;lvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else if (std::is_rvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;rvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else {  std::cout &lt;&lt; &#34;unknown value: &#34; &lt;&lt; i &lt;&lt; std::endl;  } }  // 因为 push_back 在有一个特定的 vector 实例之前不可能存在， // 而实例化 vector 时的类型已经决定了 push_back 的声明 // 所以在这里并没有发生类型推导 template&lt;class T, class Allocator = allocator&lt;T&gt;&gt; //来自C&#43;&#43;标准 class vector { public:  void push_back(T&amp;&amp; x);  … } 一个记录任意函数调用的时间开销的函数模板...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-11 20:48:22 +0800 CST'>June 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考" href="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C 实现继承和多态
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>C中的继承和多态</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-05-24 09:15:13 +0800 CST'>May 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C 实现继承和多态" href="https://874656645.github.io/posts/195-c-%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>ArcGIS 处理 Shape 字段
     </h2>
   </header>
@@ -196,45 +232,6 @@ sudo service ssh start
   </section>
   <footer class="entry-footer"><span title='2022-05-18 12:02:56 +0800 CST'>May 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 使用 VS2022 部署、运行和调试 Linux MSBuild 项目" href="https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 继承构造
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>通过 using 可以方便的使用父类的构造函数和其他函数； 优先使用子类的构造和函数，如果没有找到匹配的才会调用基类的； 可在子类的初始化列表中调用父类的构造函数，并对子类的成员进行列表初始化；  class BS {  int q;  double w; public:  BS() : q(0), w(0) {}  BS(int k) : q(k), w(100) {}  BS(double x) : q(-1), w(x) {}  BS(int k, double x) : q(k), w(x) {}  void Show() const {  std::cout &lt;&lt; q &lt;&lt;&#34;, &#34; &lt;&lt; w &lt;&lt; &#39;\n&#39;;  }   int fn(int j) {  cout &lt;&lt; &#34;BS::fn(int)\n&#34;;  return 0;  }  double fn(double w) {  cout &lt;&lt; &#34;BS::fn(double)\n&#34;;  return 0;  }  void fn(const char * s) {  cout &lt;&lt; &#34;BS::fn(const char *)\n&#34;;  } }; class DR : public BS {  short j; public:  using BS::BS;  DR() : j(-100) {} // DR needs its own default constructor  DR(double x) : BS(2*x), j(int(x)) {}  DR(int i) : j(-2), BS(i, 0....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-05-13 16:30:07 +0800 CST'>May 13, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 继承构造" href="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 委托构造
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>委托构造的使用方法类似成员列表初始化的变种；
-注意：
- 如果在一个构造函数中使用了本类的委托构造，就不能再对成员使用列表初始化了； 会先执行委托构造函数的函数体，然后再执行本身的函数体； 虽然可以在构造函数中调用其他的构造函数，但已经被初始化的成员变量还会被当前的构造函数进行重置，有可能导致又变为原来的未初始化状态；  class Test{ public:  Test():Test(0, 0.1){  s = &#34;Ah&#34;;  cout &lt;&lt; &#34;Test()\n&#34;;  }  Test(int ii):Test(ii, 0.1, &#34;Hi&#34;){  cout &lt;&lt; &#34;Test(int)\n&#34;;  }  Test(int ii, double dd):Test(ii, dd, &#34;Hi&#34;){  cout &lt;&lt; &#34;Test(int, double)\n&#34;;  }  Test(int ii, double dd, string ss):i(ii), d(dd), s(ss){  cout &lt;&lt; &#34;Test(int, double, string)\n&#34;;  }   void print(){  cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#34;\td = &#34; &lt;&lt; d &lt;&lt; &#34;\ts = &#34; &lt;&lt; s &lt;&lt; endl;  } private:  int i;  double d;  string s; }; int main() {  Test t(10);  t....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-05-13 15:37:16 +0800 CST'>May 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 委托构造" href="https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>main 函数执行完后所执行的代码
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &lt;&lt; &#34;after main exit.\n&#34;;  cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() {  cout &lt;&lt; &#34;Hello World\n&#34;;  on_exit(f, (char*)&#34;this is message&#34;);  cout &lt;&lt; &#34;end of main.\n&#34;;  return 0; } 输出：
-Hello World end of main. after main exit. state: 0	message: this is message </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-05-12 16:02:52 +0800 CST'>May 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to main 函数执行完后所执行的代码" href="https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
