@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,6 +157,47 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>main 函数执行完后所执行的代码
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){ cout &lt;&lt; &#34;after main exit.\n&#34;; cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() { cout &lt;&lt; &#34;Hello World\n&#34;; on_exit(f, (char*)&#34;this is message&#34;); cout &lt;&lt; &#34;end of main.\n&#34;; return 0; } 输出：
+Hello World end of main. after main exit. state: 0	message: this is message </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-05-12 16:02:52 +0800 CST'>May 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to main 函数执行完后所执行的代码" href="https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>大端、小端字节序
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
+  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
+ 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
+            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-21 16:04:58 +0800 CST'>April 21, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 大端、小端字节序" href="https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 内存对齐 alignof alignas max_align_t
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>alignof( type-id ) 查询类型的对齐要求，以字节为单位
+struct Storage { char a; int b; double c; long long d; }; // struct alignas(alignof(long double)) AlignasStorage { // struct alignas(long double) AlignasStorage { struct alignas(std::max_align_t) AlignasStorage { // max_align_t 相当于 alignof(long double) 内存对齐为 16 字节  // 这三种写法都可以  char a; int b; double c; long long d; }; struct Empty {}; struct alignas(64) Empty64 {}; int main() { std::cout &lt;&lt; alignof(Storage) &lt;&lt; std::endl; // 8  std::cout &lt;&lt; sizeof(Storage) &lt;&lt; std::endl; // 24 内存对齐为 8 字节，所以大小为 8 的整数倍  std::cout &lt;&lt; alignof(AlignasStorage) &lt;&lt; std::endl; // 16  std::cout &lt;&lt; sizeof(AlignasStorage) &lt;&lt; std::endl; // 32 内存对齐为 16 字节，所以大小为 16 的整数倍  int a = 10; int &amp;b = a; std::cout &lt;&lt; alignof(b) &lt;&lt; std::endl; // 4 引用类型返回引用类型的对齐要求  int x[10]; std::cout &lt;&lt; alignof(x) &lt;&lt; std::endl; // 4 数组类型返回元素类型的对齐要求  std::cout &lt;&lt; &#34;Alignment of&#34; &#34;\n&#34; &#34;- char : &#34; &lt;&lt; alignof(char) &lt;&lt; &#34;\n&#34; // 1  &#34;- pointer : &#34; &lt;&lt; alignof(int*) &lt;&lt; &#34;\n&#34; // 8  &#34;- int : &#34; &lt;&lt; alignof(int) &lt;&lt; &#34;\n&#34; // 4  &#34;- long long : &#34; &lt;&lt; alignof(long long) &lt;&lt; &#34;\n&#34; // 8  &#34;- empty class : &#34; &lt;&lt; alignof(Empty) &lt;&lt; &#34;\n&#34; // 1  &#34;- alignas(64) Empty: &#34; &lt;&lt; alignof(Empty64) &lt;&lt; &#34;\n&#34;; // 64  return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-19 19:23:40 +0800 CST'>April 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 内存对齐 alignof alignas max_align_t" href="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Cesium4Unreal——Editing Tileset Materials
     </h2>
   </header>
@@ -191,71 +232,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-04-16 16:24:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Cesium4Unreal——Hide Parts Tilesets" href="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Using Custom Controllers
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>目标 此步骤将学习如何设置控制器，而不是使用 Cesium 的 DynamicPawn。
-第一步：添加摄影测量数据 为了防止地形和摄影测量数据交叉，将 Aerometrex Denver Photogrammetry 的 actor 的位置的 Z 值设置为 600。
-第二步：定位到摄影测量数据  方式一：如果有经纬度坐标和高程数据，直接设置 CesiumGeoreference 的数据  Origin Latitude = 39.752827
-Origin Longitude = -104.999689
-Origin Height = 1570.879421
-方式二：在【世界大纲视图】中双击 Aerometrex Denver Photogrammetry，使用场景视图导航到想要放置世界原点的位置，并点击【Place Georeference origin Here】按钮  第三步：导入第三人称角色 可以添加 UE 自带的【Third Person】资源，也可以添加自己做的角色。添加自带的小白人资源有两种方式：
- 方式一：通过【添加/导入】中的【添加功能或内容包】  方式二：从其他有【第三人称游戏模板】的项目中，将 ThirdPersonCharacter 迁移到本项目中。  第四步：将 ThirdPersonCharacter 放入到场景中 找到 ThirdPersonCharacter 并将其拖拽到场景里，并调整合适的朝向
-效果如下：
-设置【自动控制玩家】为【玩家0】，这样在点击【运行】的时候就可以看到小白人了
-注意：如果你现在试着玩这个关卡，你会注意到你的演员可能会在丹佛摄影测量完全加载之前开始下降。继续阅读，看看如何解决这个问题。出于这个原因，还建议禁用当前未与之交互的任何物理对象的物理功能。
-第五步：设置一个安全的起始位置 在小白人的脚下放置一个立方体，防止开始游戏时，由于 3DTiles 数据在加载过程中，小白人由于受重力影响而掉下去。
-第六步：在场景中添加一个车辆控制器 第七步：设置关卡蓝图 通过 C 和 V 切换小白人和车辆控制器的控制权。...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-16 10:34:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Using Custom Controllers" href="https://874656645.github.io/posts/183-cesium-unreal-using-custom-controllers/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Transition Between Locations
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>目标 学习使用虚幻引擎的蓝图系统编程，实现在地球上的两个位置之间平稳飞行。
- 在虚幻引擎中使用地图坐标 在感兴趣的位置创建 viewpoints 创建一个蓝图，使位置的切换变得平滑  第一步：创建一个关卡 参考前面的步骤创关卡，并定位到澳大利亚悉尼
-Origin Latitude = -33.871799 Origin Longitude = 151.206696 Origin Height = 3000.0
-第二步：添加 DynamicPawn actor 第三步：在蓝图中设置转换   打开关卡蓝图
-  蓝图联接图
-  创建墨尔本经纬度向量
-longitude = 144.9631
-latitude = -37.8136
-height = 2000
-第四步：自定义飞行过渡 设置飞行曲线：
- Fly To Altitude Profile Curve Fly to Maximum Altitude Curve Fly to Progress Curve  添加 Fly To Curves actor，这是一个UCurveFloat，这个函数用来控制计算从源头到目的地的路径插值。
-  在【内容】面板右击，选择【其他】【曲线】，选择【CurveFloat】，并命名...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-15 16:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Transition Between Locations" href="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
-参考快速入门，删除【世界大纲试图】中的所有默认的 actors
-  创建持久关卡(Persistent Level)
-在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
-这个关卡就是 Persistent Level，它代表了整个地球。
-  世界场景设置
-打开【世界场景设置】面板，勾选【启用场景合成】
-禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

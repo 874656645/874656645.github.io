@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>多态总结 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public:  virtual ~Shape(){  cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl;  } }; class Point { public:  ~Point(){  cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl;  } private:  int m_x{0};  int m_y{0};  char m_c; }; class Circle : public Shape { public:  ~Circle(){  cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl;  } private:  Point m_p; }; int main( ) {  // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl;  // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl;  // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl;   Circle c;  return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类">
+<meta name="description" content="1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl; } }; class Point { public: ~Point(){ cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -16,7 +16,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="多态总结" />
-<meta property="og:description" content="1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public:  virtual ~Shape(){  cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl;  } }; class Point { public:  ~Point(){  cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl;  } private:  int m_x{0};  int m_y{0};  char m_c; }; class Circle : public Shape { public:  ~Circle(){  cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl;  } private:  Point m_p; }; int main( ) {  // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl;  // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl;  // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl;   Circle c;  return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类" />
+<meta property="og:description" content="1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl; } }; class Point { public: ~Point(){ cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-27T10:34:27&#43;08:00" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="多态总结"/>
-<meta name="twitter:description" content="1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public:  virtual ~Shape(){  cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl;  } }; class Point { public:  ~Point(){  cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl;  } private:  int m_x{0};  int m_y{0};  char m_c; }; class Circle : public Shape { public:  ~Circle(){  cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl;  } private:  Point m_p; }; int main( ) {  // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl;  // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl;  // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl;   Circle c;  return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类"/>
+<meta name="twitter:description" content="1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl; } }; class Point { public: ~Point(){ cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类"/>
 
 
 <script type="application/ld+json">
@@ -86,11 +86,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "多态总结",
   "name": "多态总结",
-  "description": "1. C++ 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public:  virtual ~Shape(){  cout \u0026lt;\u0026lt; \u0026#34;~Shape()\u0026#34; \u0026lt;\u0026lt; endl;  } }; class Point { public:  ~Point(){  cout \u0026lt;\u0026lt; \u0026#34;~Point()\u0026#34; \u0026lt;\u0026lt; endl;  } private:  int m_x{0};  int m_y{0};  char m_c; }; class Circle : public Shape { public:  ~Circle(){  cout \u0026lt;\u0026lt; \u0026#34;~Circle()\u0026#34; \u0026lt;\u0026lt; endl;  } private:  Point m_p; }; int main( ) {  // 8 类中存有指向虚函数表的指针  cout \u0026lt;\u0026lt; sizeof(Shape) \u0026lt;\u0026lt; endl;  // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 \u0026lt;alignment member\u0026gt; (size=7))  cout \u0026lt;\u0026lt; sizeof(Circle) \u0026lt;\u0026lt; endl;  // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(\u0026lt;alignment member\u0026gt; (size=3))  cout \u0026lt;\u0026lt; sizeof(Point) \u0026lt;\u0026lt; endl;   Circle c;  return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类",
+  "description": "1. C++ 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout \u0026lt;\u0026lt; \u0026#34;~Shape()\u0026#34; \u0026lt;\u0026lt; endl; } }; class Point { public: ~Point(){ cout \u0026lt;\u0026lt; \u0026#34;~Point()\u0026#34; \u0026lt;\u0026lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout \u0026lt;\u0026lt; \u0026#34;~Circle()\u0026#34; \u0026lt;\u0026lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout \u0026lt;\u0026lt; sizeof(Shape) \u0026lt;\u0026lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 \u0026lt;alignment member\u0026gt; (size=7))  cout \u0026lt;\u0026lt; sizeof(Circle) \u0026lt;\u0026lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(\u0026lt;alignment member\u0026gt; (size=3))  cout \u0026lt;\u0026lt; sizeof(Point) \u0026lt;\u0026lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类",
   "keywords": [
     "C++"
   ],
-  "articleBody": "1. C++ 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public:  virtual ~Shape(){  cout  \"~Shape()\"  endl;  } }; class Point { public:  ~Point(){  cout  \"~Point()\"  endl;  } private:  int m_x{0};  int m_y{0};  char m_c; }; class Circle : public Shape { public:  ~Circle(){  cout  \"~Circle()\"  endl;  } private:  Point m_p; }; int main( ) {  // 8 类中存有指向虚函数表的指针  cout  sizeof(Shape)  endl;  // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 (size=7))  cout  sizeof(Circle)  endl;  // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4((size=3))  cout  sizeof(Point)  endl;   Circle c;  return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类\n// 没有虚函数 class Shape size(1):  +---  +---  // 有虚析构函数 class Shape size(8):  +---  0 | {vfptr}  +---  Shape::$vftable@:  | \u0026Shape_meta  | 0  0 | \u0026Shape::{dtor}  Shape::{dtor} this adjustor: 0 Shape::__delDtor this adjustor: 0 Shape::__vecDelDtor this adjustor: 0 Point 类\nclass Point size(8):  +---  0 | m_x  4 | m_y  8 | m_c  | (size=3)  +--- Circle 类\nclass Circle size(24):  +---  0 | +--- (base class Shape)  0 | | {vfptr}  | +---  8 | Point m_p  | (size=4)  +---  Circle::$vftable@:  | \u0026Circle_meta  | 0  0 | \u0026Circle::{dtor}  Circle::{dtor} this adjustor: 0 Circle::__delDtor this adjustor: 0 Circle::__vecDelDtor this adjustor: 0 ",
+  "articleBody": "1. C++ 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout  \"~Shape()\"  endl; } }; class Point { public: ~Point(){ cout  \"~Point()\"  endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout  \"~Circle()\"  endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout  sizeof(Shape)  endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 (size=7))  cout  sizeof(Circle)  endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4((size=3))  cout  sizeof(Point)  endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类\n// 没有虚函数 class Shape size(1): +--- +--- // 有虚析构函数 class Shape size(8): +--- 0 | {vfptr} +--- Shape::$vftable@: | \u0026Shape_meta | 0 0 | \u0026Shape::{dtor} Shape::{dtor} this adjustor: 0 Shape::__delDtor this adjustor: 0 Shape::__vecDelDtor this adjustor: 0 Point 类\nclass Point size(8): +--- 0 | m_x 4 | m_y 8 | m_c | (size=3) +--- Circle 类\nclass Circle size(24): +--- 0 | +--- (base class Shape) 0 | | {vfptr} | +--- 8 | Point m_p | (size=4) +--- Circle::$vftable@: | \u0026Circle_meta | 0 0 | \u0026Circle::{dtor} Circle::{dtor} this adjustor: 0 Circle::__delDtor this adjustor: 0 Circle::__vecDelDtor this adjustor: 0 ",
   "wordCount" : "231",
   "inLanguage": "en",
   "datePublished": "2021-12-27T10:34:27+08:00",
@@ -221,104 +221,104 @@ if (!doNotTrack) {
 <li>虚函数指针：指向虚函数的地址的指针 <code>{vfptr}</code></li>
 <li>虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 <code>Shape::$vftable@</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shape</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#f92672">~</span>Shape(){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Shape()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Point</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>Point(){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Point()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_x{<span style="color:#ae81ff">0</span>};
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_y{<span style="color:#ae81ff">0</span>};
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> m_c;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Shape
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>Circle(){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Circle()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    Point m_p;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 8    类中存有指向虚函数表的指针
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(Shape) <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 16   类中存有指向虚函数表的指针
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//      以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//      但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(Circle) <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 8    类中的int占4个字节，char占1个字节
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//      但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(Point) <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Circle c;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Start
-</span></span><span style="display:flex;"><span>8
-</span></span><span style="display:flex;"><span>24
-</span></span><span style="display:flex;"><span>12
-</span></span><span style="display:flex;"><span>~Circle()
-</span></span><span style="display:flex;"><span>~Point()
-</span></span><span style="display:flex;"><span>~Shape()
-</span></span><span style="display:flex;"><span>0
-</span></span><span style="display:flex;"><span>Finish
-</span></span></code></pre></div><p><code>Shape</code> 类</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>// 没有虚函数
-</span></span><span style="display:flex;"><span>class Shape     size(1):
-</span></span><span style="display:flex;"><span>        +---
-</span></span><span style="display:flex;"><span>        +---
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>// 有虚析构函数
-</span></span><span style="display:flex;"><span>class Shape     size(8):
-</span></span><span style="display:flex;"><span>        +---
-</span></span><span style="display:flex;"><span> 0      | {vfptr}
-</span></span><span style="display:flex;"><span>        +---
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Shape::$vftable@:
-</span></span><span style="display:flex;"><span>        | &amp;Shape_meta
-</span></span><span style="display:flex;"><span>        |  0
-</span></span><span style="display:flex;"><span> 0      | &amp;Shape::{dtor}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Shape::{dtor} this adjustor: 0
-</span></span><span style="display:flex;"><span>Shape::__delDtor this adjustor: 0
-</span></span><span style="display:flex;"><span>Shape::__vecDelDtor this adjustor: 0
-</span></span></code></pre></div><p><code>Point</code> 类</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>class Point     size(8):
-</span></span><span style="display:flex;"><span>        +---
-</span></span><span style="display:flex;"><span> 0      | m_x
-</span></span><span style="display:flex;"><span> 4      | m_y
-</span></span><span style="display:flex;"><span> 8      | m_c
-</span></span><span style="display:flex;"><span>        | &lt;alignment member&gt; (size=3)
-</span></span><span style="display:flex;"><span>        +---
-</span></span></code></pre></div><p><code>Circle</code> 类</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>class Circle    size(24):
-</span></span><span style="display:flex;"><span>        +---
-</span></span><span style="display:flex;"><span> 0      | +--- (base class Shape)
-</span></span><span style="display:flex;"><span> 0      | | {vfptr}
-</span></span><span style="display:flex;"><span>        | +---
-</span></span><span style="display:flex;"><span> 8      | Point m_p
-</span></span><span style="display:flex;"><span>        | &lt;alignment member&gt; (size=4)
-</span></span><span style="display:flex;"><span>        +---
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Circle::$vftable@:
-</span></span><span style="display:flex;"><span>        | &amp;Circle_meta
-</span></span><span style="display:flex;"><span>        |  0
-</span></span><span style="display:flex;"><span> 0      | &amp;Circle::{dtor}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>Circle::{dtor} this adjustor: 0
-</span></span><span style="display:flex;"><span>Circle::__delDtor this adjustor: 0
-</span></span><span style="display:flex;"><span>Circle::__vecDelDtor this adjustor: 0
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Shape</span>
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">virtual</span> <span style="color:#f92672">~</span>Shape(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Shape()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Point</span>
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#f92672">~</span>Point(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Point()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> m_x{<span style="color:#ae81ff">0</span>};
+    <span style="color:#66d9ef">int</span> m_y{<span style="color:#ae81ff">0</span>};
+    <span style="color:#66d9ef">char</span> m_c;
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Circle</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Shape
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#f92672">~</span>Circle(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;~Circle()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    Point m_p;
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
+{
+    <span style="color:#75715e">// 8    类中存有指向虚函数表的指针
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(Shape) <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#75715e">// 16   类中存有指向虚函数表的指针
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//      以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 + 1
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//      但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(Circle) <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#75715e">// 8    类中的int占4个字节，char占1个字节
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//      但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(Point) <span style="color:#f92672">&lt;&lt;</span> endl;
+
+    Circle c;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Start
+8
+24
+12
+~Circle()
+~Point()
+~Shape()
+0
+Finish
+</code></pre></div><p><code>Shape</code> 类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">// 没有虚函数
+class Shape     size(1):
+        +---
+        +---
+
+// 有虚析构函数
+class Shape     size(8):
+        +---
+ 0      | {vfptr}
+        +---
+
+Shape::$vftable@:
+        | &amp;Shape_meta
+        |  0
+ 0      | &amp;Shape::{dtor}
+
+Shape::{dtor} this adjustor: 0
+Shape::__delDtor this adjustor: 0
+Shape::__vecDelDtor this adjustor: 0
+</code></pre></div><p><code>Point</code> 类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">class Point     size(8):
+        +---
+ 0      | m_x
+ 4      | m_y
+ 8      | m_c
+        | &lt;alignment member&gt; (size=3)
+        +---
+</code></pre></div><p><code>Circle</code> 类</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">class Circle    size(24):
+        +---
+ 0      | +--- (base class Shape)
+ 0      | | {vfptr}
+        | +---
+ 8      | Point m_p
+        | &lt;alignment member&gt; (size=4)
+        +---
+
+Circle::$vftable@:
+        | &amp;Circle_meta
+        |  0
+ 0      | &amp;Circle::{dtor}
+
+Circle::{dtor} this adjustor: 0
+Circle::__delDtor this adjustor: 0
+Circle::__vecDelDtor this adjustor: 0
+</code></pre></div>
 
   </div>
 

@@ -160,11 +160,62 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>内存区间划分
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：
+三、全局变量与静态变量的区别 作用域不同
+全局变量默认是 extern 的
+静态变量是文件作用域
+C/C&#43;&#43; 中 extern 关键字详解</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-26 14:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 内存区间划分" href="https://874656645.github.io/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>指针引用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+void test(int * a){ a = new int(20); //*a = 20;  cout &lt;&lt; &#34;test point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;test:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &#34;main point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-25 21:34:27 +0800 CST'>December 25, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 指针引用" href="https://874656645.github.io/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>抽象、封装、继承、多态
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、抽象、封装 数据抽象：是一种仅向用户暴露接口而把具体的实现细节隐藏起来的机制，是一种依赖于接口实现分离的设计技术
+数据封装：是一种把数据和操作数据的函数捆绑在一起的机制
+1. 好处  类的内部受到保护，不会因无意的用户级错误导致对象状态受损 类实现可能随着时间的推移而发生变化，数据抽象可以更好的应对不断变化的需求  2. 策略  通常情况下，我们都会设置类成员状态为私有（private），除非我们真的需要将其暴露，这样才能保证良好的封装性。 抽象把代码分离为接口和实现。所以在设计组件时，必须保持接口独立于实现，这样，如果改变底层实现，接口也将保持不变。在这种情况下，不管任何程序使用接口，接口都不会受到影响，只需要将最新的实现重新编译即可  3. 接口 接口描述了类的行为和功能，而不需要完成类的特定实现。如果类中至少有一个函数被声明为纯虚函数，则这个类就是抽象类
+设计抽象类（通常称为 ABC）的目的，是为了给其他类提供一个可以继承的适当的基类。抽象类不能被用于实例化对象，它只能作为接口使用。因此，如果一个 ABC 的子类需要被实例化，则必须实现每个虚函数，如果没有在派生类中重写纯虚函数，就尝试实例化该类的对象，会导致编译错误。
+可用于实例化对象的类被称为具体类
+接口的好处实现了解耦合的作用。 可以将软件架构分为业务逻辑层、抽象层和实现层
+二、继承 继承代表了 is a 关系。例如，哺乳动物是动物，狗是哺乳动物，因此，狗是动物，等等。一个类可以派生自多个类，这意味着，它可以从多个基类继承数据和函数。类派生列表以一个或多个基类命名
+派生类可以访问基类中所有的非私有成员，同时，一个派生类继承了所有的基类方法，但下列情况除外：
+ 基类的构造函数、析构函数和拷贝构造函数 基类的重载运算符 基类的友元函数  三、多态 虚函数：虚函数是在基类中使用关键字 virtual 声明的函数。在派生类中重新定义基类中定义的虚函数时，会告诉编译器不要静态链编到该函数。我们想要的是在程序中任意点可以根据所调用的对象类型来选择调用的函数，这种操作被称为动态链编，或后期绑定。
+ 多态意味着调用成员函数时，会根据调用函数的对象的类型来执行不同的函数 一般要将父类的析构函数设置为虚函数，如果不把父类的析构函数设置为虚函数，在 delete 父类指针时就不会调用子类的析构了 类析构顺序：1）派生类本身的析构函数；2）对象成员析构函数；3）基类析构函数 若在基类中不能对虚函数给出有意义的实现，这个时候就会用到纯虚函数，在函数参数后直接加 = 0 告诉编译器，函数没有主体，这种虚函数即是纯虚函数  测试类：
+// 基类 Shape class Shape { protected: int width, height; public: Shape(int a = 0, int b = 0) { width = a; height = b; } virtual ~Shape() { cout &lt;&lt; &#34;Shape destructor&#34; &lt;&lt; endl; } // pure virtual function  virtual int area() = 0; }; // 基类 PaintCost class PaintCost { public: int getCost(int area) { auto res = area * 70; cout &lt;&lt; &#34;PaintCost: &#34; &lt;&lt; res &lt;&lt; endl; return res; } }; class Rectangle: public Shape, public PaintCost { public: Rectangle(int a = 0, int b = 0):Shape(a, b) { } ~Rectangle() { cout &lt;&lt; &#34;Rectangle destructor&#34; &lt;&lt; endl; } void printPro() { // 访问父类的成员变量（不能访问父类的私有成员）  cout &lt;&lt; &#34;width: &#34; &lt;&lt; width &lt;&lt; &#34;\theight: &#34; &lt;&lt; height &lt;&lt; endl; } int area () { auto area = width * height; cout &lt;&lt; &#34;Rectangle class area: &#34; &lt;&lt; area &lt;&lt;endl; return area; } }; class Triangle: public Shape { public: Triangle(int a = 0, int b = 0):Shape(a, b) { } ~Triangle() { cout &lt;&lt; &#34;Triangle destructor&#34; &lt;&lt; endl; } int area () { auto area = width * height / 2; cout &lt;&lt; &#34;Triangle class area: &#34; &lt;&lt; area &lt;&lt;endl; return area; } }; 多继承：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-24 15:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 抽象、封装、继承、多态" href="https://874656645.github.io/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>类的静态成员
     </h2>
   </header>
   <section class="entry-content">
-    <p>使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A {  string name {&#34;C&#43;&#43;&#34;};  int id {1024};  static int objCount;  public:  A();  friend void printA(const A &amp;a);  void printA();  static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){  objCount&#43;&#43;; } void A::printA(){  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; &#34;\tname = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } void A::printC(){  // 静态函数内没有this指针  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; objCount &lt;&lt; endl;   // error: &#39;this&#39; is unavailable for static member functions  // cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; endl; } void printA(const A &amp;a){  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; a....</p>
+    <p>使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A { string name {&#34;C&#43;&#43;&#34;}; int id {1024}; static int objCount; public: A(); friend void printA(const A &amp;a); void printA(); static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){ objCount&#43;&#43;; } void A::printA(){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; &#34;\tname = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } void A::printC(){ // 静态函数内没有this指针  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; objCount &lt;&lt; endl; // error: &#39;this&#39; is unavailable for static member functions  // cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; endl; } void printA(const A &amp;a){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; a....</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-24 13:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 类的静态成员" href="https://874656645.github.io/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/"></a>
@@ -183,50 +234,10 @@ if (!doNotTrack) {
 （2）友元关系是单向的，不具有交换性；
 （3）友元关系不具有传递性；
   一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数
-class A {  friend void printA(const A &amp;a); public:  void printA();  private:  string name {&#34;C&#43;&#43;&#34;};  int id {1024};  }; void A::printA(){  cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){  cout &lt;&lt; &#34;name = &#34; &lt;&lt; a....</p>
+class A { friend void printA(const A &amp;a); public: void printA(); private: string name {&#34;C&#43;&#43;&#34;}; int id {1024}; }; void A::printA(){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; a....</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-24 12:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 友元函数与友元类" href="https://874656645.github.io/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>构造、拷贝构造、赋值构造
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>结论：
- 拷贝构造函数是函数，赋值运算符是运算符的重载； 拷贝构造函数会生成新的类对象，赋值运算符不会； 拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值; 若接受返回值的对象已经初始化过，则会调用赋值运算符，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值运算符，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。 如果只有显示的构造函数，系统会提供默认的拷贝构造； 如果显示提供了拷贝构造，系统就不会提供默认的无参构造了，用户必需显示提供构造函数； 当既没有显式的构造函数，也没有拷贝构造时，系统才会提供默认的无参构造； 显示提供拷贝构造就必需显示提供构造函数； 显示提供赋值运算符重载就必需显示提供拷贝构造；  成员初始化列表  使用成员变量初始化列表，少了一次调用默认构造函数的过程，提高效率 常量成员，因为常量只能初始化不能赋值，所以必须放在初始化列表里面 引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面 成员变量初始化的顺序跟在初始化列表的顺序无关，与变量声明的顺序有关  测试类 class A { public:  A(){  cout &lt;&lt; &#34;default constructor&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;adrres: &#34; &lt;&lt; this &lt;&lt; &#34;\tpoint x: &#34; &lt;&lt; x &lt;&lt; &#34;\ty: &#34; &lt;&lt; y &lt;&lt; endl;  }  A(int t){  x = new int(0);  y = t;  cout &lt;&lt; &#34;second constructor&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;adrres: &#34; &lt;&lt; this &lt;&lt; &#34;\tpoint x: &#34; &lt;&lt; x &lt;&lt; &#34;\ty: &#34; &lt;&lt; y &lt;&lt; endl;  }  A(const A &amp;a){  cout &lt;&lt; &#34;const copy constructor&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;adrres: &#34; &lt;&lt; this &lt;&lt; &#34;\tpoint x: &#34; &lt;&lt; x &lt;&lt; &#34;\ty: &#34; &lt;&lt; y &lt;&lt; endl;  this-&gt;x = a....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-23 14:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 构造、拷贝构造、赋值构造" href="https://874656645.github.io/posts/36-%E6%9E%84%E9%80%A0%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>函数重载、重写、隐藏、模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写（覆盖）： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写或覆盖； 重定义： 派生类中函数与基类中的函数同名（形参没有要求），但是这个函数在基类中并没有被定义为虚函数 隐藏： 派生类中重定义了父类的函数，此时基类的函数会被隐藏； 模板： 函数模板是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public:  A(int a){  m_a = a;  }  void print(){  cout &lt;&lt; &#34;print()&#34; &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl;  }  void freeP(A ** p){  if(p == NULL){  return;  }  if(*p != NULL){  free(*p);  *p = NULL;  }  }  void freeP(A * p){  if(p !...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-23 12:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数重载、重写、隐藏、模板" href="https://874656645.github.io/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>inline 内联函数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>当一个函数被声明为内联函数之后，在编译阶段，编译器会用内联函数的函数体取替换程序中出现的内联函数调用表达式，而其他的函数都是在运行时才被替换，这其实就是用空间换时间，提高了函数调用的效率。同时，内联函数具有几个特点：
- 适用于函数体积很小并频繁使用的函数 内联函数中不可以出现循环、递归或开关操作 内联函数的声明必须在函数定义之前 内联函数的定义必须出现在内联函数的第一次调用前 在类中声明同时定义的成员函数（除了虚函数）会自动隐式的当成内联函数 虚函数可以是内联函数，但是当虚函数表现多态性的时候不能内联  优点：
- 内联函数在被调用处进行代码展开，省去了参数压栈、跳转返回、栈帧开辟与回收，结果返回等操作，从而提高程序运行速度； 内联函数相比宏函数来说，在代码展开时，会做安全检查或自动类型转换，而宏定义则不会； 在类中声明同时定义的成员函数，自动转化为内联函数，因此内联函数可以访问类的成员变量，宏定义则不能； 内联函数在运行时可调试，而宏定义不可以。  缺点：
- 代码膨胀，消耗了更多的内存空间； inline 函数无法随着函数库升级而升级。inline函数的改变需要重新编译，不像 non-inline 可以直接链接； 内联函数其实是不可控的，它只是对编译器的建议，是否对函数内联，决定权在于编译器; 不能对函数进行取址操作  </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-23 11:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to inline 内联函数" href="https://874656645.github.io/posts/34-inline-%E5%86%85%E8%81%94%E5%87%BD%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

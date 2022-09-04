@@ -145,12 +145,48 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——Const、volatile、mutable
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 含有私有 const 实例数据成员的类必须定义构造函数，且该实例数据成员必须通过构造函数参数列表初始化 虽然 this 是隐含参数，也可以通过添加 const、volatile 修饰符实现函数重载 成员变量的类型会随着对象实例的类型变化而变化，比如一个 volatile int 类型的成员变量，如果对象实例为 const 的，则此时成员变量的类型为 const volatile int 经实验，mutable 不可以和 static、const 一起使用，但可以与 volatile 搭配使用  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-03 19:54:33 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——Const、volatile、mutable" href="https://874656645.github.io/posts/229-c&#43;&#43;-constvolatilemutable/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——成员指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: int a; // 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; // 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; static int num; public: Crowd(); Crowd(int x); ~Crowd(); // 类体内函数定义 	// 会被内联处理 	int f() { b&#43;&#43;; cout &lt;&lt; &#34;F()\n&#34;; return b; } // const this 指针，参数类型不同，所以可被重载 	int f()const { cout &lt;&lt; &#34;const F()\n&#34;; return b; } static int getNum(); static Crowd&amp; dec(Crowd&amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { a = 0; b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd()\n&#34;; } Crowd::Crowd(int x): a(x) { b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd(int)\n&#34;; } Crowd::~Crowd() { Crowd::num--; } int Crowd::getNum() { return Crowd::num; } Crowd&amp; Crowd::dec(Crowd&amp; a) { a....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-03 16:44:14 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——成员指针" href="https://874656645.github.io/posts/228-c&#43;&#43;-%E6%88%90%E5%91%98%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> volatile 和 const 修饰的变量说明该变量在本程序内不应被修改，但其它程序是可以修改的 volatile 修饰变量，告诉编译器不要优化该变量，每次取值都重新从内存中获取 constexpr 和 inline 修饰的变量，编译器都会进行编译期优化 当对 inline 修饰变量进行取地址操作时，优化会失效 inline 修饰函数相当于 static，只能在当前文件中访问 inline 修饰的变量可以用任意表达式初始化，但这样不保证被优化 inline 其它介绍 static 限制修饰的变量和函数的可见作用域（模块内部），其它的都是副本  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>STL——map 排序相关
     </h2>
   </header>
   <section class="entry-content">
     <p>声明变量时指定排序规则  通过指定模板的第三个参数，对象类型，C&#43;&#43; 2a 支持 lambda 对象
-struct MyCom{  bool operator()(const string key1, const string key2)const{  return key1 &gt; key2;  } };  int main() {  // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;};  map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} };   // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}};   for(const auto&amp; item : myMap1){  cout &lt;&lt; item....</p>
+struct MyCom{ bool operator()(const string key1, const string key2)const{ return key1 &gt; key2; } }; int main() { // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;}; map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} }; // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}}; for(const auto&amp; item : myMap1){ cout &lt;&lt; item....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-30 14:22:02 +0800 CST'>August 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to STL——map 排序相关" href="https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/"></a>
@@ -169,59 +205,6 @@ mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/wi
   </section>
   <footer class="entry-footer"><span title='2022-08-17 14:33:56 +0800 CST'>August 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Compile Nginx on CentOS" href="https://874656645.github.io/posts/222-compile-nginx-on-centos/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43; 杂记
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
-#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { 	std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
-static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 	{ 	extern int etn; 	int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Compile FFmpeg on CentOS
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>0. 编译的版本  ffmpeg-4.4 nasm-2.14.02 yasm-1.3.0 H.264 H.265 fdk-aac-2.0.0  1. Get the Dependencies   需要 superuser 或者 root 用户
-# yum install autoconf automake bzip2 bzip2-devel cmake freetype-devel gcc gcc-c&#43;&#43; git libtool make pkgconfig zlib-devel
-  新建 ffmpeg_sources 文件夹，把需要的源代码都放到这个文件夹中
-mkdir ~/ffmpeg_sources
-  新建 ffmpeg_build 文件夹，把构建的项目文件都放到这个文件夹中
-mkdir ~/ffmpeg_build
-  新建 bin 文件夹，把编译生成的文件都放到这个文件夹中
-mkdir ~/bin
-  2. Install NASM assembler 一些库使用的汇编程序。强烈建议这样做，否则构建可能会非常缓慢。
-cd ~/ffmpeg_sources curl -O -L https://www....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-15 14:55:49 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Compile FFmpeg on CentOS" href="https://874656645.github.io/posts/220-compile-ffmpeg-on-centos/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>判断点是否在多边形内部
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  射线法：不需考虑精度误差和多边形点给出的顺序。
-  转角法：要求多边形是有顺序的，按照多边形顶点逆时针顺序，从 P 点到顶点 Vi 分别做连线，其中 αi 为 Vi 和 Vi&#43;1 之间的夹角。其中 α 角度逆时针为正，顺时针为负，这样所有到顶点做连线之间夹角和为(环绕数)0，这点P在多边形外部，否则在内部。
-  射线法改进：针对有方向的多边形，通过判断射线穿过的边和点的位置（比如点在线的左侧为正，右侧为负），和为 0 则点在外部。
-  叉积法：适用凸多边形，如果一个点在多边形所有有向边的左边，那么这个点一定在多边形内部。
-  面积法：类似叉积法，适用凸多边形。如果点在多边形内部或者边上，那么点与多边形所有边组成的三角形面积和等于多边形面积。
-  参考：
- 详谈判断点在多边形内的七种方法（最全面） hdu1756 hrbust1429 为例  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-02 17:43:53 +0800 CST'>August 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 判断点是否在多边形内部" href="https://874656645.github.io/posts/213-%E5%88%A4%E6%96%AD%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E9%83%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

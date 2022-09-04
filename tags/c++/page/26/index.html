@@ -145,13 +145,50 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>模板类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>template&lt;class T&gt; class Test { public: Test(T t){ m_t = t;}; // explicit Test(T t){ m_t = t;};  T getValue(){ return m_t; }; private: T m_t; }; int main() { Test&lt;int&gt; tInt(1); cout &lt;&lt; tInt.getValue() &lt;&lt; endl; Test&lt;double&gt; tD(1.15); cout &lt;&lt; tD.getValue() &lt;&lt; endl; Test&lt;float&gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换  cout &lt;&lt; tF.getValue() &lt;&lt; endl; return 0; } 输出：
+Start 1 1.15 1.3 0 Finish </p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-22 10:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 模板类" href="https://874656645.github.io/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>模板函数
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>template &lt;typename T&gt; inline const T&amp; Max (const T&amp; a, const T&amp; b) { return a &lt; b ? b:a; }; int main() { int i = 39; int j = 20; cout &lt;&lt; &#34;Max(i, j): &#34; &lt;&lt; Max(i, j) &lt;&lt; endl; double f1 = 13.5; double f2 = 20.7; cout &lt;&lt; &#34;Max(f1, f2): &#34; &lt;&lt; Max(f1, f2) &lt;&lt; endl; string s1 = &#34;Hello&#34;; string s2 = &#34;World&#34;; cout &lt;&lt; &#34;Max(s1, s2): &#34; &lt;&lt; Max(s1, s2) &lt;&lt; endl; return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-22 09:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 模板函数" href="https://874656645.github.io/posts/28-%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>函数指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; // 函数指针做为形参 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; int main() { fn = cal; cout &lt;&lt; (*fn)(10) &lt;&lt; endl; cout &lt;&lt; fn(10) &lt;&lt; endl; Fn f1 = cal; cout &lt;&lt; (*f1)(20) &lt;&lt; endl; proc(30, cal); return 0; } Start 10 10 20 30 0 Finish 成员函数指针：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-16 14:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数指针" href="https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>指针函数和函数指针
     </h2>
   </header>
   <section class="entry-content">
     <p>  指针函数本质是一个函数，返回值是一个指针；
   函数指针是指向函数的一个指针变量；
-  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std;  // 指针函数fun char * fun(const char * p) {  cout &lt;&lt; &#34;fun: &#34; &lt;&lt; p &lt;&lt; endl;  return nullptr; };  // 函数指针pf char * (*pf)(const char * p);  int main() {  pf = fun; // 函数指针pf指向函数fun  pf(&#34;Hello&#34;);   return 0; } </p>
+  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &#34;fun: &#34; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun  pf(&#34;Hello&#34;); return 0; } </p>
   </section>
   <footer class="entry-footer"><span title='2021-12-16 12:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 指针函数和函数指针" href="https://874656645.github.io/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
@@ -163,45 +200,15 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B {  explicit B(int) {}  explicit operator bool() const { return true; } };  int main() {  B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化   return 0; } 从初始化列表隐式转换：...</p>
+    <p>修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：...</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-15 12:34:27 +0800 CST'>December 15, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to explicit（显式）关键字" href="https://874656645.github.io/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43; 字符串常量存储
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>局部变量、静态局部变量、全局变量、全局静态变量、字符串常量以及动态申请的内存区
- 局部变量存储在栈中 全局变量、静态变量（全局和局部静态变量）存储在静态存储区 new申请的内存是在堆中 字符串常量也是存储在静态存储区   栈中的变量内存会随着定义所在区间的结束自动释放；而对于堆，需要手动free，否则它就一直存在，直到程序结束； 对于静态存储区，其中的变量常量在程序运行期间会一直存在，不会释放，且变量常量在其中只有一份拷贝，不会出现相同的变量和常量的不同拷贝。  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; //返回的是局部变量的地址，该地址位于动态数据区，栈里 char *s1() {  char* p1 = &#34;qqq&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  char p[]=&#34;Hello world!&#34;;  char* p2 = &#34;w&#34;;//为了测试‘char p[]=&#34;Hello world!&#34;’中的字符串在静态存储区是否也有一份拷贝  printf(&#34;in s1 p=%p\n&#34;, p);  printf(&#34;in s1 p1=%p\n&#34;, p1);  printf(&#34;in s1: string&#39;s address: %p\n&#34;, &amp;(&#34;Hello world!&#34;));  printf(&#34;in s1 p2=%p\n&#34;, p2);  return p1; // 这里不能返回局部变量 p }  //返回的是字符串常量的地址，该地址位于静态数据区 char *s2() {  char *q=&#34;Hello world!...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-13 12:34:27 +0800 CST'>December 13, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 字符串常量存储" href="https://874656645.github.io/posts/23-c&#43;&#43;-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%B8%B8%E9%87%8F%E5%AD%98%E5%82%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>const 修饰符
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、const 修饰指针和引用 常对象：const Class A 只能调用 const 成员函数
-常量指针：const int * 所指的地址内容为 常量只读，但是可指向其它对象的地址（可以重指向）
-指针常量：int * const 指针所指的地址不能变（不可以重指向），但地址的内容可以被修改，与引用变量效果类似
-常量引用：const int &amp; 相当于是对象的一个别名，对象内容为 只读，并且不能指向其它对象
-const int &amp;a = 40 与 constexpr int a = 40 效果类似，但后者只能在全局区声明
-const int &amp;a = 40 等同于 const int * const a = new int(40)（指针的指向和存放的内容都不可更改）
-ClassA myA(10), myB(-10); const ClassA a; // 常对象（只能调用常成员函数） const ClassA * b = &amp;myA; // 常量指针 ClassA * const b = &amp;myA; // 指针常量 const ClassA &amp;bb = myB; // 常量引用  b = &amp;myB; // 合法（可以指向其它对象） b-&gt;setA(10); // 错误（只读） bb....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-10 12:34:27 +0800 CST'>December 10, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to const 修饰符" href="https://874656645.github.io/posts/22-const-%E4%BF%AE%E9%A5%B0%E7%AC%A6/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/tags/c&#43;&#43;/page/25/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/tags/c&#43;&#43;/page/27/">Next Page »</a>
   </nav>
 </footer>
     </main>

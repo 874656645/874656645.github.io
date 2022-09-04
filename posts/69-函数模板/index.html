@@ -8,7 +8,7 @@
 <title>函数模板 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C&#43;&#43; 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
-编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){  return a &#43; b; } // 函数一 int MyAdd(int a, int b){  return a &#43; b; } // 函数二 int MyAdd(int a, char c){  return a &#43; c; } int main() {  cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1.">
+编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){ return a &#43; b; } // 函数一 int MyAdd(int a, int b){ return a &#43; b; } // 函数二 int MyAdd(int a, char c){ return a &#43; c; } int main() { cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -17,7 +17,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="函数模板" />
 <meta property="og:description" content="函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C&#43;&#43; 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
-编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){  return a &#43; b; } // 函数一 int MyAdd(int a, int b){  return a &#43; b; } // 函数二 int MyAdd(int a, char c){  return a &#43; c; } int main() {  cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1." />
+编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){ return a &#43; b; } // 函数一 int MyAdd(int a, int b){ return a &#43; b; } // 函数二 int MyAdd(int a, char c){ return a &#43; c; } int main() { cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-11T21:40:09&#43;08:00" />
@@ -60,7 +60,7 @@ if (!doNotTrack) {
 
 <meta name="twitter:title" content="函数模板"/>
 <meta name="twitter:description" content="函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C&#43;&#43; 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
-编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){  return a &#43; b; } // 函数一 int MyAdd(int a, int b){  return a &#43; b; } // 函数二 int MyAdd(int a, char c){  return a &#43; c; } int main() {  cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1."/>
+编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){ return a &#43; b; } // 函数一 int MyAdd(int a, int b){ return a &#43; b; } // 函数二 int MyAdd(int a, char c){ return a &#43; c; } int main() { cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1."/>
 
 
 <script type="application/ld+json">
@@ -89,11 +89,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "函数模板",
   "name": "函数模板",
-  "description": "函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C++ 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数\n编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template\u0026lt;class T\u0026gt; T MyAdd(T a, T b){  return a + b; } // 函数一 int MyAdd(int a, int b){  return a + b; } // 函数二 int MyAdd(int a, char c){  return a + c; } int main() {  cout \u0026lt;\u0026lt; MyAdd(1, 2) \u0026lt;\u0026lt; endl; // 优先调用普通函数  cout \u0026lt;\u0026lt; MyAdd\u0026lt;\u0026gt;(1, 2) \u0026lt;\u0026lt; endl; // 强制调用模板函数  cout \u0026lt;\u0026lt; MyAdd(1.",
+  "description": "函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C++ 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数\n编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template\u0026lt;class T\u0026gt; T MyAdd(T a, T b){ return a + b; } // 函数一 int MyAdd(int a, int b){ return a + b; } // 函数二 int MyAdd(int a, char c){ return a + c; } int main() { cout \u0026lt;\u0026lt; MyAdd(1, 2) \u0026lt;\u0026lt; endl; // 优先调用普通函数  cout \u0026lt;\u0026lt; MyAdd\u0026lt;\u0026gt;(1, 2) \u0026lt;\u0026lt; endl; // 强制调用模板函数  cout \u0026lt;\u0026lt; MyAdd(1.",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C++ 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数\n编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    templateclass T T MyAdd(T a, T b){  return a + b; } // 函数一 int MyAdd(int a, int b){  return a + b; } // 函数二 int MyAdd(int a, char c){  return a + c; } int main() {  cout  MyAdd(1, 2)  endl; // 优先调用普通函数  cout  MyAdd(1, 2)  endl; // 强制调用模板函数  cout  MyAdd(1.1, 2.2)  endl; // 函数模板数据类型推导  cout  MyAdddouble(1.1, 2.2)  endl; // 显式调用  cout  MyAdd(1, 'a')  endl; // 没有函数二则调用函数一 MyAdd (a=1, c=97 'a')  cout  MyAdd('a', 1)  endl; // 没有函数一则调用函数二 MyAdd (a=97, c=1 '\\001')   return 0; } 输出：\n3 3 3.3 3.3 98 98 ",
+  "articleBody": " 函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C++ 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数\n编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    templateclass T T MyAdd(T a, T b){ return a + b; } // 函数一 int MyAdd(int a, int b){ return a + b; } // 函数二 int MyAdd(int a, char c){ return a + c; } int main() { cout  MyAdd(1, 2)  endl; // 优先调用普通函数  cout  MyAdd(1, 2)  endl; // 强制调用模板函数  cout  MyAdd(1.1, 2.2)  endl; // 函数模板数据类型推导  cout  MyAdddouble(1.1, 2.2)  endl; // 显式调用  cout  MyAdd(1, 'a')  endl; // 没有函数二则调用函数一 MyAdd (a=1, c=97 'a')  cout  MyAdd('a', 1)  endl; // 没有函数一则调用函数二 MyAdd (a=97, c=1 '\\001')  return 0; } 输出：\n3 3 3.3 3.3 98 98 ",
   "wordCount" : "116",
   "inLanguage": "en",
   "datePublished": "2022-01-11T21:40:09+08:00",
@@ -211,37 +211,37 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span>T MyAdd(T a, T b){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 函数一
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">MyAdd</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 函数二
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">MyAdd</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">char</span> c){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> c;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 优先调用普通函数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 强制调用模板函数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd(<span style="color:#ae81ff">1.1</span>, <span style="color:#ae81ff">2.2</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 函数模板数据类型推导
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">1.1</span>, <span style="color:#ae81ff">2.2</span>) <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 显式调用
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 没有函数二则调用函数一 MyAdd (a=1, c=97 &#39;a&#39;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd(<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 没有函数一则调用函数二 MyAdd (a=97, c=1 &#39;\001&#39;)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>3
-</span></span><span style="display:flex;"><span>3
-</span></span><span style="display:flex;"><span>3.3
-</span></span><span style="display:flex;"><span>3.3
-</span></span><span style="display:flex;"><span>98
-</span></span><span style="display:flex;"><span>98
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span>
+T MyAdd(T a, T b){
+    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b;
+}
+<span style="color:#75715e">// 函数一
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">MyAdd</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
+    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> b;
+}
+<span style="color:#75715e">// 函数二
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">MyAdd</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">char</span> c){
+    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">+</span> c;
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 优先调用普通函数
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd<span style="color:#f92672">&lt;&gt;</span>(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>) <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 强制调用模板函数
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd(<span style="color:#ae81ff">1.1</span>, <span style="color:#ae81ff">2.2</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 函数模板数据类型推导
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">1.1</span>, <span style="color:#ae81ff">2.2</span>) <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 显式调用
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;a&#39;</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 没有函数二则调用函数一 MyAdd (a=1, c=97 &#39;a&#39;)
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> MyAdd(<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#ae81ff">1</span>) <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 没有函数一则调用函数二 MyAdd (a=97, c=1 &#39;\001&#39;)
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">3
+3
+3.3
+3.3
+98
+98
+</code></pre></div>
 
   </div>
 

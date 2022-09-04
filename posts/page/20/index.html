@@ -160,12 +160,55 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 左值、右值和移动语义
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、结论  C 中将数据类型分为左值和右值，在 C&#43;&#43;11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C&#43;&#43;11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;&amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
+const int &amp;ref_a = 5; int a = 5; int &amp;ref_a = a; // 左值引用指向左值，编译通过 int &amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 &amp;&amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值
+int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-23 22:19:35 +0800 CST'>February 23, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 左值、右值和移动语义" href="https://874656645.github.io/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
+三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
+四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
+所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！
+class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){ p-&gt;setAge(30); return p; } int main() { unique_ptr&lt;Person&gt; pP(new Person); cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl; // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl; cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; if(pP == nullptr){ cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl; } return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr" href="https://874656645.github.io/posts/131-c&#43;&#43;11-auto_ptr-%E8%A2%AB%E5%BA%9F%E5%BC%83%E4%B8%8E-unique_ptr/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 mutable 关键字
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、修饰类成员变量 此关键字只能应用于类的非静态和非常量数据成员，mutable 是为了让 const 对象的某些数据成员可以被修改。static 是类的成员，不属于对象，常对象和常函数只会限制类的成员变量修改，所以类的 static 数据成员不需要 mutable 修饰，在常对象和常函数中也能被修改。
+class Person{ public: int getAge() const{ m_count&#43;&#43;; s_count&#43;&#43;; return m_age; } int getCount()const{ return m_count; } private: int m_age{20}; mutable int m_count{0}; public: static int s_count; }; int Person::s_count = 0; int main() { Person p; p.getAge(); p.getAge(); p.getAge(); cout &lt;&lt; p.getCount() &lt;&lt; endl; // 3  cout &lt;&lt; p.s_count &lt;&lt; endl; // 3  return 0; } 二、修饰匿名函数 表示可以修改按值传入的变量的副本（不是值本身），类似于不带 const 关键字的形参。使用 mutable 关键字后对按值传入的变量进行的修改，不会将改变传递到 Lambda 表达式之外。如果不加 mutable 关键字，按值传入的变量是只读的，即使在 Lambda 表达式内部也不可修改...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 mutable 关键字" href="https://874656645.github.io/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 auto 与 decltype 关键字
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() {  int a = 10;  auto val = a;  cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
-template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) {  auto v = x * y;  std::cout &lt;&lt; v; } int main() {  int a = 10;  double b = 1....</p>
+    <p>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
+template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1....</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-22 20:30:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto 与 decltype 关键字" href="https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
@@ -183,49 +226,6 @@ set args 123 abc 456 ddd 查看代码： list 或 l  查看代码显示行数：
   </section>
   <footer class="entry-footer"><span title='2022-02-20 08:53:26 +0800 CST'>February 20, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to gdb 调试使用" href="https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Makefile 使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
-  规则由三部分组成：目标、依赖、命令
-app:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则
-  四、makefile 优化   版本一：
-app:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
-  版本二：
-app:main.o add.o sub.o  gcc main.o add.o sub....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-19 16:36:47 +0800 CST'>February 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Makefile 使用" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Linux 静态库与动态库
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、库是什么 库是二进制格式的源代码（二进制加密）
-二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-17 22:25:34 +0800 CST'>February 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Linux 静态库与动态库" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>gcc 相关
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、gcc 工作流程  预处理 —— -E  宏替换 头文件展开 去掉注释 生成 .i 文件   编译 —— -S  生成 .s 文件 汇编文件   汇编 —— -c  生成 .o 文件 二进制文件   链接   二、gcc 常用参数  -v / --version -I : 编译时指定头文件路径 -c : 生成二进制文件 .o -o : 指定生成的文件名 -g : gdb 调试，生成带有调试信息的二进制文件（Debug模式） -D : 编译时指定一个宏 -Wall : 显示警告信息 -On : 优化代码，n 是优化级别（1，2，3）  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-16 21:44:06 +0800 CST'>February 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to gcc 相关" href="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
