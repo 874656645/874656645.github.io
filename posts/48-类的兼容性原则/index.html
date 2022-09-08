@@ -9,7 +9,7 @@
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
 Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
-Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &lt;&lt; &#34;printA()&#34; &lt;&lt; endl; } virtual void print(){ cout &lt;&lt; &#34;A::print()&#34; &lt;&lt; endl; } }; class B:public A{ public: void printB(){ cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } virtual void print() override{ cout &lt;&lt; &#34;B::print() b = &#34; &lt;&lt; b &lt;&lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A; // 1.">
+Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public:  void printA(){  cout &lt;&lt; &#34;printA()&#34; &lt;&lt; endl;  }  virtual void print(){  cout &lt;&lt; &#34;A::print()&#34; &lt;&lt; endl;  } }; class B:public A{ public:  void printB(){  cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl;  }  virtual void print() override{  cout &lt;&lt; &#34;B::print() b = &#34; &lt;&lt; b &lt;&lt; endl;  }  private:  int b; }; int main( ) {  // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A;  // 1.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/48-%E7%B1%BB%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8E%9F%E5%88%99/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -18,7 +18,7 @@ Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -50,7 +50,7 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="类的兼容性原则" />
 <meta property="og:description" content="父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
 Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
-Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &lt;&lt; &#34;printA()&#34; &lt;&lt; endl; } virtual void print(){ cout &lt;&lt; &#34;A::print()&#34; &lt;&lt; endl; } }; class B:public A{ public: void printB(){ cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } virtual void print() override{ cout &lt;&lt; &#34;B::print() b = &#34; &lt;&lt; b &lt;&lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A; // 1." />
+Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public:  void printA(){  cout &lt;&lt; &#34;printA()&#34; &lt;&lt; endl;  }  virtual void print(){  cout &lt;&lt; &#34;A::print()&#34; &lt;&lt; endl;  } }; class B:public A{ public:  void printB(){  cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl;  }  virtual void print() override{  cout &lt;&lt; &#34;B::print() b = &#34; &lt;&lt; b &lt;&lt; endl;  }  private:  int b; }; int main( ) {  // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A;  // 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/48-%E7%B1%BB%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E5%8E%9F%E5%88%99/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-28T11:34:27&#43;08:00" />
@@ -63,7 +63,7 @@ Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也
 <meta name="twitter:title" content="类的兼容性原则"/>
 <meta name="twitter:description" content="父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝
 Father *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去
-Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout &lt;&lt; &#34;printA()&#34; &lt;&lt; endl; } virtual void print(){ cout &lt;&lt; &#34;A::print()&#34; &lt;&lt; endl; } }; class B:public A{ public: void printB(){ cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl; } virtual void print() override{ cout &lt;&lt; &#34;B::print() b = &#34; &lt;&lt; b &lt;&lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A; // 1."/>
+Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public:  void printA(){  cout &lt;&lt; &#34;printA()&#34; &lt;&lt; endl;  }  virtual void print(){  cout &lt;&lt; &#34;A::print()&#34; &lt;&lt; endl;  } }; class B:public A{ public:  void printB(){  cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl;  }  virtual void print() override{  cout &lt;&lt; &#34;B::print() b = &#34; &lt;&lt; b &lt;&lt; endl;  }  private:  int b; }; int main( ) {  // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A;  // 1."/>
 
 
 <script type="application/ld+json">
@@ -92,11 +92,11 @@ Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也
   "@type": "BlogPosting",
   "headline": "类的兼容性原则",
   "name": "类的兼容性原则",
-  "description": "父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝\nFather *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去\nChild *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout \u0026lt;\u0026lt; \u0026#34;printA()\u0026#34; \u0026lt;\u0026lt; endl; } virtual void print(){ cout \u0026lt;\u0026lt; \u0026#34;A::print()\u0026#34; \u0026lt;\u0026lt; endl; } }; class B:public A{ public: void printB(){ cout \u0026lt;\u0026lt; \u0026#34;printB()\u0026#34; \u0026lt;\u0026lt; endl; } virtual void print() override{ cout \u0026lt;\u0026lt; \u0026#34;B::print() b = \u0026#34; \u0026lt;\u0026lt; b \u0026lt;\u0026lt; endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A; // 1.",
+  "description": "父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝\nFather *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去\nChild *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public:  void printA(){  cout \u0026lt;\u0026lt; \u0026#34;printA()\u0026#34; \u0026lt;\u0026lt; endl;  }  virtual void print(){  cout \u0026lt;\u0026lt; \u0026#34;A::print()\u0026#34; \u0026lt;\u0026lt; endl;  } }; class B:public A{ public:  void printB(){  cout \u0026lt;\u0026lt; \u0026#34;printB()\u0026#34; \u0026lt;\u0026lt; endl;  }  virtual void print() override{  cout \u0026lt;\u0026lt; \u0026#34;B::print() b = \u0026#34; \u0026lt;\u0026lt; b \u0026lt;\u0026lt; endl;  }  private:  int b; }; int main( ) {  // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A;  // 1.",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝\nFather *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去\nChild *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public: void printA(){ cout  \"printA()\"  endl; } virtual void print(){ cout  \"A::print()\"  endl; } }; class B:public A{ public: void printB(){ cout  \"printB()\"  endl; } virtual void print() override{ cout  \"B::print() b = \"  b  endl; } private: int b; }; int main( ) { // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A; // 1.1 调用自己的函数  a-printA(); // printA()  // 1.2 调用虚函数  a-print(); // A::print()  // 2、将指向父类的父类指针强转为子类指针（将父类对象赋值给子类指针）  // b = new A; // error: incompatible pointer types assigning to 'B *' from 'A *'  B *b = (B*)new A; // 2.1 调用父类函数  b-printA(); // printA()  // 2.2 调用虚函数（执行父类的）  b-print(); // A::print() 调用父类的  // 2.3 可以调用子类函数  b-printB(); // printB() b = 0  // 3、将子类对象赋值给父类指针  a = new B; // 3.1 调用父类函数  a-printA(); // printA()  // 3.2 调用子类的函数  // a-printB(); // error: no member named 'printB' in 'A'; did you mean 'printA'?  // 3.3 调用虚函数（执行子类的）  a-print(); // B::print() b = 0  // 4、指向子类对象的子类指针强转为父类指针（效果等同情况3）  b = new B; a = (A*)b; a-printA(); // printA()  //a-printB(); // error: no member named 'printB' in 'A'  a-print(); // B::print() b = 0  return 0; } ",
+  "articleBody": " 父类指针可以new子类对象，子类指针不可以new父类对象，但是可以接收强转的已经存在的父类指针 父类指针指向本类对象，调用的虚函数和普通函数都是自己的 将子类指针指向父类对象，虚函数执行的是父类的，也可以调用子类函数（这种操作是错误的，编译会报错，虽然可通过指针强转，但是不建议这样做，可能会导致未知错误） 父类指针指向子类对象，虚函数执行的是子类的，并且不能调用子类的函数 父类指针与子类指针之间赋值可以理解为指针所指内容的一种浅拷贝\nFather *f = (Father*)Child * 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去\nChild *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针  class A{ public:  void printA(){  cout  \"printA()\"  endl;  }  virtual void print(){  cout  \"A::print()\"  endl;  } }; class B:public A{ public:  void printB(){  cout  \"printB()\"  endl;  }  virtual void print() override{  cout  \"B::print() b = \"  b  endl;  }  private:  int b; }; int main( ) {  // 1、指向自己的类对象（将父类对象赋值给父类指针）  A *a = new A;  // 1.1 调用自己的函数  a-printA(); // printA()  // 1.2 调用虚函数  a-print(); // A::print()   // 2、将指向父类的父类指针强转为子类指针（将父类对象赋值给子类指针）  // b = new A; // error: incompatible pointer types assigning to 'B *' from 'A *'  B *b = (B*)new A;  // 2.1 调用父类函数  b-printA(); // printA()  // 2.2 调用虚函数（执行父类的）  b-print(); // A::print() 调用父类的  // 2.3 可以调用子类函数  b-printB(); // printB() b = 0   // 3、将子类对象赋值给父类指针  a = new B;  // 3.1 调用父类函数  a-printA(); // printA()  // 3.2 调用子类的函数  // a-printB(); // error: no member named 'printB' in 'A'; did you mean 'printA'?  // 3.3 调用虚函数（执行子类的）  a-print(); // B::print() b = 0   // 4、指向子类对象的子类指针强转为父类指针（效果等同情况3）  b = new B;  a = (A*)b;  a-printA(); // printA()  //a-printB(); // error: no member named 'printB' in 'A'  a-print(); // B::print() b = 0   return 0; } ",
   "wordCount" : "205",
   "inLanguage": "en",
   "datePublished": "2021-12-28T11:34:27+08:00",
@@ -208,65 +208,65 @@ Child *c = (Child*)new Father父类的虚函数指针覆盖子类的，同时也
 <code>Father *f = (Father*)Child *</code> 子类的虚函数指针覆盖父类的，并且子类特有的函数指针不会拷贝过去<br>
 <code>Child *c = (Child*)new Father</code>父类的虚函数指针覆盖子类的，同时也有子类特有的函数指针</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">void</span> printA(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;printA()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A::print()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> A{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">void</span> printB(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;printB()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>() <span style="color:#66d9ef">override</span>{
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::print() b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> b;
-};
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
-{
-    <span style="color:#75715e">// 1、指向自己的类对象（将父类对象赋值给父类指针）
-</span><span style="color:#75715e"></span>    A <span style="color:#f92672">*</span>a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> A;
-    <span style="color:#75715e">// 1.1 调用自己的函数
-</span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>printA();        <span style="color:#75715e">// printA()
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 1.2 调用虚函数
-</span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>print();         <span style="color:#75715e">// A::print()
-</span><span style="color:#75715e"></span>    
-    <span style="color:#75715e">// 2、将指向父类的父类指针强转为子类指针（将父类对象赋值给子类指针）
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// b = new A;       // error: incompatible pointer types assigning to &#39;B *&#39; from &#39;A *&#39;
-</span><span style="color:#75715e"></span>    B <span style="color:#f92672">*</span>b <span style="color:#f92672">=</span> (B<span style="color:#f92672">*</span>)<span style="color:#66d9ef">new</span> A;
-    <span style="color:#75715e">// 2.1 调用父类函数
-</span><span style="color:#75715e"></span>    b<span style="color:#f92672">-&gt;</span>printA();        <span style="color:#75715e">// printA()
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 2.2 调用虚函数（执行父类的）
-</span><span style="color:#75715e"></span>    b<span style="color:#f92672">-&gt;</span>print();         <span style="color:#75715e">// A::print()   调用父类的
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 2.3 可以调用子类函数
-</span><span style="color:#75715e"></span>    b<span style="color:#f92672">-&gt;</span>printB();        <span style="color:#75715e">// printB() b = 0
-</span><span style="color:#75715e"></span>    
-    <span style="color:#75715e">// 3、将子类对象赋值给父类指针
-</span><span style="color:#75715e"></span>    a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> B;
-    <span style="color:#75715e">// 3.1 调用父类函数
-</span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>printA();        <span style="color:#75715e">// printA()
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 3.2 调用子类的函数
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// a-&gt;printB();     // error: no member named &#39;printB&#39; in &#39;A&#39;; did you mean &#39;printA&#39;?
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 3.3 调用虚函数（执行子类的）
-</span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>print();         <span style="color:#75715e">// B::print() b = 0
-</span><span style="color:#75715e"></span>    
-    <span style="color:#75715e">// 4、指向子类对象的子类指针强转为父类指针（效果等同情况3）
-</span><span style="color:#75715e"></span>    b <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> B;
-    a <span style="color:#f92672">=</span> (A<span style="color:#f92672">*</span>)b;
-    a<span style="color:#f92672">-&gt;</span>printA();        <span style="color:#75715e">// printA()
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">//a-&gt;printB();      // error: no member named &#39;printB&#39; in &#39;A&#39;
-</span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>print();         <span style="color:#75715e">// B::print() b = 0
-</span><span style="color:#75715e"></span>    
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> printA(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;printA()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A::print()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span><span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> A{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> printB(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;printB()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">print</span>() <span style="color:#66d9ef">override</span>{
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::print() b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> b;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>( )
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1、指向自己的类对象（将父类对象赋值给父类指针）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    A <span style="color:#f92672">*</span>a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> A;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1.1 调用自己的函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>printA();        <span style="color:#75715e">// printA()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 1.2 调用虚函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>print();         <span style="color:#75715e">// A::print()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2、将指向父类的父类指针强转为子类指针（将父类对象赋值给子类指针）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// b = new A;       // error: incompatible pointer types assigning to &#39;B *&#39; from &#39;A *&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B <span style="color:#f92672">*</span>b <span style="color:#f92672">=</span> (B<span style="color:#f92672">*</span>)<span style="color:#66d9ef">new</span> A;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2.1 调用父类函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    b<span style="color:#f92672">-&gt;</span>printA();        <span style="color:#75715e">// printA()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 2.2 调用虚函数（执行父类的）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    b<span style="color:#f92672">-&gt;</span>print();         <span style="color:#75715e">// A::print()   调用父类的
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 2.3 可以调用子类函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    b<span style="color:#f92672">-&gt;</span>printB();        <span style="color:#75715e">// printB() b = 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 3、将子类对象赋值给父类指针
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> B;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 3.1 调用父类函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>printA();        <span style="color:#75715e">// printA()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 3.2 调用子类的函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// a-&gt;printB();     // error: no member named &#39;printB&#39; in &#39;A&#39;; did you mean &#39;printA&#39;?
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 3.3 调用虚函数（执行子类的）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>print();         <span style="color:#75715e">// B::print() b = 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 4、指向子类对象的子类指针强转为父类指针（效果等同情况3）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    b <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> B;
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">=</span> (A<span style="color:#f92672">*</span>)b;
+</span></span><span style="display:flex;"><span>    a<span style="color:#f92672">-&gt;</span>printA();        <span style="color:#75715e">// printA()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//a-&gt;printB();      // error: no member named &#39;printB&#39; in &#39;A&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    a<span style="color:#f92672">-&gt;</span>print();         <span style="color:#75715e">// B::print() b = 0
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
 
   </div>
 
