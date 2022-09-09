@@ -157,6 +157,45 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>GIS——GeoServer 地图服务
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>GeoServer Version 2.21.1 一、WMS 服务   获取服务能力元数据：
+  可在网址中指定 version=1.1.0 和 service=WMS 参数
+  获取整个 geoserver 的服务能力，默认 WMS_Capabilities 的 version 是 1.3.0 的
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中不包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中不包含工作空间的 1.3.0 版本的 xml 样例
+  获取其中某个工作空间的服务能力，需要在 geoserver 后面添加工作空间名称
+http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中包含工作空间的 1.3.0 版本的 xml 样例
+  注意：
+ 1.3.0 版本的空间参考标签为 &lt;CRS&gt;，而 1.1.0 版本的空间参考标签为 &lt;SRS&gt; 如果请求的网址指定了工作空间，图层名中就不需要有工作空间名了（比如：cite:hl_2017 和 hl_2017） 1.1.0 版本的图层中包含 geoserver 以图层组方式发布的服务图层，而 1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-23 10:34:42 +0800 CST'>August 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to GIS——GeoServer 地图服务" href="https://874656645.github.io/posts/223-gis-geoserver-%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Compile Nginx on CentOS
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>安装相关依赖
+yum install -y perl-ExtUtils-Embed \ readline-devel zlib-devel pam-devel \ libxml2-devel libxslt-devel openldap-devel \ python-devel openssl-devel cmakepcre-develnanowget \ gcc gcc-c&#43;&#43; ncurses-devel perl git `
+  编译命令：
+mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/winshining/nginx-http-flv-module.git curl -O -L http://hg.nginx.org/nginx/archive/stable-1.22.tar.gz # 其他版本 http://hg.nginx.org/nginx/archive/release-1.23.1.zip tar xzvf stable-1.22.tar.gz cd nginx-stable-1.22 ./auto/configure --prefix=&#34;$HOME/nginx&#34; --sbin-path=&#34;$HOME/nginx&#34; \ --with-select_module \ --with-poll_module \ --with-file-aio \ --with-http_ssl_module \ --with-http_realip_module \ --with-http_sub_module \ --with-http_flv_module \ --add-module=&#34;../nginx-http-flv-module&#34; \ --with-http_mp4_module \ --with-http_gzip_static_module \ --with-http_secure_link_module \ --with-http_stub_status_module \ --with-http_perl_module \ --with-ld-opt=&#34;-Wl,-E&#34; make make install   注意事项：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-17 14:33:56 +0800 CST'>August 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Compile Nginx on CentOS" href="https://874656645.github.io/posts/222-compile-nginx-on-centos/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43; 杂记
     </h2>
   </header>
@@ -208,44 +247,6 @@ cd ~/ffmpeg_sources curl -O -L https://www....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-11 17:40:41 +0800 CST'>August 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——使用蓝图获取 uasset 资源" href="https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——蓝图接口
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  蓝图接口（Blueprint Interface） 是一个或多个函数的集合——只有名称，没有实现。
-  由于接口函数没有实现，作为设计人员，所能做的就是指定一系列类型化输入和输出。
-  蓝图接口也有一定的局限性：
- 不能包含变量 不能编辑图表 不能添加组件    其他蓝图类 Actor 实现蓝图接口：
-在 类设置 中添加接口
-  参考：
- 蓝图接口 【教程】UE4中接口的使用–蓝图篇（一）  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-10 11:27:36 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——蓝图接口" href="https://874656645.github.io/posts/218-unreal-%E8%93%9D%E5%9B%BE%E6%8E%A5%E5%8F%A3/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——Actor 蓝图类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。
-  Actor支持三维变换，例如平移、旋转和缩放。
-  可以通过游戏逻辑代码（C&#43;&#43;或蓝图）创建（在蓝图中使用 从类生成Actor 节点）或 销毁Actor。
-  每一个 Actor 均有一个 DefaultSceneRoot 组件，它是默认情况下的场景组件（SceneComponent），该组件不支持可视化，在场景中是看不到的，也不可分配网格，只是 Actor 的默认场景根。
-  Actor 必须有一个默认场景根。可以使用其他的组件替换默认场景根，但是只要删除所有的其他组件，场景默认根（DefaultSceneRoot）就会自动显示，这个变量名是系统保留，不能用来命名他组件。
-  当设置Actor的位置、旋转、缩放时，同时也在设置默认场景根的位置、旋转、缩放。
-  注意：
- Actor 不直接保存变换（位置、旋转和缩放）数据，只是一个可以挂载Component的类而已 在某种意义上，Actor 可被视为包含特殊类型 对象（称作组件 Component）的容器 如果 Actor 的根组件存在，则使用它的变换数据    参考：
- Actors UE4-Actor  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-10 11:23:12 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——Actor 蓝图类" href="https://874656645.github.io/posts/217-unreal-actor-%E8%93%9D%E5%9B%BE%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -8,7 +8,7 @@
 <title>C&#43;&#43;——派生类修改基类成员的访问权限 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="案例一：
-class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety; }; 案例二：
+class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety;	// deprecated }; 案例二：
 class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	this-&gt;v = v; 	next = n; 	} 	~Node() { 	cout &lt;&lt; &#34;~Node()\n&#34;; 	delete next; 	next = nullptr; 	} 	} *head; public: 	MyList() { 	head = nullptr; 	} 	~MyList() { 	if (head !">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/230-c&#43;&#43;-%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%BF%AE%E6%94%B9%E5%9F%BA%E7%B1%BB%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/" />
@@ -49,7 +49,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="C&#43;&#43;——派生类修改基类成员的访问权限" />
 <meta property="og:description" content="案例一：
-class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety; }; 案例二：
+class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety;	// deprecated }; 案例二：
 class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	this-&gt;v = v; 	next = n; 	} 	~Node() { 	cout &lt;&lt; &#34;~Node()\n&#34;; 	delete next; 	next = nullptr; 	} 	} *head; public: 	MyList() { 	head = nullptr; 	} 	~MyList() { 	if (head !" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/230-c&#43;&#43;-%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%BF%AE%E6%94%B9%E5%9F%BA%E7%B1%BB%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
@@ -62,7 +62,7 @@ class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	thi
 
 <meta name="twitter:title" content="C&#43;&#43;——派生类修改基类成员的访问权限"/>
 <meta name="twitter:description" content="案例一：
-class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety; }; 案例二：
+class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety;	// deprecated }; 案例二：
 class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	this-&gt;v = v; 	next = n; 	} 	~Node() { 	cout &lt;&lt; &#34;~Node()\n&#34;; 	delete next; 	next = nullptr; 	} 	} *head; public: 	MyList() { 	head = nullptr; 	} 	~MyList() { 	if (head !"/>
 
 
@@ -92,12 +92,12 @@ class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	thi
   "@type": "BlogPosting",
   "headline": "C++——派生类修改基类成员的访问权限",
   "name": "C\u002b\u002b——派生类修改基类成员的访问权限",
-  "description": "案例一：\nclass A { \tint x, y; public: \tint getx() { \treturn x; \t} protected: \tint gety() { \treturn y; \t} }; class B : private A /* public A */ /* protected A */{ \tbool visible; public: \tusing A::getx; \tA::gety; }; 案例二：\nclass MyList { \tstruct Node \t{ \tint v; \tNode* next; \tNode(int v, Node* n) { \tthis-\u0026gt;v = v; \tnext = n; \t} \t~Node() { \tcout \u0026lt;\u0026lt; \u0026#34;~Node()\\n\u0026#34;; \tdelete next; \tnext = nullptr; \t} \t} *head; public: \tMyList() { \thead = nullptr; \t} \t~MyList() { \tif (head !",
+  "description": "案例一：\nclass A { \tint x, y; public: \tint getx() { \treturn x; \t} protected: \tint gety() { \treturn y; \t} }; class B : private A /* public A */ /* protected A */{ \tbool visible; public: \tusing A::getx; \tA::gety;\t// deprecated }; 案例二：\nclass MyList { \tstruct Node \t{ \tint v; \tNode* next; \tNode(int v, Node* n) { \tthis-\u0026gt;v = v; \tnext = n; \t} \t~Node() { \tcout \u0026lt;\u0026lt; \u0026#34;~Node()\\n\u0026#34;; \tdelete next; \tnext = nullptr; \t} \t} *head; public: \tMyList() { \thead = nullptr; \t} \t~MyList() { \tif (head !",
   "keywords": [
     "C++"
   ],
-  "articleBody": "案例一：\nclass A { \tint x, y; public: \tint getx() { \treturn x; \t} protected: \tint gety() { \treturn y; \t} }; class B : private A /* public A */ /* protected A */{ \tbool visible; public: \tusing A::getx; \tA::gety; }; 案例二：\nclass MyList { \tstruct Node \t{ \tint v; \tNode* next; \tNode(int v, Node* n) { \tthis-v = v; \tnext = n; \t} \t~Node() { \tcout  \"~Node()\\n\"; \tdelete next; \tnext = nullptr; \t} \t} *head; public: \tMyList() { \thead = nullptr; \t} \t~MyList() { \tif (head != nullptr) { \tdelete head; \thead = nullptr; \t} \t} \tint insert(int v) { \thead = new Node(v, head); \tif(head) return 1; \treturn 0; \t} \tint contain(int v) { \t// 这里要注意，使用局部变量 \t// 不要使用 head，会改变整个链表的头指针 \tNode* tmp = head; \twhile (tmp != nullptr) \t{ \tif (tmp-v == v) return 1; \ttmp = tmp-next; \t} \treturn 0; \t} }; class MySet : protected MyList { \tint count; public: \tMySet() { count = 0; }; \tusing MyList::contain; \tint insert(int v) { \tif (!contain(v) \u0026\u0026 MyList::insert(v)) return ++count; \treturn 0; \t} };  int main() { \tMySet l; \tl.insert(1); \tl.insert(2); \tl.insert(3); \tcout  l.insert(4)  endl; \tcout  l.contain(3)  endl;  \t//MyList\u0026 list = l;\t// 不允许对不可访问的基类 \"MyList\" 进行转换  \treturn 0; } ",
-  "wordCount" : "206",
+  "articleBody": "案例一：\nclass A { \tint x, y; public: \tint getx() { \treturn x; \t} protected: \tint gety() { \treturn y; \t} }; class B : private A /* public A */ /* protected A */{ \tbool visible; public: \tusing A::getx; \tA::gety;\t// deprecated }; 案例二：\nclass MyList { \tstruct Node \t{ \tint v; \tNode* next; \tNode(int v, Node* n) { \tthis-v = v; \tnext = n; \t} \t~Node() { \tcout  \"~Node()\\n\"; \tdelete next; \tnext = nullptr; \t} \t} *head; public: \tMyList() { \thead = nullptr; \t} \t~MyList() { \tif (head != nullptr) { \tdelete head; \thead = nullptr; \t} \t} \tint insert(int v) { \thead = new Node(v, head); \tif(head) return 1; \treturn 0; \t} \tint contain(int v) { \t// 这里要注意，使用局部变量 \t// 不要使用 head，会改变整个链表的头指针 \tNode* tmp = head; \twhile (tmp != nullptr) \t{ \tif (tmp-v == v) return 1; \ttmp = tmp-next; \t} \treturn 0; \t} }; class MySet : protected MyList { \tint count; public: \tMySet() { count = 0; }; \tusing MyList::contain; \tint insert(int v) { \tif (!contain(v) \u0026\u0026 MyList::insert(v)) return ++count; \treturn 0; \t} };  int main() { \tMySet l; \tl.insert(1); \tl.insert(2); \tl.insert(3); \tcout  l.insert(4)  endl; \tcout  l.contain(3)  endl;  \t//MyList\u0026 list = l;\t// 不允许对不可访问的基类 \"MyList\" 进行转换  \treturn 0; } ",
+  "wordCount" : "208",
   "inLanguage": "en",
   "datePublished": "2022-09-04T20:45:58+08:00",
   "dateModified": "2022-09-04T20:45:58+08:00",
@@ -215,8 +215,8 @@ class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	thi
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> visible;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">using</span> A<span style="color:#f92672">::</span>getx;
-</span></span><span style="display:flex;"><span>	A<span style="color:#f92672">::</span>gety;
-</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>	A<span style="color:#f92672">::</span>gety;			<span style="color:#75715e">// deprecated
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
 </span></span></code></pre></div><p>案例二：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyList</span> {
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Node</span>

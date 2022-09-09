@@ -9,14 +9,32 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 06 Sep 2022 22:28:34 +0800</lastBuildDate><atom:link href="https://874656645.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 09 Sep 2022 17:35:34 +0800</lastBuildDate><atom:link href="https://874656645.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;——作用域</title>
+      <link>https://874656645.github.io/posts/233-c&#43;&#43;-%E4%BD%9C%E7%94%A8%E5%9F%9F/</link>
+      <pubDate>Fri, 09 Sep 2022 17:35:34 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/233-c&#43;&#43;-%E4%BD%9C%E7%94%A8%E5%9F%9F/</guid>
+      <description>namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){  cout &amp;lt;&amp;lt; &amp;#34;B::C::g(long)\n&amp;#34;;  }  }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能当前作用域定义同名变量了 using B::C::g; // 声明引用 void g(int) 和 void g(long)  namespace B::C{  int y = 1;  int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &amp;lt;&amp;lt; &amp;#34;B::C::g(int)\n&amp;#34;;  }  void g(void){  cout &amp;lt;&amp;lt; &amp;#34;B::C::g(void)\n&amp;#34;;  } };  static int xx = 1;  class A{ public:  int xx;  A(int xx){  A::xx = xx;  } }; int main() {  static int xx = 2;  A a(3);  cout &amp;lt;&amp;lt; a.</description>
+    </item>
+    
+    <item>
+      <title>GIS——Global Mapper 使用</title>
+      <link>https://874656645.github.io/posts/232-gis-global-mapper-%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 09 Sep 2022 11:44:36 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/232-gis-global-mapper-%E4%BD%BF%E7%94%A8/</guid>
+      <description> 【File】-&amp;gt;【Create New Map Catalog】  Export  </description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;——父类与子类、基类与派生类</title>
       <link>https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/</link>
       <pubDate>Tue, 06 Sep 2022 22:28:34 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/</guid>
-      <description>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  class A { 	int x, y; public: 	virtual ~A() { 	cout &amp;lt;&amp;lt; &amp;#34;~A()\n&amp;#34;; 	} 	int getx() { 	return x; 	} 	virtual int vf() const { 	return 1; 	} protected: 	int gety() { 	return y; 	} }; class B : protected A {  friend int main(); 	bool visible; public: 	~B() { 	cout &amp;lt;&amp;lt; &amp;#34;~B()\n&amp;#34;; 	} 	using A::gety;  private: 	virtual int vf() const { 	// 子类内部不受继承方式的影响 	const A *pa = this; // 将子类指针赋值给父类指针 	const A&amp;amp; ra = *this; // 将父类引用指向子类对象 	A a = *this; // 将子类对象赋值给父类对象 	// 父类对象 a 生命期在函数结束后结束 	// 输出：~A() 	cout &amp;lt;&amp;lt; &amp;#34;in B::vf() A::vf()：&amp;#34; &amp;lt;&amp;lt; A::vf() &amp;lt;&amp;lt; endl; 	cout &amp;lt;&amp;lt; &amp;#34;in B::vf() a.</description>
+      <description>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;amp;&amp;amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  class A { 	int x, y; public: 	virtual ~A() { 	cout &amp;lt;&amp;lt; &amp;#34;~A()\n&amp;#34;; 	} 	int getx() { 	return x; 	} 	virtual int vf() const { 	return 1; 	} protected: 	int gety() { 	return y; 	} }; class B : protected A {  friend int main(); 	bool visible; public: 	~B() { 	cout &amp;lt;&amp;lt; &amp;#34;~B()\n&amp;#34;; 	} 	using A::gety;  	A* getFather(){ 	return this; 	}  private: 	virtual int vf() const { 	// 子类内部不受继承方式的影响 	const A *pa = this; // 将子类指针赋值给父类指针 	const A&amp;amp; ra = *this; // 将父类引用指向子类对象 	A a = *this; // 将子类对象赋值给父类对象 	// 父类对象 a 生命期在函数结束后结束 	// 输出：~A() 	cout &amp;lt;&amp;lt; &amp;#34;in B::vf() A::vf()：&amp;#34; &amp;lt;&amp;lt; A::vf() &amp;lt;&amp;lt; endl; 	cout &amp;lt;&amp;lt; &amp;#34;in B::vf() a.</description>
     </item>
     
     <item>
@@ -26,7 +44,7 @@
       
       <guid>https://874656645.github.io/posts/230-c&#43;&#43;-%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%BF%AE%E6%94%B9%E5%9F%BA%E7%B1%BB%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/</guid>
       <description>案例一：
-class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety; }; 案例二：
+class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety;	// deprecated }; 案例二：
 class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	this-&amp;gt;v = v; 	next = n; 	} 	~Node() { 	cout &amp;lt;&amp;lt; &amp;#34;~Node()\n&amp;#34;; 	delete next; 	next = nullptr; 	} 	} *head; public: 	MyList() { 	head = nullptr; 	} 	~MyList() { 	if (head !</description>
     </item>
     
@@ -45,7 +63,7 @@ class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	thi
       <pubDate>Sat, 03 Sep 2022 16:44:14 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/228-c&#43;&#43;-%E6%88%90%E5%91%98%E6%8C%87%E9%92%88/</guid>
-      <description>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&amp;gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: 	int a; 	// 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; 	static int num; public: 	Crowd(); 	Crowd(int x); 	~Crowd();  	// 类体内函数定义 	// 会被内联处理 	int f() { 	b++; 	cout &amp;lt;&amp;lt; &amp;#34;F()\n&amp;#34;; 	return b; 	} 	// const this 指针，参数类型不同，所以可被重载 	int f()const { 	cout &amp;lt;&amp;lt; &amp;#34;const F()\n&amp;#34;; 	return b; 	}  	static int getNum(); 	static Crowd&amp;amp; dec(Crowd&amp;amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { 	a = 0; 	b = 0; 	Crowd::num++; 	cout &amp;lt;&amp;lt; &amp;#34;Crowd()\n&amp;#34;; } Crowd::Crowd(int x): a(x) { 	b = 0; 	Crowd::num++; 	cout &amp;lt;&amp;lt; &amp;#34;Crowd(int)\n&amp;#34;; } Crowd::~Crowd() { 	Crowd::num--; } int Crowd::getNum() { 	return Crowd::num; } Crowd&amp;amp; Crowd::dec(Crowd&amp;amp; a) { 	a.</description>
+      <description>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&amp;gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: 	int a; 	// 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; 	// C++17 支持 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; 	static int num; public: 	Crowd(); 	Crowd(int x); 	~Crowd();  	// 类体内函数定义 	// 会被内联处理 	int f() { 	b++; 	cout &amp;lt;&amp;lt; &amp;#34;F()\n&amp;#34;; 	return b; 	} 	// const this 指针，参数类型不同，所以可被重载 	int f()const { 	cout &amp;lt;&amp;lt; &amp;#34;const F()\n&amp;#34;; 	return b; 	}  	static int getNum(); 	static Crowd&amp;amp; dec(Crowd&amp;amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { 	a = 0; 	b = 0; 	Crowd::num++; 	cout &amp;lt;&amp;lt; &amp;#34;Crowd()\n&amp;#34;; } Crowd::Crowd(int x): a(x) { 	b = 0; 	Crowd::num++; 	cout &amp;lt;&amp;lt; &amp;#34;Crowd(int)\n&amp;#34;; } Crowd::~Crowd() { 	Crowd::num--; } int Crowd::getNum() { 	return Crowd::num; } Crowd&amp;amp; Crowd::dec(Crowd&amp;amp; a) { 	a.</description>
     </item>
     
     <item>

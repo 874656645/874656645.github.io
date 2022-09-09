@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> volatile 和 const 修饰的变量说明该变量在本程序内不应被修改，但其它程序是可以修改的 volatile 修饰变量，告诉编译器不要优化该变量，每次取值都重新从内存中获取 constexpr 和 inline 修饰的变量，编译器都会进行编译期优化 当对 inline 修饰变量进行取地址操作时，优化会失效 inline 修饰函数相当于 static，只能在当前文件中访问 inline 修饰的变量可以用任意表达式初始化，但这样不保证被优化 inline 其它介绍 static 限制修饰的变量和函数的可见作用域（模块内部），其它的都是副本  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>STL——map 排序相关
     </h2>
   </header>
@@ -192,18 +204,6 @@ static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部
   </section>
   <footer class="entry-footer"><span title='2022-05-24 09:15:13 +0800 CST'>May 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C 实现继承和多态" href="https://874656645.github.io/posts/195-c-%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 继承构造
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>通过 using 可以方便的使用父类的构造函数和其他函数； 优先使用子类的构造和函数，如果没有找到匹配的才会调用基类的； 可在子类的初始化列表中调用父类的构造函数，并对子类的成员进行列表初始化；  class BS {  int q;  double w; public:  BS() : q(0), w(0) {}  BS(int k) : q(k), w(100) {}  BS(double x) : q(-1), w(x) {}  BS(int k, double x) : q(k), w(x) {}  void Show() const {  std::cout &lt;&lt; q &lt;&lt;&#34;, &#34; &lt;&lt; w &lt;&lt; &#39;\n&#39;;  }   int fn(int j) {  cout &lt;&lt; &#34;BS::fn(int)\n&#34;;  return 0;  }  double fn(double w) {  cout &lt;&lt; &#34;BS::fn(double)\n&#34;;  return 0;  }  void fn(const char * s) {  cout &lt;&lt; &#34;BS::fn(const char *)\n&#34;;  } }; class DR : public BS {  short j; public:  using BS::BS;  DR() : j(-100) {} // DR needs its own default constructor  DR(double x) : BS(2*x), j(int(x)) {}  DR(int i) : j(-2), BS(i, 0....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-05-13 16:30:07 +0800 CST'>May 13, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 继承构造" href="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

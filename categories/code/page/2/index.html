@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> volatile 和 const 修饰的变量说明该变量在本程序内不应被修改，但其它程序是可以修改的 volatile 修饰变量，告诉编译器不要优化该变量，每次取值都重新从内存中获取 constexpr 和 inline 修饰的变量，编译器都会进行编译期优化 当对 inline 修饰变量进行取地址操作时，优化会失效 inline 修饰函数相当于 static，只能在当前文件中访问 inline 修饰的变量可以用任意表达式初始化，但这样不保证被优化 inline 其它介绍 static 限制修饰的变量和函数的可见作用域（模块内部），其它的都是副本  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>STL——map 排序相关
     </h2>
   </header>
@@ -204,24 +216,6 @@ cd ~/ffmpeg_sources curl -O -L https://www....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-15 14:55:49 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Compile FFmpeg on CentOS" href="https://874656645.github.io/posts/220-compile-ffmpeg-on-centos/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>判断点是否在多边形内部
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  射线法：不需考虑精度误差和多边形点给出的顺序。
-  转角法：要求多边形是有顺序的，按照多边形顶点逆时针顺序，从 P 点到顶点 Vi 分别做连线，其中 αi 为 Vi 和 Vi&#43;1 之间的夹角。其中 α 角度逆时针为正，顺时针为负，这样所有到顶点做连线之间夹角和为(环绕数)0，这点P在多边形外部，否则在内部。
-  射线法改进：针对有方向的多边形，通过判断射线穿过的边和点的位置（比如点在线的左侧为正，右侧为负），和为 0 则点在外部。
-  叉积法：适用凸多边形，如果一个点在多边形所有有向边的左边，那么这个点一定在多边形内部。
-  面积法：类似叉积法，适用凸多边形。如果点在多边形内部或者边上，那么点与多边形所有边组成的三角形面积和等于多边形面积。
-  参考：
- 详谈判断点在多边形内的七种方法（最全面） hdu1756 hrbust1429 为例  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-02 17:43:53 +0800 CST'>August 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 判断点是否在多边形内部" href="https://874656645.github.io/posts/213-%E5%88%A4%E6%96%AD%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E9%83%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

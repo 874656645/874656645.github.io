@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>OpenGL 相机 LookAt 矩阵计算
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { 	// 1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-28 14:23:38 +0800 CST'>June 28, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to OpenGL 相机 LookAt 矩阵计算" href="https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>OpenGL 渲染管线
     </h2>
   </header>
@@ -200,31 +212,6 @@ Games101 闫令琪
   </section>
   <footer class="entry-footer"><span title='2022-05-24 09:15:13 +0800 CST'>May 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C 实现继承和多态" href="https://874656645.github.io/posts/195-c-%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>使用 VS2022 部署、运行和调试 Linux MSBuild 项目
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、设置 Linux 环境 1. 确保已安装用于 Visual Studio 的 Linux 开发工作负荷 2. Linux 所需环境 sudo apt-get install openssh-server g&#43;&#43; gdb make ninja-build rsync zip
-确保 ssh 服务在 Linux 计算机上运行
-sudo service ssh start
-参考官方文档
-二、连接到远程 Linux 打开【工具】&gt;【选项】&gt;【跨平台】&gt;【连接管理器】进行添加设置
-也可以连接到 WSL，参考官方文档
-三、创建 Linux MSBuild 项目 四、配置 Linux MSBuild 项目 大部分的默认配置都不需要修改，只需关注几个地方
-调试设置
-包含目录是 Linux 上项目的路径
-库目录可使用相对路径
-如果依赖的是动态库，需要在 Linux 端设置 LD_LIBRARY_PATH
-最后在 Linux 环境中生成的项目目录如下
-还可以在【调试】中打开【Linux控制台】
-参考官方文档</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-05-18 12:02:56 +0800 CST'>May 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 使用 VS2022 部署、运行和调试 Linux MSBuild 项目" href="https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

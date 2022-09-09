@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 继承构造
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>通过 using 可以方便的使用父类的构造函数和其他函数； 优先使用子类的构造和函数，如果没有找到匹配的才会调用基类的； 可在子类的初始化列表中调用父类的构造函数，并对子类的成员进行列表初始化；  class BS {  int q;  double w; public:  BS() : q(0), w(0) {}  BS(int k) : q(k), w(100) {}  BS(double x) : q(-1), w(x) {}  BS(int k, double x) : q(k), w(x) {}  void Show() const {  std::cout &lt;&lt; q &lt;&lt;&#34;, &#34; &lt;&lt; w &lt;&lt; &#39;\n&#39;;  }   int fn(int j) {  cout &lt;&lt; &#34;BS::fn(int)\n&#34;;  return 0;  }  double fn(double w) {  cout &lt;&lt; &#34;BS::fn(double)\n&#34;;  return 0;  }  void fn(const char * s) {  cout &lt;&lt; &#34;BS::fn(const char *)\n&#34;;  } }; class DR : public BS {  short j; public:  using BS::BS;  DR() : j(-100) {} // DR needs its own default constructor  DR(double x) : BS(2*x), j(int(x)) {}  DR(int i) : j(-2), BS(i, 0....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-05-13 16:30:07 +0800 CST'>May 13, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 继承构造" href="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 委托构造
     </h2>
   </header>
@@ -196,20 +208,6 @@ struct Storage {  char a;  int b;  double c;  long long d; };  // struct alignas
   </section>
   <footer class="entry-footer"><span title='2022-04-19 19:23:40 +0800 CST'>April 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 内存对齐 alignof alignas max_align_t" href="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 折叠表达式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一元折叠表达式
- ( pack op ... ) : 一元右折叠  (E op ...) 展开后： (E1 op (... op (EN-1 op EN)))   ( ... op pack ) ：一元左折叠  (... op E) 展开后： (((E1 op E2) op ...) op EN)      二元折叠表达式
- ( pack op ... op init ) ：二元右折叠  (E op ... op I) 展开后： (E1 op (... op (EN−1 op (EN op I))))   ( init op ....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-13 16:50:15 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 折叠表达式" href="https://874656645.github.io/posts/177-c&#43;&#43;17-%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

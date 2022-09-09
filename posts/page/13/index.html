@@ -160,6 +160,33 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;17 constexpr-if 简化编译
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
+比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
+template &lt;typename T&gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &lt;typename U&gt;  T add(U x) const {  return val &#43; x;  } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
+template &lt;typename U&gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) {  n &#43;= x;  }  return copy; } 把两种情况结合在一起：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-12 17:16:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 constexpr-if 简化编译" href="https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>const_cast
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>函数指针和成员函数指针无法用于 const_cast const_cast 使得指向非 const 类型的 const 引用或指针能够被修改 通过 const_cast 修改 const 对象是未定义的行为  struct type {  int i;   type(): i(3) {}   void f(int v) const  {  // this-&gt;i = v; // compile error: this is a pointer to const  const_cast&lt;type*&gt;(this)-&gt;i = v; // OK as long as the type object isn&#39;t const  } };  int main() {  int i = 3; // i is not declared const  const int&amp; rci = i; // const reference  const_cast&lt;int&amp;&gt;(rci) = 4; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;;   const int* pci = &amp;i;  // *pci = 5; // error: assignment of read-only location ‘* pci’  *const_cast&lt;int*&gt;(pci) = 5; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;;   type t; // if this was const type t, then t....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-11 17:51:55 +0800 CST'>April 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to const_cast" href="https://874656645.github.io/posts/172-const_cast/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>类型转换函数
     </h2>
   </header>
@@ -198,36 +225,6 @@ std::function</p>
   </section>
   <footer class="entry-footer"><span title='2022-04-08 16:06:06 +0800 CST'>April 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::function" href="https://874656645.github.io/posts/169-c&#43;&#43;11-function/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 std::mem_fn
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-08 10:20:07 +0800 CST'>April 8, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::mem_fn" href="https://874656645.github.io/posts/168-c&#43;&#43;11-mem_fn/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 std::reference_wrapper
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>创建一个对象或函数的引用，对象必须是 可复制(CopyConstructible)、可赋值(CopyAssignable) 的。
-  它经常被用作在标准容器(如 std::vector )中存储引用的机制，而标准容器通常不能保存引用。
-  辅助函数 std::ref 与 std::cref 常用于生成 std::reference_wrapper 对象。
-  std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。
-  能隐式转换成 T&amp;。
-    在 vector 中存储引用类型：
-#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() {  std::list&lt;int&gt; l(10);  std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1   std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end());  // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-07 13:43:10 +0800 CST'>April 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::reference_wrapper" href="https://874656645.github.io/posts/167-c&#43;&#43;11-reference_wrapper/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

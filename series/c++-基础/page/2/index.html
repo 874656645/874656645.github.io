@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> volatile 和 const 修饰的变量说明该变量在本程序内不应被修改，但其它程序是可以修改的 volatile 修饰变量，告诉编译器不要优化该变量，每次取值都重新从内存中获取 constexpr 和 inline 修饰的变量，编译器都会进行编译期优化 当对 inline 修饰变量进行取地址操作时，优化会失效 inline 修饰函数相当于 static，只能在当前文件中访问 inline 修饰的变量可以用任意表达式初始化，但这样不保证被优化 inline 其它介绍 static 限制修饰的变量和函数的可见作用域（模块内部），其它的都是副本  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43; 杂记
     </h2>
   </header>
@@ -195,21 +207,6 @@ Hello World end of main. after main exit. state: 0	message: this is message </p>
   </section>
   <footer class="entry-footer"><span title='2022-04-11 17:51:55 +0800 CST'>April 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to const_cast" href="https://874656645.github.io/posts/172-const_cast/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>类型转换函数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、转换函数 Conversion Functions(operators) 在 C&#43;&#43; 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C&#43;&#43; 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。
-转换函数写法：operator typeName();
- 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：
-class Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numerator(numerator), m_denominator(denominator)  {  }   //转换函数  operator double() const  {  return (double)m_numerator / m_denominator;  } private:  int m_numerator; //分子  int m_denominator; //分母 };  int main() {  Fraction f(8,5);  double d = 4 &#43; f;  cout &lt;&lt; d &lt;&lt; endl;  return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-10 15:39:37 +0800 CST'>April 10, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类型转换函数" href="https://874656645.github.io/posts/171-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
