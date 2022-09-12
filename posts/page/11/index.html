@@ -160,6 +160,44 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Cesium4Unreal——Editing Tileset Materials
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Cesium for Unreal 插件的材质被设计成模块化的，所以可以被很容易地添加和删除。
+目标  浏览和理解现有的 Cesium for Unreal 3D Tileset 的材质 基于包含在 Cesium for Unreal 插件内的材质实例文件创建自定义材质 修改 tileset 的材质 了解 tileset mesh 的材质限制  Material Instances Cesium for Unreal 通过使用 Material Instances 实现最大的灵活度，每个材质实例通过使用更多的材质图层来应用图像叠加，水，或其他材质效果。
+![MaterialInstances](./img/MaterialInstances.jpg)  图层资产：包含将显示在给定层上的材质图层节点 混合资产：包含一个节点，该节点确定该材质图层将如何与下面的图层混合 每个材质图层和材质图层混合都可以像其他材质对象一样在材质编辑器中编辑  创建应用到整个 tileset 的材质   在插件目录找到 MI_CesiumThreeOverlaysAndClipping 材质实例文件，并把它拷贝到项目的内容文件夹中，将其改名为 MI_GroundTint。
+  在【内容】面板右击，创建一个【材质图层】资产，并将其命名为 ML_GroundTint。
+  双击 ML_GroundTint，打开材质编辑窗口，点击【SetMaterialAttributes】节点，在【细节】面板中的【属性设置类型】数组中添加两个元素，第一个元素设置为默认值【BaseColor】，第二个元素设置为【Opacity】。
+  添加一个【Constant3Vector】节点，并右击节点，将其【转换为参数】，并命名为 Color。
+  添加一个【Constant】节点，，将其【转换为参数】，并命名为 Opacity。
+  右击 Color 节点，在【细节】面板设置默认颜色，比如红色，设置 Opacity 的默认值为 0....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-17 16:24:27 +0800 CST'>April 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Editing Tileset Materials" href="https://874656645.github.io/posts/185-cesium-unreal-editing-tileset-materials/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Cesium4Unreal——Hide Parts Tilesets
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。
+在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。
+注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。
+第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置
+第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay
+关连 CesiumCartographicPolygon
+可以手动刷新 tileset （Refresh Tileset）观看效果
+ Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-16 16:24:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Hide Parts Tilesets" href="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Cesium4Unreal——Using Custom Controllers
     </h2>
   </header>
@@ -221,53 +259,6 @@ height = 2000
   </section>
   <footer class="entry-footer"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Place Objects On Globe
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。
-可以从以下几方面解决（由易到难）：
- 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置
-当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象
-开始放置的地方：
-修改 CesiumGeoreference 原点后：
-四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。
-现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。
-需要注意两点：
- 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-15 10:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Place Objects On Globe" href="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Photogrammetry 倾斜摄影
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>第一步：新建空白关卡 第二步：添加倾斜摄影数据 去网站将数据资产添加到自己的账户
-第三步：以倾斜摄影数据为中心 看起来怪怪的是因为球心坐标系与游戏的坐标系统有所不同， 虚幻编辑器的摄像机 Z 方向是向上的。在地球上（与大多数游戏不同）以地球为中心的坐标系统的向上方向取决于你在世界的位置。
-通过点击 CesiumGeoreference 的 Place Georeference Origin Here 按钮快速设置场景坐标原点到当前相机位置
-此按钮将重新定位虚幻引擎当前关卡的坐标系统，使其中心点(0,0,0)准确地位于摄像机之前的位置，并对齐虚幻引擎的坐标轴，使&#43;X指向东方，&#43;Y指向南方，&#43;Z指向上方
-第四步：添加光照 CesiumSunSky 添加照明并调整时区和时间
-第五步：添加地球影像地形 修改摄影测量数据的位置
-第六步：从本地目录添加 3D Tileset 1. 在场景中添加了一个新的空白 Cesium3DTileset Actor 2. 设置本地 Tileset 文件路径 定位到添加的 tileset actor，场景和数据朝向很可能是错误的
-这是因为 CesiumGeoreference actor 的原点距离 LocalTileset actor 很远。
-3. 重新设置原点 修改 3D Tileset 数据的 Z 值
-影像地形数据 可以通过在本场发布数据服务的方式，类似这种 http://localhost:portNumber/terrainAsset
-经度和时区 摘自知乎
-经度与纬度组成了一个坐标系统，称为地理坐标系统。通过经纬度表示地球上的任何一个位置。
-国际上规定以通过英国伦敦近郊的格林尼治天文台旧址的经线作为计算经度的起点，即经度零度零分零秒，也称“本初子午线”。在它东面的为东经，共180度；在它西面的为西经，共180度。因为地球是圆的，所以东经180度和西经180度的经线是同一条经线。各国公定180度经线为“国际日期变更线”。为了避免同一地区使用两个不同的日期，国际日期变线在遇陆地时略有偏离。
-地球自西向东转，东边时间就要比西边早。规定将全球分为24时区，东西各12时区，每个时区跨经度15度，以英国格林尼治天文台旧址为零时区，两个相邻时区之间相差1小时。
-不同时区的时间按照同减异加、东加西减的原则计算。比如，北京位于东8区，纽约在西5区，北京时间要比纽约早13个小时。</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-14 15:34:27 +0800 CST'>April 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Photogrammetry 倾斜摄影" href="https://874656645.github.io/posts/179-cesium-unreal-photogrammetry/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,11 +157,37 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 继承构造
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>通过 using 可以方便的使用父类的构造函数和其他函数； 优先使用子类的构造和函数，如果没有找到匹配的才会调用基类的； 可在子类的初始化列表中调用父类的构造函数，并对子类的成员进行列表初始化；  class BS { int q; double w; public: BS() : q(0), w(0) {} BS(int k) : q(k), w(100) {} BS(double x) : q(-1), w(x) {} BS(int k, double x) : q(k), w(x) {} void Show() const { std::cout &lt;&lt; q &lt;&lt;&#34;, &#34; &lt;&lt; w &lt;&lt; &#39;\n&#39;; } int fn(int j) { cout &lt;&lt; &#34;BS::fn(int)\n&#34;; return 0; } double fn(double w) { cout &lt;&lt; &#34;BS::fn(double)\n&#34;; return 0; } void fn(const char * s) { cout &lt;&lt; &#34;BS::fn(const char *)\n&#34;; } }; class DR : public BS { short j; public: using BS::BS; DR() : j(-100) {} // DR needs its own default constructor  DR(double x) : BS(2*x), j(int(x)) {} DR(int i) : j(-2), BS(i, 0....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-05-13 16:30:07 +0800 CST'>May 13, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 继承构造" href="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 委托构造
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>委托构造的使用方法类似成员列表初始化的变种；
+注意：
+ 如果在一个构造函数中使用了本类的委托构造，就不能再对成员使用列表初始化了； 会先执行委托构造函数的函数体，然后再执行本身的函数体； 虽然可以在构造函数中调用其他的构造函数，但已经被初始化的成员变量还会被当前的构造函数进行重置，有可能导致又变为原来的未初始化状态；  class Test{ public: Test():Test(0, 0.1){ s = &#34;Ah&#34;; cout &lt;&lt; &#34;Test()\n&#34;; } Test(int ii):Test(ii, 0.1, &#34;Hi&#34;){ cout &lt;&lt; &#34;Test(int)\n&#34;; } Test(int ii, double dd):Test(ii, dd, &#34;Hi&#34;){ cout &lt;&lt; &#34;Test(int, double)\n&#34;; } Test(int ii, double dd, string ss):i(ii), d(dd), s(ss){ cout &lt;&lt; &#34;Test(int, double, string)\n&#34;; } void print(){ cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#34;\td = &#34; &lt;&lt; d &lt;&lt; &#34;\ts = &#34; &lt;&lt; s &lt;&lt; endl; } private: int i; double d; string s; }; int main() { Test t(10); t....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-05-13 15:37:16 +0800 CST'>May 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 委托构造" href="https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>main 函数执行完后所执行的代码
     </h2>
   </header>
   <section class="entry-content">
-    <p> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &lt;&lt; &#34;after main exit.\n&#34;;  cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() {  cout &lt;&lt; &#34;Hello World\n&#34;;  on_exit(f, (char*)&#34;this is message&#34;);  cout &lt;&lt; &#34;end of main.\n&#34;;  return 0; } 输出：
+    <p> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){ cout &lt;&lt; &#34;after main exit.\n&#34;; cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() { cout &lt;&lt; &#34;Hello World\n&#34;; on_exit(f, (char*)&#34;this is message&#34;); cout &lt;&lt; &#34;end of main.\n&#34;; return 0; } 输出：
 Hello World end of main. after main exit. state: 0	message: this is message </p>
   </section>
   <footer class="entry-footer"><span title='2022-05-12 16:02:52 +0800 CST'>May 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
@@ -190,48 +216,10 @@ Hello World end of main. after main exit. state: 0	message: this is message </p>
   </header>
   <section class="entry-content">
     <p>alignof( type-id ) 查询类型的对齐要求，以字节为单位
-struct Storage {  char a;  int b;  double c;  long long d; };  // struct alignas(alignof(long double)) AlignasStorage { // struct alignas(long double) AlignasStorage { struct alignas(std::max_align_t) AlignasStorage { // max_align_t 相当于 alignof(long double) 内存对齐为 16 字节  // 这三种写法都可以  char a;  int b;  double c;  long long d; };  struct Empty {};  struct alignas(64) Empty64 {};  int main() {  std::cout &lt;&lt; alignof(Storage) &lt;&lt; std::endl; // 8  std::cout &lt;&lt; sizeof(Storage) &lt;&lt; std::endl; // 24 内存对齐为 8 字节，所以大小为 8 的整数倍  std::cout &lt;&lt; alignof(AlignasStorage) &lt;&lt; std::endl; // 16  std::cout &lt;&lt; sizeof(AlignasStorage) &lt;&lt; std::endl; // 32 内存对齐为 16 字节，所以大小为 16 的整数倍  int a = 10;  int &amp;b = a;  std::cout &lt;&lt; alignof(b) &lt;&lt; std::endl; // 4 引用类型返回引用类型的对齐要求  int x[10];  std::cout &lt;&lt; alignof(x) &lt;&lt; std::endl; // 4 数组类型返回元素类型的对齐要求   std::cout &lt;&lt; &#34;Alignment of&#34; &#34;\n&#34;  &#34;- char : &#34; &lt;&lt; alignof(char) &lt;&lt; &#34;\n&#34; // 1  &#34;- pointer : &#34; &lt;&lt; alignof(int*) &lt;&lt; &#34;\n&#34; // 8  &#34;- int : &#34; &lt;&lt; alignof(int) &lt;&lt; &#34;\n&#34; // 4  &#34;- long long : &#34; &lt;&lt; alignof(long long) &lt;&lt; &#34;\n&#34; // 8  &#34;- empty class : &#34; &lt;&lt; alignof(Empty) &lt;&lt; &#34;\n&#34; // 1  &#34;- alignas(64) Empty: &#34; &lt;&lt; alignof(Empty64) &lt;&lt; &#34;\n&#34;; // 64   return 0; } </p>
+struct Storage { char a; int b; double c; long long d; }; // struct alignas(alignof(long double)) AlignasStorage { // struct alignas(long double) AlignasStorage { struct alignas(std::max_align_t) AlignasStorage { // max_align_t 相当于 alignof(long double) 内存对齐为 16 字节  // 这三种写法都可以  char a; int b; double c; long long d; }; struct Empty {}; struct alignas(64) Empty64 {}; int main() { std::cout &lt;&lt; alignof(Storage) &lt;&lt; std::endl; // 8  std::cout &lt;&lt; sizeof(Storage) &lt;&lt; std::endl; // 24 内存对齐为 8 字节，所以大小为 8 的整数倍  std::cout &lt;&lt; alignof(AlignasStorage) &lt;&lt; std::endl; // 16  std::cout &lt;&lt; sizeof(AlignasStorage) &lt;&lt; std::endl; // 32 内存对齐为 16 字节，所以大小为 16 的整数倍  int a = 10; int &amp;b = a; std::cout &lt;&lt; alignof(b) &lt;&lt; std::endl; // 4 引用类型返回引用类型的对齐要求  int x[10]; std::cout &lt;&lt; alignof(x) &lt;&lt; std::endl; // 4 数组类型返回元素类型的对齐要求  std::cout &lt;&lt; &#34;Alignment of&#34; &#34;\n&#34; &#34;- char : &#34; &lt;&lt; alignof(char) &lt;&lt; &#34;\n&#34; // 1  &#34;- pointer : &#34; &lt;&lt; alignof(int*) &lt;&lt; &#34;\n&#34; // 8  &#34;- int : &#34; &lt;&lt; alignof(int) &lt;&lt; &#34;\n&#34; // 4  &#34;- long long : &#34; &lt;&lt; alignof(long long) &lt;&lt; &#34;\n&#34; // 8  &#34;- empty class : &#34; &lt;&lt; alignof(Empty) &lt;&lt; &#34;\n&#34; // 1  &#34;- alignas(64) Empty: &#34; &lt;&lt; alignof(Empty64) &lt;&lt; &#34;\n&#34;; // 64  return 0; } </p>
   </section>
   <footer class="entry-footer"><span title='2022-04-19 19:23:40 +0800 CST'>April 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 内存对齐 alignof alignas max_align_t" href="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Editing Tileset Materials
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Cesium for Unreal 插件的材质被设计成模块化的，所以可以被很容易地添加和删除。
-目标  浏览和理解现有的 Cesium for Unreal 3D Tileset 的材质 基于包含在 Cesium for Unreal 插件内的材质实例文件创建自定义材质 修改 tileset 的材质 了解 tileset mesh 的材质限制  Material Instances Cesium for Unreal 通过使用 Material Instances 实现最大的灵活度，每个材质实例通过使用更多的材质图层来应用图像叠加，水，或其他材质效果。
-![MaterialInstances](./img/MaterialInstances.jpg)  图层资产：包含将显示在给定层上的材质图层节点 混合资产：包含一个节点，该节点确定该材质图层将如何与下面的图层混合 每个材质图层和材质图层混合都可以像其他材质对象一样在材质编辑器中编辑  创建应用到整个 tileset 的材质   在插件目录找到 MI_CesiumThreeOverlaysAndClipping 材质实例文件，并把它拷贝到项目的内容文件夹中，将其改名为 MI_GroundTint。
-  在【内容】面板右击，创建一个【材质图层】资产，并将其命名为 ML_GroundTint。
-  双击 ML_GroundTint，打开材质编辑窗口，点击【SetMaterialAttributes】节点，在【细节】面板中的【属性设置类型】数组中添加两个元素，第一个元素设置为默认值【BaseColor】，第二个元素设置为【Opacity】。
-  添加一个【Constant3Vector】节点，并右击节点，将其【转换为参数】，并命名为 Color。
-  添加一个【Constant】节点，，将其【转换为参数】，并命名为 Opacity。
-  右击 Color 节点，在【细节】面板设置默认颜色，比如红色，设置 Opacity 的默认值为 0....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-17 16:24:27 +0800 CST'>April 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Editing Tileset Materials" href="https://874656645.github.io/posts/185-cesium-unreal-editing-tileset-materials/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Hide Parts Tilesets
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>使用 CesiumCartographicPolygon actor，可以定义一个 tileset 的隐藏区域，或应用其他材质效果。CesiumCartographicPolygon 可以通过 Cesium PolygonRasterOverlay 组件添加到一个或多个 tilesets。
-在这里，一个 CesiumCartographicPolygon 被用来隐藏 Cesium World Terrain 和 Cesium OSM Buildings，它们与 Aerometrex Denver Photogrammetry 重叠。
-注意：虽然 CesiumCartographicPolygon 有助于基于材质的改变，如 clipping，但它们不影响物理。你仍然可以与 tileset 的隐藏部分发生碰撞。
-第一步：添加 CesiumCartographicPolygon actor 可以修改多边形的节点（增加、删除、拖拽节点），修改线的颜色，以及地理位置
-第二步：将 CesiumCartographicPolygon 连接到 tileset 数据 选择要将 CesiumCartographicPolygon 应用到的 tileset，比如 Cesium World Terrain，添加组件 CesiumPolygonRasterOverlay
-关连 CesiumCartographicPolygon
-可以手动刷新 tileset （Refresh Tileset）观看效果
- Exclude Tiles Inside： 是专为 clipping 使用。如果这个设置被启用，任何完全位于多边形内部的 tiles 都不会被加载，这可以提高性能。如果你使用这个多边形不是为了 clipping，要禁用这个设置。否则，多边形内的 tiles 将不会被渲染。 Material Layer Key： 将多边形与特定部分的 tileset 的材质连接起来。如果你把这个键换成别的东西，它不会起作用，直到你创建一个使用新键的材质，并将该材质应用到 tileset。  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-16 16:24:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Hide Parts Tilesets" href="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

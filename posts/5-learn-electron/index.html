@@ -27,7 +27,7 @@ cd electron-yarn-cz
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -122,7 +122,7 @@ cd electron-yarn-cz
   "keywords": [
     
   ],
-  "articleBody": "1. Use npm run example 1.1 Clone repository git clone https://github.com/electron/electron-quick-start\n1.2 Go into the repository cd electron-quick-start\n1.3 Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install\n或者是\nnpm install --registry=https://registry.npm.taobao.org\n1.4 Run the app npm start\n2. Use yarn create a electron program 2.1 Create a program folder md electron-yarn-cz\n进入项目文件夹\ncd electron-yarn-cz\n2.2 Create a program config file yarn init\n2.3 Instal electron environment yarn add electron --dev --registry=https://registry.npm.taobao.org\n2.4 Add main.js and index.html 2.5 Edit package.json file \"main\": \"main.js\", \"scripts\": { \t\"start\": \"electron .\" } 3. 打包项目 _推荐devtron 和 electron-builder 2个开发工具，配置简单，功能强大\n3.1 添加打包模块 yarn add electron-builder --dev\n3.2 在package.js中添加命令 \"scripts\": { \t\"start\": \"electron .\", \t\"pack\": \"electron-builder --dir\", \t\"dist\": \"electron-builder\" } 3.3 运行 yarn dist ",
+  "articleBody": "1. Use npm run example 1.1 Clone repository git clone https://github.com/electron/electron-quick-start\n1.2 Go into the repository cd electron-quick-start\n1.3 Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install\n或者是\nnpm install --registry=https://registry.npm.taobao.org\n1.4 Run the app npm start\n2. Use yarn create a electron program 2.1 Create a program folder md electron-yarn-cz\n进入项目文件夹\ncd electron-yarn-cz\n2.2 Create a program config file yarn init\n2.3 Instal electron environment yarn add electron --dev --registry=https://registry.npm.taobao.org\n2.4 Add main.js and index.html 2.5 Edit package.json file \"main\": \"main.js\", \"scripts\": { \"start\": \"electron .\" } 3. 打包项目 _推荐devtron 和 electron-builder 2个开发工具，配置简单，功能强大\n3.1 添加打包模块 yarn add electron-builder --dev\n3.2 在package.js中添加命令 \"scripts\": { \"start\": \"electron .\", \"pack\": \"electron-builder --dir\", \"dist\": \"electron-builder\" } 3.3 运行 yarn dist ",
   "wordCount" : "114",
   "inLanguage": "en",
   "datePublished": "2019-01-31T15:44:09+08:00",
@@ -296,21 +296,21 @@ cd electron-yarn-cz
 <p><code>yarn add electron --dev --registry=https://registry.npm.taobao.org</code></p>
 <h3 id="24-add-mainjs-and-indexhtml">2.4 Add main.js and index.html<a hidden class="anchor" aria-hidden="true" href="#24-add-mainjs-and-indexhtml">#</a></h3>
 <h3 id="25-edit-packagejson-file">2.5 Edit package.json file<a hidden class="anchor" aria-hidden="true" href="#25-edit-packagejson-file">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#34;main&#34;: &#34;main.js&#34;,
-</span></span><span style="display:flex;"><span>&#34;scripts&#34;: {
-</span></span><span style="display:flex;"><span>	&#34;start&#34;: &#34;electron .&#34;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="3-打包项目">3. 打包项目<a hidden class="anchor" aria-hidden="true" href="#3-打包项目">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&#34;main&#34;: &#34;main.js&#34;,
+&#34;scripts&#34;: {
+	&#34;start&#34;: &#34;electron .&#34;
+}
+</code></pre></div><h2 id="3-打包项目">3. 打包项目<a hidden class="anchor" aria-hidden="true" href="#3-打包项目">#</a></h2>
 <p>_推荐devtron 和 electron-builder 2个开发工具，配置简单，功能强大</p>
 <h3 id="31-添加打包模块">3.1 添加打包模块<a hidden class="anchor" aria-hidden="true" href="#31-添加打包模块">#</a></h3>
 <p><code>yarn add electron-builder --dev</code></p>
 <h3 id="32-在packagejs中添加命令">3.2 在package.js中添加命令<a hidden class="anchor" aria-hidden="true" href="#32-在packagejs中添加命令">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>&#34;scripts&#34;: {
-</span></span><span style="display:flex;"><span>	&#34;start&#34;: &#34;electron .&#34;,
-</span></span><span style="display:flex;"><span>	&#34;pack&#34;: &#34;electron-builder --dir&#34;,
-</span></span><span style="display:flex;"><span>	&#34;dist&#34;: &#34;electron-builder&#34;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h3 id="33-运行-yarn-dist">3.3 运行 <code>yarn dist</code><a hidden class="anchor" aria-hidden="true" href="#33-运行-yarn-dist">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">&#34;scripts&#34;: {
+	&#34;start&#34;: &#34;electron .&#34;,
+	&#34;pack&#34;: &#34;electron-builder --dir&#34;,
+	&#34;dist&#34;: &#34;electron-builder&#34;
+}
+</code></pre></div><h3 id="33-运行-yarn-dist">3.3 运行 <code>yarn dist</code><a hidden class="anchor" aria-hidden="true" href="#33-运行-yarn-dist">#</a></h3>
 
 
   </div>
