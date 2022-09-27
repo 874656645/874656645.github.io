@@ -32,7 +32,7 @@ whereis gdb
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -436,23 +436,23 @@ whereis gdb
 <p><img loading="lazy" style="margin: auto;" src="../img/%e5%88%87%e6%8d%a2%e8%b6%85%e7%ba%a7%e7%94%a8%e6%88%b7.jpg" alt="切换超级用户"  />
 </p>
 <h3 id="15-查看文件和目录">15、 查看文件和目录<a hidden class="anchor" aria-hidden="true" href="#15-查看文件和目录">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls
-ls -a
-ls -l       <span style="color:#75715e"># -rwxrw-r-- 1 rick rick 0 Feb 12 18:37 test</span>
-ls -lh
-ls -alF     <span style="color:#75715e"># drwxr-xr-x 1 rick rick 4096 Feb 12 18:37 rick/</span>
-ll
-</code></pre></div><h3 id="16-cd">16、 <code>cd</code><a hidden class="anchor" aria-hidden="true" href="#16-cd">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /home/rick
-cd ~
-cd
-cd -    <span style="color:#75715e"># 切换到上一个的历史目录</span>
-</code></pre></div><h3 id="17-mkdir-目录名">17、 <code>mkdir</code> 目录名<a hidden class="anchor" aria-hidden="true" href="#17-mkdir-目录名">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir aa
-mkdir aa/bb
-rm aa -r
-mkdir aa/bb/cc -p
-</code></pre></div><h3 id="18-touch-文件名">18、 <code>touch</code> 文件名<a hidden class="anchor" aria-hidden="true" href="#18-touch-文件名">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ls
+</span></span><span style="display:flex;"><span>ls -a
+</span></span><span style="display:flex;"><span>ls -l       <span style="color:#75715e"># -rwxrw-r-- 1 rick rick 0 Feb 12 18:37 test</span>
+</span></span><span style="display:flex;"><span>ls -lh
+</span></span><span style="display:flex;"><span>ls -alF     <span style="color:#75715e"># drwxr-xr-x 1 rick rick 4096 Feb 12 18:37 rick/</span>
+</span></span><span style="display:flex;"><span>ll
+</span></span></code></pre></div><h3 id="16-cd">16、 <code>cd</code><a hidden class="anchor" aria-hidden="true" href="#16-cd">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /home/rick
+</span></span><span style="display:flex;"><span>cd ~
+</span></span><span style="display:flex;"><span>cd
+</span></span><span style="display:flex;"><span>cd -    <span style="color:#75715e"># 切换到上一个的历史目录</span>
+</span></span></code></pre></div><h3 id="17-mkdir-目录名">17、 <code>mkdir</code> 目录名<a hidden class="anchor" aria-hidden="true" href="#17-mkdir-目录名">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir aa
+</span></span><span style="display:flex;"><span>mkdir aa/bb
+</span></span><span style="display:flex;"><span>rm aa -r
+</span></span><span style="display:flex;"><span>mkdir aa/bb/cc -p
+</span></span></code></pre></div><h3 id="18-touch-文件名">18、 <code>touch</code> 文件名<a hidden class="anchor" aria-hidden="true" href="#18-touch-文件名">#</a></h3>
 <ul>
 <li>如果文件不存在，则创建文件</li>
 <li>如果文件存在，更新文件时间</li>
@@ -465,24 +465,24 @@ mkdir aa/bb/cc -p
 <ul>
 <li>删除后很难恢复</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rm -r       <span style="color:#75715e"># 用递归的方式删除目录</span>
-rm -ri      <span style="color:#75715e"># 提示</span>
-rm aa/* -r  <span style="color:#75715e"># 删除 aa 目录下的所有文件和目录</span>
-</code></pre></div><h3 id="21-cp-拷贝">21、 <code>cp</code> 拷贝<a hidden class="anchor" aria-hidden="true" href="#21-cp-拷贝">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp file file1   <span style="color:#75715e"># file1 不存在，则创建 file1 并把 file 中的内容拷贝进去</span>
-cp file file1   <span style="color:#75715e"># file1 存在，则会用 file 中的内容覆盖 file1 中的内容</span>
-cp file dir     <span style="color:#75715e"># 将 file 拷贝到 dir 目录下</span>
-cp dir dir1     <span style="color:#75715e"># dir1 目录不存在，则把 dir 的所有子目录拷贝到 dir1 目录下</span>
-rm dir1/* -r
-cp dir dir1     <span style="color:#75715e"># dir1 目录存在，则把 dir 整个目录拷贝到 dir1 目录下</span>
-cp -r nginx_build/* nginx
-</code></pre></div><h3 id="22-mv">22、 <code>mv</code><a hidden class="anchor" aria-hidden="true" href="#22-mv">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mv file file1   <span style="color:#75715e"># file1 不存在，则是将 file 文件改名为 file1</span>
-mv file file1   <span style="color:#75715e"># file1 存在，则用 file 中的内容覆盖 file1 中的内容，并删除 file</span>
-mv file dir     <span style="color:#75715e"># dir 存在，将 file 移动到 dir 目录下</span>
-mv dir dir1     <span style="color:#75715e"># dir1 不存在，就是将 dir 改名为 dir1</span>
-mv dir dir1     <span style="color:#75715e"># dir1 存在，则将 dir 目录移动到 dir1下</span>
-</code></pre></div><h3 id="23-cat-将文件内容打印到终端">23、 <code>cat</code> 将文件内容打印到终端<a hidden class="anchor" aria-hidden="true" href="#23-cat-将文件内容打印到终端">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rm -r       <span style="color:#75715e"># 用递归的方式删除目录</span>
+</span></span><span style="display:flex;"><span>rm -ri      <span style="color:#75715e"># 提示</span>
+</span></span><span style="display:flex;"><span>rm aa/* -r  <span style="color:#75715e"># 删除 aa 目录下的所有文件和目录</span>
+</span></span></code></pre></div><h3 id="21-cp-拷贝">21、 <code>cp</code> 拷贝<a hidden class="anchor" aria-hidden="true" href="#21-cp-拷贝">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cp file file1   <span style="color:#75715e"># file1 不存在，则创建 file1 并把 file 中的内容拷贝进去</span>
+</span></span><span style="display:flex;"><span>cp file file1   <span style="color:#75715e"># file1 存在，则会用 file 中的内容覆盖 file1 中的内容</span>
+</span></span><span style="display:flex;"><span>cp file dir     <span style="color:#75715e"># 将 file 拷贝到 dir 目录下</span>
+</span></span><span style="display:flex;"><span>cp dir dir1     <span style="color:#75715e"># dir1 目录不存在，则把 dir 的所有子目录拷贝到 dir1 目录下</span>
+</span></span><span style="display:flex;"><span>rm dir1/* -r
+</span></span><span style="display:flex;"><span>cp dir dir1     <span style="color:#75715e"># dir1 目录存在，则把 dir 整个目录拷贝到 dir1 目录下</span>
+</span></span><span style="display:flex;"><span>cp -r nginx_build/* nginx
+</span></span></code></pre></div><h3 id="22-mv">22、 <code>mv</code><a hidden class="anchor" aria-hidden="true" href="#22-mv">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mv file file1   <span style="color:#75715e"># file1 不存在，则是将 file 文件改名为 file1</span>
+</span></span><span style="display:flex;"><span>mv file file1   <span style="color:#75715e"># file1 存在，则用 file 中的内容覆盖 file1 中的内容，并删除 file</span>
+</span></span><span style="display:flex;"><span>mv file dir     <span style="color:#75715e"># dir 存在，将 file 移动到 dir 目录下</span>
+</span></span><span style="display:flex;"><span>mv dir dir1     <span style="color:#75715e"># dir1 不存在，就是将 dir 改名为 dir1</span>
+</span></span><span style="display:flex;"><span>mv dir dir1     <span style="color:#75715e"># dir1 存在，则将 dir 目录移动到 dir1下</span>
+</span></span></code></pre></div><h3 id="23-cat-将文件内容打印到终端">23、 <code>cat</code> 将文件内容打印到终端<a hidden class="anchor" aria-hidden="true" href="#23-cat-将文件内容打印到终端">#</a></h3>
 <ul>
 <li>适用文件内容较小的情况</li>
 </ul>
@@ -512,41 +512,41 @@ mv dir dir1     <span style="color:#75715e"># dir1 存在，则将 dir 目录移
 <p><img loading="lazy" style="margin: auto;" src="../img/%e7%a1%ac%e9%93%be%e6%8e%a5.jpg" alt="硬链接"  />
 </p>
 <h3 id="26-chmod-修改权限">26、 <code>chmod</code> 修改权限<a hidden class="anchor" aria-hidden="true" href="#26-chmod-修改权限">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">chmod uo-rw program
-chmod u+r,g-x program
-chmod -440 program
-chmod <span style="color:#ae81ff">777</span> program
-</code></pre></div><h3 id="27-chown-修改所有者或所属组">27、 <code>chown</code> 修改所有者或所属组<a hidden class="anchor" aria-hidden="true" href="#27-chown-修改所有者或所属组">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo chown sys program
-sudo chown rick:sys program
-</code></pre></div><h3 id="28-chgrp-所属组">28、 <code>chgrp</code> 所属组<a hidden class="anchor" aria-hidden="true" href="#28-chgrp-所属组">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chmod uo-rw program
+</span></span><span style="display:flex;"><span>chmod u+r,g-x program
+</span></span><span style="display:flex;"><span>chmod -440 program
+</span></span><span style="display:flex;"><span>chmod <span style="color:#ae81ff">777</span> program
+</span></span></code></pre></div><h3 id="27-chown-修改所有者或所属组">27、 <code>chown</code> 修改所有者或所属组<a hidden class="anchor" aria-hidden="true" href="#27-chown-修改所有者或所属组">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo chown sys program
+</span></span><span style="display:flex;"><span>sudo chown rick:sys program
+</span></span></code></pre></div><h3 id="28-chgrp-所属组">28、 <code>chgrp</code> 所属组<a hidden class="anchor" aria-hidden="true" href="#28-chgrp-所属组">#</a></h3>
 <p><code>sudo chgrp rick program</code></p>
 <h3 id="29-find-查找">29、 <code>find</code> 查找<a hidden class="anchor" aria-hidden="true" href="#29-find-查找">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">find ./ -name <span style="color:#e6db74">&#34;program&#34;</span>           <span style="color:#75715e"># 按文件名查找</span>
-find ./ -type f                   <span style="color:#75715e"># 按文件类型查找（7种）</span>
-find ./ -size -4k
-find ./ -size +2k -size -10k      <span style="color:#75715e"># 按文件大小查找</span>
-find ./ -ctime -1                 <span style="color:#75715e"># 按日期查找（-ctime、-mtime、-atime）</span>
-find ./ -type d -exec ls -l <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> <span style="color:#75715e"># 查找指定目录，并列出该目录中文件详细信息</span>
-find ./ -type d | xargs ls -l     <span style="color:#75715e"># 利用管道，效率较高</span>
-</code></pre></div><h3 id="30-grep-所属组">30、 <code>grep</code> 所属组<a hidden class="anchor" aria-hidden="true" href="#30-grep-所属组">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">grep -r <span style="color:#e6db74">&#34;hello&#34;</span> ./ -n
-</code></pre></div><h3 id="31-写入文件">31、 写入文件<a hidden class="anchor" aria-hidden="true" href="#31-写入文件">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>find ./ -name <span style="color:#e6db74">&#34;program&#34;</span>           <span style="color:#75715e"># 按文件名查找</span>
+</span></span><span style="display:flex;"><span>find ./ -type f                   <span style="color:#75715e"># 按文件类型查找（7种）</span>
+</span></span><span style="display:flex;"><span>find ./ -size -4k
+</span></span><span style="display:flex;"><span>find ./ -size +2k -size -10k      <span style="color:#75715e"># 按文件大小查找</span>
+</span></span><span style="display:flex;"><span>find ./ -ctime -1                 <span style="color:#75715e"># 按日期查找（-ctime、-mtime、-atime）</span>
+</span></span><span style="display:flex;"><span>find ./ -type d -exec ls -l <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> <span style="color:#75715e"># 查找指定目录，并列出该目录中文件详细信息</span>
+</span></span><span style="display:flex;"><span>find ./ -type d | xargs ls -l     <span style="color:#75715e"># 利用管道，效率较高</span>
+</span></span></code></pre></div><h3 id="30-grep-所属组">30、 <code>grep</code> 所属组<a hidden class="anchor" aria-hidden="true" href="#30-grep-所属组">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>grep -r <span style="color:#e6db74">&#34;hello&#34;</span> ./ -n
+</span></span></code></pre></div><h3 id="31-写入文件">31、 写入文件<a hidden class="anchor" aria-hidden="true" href="#31-写入文件">#</a></h3>
 <p><code>ls -l &gt; fileinfo</code></p>
 <h3 id="32-usermod-修改用户组">32、 <code>usermod</code> 修改用户组<a hidden class="anchor" aria-hidden="true" href="#32-usermod-修改用户组">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 查看当前用户所属组</span>
-groups 用户名
-<span style="color:#75715e"># 一个用户仅仅属于某一个组，而不是同时属于多个组</span>
-sudo usermod -g 组名 用户名
-<span style="color:#75715e"># 给一个用户添加一个新的组，同时保留原来的组</span>
-sudo usermod -a -G 组名 用户名
-</code></pre></div><h3 id="33查看环境变量">33、查看环境变量<a hidden class="anchor" aria-hidden="true" href="#33查看环境变量">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 查看当前用户所属组</span>
+</span></span><span style="display:flex;"><span>groups 用户名
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 一个用户仅仅属于某一个组，而不是同时属于多个组</span>
+</span></span><span style="display:flex;"><span>sudo usermod -g 组名 用户名
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 给一个用户添加一个新的组，同时保留原来的组</span>
+</span></span><span style="display:flex;"><span>sudo usermod -a -G 组名 用户名
+</span></span></code></pre></div><h3 id="33查看环境变量">33、查看环境变量<a hidden class="anchor" aria-hidden="true" href="#33查看环境变量">#</a></h3>
 <p><code>env</code></p>
 <h3 id="34修改环境变量">34、修改环境变量<a hidden class="anchor" aria-hidden="true" href="#34修改环境变量">#</a></h3>
 <p>修改 <code>~/.bashrc</code> 文件（当前用户）或 <code>/etc/profile</code> 文件（所有用户）</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/mnt/h/wsl/emsdk:/mnt/h/wsl/emsdk/upstream/emscripten:/mnt/h/wsl/emsdk/node/14.18.2_64bit/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
-source ~/.bashrc
-</code></pre></div><h3 id="35ldd-列出动态库依赖关系">35、<code>ldd</code> 列出动态库依赖关系<a hidden class="anchor" aria-hidden="true" href="#35ldd-列出动态库依赖关系">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/mnt/h/wsl/emsdk:/mnt/h/wsl/emsdk/upstream/emscripten:/mnt/h/wsl/emsdk/node/14.18.2_64bit/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>source ~/.bashrc
+</span></span></code></pre></div><h3 id="35ldd-列出动态库依赖关系">35、<code>ldd</code> 列出动态库依赖关系<a hidden class="anchor" aria-hidden="true" href="#35ldd-列出动态库依赖关系">#</a></h3>
 <p><code>ldd</code> 是 <code>list, dynamic, dependencies</code> 的缩写</p>
 <p><code>ldd ffmpeg</code></p>
 <p><img loading="lazy" style="margin: auto;" src=".././img/Linux-ldd.jpg" alt="Linux-ldd"  />

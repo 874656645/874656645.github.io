@@ -160,71 +160,70 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>异常
+    <h2>list 容器
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、try、catch、throw  可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型 C&#43;&#43; 异常机制是跨函数的，且是必须处理的。如果中间函数没有处理就一直抛到最顶层，如果 main 函数也不处理，程序就会挂掉  int main( ) { try{ throw &#34;exception&#34;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常  cout &lt;&lt; &#34;...&#34; &lt;&lt; endl; } { cout &lt;&lt; &#34;finally&#34; &lt;&lt; endl; } return 0; } 输出：
-Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：...</p>
+    <p>注意事项  双向循环链表 不支持随机访问 因为不支持随机访问，所以也不能用全局的排序算法 sort 一般不支持随机访问的容器会自己提供 sort 方法 自定义类型要指定排序规则  排序案例 案例描述：将 Person 自定义数据类型进行排序，Person 中属性有姓名、年龄、身高
+排序规则：按照年龄进行升序，如果年龄相同按照身高进行降序
+class Person{ public:  Person(string name, int age, int height){  this-&gt;m_name = name;  this-&gt;m_age = age;  this-&gt;m_height = height;  }  bool operator&lt;(const Person &amp;p2){  if(this-&gt;m_age == p2.m_age){  return this-&gt;m_height &gt; p2.m_height;  }  return this-&gt;m_age &lt; p2.m_age;  }  void printPerson()const{  cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl;  } private:  string m_name;  int m_age;  int m_height; }; int main() {  list&lt;Person&gt; lp;  lp....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-15 17:34:27 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 异常" href="https://874656645.github.io/posts/57-%E5%BC%82%E5%B8%B8/"></a>
+  <footer class="entry-footer"><span title='2022-01-18 20:26:45 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to list 容器" href="https://874656645.github.io/posts/86-list-%E5%AE%B9%E5%99%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>类型转换
+    <h2>queue 队列容器适配器
     </h2>
   </header>
   <section class="entry-content">
-    <p>1. static_cast&lt;&gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&lt;&gt;  // 1. 内置对象  int a = 97; char c = static_cast&lt;char&gt;(a); // OK  cout &lt;&lt; c &lt;&lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;a;  // char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &lt;&lt; pc &lt;&lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4....</p>
+    <p>先进先出 不允许遍历元素  queue 队列操作：
+size()
+empty()</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-15 15:55:28 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类型转换" href="https://874656645.github.io/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"></a>
+  <footer class="entry-footer"><span title='2022-01-17 19:41:48 +0800 CST'>January 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to queue 队列容器适配器" href="https://874656645.github.io/posts/85-queue-%E9%98%9F%E5%88%97%E5%AE%B9%E5%99%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>自定义数组实现
+    <h2>stack 栈容器适配器
     </h2>
   </header>
   <section class="entry-content">
-    <p>要求  可以对内置数据类型以及自定义数据类型的数据进行存储 将数组中的数据存储到堆区 构造函数中可以传入数组的容量 提供对应的拷贝构造函数以及 operator= 防止浅拷贝问题 提供尾插法和尾删法对数组中的数据进行增加和删除 可以通过下标的方式访问数组中的元素 可以获取数组中当前元素个数和数组的容量  实现 template&lt;class T&gt; class MyArray{ public: MyArray(int capacity){ this-&gt;m_capacity = capacity; this-&gt;m_size = 0; this-&gt;m_addr = new T[this-&gt;m_capacity]; } MyArray(const MyArray&amp; arr){ if(arr.m_addr == NULL){ return; } // 深拷贝  this-&gt;m_capacity = arr.m_capacity; this-&gt;m_size = arr.m_size; this-&gt;m_addr = new T[this-&gt;m_capacity]; for(int i = 0; i &lt; m_size; &#43;&#43;i){ // T 类型是可拷贝的，= 运算符也是深拷贝  this-&gt;m_addr[i] = arr.m_addr[i]; } } MyArray&amp; operator=(const MyArray&amp; arr){ if(this == &amp;arr){ return *this; } if(this-&gt;m_addr !...</p>
+    <p>先进后出 栈不允许遍历元素 不能随机存取  stack 栈操作:
+size()
+empty()</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-15 13:36:04 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 自定义数组实现" href="https://874656645.github.io/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 22:17:43 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to stack 栈容器适配器" href="https://874656645.github.io/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>类模板
+    <h2>评委打分案例
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ public: Person(T age){ this-&gt;m_age = age; } void Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } private: T m_age; }; int main() { Person&lt;int&gt; p(20); p.Show(); cout &lt;&lt; p &lt;&lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&lt;class T&gt; Person&lt;T&gt;::Person(T age){ this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() { Person&lt;int&gt; p(20); p....</p>
+    <p>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
+分析：
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public:  Player(string name){  m_name = name;  m_avgScore = 0;  }  void setAvgScore(int v){  m_avgScore = v;  }  void printInfo()const{  cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl;  } private:  string m_name;  int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){  string nameSeed = &#34;ABCDE&#34;;  for(int i = 0; i &lt; nameSeed....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>编译过程
+    <h2>生成随机数
     </h2>
   </header>
   <section class="entry-content">
-    <p>各个 .cpp 文件是独立编译的，如果有其它的类和函数会先在本 .o 文件中生成符号，由最后的链接器去其它 .o 文件找具体的函数定义
- .c .cpp 文件经过 预编译器拷贝头文件、宏展开 生成 .i 文件（文本文件）
-g&#43;&#43; -E main.cpp -o main.i .i 文件经过 编译器 生成汇编程序 .s（文本文件）
-g&#43;&#43; -S main.i -o main.s .s 文件经过 汇编器 生成可定位目标文件 .o （二进制）
-Windows:
-g&#43;&#43; -c main.s -o main.obj
-Linux:
-g&#43;&#43; -c main.s -o main.o .o 文件经过 链接器 生成可执行目标文件 .exe .dll
-g&#43;&#43; main.s -o main  </p>
+    <p>#include &lt;ctime&gt;using namespace std;  int main() {  srand((unsigned int)time(NULL));  cout &lt;&lt; rand() % 40 &lt;&lt; endl;  return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-12 20:12:00 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 编译过程" href="https://874656645.github.io/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -145,71 +145,65 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;17 大括号初始化
+    <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
     </h2>
   </header>
   <section class="entry-content">
-    <p>( expression-list )：优先调用非聚合初始化，且会存在隐式转换 = expression： { initializer-list }：如果有聚合初始化（initializer_list&lt;&gt;），就调用聚合初始化，没有的话就调用符合条件的非聚合初始化 = { initializer-list }：同上 使用 auto 声明的变量括号初始化，只允许一个参数的情况 {} 与 () 调用构造函数初始化的方式，不同点在于 {} 没有类型的隐式转换，比如 int x(1.2); 和 int x = 1.2; 通过隐式的对浮点值进行向下取整，然后将其转换为整型，从而将 x 的值初始化为 1。相反的， int x{1.2}; 将会遇到编译错误，初始化列表中的初始值，需要与变量声明的类型完全匹配。  测试代码一：
-// #define AGGREGATE_INIT class Test{ public: Test(int a, float b, char* c){ cout &lt;&lt; &#34;int float char* initialize...&#34; &lt;&lt; endl; } Test(int a, int b, int c){ cout &lt;&lt; &#34;int int int initialize....</p>
+    <p> volatile 和 const 修饰的变量说明该变量在本程序内不应被修改，但其它程序是可以修改的 volatile 修饰变量，告诉编译器不要优化该变量，每次取值都重新从内存中获取 constexpr 和 inline 修饰的变量，编译器都会进行编译期优化 当对 inline 修饰变量进行取地址操作时，优化会失效 inline 修饰函数相当于 static，只能在当前文件中访问 inline 修饰的变量可以用任意表达式初始化，但这样不保证被优化 inline 其它介绍 static 限制修饰的变量和函数的可见作用域（模块内部），其它的都是副本  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-12 18:51:42 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 大括号初始化" href="https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
+  <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;17 constexpr-if 简化编译
+    <h2>STL——map 排序相关
     </h2>
   </header>
   <section class="entry-content">
-    <p>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
-比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
-template &lt;typename T&gt; class addable { T val; public: addable(T v) : val{v} {} template &lt;typename U&gt; T add(U x) const { return val &#43; x; } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
-template &lt;typename U&gt; T add(U x) { auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) { n &#43;= x; } return copy; } 把两种情况结合在一起：...</p>
+    <p>声明变量时指定排序规则  通过指定模板的第三个参数，对象类型，C&#43;&#43; 2a 支持 lambda 对象
+struct MyCom{  bool operator()(const string key1, const string key2)const{  return key1 &gt; key2;  } };  int main() {  // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;};  map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} };   // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}};   for(const auto&amp; item : myMap1){  cout &lt;&lt; item....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-12 17:16:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 constexpr-if 简化编译" href="https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/"></a>
+  <footer class="entry-footer"><span title='2022-08-30 14:22:02 +0800 CST'>August 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL——map 排序相关" href="https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>const_cast
+    <h2>C&#43;&#43; 杂记
     </h2>
   </header>
   <section class="entry-content">
-    <p>函数指针和成员函数指针无法用于 const_cast const_cast 使得指向非 const 类型的 const 引用或指针能够被修改 通过 const_cast 修改 const 对象是未定义的行为  struct type { int i; type(): i(3) {} void f(int v) const { // this-&gt;i = v; // compile error: this is a pointer to const  const_cast&lt;type*&gt;(this)-&gt;i = v; // OK as long as the type object isn&#39;t const  } }; int main() { int i = 3; // i is not declared const  const int&amp; rci = i; // const reference  const_cast&lt;int&amp;&gt;(rci) = 4; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;; const int* pci = &amp;i; // *pci = 5; // error: assignment of read-only location ‘* pci’  *const_cast&lt;int*&gt;(pci) = 5; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;; type t; // if this was const type t, then t....</p>
+    <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { 	std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 	{ 	extern int etn; 	int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-11 17:51:55 +0800 CST'>April 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to const_cast" href="https://874656645.github.io/posts/172-const_cast/"></a>
+  <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>类型转换函数
+    <h2>C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、转换函数 Conversion Functions(operators) 在 C&#43;&#43; 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C&#43;&#43; 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。
-转换函数写法：operator typeName();
- 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：
-class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 &#43; f; cout &lt;&lt; d &lt;&lt; endl; return 0; } 输出：...</p>
+    <p>一、通用引用  类型声明形式为 type&amp;&amp; 其中 type 类型是要进行推导的，如果类型推导没有发生，那么 type&amp;&amp; 代表一个右值引用 如果一个对象被声明为 auto&amp;&amp;，这个形参或者对象就是一个通用引用 通用引用，如果它被右值初始化，就会对应地成为右值引用；如果它被左值初始化，就会成为左值引用 如果在一个类模板里面看见了一个函数形参类型为 T&amp;&amp;，也不一定就是通用引用，可能并没有发生类型推导  void f(Widget&amp;&amp; param); //右值引用 Widget&amp;&amp; var1 = Widget(); //右值引用 auto&amp;&amp; var2 = var1; //通用引用（不是右值引用）  template&lt;typename T&gt; void f(std::vector&lt;T&gt;&amp;&amp; param); //右值引用  template&lt;typename T&gt; void f(T&amp;&amp; param); //通用引用（不是右值引用）  template &lt;typename T&gt; void f(const T&amp;&amp; param); //param是一个右值引用，因为添加了 const 限定符  // 函数模板 一般可能是通用引用 template &lt;typename T&gt; void print_reference_type(T &amp;&amp;i) { // T&amp;&amp; 或是 auto&amp;&amp;  if (std::is_lvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;lvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else if (std::is_rvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;rvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else {  std::cout &lt;&lt; &#34;unknown value: &#34; &lt;&lt; i &lt;&lt; std::endl;  } }  // 因为 push_back 在有一个特定的 vector 实例之前不可能存在， // 而实例化 vector 时的类型已经决定了 push_back 的声明 // 所以在这里并没有发生类型推导 template&lt;class T, class Allocator = allocator&lt;T&gt;&gt; //来自C&#43;&#43;标准 class vector { public:  void push_back(T&amp;&amp; x);  … } 一个记录任意函数调用的时间开销的函数模板...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-10 15:39:37 +0800 CST'>April 10, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类型转换函数" href="https://874656645.github.io/posts/171-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-06-11 20:48:22 +0800 CST'>June 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考" href="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;11 constexpr
+    <h2>C 实现继承和多态
     </h2>
   </header>
   <section class="entry-content">
-    <p>在编译过程中就已经把值计算出来，会做类型检查； define 是在预编译过程中进行简单的文本替换，不会做类型检查； 在对象声明时或非静态成员函数中使用 constexpr 关键字(C&#43;&#43; 14)暗示这个对象或非静态成员函数是 const 的； 在函数或静态数据成员(C&#43;&#43; 17)声明中使用的 constexpr 关键字意味着内联； C&#43;&#43;11 中 constexpr 函数可以使用递归，?: 三目运算符，从 C&#43;&#43;14 开始，constexpr 函数可以在内部使用局部变量、循环和分支等简单语句； constexpr 修饰的是函数参数，而不是函数返回值，函数返回值是可以被改变的    constexpr 修饰变量必须满足以下要求：
- 它的类型必须是一个LiteralType 它必须立即初始化 其初始化的完整表达式，包括所有隐式转换、构造函数调用等，必须是 constexpr 它必须有 constexpr 析构    constexpr 修饰函数必须满足以下要求：
- 它不能是 virtual 修饰的(直到 C&#43;&#43;20) 它不能是 coroutine 协程(直到 C&#43;&#43;20) 它的返回类型（如果有的话）必须是 LiteralType 所有参数必须是 LiteralType    class Test{ public: int x = 10; }; int main() { constexpr Test t; // const  cout &lt;&lt; typeid(t....</p>
+    <p>C中的继承和多态</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-09 10:28:47 +0800 CST'>April 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 constexpr" href="https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/"></a>
+  <footer class="entry-footer"><span title='2022-05-24 09:15:13 +0800 CST'>May 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C 实现继承和多态" href="https://874656645.github.io/posts/195-c-%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

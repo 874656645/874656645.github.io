@@ -8,7 +8,7 @@
 <title>适配器模式 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;, 设计模式" />
 <meta name="description" content="有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式
-class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &lt;&lt; endl; } }; class TargetInterface{ public: virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public: MyAdaptor(int param):param(param){} void operator()(int v){ print(v, param); } private: MyPrint print; int param; }; MyAdaptor myBind2nd(int v){ return MyAdaptor(v); } int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v.push_back(i); } for_each(v.begin(), v.">
+class MyPrint{ public:  void operator()(int a, int b){  cout &lt;&lt; a &#43; b &lt;&lt; endl;  } }; class TargetInterface{ public:  virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public:  MyAdaptor(int param):param(param){}  void operator()(int v){  print(v, param);  } private:  MyPrint print;  int param; }; MyAdaptor myBind2nd(int v){  return MyAdaptor(v); } int main() {  vector&lt;int&gt; v;  for(int i = 0; i &lt; 10; &#43;&#43;i){  v.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -17,7 +17,7 @@ class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &l
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="适配器模式" />
 <meta property="og:description" content="有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式
-class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &lt;&lt; endl; } }; class TargetInterface{ public: virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public: MyAdaptor(int param):param(param){} void operator()(int v){ print(v, param); } private: MyPrint print; int param; }; MyAdaptor myBind2nd(int v){ return MyAdaptor(v); } int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v.push_back(i); } for_each(v.begin(), v." />
+class MyPrint{ public:  void operator()(int a, int b){  cout &lt;&lt; a &#43; b &lt;&lt; endl;  } }; class TargetInterface{ public:  virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public:  MyAdaptor(int param):param(param){}  void operator()(int v){  print(v, param);  } private:  MyPrint print;  int param; }; MyAdaptor myBind2nd(int v){  return MyAdaptor(v); } int main() {  vector&lt;int&gt; v;  for(int i = 0; i &lt; 10; &#43;&#43;i){  v." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/110-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-01T16:07:36&#43;08:00" />
@@ -60,7 +60,7 @@ class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &l
 
 <meta name="twitter:title" content="适配器模式"/>
 <meta name="twitter:description" content="有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式
-class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &lt;&lt; endl; } }; class TargetInterface{ public: virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public: MyAdaptor(int param):param(param){} void operator()(int v){ print(v, param); } private: MyPrint print; int param; }; MyAdaptor myBind2nd(int v){ return MyAdaptor(v); } int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v.push_back(i); } for_each(v.begin(), v."/>
+class MyPrint{ public:  void operator()(int a, int b){  cout &lt;&lt; a &#43; b &lt;&lt; endl;  } }; class TargetInterface{ public:  virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public:  MyAdaptor(int param):param(param){}  void operator()(int v){  print(v, param);  } private:  MyPrint print;  int param; }; MyAdaptor myBind2nd(int v){  return MyAdaptor(v); } int main() {  vector&lt;int&gt; v;  for(int i = 0; i &lt; 10; &#43;&#43;i){  v."/>
 
 
 <script type="application/ld+json">
@@ -89,11 +89,11 @@ class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &l
   "@type": "BlogPosting",
   "headline": "适配器模式",
   "name": "适配器模式",
-  "description": "有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式\nclass MyPrint{ public: void operator()(int a, int b){ cout \u0026lt;\u0026lt; a + b \u0026lt;\u0026lt; endl; } }; class TargetInterface{ public: virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public: MyAdaptor(int param):param(param){} void operator()(int v){ print(v, param); } private: MyPrint print; int param; }; MyAdaptor myBind2nd(int v){ return MyAdaptor(v); } int main() { vector\u0026lt;int\u0026gt; v; for(int i = 0; i \u0026lt; 10; ++i){ v.push_back(i); } for_each(v.begin(), v.",
+  "description": "有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式\nclass MyPrint{ public:  void operator()(int a, int b){  cout \u0026lt;\u0026lt; a + b \u0026lt;\u0026lt; endl;  } }; class TargetInterface{ public:  virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public:  MyAdaptor(int param):param(param){}  void operator()(int v){  print(v, param);  } private:  MyPrint print;  int param; }; MyAdaptor myBind2nd(int v){  return MyAdaptor(v); } int main() {  vector\u0026lt;int\u0026gt; v;  for(int i = 0; i \u0026lt; 10; ++i){  v.",
   "keywords": [
     "C++", "设计模式"
   ],
-  "articleBody": "有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式\nclass MyPrint{ public: void operator()(int a, int b){ cout  a + b  endl; } }; class TargetInterface{ public: virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public: MyAdaptor(int param):param(param){} void operator()(int v){ print(v, param); } private: MyPrint print; int param; }; MyAdaptor myBind2nd(int v){ return MyAdaptor(v); } int main() { vectorint v; for(int i = 0; i  10; ++i){ v.push_back(i); } for_each(v.begin(), v.end(), myBind2nd(10)); return 0; } ",
+  "articleBody": "有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式\nclass MyPrint{ public:  void operator()(int a, int b){  cout  a + b  endl;  } }; class TargetInterface{ public:  virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public:  MyAdaptor(int param):param(param){}  void operator()(int v){  print(v, param);  } private:  MyPrint print;  int param; }; MyAdaptor myBind2nd(int v){  return MyAdaptor(v); } int main() {  vectorint v;  for(int i = 0; i  10; ++i){  v.push_back(i);  }  for_each(v.begin(), v.end(), myBind2nd(10));  return 0; } ",
   "wordCount" : "75",
   "inLanguage": "en",
   "datePublished": "2022-02-01T16:07:36+08:00",
@@ -197,39 +197,39 @@ class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &l
   </header> 
 
   <div class="post-content"><p>有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyPrint</span>{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
-        cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">+</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TargetInterface</span>{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span> v) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyAdaptor</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> TargetInterface{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    MyAdaptor(<span style="color:#66d9ef">int</span> param)<span style="color:#f92672">:</span>param(param){}
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> v){
-        print(v, param);
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    MyPrint print;
-    <span style="color:#66d9ef">int</span> param;
-};
-MyAdaptor <span style="color:#a6e22e">myBind2nd</span>(<span style="color:#66d9ef">int</span> v){
-    <span style="color:#66d9ef">return</span> MyAdaptor(v);
-}
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v;
-    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>i){
-        v.push_back(i);
-    }
-    for_each(v.begin(), v.end(), myBind2nd(<span style="color:#ae81ff">10</span>));
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyPrint</span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">+</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TargetInterface</span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span> v) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyAdaptor</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> TargetInterface{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    MyAdaptor(<span style="color:#66d9ef">int</span> param)<span style="color:#f92672">:</span>param(param){}
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">operator</span>()(<span style="color:#66d9ef">int</span> v){
+</span></span><span style="display:flex;"><span>        print(v, param);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    MyPrint print;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> param;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>MyAdaptor <span style="color:#a6e22e">myBind2nd</span>(<span style="color:#66d9ef">int</span> v){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> MyAdaptor(v);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>i){
+</span></span><span style="display:flex;"><span>        v.push_back(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    for_each(v.begin(), v.end(), myBind2nd(<span style="color:#ae81ff">10</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
 
   </div>
 

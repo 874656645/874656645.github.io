@@ -145,71 +145,75 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>fork Unix
+    <h2>定义一个只能在堆上（栈上）生成对象的类
     </h2>
   </header>
   <section class="entry-content">
-    <p>Unix 的 fork 函数 fork函数可以创建一个和当前映像一样的子进程，这个函数会返回两个值：从子进程返回0，从父进程返回子进程的PID；
- 1）在父进程中，fork返回新创建子进程的进程ID； 2）在子进程中，fork返回0； 3）如果出现错误，fork返回一个负值；  #include &lt;iostream&gt;#include &lt;unistd.h&gt; using namespace std; int main() { pid_t fpid; //fpid表示fork函数返回的值  int count = 0; cout &lt;&lt; &amp;count &lt;&lt; endl; fpid = fork(); if (fpid &lt; 0) printf(&#34;error in fork!\n&#34;); else if (fpid == 0) { printf(&#34;i am the child process, my process id is %d\n&#34;,getpid()); cout &lt;&lt; &amp;count &lt;&lt; endl; count&#43;&#43;; } else { printf(&#34;i am the parent process, my process id is %d\n&#34;,getpid()); cout &lt;&lt; &amp;count &lt;&lt; endl; count&#43;&#43;; } printf(&#34;统计结果是: %d\n&#34;,count); return 0; } 输出：...</p>
+    <p>一、只能在堆上 方法：将析构函数设置为私有
+原因：C&#43;&#43; 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象
+class Test { public:  void printT(){  cout &lt;&lt; &#34;printT&#34; &lt;&lt; endl;  }   void freeT(){  delete this;  }  private:  ~Test(){  cout &lt;&lt; &#34;~Test()&#34; &lt;&lt; endl;  } }; int main( ) {  // 不能在栈上创建对象  //Test t; // prog.cc:25:10: error: variable of type &#39;Test&#39; has private destructor  // 只能在堆上创建对象  Test *t = new Test;  t-&gt;printT();  // 销毁对象  t-&gt;freeT();  return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-23 10:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to fork Unix" href="https://874656645.github.io/posts/33-fork-unix/"></a>
+  <footer class="entry-footer"><span title='2021-12-27 17:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 定义一个只能在堆上（栈上）生成对象的类" href="https://874656645.github.io/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C 与 C&#43;&#43; 的差异
+    <h2>抽象类、接口类、聚合类
     </h2>
   </header>
   <section class="entry-content">
-    <p>C&#43;&#43; 是 C 的超集和增强，校验更加严格
-C 主要是面向过程，C&#43;&#43; 是面向对象，面向过程是函数驱动，面向对象是对象驱动
-1 新增命名空间  给{}作用域起了个名称，后面不用加分号; 命名空间可以嵌套  namespace X { namespace Y { } } 2 新增引用类型  引用在一定程度上可以替代指针，作用与常指针类似 int * const a 引用没有定义，是一种关系声明，声明它和原有某一变量（实体）的关系，
-故而类型与原类型保持一致，且不分配内存，与被引用的变量有相同的地址 声明时必须初始化，一经声明，不可变更 可对引用再次引用，多次引用的结果是某一变量具有多个别名 &amp; 符号在 = 号左边是引用，在 = 号右边为取地址  3 枚举检测增强  不能将整型隐式转化为枚举  4 变量定义增强  C&#43;&#43; 变量不必都声明在函数顶部，可以随使用随定义  5 全局变量定义检测严格  C 全局变量重复定义，C&#43;&#43; 不可以，全局变量检测增强  // C 语言 int g_val; // bss段 int g_val = 10; // data段 6 函数形参个数和函数返回值检测增强 // C 语言 f() // 默认返回值 int { return 10; } int g(int a) { return 10; } // 调用 g(10, 20, 30, 40); // 可编译通过，但是有警告 7 struct 结构体增强  功能与类基本等同，只不过 class 默认是 private 权限，struct 默认是 public 权限  // C 语言声明结构体变量 struct Student s; // C&#43;&#43; 语言声明结构体变量 Student s; 8 新增 bool 关键字，1 个字节  C 用 0 表示 false，非 0 表示 true C&#43;&#43; 中 bool 为 1 个字节，但是只有 true 和 false 两个值  9 三目运算符增强（语法糖）  C 中三目运算符不可以当左值  // C 语言 int a = 10, b = 20; ((a &lt; b) ?...</p>
+    <p>抽象类：含有纯虚函数的类，不能实例化对象 接口类：仅含有纯虚函数的抽象类 聚合类：用户可以直接访问其成员，并且具有特殊的初始化语法形式。满足如下特点：
+1）所有成员都是 public，没有私有和受保护的非静态成员；
+2）没有定义任何构造函数；
+3）没有类内初始化；
+4）没有基类，也没有 virtual 函数  // 接口类 class A {  virtual void printA() = 0; // 纯虚函数 }; // 抽象类 class AA:public A { public:  // 覆写接口类的纯虚函数  void printA() override  {  cout &lt;&lt; &#34;class AA printA()&#34; &lt;&lt; endl;  }  virtual void printAA() = 0; }; // 可实例化的类 class B:public AA { public:  // 覆写父类（抽象类）的纯虚函数  void printAA() override  {  cout &lt;&lt; &#34;class B printAA()&#34; &lt;&lt; endl;  }  void printB()  {  cout &lt;&lt; &#34;printB()&#34; &lt;&lt; endl;  } }; // 聚合类 class C { public:  int x;  int y;  void print(){  cc();  }  private:  void cc(){  cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; &#34;, y = &#34; &lt;&lt; y &lt;&lt; &#34;, z = &#34; &lt;&lt; z &lt;&lt; endl;  }  static int z; }; int C::z = 0; class D { public:  int a;  int b;  C c;   void print(){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; &#34;, b = &#34; &lt;&lt; b &lt;&lt; endl;  c....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-22 22:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C 与 C&#43;&#43; 的差异" href="https://874656645.github.io/posts/32-c-%E4%B8%8E-c&#43;&#43;-%E7%9A%84%E5%B7%AE%E5%BC%82/"></a>
+  <footer class="entry-footer"><span title='2021-12-27 16:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 抽象类、接口类、聚合类" href="https://874656645.github.io/posts/45-%E6%8A%BD%E8%B1%A1%E7%B1%BB%E6%8E%A5%E5%8F%A3%E7%B1%BB%E8%81%9A%E5%90%88%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>函数形参从右到左入栈
+    <h2>虚继承和虚基类
     </h2>
   </header>
   <section class="entry-content">
-    <p>int add(int count, ...) { // 指针大小与程序位数有关（32位指针是4个字节，64位指针是8个字节）  int intSize = sizeof(int*) / sizeof(int); int sum = 0; // cout &lt;&lt; &amp;count &lt;&lt; endl;  int *p = &amp;count &#43; intSize; // cout &lt;&lt; p &lt;&lt; endl;  for (int i = 0; i &lt; count; &#43;&#43;i) { sum &#43;= *p; cout &lt;&lt; *p &lt;&lt; endl; p &#43;= intSize; } return sum; } int main() { cout &lt;&lt; add(3, 1, 2, 3) &lt;&lt; endl; return 0; } 输出：...</p>
+    <p>虚继承和虚基类 参考
+ 在C&#43;&#43;中，在定义公共基类A的派生类B、C…的时候，如果在继承方式前使用关键字virtual对继承方式限定，这样的继承方式就是虚拟继承，公共基类A成为虚基类。这样，在具有公共基类的、使用了虚拟继承方式的多个派生类B、C…的公共派生类D中，该基类A的成员就只有一份拷贝 一个类有多个基类，这样的继承关系称为多继承。在多继承的情况下，如果不同基类的成员名称相同，匹配度相同, 则会造成二义性。为了避免多继承产生的二义性，在这种机制下，不论虚基类在继承体系中出现了多少次，在派生类中都只包含一份虚基类的成员。 会在虚继承的类中生成一个指向虚基类的指针 {vbptr} 会在内存中生成一个虚基类表 D::$vbtable@B@  微软的Visual Studio提供给用户显示C&#43;&#43;对象在内存中的布局的选项
+cl [filename].cpp /d1 reportSingleClassLayout[className]
+一般继承：
+class A { public:  int dataA; }; class B:public A { public:  int dataB; }; class C:public A { public:  int dataC; }; class D : public B, public C { public:  int dataD; }; 输出：
+class D size(20):  &#43;---  0 | &#43;--- (base class B)  0 | | &#43;--- (base class A)  0 | | | dataA  | | &#43;---  4 | | dataB  | &#43;---  8 | &#43;--- (base class C)  8 | | &#43;--- (base class A)  8 | | | dataA  | | &#43;--- 12 | | dataC  | &#43;--- 16 | dataD  &#43;--- 调用：...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数形参从右到左入栈" href="https://874656645.github.io/posts/31-%E5%87%BD%E6%95%B0%E5%BD%A2%E5%8F%82%E4%BB%8E%E5%8F%B3%E5%88%B0%E5%B7%A6%E5%85%A5%E6%A0%88/"></a>
+  <footer class="entry-footer"><span title='2021-12-27 13:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 虚继承和虚基类" href="https://874656645.github.io/posts/44-%E8%99%9A%E7%BB%A7%E6%89%BF%E5%92%8C%E8%99%9A%E5%9F%BA%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>指针 &#43; 1
+    <h2>多态总结
     </h2>
   </header>
   <section class="entry-content">
-    <p>1. 32 位和 64 位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
-2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
-int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]；  // &amp;a&#43;1不是首地址&#43;1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）  // 但是prt与(&amp;a&#43;1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int)  int *ptr = (int*)(&amp;a &#43; 1); cout &lt;&lt; *(a &#43; 1) &lt;&lt; endl; cout &lt;&lt; *(ptr - 1) &lt;&lt; endl; return 0; } 输出：
-2 5 注： a，&amp;a的地址是一样的，但意思不一样：
- a是数组首地址，也就是a[0]的地址，a&#43;1是数组下一元素的地址，即a[1] &amp;a是对象（整个数组作为一个对象）首地址，而&amp;a&#43;1是下一个对象的地址，即a[5].  </p>
+    <p>1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public:  virtual ~Shape(){  cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl;  } }; class Point { public:  ~Point(){  cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl;  } private:  int m_x{0};  int m_y{0};  char m_c; }; class Circle : public Shape { public:  ~Circle(){  cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl;  } private:  Point m_p; }; int main( ) {  // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl;  // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl;  // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl;   Circle c;  return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类...</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-22 15:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 指针 &#43; 1" href="https://874656645.github.io/posts/30-%E6%8C%87%E9%92%88-&#43;1/"></a>
+  <footer class="entry-footer"><span title='2021-12-27 10:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 多态总结" href="https://874656645.github.io/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>模板类
+    <h2>函数默认参数和占位参数
     </h2>
   </header>
   <section class="entry-content">
-    <p>template&lt;class T&gt; class Test { public: Test(T t){ m_t = t;}; // explicit Test(T t){ m_t = t;};  T getValue(){ return m_t; }; private: T m_t; }; int main() { Test&lt;int&gt; tInt(1); cout &lt;&lt; tInt.getValue() &lt;&lt; endl; Test&lt;double&gt; tD(1.15); cout &lt;&lt; tD.getValue() &lt;&lt; endl; Test&lt;float&gt; tF = 1.3f; // 构造函数没有explicit修饰，可以隐式转换  cout &lt;&lt; tF.getValue() &lt;&lt; endl; return 0; } 输出：
-Start 1 1.15 1.3 0 Finish </p>
+    <p>1. 函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
+// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() {  foo(20);  return 0; } 2. 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
+int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    3....</p>
   </section>
-  <footer class="entry-footer"><span title='2021-12-22 10:34:27 +0800 CST'>December 22, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板类" href="https://874656645.github.io/posts/29-%E6%A8%A1%E6%9D%BF%E7%B1%BB/"></a>
+  <footer class="entry-footer"><span title='2021-12-26 15:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数默认参数和占位参数" href="https://874656645.github.io/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

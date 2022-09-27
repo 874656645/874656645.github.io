@@ -160,64 +160,72 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>评委打分案例
+    <h2>函数对象适配器
     </h2>
   </header>
   <section class="entry-content">
-    <p>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
-分析：
- 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed....</p>
+    <p>仿函数适配器 bind1st、bind2nd 将二元仿函数转为一元仿函数
+  仿函数适配器 not1、not2
+  仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了
+  仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器
+  class MyPrint : public binary_function&lt;int, int, void&gt;{ public:  void operator()(int v, int val) const{  cout &lt;&lt; &#34;v: &#34; &lt;&lt; v &lt;&lt; &#34;, val: &#34; &lt;&lt; val &lt;&lt; &#34;, v &#43; val: &#34; &lt;&lt; v &#43; val &lt;&lt; endl;  } }; void myPrint(int v, int val){  cout &lt;&lt; v &#43; val &lt;&lt; &#34; &#34;; } class MySort: public binary_function&lt;int, int, bool&gt;{ public:  bool operator() (int lhs, int rhs)const{  return lhs &gt; rhs;  } }; class MyGreater: public unary_function&lt;int, bool&gt;{ public:  bool operator()(int v)const{  return v &gt; 50;  } };  void printVec(const vector&lt;int&gt; &amp;v){  for(const auto &amp;p : v){  cout &lt;&lt; p &lt;&lt; &#34; &#34;;  }  cout &lt;&lt; endl; } class Person{ public:  Person(int id, int age):id(id), age(age){}  void show(){  cout &lt;&lt; &#34;id: &#34; &lt;&lt; id &lt;&lt; &#34;, age: &#34; &lt;&lt; age &lt;&lt; endl;  }  int id;  int age; }; int main(){   vector&lt;int&gt; v;  for(int i = 0; i &lt; 10; &#43;&#43;i){  v....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-27 21:55:47 +0800 CST'>January 27, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数对象适配器" href="https://874656645.github.io/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>生成随机数
+    <h2>C&#43;&#43; 沉思录笔记
     </h2>
   </header>
   <section class="entry-content">
-    <p>#include &lt;ctime&gt;using namespace std; int main() { srand((unsigned int)time(NULL)); cout &lt;&lt; rand() % 40 &lt;&lt; endl; return 0; } </p>
+    <p>有的情况下，现在的折衷方案比未来的理想方案好得多
+  我考虑问题的本质是什么，再定义一个类抓住这个本质，并确保这个类能独立地工作。然后在遇到符合这个本质的问题时就使用这个类。
+  只要类定义正确，我就只能按照我编写它的初衷那样去用它。
+  C&#43;&#43; 哲学：抽象，实用，只为用到的东西付出代价。
+  类设计者的核查表：
+ 你的类需要一个构造函数吗？ 你的数据成员是私有的吗？（使用函数，可以延迟计算，不必时时计算，保证数据成员的准确性） 你的类需要一个无参的构造函数吗？（对象数组） 是不是每个构造函数初始化所有的数据成员？ 类需要析构函数吗？ 类需要一个虚析构函数吗？ 你的类需要复制构造函数吗？（是否需要深拷贝） 你的类需要一个赋值操作符吗？ 你的赋值操作符能正确地将对象赋给对象本身吗？ 你的类需要定义关系操作符吗？ 删除数组时你记住了用 delete[] 吗？ 记得在复制构造函数和赋值操作符的参数类型中加上 const 了吗？ 如果函数有引用参数，它们应该是 const 引用吗？ 记得适当地声明成员函数为 const 的了吗？    代理类：用类来表示概念（RAII）
+class Vehicle{ public:  virtual double weight() = 0;  virtual void start() = 0;  virtual Vehicle* copy() const = 0;  virtual ~Vehicle(){} }; class RoadVehicle: public Vehicle{  /* ....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-01-26 17:48:58 +0800 CST'>January 26, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 沉思录笔记" href="https://874656645.github.io/posts/95-c&#43;&#43;-%E6%B2%89%E6%80%9D%E5%BD%95%E7%AC%94%E8%AE%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>deque 容器
+    <h2>机房预约系统案例
     </h2>
   </header>
   <section class="entry-content">
-    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
+  <footer class="entry-footer"><span title='2022-01-24 20:53:57 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 机房预约系统案例" href="https://874656645.github.io/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>巧妙收缩 vector 空间
+    <h2>switch 与 if Else 区别
     </h2>
   </header>
   <section class="entry-content">
-    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 100000; &#43;&#43;i){ v.push_back(i); } cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; v.resize(10); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; vector&lt;int&gt;(v).swap(v); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v....</p>
+    <p> while 循环中的 switch, break 只能中断 switch，不能中断 while 循环  void managerMenue(){  while(true){  cout &lt;&lt; &#34;这是子菜单&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;是否返回主菜单？&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;1 是&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;2 否&#34; &lt;&lt; endl;  int i = 0;  cin &gt;&gt; i;  switch(i){  case 1:  break;  case 2:  return;  default:  break;  }  // if(i == 1){  // // system(&#34;reset&#34;);  // break;  // }  // else if(i == 2){  // return;  // }  // else{  // cout &lt;&lt; &#34;输入有误，请重新输入&#34; &lt;&lt; endl;  // }  }  cout &lt;&lt; &#34;这是子菜单循环外代码&#34; &lt;&lt; endl; }  int main() {  while(true){  cout &lt;&lt; &#34;欢迎登陆！&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;这是主菜单&#34; &lt;&lt; endl;  cout &lt;&lt; &#34;请输入选项：&#34; &lt;&lt; endl;  int i = 0;  cin &gt;&gt; i;  // switch(i)  // {  // case 1:  // system(&#34;reset&#34;);  // managerMenue();  // break;  // case 2:  // break;  // }  if(i == 1){  // system(&#34;reset&#34;);  managerMenue();  // break;  }  else{  break;  }  cout &lt;&lt; &#34;switch 外代码&#34; &lt;&lt; endl;  }   cout &lt;&lt; &#34;while 外代码&#34; &lt;&lt; endl;   return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
+  <footer class="entry-footer"><span title='2022-01-24 20:01:08 +0800 CST'>January 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to switch 与 if Else 区别" href="https://874656645.github.io/posts/93-switch-%E4%B8%8E-if-else-%E5%8C%BA%E5%88%AB/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>vector 中的元素存放在堆上还是栈上
+    <h2>演讲比赛流程管理案例
     </h2>
   </header>
   <section class="entry-content">
-    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete()....</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-16 15:50:29 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to vector 中的元素存放在堆上还是栈上" href="https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"></a>
+  <footer class="entry-footer"><span title='2022-01-22 17:21:43 +0800 CST'>January 22, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 演讲比赛流程管理案例" href="https://874656645.github.io/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

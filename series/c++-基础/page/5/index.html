@@ -145,73 +145,68 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>实现一个简单的字符串类
+    <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
     </h2>
   </header>
   <section class="entry-content">
-    <p>MyString.h
-#ifndef __MYSTRING_H_ #define __MYSTRING_H_  #include &lt;stdlib.h&gt;#include &lt;iostream&gt;#include &lt;cstring&gt; using namespace std; class MyString { // 重载 &lt;&lt;  // 最好是 const 的，可以输出匿名变量（匿名变量不能被非 const 的左值引用接收）  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, const MyString &amp;s); // 重载 &gt;&gt;  friend istream&amp; operator&gt;&gt;(istream &amp;is, MyString &amp;s); private: // 字符串的有效长度  int m_len; // 字符串指针  char* m_pStr; public: MyString(); MyString(const char *); MyString(const MyString &amp;); ~MyString(); // 重载 =  MyString&amp; operator=(const MyString &amp;); // 重载 []  char&amp; operator[](int index); // 重载 &#43;  MyString operator&#43;(const MyString &amp;); // 重载 &#43;=  MyString&amp; operator&#43;=(const MyString &amp;); // 重载 ==  bool operator==(const MyString &amp;); // 重载 !...</p>
+    <p> volatile 和 const 修饰的变量说明该变量在本程序内不应被修改，但其它程序是可以修改的 volatile 修饰变量，告诉编译器不要优化该变量，每次取值都重新从内存中获取 constexpr 和 inline 修饰的变量，编译器都会进行编译期优化 当对 inline 修饰变量进行取地址操作时，优化会失效 inline 修饰函数相当于 static，只能在当前文件中访问 inline 修饰的变量可以用任意表达式初始化，但这样不保证被优化 inline 其它介绍 static 限制修饰的变量和函数的可见作用域（模块内部），其它的都是副本  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-08 14:01:27 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 实现一个简单的字符串类" href="https://874656645.github.io/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/"></a>
+  <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>静态数组初始化
+    <h2>C&#43;&#43; 杂记
     </h2>
   </header>
   <section class="entry-content">
-    <p>1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto &amp; i : da){ cout &lt;&lt; i &lt;&lt; endl; } return 0; } 输出：
-6.95128e-310 4.63759e-310 0 2. C&#43;&#43; 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() { int arr[10]; cout &lt;&lt; arr &lt;&lt; endl; cout &lt;&lt; arr &#43; 1 &lt;&lt; endl; cout &lt;&lt; &#34;----------&#34; &lt;&lt; endl; cout &lt;&lt; &amp;arr &lt;&lt; endl; cout &lt;&lt; &amp;arr &#43; 1 &lt;&lt; endl; return 0; } 输出：...</p>
+    <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { 	std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 	{ 	extern int etn; 	int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-08 13:50:12 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 静态数组初始化" href="https://874656645.github.io/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
+  <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>自定义智能指针
+    <h2>main 函数执行完后所执行的代码
     </h2>
   </header>
   <section class="entry-content">
-    <p>使用模板类 重载 -&gt; 操作符 重载 * 操作符  template&lt;typename T&gt; class MyAutoPtr{ public: MyAutoPtr(T * t){ ptr = t; } ~MyAutoPtr(){ if(ptr != NULL){ delete ptr; ptr = NULL; } } T* operator-&gt;(){ // 相当于 ptr-&gt; , 所以返回 ptr 指针即可，将所有操作转发给真正的指针变量  return ptr; } T&amp; operator*(){ // 相当于 (*ptr) ，所以返回 ptr 指向的对象引用即可  return *ptr; } private: T* ptr; }; class A{ public: A(int a){ cout &lt;&lt; &#34;A(int)...&#34; &lt;&lt; endl; this-&gt;a = a; } ~A(){ cout &lt;&lt; &#34;~A()....</p>
+    <p> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &lt;&lt; &#34;after main exit.\n&#34;;  cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() {  cout &lt;&lt; &#34;Hello World\n&#34;;  on_exit(f, (char*)&#34;this is message&#34;);  cout &lt;&lt; &#34;end of main.\n&#34;;  return 0; } 输出：
+Hello World end of main. after main exit. state: 0	message: this is message </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-04 21:07:15 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 自定义智能指针" href="https://874656645.github.io/posts/62-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88/"></a>
+  <footer class="entry-footer"><span title='2022-05-12 16:02:52 +0800 CST'>May 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to main 函数执行完后所执行的代码" href="https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>临时变量不能绑定 no-const 左值引用类型
+    <h2>大端、小端字节序
     </h2>
   </header>
   <section class="entry-content">
-    <p>error: cannot bind non-const lvalue reference of type ‘T&amp;’ to an rvalue of type ‘T’
-如果一个参数是以非 const 引用传入，c&#43;&#43; 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。
-但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。
-所以，修改一个临时变量是毫无意义的。据此，c&#43;&#43; 编译器加入了临时变量不能作为非 const 引用的这个语义限制。
-c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数
-std::move() 返回的也是一个右值
-对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
-一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
-class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt;a &#43; t.a; return temp; } void printT(T &amp;t){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; t....</p>
+    <p>一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
+  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
+ 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
+            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-04 10:31:45 +0800 CST'>January 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 临时变量不能绑定 no-const 左值引用类型" href="https://874656645.github.io/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-04-21 16:04:58 +0800 CST'>April 21, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 大端、小端字节序" href="https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>操作符重载
+    <h2>const_cast
     </h2>
   </header>
   <section class="entry-content">
-    <p>还有类型转换函数
-#include &lt;iostream&gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c); friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public: Complex(){ cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &lt;&lt; &#34;Complex(int, int)...&#34; &lt;&lt; endl; this-&gt;a = a; this-&gt;b = b; } ~Complex(){ cout &lt;&lt; &#34;~Complex()....</p>
+    <p>函数指针和成员函数指针无法用于 const_cast const_cast 使得指向非 const 类型的 const 引用或指针能够被修改 通过 const_cast 修改 const 对象是未定义的行为  struct type {  int i;   type(): i(3) {}   void f(int v) const  {  // this-&gt;i = v; // compile error: this is a pointer to const  const_cast&lt;type*&gt;(this)-&gt;i = v; // OK as long as the type object isn&#39;t const  } };  int main() {  int i = 3; // i is not declared const  const int&amp; rci = i; // const reference  const_cast&lt;int&amp;&gt;(rci) = 4; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;;   const int* pci = &amp;i;  // *pci = 5; // error: assignment of read-only location ‘* pci’  *const_cast&lt;int*&gt;(pci) = 5; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;;   type t; // if this was const type t, then t....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-03 13:54:11 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 操作符重载" href="https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
+  <footer class="entry-footer"><span title='2022-04-11 17:51:55 +0800 CST'>April 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to const_cast" href="https://874656645.github.io/posts/172-const_cast/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

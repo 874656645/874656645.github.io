@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,101 +157,68 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Compile FFmpeg on CentOS
+    <h2>C&#43;&#43;——作用域和可访问性
     </h2>
   </header>
   <section class="entry-content">
-    <p>0. 编译的版本  ffmpeg-4.4 nasm-2.14.02 yasm-1.3.0 H.264 H.265 fdk-aac-2.0.0  1. Get the Dependencies   需要 superuser 或者 root 用户
-# yum install autoconf automake bzip2 bzip2-devel cmake freetype-devel gcc gcc-c&#43;&#43; git libtool make pkgconfig zlib-devel
-  新建 ffmpeg_sources 文件夹，把需要的源代码都放到这个文件夹中
-mkdir ~/ffmpeg_sources
-  新建 ffmpeg_build 文件夹，把构建的项目文件都放到这个文件夹中
-mkdir ~/ffmpeg_build
-  新建 bin 文件夹，把编译生成的文件都放到这个文件夹中
-mkdir ~/bin
-  2. Install NASM assembler 一些库使用的汇编程序。强烈建议这样做，否则构建可能会非常缓慢。
-cd ~/ffmpeg_sources curl -O -L https://www....</p>
+    <p>一、 命名空间   嵌套命名空间
+namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){  cout &lt;&lt; &#34;B::C::g(long)\n&#34;;  }  }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{  int y = 1;  int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;;  }  void g(void){  cout &lt;&lt; &#34;B::C::g(void)\n&#34;;  } };  static int xx = 1;  class A{ public:  int xx;  A(int xx){  A::xx = xx;  } }; int main() {  static int xx = 2;  A a(3);  cout &lt;&lt; a....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-08-15 14:55:49 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Compile FFmpeg on CentOS" href="https://874656645.github.io/posts/220-compile-ffmpeg-on-centos/"></a>
+  <footer class="entry-footer"><span title='2022-09-09 17:35:34 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——作用域和可访问性" href="https://874656645.github.io/posts/233-c&#43;&#43;-%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Unreal——使用蓝图获取 uasset 资源
+    <h2>GIS——Global Mapper 使用
     </h2>
   </header>
   <section class="entry-content">
-    <p>方法一：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按路径获取资产（Get Asset by Path） 获取路径下的所有类型资产；
-  通过 获取完整名称（GetFullName） &#43; 包含（Contains） 筛选需要的资产；
-  通过 获取资产（GetAsset） 获取资产对象
-  资产对象的属性：
-  方法二：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按对象路径获取资产（Get Asset by Object Path） 直接获取想要的资产对象；
-  再通过 获取资产（GetAsset） &#43; cast 将资产对象转换为需要的对象类型；
-  注意：资产路径的格式：
- map : World&#39;/Game/Maps/NewWorld.NewWorld&#39; 蓝图类 : 要加 _C 例如 Blueprint&#39;/Game/Blueprints/MySpringArmPawn.MySpringArmPawn_C&#39;  参考：
- UE4 | BP | 使用蓝图获取Uasset资源 关于UE4动态资源加载(蓝图类)  </p>
+    <p>  【File】-&gt;【Create New Map Catalog】
+  Export
+  导出灰度图
+ 关闭【地图渲晕（Disable Hill Shading）】，默认是开启状态，关闭后，并使用【梯度渲染（Gradient Shader）】   导出 PNG 设置    </p>
   </section>
-  <footer class="entry-footer"><span title='2022-08-11 17:40:41 +0800 CST'>August 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——使用蓝图获取 uasset 资源" href="https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/"></a>
+  <footer class="entry-footer"><span title='2022-09-09 11:44:36 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to GIS——Global Mapper 使用" href="https://874656645.github.io/posts/232-gis-global-mapper-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Unreal——蓝图接口
+    <h2>C&#43;&#43;——父类与子类、基类与派生类
     </h2>
   </header>
   <section class="entry-content">
-    <p>  蓝图接口（Blueprint Interface） 是一个或多个函数的集合——只有名称，没有实现。
-  由于接口函数没有实现，作为设计人员，所能做的就是指定一系列类型化输入和输出。
-  蓝图接口也有一定的局限性：
- 不能包含变量 不能编辑图表 不能添加组件    其他蓝图类 Actor 实现蓝图接口：
-在 类设置 中添加接口
-  参考：
- 蓝图接口 【教程】UE4中接口的使用–蓝图篇（一）  </p>
+    <p>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;&amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  class A { 	int x, y; public: 	virtual ~A() { 	cout &lt;&lt; &#34;~A()\n&#34;; 	} 	int getx() { 	return x; 	} 	virtual int vf() const { 	return 1; 	} protected: 	int gety() { 	return y; 	} }; class B : protected A {  friend int main(); 	bool visible; public: 	~B() { 	cout &lt;&lt; &#34;~B()\n&#34;; 	} 	using A::gety;  	A* getFather(){ 	return this; 	}  private: 	virtual int vf() const { 	// 子类内部不受继承方式的影响 	const A *pa = this; // 将子类指针赋值给父类指针 	const A&amp; ra = *this; // 将父类引用指向子类对象 	A a = *this; // 将子类对象赋值给父类对象 	// 父类对象 a 生命期在函数结束后结束 	// 输出：~A() 	cout &lt;&lt; &#34;in B::vf() A::vf()：&#34; &lt;&lt; A::vf() &lt;&lt; endl; 	cout &lt;&lt; &#34;in B::vf() a....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-08-10 11:27:36 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——蓝图接口" href="https://874656645.github.io/posts/218-unreal-%E8%93%9D%E5%9B%BE%E6%8E%A5%E5%8F%A3/"></a>
+  <footer class="entry-footer"><span title='2022-09-06 22:28:34 +0800 CST'>September 6, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——父类与子类、基类与派生类" href="https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Unreal——Actor 蓝图类
+    <h2>C&#43;&#43;——派生类修改基类成员的访问权限
     </h2>
   </header>
   <section class="entry-content">
-    <p>  所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。
-  Actor支持三维变换，例如平移、旋转和缩放。
-  可以通过游戏逻辑代码（C&#43;&#43;或蓝图）创建（在蓝图中使用 从类生成Actor 节点）或 销毁Actor。
-  每一个 Actor 均有一个 DefaultSceneRoot 组件，它是默认情况下的场景组件（SceneComponent），该组件不支持可视化，在场景中是看不到的，也不可分配网格，只是 Actor 的默认场景根。
-  Actor 必须有一个默认场景根。可以使用其他的组件替换默认场景根，但是只要删除所有的其他组件，场景默认根（DefaultSceneRoot）就会自动显示，这个变量名是系统保留，不能用来命名他组件。
-  当设置Actor的位置、旋转、缩放时，同时也在设置默认场景根的位置、旋转、缩放。
-  注意：
- Actor 不直接保存变换（位置、旋转和缩放）数据，只是一个可以挂载Component的类而已 在某种意义上，Actor 可被视为包含特殊类型 对象（称作组件 Component）的容器 如果 Actor 的根组件存在，则使用它的变换数据    参考：
- Actors UE4-Actor  </p>
+    <p>案例一：
+class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety;	// deprecated }; 案例二：
+class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	this-&gt;v = v; 	next = n; 	} 	~Node() { 	cout &lt;&lt; &#34;~Node()\n&#34;; 	delete next; 	next = nullptr; 	} 	} *head; public: 	MyList() { 	head = nullptr; 	} 	~MyList() { 	if (head !...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-08-10 11:23:12 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——Actor 蓝图类" href="https://874656645.github.io/posts/217-unreal-actor-%E8%93%9D%E5%9B%BE%E7%B1%BB/"></a>
+  <footer class="entry-footer"><span title='2022-09-04 20:45:58 +0800 CST'>September 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——派生类修改基类成员的访问权限" href="https://874656645.github.io/posts/230-c&#43;&#43;-%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%BF%AE%E6%94%B9%E5%9F%BA%E7%B1%BB%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Unreal——通用基类（Actor、Pawn、Character等）
+    <h2>C&#43;&#43;——Const、volatile、mutable
     </h2>
   </header>
   <section class="entry-content">
-    <p>Actor
-  Actor 是可以放到关卡中的任何对象，例如摄像机、静态网格体或玩家出生点位置
-  Actor 支持 3D 变换，例如转换、旋转和缩放
-  Actor 在 UE 中是只是一个可以挂载 Component的类而已。所以，需要挂载组件的时候，才应该继承自 Actor 类。很多时候，写一个 Manager 或者一个 Data 又或者只是解析一个Config，只需要写一个 C&#43;&#43; 类就可以了
-  可以通过 gameplay 代码（C&#43;&#43; 或蓝图）创建（生成）或销毁 Actor，在蓝图中使用 从类生成Actor 节点，生成后就自动添加到场景中并能在场景中看到
-    Pawn
-Pawn 是 Actor 的子类，作为游戏内的形象或人像（例如游戏中的角色）。玩家或游戏的 AI 可以控制 Pawn，将其作为非玩家角色（NPC），可以理解为在游戏中的肉体。
-  Character
- 角色（Character） 是计划用作玩家角色的 Pawn Actor 的子类。角色子类包括碰撞设置、双足运动的输入绑定以及用于玩家控制动作的其他代码 相比于 Pawn 类，Character 类提供了一个Movement 组件，这个组件提供了角色移动基本逻辑功能，包括角色的移动和跳跃，还可以依据需求扩展出不同的移动状态，比如爬行、蹲伏 当对象逻辑简单、不需要过多的逻辑动作（比如方块、飞船）那么可以选择继承 Pawn 而不是继承 Character 类    Controller...</p>
+    <p> 含有私有 const 实例数据成员的类必须定义构造函数，且该实例数据成员必须通过构造函数参数列表初始化 虽然 this 是隐含参数，也可以通过添加 const、volatile 修饰符实现函数重载 成员变量的类型会随着对象实例的类型变化而变化，比如一个 volatile int 类型的成员变量，如果对象实例为 const 的，则此时成员变量的类型为 const volatile int 经实验，mutable 不可以和 static、const 一起使用，但可以与 volatile 搭配使用  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-08-10 10:02:42 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——通用基类（Actor、Pawn、Character等）" href="https://874656645.github.io/posts/216-unreal-%E9%80%9A%E7%94%A8%E5%9F%BA%E7%B1%BBactorpawncharacter%E7%AD%89/"></a>
+  <footer class="entry-footer"><span title='2022-09-03 19:54:33 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——Const、volatile、mutable" href="https://874656645.github.io/posts/229-c&#43;&#43;-constvolatilemutable/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

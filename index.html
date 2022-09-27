@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -194,66 +194,72 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——多继承与虚基类
+    <h2>C&#43;&#43;——计算最大和子矩阵问题
     </h2>
   </header>
   <section class="entry-content">
-    <p>案例一：
-class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A  } }; class C { public: C() { } }; class D : virtual public A, public C { public: D(int x) :A(x) { } }; class E : public B, public D { public: E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } }; int main(){ E e(0); //cout &lt;&lt; e....</p>
+    <p>描述：计算矩阵中，最大和的子矩阵，并输出最大的和
+测试用例一：最大和为 20， 最大子矩阵为后三列
+$$\begin{equation} \begin{bmatrix*}[c] -3 &amp; 5 &amp; -1 &amp; 5 \newline 2 &amp; 4 &amp; -2 &amp; 4 \newline -1 &amp; 3 &amp; -1 &amp; 3 \end{bmatrix*} \end{equation}$$
+测试用例二：最大和为 12， 最大子矩阵为最后一列
+$$\begin{equation} \begin{bmatrix*}[c] -3 &amp; 2 &amp; -1 &amp; 5 \newline 5 &amp; 4 &amp; -2 &amp; 4 \newline -1 &amp; 3 &amp; -1 &amp; 3 \end{bmatrix*} \end{equation}$$
+测试用例三：
+$$\begin{equation} \begin{bmatrix*}[c] 1 &amp; 2 &amp; 3 &amp; 4 \newline 5 &amp; 6 &amp; 7 &amp; 8 \newline 9 &amp; 10 &amp; 11 &amp; 12 \end{bmatrix*} \end{equation}$$...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-12 16:00:03 +0800 CST'>September 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——多继承与虚基类" href="https://874656645.github.io/posts/235-c&#43;&#43;-%E5%A4%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E8%99%9A%E5%9F%BA%E7%B1%BB/"></a>
+  <footer class="entry-footer"><span title='2022-09-27 18:42:52 +0800 CST'>September 27, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——计算最大和子矩阵问题" href="https://874656645.github.io/posts/248-c&#43;&#43;-%E8%AE%A1%E7%AE%97%E6%9C%80%E5%A4%A7%E5%92%8C%E7%9F%A9%E9%98%B5%E9%97%AE%E9%A2%98/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——虚函数表与多态（派生类内存布局）
+    <h2>C&#43;&#43;——旋转骰子问题
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &lt;&lt; &#34;Construct A\n&#34;; } virtual void d() { cout &lt;&lt; &#34;Deconstruct A\n&#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &lt;&lt; &#34;Construct B\n&#34;; } void d()override { cout &lt;&lt; &#34;Deconstruct B\n&#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 </p>
+    <p>方法一：使用字符串 注意 ：
+ 字符与字符相加返回的是一个整数 字符串与字符相加的问题：  可以使用 &#43; 号运算符，但其中一个操作数需要是 string 类型 如果需要连续相加多个字符，前两个操作数必须有一个是 string 类型的 可以使用 string.append 方法   控制台输入字符串的问题，如果直接使用 cin &gt;&gt; str，遇到空格和回车都会终止读取  例如：在字符串 s 后面添加 ‘a’、‘b’、‘c’ 三个字符
+参考C&#43;&#43; 运算符优先级
+string s; s = s &#43; &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 正确 s &#43;= &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 错误 s = &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39; &#43; s;	// 错误 int main(){  string LR = &#34;1625&#34;, FB = &#34;3645&#34;, AC = &#34;1324&#34;; 	string mov; 	getline(cin, mov); 	for (char c : mov) { 	string tmp = &#34;&#34;; 	switch (c) 	{ 	case &#39;L&#39;: 	case &#39;R&#39;: 	{ 	if (c == &#39;L&#39;) { 	// LR = tmp &#43; LR[3] &#43; LR[0] &#43; LR[1] &#43; LR[2]; 	LR = LR[3] &#43; string(LR, 0, 3); 	} 	else 	{ 	// LR = tmp &#43; LR[1] &#43; LR[2] &#43; LR[3] &#43; LR[0]; 	LR = string(LR, 1, 3) &#43; LR[0]; 	}  	// FB = tmp &#43; FB[0] &#43; LR[1] &#43; FB[2] &#43; LR[3]; 	FB[1] = LR[1]; 	FB[3] = LR[3]; 	// AC = tmp &#43; LR[0] &#43; AC[1] &#43; LR[2] &#43; AC[3]; 	AC[0] = LR[0]; 	AC[2] = LR[2]; 	break; 	} 	case &#39;F&#39;: 	case &#39;B&#39;: 	{ 	if (c == &#39;F&#39;) 	{ 	// FB = tmp &#43; FB[3] &#43; FB[0] &#43; FB[1] &#43; FB[2]; 	FB = FB[3] &#43; string(FB, 0, 3); 	} 	else 	{ 	// FB = tmp &#43; FB[1] &#43; FB[2] &#43; FB[3] &#43; FB[0]; 	FB = string(FB, 1, 3) &#43; FB[0]; 	} 	// LR = tmp &#43; LR[0] &#43; FB[1] &#43; LR[2] &#43; FB[3]; 	LR[1] = FB[1]; 	LR[3] = FB[3]; 	// AC = tmp &#43; AC[0] &#43; FB[0] &#43; AC[2] &#43; FB[2]; 	AC[1] = FB[0]; 	AC[3] = FB[2]; 	break; 	} 	case &#39;A&#39;: 	case &#39;C&#39;: 	{ 	if (c == &#39;A&#39;) 	{ 	AC = tmp &#43; AC[3] &#43; AC[0] &#43; AC[1] &#43; AC[2]; 	} 	else 	{ 	AC = tmp &#43; AC[1] &#43; AC[2] &#43; AC[3] &#43; AC[0]; 	} 	LR = tmp &#43; AC[0] &#43; LR[1] &#43; AC[2] &#43; LR[3]; 	FB = tmp &#43; AC[1] &#43; FB[1] &#43; AC[3] &#43; FB[3]; 	break; 	} 	default: 	break; 	} 	}  	cout &lt;&lt; LR[0] &lt;&lt; LR[2] &lt;&lt; FB[0] &lt;&lt; FB[2] &lt;&lt; LR[3] &lt;&lt; LR[1];   return 0; } 方法二：使用 deque 容器 int main() { 	//string LR = &#34;1625&#34;, FB = &#34;3645&#34;, AC = &#34;1324&#34;; 	deque&lt;char&gt; LR, FB, AC; 	LR....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-11 20:34:53 +0800 CST'>September 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——虚函数表与多态（派生类内存布局）" href="https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"></a>
+  <footer class="entry-footer"><span title='2022-09-23 16:30:43 +0800 CST'>September 23, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——旋转骰子问题" href="https://874656645.github.io/posts/247-c&#43;&#43;-%E6%97%8B%E8%BD%AC%E9%AA%B0%E5%AD%90%E9%97%AE%E9%A2%98/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——作用域和可访问性
+    <h2>C&#43;&#43; List、strcpy_s、strtok_s 使用
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、 命名空间   嵌套命名空间
-namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){ cout &lt;&lt; &#34;B::C::g(long)\n&#34;; } }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{ int y = 1; int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;; } void g(void){ cout &lt;&lt; &#34;B::C::g(void)\n&#34;; } }; static int xx = 1; class A{ public: int xx; A(int xx){ A::xx = xx; } }; int main() { static int xx = 2; A a(3); cout &lt;&lt; a....</p>
+    <p>目标： 对输入的字符串中的单词，把给定的索引区间中的单词逆序
+方法一：  通过 strtok（strtok_s、strtok_r） 分割字符串 使用 list 容器存储各个单词 可以通过前插的方式反转指定区间的单词 也可以通过前后交换的方式反转指定区间的单词 顺序输出 list 中的单词  int main(){  string str = &#34;I am a developer&#34;; 	char *cArr = new char[str.size()&#43;1]{0}; 	strcpy_s(cArr, str.size()&#43;1, str.c_str());	// 注意：第二个参数，要拷贝的字符串的长度包括结尾的 &#39;\0&#39; 	char *w = nullptr, *rest = nullptr; 	list&lt;string&gt; wordList; 	w = strtok_s(cArr, &#34; &#34;, &amp;rest); 	while (w) 	{ 	wordList.push_back(w); 	w = strtok_s(nullptr, &#34; &#34;, &amp;rest); 	} 	int startIndex = 0, endIndex = 0; 	cin &gt;&gt; startIndex &gt;&gt; endIndex; 	int len = wordList....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-09 17:35:34 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——作用域和可访问性" href="https://874656645.github.io/posts/233-c&#43;&#43;-%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/"></a>
+  <footer class="entry-footer"><span title='2022-09-22 16:52:07 +0800 CST'>September 22, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; List、strcpy_s、strtok_s 使用" href="https://874656645.github.io/posts/246-c&#43;&#43;-liststrcpy_sstrtok_s-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>GIS——Global Mapper 使用
+    <h2>C&#43;&#43;——类模板双栈模拟队列
     </h2>
   </header>
   <section class="entry-content">
-    <p>  【File】-&gt;【Create New Map Catalog】
-  Export
-  </p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-09 11:44:36 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to GIS——Global Mapper 使用" href="https://874656645.github.io/posts/232-gis-global-mapper-%E4%BD%BF%E7%94%A8/"></a>
+  <footer class="entry-footer"><span title='2022-09-20 22:14:24 +0800 CST'>September 20, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——类模板双栈模拟队列" href="https://874656645.github.io/posts/245-c&#43;&#43;-%E7%B1%BB%E6%A8%A1%E6%9D%BF%E5%8F%8C%E6%A0%88%E6%A8%A1%E6%8B%9F%E9%98%9F%E5%88%97/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——父类与子类、基类与派生类
+    <h2>C&#43;&#43;——类模板
     </h2>
   </header>
   <section class="entry-content">
-    <p>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;&amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  class A { int x, y; public: virtual ~A() { cout &lt;&lt; &#34;~A()\n&#34;; } int getx() { return x; } virtual int vf() const { return 1; } protected: int gety() { return y; } }; class B : protected A { friend int main(); bool visible; public: ~B() { cout &lt;&lt; &#34;~B()\n&#34;; } using A::gety; A* getFather(){ return this; } private: virtual int vf() const { // 子类内部不受继承方式的影响 	const A *pa = this; // 将子类指针赋值给父类指针 	const A&amp; ra = *this; // 将父类引用指向子类对象 	A a = *this; // 将子类对象赋值给父类对象 	// 父类对象 a 生命期在函数结束后结束 	// 输出：~A() 	cout &lt;&lt; &#34;in B::vf() A::vf()：&#34; &lt;&lt; A::vf() &lt;&lt; endl; cout &lt;&lt; &#34;in B::vf() a....</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-06 22:28:34 +0800 CST'>September 6, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——父类与子类、基类与派生类" href="https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/"></a>
+  <footer class="entry-footer"><span title='2022-09-18 18:07:48 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——类模板" href="https://874656645.github.io/posts/244-c&#43;&#43;-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

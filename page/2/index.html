@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,64 +157,62 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——派生类修改基类成员的访问权限
+    <h2>C&#43;&#43;——函数模板
     </h2>
   </header>
   <section class="entry-content">
-    <p>案例一：
-class A { int x, y; public: int getx() { return x; } protected: int gety() { return y; } }; class B : private A /* public A */ /* protected A */{ bool visible; public: using A::getx; A::gety;	// deprecated }; 案例二：
-class MyList { struct Node { int v; Node* next; Node(int v, Node* n) { this-&gt;v = v; next = n; } ~Node() { cout &lt;&lt; &#34;~Node()\n&#34;; delete next; next = nullptr; } } *head; public: MyList() { head = nullptr; } ~MyList() { if (head !...</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-04 20:45:58 +0800 CST'>September 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——派生类修改基类成员的访问权限" href="https://874656645.github.io/posts/230-c&#43;&#43;-%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%BF%AE%E6%94%B9%E5%9F%BA%E7%B1%BB%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/"></a>
+  <footer class="entry-footer"><span title='2022-09-18 17:28:56 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——函数模板" href="https://874656645.github.io/posts/243-c&#43;&#43;-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——Const、volatile、mutable
+    <h2>C&#43;&#43;——变量模板
     </h2>
   </header>
   <section class="entry-content">
-    <p> 含有私有 const 实例数据成员的类必须定义构造函数，且该实例数据成员必须通过构造函数参数列表初始化 虽然 this 是隐含参数，也可以通过添加 const、volatile 修饰符实现函数重载 成员变量的类型会随着对象实例的类型变化而变化，比如一个 volatile int 类型的成员变量，如果对象实例为 const 的，则此时成员变量的类型为 const volatile int 经实验，mutable 不可以和 static、const 一起使用，但可以与 volatile 搭配使用  </p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-03 19:54:33 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——Const、volatile、mutable" href="https://874656645.github.io/posts/229-c&#43;&#43;-constvolatilemutable/"></a>
+  <footer class="entry-footer"><span title='2022-09-18 14:38:58 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——变量模板" href="https://874656645.github.io/posts/242-c&#43;&#43;-%E5%8F%98%E9%87%8F%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——成员指针
+    <h2>C&#43;&#43;——Lambda表达式
     </h2>
   </header>
   <section class="entry-content">
-    <p>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: int a; // 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; // C&#43;&#43;17 支持 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; static int num; public: Crowd(); Crowd(int x); ~Crowd(); // 类体内函数定义 	// 会被内联处理 	int f() { b&#43;&#43;; cout &lt;&lt; &#34;F()\n&#34;; return b; } // const this 指针，参数类型不同，所以可被重载 	int f()const { cout &lt;&lt; &#34;const F()\n&#34;; return b; } static int getNum(); static Crowd&amp; dec(Crowd&amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { a = 0; b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd()\n&#34;; } Crowd::Crowd(int x): a(x) { b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd(int)\n&#34;; } Crowd::~Crowd() { Crowd::num--; } int Crowd::getNum() { return Crowd::num; } Crowd&amp; Crowd::dec(Crowd&amp; a) { a....</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-03 16:44:14 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——成员指针" href="https://874656645.github.io/posts/228-c&#43;&#43;-%E6%88%90%E5%91%98%E6%8C%87%E9%92%88/"></a>
+  <footer class="entry-footer"><span title='2022-09-18 10:38:31 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——Lambda表达式" href="https://874656645.github.io/posts/241-c&#43;&#43;-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
+    <h2>C&#43;&#43;——类型推导杂记
     </h2>
   </header>
   <section class="entry-content">
-    <p> volatile 和 const 修饰的变量说明该变量在本程序内不应被修改，但其它程序是可以修改的 volatile 修饰变量，告诉编译器不要优化该变量，每次取值都重新从内存中获取 constexpr 和 inline 修饰的变量，编译器都会进行编译期优化 当对 inline 修饰变量进行取地址操作时，优化会失效 inline 修饰函数相当于 static，只能在当前文件中访问 inline 修饰的变量可以用任意表达式初始化，但这样不保证被优化 inline 其它介绍 static 限制修饰的变量和函数的可见作用域（模块内部），其它的都是副本  </p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
+  <footer class="entry-footer"><span title='2022-09-16 11:38:55 +0800 CST'>September 16, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——类型推导杂记" href="https://874656645.github.io/posts/240-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC%E6%9D%82%E8%AE%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>GIS——GeoServer 发布 ArcGIS 切片的 WMTS 服务
+    <h2>C&#43;&#43;——类型转换杂记
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、部署环境和软件版本 操作系统 版本 win10 JDK 版本 OpenJDK11U-jdk_x64_windows_hotspot_11.0.16.1_1 GeoServer 版本 2.21.1 GeoWebCache 版本 1.21.1 二、说明  安装 JDK，配置 java 环境。 Windows 平台可安装 GeoServer Exe 安装包。 也可以通过 Tomcat 起动服务，需要下载 GeoServer 和 GeoWebCache 的 war 包，并放到 tomcat/webapps 目录下，如果只是发布切片服务，配置 GeoWebCache 即可。  三、软件下载  下载 GeoServer 也可GeoServer 官网下载 下载 GeoWebCache，解压待用  四、配置 GeoServer  将 GeoWebCache 中的 jar 包 \geowebcache\WEB-INF\lib\gwc-arcgiscache-1.21.1.jar 拷贝到 GeoServer 安装目录 \webapps\geoserver\WEB-INF\lib。 解压 GeoServer 安装目录下的 jar 包 \webapps\geoserver\WEB-INF\lib\gs-gwc-2.21.1.jar 到 gs-gwc-2.21.1 文件夹，将 GeoWebCache 中的 \geowebcache\WEB-INF\geowebcache-arcgiscache-context....</p>
+    <p>const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() {  const int x = 0;  *(int*)&amp;x = 2;  cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3;  int y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10;  y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0   return 0; } struct T{  int x = 0;  const int y = 0;  int q() const{  *(int*)&amp;y = y &#43; 1;  return y;  } }; int main() {  T m;  const T n;  int x = m....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-08-31 11:19:28 +0800 CST'>August 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to GIS——GeoServer 发布 ArcGIS 切片的 WMTS 服务" href="https://874656645.github.io/posts/226-gis-geoserver-%E5%8F%91%E5%B8%83-arcgis-%E5%88%87%E7%89%87%E7%9A%84-wmts-%E6%9C%8D%E5%8A%A1/"></a>
+  <footer class="entry-footer"><span title='2022-09-15 11:13:34 +0800 CST'>September 15, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——类型转换杂记" href="https://874656645.github.io/posts/239-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%9D%82%E8%AE%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

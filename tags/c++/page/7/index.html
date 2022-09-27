@@ -145,87 +145,71 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Emscripten——C&#43;&#43; 调用 Js 回调函数
+    <h2>C&#43;&#43;17 折叠表达式
     </h2>
   </header>
   <section class="entry-content">
-    <p>WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C&#43;&#43; 调用 JavaScript 的方法：
- 使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C&#43;&#43; 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：
-int EMSCRIPTEN_KEEPALIVE runScript(){ emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;); emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;); return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
-  EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。
-#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), { alert(&#39;hello world!&#39;); throw &#39;all done&#39;; // exception }); EM_JS(void, take_args, (int x, float y), { console....</p>
+    <p>一元折叠表达式
+ ( pack op ... ) : 一元右折叠  (E op ...) 展开后： (E1 op (... op (EN-1 op EN)))   ( ... op pack ) ：一元左折叠  (... op E) 展开后： (((E1 op E2) op ...) op EN)      二元折叠表达式
+ ( pack op ... op init ) ：二元右折叠  (E op ... op I) 展开后： (E1 op (... op (EN−1 op (EN op I))))   ( init op ....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-03-26 10:34:44 +0800 CST'>March 26, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 调用 Js 回调函数" href="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-04-13 16:50:15 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 折叠表达式" href="https://874656645.github.io/posts/177-c&#43;&#43;17-%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Emscripten——js 调用 C&#43;&#43; 接口
+    <h2>C&#43;&#43;17 变长参数模板
     </h2>
   </header>
   <section class="entry-content">
-    <p>Emscripten 提供了许多方法来在 JavaScript 和编译后的 C 或 c&#43;&#43; 之间连接和交互，我们先来看看 js 调用 WASM 的情况。
-一、使用 ccall 或 cwrap callall() 调用带有指定参数的编译过的 C 函数 并返回结果，而 cwrap() 封装了编译过的 C 函数并返回一个可以正常调用的 JavaScript 函数。因此，如果计划多次调用一个编译后的函数，cwrap() 会更有用。
-例如下面的 C main.cpp 文件：
-#include &lt;math.h&gt; extern &#34;C&#34; { int int_sqrt(int x) { return sqrt(x); } } 使用下面的命令进行编译：
-emcc main.cpp -o function.html -s EXPORTED_FUNCTIONS=_int_sqrt -s EXPORTED_RUNTIME_METHODS=ccall,cwrap
-EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的函数会被删掉），EXPORTED_RUNTIME_METHODS 告诉编译器我们需要用到的运行时方法 ccall 和 cwrap，否则这些方法也会被优化掉
-编译后就可以在 js 中通过 cwrap 使用了：
-int_sqrt = Module.cwrap(&#39;int_sqrt&#39;, &#39;number&#39;, [&#39;number&#39;]) int_sqrt(12) // return 3 int_sqrt(28) // return 5 第一个参数是被 wrap 的 C 函数的名字（没有下划线），第二个参数是函数返回值在类型（如果没有返回值，使用 JavaScript 的 null 类型），第三个参数是一个参数数组（如果没有参数，可以省略）。...</p>
+    <p>任意个数、任意类别的模板参数
+template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) {  std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
+ C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) {  std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) {  std::cout &lt;&lt; value &lt;&lt; std::endl;  my_printf(args...); } int main() {  my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;);  return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-03-25 10:06:38 +0800 CST'>March 25, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——js 调用 C&#43;&#43; 接口" href="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/"></a>
+  <footer class="entry-footer"><span title='2022-04-13 10:49:20 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 变长参数模板" href="https://874656645.github.io/posts/176-c&#43;&#43;17-%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Emscripten——使用 CMake 构建并用 Make 编译
+    <h2>C&#43;&#43;17 使用结构化绑定来解包绑定的返回值
     </h2>
   </header>
   <section class="entry-content">
-    <p>使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
-# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ....</p>
+    <p>注意：使用结构化绑定时，就不能再使用 std::tie 创建虚拟变量了，所以我们不得不绑定所有值到命名过的变量上。对部分成员进行绑定的做法是高效的，因为编译器可以很容易的对未绑定的变量进行优化
+std::pair&lt;int,int&gt; divide_remainder(int dividend, int divisor){  int f = dividend / divisor;  int s = dividend % divisor;  return {f, s}; }  int main() {  auto [dividend, remainder] = divide_remainder(16, 3);  std::cout &lt;&lt; &#34;16 / 3 is &#34; &lt;&lt; dividend &lt;&lt; &#34; with a remainder of &#34; &lt;&lt; remainder &lt;&lt; &#39;\n&#39;;   // 之前的写法  int remainder1;  std::tie(std::ignore, remainder1) = divide_remainder(16, 5);  std::cout &lt;&lt; &#34;16 % 5 is &#34; &lt;&lt; remainder1 &lt;&lt; &#39;\n&#39;;   return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-03-24 17:45:14 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——使用 CMake 构建并用 Make 编译" href="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/"></a>
+  <footer class="entry-footer"><span title='2022-04-12 19:02:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 使用结构化绑定来解包绑定的返回值" href="https://874656645.github.io/posts/175-c&#43;&#43;17-%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A%E6%9D%A5%E8%A7%A3%E5%8C%85%E7%BB%91%E5%AE%9A%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Emscripten——C&#43;&#43; 函数导出
+    <h2>C&#43;&#43;17 大括号初始化
     </h2>
   </header>
   <section class="entry-content">
-    <p>导出 C&#43;&#43; 函数到 js 有多种方式：
-  方式一：在编译的时候指定
-在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
-  方式二：修改 C&#43;&#43; 函数
-在 C&#43;&#43; 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
-#include &lt;emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) { printf(&#34;我的函数已被调用\n&#34;); return 0; } #ifdef __cplusplus extern &#34;C&#34; { #endif  int EMSCRIPTEN_KEEPALIVE sayHello(){ cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl; return 0; } int sayHello1() { Person p; cout &lt;&lt; p.printInfo() &lt;&lt; endl; return 0; } #ifdef __cplusplus } #endif   方式三：WebIDL Binder...</p>
+    <p>( expression-list )：优先调用非聚合初始化，且会存在隐式转换 = expression： { initializer-list }：如果有聚合初始化（initializer_list&lt;&gt;），就调用聚合初始化，没有的话就调用符合条件的非聚合初始化 = { initializer-list }：同上 使用 auto 声明的变量括号初始化，只允许一个参数的情况 {} 与 () 调用构造函数初始化的方式，不同点在于 {} 没有类型的隐式转换，比如 int x(1.2); 和 int x = 1.2; 通过隐式的对浮点值进行向下取整，然后将其转换为整型，从而将 x 的值初始化为 1。相反的， int x{1.2}; 将会遇到编译错误，初始化列表中的初始值，需要与变量声明的类型完全匹配。  测试代码一：
+// #define AGGREGATE_INIT class Test{ public:  Test(int a, float b, char* c){  cout &lt;&lt; &#34;int float char* initialize...&#34; &lt;&lt; endl;  }  Test(int a, int b, int c){  cout &lt;&lt; &#34;int int int initialize....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-03-24 17:31:30 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 函数导出" href="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/"></a>
+  <footer class="entry-footer"><span title='2022-04-12 18:51:42 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 大括号初始化" href="https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Emscripten——Hello World
+    <h2>C&#43;&#43;17 constexpr-if 简化编译
     </h2>
   </header>
   <section class="entry-content">
-    <p>编译   新建 main.cpp 文件
-#include &lt;iostream&gt;using namespace std; int main(){ cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl; return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
-执行命令 em&#43;&#43; main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
-  使用 node 测试
-测试命令 node a.out.js，会在控制台输出 cout 的内容
-  使用 html 页面 测试
-执行命令 em&#43;&#43; main.cpp -o hello.html，会在同级目录下生成三个文件：
- hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件
-在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面...</p>
+    <p>它能处理不同模板类型的特化，因为它可以在完全不同的代码中，选取相应的片段，依据这些片段的类型对模板进行特化
+比如我们有一个简单的类，它的成员函数 add ，支持对 U 类型值与 T 类型值的加法
+template &lt;typename T&gt; class addable {  T val; public:  addable(T v) : val{v} {}   template &lt;typename U&gt;  T add(U x) const {  return val &#43; x;  } }; 假设类型 T 是 std::vector&lt;something&gt; ，而类型 U 是 int。这里就有问题了，为整个 vector 添加整数是为 了什么呢？应该是对 vector 中的每个元素加上一个整型数。实现这个功能就需要在循环中进行
+template &lt;typename U&gt; T add(U x) {  auto copy (val); // Get a copy of the vector member  for (auto &amp;n : copy) {  n &#43;= x;  }  return copy; } 把两种情况结合在一起：...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-03-24 17:03:19 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——Hello World" href="https://874656645.github.io/posts/154-emscripten-hello-world/"></a>
+  <footer class="entry-footer"><span title='2022-04-12 17:16:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 constexpr-if 简化编译" href="https://874656645.github.io/posts/173-c&#43;&#43;17-constexpr-if-%E7%AE%80%E5%8C%96%E7%BC%96%E8%AF%91/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

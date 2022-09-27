@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,67 +157,92 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>代理模式
+    <h2>Windows 10 中的 Linux 子系统
     </h2>
   </header>
   <section class="entry-content">
-    <p>为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
+    <p>WSL 的基本命令
+一、自动安装 满足 Win10 系统版本要求的（ Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11）可以使用这种方式
+查看方式，Win &#43; R 打开运行窗口，输入 winver 查看
+  安装 WSL
+wsl --install
+  查看可用的 Linux 发行版
+wsl -l -o
+  查看已安装的 Linux 分发版
+wsl -l -v
+  注销 Linux 发行版
+wsl --unregister Ubuntu
+  可以直接从官网下载 Linux 发行版的安装包，然后将 appx 扩展名改为 zip，解压到想要放置的目录，双击 ubuntu.exe 启动，参考手动安装
+  二、手动安装  注意：以下命令都是在以管理员权限运行的 PowerShell 中完成   启用 “适用于 Linux 的 Windows 子系统” 可选功能...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 07:28:53 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 代理模式" href="https://874656645.github.io/posts/108-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-13 11:01:34 +0800 CST'>February 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Windows 10 中的 Linux 子系统" href="https://874656645.github.io/posts/121-windows-10-%E4%B8%AD%E7%9A%84-linux-%E5%AD%90%E7%B3%BB%E7%BB%9F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>单例模式
+    <h2>Linux 目录介绍
     </h2>
   </header>
   <section class="entry-content">
-    <p>单例在内存中只有一份，在内存中不会占用太多，程序退出时会随着程序统一释放内存，所以可以不必特意释放  一、懒汉式 不是线程安全的，所以多线程使用要加锁
-class Singleton{ public: static Singleton* getInstance(){ if(s_instance == nullptr){ s_instance = new Singleton; } return s_instance; } // 可有可无，程序结束时，系统会自动回收程序的所有内存  class Garbo{ ~Garbo(){ if(s_instance){ cout &lt;&lt; &#34;gc...&#34; &lt;&lt; endl; delete s_instance; } } }; private: Singleton(){ cout &lt;&lt; &#34;Singleton()...&#34; &lt;&lt; endl; } Singleton(const Singleton&amp;) = delete; Singleton&amp; operator=(const Singleton&amp;) = delete; static Singleton* s_instance; static Garbo s_gc; }; Singleton* Singleton::s_instance = nullptr; int main() { cout &lt;&lt; &#34;main()....</p>
+    <p>         bin 二进制文件，可执行文件   boot 系统开机启动项   dev device 设备（硬盘、显卡、显示器 一切皆文件）   lib 动态库   mnt 手动挂载目录   media 外设自动挂载目录   root 超级用户的家目录   usr unix system resource 头文件include、源文件src、用户安装程序/usr/local   etc 配置文件   opt 安装第三方应用程序   home Linux 所有用户的家目录（操作系统的家目录）   tmp 临时文件目录，系统重启后会被清空    </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 20:43:34 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 单例模式" href="https://874656645.github.io/posts/107-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-10 21:39:52 +0800 CST'>February 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 目录介绍" href="https://874656645.github.io/posts/120-linux-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>抽象工厂模式
+    <h2>递归与递归树
     </h2>
   </header>
   <section class="entry-content">
-    <p> 抽象工厂针对的是产品族，而不是产品等级 产品族：同一产地或者同一厂商，功能不同 产品等级：功能相同，产地或者厂商不同 对于增加产品族，符合开闭原则 对于增加产品等级，不符合开闭原则  // 抽象工厂模式 class AbstractApple{ public: virtual void showName() = 0; }; class AbstractBanana{ public: virtual void showName() = 0; }; class AbstractPear{ public: virtual void showName() = 0; }; class ChinaApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是中国苹果！&#34; &lt;&lt; endl; } }; class ChinaBanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是中国香蕉！&#34; &lt;&lt; endl; } }; class ChinaPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是中国鸭梨！&#34; &lt;&lt; endl; } }; class USAApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是美国苹果！&#34; &lt;&lt; endl; } }; class USABanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是美国香蕉！&#34; &lt;&lt; endl; } }; class USAPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是美国鸭梨！&#34; &lt;&lt; endl; } }; class JapanApple : public AbstractApple{ public: void showName() override{ cout &lt;&lt; &#34;我是日本苹果！&#34; &lt;&lt; endl; } }; class JapanBanana : public AbstractBanana{ public: void showName() override{ cout &lt;&lt; &#34;我是日本香蕉！&#34; &lt;&lt; endl; } }; class JapanPear : public AbstractPear{ public: void showName() override{ cout &lt;&lt; &#34;我是日本鸭梨！&#34; &lt;&lt; endl; } }; class AbstractFactory{ public: virtual AbstractApple* CreateApple() = 0; virtual AbstractBanana* CreateBanana() = 0; virtual AbstractPear* CreatePear() = 0; }; class ChinaFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new ChinaApple; } AbstractBanana* CreateBanana() override{ return new ChinaBanana; } AbstractPear* CreatePear() override{ return new ChinaPear; } }; class USAFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new USAApple; } AbstractBanana* CreateBanana() override{ return new USABanana; } AbstractPear* CreatePear() override{ return new USAPear; } }; class JapanFactory : public AbstractFactory{ public: AbstractApple* CreateApple() override{ return new JapanApple; } AbstractBanana* CreateBanana() override{ return new JapanBanana; } AbstractPear* CreatePear() override{ return new JapanPear; } }; int main() { AbstractFactory* factory = nullptr; AbstractApple* apple = nullptr; AbstractBanana* banana = nullptr; AbstractPear* pear = nullptr; // 中国  factory = new ChinaFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; // 美国  factory = new USAFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; // 日本  factory = new JapanFactory; apple = factory-&gt;CreateApple(); apple-&gt;showName(); banana = factory-&gt;CreateBanana(); banana-&gt;showName(); pear = factory-&gt;CreatePear(); pear-&gt;showName(); delete pear; delete banana; delete apple; delete factory; return 0; } </p>
+    <p>逆序打印字符串
+void printReverseString(const char* str){  if(*str == &#39;\0&#39;){  return;  }  printReverseString(str &#43; 1);  printf(&#34;%c&#34;, *str); }  int main() {  const char* str = &#34;Hello World&#34;;  printReverseString(str); // dlroW olleH   return 0; }   逆序输出链表
+struct LinkNode{  int data;  struct LinkNode* next; };  void printReverseLinkNode(struct LinkNode* header){  if(header == NULL){  return;  }  printReverseLinkNode(header-&gt;next);  printf(&#34;%d\n&#34;, header-&gt;data); }  int main() {  struct LinkNode* header = malloc(sizeof(struct LinkNode));  struct LinkNode* node1 = malloc(sizeof(struct LinkNode));  node1-&gt;data = 10;  node1-&gt;next = NULL;  struct LinkNode* node2 = malloc(sizeof(struct LinkNode));  node2-&gt;data = 20;  node2-&gt;next = NULL;  struct LinkNode* node3 = malloc(sizeof(struct LinkNode));  node3-&gt;data = 30;  node3-&gt;next = NULL;  header-&gt;next = node1;  node1-&gt;next = node2;  node2-&gt;next = node3;  printReverseLinkNode(header-&gt;next);   return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 17:44:49 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 抽象工厂模式" href="https://874656645.github.io/posts/106-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>工厂方法模式
+    <h2>常用的宏定义
     </h2>
   </header>
   <section class="entry-content">
-    <p>工厂方法模式 = 简单工厂模式 &#43; 开闭原则
-类的个数成倍增多，维护成本很高
-适用场景：
- 客户端不知道它所需要的对象的类 抽象工厂类通过其子类来指定创建哪个对象  // 工厂方法模式 class AbstractFruit{ public: virtual void showName() = 0; }; class Apple : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl; } }; class Banana : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl; } }; class Pear : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl; } }; // 抽象工厂 class AbstractFruitFactory{ public: virtual AbstractFruit* CreateFruit() = 0; }; class AppleFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Apple; } }; class PearFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Pear; } }; class BananaFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Banana; } }; int main() { AbstractFruitFactory* factory = nullptr; AbstractFruit* fruit = nullptr; factory = new AppleFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new BananaFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new PearFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; return 0; } </p>
+    <p>int main() {  printf(&#34;%s\n&#34;, __FILE__); // main.c  printf(&#34;%d\n&#34;, __LINE__); // 14  printf(&#34;%s\n&#34;, __DATE__); // Feb 7 2022  printf(&#34;%s\n&#34;, __TIME__); // 01:59:37   return 0; } // func1.h #ifdef __cplusplus extern &#34;C&#34;{ #endif  void func1();  #ifdef __cplusplus } #endif  // main.h extern &#34;C&#34;{  include &#34;func1.h&#34; } extern &#34;C&#34;{  extern void func1(); } int main() {  func1();   return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 15:51:36 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 工厂方法模式" href="https://874656645.github.io/posts/105-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-07 10:11:16 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 常用的宏定义" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>简单工厂模式
+    <h2>Linux 常用命令
     </h2>
   </header>
   <section class="entry-content">
-    <p> 实现了客户端与功能类的解耦 但是违反了类的单一职责原则，整个类的代码冗长，阅读难度、维护难度和测试难度也很大 违反了开闭原则，增添功能要修改源代码  适用场景：
- 工厂类负责创建的对象比较少，不会造成工厂方法中的业务逻辑太过复杂 客户端只知道传入工厂类的参数，对于如何创建对象并不关心  // 简单工厂模式 class AbstractFruit{ public: virtual void showName() = 0; }; class Apple : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl; } }; class Banana : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl; } }; class Pear : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl; } }; class FruitFactory{ public: static AbstractFruit* CreateFruit(string flag){ if(flag == &#34;apple&#34;){ return new Apple; } else if(flag == &#34;banana&#34;){ return new Banana; } else if(flag == &#34;pear&#34;){ return new Pear; } else{ return nullptr; } } }; int main() { AbstractFruit* fruit = FruitFactory::CreateFruit(&#34;apple&#34;); fruit-&gt;showName(); delete fruit; fruit = FruitFactory::CreateFruit(&#34;banana&#34;); fruit-&gt;showName(); delete fruit; fruit = FruitFactory::CreateFruit(&#34;pear&#34;); fruit-&gt;showName(); delete fruit; return 0; } </p>
+    <p>Linux 命令大全
+一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装软件 sudo apt install tree
+3. 删除不需要的包 sudo apt autoremove
+4. 查看已安装的软件 dpkg -l | grep openssh-server
+5. 查看软件安装的路径 dpkg -L openssh-server
+whereis gdb
+二、shell 操作和常用命令 1、查看输入的命令历史 history
+2、删除光标前面的字符串 ctrl &#43; u
+3、删除光标后面的字符串 ctrl &#43; k
+4、光标定位到头部 ctrl &#43; a
+5、光标定位到尾部 ctrl &#43; e
+6、命令、路径补全 Tab
+7、缩写别名 alias
+8、查看说明 man 5 passwd
+9、宿主目录 ~
+10、查看目录内容 tree ~...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-31 15:14:38 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 简单工厂模式" href="https://874656645.github.io/posts/104-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

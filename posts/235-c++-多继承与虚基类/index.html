@@ -8,7 +8,7 @@
 <title>C&#43;&#43;——多继承与虚基类 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="案例一：
-class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A  } }; class C { public: C() { } }; class D : virtual public A, public C { public: D(int x) :A(x) { } }; class E : public B, public D { public: E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } }; int main(){ E e(0); //cout &lt;&lt; e.">
+class A { public:  int a;  A(int x) :a(x) {   } }; class B : public A { public:  B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A   } }; class C { public:  C() {   } }; class D : virtual public A, public C { public:  D(int x) :A(x) {   } }; class E : /*public A,*/ public B, public D { // 不允许存在直接基类和间接虚基类的情况 public:  E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } };  int main(){  E e(0);  //cout &lt;&lt; e.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/235-c&#43;&#43;-%E5%A4%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E8%99%9A%E5%9F%BA%E7%B1%BB/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -17,7 +17,7 @@ class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(in
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="C&#43;&#43;——多继承与虚基类" />
 <meta property="og:description" content="案例一：
-class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A  } }; class C { public: C() { } }; class D : virtual public A, public C { public: D(int x) :A(x) { } }; class E : public B, public D { public: E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } }; int main(){ E e(0); //cout &lt;&lt; e." />
+class A { public:  int a;  A(int x) :a(x) {   } }; class B : public A { public:  B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A   } }; class C { public:  C() {   } }; class D : virtual public A, public C { public:  D(int x) :A(x) {   } }; class E : /*public A,*/ public B, public D { // 不允许存在直接基类和间接虚基类的情况 public:  E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } };  int main(){  E e(0);  //cout &lt;&lt; e." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/235-c&#43;&#43;-%E5%A4%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E8%99%9A%E5%9F%BA%E7%B1%BB/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-12T16:00:03&#43;08:00" />
@@ -60,7 +60,7 @@ class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(in
 
 <meta name="twitter:title" content="C&#43;&#43;——多继承与虚基类"/>
 <meta name="twitter:description" content="案例一：
-class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A  } }; class C { public: C() { } }; class D : virtual public A, public C { public: D(int x) :A(x) { } }; class E : public B, public D { public: E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } }; int main(){ E e(0); //cout &lt;&lt; e."/>
+class A { public:  int a;  A(int x) :a(x) {   } }; class B : public A { public:  B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A   } }; class C { public:  C() {   } }; class D : virtual public A, public C { public:  D(int x) :A(x) {   } }; class E : /*public A,*/ public B, public D { // 不允许存在直接基类和间接虚基类的情况 public:  E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } };  int main(){  E e(0);  //cout &lt;&lt; e."/>
 
 
 <script type="application/ld+json">
@@ -89,12 +89,12 @@ class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(in
   "@type": "BlogPosting",
   "headline": "C++——多继承与虚基类",
   "name": "C\u002b\u002b——多继承与虚基类",
-  "description": "案例一：\nclass A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(int x) :A(x) {\t// 这里初始化的是派生树中正常的基类 A  } }; class C { public: C() { } }; class D : virtual public A, public C { public: D(int x) :A(x) { } }; class E : public B, public D { public: E(int x) : A(x), B(x + 5), D(x + 10) {\t// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } }; int main(){ E e(0); //cout \u0026lt;\u0026lt; e.",
+  "description": "案例一：\nclass A { public:  int a;  A(int x) :a(x) {   } }; class B : public A { public:  B(int x) :A(x) {\t// 这里初始化的是派生树中正常的基类 A   } }; class C { public:  C() {   } }; class D : virtual public A, public C { public:  D(int x) :A(x) {   } }; class E : /*public A,*/ public B, public D { // 不允许存在直接基类和间接虚基类的情况 public:  E(int x) : A(x), B(x + 5), D(x + 10) {\t// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } };  int main(){  E e(0);  //cout \u0026lt;\u0026lt; e.",
   "keywords": [
     "C++"
   ],
-  "articleBody": "  案例一：\nclass A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(int x) :A(x) {\t// 这里初始化的是派生树中正常的基类 A  } }; class C { public: C() { } }; class D : virtual public A, public C { public: D(int x) :A(x) { } }; class E : public B, public D { public: E(int x) : A(x), B(x + 5), D(x + 10) {\t// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } }; int main(){ E e(0); //cout  cout  e.B::a  endl; // 5 派生树中正常基类 A 中的 a  cout  e.D::a  endl; // 0 派生树中虚基类 A 中的 a  cout  e.A::a  endl; // 5 派生树中正常基类 A 中的 a  return 0; }   案例二：\nstruct A { A(){ cout  \"A\"; } }; struct B{ B(){ cout  \"B\"; } }; struct C { int a; int\u0026 b; const int c; C(char d):c(d), b(a) { a = d; cout  d; } }; struct D{ D(){ cout  \"D\"; } }; struct E : A, virtual B, C, virtual D { A x, y; B z; E() : z(), y(), C('C') { cout  \"E\"; } }; int main(){ E e; // BDACAABE  return 0; }   案例三：\n 派生树从左到右，从下到上 第一级：虚基类 第二级：直接基类 第三级：对象成员 第四级：自身构造函数体 当前类的构造函数和类中每个对象成员都是一棵独立的派生树 每棵派生树的虚基类只构造和析构一次  struct A { A() { cout  \"A\"; } }; struct B { const A a; B() { cout  \"B\"; } }; struct C { C() { cout  \"C\"; } }; struct D { D() { cout  \"D\"; } }; struct E : A { E() { cout  \"E\"; } }; struct F : B, virtual C { F() { cout  \"F\"; } }; struct G : B { G() { cout  \"G\"; } }; struct H : virtual C, virtual D { H() { cout  \"H\"; } }; struct I : E, F, virtual G, H { E e; F f; I() : f(), e(), F(), E() { cout  \"I\"; } }; int main(){ I i; // CABGDAEABFHAECABFI  return 0; }   ",
-  "wordCount" : "355",
+  "articleBody": "  案例一：\nclass A { public:  int a;  A(int x) :a(x) {   } }; class B : public A { public:  B(int x) :A(x) {\t// 这里初始化的是派生树中正常的基类 A   } }; class C { public:  C() {   } }; class D : virtual public A, public C { public:  D(int x) :A(x) {   } }; class E : /*public A,*/ public B, public D { // 不允许存在直接基类和间接虚基类的情况 public:  E(int x) : A(x), B(x + 5), D(x + 10) {\t// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } };  int main(){  E e(0);  //cout  cout  e.B::a  endl; // 5 派生树中正常基类 A 中的 a  cout  e.D::a  endl; // 0 派生树中虚基类 A 中的 a  cout  e.A::a  endl; // 5 派生树中正常基类 A 中的 a  return 0; }   案例二：\nstruct A {  A(){  cout  \"A\";  } }; struct B{  B(){  cout  \"B\";  } }; struct C {  int a;  int\u0026 b;  const int c;  C(char d):c(d), b(a) {  a = d;  cout  d;  } }; struct D{  D(){  cout  \"D\";  } }; struct E : A, virtual B, C, virtual D {  A x, y;  B z;  E() : z(), y(), C('C') {  cout  \"E\";  } }; int main(){  E e; // BDACAABE  return 0; }   案例三：\n 派生树从左到右，从下到上 第一级：虚基类 第二级：直接基类 第三级：对象成员 第四级：自身构造函数体 当前类的构造函数和类中每个对象成员都是一棵独立的派生树 每棵派生树的虚基类只构造和析构一次  struct A {  A() {  cout  \"A\";  } }; struct B {  const A a;  B() {  cout  \"B\";  } }; struct C {  C() {  cout  \"C\";  } }; struct D {  D() {  cout  \"D\";  } }; struct E : A {  E() {  cout  \"E\";  } }; struct F : B, virtual C {  F() {  cout  \"F\";  } }; struct G : B {  G() {  cout  \"G\";  } }; struct H : virtual C, virtual D {  H() {  cout  \"H\";  } }; struct I : E, F, virtual G, H {  E e;  F f;  I() : f(), e(), F(), E() {  cout  \"I\";  } }; int main(){  I i; // CABGDAEABFHAECABFI  return 0; }   ",
+  "wordCount" : "359",
   "inLanguage": "en",
   "datePublished": "2022-09-12T16:00:03+08:00",
   "dateModified": "2022-09-12T16:00:03+08:00",
@@ -203,86 +203,86 @@ class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(in
 <ol>
 <li>
 <p>案例一：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span> {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> a;
-    A(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span>a(x) {
-
-    }
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> A {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    B(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span>A(x) {		<span style="color:#75715e">// 这里初始化的是派生树中正常的基类 A
-</span><span style="color:#75715e"></span>
-    }
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span> {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    C() {
-
-    }
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">D</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">public</span> A, <span style="color:#66d9ef">public</span> C {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    D(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span>A(x) {
-
-    }
-};
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> B, <span style="color:#66d9ef">public</span> D {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    E(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> A(x), B(x <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>), D(x <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>) {	<span style="color:#75715e">// error C2385: 对“A”的访问不明确
-</span><span style="color:#75715e"></span>                                            <span style="color:#75715e">// 所以要使用 B::A(x) 或者 D::A(x)
-</span><span style="color:#75715e"></span>                                            <span style="color:#75715e">// 此时初始化的都是派生树中虚基类 A
-</span><span style="color:#75715e"></span>    }
-};
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-    E e(<span style="color:#ae81ff">0</span>);
-    <span style="color:#75715e">//cout &lt;&lt; e.a &lt;&lt; endl;		// 二义性
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> e.B<span style="color:#f92672">::</span>a <span style="color:#f92672">&lt;&lt;</span> endl;     <span style="color:#75715e">// 5 派生树中正常基类 A 中的 a
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> e.D<span style="color:#f92672">::</span>a <span style="color:#f92672">&lt;&lt;</span> endl;     <span style="color:#75715e">// 0 派生树中虚基类 A 中的 a
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> e.A<span style="color:#f92672">::</span>a <span style="color:#f92672">&lt;&lt;</span> endl;     <span style="color:#75715e">// 5 派生树中正常基类 A 中的 a
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a;
+</span></span><span style="display:flex;"><span>    A(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span>a(x) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> A {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    B(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span>A(x) {		<span style="color:#75715e">// 这里初始化的是派生树中正常的基类 A
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    C() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">D</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">public</span> A, <span style="color:#66d9ef">public</span> C {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    D(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span>A(x) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">E</span> <span style="color:#f92672">:</span> <span style="color:#75715e">/*public A,*/</span> <span style="color:#66d9ef">public</span> B, <span style="color:#66d9ef">public</span> D {    <span style="color:#75715e">// 不允许存在直接基类和间接虚基类的情况
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    E(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> A(x), B(x <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>), D(x <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>) {	<span style="color:#75715e">// error C2385: 对“A”的访问不明确
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                            <span style="color:#75715e">// 所以要使用 B::A(x) 或者 D::A(x)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                            <span style="color:#75715e">// 此时初始化的都是派生树中虚基类 A
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>    E e(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//cout &lt;&lt; e.a &lt;&lt; endl;		// 二义性
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> e.B<span style="color:#f92672">::</span>a <span style="color:#f92672">&lt;&lt;</span> endl;     <span style="color:#75715e">// 5 派生树中正常基类 A 中的 a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> e.D<span style="color:#f92672">::</span>a <span style="color:#f92672">&lt;&lt;</span> endl;     <span style="color:#75715e">// 0 派生树中虚基类 A 中的 a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> e.A<span style="color:#f92672">::</span>a <span style="color:#f92672">&lt;&lt;</span> endl;     <span style="color:#75715e">// 5 派生树中正常基类 A 中的 a
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p>案例二：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">A</span> {
-    A(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">B</span>{
-    B(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">C</span> {
-    <span style="color:#66d9ef">int</span> a;
-    <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> b;
-    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> c;
-    C(<span style="color:#66d9ef">char</span> d)<span style="color:#f92672">:</span>c(d), b(a) {
-        a <span style="color:#f92672">=</span> d;
-        cout <span style="color:#f92672">&lt;&lt;</span> d;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">D</span>{
-    D(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">E</span> <span style="color:#f92672">:</span> A, <span style="color:#66d9ef">virtual</span> B, C, <span style="color:#66d9ef">virtual</span> D {
-    A x, y;
-    B z;
-    E() <span style="color:#f92672">:</span> z(), y(), C(<span style="color:#e6db74">&#39;C&#39;</span>) {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;E&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-    E e;                <span style="color:#75715e">// BDACAABE
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">A</span> {
+</span></span><span style="display:flex;"><span>    A(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">B</span>{
+</span></span><span style="display:flex;"><span>    B(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">C</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> b;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> c;
+</span></span><span style="display:flex;"><span>    C(<span style="color:#66d9ef">char</span> d)<span style="color:#f92672">:</span>c(d), b(a) {
+</span></span><span style="display:flex;"><span>        a <span style="color:#f92672">=</span> d;
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> d;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">D</span>{
+</span></span><span style="display:flex;"><span>    D(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">E</span> <span style="color:#f92672">:</span> A, <span style="color:#66d9ef">virtual</span> B, C, <span style="color:#66d9ef">virtual</span> D {
+</span></span><span style="display:flex;"><span>    A x, y;
+</span></span><span style="display:flex;"><span>    B z;
+</span></span><span style="display:flex;"><span>    E() <span style="color:#f92672">:</span> z(), y(), C(<span style="color:#e6db74">&#39;C&#39;</span>) {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;E&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>    E e;                <span style="color:#75715e">// BDACAABE
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p>案例三：</p>
 <ul>
@@ -294,61 +294,61 @@ class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(in
 <li>当前类的构造函数和类中每个对象成员都是一棵独立的派生树</li>
 <li>每棵派生树的虚基类只构造和析构一次</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">A</span> {
-    A() {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">B</span> {
-    <span style="color:#66d9ef">const</span> A a;
-    B() {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">C</span> {
-    C() {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;C&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">D</span> {
-    D() {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">E</span> <span style="color:#f92672">:</span> A
-{
-    E() {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;E&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">F</span> <span style="color:#f92672">:</span> B, <span style="color:#66d9ef">virtual</span> C {
-    F() {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;F&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">G</span> <span style="color:#f92672">:</span> B
-{
-    G() {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;G&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">H</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">virtual</span> C, <span style="color:#66d9ef">virtual</span> D {
-    H() {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;H&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">I</span> <span style="color:#f92672">:</span> E, F, <span style="color:#66d9ef">virtual</span> G, H {
-    E e;
-    F f;
-    I() <span style="color:#f92672">:</span> f(), e(), F(), E() {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;I&#34;</span>;
-    }
-};
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-    I i;                <span style="color:#75715e">// CABGDAEABFHAECABFI
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-%e5%a4%9a%e7%bb%a7%e6%89%bf%e6%b4%be%e7%94%9f%e6%a0%91.jpg" alt="C&#43;&#43;-多继承派生树"  />
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">A</span> {
+</span></span><span style="display:flex;"><span>    A() {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">B</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> A a;
+</span></span><span style="display:flex;"><span>    B() {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">C</span> {
+</span></span><span style="display:flex;"><span>    C() {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;C&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">D</span> {
+</span></span><span style="display:flex;"><span>    D() {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">E</span> <span style="color:#f92672">:</span> A
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    E() {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;E&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">F</span> <span style="color:#f92672">:</span> B, <span style="color:#66d9ef">virtual</span> C {
+</span></span><span style="display:flex;"><span>    F() {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;F&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">G</span> <span style="color:#f92672">:</span> B
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    G() {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;G&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">H</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">virtual</span> C, <span style="color:#66d9ef">virtual</span> D {
+</span></span><span style="display:flex;"><span>    H() {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;H&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">I</span> <span style="color:#f92672">:</span> E, F, <span style="color:#66d9ef">virtual</span> G, H {
+</span></span><span style="display:flex;"><span>    E e;
+</span></span><span style="display:flex;"><span>    F f;
+</span></span><span style="display:flex;"><span>    I() <span style="color:#f92672">:</span> f(), e(), F(), E() {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;I&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+</span></span><span style="display:flex;"><span>    I i;                <span style="color:#75715e">// CABGDAEABFHAECABFI
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-%e5%a4%9a%e7%bb%a7%e6%89%bf%e6%b4%be%e7%94%9f%e6%a0%91.jpg" alt="C&#43;&#43;-多继承派生树"  />
 </p>
 </li>
 </ol>
@@ -361,6 +361,11 @@ class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(in
       <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/236-c&#43;&#43;-%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BD%BF%E7%94%A8/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>C&#43;&#43;——异常的使用</span>
+  </a>
   <a class="next" href="https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/">
     <span class="title">Next Page »</span>
     <br>

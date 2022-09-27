@@ -145,73 +145,64 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>大端、小端字节序
+    <h2>C&#43;&#43;——类型转换
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
-  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
- 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
-            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：...</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-21 16:04:58 +0800 CST'>April 21, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 大端、小端字节序" href="https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/"></a>
+  <footer class="entry-footer"><span title='2022-09-14 22:02:50 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——类型转换" href="https://874656645.github.io/posts/238-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>const_cast
+    <h2>C&#43;&#43;——运算符重载
     </h2>
   </header>
   <section class="entry-content">
-    <p>函数指针和成员函数指针无法用于 const_cast const_cast 使得指向非 const 类型的 const 引用或指针能够被修改 通过 const_cast 修改 const 对象是未定义的行为  struct type { int i; type(): i(3) {} void f(int v) const { // this-&gt;i = v; // compile error: this is a pointer to const  const_cast&lt;type*&gt;(this)-&gt;i = v; // OK as long as the type object isn&#39;t const  } }; int main() { int i = 3; // i is not declared const  const int&amp; rci = i; // const reference  const_cast&lt;int&amp;&gt;(rci) = 4; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;; const int* pci = &amp;i; // *pci = 5; // error: assignment of read-only location ‘* pci’  *const_cast&lt;int*&gt;(pci) = 5; // OK: modifies i  std::cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#39;\n&#39;; type t; // if this was const type t, then t....</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-11 17:51:55 +0800 CST'>April 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to const_cast" href="https://874656645.github.io/posts/172-const_cast/"></a>
+  <footer class="entry-footer"><span title='2022-09-14 17:38:55 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——运算符重载" href="https://874656645.github.io/posts/237-c&#43;&#43;-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>类型转换函数
+    <h2>C&#43;&#43;——异常的使用
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、转换函数 Conversion Functions(operators) 在 C&#43;&#43; 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C&#43;&#43; 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。
-转换函数写法：operator typeName();
- 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：
-class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 &#43; f; cout &lt;&lt; d &lt;&lt; endl; return 0; } 输出：...</p>
+    <p>普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h
+struct A { 	int a = 1; 	virtual int getA()const { return a; } }; struct B : A { 	int a = 2; 	int getA()const override { return a; } };  #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { 	try 	{  // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); 	} 	catch (const A e) 	{ 	cout &lt;&lt; e....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-04-10 15:39:37 +0800 CST'>April 10, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类型转换函数" href="https://874656645.github.io/posts/171-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2022-09-14 11:08:56 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——异常的使用" href="https://874656645.github.io/posts/236-c&#43;&#43;-%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BD%BF%E7%94%A8/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>2022-02-14 杂记
+    <h2>C&#43;&#43;——多继承与虚基类
     </h2>
   </header>
   <section class="entry-content">
-    <p>NULL，0，&#39;\0&#39;，‘0’
-int main() { char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48}; printf(&#34;%c\n&#34;, arr[0]); printf(&#34;%c\n&#34;, arr[1]); printf(&#34;%c\n&#34;, arr[2]); printf(&#34;%c\n&#34;, arr[3]); printf(&#34;---------------\n&#34;); printf(&#34;%d\n&#34;, arr[0]); printf(&#34;%d\n&#34;, arr[1]); printf(&#34;%d\n&#34;, arr[2]); printf(&#34;%d\n&#34;, arr[3]); return 0; } 输出：
-0 0 --------------- 0 0 48 48   UTF-8 向下兼容 ASCII 编码，UTF-8 编码中，一个英文字为一个字节，一个中文一般为三个字节（ASCII、Unicode、UTF-8）
- 0xxxxxxx：单字节编码形式，这和 ASCII 编码完全一样，因此 UTF-8 是兼容 ASCII 的； 110xxxxx 10xxxxxx：双字节编码形式； 1110xxxx 10xxxxxx 10xxxxxx：三字节编码形式； 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx：四字节编码形式； UTF-8：每字 1 ~ 6 字节 Unicode（UCS-2）：每字都是 2 bytes UTF-16：每字 2 ~ 4 字节 UTF-32（UCS-4）：每字都是 4 bytes    float 单精度，浮点数在内存中是按科学计数法来存储的，小数点后6位能确定表示，float 是由 1 bit 符号位，8 bit 指数位和 23 bit 尾数位组成，精度是由尾数位决定的（2^23 = 8388608）...</p>
+    <p>案例一：
+class A { public:  int a;  A(int x) :a(x) {   } }; class B : public A { public:  B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A   } }; class C { public:  C() {   } }; class D : virtual public A, public C { public:  D(int x) :A(x) {   } }; class E : /*public A,*/ public B, public D { // 不允许存在直接基类和间接虚基类的情况 public:  E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } };  int main(){  E e(0);  //cout &lt;&lt; e....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-15 15:29:35 +0800 CST'>February 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 2022-02-14 杂记" href="https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/"></a>
+  <footer class="entry-footer"><span title='2022-09-12 16:00:03 +0800 CST'>September 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——多继承与虚基类" href="https://874656645.github.io/posts/235-c&#43;&#43;-%E5%A4%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E8%99%9A%E5%9F%BA%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>递归与递归树
+    <h2>C&#43;&#43;——虚函数表与多态（派生类内存布局）
     </h2>
   </header>
   <section class="entry-content">
-    <p>逆序打印字符串
-void printReverseString(const char* str){ if(*str == &#39;\0&#39;){ return; } printReverseString(str &#43; 1); printf(&#34;%c&#34;, *str); } int main() { const char* str = &#34;Hello World&#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
-struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&gt;next); printf(&#34;%d\n&#34;, header-&gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&gt;data = 10; node1-&gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&gt;data = 20; node2-&gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&gt;data = 30; node3-&gt;next = NULL; header-&gt;next = node1; node1-&gt;next = node2; node2-&gt;next = node3; printReverseLinkNode(header-&gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
+    <p>一、基类中有虚函数但不是虚继承 class A { public: 	A() { 	c(); 	} 	virtual ~A() { 	d(); 	} 	virtual void c() { 	cout &lt;&lt; &#34;Construct A\n&#34;; 	} 	virtual void d() { 	cout &lt;&lt; &#34;Deconstruct A\n&#34;; 	} }; class B : public A { public: 	B() { // 等价于 B() : A(){} 	c(); 	} 	~B() { 	d(); 	} 	void c()override { 	cout &lt;&lt; &#34;Construct B\n&#34;; 	} 	void d()override { 	cout &lt;&lt; &#34;Deconstruct B\n&#34;; 	} }; int main() { 	B b;  return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 </p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
+  <footer class="entry-footer"><span title='2022-09-11 20:34:53 +0800 CST'>September 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——虚函数表与多态（派生类内存布局）" href="https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,67 +157,77 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>命令模式
+    <h2>Makefile 使用
     </h2>
   </header>
   <section class="entry-content">
-    <p>将一个请求封闭为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。
-命令模式可以将请求者和接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求</p>
+    <p>一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
+  规则由三部分组成：目标、依赖、命令
+app:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则
+  四、makefile 优化   版本一：
+app:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
+  版本二：
+app:main.o add.o sub.o  gcc main.o add.o sub....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-19 16:36:47 +0800 CST'>February 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Makefile 使用" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>策略模式
+    <h2>Linux 静态库与动态库
     </h2>
   </header>
   <section class="entry-content">
-    <p>策略模式定义了一系列的算法，并将每个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
+    <p>一、库是什么 库是二进制格式的源代码（二进制加密）
+二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:59:42 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 策略模式" href="https://874656645.github.io/posts/112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-17 22:25:34 +0800 CST'>February 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 静态库与动态库" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>模板方法模式
+    <h2>gcc 相关
     </h2>
   </header>
   <section class="entry-content">
-    <p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
-class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬....</p>
+    <p>一、gcc 工作流程  预处理 —— -E  宏替换 头文件展开 去掉注释 生成 .i 文件   编译 —— -S  生成 .s 文件 汇编文件   汇编 —— -c  生成 .o 文件 二进制文件   链接   二、gcc 常用参数  -v / --version -I : 编译时指定头文件路径 -c : 生成二进制文件 .o -o : 指定生成的文件名 -g : gdb 调试，生成带有调试信息的二进制文件（Debug模式） -D : 编译时指定一个宏 -Wall : 显示警告信息 -On : 优化代码，n 是优化级别（1，2，3）  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:41:35 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板方法模式" href="https://874656645.github.io/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-16 21:44:06 +0800 CST'>February 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to gcc 相关" href="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>适配器模式
+    <h2>2022-02-14 杂记
     </h2>
   </header>
   <section class="entry-content">
-    <p>有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式
-class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &lt;&lt; endl; } }; class TargetInterface{ public: virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public: MyAdaptor(int param):param(param){} void operator()(int v){ print(v, param); } private: MyPrint print; int param; }; MyAdaptor myBind2nd(int v){ return MyAdaptor(v); } int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v.push_back(i); } for_each(v.begin(), v....</p>
+    <p>NULL，0，’\0’，‘0’
+int main() {  char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48};  printf(&#34;%c\n&#34;, arr[0]);  printf(&#34;%c\n&#34;, arr[1]);  printf(&#34;%c\n&#34;, arr[2]);  printf(&#34;%c\n&#34;, arr[3]);  printf(&#34;---------------\n&#34;);  printf(&#34;%d\n&#34;, arr[0]);  printf(&#34;%d\n&#34;, arr[1]);  printf(&#34;%d\n&#34;, arr[2]);  printf(&#34;%d\n&#34;, arr[3]);   return 0; } 输出：
+  0 0 --------------- 0 0 48 48   UTF-8 向下兼容 ASCII 编码，UTF-8 编码中，一个英文字为一个字节，一个中文一般为三个字节（ASCII、Unicode、UTF-8）
+ 0xxxxxxx：单字节编码形式，这和 ASCII 编码完全一样，因此 UTF-8 是兼容 ASCII 的； 110xxxxx 10xxxxxx：双字节编码形式； 1110xxxx 10xxxxxx 10xxxxxx：三字节编码形式； 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx：四字节编码形式； UTF-8：每字 1 ~ 6 字节 Unicode（UCS-2）：每字都是 2 bytes UTF-16：每字 2 ~ 4 字节 UTF-32（UCS-4）：每字都是 4 bytes    float 单精度，浮点数在内存中是按科学计数法来存储的，小数点后6位能确定表示，float 是由 1 bit 符号位，8 bit 指数位和 23 bit 尾数位组成，精度是由尾数位决定的（2^23 = 8388608）...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:07:36 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 适配器模式" href="https://874656645.github.io/posts/110-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-15 15:29:35 +0800 CST'>February 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 2022-02-14 杂记" href="https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>外观模式
+    <h2>vim 使用
     </h2>
   </header>
   <section class="entry-content">
-    <p>将复杂的子系统抽象到同一个接口进行管理，外界只需要通过此接口与子类系统进行交互，而不必直接与复杂的子类系统进行交互
-案例：家庭影院外观模式 实现KTV模式：电视打开，灯关掉，音响打开，麦克风打开，DVD打开
-实现游戏模式：电视打开，音响打开，游戏机打开</p>
+    <p>一、使用教程   vimtutor
+  显示行号:
+vim ~/.vimrc 在文件的最后一行输入 set number 并保存退出   二、vim 三种工作模式  命令模式 编辑模式 末行模式
+  三、命令模式下的相关操作  保存退出
+ZZ 代码格式化
+gg=G 光标移动：  左下上右：H J K L 移动到行首：0 移动到行尾：$ 移动到文件首部：gg 移动到文件尾部：G 跳转到第20行：20 &#43; G 从当前位置向下移动 n 行：n &#43; enter   删除命令：  删除光标后的一个字符：x（小写） 删除光标前的一个字符：X（大写） 删除一个单词：dw 删除光标前的所有字符：d0 删除光标后的所有字符：d$ 或者 D 删除光标所在行：dd 删除多行：ndd 删除光标所在行以及下面 n 行 删除光标所在行到文件首部的字符：dgg 删除光标所在行到文件尾部的字符：dG   撤销与反撤销：  撤销：u 反撤销：ctrl &#43; r   复制粘贴：  复制一行：yy 复制多行：nyy 粘贴到光标下一行：p 粘贴到光标上一行：P(大写)   字符可视模式：v  移动光标 复制：y 删除：d 粘贴：p(小写 光标之后) P(大写 光标之前)   行可视模式：V  增加缩进：&gt; 减少缩进：&lt;   块可视模式：ctrl &#43; V  o：将光标在块的左上角和右下角切换 O：将光标移动到所在行的对角 nl：将光标向右移动 n 个字符 nj：将光标向下移动 n 行 I：插入，按两次 ESC 退出（例如：多行注释操作）   替换操作：  r：替换光标后的字符 R：替换光标后的多个字符   查找操作：  /xxx ?...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 15:32:38 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 外观模式" href="https://874656645.github.io/posts/109-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-13 19:38:16 +0800 CST'>February 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to vim 使用" href="https://874656645.github.io/posts/122-vim-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
