@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -181,7 +181,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
     </h2>
   </header>
   <section class="entry-content">
-    <p>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8  import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request  class DmdSpider(object):  name = &#34;dmd&#34;  save_path = &#39;E:/python/manhuadao/pics/&#39;  __picNo = 0   # 访问漫画岛网页  def start_request(self, url):  header = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#39;}  r = requests.get(url, params=header)  # print(r.text)   self....</p>
+    <p>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &#34;dmd&#34; save_path = &#39;E:/python/manhuadao/pics/&#39; __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#39;} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath(&#39;//div[@class=&#34;read-bottom&#34;]//a[@class=&#34;next&#34;]/@href&#39;) # print(next) for href in next_urls: nexturl = href....</p>
   </section>
   <footer class="entry-footer"><span title='2019-02-28 15:00:16 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Crawl Pictures From Website" href="https://874656645.github.io/posts/9-crawl-pictures-from-website/"></a>
@@ -218,7 +218,7 @@ virtualenv env
 详细操作
 2. Creating a new Scrapy project scrapy startproject tutorial
 3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
-import scrapy  class QuotesSpider(scrapy.Spider):  name = &#34;quotes&#34;   def start_requests(self):  urls = [  &#39;http://quotes....</p>
+import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy....</p>
   </section>
   <footer class="entry-footer"><span title='2019-02-15 15:40:48 +0800 CST'>February 15, 2019</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Scrapy Learn" href="https://874656645.github.io/posts/7-scrapy-learn/"></a>

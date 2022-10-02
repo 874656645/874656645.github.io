@@ -212,11 +212,11 @@ if (!doNotTrack) {
 接下来是如何添加必要的信息，以便其他 CMake 项目可以使用我们的项目，无论是在构建目录、本地安装还是打包的时候
 第一步是更新我们的 install(TARGETS) 命令，不仅指定 DESTINATION，还指定 EXPORT。EXPORT 关键字生成一个 CMake 文件，其中包含从安装树导入安装命令中列出的所有目标的代码。
 修改 MathFunctions/CMakeLists.txt 文件代码：
-# install rules set(installable_libs MathFunctions tutorial_compiler_flags)if(TARGET SqrtLibrary) list(APPEND installable_libs SqrtLibrary)endif()install(TARGETS ${installable_libs}  EXPORT MathFunctionsTargets  DESTINATION lib)install(FILES MathFunctions.h DESTINATION include)第二步我们还需要显式地安装生成的 MathFunctionsTargets.cmake 文件。在顶层的 CMakeLists.txt 文件底部添加如下代码：
-install(EXPORT MathFunctionsTargets  FILE MathFunctionsTargets.cmake  DESTINATION lib/cmake/MathFunctions )此时构建会有下面的错误：
+# install rules set(installable_libs MathFunctions tutorial_compiler_flags)if(TARGET SqrtLibrary) list(APPEND installable_libs SqrtLibrary)endif()install(TARGETS ${installable_libs} EXPORT MathFunctionsTargets DESTINATION lib)install(FILES MathFunctions.h DESTINATION include)第二步我们还需要显式地安装生成的 MathFunctionsTargets.cmake 文件。在顶层的 CMakeLists.txt 文件底部添加如下代码：
+install(EXPORT MathFunctionsTargets FILE MathFunctionsTargets.cmake DESTINATION lib/cmake/MathFunctions )此时构建会有下面的错误：
 这是因为在生成导出信息期间，它将导出内在绑定到当前计算机项目的路径，在其他计算机上路径无效。
 第三步更新 MathFunctions/CMakeLists.txt 中的 target_include_directories() 用来设置在 build 时和在 install/package 时需要使用不同的 INTERFACE locations。
-# 将当前二进制目录添加到包含目录列表中 target_include_directories(MathFunctions  # INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}  INTERFACE  $&lt;BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}&gt;  $&lt;INSTALL_INTERFACE:include&gt; )第四步我们还需要生成一个 MathFunctionsConfig....</p>
+# 将当前二进制目录添加到包含目录列表中 target_include_directories(MathFunctions # INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}  INTERFACE $&lt;BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}&gt; $&lt;INSTALL_INTERFACE:include&gt; )第四步我们还需要生成一个 MathFunctionsConfig.cmake，这样 CMake 的 find_package() 命令就可以找到我们的项目。在顶层的项目目录添加 Config....</p>
   </section>
   <footer class="entry-footer"><span title='2022-03-06 10:37:40 +0800 CST'>March 6, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to CMake 添加导出配置" href="https://874656645.github.io/posts/145-cmake-%E6%B7%BB%E5%8A%A0%E5%AF%BC%E5%87%BA%E9%85%8D%E7%BD%AE/"></a>
@@ -234,7 +234,7 @@ install(EXPORT MathFunctionsTargets  FILE MathFunctionsTargets.cmake  DESTINATIO
 逻辑表达式用于创建条件输出。基本的表达式是 0 和 1 表达式。
 生成器表达式的一个常见用法是有条件地添加编译器标志，比如那些用于语言级别或警告的标志。一个很好的模式是将该信息关联到一个 INTERFACE 目标，从而允许该信息传播。让我们先构造一个接口目标，并指定所需的 c&#43;&#43; 标准 11，而不是使用 CMAKE CXX 标准。
 # 指定 C&#43;&#43; 标准 # set(CMAKE_CXX_STANDARD 11) # set(CMAKE_CXX_STANDARD_REQUIRED True) # 将上面的代码替换为 add_library(tutorial_compiler_flags INTERFACE)target_compile_features(tutorial_compiler_flags INTERFACE cxx_std_11)接下来，我们为项目添加所需的编译器警告标志。由于警告标志因编译器的不同而不同，我们使用 COMPILE_LANG_AND_ID 生成器表达式来控制给定语言和一组编译器 ID 要应用哪些标志（注：将要使用的生成器表达式是在 3.15 中引入的，所以要更新 cmake_minimum_required 的版本为 3.15），如下所示：
-set(gcc_like_cxx &#34;$&lt;COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC&gt;&#34;)set(msvc_cxx &#34;$&lt;COMPILE_LANG_AND_ID:CXX,MSVC&gt;&#34;)target_compile_options(tutorial_compiler_flags INTERFACE  &#34;$&lt;${gcc_like_cxx}:$&lt;BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused&gt;&gt;&#34;  &#34;$&lt;${msvc_cxx}:$&lt;BUILD_INTERFACE:-W3&gt;&gt;&#34; )我们看到警告标志被封装在一个 BUILD_INTERFACE 条件中。这样做是为了让我们已安装项目的使用者不会继承我们的警告标志。
+set(gcc_like_cxx &#34;$&lt;COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC&gt;&#34;)set(msvc_cxx &#34;$&lt;COMPILE_LANG_AND_ID:CXX,MSVC&gt;&#34;)target_compile_options(tutorial_compiler_flags INTERFACE &#34;$&lt;${gcc_like_cxx}:$&lt;BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused&gt;&gt;&#34; &#34;$&lt;${msvc_cxx}:$&lt;BUILD_INTERFACE:-W3&gt;&gt;&#34; )我们看到警告标志被封装在一个 BUILD_INTERFACE 条件中。这样做是为了让我们已安装项目的使用者不会继承我们的警告标志。
 修改 Mathfunctions/cmakelists.txt，以便所有编译目标都有一个 target_link_libraries() 调用我们设置的编译条件标识 tutorial_compiler_flags。...</p>
   </section>
   <footer class="entry-footer"><span title='2022-03-06 07:42:05 +0800 CST'>March 6, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>

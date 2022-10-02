@@ -204,8 +204,8 @@ mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/wi
   </header>
   <section class="entry-content">
     <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
-#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { 	std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
-static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 	{ 	extern int etn; 	int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>

@@ -176,7 +176,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() {  vector&lt;int&gt; v;  for(int i = 0; i &lt; 100000; &#43;&#43;i){  v.push_back(i);  }  cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl;  cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl;   cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl;  v.resize(10);  cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl;  cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl;   cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl;  vector&lt;int&gt;(v)....</p>
+    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 100000; &#43;&#43;i){ v.push_back(i); } cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; v.resize(10); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; vector&lt;int&gt;(v).swap(v); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
@@ -188,7 +188,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public:  Person(int age, int id){  m_age = age;  m_id = id;  cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl;  }  Person(const Person&amp; p){  m_age = p.m_age;  m_id = p.m_id;  cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl;  }  ~Person(){  cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl;  }  void* operator new(size_t size){  void* p = malloc(size);  cout &lt;&lt; &#34;new()....</p>
+    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete()....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 15:50:29 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to vector 中的元素存放在堆上还是栈上" href="https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"></a>
@@ -200,7 +200,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p> 平时要有容器、算法、迭代器的思维模式 容器提供迭代器，算法使用迭代器  // 算法 int count(int* begin, int* end, int val){  int n = 0;  while(begin != end){  if(*begin == val){  n&#43;&#43;;  }  begin&#43;&#43;;  }  return n; } int main() {  // 容器  int arr[] = {1, 3, 0, 5, 1, 3, 1, 0};  // 迭代器  int* begin = arr;  int* end = *(&amp;arr &#43; 1);   int n = count(begin, end, 1);  cout &lt;&lt; &#34;count: &#34; &lt;&lt; n &lt;&lt; endl;  return 0; } </p>
+    <p> 平时要有容器、算法、迭代器的思维模式 容器提供迭代器，算法使用迭代器  // 算法 int count(int* begin, int* end, int val){ int n = 0; while(begin != end){ if(*begin == val){ n&#43;&#43;; } begin&#43;&#43;; } return n; } int main() { // 容器  int arr[] = {1, 3, 0, 5, 1, 3, 1, 0}; // 迭代器  int* begin = arr; int* end = *(&amp;arr &#43; 1); int n = count(begin, end, 1); cout &lt;&lt; &#34;count: &#34; &lt;&lt; n &lt;&lt; endl; return 0; } </p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 12:31:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to STL Hello World" href="https://874656645.github.io/posts/78-stl-hello-world/"></a>
@@ -212,7 +212,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std;  void ReadWriteFile(){  ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in);  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app);  if (!ifs)  {  cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl;  return;  }  if (!ofs)  {  cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl;  return;  }  char ch;  while (ifs.get(ch))  {  cout &lt;&lt; ch;  ofs &lt;&lt; ch;  }   ifs....</p>
+    <p>一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in); ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app); if (!ifs) { cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl; return; } if (!ofs) { cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl; return; } char ch; while (ifs.get(ch)) { cout &lt;&lt; ch; ofs &lt;&lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &lt;&lt; &#34;Age: &#34; &lt;&lt; m_age &lt;&lt; &#34; ID: &#34; &lt;&lt; m_id &lt;&lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 09:47:21 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 文件操作" href="https://874656645.github.io/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"></a>

@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -161,7 +161,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>void printArr(const char ** p, int len){  for(int i = 0; i &lt; len; &#43;&#43;i){  cout &lt;&lt; p[i] &lt;&lt; endl;  } }  void sortSelect(const char ** p, int len){  for(int i = 0; i &lt; len - 1; &#43;&#43;i){  int max = i;  for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){  if(p[j] &gt; p[max]){  max = j;  }  }  // 交换  if(i !...</p>
+    <p>void printArr(const char ** p, int len){ for(int i = 0; i &lt; len; &#43;&#43;i){ cout &lt;&lt; p[i] &lt;&lt; endl; } } void sortSelect(const char ** p, int len){ for(int i = 0; i &lt; len - 1; &#43;&#43;i){ int max = i; for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){ if(p[j] &gt; p[max]){ max = j; } } // 交换  if(i != max){ const char* tmp = p[i]; p[i] = p[max]; p[max] = tmp; } } } int main() { const char* arr[] = {&#34;aa&#34;, &#34;bb&#34;, &#34;cc&#34;, &#34;dd&#34;, &#34;ee&#34;}; int len = sizeof(arr) / sizeof(char*); cout &lt;&lt; len &lt;&lt; endl; printArr(arr, len); sortSelect(arr, len); cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printArr(arr, len); return 0; } 输出：...</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>

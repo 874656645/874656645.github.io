@@ -167,7 +167,7 @@ if (!doNotTrack) {
     <p>一、队列   队列特点
  访问受限的线性表 先进先出 插入在一端进行，删除在另一端进行    主要元素
  队头 队尾    主要操作
- 入队列 出队列 取队首元素 判断队列是否为空    二、队列的抽象数据类型 template &lt;class T&gt; class Queue {  // 队列的运算集 public:  // 变为空队列  void clear();  // 将item插入队尾，成功则返回真，否则返回假  bool enQueue(const T item);  // 返回队头元素并将其从队列中删除，成功则返回真  bool deQueue(T &amp; item);  // 返回队头元素，但不删除，成功则返回真  bool getFront(T &amp; item);  // 返回真，若队列已空  bool isEmpty();  // 返回真，若队列已满  bool isFull(); }; 三、队列的实现方式 队列的物理实现又分为顺序队列和链式队列</p>
+ 入队列 出队列 取队首元素 判断队列是否为空    二、队列的抽象数据类型 template &lt;class T&gt; class Queue { // 队列的运算集 public: // 变为空队列  void clear(); // 将item插入队尾，成功则返回真，否则返回假  bool enQueue(const T item); // 返回队头元素并将其从队列中删除，成功则返回真  bool deQueue(T &amp; item); // 返回队头元素，但不删除，成功则返回真  bool getFront(T &amp; item); // 返回真，若队列已空  bool isEmpty(); // 返回真，若队列已满  bool isFull(); }; 三、队列的实现方式 队列的物理实现又分为顺序队列和链式队列</p>
   </section>
   <footer class="entry-footer"><span title='2022-04-05 09:03:06 +0800 CST'>April 5, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——队列" href="https://874656645.github.io/posts/163-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97/"></a>
@@ -198,7 +198,7 @@ if (!doNotTrack) {
   <section class="entry-content">
     <p>栈的物理实现有 顺序栈 和 链式栈
 一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：
-template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size;  top = -1;  st = new T[mSize];  }  arrStack() { // 创建一个顺序栈的实例  top = -1;  }  ~arrStack() {  delete [] st;  }  void clear() {  top = -1;  } // 清空栈 };  bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl;  return false;  } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item;  return true;  } }  bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl;  return false;  } else {  item = st[top--]; // 返回栈顶，并缩减1  return true;  } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：...</p>
+template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item; return true; } } bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：...</p>
   </section>
   <footer class="entry-footer"><span title='2022-04-03 20:03:03 +0800 CST'>April 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——栈的实现方式" href="https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/"></a>
@@ -227,7 +227,7 @@ WebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C&#43;&#43; 和 
 该绑定器支持可以用 WebIDL 表达的 c&#43;&#43; 类型的子集。这个子集对于大多数情况来说已经足够了。
 接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：
  创建一个 WebIDL 文件，用来描述 C&#43;&#43; 接口； 使用绑定器生成 C&#43;&#43; 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C&#43;&#43; 类型的 WebIDL 接口文件。该文件将复制 C&#43;&#43; 头文件中的一些信息。比如，我们想绑定下面的 C&#43;&#43; 类（my_classes.h）：
-class Foo { public:  int getVal();  void setVal(int v);  private:  int m_val{0}; };  class Bar { public:  Bar(long val);  ~Bar();  void doSomething();  private:  int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes....</p>
+class Foo { public: int getVal(); void setVal(int v); private: int m_val{0}; }; class Bar { public: Bar(long val); ~Bar(); void doSomething(); private: int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes....</p>
   </section>
   <footer class="entry-footer"><span title='2022-03-29 11:00:18 +0800 CST'>March 29, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码" href="https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/"></a>

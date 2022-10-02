@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -177,9 +177,9 @@ QProcess::startDetached(&#34;taskkill -t -f /IM iexplore.exe&#34;);
     </h2>
   </header>
   <section class="entry-content">
-    <p>QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
+    <p> QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
 以QString做为形参变量传递  qDebug(msg.toUtf8());
-QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) {  QFile file(logFileName);  file.open(QIODevice::WriteOnly | QIODevice::Append);  QTextStream text_stream(&amp;file);  text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;;  file.flush();  file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;;  QDir dir(fileName);  if (!dir.exists())  {  // 注：不能创建两级文件夹  bool ismkdir = dir....</p>
+QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } </p>
   </section>
   <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt QString 中文乱码" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
@@ -217,8 +217,8 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
   </header>
   <section class="entry-content">
     <p>1、随机数 python 脚本
-import random def randNum():  res = random.randint(1, 7)  return res 2、自增 python 脚本
-total = 0 def accumulate(increment):  global total  if total:  total &#43;= increment  else:  total = increment  return total </p>
+import random def randNum(): res = random.randint(1, 7) return res 2、自增 python 脚本
+total = 0 def accumulate(increment): global total if total: total &#43;= increment else: total = increment return total </p>
   </section>
   <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to ArcGIS 字段计算（自增、随机数）" href="https://874656645.github.io/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
