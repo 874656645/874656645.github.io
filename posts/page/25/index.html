@@ -160,17 +160,31 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>gdb 调试使用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、生成带有调试信息的程序 gcc main.c -o app -g
+二、启动调试  启动调试：gdb app 设置参数： set args
+set args 123 abc 456 ddd 查看代码： list 或 l  查看代码显示行数：show listsize 设置代码显示行数：set listsize 20 查看当前文件：  l l 行号 l 函数名   查看非当前文件：  l 文件名:行号 l 文件名:函数名      三、断点相关  设置断点：  break 行号 b 行号 b 函数名 b 文件名:行号 b 文件名:函数名   查看断点：info break 或 i b 删除断点：  del 断点Num d Num d Num1 Num2 d Num1-Num10   设置断点无效：dis Num 断点生效：ena Num 设置条件断点：b 行号 if i == 10  四、调试相关  启动运行：  start - s run - r   退出 gdb 调试：quit - q 打印变量的值：p 变量名 打印变量的类型：ptype 变量名 向下单步调试：  next - n step - s   跳出函数体：finish 从循环中跳出（循环体中不能有断点）：until 设置变量的值：set var 变量名 = value 继续运行到下一个断点：continue - c 监视变量：display 变量名 查看所有的监视变量的信息：info(i) display 取消变量监视：undisplay Num  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-20 08:53:26 +0800 CST'>February 20, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to gdb 调试使用" href="https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Makefile 使用
     </h2>
   </header>
   <section class="entry-content">
     <p>一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
   规则由三部分组成：目标、依赖、命令
-app:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则
+app:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则
   四、makefile 优化   版本一：
-app:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
+app:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
   版本二：
-app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
+app:main.o add.o sub.o  gcc main.o add.o sub....</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-19 16:36:47 +0800 CST'>February 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Makefile 使用" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"></a>
@@ -207,30 +221,13 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
     </h2>
   </header>
   <section class="entry-content">
-    <p>NULL，0，&#39;\0&#39;，‘0’
-int main() { char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48}; printf(&#34;%c\n&#34;, arr[0]); printf(&#34;%c\n&#34;, arr[1]); printf(&#34;%c\n&#34;, arr[2]); printf(&#34;%c\n&#34;, arr[3]); printf(&#34;---------------\n&#34;); printf(&#34;%d\n&#34;, arr[0]); printf(&#34;%d\n&#34;, arr[1]); printf(&#34;%d\n&#34;, arr[2]); printf(&#34;%d\n&#34;, arr[3]); return 0; } 输出：
-0 0 --------------- 0 0 48 48   UTF-8 向下兼容 ASCII 编码，UTF-8 编码中，一个英文字为一个字节，一个中文一般为三个字节（ASCII、Unicode、UTF-8）
+    <p>NULL，0，’\0’，‘0’
+int main() {  char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48};  printf(&#34;%c\n&#34;, arr[0]);  printf(&#34;%c\n&#34;, arr[1]);  printf(&#34;%c\n&#34;, arr[2]);  printf(&#34;%c\n&#34;, arr[3]);  printf(&#34;---------------\n&#34;);  printf(&#34;%d\n&#34;, arr[0]);  printf(&#34;%d\n&#34;, arr[1]);  printf(&#34;%d\n&#34;, arr[2]);  printf(&#34;%d\n&#34;, arr[3]);   return 0; } 输出：
+  0 0 --------------- 0 0 48 48   UTF-8 向下兼容 ASCII 编码，UTF-8 编码中，一个英文字为一个字节，一个中文一般为三个字节（ASCII、Unicode、UTF-8）
  0xxxxxxx：单字节编码形式，这和 ASCII 编码完全一样，因此 UTF-8 是兼容 ASCII 的； 110xxxxx 10xxxxxx：双字节编码形式； 1110xxxx 10xxxxxx 10xxxxxx：三字节编码形式； 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx：四字节编码形式； UTF-8：每字 1 ~ 6 字节 Unicode（UCS-2）：每字都是 2 bytes UTF-16：每字 2 ~ 4 字节 UTF-32（UCS-4）：每字都是 4 bytes    float 单精度，浮点数在内存中是按科学计数法来存储的，小数点后6位能确定表示，float 是由 1 bit 符号位，8 bit 指数位和 23 bit 尾数位组成，精度是由尾数位决定的（2^23 = 8388608）...</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-15 15:29:35 +0800 CST'>February 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 2022-02-14 杂记" href="https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>vim 使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、使用教程   vimtutor
-  显示行号:
-vim ~/.vimrc 在文件的最后一行输入 set number 并保存退出   二、vim 三种工作模式  命令模式 编辑模式 末行模式
-  三、命令模式下的相关操作  保存退出
-ZZ 代码格式化
-gg=G 光标移动：  左下上右：H J K L 移动到行首：0 移动到行尾：$ 移动到文件首部：gg 移动到文件尾部：G 跳转到第20行：20 &#43; G 从当前位置向下移动 n 行：n &#43; enter   删除命令：  删除光标后的一个字符：x（小写） 删除光标前的一个字符：X（大写） 删除一个单词：dw 删除光标前的所有字符：d0 删除光标后的所有字符：d$ 或者 D 删除光标所在行：dd 删除多行：ndd 删除光标所在行以及下面 n 行 删除光标所在行到文件首部的字符：dgg 删除光标所在行到文件尾部的字符：dG   撤销与反撤销：  撤销：u 反撤销：ctrl &#43; r   复制粘贴：  复制一行：yy 复制多行：nyy 粘贴到光标下一行：p 粘贴到光标上一行：P(大写)   字符可视模式：v  移动光标 复制：y 删除：d 粘贴：p(小写 光标之后) P(大写 光标之前)   行可视模式：V  增加缩进：&gt; 减少缩进：&lt;   块可视模式：ctrl &#43; V  o：将光标在块的左上角和右下角切换 O：将光标移动到所在行的对角 nl：将光标向右移动 n 个字符 nj：将光标向下移动 n 行 I：插入，按两次 ESC 退出（例如：多行注释操作）   替换操作：  r：替换光标后的字符 R：替换光标后的多个字符   查找操作：  /xxx ?...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-13 19:38:16 +0800 CST'>February 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to vim 使用" href="https://874656645.github.io/posts/122-vim-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

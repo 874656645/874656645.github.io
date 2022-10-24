@@ -145,6 +145,23 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>第一步：创建一个关卡  创建一个空的 Unreal 关卡； 登录 Cesium ion 并添加 Cesium World Terrain 和 CesiumSunSky； 设置 CesiumGeoreference 的坐标为 San Francisco International Airport (SFO)；
+Origin Latitude = 37.61779
+Origin Longitude = -122.390533
+Origin Height = 0.0  第二步：添加 PlaneTrack 类  在 UE Editor 中添加 C&#43;&#43; 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目  VS 2022 解决方案类似下图：
+ 添加下面的代码到 project.Build.cs 文件：
+// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; });  // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-10-19 14:25:50 +0800 CST'>October 19, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal" href="https://874656645.github.io/posts/249-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>GIS——Global Mapper 使用
     </h2>
   </header>
@@ -206,26 +223,6 @@ http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version
   </section>
   <footer class="entry-footer"><span title='2022-08-23 10:34:42 +0800 CST'>August 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to GIS——GeoServer 地图服务" href="https://874656645.github.io/posts/223-gis-geoserver-%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——使用蓝图获取 uasset 资源
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>方法一：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按路径获取资产（Get Asset by Path） 获取路径下的所有类型资产；
-  通过 获取完整名称（GetFullName） &#43; 包含（Contains） 筛选需要的资产；
-  通过 获取资产（GetAsset） 获取资产对象
-  资产对象的属性：
-  方法二：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按对象路径获取资产（Get Asset by Object Path） 直接获取想要的资产对象；
-  再通过 获取资产（GetAsset） &#43; cast 将资产对象转换为需要的对象类型；
-  注意：资产路径的格式：
- map : World&#39;/Game/Maps/NewWorld.NewWorld&#39; 蓝图类 : 要加 _C 例如 Blueprint&#39;/Game/Blueprints/MySpringArmPawn.MySpringArmPawn_C&#39;  参考：
- UE4 | BP | 使用蓝图获取Uasset资源 关于UE4动态资源加载(蓝图类)  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-11 17:40:41 +0800 CST'>August 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——使用蓝图获取 uasset 资源" href="https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

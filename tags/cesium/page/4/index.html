@@ -145,6 +145,29 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Cesium4Unreal——Transition Between Locations
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>目标 学习使用虚幻引擎的蓝图系统编程，实现在地球上的两个位置之间平稳飞行。
+ 在虚幻引擎中使用地图坐标 在感兴趣的位置创建 viewpoints 创建一个蓝图，使位置的切换变得平滑  第一步：创建一个关卡 参考前面的步骤创关卡，并定位到澳大利亚悉尼
+Origin Latitude = -33.871799 Origin Longitude = 151.206696 Origin Height = 3000.0
+第二步：添加 DynamicPawn actor 第三步：在蓝图中设置转换   打开关卡蓝图
+  蓝图联接图
+  创建墨尔本经纬度向量
+longitude = 144.9631
+latitude = -37.8136
+height = 2000
+第四步：自定义飞行过渡 设置飞行曲线：
+ Fly To Altitude Profile Curve Fly to Maximum Altitude Curve Fly to Progress Curve  添加 Fly To Curves actor，这是一个UCurveFloat，这个函数用来控制计算从源头到目的地的路径插值。
+  在【内容】面板右击，选择【其他】【曲线】，选择【CurveFloat】，并命名...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-15 16:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Transition Between Locations" href="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
     </h2>
   </header>

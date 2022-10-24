@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,12 +157,38 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Unreal——智慧城市项目搭建
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、项目目录 —— 内容
+—— Maps
+—— UMG
+—— Mesh
+—— 材质
+—— 蓝图
+—— 贴图
+—— 团队人员
+—— 产品经理
+—— 平面
+—— UE 美术 —— UE 技术美术 —— 模型师
+—— UE 程序
+学习网址  可视化展示系列教程 基础  高级UE开发工程师 岗位职责：
+ 负责 UE 客户端功能的设计、开发实现； 负责与产品对接功能需求，以及其他开发人员讨论需求，合作完成产品开发； 配合美术，策划完成各种效果的实现，与团队成员沟通协调，完成内容制作与优化； 保证代码质量与运行效率，持续进行项目功能优化、迭代、代码调试及 bug 修复；  任职要求：
+ 本科或以上学历，2年以上 UE 工作经验，至少参与过两个商业项目； 可以撰写 UE 引擎技术文档，并与美术配合将项目资源导入引擎； 熟悉 UE 开发流程和步骤，熟练使用 UE 蓝图编程及插件技术，熟悉 UE C&#43;&#43; 与蓝图的交互机制； 熟悉 UMG 的 GUI 开发等； 有较强的学习能力和解决问题能力，勇于承担责任，具有良好的团队交流和协作能力；  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-30 15:12:06 +0800 CST'>June 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——智慧城市项目搭建" href="https://874656645.github.io/posts/199-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Unreal——智慧城市项目技术路线和软件
     </h2>
   </header>
   <section class="entry-content">
     <p>软件和插件：
- Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&#39; `CityEngine VR Experience for Unreal Engine&#39; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera  蓝图开发：
+ Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine’ `CityEngine VR Experience for Unreal Engine’ datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera  蓝图开发：
  通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：
  材质 PBR 粒子效果（magic_circle_creator） 光影效果 天气模拟（天气插件 Ultra Dynamic Sky） 后处理：环境光遮蔽、MSAA、景深与镜头效果、屏幕空间反射、扫描线、泛光 自发光材质  数据：...</p>
   </section>
@@ -176,7 +202,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { // 1....</p>
+    <p>原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { 	// 1....</p>
   </section>
   <footer class="entry-footer"><span title='2022-06-28 14:23:38 +0800 CST'>June 28, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to OpenGL 相机 LookAt 矩阵计算" href="https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/"></a>
@@ -199,7 +225,7 @@ Games101 闫令琪
   光栅化： 经过以上步骤，基本上一个图形就形成了，但是这个图形的坐标还是在自己的坐标系中，光栅化就是将图形的坐标转化为屏幕像素坐标，最终将图元的数学描述转化为用于显示在屏幕上的片段，然后通过帧缓存就可以在电脑上看到一个个美丽的图形。
   片元着色器： 片元着色器是opengl渲染的最后一个流程，它的主要作用就是赋予我们图形最终的颜色，纹理渲染也在这个阶段
   参考：
- 顶点着色器到片元着色器的过程，varying变量 opengl基本流程 OpenGL学习脚印: 投影矩阵和视口变换矩阵(math-projection and viewport matrix) OpenGL入门（五）– OpenGL渲染流程图解析 Opengl复习笔记（一）——顶点着色器、片段着色器（内含代码） GPU是如何工作的？Shader图形编程入门 GAMES101-现代计算机图形学入门-闫令琪  </p>
+ 顶点着色器到片元着色器的过程，varying变量 opengl基本流程 OpenGL学习脚印: 投影矩阵和视口变换矩阵(math-projection and viewport matrix) OpenGL入门（五）– OpenGL渲染流程图解析 Opengl复习笔记（一）——顶点着色器、片段着色器（内含代码） GPU是如何工作的？Shader图形编程入门 GAMES101-现代计算机图形学入门-闫令琪 20分钟让你了解OpenGL——OpenGL全流程详细解读 OpenGL学习：Per-fragment operation(1)-模板测试(stencil test)  </p>
   </section>
   <footer class="entry-footer"><span title='2022-06-17 16:45:02 +0800 CST'>June 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to OpenGL 渲染管线" href="https://874656645.github.io/posts/196-opengl-%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF/"></a>
@@ -211,22 +237,10 @@ Games101 闫令琪
     </h2>
   </header>
   <section class="entry-content">
-    <p> 信号函数没有返回值，且只是一个函数声明，必须有 signals: 声明 槽函数的函数标签必须和信号函数相同（相同的返回值类型和形参列表） Qt5 后成员函数也可作为 slots，可以不用 slots: 声明 slots: 声明前要添加访问权限修饰符 信号函数和槽函数其实都可以被重载  // signal 和 slots 都可以重载  // Qt5的方式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow; void(MainWindow::*pSlot1)() = &amp;MainWindow::onShowMainWindow; connect(&amp;sw, pFun1, this, pSlot1); void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow; void(MainWindow::*pSlot2)(int,QString) = &amp;MainWindow::onShowMainWindow; connect(&amp;sw, pFun2, this, pSlot2); // Qt4的方式  // 1. SIGNAL、SLOT宏会把信号和槽转成字符串，所以就不能进行编译期错误检查  // 2. 槽函数前面必须有 slots 标签，否则无法识别为槽函数  connect(&amp;sw, SIGNAL(showMainWindow()), this, SLOT(onShowMainWindow())); connect(&amp;sw, SIGNAL(showMainWindow(int,QString)) , this, SLOT(onShowMainWindow(int,QString))); // Lambda 表达式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow; connect(&amp;sw, pFun1, [](){ qDebug()&lt;&lt;&#34;没有参数的信号&#34;; } ); void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow; connect(&amp;sw, pFun2, [](int a, QString msg){ qDebug()&lt;&lt;a&lt;&lt;msg; } ); // Lambda 表达式使用注意事项  // 如果b3是局部变量或者成员变量，lambda不要使用引用传值  QPushButton *b3 = new QPushButton(this); b3-&gt;setText(&#34;Lambda&#34;); int a = 10, b = 100; connect(&amp;b2/*b3*/, &amp;QPushButton::clicked, [=](){ // 此处使用 &amp; 传值会有问题  qDebug()&lt;&lt;a&lt;&lt;b; } ); </p>
+    <p> 信号函数没有返回值，且只是一个函数声明，必须有 signals: 声明 槽函数的函数标签必须和信号函数相同（相同的返回值类型和形参列表） Qt5 后成员函数也可作为 slots，可以不用 slots: 声明 slots: 声明前要添加访问权限修饰符 信号函数和槽函数其实都可以被重载   // signal 和 slots 都可以重载  // Qt5的方式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot1)() = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun1, this, pSlot1);  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot2)(int,QString) = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun2, this, pSlot2);   // Qt4的方式  // 1. SIGNAL、SLOT宏会把信号和槽转成字符串，所以就不能进行编译期错误检查  // 2. 槽函数前面必须有 slots 标签，否则无法识别为槽函数  connect(&amp;sw, SIGNAL(showMainWindow()), this, SLOT(onShowMainWindow()));  connect(&amp;sw, SIGNAL(showMainWindow(int,QString))  , this, SLOT(onShowMainWindow(int,QString)));   // Lambda 表达式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun1,  [](){  qDebug()&lt;&lt;&#34;没有参数的信号&#34;;  }  );  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun2,  [](int a, QString msg){  qDebug()&lt;&lt;a&lt;&lt;msg;  }  );   // Lambda 表达式使用注意事项  // 如果b3是局部变量或者成员变量，lambda不要使用引用传值  QPushButton *b3 = new QPushButton(this);  b3-&gt;setText(&#34;Lambda&#34;);  int a = 10, b = 100;  connect(&amp;b2/*b3*/, &amp;QPushButton::clicked,  [=](){ // 此处使用 &amp; 传值会有问题  qDebug()&lt;&lt;a&lt;&lt;b;  }  ); </p>
   </section>
   <footer class="entry-footer"><span title='2022-06-14 09:45:15 +0800 CST'>June 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt 信号和槽" href="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、通用引用  类型声明形式为 type&amp;&amp; 其中 type 类型是要进行推导的，如果类型推导没有发生，那么 type&amp;&amp; 代表一个右值引用 如果一个对象被声明为 auto&amp;&amp;，这个形参或者对象就是一个通用引用 通用引用，如果它被右值初始化，就会对应地成为右值引用；如果它被左值初始化，就会成为左值引用 如果在一个类模板里面看见了一个函数形参类型为 T&amp;&amp;，也不一定就是通用引用，可能并没有发生类型推导  void f(Widget&amp;&amp; param); //右值引用 Widget&amp;&amp; var1 = Widget(); //右值引用 auto&amp;&amp; var2 = var1; //通用引用（不是右值引用）  template&lt;typename T&gt; void f(std::vector&lt;T&gt;&amp;&amp; param); //右值引用  template&lt;typename T&gt; void f(T&amp;&amp; param); //通用引用（不是右值引用）  template &lt;typename T&gt; void f(const T&amp;&amp; param); //param是一个右值引用，因为添加了 const 限定符  // 函数模板 一般可能是通用引用 template &lt;typename T&gt; void print_reference_type(T &amp;&amp;i) { // T&amp;&amp; 或是 auto&amp;&amp;  if (std::is_lvalue_reference&lt;decltype(i)&gt;::value) { std::cout &lt;&lt; &#34;lvalue: &#34; &lt;&lt; i &lt;&lt; std::endl; } else if (std::is_rvalue_reference&lt;decltype(i)&gt;::value) { std::cout &lt;&lt; &#34;rvalue: &#34; &lt;&lt; i &lt;&lt; std::endl; } else { std::cout &lt;&lt; &#34;unknown value: &#34; &lt;&lt; i &lt;&lt; std::endl; } } // 因为 push_back 在有一个特定的 vector 实例之前不可能存在， // 而实例化 vector 时的类型已经决定了 push_back 的声明 // 所以在这里并没有发生类型推导 template&lt;class T, class Allocator = allocator&lt;T&gt;&gt; //来自C&#43;&#43;标准 class vector { public: void push_back(T&amp;&amp; x); … } 一个记录任意函数调用的时间开销的函数模板...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-06-11 20:48:22 +0800 CST'>June 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考" href="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

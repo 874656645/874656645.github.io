@@ -16,7 +16,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -89,7 +89,7 @@ if (!doNotTrack) {
   "keywords": [
     "GeoServer", "ArcGIS"
   ],
-  "articleBody": "一、部署环境和软件版本 操作系统 版本 win10 JDK 版本 OpenJDK11U-jdk_x64_windows_hotspot_11.0.16.1_1 GeoServer 版本 2.21.1 GeoWebCache 版本 1.21.1 二、说明  安装 JDK，配置 java 环境。 Windows 平台可安装 GeoServer Exe 安装包。 也可以通过 Tomcat 起动服务，需要下载 GeoServer 和 GeoWebCache 的 war 包，并放到 tomcat/webapps 目录下，如果只是发布切片服务，配置 GeoWebCache 即可。  三、软件下载  下载 GeoServer 也可GeoServer 官网下载 下载 GeoWebCache，解压待用  四、配置 GeoServer  将 GeoWebCache 中的 jar 包 \\geowebcache\\WEB-INF\\lib\\gwc-arcgiscache-1.21.1.jar 拷贝到 GeoServer 安装目录 \\webapps\\geoserver\\WEB-INF\\lib。 解压 GeoServer 安装目录下的 jar 包 \\webapps\\geoserver\\WEB-INF\\lib\\gs-gwc-2.21.1.jar 到 gs-gwc-2.21.1 文件夹，将 GeoWebCache 中的 \\geowebcache\\WEB-INF\\geowebcache-arcgiscache-context.xml 文件拷贝到解压的目录 gs-gwc-2.21.1 文件夹下。 修改 gs-gwc-2.21.1 文件夹下的 geowebcache-core-context.xml 文件，添加以下代码：\n 修改 gs-gwc-2.21.1 文件夹下的 geowebcache-servlet.xml 文件，添加以下代码：\n 将 gs-gwc-2.21.1 文件夹打成 jar 包，替换 GeoServer 安装目录下的 jar 包 \\webapps\\geoserver\\WEB-INF\\lib\\gs-gwc-2.21.1.jar，完成修改。 参考：将文件夹打包成.jar文件 打包，打 jar 包命令：jar -cvfm gs-gwc-2.21.1.jar gs-gwc-2.21.1/META-INF/MANIFEST.MF -C gs-gwc-2.21.1/ .  五、ArcGIS 切片数据 COMPACT（bundle） 格式或 EXPLODED（jpeg、png） 的切片数据均可，参考ArcGIS Desktop 制作影像切片\n六、切片数据配置  打开 \\GeoServer\\gwc\\geowebcache.xml 文件，在 layers 节点下添加 arcgisLayer 节点。   test E:\\\\data\\\\arcgiscache\\\\cachedata\\\\test\\\\conf.xml E:\\\\data\\\\arcgiscache\\\\cachedata\\\\test\\\\_alllayers false  重启 GeoServer 服务，在 切片图层 里就能看到配置的 ArcGIS 切片服务了  参考：\n Geoserver：Geoserver采用内置的GeoWebCache发布Arcgis切片 使用GeoWebCache发布ArcGIS切片地图（实现高清电子地图） GeoServer(GeoWebCache)发布ArcGIS切片的操作方法及利用OpenLayers调用其发布服务的关键代码 GeoWebCache settings  ",
+  "articleBody": "一、部署环境和软件版本 操作系统 版本 win10 JDK 版本 OpenJDK11U-jdk_x64_windows_hotspot_11.0.16.1_1 GeoServer 版本 2.21.1 GeoWebCache 版本 1.21.1 二、说明  安装 JDK，配置 java 环境。 Windows 平台可安装 GeoServer Exe 安装包。 也可以通过 Tomcat 起动服务，需要下载 GeoServer 和 GeoWebCache 的 war 包，并放到 tomcat/webapps 目录下，如果只是发布切片服务，配置 GeoWebCache 即可。  三、软件下载  下载 GeoServer 也可GeoServer 官网下载 下载 GeoWebCache，解压待用  四、配置 GeoServer  将 GeoWebCache 中的 jar 包 \\geowebcache\\WEB-INF\\lib\\gwc-arcgiscache-1.21.1.jar 拷贝到 GeoServer 安装目录 \\webapps\\geoserver\\WEB-INF\\lib。 解压 GeoServer 安装目录下的 jar 包 \\webapps\\geoserver\\WEB-INF\\lib\\gs-gwc-2.21.1.jar 到 gs-gwc-2.21.1 文件夹，将 GeoWebCache 中的 \\geowebcache\\WEB-INF\\geowebcache-arcgiscache-context.xml 文件拷贝到解压的目录 gs-gwc-2.21.1 文件夹下。 修改 gs-gwc-2.21.1 文件夹下的 geowebcache-core-context.xml 文件，添加以下代码：\n 修改 gs-gwc-2.21.1 文件夹下的 geowebcache-servlet.xml 文件，添加以下代码：\n 将 gs-gwc-2.21.1 文件夹打成 jar 包，替换 GeoServer 安装目录下的 jar 包 \\webapps\\geoserver\\WEB-INF\\lib\\gs-gwc-2.21.1.jar，完成修改。 参考：将文件夹打包成.jar文件 打包，打 jar 包命令：jar -cvfm gs-gwc-2.21.1.jar gs-gwc-2.21.1/META-INF/MANIFEST.MF -C gs-gwc-2.21.1/ .  五、ArcGIS 切片数据 COMPACT（bundle） 格式或 EXPLODED（jpeg、png） 的切片数据均可，参考ArcGIS Desktop 制作影像切片\n六、切片数据配置  打开 \\GeoServer\\gwc\\geowebcache.xml 文件，在 layers 节点下添加 arcgisLayer 节点。    test  E:\\\\data\\\\arcgiscache\\\\cachedata\\\\test\\\\conf.xml  E:\\\\data\\\\arcgiscache\\\\cachedata\\\\test\\\\_alllayers  false  重启 GeoServer 服务，在 切片图层 里就能看到配置的 ArcGIS 切片服务了  参考：\n Geoserver：Geoserver采用内置的GeoWebCache发布Arcgis切片 使用GeoWebCache发布ArcGIS切片地图（实现高清电子地图） GeoServer(GeoWebCache)发布ArcGIS切片的操作方法及利用OpenLayers调用其发布服务的关键代码 GeoWebCache settings  ",
   "wordCount" : "140",
   "inLanguage": "en",
   "datePublished": "2022-08-31T11:19:28+08:00",
@@ -216,11 +216,11 @@ if (!doNotTrack) {
 </div>
 
   <div class="post-content"><h2 id="一部署环境和软件版本">一、部署环境和软件版本<a hidden class="anchor" aria-hidden="true" href="#一部署环境和软件版本">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">操作系统         版本    win10
-JDK             版本    OpenJDK11U-jdk_x64_windows_hotspot_11.0.16.1_1
-GeoServer       版本    2.21.1
-GeoWebCache     版本    1.21.1
-</code></pre></div><h2 id="二说明">二、说明<a hidden class="anchor" aria-hidden="true" href="#二说明">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>操作系统         版本    win10
+</span></span><span style="display:flex;"><span>JDK             版本    OpenJDK11U-jdk_x64_windows_hotspot_11.0.16.1_1
+</span></span><span style="display:flex;"><span>GeoServer       版本    2.21.1
+</span></span><span style="display:flex;"><span>GeoWebCache     版本    1.21.1
+</span></span></code></pre></div><h2 id="二说明">二、说明<a hidden class="anchor" aria-hidden="true" href="#二说明">#</a></h2>
 <ol>
 <li>安装 <em>JDK</em>，配置 <em>java</em> 环境。</li>
 <li><em>Windows</em> 平台可安装 <em>GeoServer Exe</em> 安装包。</li>
@@ -251,13 +251,13 @@ GeoWebCache     版本    1.21.1
 <ol>
 <li>打开 <code>\GeoServer\gwc\geowebcache.xml</code> 文件，在 <code>layers</code> 节点下添加 <code>arcgisLayer</code> 节点。</li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;arcgisLayer&gt;</span>
-  <span style="color:#f92672">&lt;name&gt;</span>test<span style="color:#f92672">&lt;/name&gt;</span>
-  <span style="color:#f92672">&lt;tilingScheme&gt;</span>E:\\data\\arcgiscache\\cachedata\\test\\conf.xml<span style="color:#f92672">&lt;/tilingScheme&gt;</span>
-  <span style="color:#f92672">&lt;tileCachePath&gt;</span>E:\\data\\arcgiscache\\cachedata\\test\\_alllayers<span style="color:#f92672">&lt;/tileCachePath&gt;</span>
-  <span style="color:#f92672">&lt;hexZoom&gt;</span>false<span style="color:#f92672">&lt;/hexZoom&gt;</span>
-<span style="color:#f92672">&lt;/arcgisLayer&gt;</span>
-</code></pre></div><ol start="2">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;arcgisLayer&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;name&gt;</span>test<span style="color:#f92672">&lt;/name&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;tilingScheme&gt;</span>E:\\data\\arcgiscache\\cachedata\\test\\conf.xml<span style="color:#f92672">&lt;/tilingScheme&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;tileCachePath&gt;</span>E:\\data\\arcgiscache\\cachedata\\test\\_alllayers<span style="color:#f92672">&lt;/tileCachePath&gt;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&lt;hexZoom&gt;</span>false<span style="color:#f92672">&lt;/hexZoom&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/arcgisLayer&gt;</span>
+</span></span></code></pre></div><ol start="2">
 <li>重启 <em>GeoServer</em> 服务，在 <em>切片图层</em> 里就能看到配置的 <em>ArcGIS</em> 切片服务了</li>
 </ol>
 <p><img loading="lazy" style="margin: auto;" src=".././img/GeoServer-ArcGIS-%e5%88%87%e7%89%87%e6%9c%8d%e5%8a%a1.jpg" alt="GeoServer-ArcGIS-切片服务"  />

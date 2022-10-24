@@ -145,6 +145,26 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Unreal——使用蓝图获取 uasset 资源
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>方法一：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按路径获取资产（Get Asset by Path） 获取路径下的所有类型资产；
+  通过 获取完整名称（GetFullName） &#43; 包含（Contains） 筛选需要的资产；
+  通过 获取资产（GetAsset） 获取资产对象
+  资产对象的属性：
+  方法二：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按对象路径获取资产（Get Asset by Object Path） 直接获取想要的资产对象；
+  再通过 获取资产（GetAsset） &#43; cast 将资产对象转换为需要的对象类型；
+  注意：资产路径的格式：
+ map : World&#39;/Game/Maps/NewWorld.NewWorld&#39; 蓝图类 : 要加 _C 例如 Blueprint&#39;/Game/Blueprints/MySpringArmPawn.MySpringArmPawn_C&#39;  参考：
+ UE4 | BP | 使用蓝图获取Uasset资源 关于UE4动态资源加载(蓝图类)  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-11 17:40:41 +0800 CST'>August 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——使用蓝图获取 uasset 资源" href="https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Unreal——蓝图接口
     </h2>
   </header>
@@ -220,21 +240,6 @@ Pawn 是 Actor 的子类，作为游戏内的形象或人像（例如游戏中�
   </section>
   <footer class="entry-footer"><span title='2022-08-09 19:38:55 +0800 CST'>August 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——蓝图函数、事件和宏" href="https://874656645.github.io/posts/215-unreal-%E8%93%9D%E5%9B%BE%E5%87%BD%E6%95%B0%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%AE%8F/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——DefaultGraphicsRHI
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>注意： UE5 默认使用的是 DX12，有可能会在渲染方面出现奇怪的问题，需要特别注意。
-RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个平台的图形 API 包装成统一接口，供上层渲染来使用，让业务不用过多的关注 API 细节（实际还得关注RHI 细节）。从代码结构上来看，RHI 封装的比较贴合于现代的图形 API(vulkan, metal, DX12)，也支持 opengl/opengles。这个接口是广义上的概念，不仅指 C&#43;&#43; 的纯虚基类，也包括一些全局变量，全局函数等。
-参考：
- UE4/UE5的RHI(Vulkan为例)  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-04 14:57:18 +0800 CST'>August 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——DefaultGraphicsRHI" href="https://874656645.github.io/posts/214-unreal-defaultgraphicsrhi/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -15,7 +15,7 @@ c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前�
 std::move() 返回的也是一个右值
 对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
 一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
-class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt;a &#43; t.a; return temp; } void printT(T &amp;t){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; t.">
+class T{ public:  T(int v){  a = v;  }  T operator&#43;(T &amp;t){  T temp = this-&gt;a &#43; t.a;  return temp;  }  void printT(T &amp;t){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; t.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -24,7 +24,7 @@ class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -62,7 +62,7 @@ c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前�
 std::move() 返回的也是一个右值
 对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
 一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
-class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt;a &#43; t.a; return temp; } void printT(T &amp;t){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; t." />
+class T{ public:  T(int v){  a = v;  }  T operator&#43;(T &amp;t){  T temp = this-&gt;a &#43; t.a;  return temp;  }  void printT(T &amp;t){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; t." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/60-%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E4%B8%8D%E8%83%BD%E4%BD%9C%E4%B8%BAno-const%E5%BC%95%E7%94%A8%E5%8F%82%E6%95%B0/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-04T10:31:45&#43;08:00" />
@@ -81,7 +81,7 @@ c&#43;&#43; 中临时变量是右值类型，不能取引用，只能在当前�
 std::move() 返回的也是一个右值
 对于临时变量或字面量的右值引用可以使用 cosnt &amp; 或 &amp;&amp; 类型的参数接收
 一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。
-class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt;a &#43; t.a; return temp; } void printT(T &amp;t){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; t."/>
+class T{ public:  T(int v){  a = v;  }  T operator&#43;(T &amp;t){  T temp = this-&gt;a &#43; t.a;  return temp;  }  void printT(T &amp;t){  cout &lt;&lt; &#34;a = &#34; &lt;&lt; t."/>
 
 
 <script type="application/ld+json">
@@ -110,11 +110,11 @@ class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt
   "@type": "BlogPosting",
   "headline": "临时变量不能绑定 no-const 左值引用类型",
   "name": "临时变量不能绑定 no-const 左值引用类型",
-  "description": "error: cannot bind non-const lvalue reference of type ‘T\u0026amp;’ to an rvalue of type ‘T’\n如果一个参数是以非 const 引用传入，c++ 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。\n但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。\n所以，修改一个临时变量是毫无意义的。据此，c++ 编译器加入了临时变量不能作为非 const 引用的这个语义限制。\nc++ 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数\nstd::move() 返回的也是一个右值\n对于临时变量或字面量的右值引用可以使用 cosnt \u0026amp; 或 \u0026amp;\u0026amp; 类型的参数接收\n一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。\nclass T{ public: T(int v){ a = v; } T operator+(T \u0026amp;t){ T temp = this-\u0026gt;a + t.a; return temp; } void printT(T \u0026amp;t){ cout \u0026lt;\u0026lt; \u0026#34;a = \u0026#34; \u0026lt;\u0026lt; t.",
+  "description": "error: cannot bind non-const lvalue reference of type ‘T\u0026amp;’ to an rvalue of type ‘T’\n如果一个参数是以非 const 引用传入，c++ 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。\n但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。\n所以，修改一个临时变量是毫无意义的。据此，c++ 编译器加入了临时变量不能作为非 const 引用的这个语义限制。\nc++ 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数\nstd::move() 返回的也是一个右值\n对于临时变量或字面量的右值引用可以使用 cosnt \u0026amp; 或 \u0026amp;\u0026amp; 类型的参数接收\n一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。\nclass T{ public:  T(int v){  a = v;  }  T operator+(T \u0026amp;t){  T temp = this-\u0026gt;a + t.a;  return temp;  }  void printT(T \u0026amp;t){  cout \u0026lt;\u0026lt; \u0026#34;a = \u0026#34; \u0026lt;\u0026lt; t.",
   "keywords": [
     "C++"
   ],
-  "articleBody": "error: cannot bind non-const lvalue reference of type ‘T\u0026’ to an rvalue of type ‘T’\n如果一个参数是以非 const 引用传入，c++ 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。\n但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。\n所以，修改一个临时变量是毫无意义的。据此，c++ 编译器加入了临时变量不能作为非 const 引用的这个语义限制。\nc++ 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数\nstd::move() 返回的也是一个右值\n对于临时变量或字面量的右值引用可以使用 cosnt \u0026 或 \u0026\u0026 类型的参数接收\n一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。\nclass T{ public: T(int v){ a = v; } T operator+(T \u0026t){ T temp = this-a + t.a; return temp; } void printT(T \u0026t){ cout  \"a = \"  t.a  endl; } // 方式一  void printT(const T \u0026t){ cout  \"a = \"  t.a  endl; } // 方式二 C++11 以后添加的右值引用新特性  void printT(T \u0026\u0026t){ cout  \"a = \"  t.a  endl; } private: int a; }; int main() { T t0(0), t1(1), t2(2); t0.printT(t1 + t2); // t1 + t2 返回临时变量 右值  return 0; } 输出：\nmain.cpp:29:18: error: cannot bind non-const lvalue reference of type ‘T\u0026’ to an rvalue of type ‘T’ 29 | t0.printT(t1 + t2); | ~~~^~~~ main.cpp:20:20: note: initializing argument 1 of ‘void T::printT(T\u0026)’ 20 | void printT(T \u0026t){ | ~~~^ ",
+  "articleBody": "error: cannot bind non-const lvalue reference of type ‘T\u0026’ to an rvalue of type ‘T’\n如果一个参数是以非 const 引用传入，c++ 编译器就有理由认为程序员会在函数中修改这个值，并且这个被修改的引用在函数返回后要发挥作用。\n但如果你 把一个临时变量当作非 const 引用参数传进来，由于临时变量的特殊性，程序员并不能操作临时变量，而且临时变量随时可能被释放掉。\n所以，修改一个临时变量是毫无意义的。据此，c++ 编译器加入了临时变量不能作为非 const 引用的这个语义限制。\nc++ 中临时变量是右值类型，不能取引用，只能在当前行使用，不能作为非 const 的引用参数\nstd::move() 返回的也是一个右值\n对于临时变量或字面量的右值引用可以使用 cosnt \u0026 或 \u0026\u0026 类型的参数接收\n一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。\nclass T{ public:  T(int v){  a = v;  }  T operator+(T \u0026t){  T temp = this-a + t.a;  return temp;  }  void printT(T \u0026t){  cout  \"a = \"  t.a  endl;  }  // 方式一  void printT(const T \u0026t){  cout  \"a = \"  t.a  endl;  }  // 方式二 C++11 以后添加的右值引用新特性  void printT(T \u0026\u0026t){  cout  \"a = \"  t.a  endl;  } private:  int a; }; int main() {  T t0(0), t1(1), t2(2);  t0.printT(t1 + t2); // t1 + t2 返回临时变量 右值   return 0; } 输出：\nmain.cpp:29:18: error: cannot bind non-const lvalue reference of type ‘T\u0026’ to an rvalue of type ‘T’  29 | t0.printT(t1 + t2);  | ~~~^~~~ main.cpp:20:20: note: initializing argument 1 of ‘void T::printT(T\u0026)’  20 | void printT(T \u0026t){  | ~~~^ ",
   "wordCount" : "169",
   "inLanguage": "en",
   "datePublished": "2022-01-04T10:31:45+08:00",
@@ -225,44 +225,44 @@ class T{ public: T(int v){ a = v; } T operator&#43;(T &amp;t){ T temp = this-&gt
 <strong>std::move() 返回的也是一个右值</strong><br>
 <strong>对于临时变量或字面量的右值引用可以使用 <code>cosnt &amp;</code> 或 <code>&amp;&amp;</code> 类型的参数接收</strong></p>
 <p>一般来说，右值的地址不能通过解引用来获得，因为它们是字面量，或者因为它们本质上是临时的(例如由函数或显式构造函数调用返回的值)。通过将一个对象传递给这个函数，可以获得一个引用它的右值。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span>{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    T(<span style="color:#66d9ef">int</span> v){
-        a <span style="color:#f92672">=</span> v;
-    }
-    T <span style="color:#66d9ef">operator</span><span style="color:#f92672">+</span>(T <span style="color:#f92672">&amp;</span>t){
-        T temp <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">+</span> t.a;
-        <span style="color:#66d9ef">return</span> temp;
-    }
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printT</span>(T <span style="color:#f92672">&amp;</span>t){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.a <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#75715e">// 方式一
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printT</span>(<span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>t){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.a <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-    <span style="color:#75715e">// 方式二 C++11 以后添加的右值引用新特性
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printT</span>(T <span style="color:#f92672">&amp;&amp;</span>t){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.a <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> a;
-};
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    T t0(<span style="color:#ae81ff">0</span>), t1(<span style="color:#ae81ff">1</span>), t2(<span style="color:#ae81ff">2</span>);
-    t0.printT(t1 <span style="color:#f92672">+</span> t2);     <span style="color:#75715e">// t1 + t2 返回临时变量 右值
-</span><span style="color:#75715e"></span>
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">main.cpp:29:18: error: cannot bind non-const lvalue reference of type ‘T&amp;’ to an rvalue of type ‘T’
-   29 |     t0.printT(t1 + t2);
-      |               ~~~^~~~
-main.cpp:20:20: note:   initializing argument 1 of ‘void T::printT(T&amp;)’
-   20 |     void printT(T &amp;t){
-      |                 ~~~^
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    T(<span style="color:#66d9ef">int</span> v){
+</span></span><span style="display:flex;"><span>        a <span style="color:#f92672">=</span> v;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    T <span style="color:#66d9ef">operator</span><span style="color:#f92672">+</span>(T <span style="color:#f92672">&amp;</span>t){
+</span></span><span style="display:flex;"><span>        T temp <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>a <span style="color:#f92672">+</span> t.a;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> temp;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printT</span>(T <span style="color:#f92672">&amp;</span>t){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.a <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 方式一
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printT</span>(<span style="color:#66d9ef">const</span> T <span style="color:#f92672">&amp;</span>t){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.a <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 方式二 C++11 以后添加的右值引用新特性
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printT</span>(T <span style="color:#f92672">&amp;&amp;</span>t){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.a <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    T t0(<span style="color:#ae81ff">0</span>), t1(<span style="color:#ae81ff">1</span>), t2(<span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>    t0.printT(t1 <span style="color:#f92672">+</span> t2);     <span style="color:#75715e">// t1 + t2 返回临时变量 右值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>main.cpp:29:18: error: cannot bind non-const lvalue reference of type ‘T&amp;’ to an rvalue of type ‘T’
+</span></span><span style="display:flex;"><span>   29 |     t0.printT(t1 + t2);
+</span></span><span style="display:flex;"><span>      |               ~~~^~~~
+</span></span><span style="display:flex;"><span>main.cpp:20:20: note:   initializing argument 1 of ‘void T::printT(T&amp;)’
+</span></span><span style="display:flex;"><span>   20 |     void printT(T &amp;t){
+</span></span><span style="display:flex;"><span>      |                 ~~~^
+</span></span></code></pre></div>
 
   </div>
 
