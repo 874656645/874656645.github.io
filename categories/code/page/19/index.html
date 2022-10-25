@@ -145,6 +145,24 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>哈希法与冲突处理
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>哈希表及处理冲突的方法
+一、哈希法与哈希表  哈希法又称散列法、杂凑法以及关键字地址计算法等，相应的表称为哈希表。 这种方法的基本思想是：首先在元素的关键字 k 和元素的存储位置 p 之间建立一个对应关系 f，使得 p = f(k)，f 称为哈希函数。 创建哈希表时，把关键字为 k 的元素直接存入地址为 f(k) 的单元；以后当查找关键字为 k 的元素时，再利用哈希函数计算出该元素的存储位置 p=f(k)，从而达到按关键字直接存取元素的目的。  二、冲突 当关键字集合很大时，关键字值不同的元素可能会映象到哈希表的同一地址上，即 k1 ≠ k2，但 f(k1) = f(k2)，这种现象称为冲突，此时称 k1 和 k2 为同义词。
+三、哈希函数构造方法 构造哈希函数的原则是：
+ 函数本身便于计算； 计算出来的地址分布均匀，即对任一关键字 k，f(k) 对应不同地址的概率相等，目的是尽可能减少冲突  常用的构造方法：
+ 数字分析法 平方取中法 分段叠加法 除留余数法：假设哈希表长为 m，p 为小于等于 m 的最大素数，则哈希函数为 f(k)=k % p 伪随机数法  四、冲突处理方法 1. 开放地址法（Open addressing） 这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi
+ 线性探测 二次探测 伪随机探测  线性探测再散列的优点是：只要哈希表不满，就一定能找到一个不冲突的哈希地址，而二次探测再散列和伪随机探测再散列则不一定；缺点是线性探测再散列容易产生二次聚集
+2. 再哈希法 这种方法是同时构造多个不同的哈希函数，当哈希地址Hi=RH1（key）发生冲突时，再计算Hi=RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-25 17:23:49 +0800 CST'>February 25, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 哈希法与冲突处理" href="https://874656645.github.io/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 左值、右值和移动语义
     </h2>
   </header>
@@ -164,10 +182,10 @@ int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; //
   </header>
   <section class="entry-content">
     <p>一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
-三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){  // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... }  std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ...  std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
+三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
 四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
 所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！
-class Person{ public:  int getAge()const{  return m_age;  }  void setAge(int age){  m_age = age;  } private:  int m_age{20}; };  unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){  p-&gt;setAge(30);  return p; }  int main() {  unique_ptr&lt;Person&gt; pP(new Person);  cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl;  // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP));  // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl;  cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl;  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl;  if(pP == nullptr){  cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl;  }  return 0; } 输出：...</p>
+class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){ p-&gt;setAge(30); return p; } int main() { unique_ptr&lt;Person&gt; pP(new Person); cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl; // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl; cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; if(pP == nullptr){ cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl; } return 0; } 输出：...</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr" href="https://874656645.github.io/posts/131-c&#43;&#43;11-auto_ptr-%E8%A2%AB%E5%BA%9F%E5%BC%83%E4%B8%8E-unique_ptr/"></a>
@@ -180,7 +198,7 @@ class Person{ public:  int getAge()const{  return m_age;  }  void setAge(int age
   </header>
   <section class="entry-content">
     <p>一、修饰类成员变量 此关键字只能应用于类的非静态和非常量数据成员，mutable 是为了让 const 对象的某些数据成员可以被修改。static 是类的成员，不属于对象，常对象和常函数只会限制类的成员变量修改，所以类的 static 数据成员不需要 mutable 修饰，在常对象和常函数中也能被修改。
-class Person{ public:  int getAge() const{  m_count&#43;&#43;;  s_count&#43;&#43;;  return m_age;  }  int getCount()const{  return m_count;  } private:  int m_age{20};  mutable int m_count{0}; public:  static int s_count; }; int Person::s_count = 0;  int main() {  Person p;  p.getAge();  p.getAge();  p.getAge();  cout &lt;&lt; p.getCount() &lt;&lt; endl; // 3  cout &lt;&lt; p....</p>
+class Person{ public: int getAge() const{ m_count&#43;&#43;; s_count&#43;&#43;; return m_age; } int getCount()const{ return m_count; } private: int m_age{20}; mutable int m_count{0}; public: static int s_count; }; int Person::s_count = 0; int main() { Person p; p.getAge(); p.getAge(); p.getAge(); cout &lt;&lt; p.getCount() &lt;&lt; endl; // 3  cout &lt;&lt; p.s_count &lt;&lt; endl; // 3  return 0; } 二、修饰匿名函数 表示可以修改按值传入的变量的副本（不是值本身），类似于不带 const 关键字的形参。使用 mutable 关键字后对按值传入的变量进行的修改，不会将改变传递到 Lambda 表达式之外。如果不加 mutable 关键字，按值传入的变量是只读的，即使在 Lambda 表达式内部也不可修改...</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 mutable 关键字" href="https://874656645.github.io/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
@@ -192,25 +210,11 @@ class Person{ public:  int getAge() const{  m_count&#43;&#43;;  s_count&#43;&#43
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() {  int a = 10;  auto val = a;  cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
-template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) {  auto v = x * y;  std::cout &lt;&lt; v; } int main() {  int a = 10;  double b = 1....</p>
+    <p>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
+template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1....</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-22 20:30:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto 与 decltype 关键字" href="https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>gdb 调试使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、生成带有调试信息的程序 gcc main.c -o app -g
-二、启动调试  启动调试：gdb app 设置参数： set args
-set args 123 abc 456 ddd 查看代码： list 或 l  查看代码显示行数：show listsize 设置代码显示行数：set listsize 20 查看当前文件：  l l 行号 l 函数名   查看非当前文件：  l 文件名:行号 l 文件名:函数名      三、断点相关  设置断点：  break 行号 b 行号 b 函数名 b 文件名:行号 b 文件名:函数名   查看断点：info break 或 i b 删除断点：  del 断点Num d Num d Num1 Num2 d Num1-Num10   设置断点无效：dis Num 断点生效：ena Num 设置条件断点：b 行号 if i == 10  四、调试相关  启动运行：  start - s run - r   退出 gdb 调试：quit - q 打印变量的值：p 变量名 打印变量的类型：ptype 变量名 向下单步调试：  next - n step - s   跳出函数体：finish 从循环中跳出（循环体中不能有断点）：until 设置变量的值：set var 变量名 = value 继续运行到下一个断点：continue - c 监视变量：display 变量名 查看所有的监视变量的信息：info(i) display 取消变量监视：undisplay Num  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-20 08:53:26 +0800 CST'>February 20, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to gdb 调试使用" href="https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

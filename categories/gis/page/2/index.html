@@ -145,6 +145,30 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>GIS——GeoServer 地图服务
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>GeoServer Version 2.21.1 一、WMS 服务   获取服务能力元数据：
+  可在网址中指定 version=1.1.0 和 service=WMS 参数
+  获取整个 geoserver 的服务能力，默认 WMS_Capabilities 的 version 是 1.3.0 的
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中不包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中不包含工作空间的 1.3.0 版本的 xml 样例
+  获取其中某个工作空间的服务能力，需要在 geoserver 后面添加工作空间名称
+http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中包含工作空间的 1.3.0 版本的 xml 样例
+  注意：
+ 1.3.0 版本的空间参考标签为 &lt;CRS&gt;，而 1.1.0 版本的空间参考标签为 &lt;SRS&gt; 如果请求的网址指定了工作空间，图层名中就不需要有工作空间名了（比如：cite:hl_2017 和 hl_2017） 1.1.0 版本的图层中包含 geoserver 以图层组方式发布的服务图层，而 1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-23 10:34:42 +0800 CST'>August 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to GIS——GeoServer 地图服务" href="https://874656645.github.io/posts/223-gis-geoserver-%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Unreal——使用蓝图获取 uasset 资源
     </h2>
   </header>
@@ -219,27 +243,6 @@ Pawn 是 Actor 的子类，作为游戏内的形象或人像（例如游戏中�
   </section>
   <footer class="entry-footer"><span title='2022-08-10 10:02:42 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——通用基类（Actor、Pawn、Character等）" href="https://874656645.github.io/posts/216-unreal-%E9%80%9A%E7%94%A8%E5%9F%BA%E7%B1%BBactorpawncharacter%E7%AD%89/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——蓝图函数、事件和宏
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  函数调用会等待函数执行结果，事件调用只是触发但不会等待
-事件是异步执行，触发后，会在新的线程中执行，所以可以使用 Delay，函数和宏的调用是同步执行，是单线程的，所以在函数中不能使用 Timeline、Delay 和 Http 请求 等操作。
-  事件没有返回值，函数和宏可以有返回值
-  函数和事件可以跨蓝图类访问，而宏只可以在定义的蓝图类内访问（宏库可以跨蓝图类访问）
-  函数可以用局部变量，事件没有局部变量
-  因为函数执行顺序有保证，所以优先使用函数
-  函数可以被继承，而宏不可以被继承，子类无法使用父类的宏
-  没有返回值的函数，在被子类 Overide 时，会变成事件
-  参考：
- UE4蓝图之函数、事件、宏的区别 【UE4笔记】Event&amp;Function事件和函数的区别 [UE4]函数和事件的区别  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-09 19:38:55 +0800 CST'>August 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——蓝图函数、事件和宏" href="https://874656645.github.io/posts/215-unreal-%E8%93%9D%E5%9B%BE%E5%87%BD%E6%95%B0%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%AE%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

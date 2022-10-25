@@ -175,7 +175,7 @@ if (!doNotTrack) {
   <section class="entry-content">
     <p>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
 分析：
- 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public:  Player(string name){  m_name = name;  m_avgScore = 0;  }  void setAvgScore(int v){  m_avgScore = v;  }  void printInfo()const{  cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl;  } private:  string m_name;  int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){  string nameSeed = &#34;ABCDE&#34;;  for(int i = 0; i &lt; nameSeed....</p>
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
@@ -187,7 +187,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std;  void ReadWriteFile(){  ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in);  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app);  if (!ifs)  {  cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl;  return;  }  if (!ofs)  {  cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl;  return;  }  char ch;  while (ifs.get(ch))  {  cout &lt;&lt; ch;  ofs &lt;&lt; ch;  }   ifs....</p>
+    <p>一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in); ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app); if (!ifs) { cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl; return; } if (!ofs) { cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl; return; } char ch; while (ifs.get(ch)) { cout &lt;&lt; ch; ofs &lt;&lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &lt;&lt; &#34;Age: &#34; &lt;&lt; m_age &lt;&lt; &#34; ID: &#34; &lt;&lt; m_id &lt;&lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 09:47:21 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 文件操作" href="https://874656645.github.io/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"></a>
@@ -199,7 +199,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;#include &lt;cstring&gt;#include &lt;iomanip&gt; // 控制符头文件using namespace std; // 格式化输出 void func(){  // 方式一：使用成员方法  int number = 10;  cout &lt;&lt; number &lt;&lt; endl;  cout.unsetf(ios::dec);  // 八进制  cout.setf(ios::oct);  cout.setf(ios::showbase);  cout &lt;&lt; number &lt;&lt; endl; // 012  // 十六进制  cout.unsetf(ios::oct);  cout.setf(ios::hex);  cout &lt;&lt; number &lt;&lt; endl; // 0xa  // 固定宽度  cout.width(10);  cout.fill(&#39;*&#39;);  cout &lt;&lt; number &lt;&lt; endl; // *******0xa  // 上面的设置只对当前输出有效，下次的输出格式要重新设置  cout....</p>
+    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;#include &lt;cstring&gt;#include &lt;iomanip&gt; // 控制符头文件using namespace std; // 格式化输出 void func(){ // 方式一：使用成员方法  int number = 10; cout &lt;&lt; number &lt;&lt; endl; cout.unsetf(ios::dec); // 八进制  cout.setf(ios::oct); cout.setf(ios::showbase); cout &lt;&lt; number &lt;&lt; endl; // 012  // 十六进制  cout.unsetf(ios::oct); cout.setf(ios::hex); cout &lt;&lt; number &lt;&lt; endl; // 0xa  // 固定宽度  cout.width(10); cout.fill(&#39;*&#39;); cout &lt;&lt; number &lt;&lt; endl; // *******0xa  // 上面的设置只对当前输出有效，下次的输出格式要重新设置  cout.setf(ios::left); cout.width(10); cout....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 09:12:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 格式化输出" href="https://874656645.github.io/posts/76-%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/"></a>

@@ -145,6 +145,20 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Unreal Engine 5 打包
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>UE5 打包：
+如果平台前面有感叹号表示缺少 SDK 环境
+ 注意： 安装完 SDK 后要重启电脑   Windows SDK 18362 or Newer .NET Core 3.1  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-07 10:23:08 +0800 CST'>July 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal Engine 5 打包" href="https://874656645.github.io/posts/201-unreal-engine-5-%E6%89%93%E5%8C%85/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Unreal——智慧城市项目搭建
     </h2>
   </header>
@@ -176,7 +190,7 @@ if (!doNotTrack) {
   </header>
   <section class="entry-content">
     <p>软件和插件：
- Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine’ `CityEngine VR Experience for Unreal Engine’ datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera  蓝图开发：
+ Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&#39; `CityEngine VR Experience for Unreal Engine&#39; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera  蓝图开发：
  通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：
  材质 PBR 粒子效果（magic_circle_creator） 光影效果 天气模拟（天气插件 Ultra Dynamic Sky） 后处理：环境光遮蔽、MSAA、景深与镜头效果、屏幕空间反射、扫描线、泛光 自发光材质  数据：...</p>
   </section>
@@ -220,29 +234,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-04-16 16:24:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Cesium4Unreal——Hide Parts Tilesets" href="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Using Custom Controllers
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>目标 此步骤将学习如何设置控制器，而不是使用 Cesium 的 DynamicPawn。
-第一步：添加摄影测量数据 为了防止地形和摄影测量数据交叉，将 Aerometrex Denver Photogrammetry 的 actor 的位置的 Z 值设置为 600。
-第二步：定位到摄影测量数据  方式一：如果有经纬度坐标和高程数据，直接设置 CesiumGeoreference 的数据  Origin Latitude = 39.752827
-Origin Longitude = -104.999689
-Origin Height = 1570.879421
-方式二：在【世界大纲视图】中双击 Aerometrex Denver Photogrammetry，使用场景视图导航到想要放置世界原点的位置，并点击【Place Georeference origin Here】按钮  第三步：导入第三人称角色 可以添加 UE 自带的【Third Person】资源，也可以添加自己做的角色。添加自带的小白人资源有两种方式：
- 方式一：通过【添加/导入】中的【添加功能或内容包】  方式二：从其他有【第三人称游戏模板】的项目中，将 ThirdPersonCharacter 迁移到本项目中。  第四步：将 ThirdPersonCharacter 放入到场景中 找到 ThirdPersonCharacter 并将其拖拽到场景里，并调整合适的朝向
-效果如下：
-设置【自动控制玩家】为【玩家0】，这样在点击【运行】的时候就可以看到小白人了
-注意：如果你现在试着玩这个关卡，你会注意到你的演员可能会在丹佛摄影测量完全加载之前开始下降。继续阅读，看看如何解决这个问题。出于这个原因，还建议禁用当前未与之交互的任何物理对象的物理功能。
-第五步：设置一个安全的起始位置 在小白人的脚下放置一个立方体，防止开始游戏时，由于 3DTiles 数据在加载过程中，小白人由于受重力影响而掉下去。
-第六步：在场景中添加一个车辆控制器 第七步：设置关卡蓝图 通过 C 和 V 切换小白人和车辆控制器的控制权。...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-16 10:34:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Using Custom Controllers" href="https://874656645.github.io/posts/183-cesium-unreal-using-custom-controllers/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
