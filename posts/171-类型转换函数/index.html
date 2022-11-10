@@ -10,7 +10,7 @@
 <meta name="description" content="一、转换函数 Conversion Functions(operators) 在 C&#43;&#43; 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C&#43;&#43; 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。
 转换函数写法：operator typeName();
  转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：
-class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 &#43; f; cout &lt;&lt; d &lt;&lt; endl; return 0; } 输出：">
+class Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numerator(numerator), m_denominator(denominator)  {  }   //转换函数  operator double() const  {  return (double)m_numerator / m_denominator;  } private:  int m_numerator; //分子  int m_denominator; //分母 };  int main() {  Fraction f(8,5);  double d = 4 &#43; f;  cout &lt;&lt; d &lt;&lt; endl;  return 0; } 输出：">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/171-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -19,7 +19,7 @@ class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerat
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -52,7 +52,7 @@ if (!doNotTrack) {
 <meta property="og:description" content="一、转换函数 Conversion Functions(operators) 在 C&#43;&#43; 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C&#43;&#43; 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。
 转换函数写法：operator typeName();
  转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：
-class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 &#43; f; cout &lt;&lt; d &lt;&lt; endl; return 0; } 输出：" />
+class Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numerator(numerator), m_denominator(denominator)  {  }   //转换函数  operator double() const  {  return (double)m_numerator / m_denominator;  } private:  int m_numerator; //分子  int m_denominator; //分母 };  int main() {  Fraction f(8,5);  double d = 4 &#43; f;  cout &lt;&lt; d &lt;&lt; endl;  return 0; } 输出：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/171-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-10T15:39:37&#43;08:00" />
@@ -66,7 +66,7 @@ class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerat
 <meta name="twitter:description" content="一、转换函数 Conversion Functions(operators) 在 C&#43;&#43; 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C&#43;&#43; 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。
 转换函数写法：operator typeName();
  转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：
-class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 &#43; f; cout &lt;&lt; d &lt;&lt; endl; return 0; } 输出："/>
+class Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numerator(numerator), m_denominator(denominator)  {  }   //转换函数  operator double() const  {  return (double)m_numerator / m_denominator;  } private:  int m_numerator; //分子  int m_denominator; //分母 };  int main() {  Fraction f(8,5);  double d = 4 &#43; f;  cout &lt;&lt; d &lt;&lt; endl;  return 0; } 输出："/>
 
 
 <script type="application/ld+json">
@@ -95,11 +95,11 @@ class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerat
   "@type": "BlogPosting",
   "headline": "类型转换函数",
   "name": "类型转换函数",
-  "description": "一、转换函数 Conversion Functions(operators) 在 C++ 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C++ 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。\n转换函数写法：operator typeName();\n 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：\nclass Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 + f; cout \u0026lt;\u0026lt; d \u0026lt;\u0026lt; endl; return 0; } 输出：",
+  "description": "一、转换函数 Conversion Functions(operators) 在 C++ 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C++ 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。\n转换函数写法：operator typeName();\n 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：\nclass Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numerator(numerator), m_denominator(denominator)  {  }   //转换函数  operator double() const  {  return (double)m_numerator / m_denominator;  } private:  int m_numerator; //分子  int m_denominator; //分母 };  int main() {  Fraction f(8,5);  double d = 4 + f;  cout \u0026lt;\u0026lt; d \u0026lt;\u0026lt; endl;  return 0; } 输出：",
   "keywords": [
     "C++"
   ],
-  "articleBody": "一、转换函数 Conversion Functions(operators) 在 C++ 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C++ 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。\n转换函数写法：operator typeName();\n 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：\nclass Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 + f; cout  d  endl; return 0; } 输出：\n5.6 注意： 编译器将在基于类型调用适当的功能时具有更多控制，而不是我们所期望的。所以使用类或对象的特定成员函数来执行此类转换才是良好的习惯。\n二、构造函数隐式转换 non-explicit-one-argument constructor class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } Fraction operator + (const Fraction\u0026 f) { return Fraction(m_numerator * f.m_denominator + f.m_numerator * m_denominator, m_denominator * f.m_denominator); } //转换函数  operator string() const { return to_string(m_numerator) + \"/\" + to_string(m_denominator); } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); Fraction ff = f + 4; // 调用构造函数，将 4 转换成 Fraction(4, 1)，然后再调用 operator +  cout  (string)ff  endl; return 0; } 输出：\n28/5 三、转换函数与构造函数隐式转换（ambiguous） class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } Fraction operator + (const Fraction\u0026 f) { return Fraction(m_numerator * f.m_denominator + f.m_numerator * m_denominator, m_denominator * f.m_denominator); } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } operator string() const { return to_string(m_numerator) + \"/\" + to_string(m_denominator); } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); Fraction ff = f + 4; // error: ambiguous overload for ‘operator+’ (operand types are ‘Fraction’ and ‘int’)  cout  ff  endl; return 0; } 输出：\nmain.cpp:54:21: error: ambiguous overload for ‘operator+’ (operand types are ‘Fraction’ and ‘int’) 54 | Fraction ff = f + 4; | ~ ^ ~ | | | | | int | Fraction main.cpp:54:21: note: candidate: ‘operator+(double, int)’ 54 | Fraction ff = f + 4; | ~~^~~ main.cpp:21:14: note: candidate: ‘Fraction Fraction::operator+(const Fraction\u0026)’ 21 | Fraction operator + (const Fraction\u0026 f) { | ^~~~~~~~  可以将 4 隐式的转换为 Fraction 对象，然后调用 + 操作符重载 也可以将 f 转换为 double，再与 4 相加，最后再将 double 隐式转换为 Fraction 对象  四、禁止构造函数隐式转换 class Fraction { public: explicit Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } Fraction operator + (const Fraction\u0026 f) { return Fraction(m_numerator * f.m_denominator + f.m_numerator * m_denominator, m_denominator * f.m_denominator); } //转换函数  operator string() const { return to_string(m_numerator) + \"/\" + to_string(m_denominator); } operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); // Fraction ff = f + 4; // error: conversion from ‘double’ to non-scalar type ‘Fraction’ requested  double ff = f + 4; // OK\t5.6  cout  ff  endl; return 0; }  由于在构造函数前面增加了 explicit 关键字，所以不能将 4 转换成 Fraction 类型； 也不能先将 f 转换成 double 类型，与 4 相加，再将 double 隐式转换成 Fraction 类型，所以会报错。  参考：\n C++转换函数 （conversion function）与 C++中explicit关键字 C++转换函数 Conversion Operators in C++  ",
+  "articleBody": "一、转换函数 Conversion Functions(operators) 在 C++ 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C++ 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。\n转换函数写法：operator typeName();\n 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：\nclass Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numerator(numerator), m_denominator(denominator)  {  }   //转换函数  operator double() const  {  return (double)m_numerator / m_denominator;  } private:  int m_numerator; //分子  int m_denominator; //分母 };  int main() {  Fraction f(8,5);  double d = 4 + f;  cout  d  endl;  return 0; } 输出：\n5.6 注意： 编译器将在基于类型调用适当的功能时具有更多控制，而不是我们所期望的。所以使用类或对象的特定成员函数来执行此类转换才是良好的习惯。\n二、构造函数隐式转换 non-explicit-one-argument constructor class Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numerator(numerator), m_denominator(denominator)  {  }   Fraction operator + (const Fraction\u0026 f) {  return Fraction(m_numerator * f.m_denominator + f.m_numerator * m_denominator, m_denominator * f.m_denominator);  }   //转换函数  operator string() const  {  return to_string(m_numerator) + \"/\" + to_string(m_denominator);  } private:  int m_numerator; //分子  int m_denominator; //分母 };  int main() {  Fraction f(8,5);  Fraction ff = f + 4; // 调用构造函数，将 4 转换成 Fraction(4, 1)，然后再调用 operator +  cout  (string)ff  endl;  return 0; } 输出：\n28/5 三、转换函数与构造函数隐式转换（ambiguous） class Fraction { public:  Fraction(int numerator, int denominator = 1)  :m_numerator(numerator), m_denominator(denominator)  {  }   Fraction operator + (const Fraction\u0026 f) {  return Fraction(m_numerator * f.m_denominator + f.m_numerator * m_denominator, m_denominator * f.m_denominator);  }   //转换函数  operator double() const  {  return (double)m_numerator / m_denominator;  }  operator string() const  {  return to_string(m_numerator) + \"/\" + to_string(m_denominator);  } private:  int m_numerator; //分子  int m_denominator; //分母 };  int main() {  Fraction f(8,5);  Fraction ff = f + 4; // error: ambiguous overload for ‘operator+’ (operand types are ‘Fraction’ and ‘int’)  cout  ff  endl;  return 0; } 输出：\nmain.cpp:54:21: error: ambiguous overload for ‘operator+’ (operand types are ‘Fraction’ and ‘int’)  54 | Fraction ff = f + 4;  | ~ ^ ~  | | |  | | int  | Fraction main.cpp:54:21: note: candidate: ‘operator+(double, int)’  54 | Fraction ff = f + 4;  | ~~^~~ main.cpp:21:14: note: candidate: ‘Fraction Fraction::operator+(const Fraction\u0026)’  21 | Fraction operator + (const Fraction\u0026 f) {  | ^~~~~~~~  可以将 4 隐式的转换为 Fraction 对象，然后调用 + 操作符重载 也可以将 f 转换为 double，再与 4 相加，最后再将 double 隐式转换为 Fraction 对象  四、禁止构造函数隐式转换 class Fraction { public:  explicit Fraction(int numerator, int denominator = 1)  :m_numerator(numerator), m_denominator(denominator)  {  }   Fraction operator + (const Fraction\u0026 f) {  return Fraction(m_numerator * f.m_denominator + f.m_numerator * m_denominator, m_denominator * f.m_denominator);  }   //转换函数  operator string() const  {  return to_string(m_numerator) + \"/\" + to_string(m_denominator);  }  operator double() const  {  return (double)m_numerator / m_denominator;  } private:  int m_numerator; //分子  int m_denominator; //分母 }; int main() {  Fraction f(8,5);  // Fraction ff = f + 4; // error: conversion from ‘double’ to non-scalar type ‘Fraction’ requested  double ff = f + 4; // OK\t5.6  cout  ff  endl;  return 0; }  由于在构造函数前面增加了 explicit 关键字，所以不能将 4 转换成 Fraction 类型； 也不能先将 f 转换成 double 类型，与 4 相加，再将 double 隐式转换成 Fraction 类型，所以会报错。  参考：\n C++转换函数 （conversion function）与 C++中explicit关键字 C++转换函数 Conversion Operators in C++  ",
   "wordCount" : "461",
   "inLanguage": "en",
   "datePublished": "2022-04-10T15:39:37+08:00",
@@ -230,152 +230,152 @@ class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerat
 <li>转换函数不能有形参</li>
 </ul>
 <p>例如下面的类：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fraction</span>
-{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    Fraction(<span style="color:#66d9ef">int</span> numerator, <span style="color:#66d9ef">int</span> denominator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
-        <span style="color:#f92672">:</span>m_numerator(numerator), m_denominator(denominator)
-    {
-    }
-
-    <span style="color:#75715e">//转换函数
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">double</span>() <span style="color:#66d9ef">const</span>
-    {
-        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">double</span>)m_numerator <span style="color:#f92672">/</span> m_denominator;
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> m_numerator;        <span style="color:#75715e">//分子
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m_denominator;      <span style="color:#75715e">//分母
-</span><span style="color:#75715e"></span>};
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    Fraction f(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>);
-    <span style="color:#66d9ef">double</span> d <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span> f;
-    cout <span style="color:#f92672">&lt;&lt;</span> d <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">5.6
-</code></pre></div><p><strong>注意：</strong> 编译器将在基于类型调用适当的功能时具有更多控制，而不是我们所期望的。所以使用类或对象的特定成员函数来执行此类转换才是良好的习惯。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fraction</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Fraction(<span style="color:#66d9ef">int</span> numerator, <span style="color:#66d9ef">int</span> denominator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">:</span>m_numerator(numerator), m_denominator(denominator)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//转换函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">double</span>() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">double</span>)m_numerator <span style="color:#f92672">/</span> m_denominator;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_numerator;        <span style="color:#75715e">//分子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m_denominator;      <span style="color:#75715e">//分母
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Fraction f(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> d <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">+</span> f;
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> d <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>5.6
+</span></span></code></pre></div><p><strong>注意：</strong> 编译器将在基于类型调用适当的功能时具有更多控制，而不是我们所期望的。所以使用类或对象的特定成员函数来执行此类转换才是良好的习惯。</p>
 <h2 id="二构造函数隐式转换-non-explicit-one-argument-constructor">二、构造函数隐式转换 non-explicit-one-argument constructor<a hidden class="anchor" aria-hidden="true" href="#二构造函数隐式转换-non-explicit-one-argument-constructor">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fraction</span>
-{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    Fraction(<span style="color:#66d9ef">int</span> numerator, <span style="color:#66d9ef">int</span> denominator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
-        <span style="color:#f92672">:</span>m_numerator(numerator), m_denominator(denominator)
-    {
-    }
-    
-    Fraction <span style="color:#66d9ef">operator</span> <span style="color:#f92672">+</span> (<span style="color:#66d9ef">const</span> Fraction<span style="color:#f92672">&amp;</span> f) {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Fraction</span>(m_numerator <span style="color:#f92672">*</span> f.m_denominator <span style="color:#f92672">+</span> f.m_numerator <span style="color:#f92672">*</span> m_denominator, m_denominator <span style="color:#f92672">*</span> f.m_denominator);
-    }
-    
-    <span style="color:#75715e">//转换函数
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">string</span>() <span style="color:#66d9ef">const</span>
-    {   
-        <span style="color:#66d9ef">return</span> to_string(m_numerator) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> to_string(m_denominator);
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> m_numerator;        <span style="color:#75715e">//分子
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m_denominator;      <span style="color:#75715e">//分母
-</span><span style="color:#75715e"></span>};
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    Fraction f(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>);
-    Fraction ff <span style="color:#f92672">=</span> f <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// 调用构造函数，将 4 转换成 Fraction(4, 1)，然后再调用 operator +
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> (string)ff <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">28/5
-</code></pre></div><h2 id="三转换函数与构造函数隐式转换ambiguous">三、转换函数与构造函数隐式转换（ambiguous）<a hidden class="anchor" aria-hidden="true" href="#三转换函数与构造函数隐式转换ambiguous">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fraction</span>
-{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    Fraction(<span style="color:#66d9ef">int</span> numerator, <span style="color:#66d9ef">int</span> denominator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
-        <span style="color:#f92672">:</span>m_numerator(numerator), m_denominator(denominator)
-    {
-    }
-    
-    Fraction <span style="color:#66d9ef">operator</span> <span style="color:#f92672">+</span> (<span style="color:#66d9ef">const</span> Fraction<span style="color:#f92672">&amp;</span> f) {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Fraction</span>(m_numerator <span style="color:#f92672">*</span> f.m_denominator <span style="color:#f92672">+</span> f.m_numerator <span style="color:#f92672">*</span> m_denominator, m_denominator <span style="color:#f92672">*</span> f.m_denominator);
-    }
-    
-    <span style="color:#75715e">//转换函数
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">double</span>() <span style="color:#66d9ef">const</span>
-    {
-        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">double</span>)m_numerator <span style="color:#f92672">/</span> m_denominator;
-    }
-    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">string</span>() <span style="color:#66d9ef">const</span>
-    {   
-        <span style="color:#66d9ef">return</span> to_string(m_numerator) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> to_string(m_denominator);
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> m_numerator;        <span style="color:#75715e">//分子
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m_denominator;      <span style="color:#75715e">//分母
-</span><span style="color:#75715e"></span>};
-
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    Fraction f(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>);
-    Fraction ff <span style="color:#f92672">=</span> f <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// error: ambiguous overload for ‘operator+’ (operand types are ‘Fraction’ and ‘int’)
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> ff <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">main.cpp:54:21: error: ambiguous overload for ‘operator+’ (operand types are ‘Fraction’ and ‘int’)
-   54 |     Fraction ff = f + 4;
-      |                   ~ ^ ~
-      |                   |   |
-      |                   |   int
-      |                   Fraction
-main.cpp:54:21: note: candidate: ‘operator+(double, int)’ 
-   54 |     Fraction ff = f + 4;
-      |                   ~~^~~
-main.cpp:21:14: note: candidate: ‘Fraction Fraction::operator+(const Fraction&amp;)’
-   21 |     Fraction operator + (const Fraction&amp; f) {
-      |              ^~~~~~~~
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fraction</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Fraction(<span style="color:#66d9ef">int</span> numerator, <span style="color:#66d9ef">int</span> denominator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">:</span>m_numerator(numerator), m_denominator(denominator)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    Fraction <span style="color:#66d9ef">operator</span> <span style="color:#f92672">+</span> (<span style="color:#66d9ef">const</span> Fraction<span style="color:#f92672">&amp;</span> f) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Fraction</span>(m_numerator <span style="color:#f92672">*</span> f.m_denominator <span style="color:#f92672">+</span> f.m_numerator <span style="color:#f92672">*</span> m_denominator, m_denominator <span style="color:#f92672">*</span> f.m_denominator);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//转换函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">string</span>() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>    {   
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> to_string(m_numerator) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> to_string(m_denominator);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_numerator;        <span style="color:#75715e">//分子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m_denominator;      <span style="color:#75715e">//分母
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Fraction f(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>    Fraction ff <span style="color:#f92672">=</span> f <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// 调用构造函数，将 4 转换成 Fraction(4, 1)，然后再调用 operator +
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> (string)ff <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>28/5
+</span></span></code></pre></div><h2 id="三转换函数与构造函数隐式转换ambiguous">三、转换函数与构造函数隐式转换（ambiguous）<a hidden class="anchor" aria-hidden="true" href="#三转换函数与构造函数隐式转换ambiguous">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fraction</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Fraction(<span style="color:#66d9ef">int</span> numerator, <span style="color:#66d9ef">int</span> denominator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">:</span>m_numerator(numerator), m_denominator(denominator)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    Fraction <span style="color:#66d9ef">operator</span> <span style="color:#f92672">+</span> (<span style="color:#66d9ef">const</span> Fraction<span style="color:#f92672">&amp;</span> f) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Fraction</span>(m_numerator <span style="color:#f92672">*</span> f.m_denominator <span style="color:#f92672">+</span> f.m_numerator <span style="color:#f92672">*</span> m_denominator, m_denominator <span style="color:#f92672">*</span> f.m_denominator);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//转换函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">double</span>() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">double</span>)m_numerator <span style="color:#f92672">/</span> m_denominator;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">string</span>() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>    {   
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> to_string(m_numerator) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> to_string(m_denominator);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_numerator;        <span style="color:#75715e">//分子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m_denominator;      <span style="color:#75715e">//分母
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Fraction f(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>    Fraction ff <span style="color:#f92672">=</span> f <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// error: ambiguous overload for ‘operator+’ (operand types are ‘Fraction’ and ‘int’)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> ff <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>main.cpp:54:21: error: ambiguous overload for ‘operator+’ (operand types are ‘Fraction’ and ‘int’)
+</span></span><span style="display:flex;"><span>   54 |     Fraction ff = f + 4;
+</span></span><span style="display:flex;"><span>      |                   ~ ^ ~
+</span></span><span style="display:flex;"><span>      |                   |   |
+</span></span><span style="display:flex;"><span>      |                   |   int
+</span></span><span style="display:flex;"><span>      |                   Fraction
+</span></span><span style="display:flex;"><span>main.cpp:54:21: note: candidate: ‘operator+(double, int)’ 
+</span></span><span style="display:flex;"><span>   54 |     Fraction ff = f + 4;
+</span></span><span style="display:flex;"><span>      |                   ~~^~~
+</span></span><span style="display:flex;"><span>main.cpp:21:14: note: candidate: ‘Fraction Fraction::operator+(const Fraction&amp;)’
+</span></span><span style="display:flex;"><span>   21 |     Fraction operator + (const Fraction&amp; f) {
+</span></span><span style="display:flex;"><span>      |              ^~~~~~~~
+</span></span></code></pre></div><ul>
 <li>可以将 4 隐式的转换为 Fraction 对象，然后调用 + 操作符重载</li>
 <li>也可以将 f 转换为 double，再与 4 相加，最后再将 double 隐式转换为 Fraction 对象</li>
 </ul>
 <h2 id="四禁止构造函数隐式转换">四、禁止构造函数隐式转换<a hidden class="anchor" aria-hidden="true" href="#四禁止构造函数隐式转换">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fraction</span>
-{
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">explicit</span> Fraction(<span style="color:#66d9ef">int</span> numerator, <span style="color:#66d9ef">int</span> denominator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
-        <span style="color:#f92672">:</span>m_numerator(numerator), m_denominator(denominator)
-    {
-    }
-    
-    Fraction <span style="color:#66d9ef">operator</span> <span style="color:#f92672">+</span> (<span style="color:#66d9ef">const</span> Fraction<span style="color:#f92672">&amp;</span> f) {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Fraction</span>(m_numerator <span style="color:#f92672">*</span> f.m_denominator <span style="color:#f92672">+</span> f.m_numerator <span style="color:#f92672">*</span> m_denominator, m_denominator <span style="color:#f92672">*</span> f.m_denominator);
-    }
-    
-    <span style="color:#75715e">//转换函数
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">string</span>() <span style="color:#66d9ef">const</span>
-    {   
-        <span style="color:#66d9ef">return</span> to_string(m_numerator) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> to_string(m_denominator);
-    }
-    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">double</span>() <span style="color:#66d9ef">const</span>
-    {
-        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">double</span>)m_numerator <span style="color:#f92672">/</span> m_denominator;
-    }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> m_numerator;        <span style="color:#75715e">//分子
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m_denominator;      <span style="color:#75715e">//分母
-</span><span style="color:#75715e"></span>};
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-    Fraction f(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>);
-    <span style="color:#75715e">// Fraction ff = f + 4; // error: conversion from ‘double’ to non-scalar type ‘Fraction’ requested
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">double</span> ff <span style="color:#f92672">=</span> f <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// OK	5.6
-</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> ff <span style="color:#f92672">&lt;&lt;</span> endl;
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Fraction</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">explicit</span> Fraction(<span style="color:#66d9ef">int</span> numerator, <span style="color:#66d9ef">int</span> denominator <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">:</span>m_numerator(numerator), m_denominator(denominator)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    Fraction <span style="color:#66d9ef">operator</span> <span style="color:#f92672">+</span> (<span style="color:#66d9ef">const</span> Fraction<span style="color:#f92672">&amp;</span> f) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">Fraction</span>(m_numerator <span style="color:#f92672">*</span> f.m_denominator <span style="color:#f92672">+</span> f.m_numerator <span style="color:#f92672">*</span> m_denominator, m_denominator <span style="color:#f92672">*</span> f.m_denominator);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//转换函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">string</span>() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>    {   
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> to_string(m_numerator) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> to_string(m_denominator);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">operator</span> <span style="color:#a6e22e">double</span>() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">double</span>)m_numerator <span style="color:#f92672">/</span> m_denominator;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_numerator;        <span style="color:#75715e">//分子
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> m_denominator;      <span style="color:#75715e">//分母
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Fraction f(<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">5</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Fraction ff = f + 4; // error: conversion from ‘double’ to non-scalar type ‘Fraction’ requested
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">double</span> ff <span style="color:#f92672">=</span> f <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// OK	5.6
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> ff <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>由于在构造函数前面增加了 <code>explicit</code> 关键字，所以不能将 4 转换成 Fraction 类型；</li>
 <li>也不能先将 f 转换成 double 类型，与 4 相加，再将 double 隐式转换成 Fraction 类型，所以会报错。</li>
 </ul>

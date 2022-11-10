@@ -160,11 +160,26 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>GIS——Global Mapper 使用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  【File】-&gt;【Create New Map Catalog】
+  Export
+  导出灰度图
+ 关闭【地图渲晕（Disable Hill Shading）】，默认是开启状态，关闭后，并使用【梯度渲染（Gradient Shader）】   导出 PNG 设置    </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-09 11:44:36 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to GIS——Global Mapper 使用" href="https://874656645.github.io/posts/232-gis-global-mapper-%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——父类与子类、基类与派生类
     </h2>
   </header>
   <section class="entry-content">
-    <p>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;&amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  class A { int x, y; public: virtual ~A() { cout &lt;&lt; &#34;~A()\n&#34;; } int getx() { return x; } virtual int vf() const { return 1; } protected: int gety() { return y; } }; class B : protected A { friend int main(); bool visible; public: ~B() { cout &lt;&lt; &#34;~B()\n&#34;; } using A::gety; A* getFather(){ return this; } private: virtual int vf() const { // 子类内部不受继承方式的影响 	const A *pa = this; // 将子类指针赋值给父类指针 	const A&amp; ra = *this; // 将父类引用指向子类对象 	A a = *this; // 将子类对象赋值给父类对象 	// 父类对象 a 生命期在函数结束后结束 	// 输出：~A() 	cout &lt;&lt; &#34;in B::vf() A::vf()：&#34; &lt;&lt; A::vf() &lt;&lt; endl; cout &lt;&lt; &#34;in B::vf() a....</p>
+    <p>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;&amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  class A { 	int x, y; public: 	virtual ~A() { 	cout &lt;&lt; &#34;~A()\n&#34;; 	} 	int getx() { 	return x; 	} 	virtual int vf() const { 	return 1; 	} protected: 	int gety() { 	return y; 	} }; class B : protected A {  friend int main(); 	bool visible; public: 	~B() { 	cout &lt;&lt; &#34;~B()\n&#34;; 	} 	using A::gety;  	A* getFather(){ 	return this; 	}  private: 	virtual int vf() const { 	// 子类内部不受继承方式的影响 	const A *pa = this; // 将子类指针赋值给父类指针 	const A&amp; ra = *this; // 将父类引用指向子类对象 	A a = *this; // 将子类对象赋值给父类对象 	// 父类对象 a 生命期在函数结束后结束 	// 输出：~A() 	cout &lt;&lt; &#34;in B::vf() A::vf()：&#34; &lt;&lt; A::vf() &lt;&lt; endl; 	cout &lt;&lt; &#34;in B::vf() a....</p>
   </section>
   <footer class="entry-footer"><span title='2022-09-06 22:28:34 +0800 CST'>September 6, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——父类与子类、基类与派生类" href="https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/"></a>
@@ -177,8 +192,8 @@ if (!doNotTrack) {
   </header>
   <section class="entry-content">
     <p>案例一：
-class A { int x, y; public: int getx() { return x; } protected: int gety() { return y; } }; class B : private A /* public A */ /* protected A */{ bool visible; public: using A::getx; A::gety;	// deprecated }; 案例二：
-class MyList { struct Node { int v; Node* next; Node(int v, Node* n) { this-&gt;v = v; next = n; } ~Node() { cout &lt;&lt; &#34;~Node()\n&#34;; delete next; next = nullptr; } } *head; public: MyList() { head = nullptr; } ~MyList() { if (head !...</p>
+class A { 	int x, y; public: 	int getx() { 	return x; 	} protected: 	int gety() { 	return y; 	} }; class B : private A /* public A */ /* protected A */{ 	bool visible; public: 	using A::getx; 	A::gety;	// deprecated }; 案例二：
+class MyList { 	struct Node 	{ 	int v; 	Node* next; 	Node(int v, Node* n) { 	this-&gt;v = v; 	next = n; 	} 	~Node() { 	cout &lt;&lt; &#34;~Node()\n&#34;; 	delete next; 	next = nullptr; 	} 	} *head; public: 	MyList() { 	head = nullptr; 	} 	~MyList() { 	if (head !...</p>
   </section>
   <footer class="entry-footer"><span title='2022-09-04 20:45:58 +0800 CST'>September 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——派生类修改基类成员的访问权限" href="https://874656645.github.io/posts/230-c&#43;&#43;-%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%BF%AE%E6%94%B9%E5%9F%BA%E7%B1%BB%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/"></a>
@@ -202,22 +217,10 @@ class MyList { struct Node { int v; Node* next; Node(int v, Node* n) { this-&gt;
     </h2>
   </header>
   <section class="entry-content">
-    <p>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: int a; // 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; // C&#43;&#43;17 支持 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; static int num; public: Crowd(); Crowd(int x); ~Crowd(); // 类体内函数定义 	// 会被内联处理 	int f() { b&#43;&#43;; cout &lt;&lt; &#34;F()\n&#34;; return b; } // const this 指针，参数类型不同，所以可被重载 	int f()const { cout &lt;&lt; &#34;const F()\n&#34;; return b; } static int getNum(); static Crowd&amp; dec(Crowd&amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { a = 0; b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd()\n&#34;; } Crowd::Crowd(int x): a(x) { b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd(int)\n&#34;; } Crowd::~Crowd() { Crowd::num--; } int Crowd::getNum() { return Crowd::num; } Crowd&amp; Crowd::dec(Crowd&amp; a) { a....</p>
+    <p>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: 	int a; 	// 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; 	// C&#43;&#43;17 支持 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; 	static int num; public: 	Crowd(); 	Crowd(int x); 	~Crowd();  	// 类体内函数定义 	// 会被内联处理 	int f() { 	b&#43;&#43;; 	cout &lt;&lt; &#34;F()\n&#34;; 	return b; 	} 	// const this 指针，参数类型不同，所以可被重载 	int f()const { 	cout &lt;&lt; &#34;const F()\n&#34;; 	return b; 	}  	static int getNum(); 	static Crowd&amp; dec(Crowd&amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { 	a = 0; 	b = 0; 	Crowd::num&#43;&#43;; 	cout &lt;&lt; &#34;Crowd()\n&#34;; } Crowd::Crowd(int x): a(x) { 	b = 0; 	Crowd::num&#43;&#43;; 	cout &lt;&lt; &#34;Crowd(int)\n&#34;; } Crowd::~Crowd() { 	Crowd::num--; } int Crowd::getNum() { 	return Crowd::num; } Crowd&amp; Crowd::dec(Crowd&amp; a) { 	a....</p>
   </section>
   <footer class="entry-footer"><span title='2022-09-03 16:44:14 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——成员指针" href="https://874656645.github.io/posts/228-c&#43;&#43;-%E6%88%90%E5%91%98%E6%8C%87%E9%92%88/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> volatile 和 const 修饰的变量说明该变量在本程序内不应被修改，但其它程序是可以修改的 volatile 修饰变量，告诉编译器不要优化该变量，每次取值都重新从内存中获取 constexpr 和 inline 修饰的变量，编译器都会进行编译期优化 当对 inline 修饰变量进行取地址操作时，优化会失效 inline 修饰函数相当于 static，只能在当前文件中访问 inline 修饰的变量可以用任意表达式初始化，但这样不保证被优化 inline 其它介绍 static 限制修饰的变量和函数的可见作用域（模块内部），其它的都是副本  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -190,7 +190,7 @@ cd ~/ffmpeg_sources curl -O -L https://www....</p>
   <section class="entry-content">
     <p>一、注意事项：  线程处理类继承于 QObject 线程处理类对象不能有父对象 处理完成后向外发信号 即使 QThread 线程内部的处理对象运行结束了，QThread 线程对象也不会自动释放，需要手动 quit() &#43; wait() 线程处理类对象创建成功后，需要通过 moveToThread() 函数移动到 QThread 对象中 需要通过其他线程发信号来启动另外线程中的处理类对象的处理函数 子线程中不要操作图形界面  二、connect 第五个参数的作用 指定信号和槽的连接方式：自动连接、直接连接、队列连接，多线程时才有意义，默认为 Qt::AutoConnection。
  Qt::AutoConnection（自动连接）：多线程时是 Qt::QueuedConnection（队列连接），单线程时是 Qt::DirectConnection（直接连接） Qt::QueuedConnection（队列连接）：槽函数所在线程和信号接收者所在线程相同 Qt::DirectConnection（直接连接）：槽函数所在线程和信号发送者所在线程相同  三、代码示例   线程处理类
-class MyThreadPro : public QObject { Q_OBJECT public: explicit MyThreadPro(QObject *parent = nullptr); // 后台处理函数  void startProcessing(); // 是否结束标识位  void setFlag(bool b = false); signals: // 向其他线程发送信号  void myTimeout(); private: bool stopRunning; };   主窗口类...</p>
+class MyThreadPro : public QObject {  Q_OBJECT public:  explicit MyThreadPro(QObject *parent = nullptr);  // 后台处理函数  void startProcessing();  // 是否结束标识位  void setFlag(bool b = false);  signals:  // 向其他线程发送信号  void myTimeout();  private:  bool stopRunning; };   主窗口类...</p>
   </section>
   <footer class="entry-footer"><span title='2022-07-18 22:17:00 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt 多线程" href="https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>

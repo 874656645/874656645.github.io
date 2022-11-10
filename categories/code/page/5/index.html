@@ -149,7 +149,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: int a; // 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; // C&#43;&#43;17 支持 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; static int num; public: Crowd(); Crowd(int x); ~Crowd(); // 类体内函数定义 	// 会被内联处理 	int f() { b&#43;&#43;; cout &lt;&lt; &#34;F()\n&#34;; return b; } // const this 指针，参数类型不同，所以可被重载 	int f()const { cout &lt;&lt; &#34;const F()\n&#34;; return b; } static int getNum(); static Crowd&amp; dec(Crowd&amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { a = 0; b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd()\n&#34;; } Crowd::Crowd(int x): a(x) { b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd(int)\n&#34;; } Crowd::~Crowd() { Crowd::num--; } int Crowd::getNum() { return Crowd::num; } Crowd&amp; Crowd::dec(Crowd&amp; a) { a....</p>
+    <p>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: 	int a; 	// 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; 	// C&#43;&#43;17 支持 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; 	static int num; public: 	Crowd(); 	Crowd(int x); 	~Crowd();  	// 类体内函数定义 	// 会被内联处理 	int f() { 	b&#43;&#43;; 	cout &lt;&lt; &#34;F()\n&#34;; 	return b; 	} 	// const this 指针，参数类型不同，所以可被重载 	int f()const { 	cout &lt;&lt; &#34;const F()\n&#34;; 	return b; 	}  	static int getNum(); 	static Crowd&amp; dec(Crowd&amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { 	a = 0; 	b = 0; 	Crowd::num&#43;&#43;; 	cout &lt;&lt; &#34;Crowd()\n&#34;; } Crowd::Crowd(int x): a(x) { 	b = 0; 	Crowd::num&#43;&#43;; 	cout &lt;&lt; &#34;Crowd(int)\n&#34;; } Crowd::~Crowd() { 	Crowd::num--; } int Crowd::getNum() { 	return Crowd::num; } Crowd&amp; Crowd::dec(Crowd&amp; a) { 	a....</p>
   </section>
   <footer class="entry-footer"><span title='2022-09-03 16:44:14 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——成员指针" href="https://874656645.github.io/posts/228-c&#43;&#43;-%E6%88%90%E5%91%98%E6%8C%87%E9%92%88/"></a>
@@ -174,7 +174,7 @@ if (!doNotTrack) {
   </header>
   <section class="entry-content">
     <p>声明变量时指定排序规则  通过指定模板的第三个参数，对象类型，C&#43;&#43; 2a 支持 lambda 对象
-struct MyCom{ bool operator()(const string key1, const string key2)const{ return key1 &gt; key2; } }; int main() { // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;}; map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} }; // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}}; for(const auto&amp; item : myMap1){ cout &lt;&lt; item....</p>
+struct MyCom{  bool operator()(const string key1, const string key2)const{  return key1 &gt; key2;  } };  int main() {  // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;};  map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} };   // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}};   for(const auto&amp; item : myMap1){  cout &lt;&lt; item....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-30 14:22:02 +0800 CST'>August 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to STL——map 排序相关" href="https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/"></a>
@@ -202,8 +202,8 @@ mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/wi
   </header>
   <section class="entry-content">
     <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
-#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
-static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { 	std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){  int etn = 5; // 局部自动变量 	{ 	extern int etn; 	int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>

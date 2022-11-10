@@ -190,11 +190,11 @@ set args 123 abc 456 ddd 查看代码： list 或 l  查看代码显示行数：
   <section class="entry-content">
     <p>一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
   规则由三部分组成：目标、依赖、命令
-app:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则
+app:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则
   四、makefile 优化   版本一：
-app:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
+app:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
   版本二：
-app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
+app:main.o add.o sub.o  gcc main.o add.o sub....</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-19 16:36:47 +0800 CST'>February 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Makefile 使用" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"></a>
@@ -219,7 +219,7 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、gcc 工作流程  预处理 —— -E  宏替换 头文件展开 去掉注释 生成 .i 文件   编译 —— -S  生成 .s 文件 汇编文件   汇编 —— -c  生成 .o 文件 二进制文件   链接   二、gcc 常用参数  -v / --version -I : 编译时指定头文件路径 -c : 生成二进制文件 .o -o : 指定生成的文件名 -g : gdb 调试，生成带有调试信息的二进制文件（Debug模式） -D : 编译时指定一个宏 -Wall : 显示警告信息 -On : 优化代码，n 是优化级别（1，2，3）  </p>
+    <p>一、gcc 工作流程  预处理 —— -E  宏替换 头文件展开 去掉注释 生成 .i 文件   编译 —— -S  生成 .s 文件 汇编文件   汇编 —— -c  生成 .o 文件 二进制文件   链接  二、gcc 常用参数  -v / --version -I : 编译时指定头文件路径 -c : 生成二进制文件 .o -o : 指定生成的文件名 -g : gdb 调试，生成带有调试信息的二进制文件（Debug模式） -D : 编译时指定一个宏 -Wall : 显示警告信息 -On : 优化代码，n 是优化级别（1，2，3）  </p>
   </section>
   <footer class="entry-footer"><span title='2022-02-16 21:44:06 +0800 CST'>February 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to gcc 相关" href="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/"></a>

@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,6 +157,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——连续子数组最大和
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、暴力算法 $\mathcal{O}(n^3)$ 遍历数组的所有子数组集合，并对其求和，筛选出和的最大值
+int maxSumOfSub1(int* array, int length){  int maxSum = 0;  int startIndex = 0, endIndex = 0;  for(int i = 0; i &lt; length; i&#43;&#43;){  for(int j = i; j &lt; length; j&#43;&#43;){  int sum = 0;  for(int k = i; k &lt;= j; k&#43;&#43;)  sum &#43;= array[k];  if(maxSum &lt; sum){  maxSum = sum;  startIndex = i;  endIndex = j;  }  }  }   cout &lt;&lt; &#34;Begin:&#34; &lt;&lt; startIndex &lt;&lt; &#34; End:&#34; &lt;&lt; endIndex &lt;&lt; &#34; Num:&#34; &lt;&lt; maxSum &lt;&lt; endl;  return maxSum; } 二、前缀和 $\mathcal{O}(n^2)$ 先把数组的前 i 项和求出来并将其保存到数组中，然后计算所有子数组集合的和，筛选其中最大的...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-19 15:35:35 +0800 CST'>March 19, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——连续子数组最大和" href="https://874656645.github.io/posts/152-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——线性表
     </h2>
   </header>
@@ -229,26 +242,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-03-10 21:10:53 +0800 CST'>March 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——数据结构定义" href="https://874656645.github.io/posts/148-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%AE%9A%E4%B9%89/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——简介
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>算法 &#43; 数据结构 = 程序   数据结构与算法是程序的灵魂，以问题求解为导向，进行问题抽象、数据抽象、算法抽象，通过有效地组织数据、设计高效的算法、完成高质量的程序，从而解决实际应用的问题。
-  流程：问题 =&gt; 数据 =&gt; 算法
-  理论（离散数学、概率统计、图论等） =&gt; 抽象（问题抽象、数据抽象、算法抽象等面向对象思想） =&gt; 设计（实现的某种具体编程语言）
-  逻辑抽象 &#43; 运算抽象 =&gt; ADT
-  运算 &#43; 存储 =&gt; 算法分析（时间和空间复杂度）
-  问题抽象：分析和抽象任务需求，建立问题模型
-  数据抽象：确定恰当的数据结构表示数学模型
-  算法抽象：在数据模型的基础上设计合适的算法
-  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-08 20:33:08 +0800 CST'>March 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——简介" href="https://874656645.github.io/posts/147-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%AE%80%E4%BB%8B/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
