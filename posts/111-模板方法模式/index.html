@@ -8,7 +8,7 @@
 <title>模板方法模式 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;, 设计模式" />
 <meta name="description" content="定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
-class TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew() = 0;  virtual void pourCup() = 0;  virtual void addSomething() = 0;   void make(){  boilWater();  drew();  pourCup();  addSomething();  } }; class Tea : public TemplateDrink{ public:  void boilWater() override{  cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl;  }  void drew() override{  cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl;  }  void pourCup() override{  cout &lt;&lt; &#34;倒入茶杯中.">
+class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -17,7 +17,7 @@ class TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew()
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="模板方法模式" />
 <meta property="og:description" content="定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
-class TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew() = 0;  virtual void pourCup() = 0;  virtual void addSomething() = 0;   void make(){  boilWater();  drew();  pourCup();  addSomething();  } }; class Tea : public TemplateDrink{ public:  void boilWater() override{  cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl;  }  void drew() override{  cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl;  }  void pourCup() override{  cout &lt;&lt; &#34;倒入茶杯中." />
+class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-01T16:41:35&#43;08:00" />
@@ -60,7 +60,7 @@ class TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew()
 
 <meta name="twitter:title" content="模板方法模式"/>
 <meta name="twitter:description" content="定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
-class TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew() = 0;  virtual void pourCup() = 0;  virtual void addSomething() = 0;   void make(){  boilWater();  drew();  pourCup();  addSomething();  } }; class Tea : public TemplateDrink{ public:  void boilWater() override{  cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl;  }  void drew() override{  cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl;  }  void pourCup() override{  cout &lt;&lt; &#34;倒入茶杯中."/>
+class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬."/>
 
 
 <script type="application/ld+json">
@@ -89,11 +89,11 @@ class TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew()
   "@type": "BlogPosting",
   "headline": "模板方法模式",
   "name": "模板方法模式",
-  "description": "定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。\nclass TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew() = 0;  virtual void pourCup() = 0;  virtual void addSomething() = 0;   void make(){  boilWater();  drew();  pourCup();  addSomething();  } }; class Tea : public TemplateDrink{ public:  void boilWater() override{  cout \u0026lt;\u0026lt; \u0026#34;煮山泉水...\u0026#34; \u0026lt;\u0026lt; endl;  }  void drew() override{  cout \u0026lt;\u0026lt; \u0026#34;冲龙井茶...\u0026#34; \u0026lt;\u0026lt; endl;  }  void pourCup() override{  cout \u0026lt;\u0026lt; \u0026#34;倒入茶杯中.",
+  "description": "定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。\nclass TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout \u0026lt;\u0026lt; \u0026#34;煮山泉水...\u0026#34; \u0026lt;\u0026lt; endl; } void drew() override{ cout \u0026lt;\u0026lt; \u0026#34;冲龙井茶...\u0026#34; \u0026lt;\u0026lt; endl; } void pourCup() override{ cout \u0026lt;\u0026lt; \u0026#34;倒入茶杯中...\u0026#34; \u0026lt;\u0026lt; endl; } void addSomething() override{ cout \u0026lt;\u0026lt; \u0026#34;加点柠檬.",
   "keywords": [
     "C++", "设计模式"
   ],
-  "articleBody": "定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。\nclass TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew() = 0;  virtual void pourCup() = 0;  virtual void addSomething() = 0;   void make(){  boilWater();  drew();  pourCup();  addSomething();  } }; class Tea : public TemplateDrink{ public:  void boilWater() override{  cout  \"煮山泉水...\"  endl;  }  void drew() override{  cout  \"冲龙井茶...\"  endl;  }  void pourCup() override{  cout  \"倒入茶杯中...\"  endl;  }  void addSomething() override{  cout  \"加点柠檬...\"  endl;  } }; class Coffee : public TemplateDrink{ public:  void boilWater() override{  cout  \"煮矿泉水...\"  endl;  }  void drew() override{  cout  \"冲雀巢咖啡...\"  endl;  }  void pourCup() override{  cout  \"倒入咖啡杯中...\"  endl;  }  void addSomething() override{  cout  \"加点糖和牛奶...\"  endl;  } }; int main() {  Tea myTea;  myTea.make();  cout  \"-------------------\"  endl;  Coffee myCoffee;  myCoffee.make();  return 0; } ",
+  "articleBody": "定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。\nclass TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout  \"煮山泉水...\"  endl; } void drew() override{ cout  \"冲龙井茶...\"  endl; } void pourCup() override{ cout  \"倒入茶杯中...\"  endl; } void addSomething() override{ cout  \"加点柠檬...\"  endl; } }; class Coffee : public TemplateDrink{ public: void boilWater() override{ cout  \"煮矿泉水...\"  endl; } void drew() override{ cout  \"冲雀巢咖啡...\"  endl; } void pourCup() override{ cout  \"倒入咖啡杯中...\"  endl; } void addSomething() override{ cout  \"加点糖和牛奶...\"  endl; } }; int main() { Tea myTea; myTea.make(); cout  \"-------------------\"  endl; Coffee myCoffee; myCoffee.make(); return 0; } ",
   "wordCount" : "135",
   "inLanguage": "en",
   "datePublished": "2022-02-01T16:41:35+08:00",
@@ -197,60 +197,60 @@ class TemplateDrink{ public:  virtual void boilWater() = 0;  virtual void drew()
   </header> 
 
   <div class="post-content"><p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TemplateDrink</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> boilWater() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drew</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pourCup</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addSomething</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">make</span>(){
-</span></span><span style="display:flex;"><span>        boilWater();
-</span></span><span style="display:flex;"><span>        drew();
-</span></span><span style="display:flex;"><span>        pourCup();
-</span></span><span style="display:flex;"><span>        addSomething();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tea</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> TemplateDrink{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> boilWater() <span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;煮山泉水...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drew</span>() <span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;冲龙井茶...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pourCup</span>() <span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;倒入茶杯中...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addSomething</span>() <span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;加点柠檬...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Coffee</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> TemplateDrink{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> boilWater() <span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;煮矿泉水...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drew</span>() <span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;冲雀巢咖啡...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pourCup</span>() <span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;倒入咖啡杯中...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addSomething</span>() <span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;加点糖和牛奶...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    Tea myTea;
-</span></span><span style="display:flex;"><span>    myTea.make();
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-------------------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    Coffee myCoffee;
-</span></span><span style="display:flex;"><span>    myCoffee.make();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TemplateDrink</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> boilWater() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drew</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pourCup</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addSomething</span>() <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">make</span>(){
+        boilWater();
+        drew();
+        pourCup();
+        addSomething();
+    }
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Tea</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> TemplateDrink{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> boilWater() <span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;煮山泉水...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drew</span>() <span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;冲龙井茶...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pourCup</span>() <span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;倒入茶杯中...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addSomething</span>() <span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;加点柠檬...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Coffee</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> TemplateDrink{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> boilWater() <span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;煮矿泉水...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">drew</span>() <span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;冲雀巢咖啡...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pourCup</span>() <span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;倒入咖啡杯中...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addSomething</span>() <span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;加点糖和牛奶...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    Tea myTea;
+    myTea.make();
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-------------------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    Coffee myCoffee;
+    myCoffee.make();
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div>
 
   </div>
 

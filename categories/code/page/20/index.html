@@ -145,6 +145,48 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
+三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
+四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
+所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！
+class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){ p-&gt;setAge(30); return p; } int main() { unique_ptr&lt;Person&gt; pP(new Person); cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl; // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl; cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; if(pP == nullptr){ cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl; } return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr" href="https://874656645.github.io/posts/131-c&#43;&#43;11-auto_ptr-%E8%A2%AB%E5%BA%9F%E5%BC%83%E4%B8%8E-unique_ptr/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 mutable 关键字
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、修饰类成员变量 此关键字只能应用于类的非静态和非常量数据成员，mutable 是为了让 const 对象的某些数据成员可以被修改。static 是类的成员，不属于对象，常对象和常函数只会限制类的成员变量修改，所以类的 static 数据成员不需要 mutable 修饰，在常对象和常函数中也能被修改。
+class Person{ public: int getAge() const{ m_count&#43;&#43;; s_count&#43;&#43;; return m_age; } int getCount()const{ return m_count; } private: int m_age{20}; mutable int m_count{0}; public: static int s_count; }; int Person::s_count = 0; int main() { Person p; p.getAge(); p.getAge(); p.getAge(); cout &lt;&lt; p.getCount() &lt;&lt; endl; // 3  cout &lt;&lt; p.s_count &lt;&lt; endl; // 3  return 0; } 二、修饰匿名函数 表示可以修改按值传入的变量的副本（不是值本身），类似于不带 const 关键字的形参。使用 mutable 关键字后对按值传入的变量进行的修改，不会将改变传递到 Lambda 表达式之外。如果不加 mutable 关键字，按值传入的变量是只读的，即使在 Lambda 表达式内部也不可修改...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 mutable 关键字" href="https://874656645.github.io/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 auto 与 decltype 关键字
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
+template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 20:30:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto 与 decltype 关键字" href="https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>gdb 调试使用
     </h2>
   </header>
@@ -165,54 +207,14 @@ set args 123 abc 456 ddd 查看代码： list 或 l  查看代码显示行数：
   <section class="entry-content">
     <p>一、make  gcc 编译器 make 是 Linux 自带的构建器  二、文件命名  makefile Makefile  三、makefile 中的规则 例如：gcc a.c b.c c.c -o app
   规则由三部分组成：目标、依赖、命令
-app:a.c b.c c.c  gcc a.c b.c c.c -o app   makefile 中可以有多条规则
+app:a.c b.c c.c gcc a.c b.c c.c -o app   makefile 中可以有多条规则
   四、makefile 优化   版本一：
-app:main.c add.c sub.c  gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
+app:main.c add.c sub.c gcc main.c add.c sub.c -I ./ -o app 存在的问题： 效率低，其中一个文件修改了，剩余的其它文件都要重新编译
   版本二：
-app:main.o add.o sub.o  gcc main.o add.o sub....</p>
+app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-19 16:36:47 +0800 CST'>February 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Makefile 使用" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Linux 静态库与动态库
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、库是什么 库是二进制格式的源代码（二进制加密）
-二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-17 22:25:34 +0800 CST'>February 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Linux 静态库与动态库" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>gcc 相关
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、gcc 工作流程  预处理 —— -E  宏替换 头文件展开 去掉注释 生成 .i 文件   编译 —— -S  生成 .s 文件 汇编文件   汇编 —— -c  生成 .o 文件 二进制文件   链接  二、gcc 常用参数  -v / --version -I : 编译时指定头文件路径 -c : 生成二进制文件 .o -o : 指定生成的文件名 -g : gdb 调试，生成带有调试信息的二进制文件（Debug模式） -D : 编译时指定一个宏 -Wall : 显示警告信息 -On : 优化代码，n 是优化级别（1，2，3）  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-16 21:44:06 +0800 CST'>February 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to gcc 相关" href="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>2022-02-14 杂记
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>NULL，0，’\0’，‘0’
-int main() {  char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48};  printf(&#34;%c\n&#34;, arr[0]);  printf(&#34;%c\n&#34;, arr[1]);  printf(&#34;%c\n&#34;, arr[2]);  printf(&#34;%c\n&#34;, arr[3]);  printf(&#34;---------------\n&#34;);  printf(&#34;%d\n&#34;, arr[0]);  printf(&#34;%d\n&#34;, arr[1]);  printf(&#34;%d\n&#34;, arr[2]);  printf(&#34;%d\n&#34;, arr[3]);   return 0; } 输出：
-  0 0 --------------- 0 0 48 48   UTF-8 向下兼容 ASCII 编码，UTF-8 编码中，一个英文字为一个字节，一个中文一般为三个字节（ASCII、Unicode、UTF-8）
- 0xxxxxxx：单字节编码形式，这和 ASCII 编码完全一样，因此 UTF-8 是兼容 ASCII 的； 110xxxxx 10xxxxxx：双字节编码形式； 1110xxxx 10xxxxxx 10xxxxxx：三字节编码形式； 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx：四字节编码形式； UTF-8：每字 1 ~ 6 字节 Unicode（UCS-2）：每字都是 2 bytes UTF-16：每字 2 ~ 4 字节 UTF-32（UCS-4）：每字都是 4 bytes    float 单精度，浮点数在内存中是按科学计数法来存储的，小数点后6位能确定表示，float 是由 1 bit 符号位，8 bit 指数位和 23 bit 尾数位组成，精度是由尾数位决定的（2^23 = 8388608）...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-15 15:29:35 +0800 CST'>February 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 2022-02-14 杂记" href="https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
