@@ -8,7 +8,7 @@
 <title>C&#43;&#43;——异常的使用 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h
-struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { int a = 2; int getA()const override { return a; } }; #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { try { // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); } catch (const A e) { cout &lt;&lt; e.">
+struct A { 	int a = 1; 	virtual int getA()const { return a; } }; struct B : A { 	int a = 2; 	int getA()const override { return a; } };  #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { 	try 	{  // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); 	} 	catch (const A e) 	{ 	cout &lt;&lt; e.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/236-c&#43;&#43;-%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BD%BF%E7%94%A8/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -17,7 +17,7 @@ struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { in
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="C&#43;&#43;——异常的使用" />
 <meta property="og:description" content="普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h
-struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { int a = 2; int getA()const override { return a; } }; #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { try { // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); } catch (const A e) { cout &lt;&lt; e." />
+struct A { 	int a = 1; 	virtual int getA()const { return a; } }; struct B : A { 	int a = 2; 	int getA()const override { return a; } };  #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { 	try 	{  // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); 	} 	catch (const A e) 	{ 	cout &lt;&lt; e." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/236-c&#43;&#43;-%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BD%BF%E7%94%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-14T11:08:56&#43;08:00" />
@@ -60,7 +60,7 @@ struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { in
 
 <meta name="twitter:title" content="C&#43;&#43;——异常的使用"/>
 <meta name="twitter:description" content="普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h
-struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { int a = 2; int getA()const override { return a; } }; #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { try { // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); } catch (const A e) { cout &lt;&lt; e."/>
+struct A { 	int a = 1; 	virtual int getA()const { return a; } }; struct B : A { 	int a = 2; 	int getA()const override { return a; } };  #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { 	try 	{  // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); 	} 	catch (const A e) 	{ 	cout &lt;&lt; e."/>
 
 
 <script type="application/ld+json">
@@ -89,11 +89,11 @@ struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { in
   "@type": "BlogPosting",
   "headline": "C++——异常的使用",
   "name": "C\u002b\u002b——异常的使用",
-  "description": "普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h\nstruct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { int a = 2; int getA()const override { return a; } }; #define cout cout\u0026lt;\u0026lt;__FILE__\u0026lt;\u0026lt;\u0026#34;:\u0026#34;\u0026lt;\u0026lt;__LINE__\u0026lt;\u0026lt;\u0026#34;: Exception: \u0026#34;  void testException() { try { // 抛出子类指针类型的异常 \t//throw new B;  // 抛出子类对象类型的异常 \tthrow B(); } catch (const A e) { cout \u0026lt;\u0026lt; e.",
+  "description": "普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h\nstruct A { \tint a = 1; \tvirtual int getA()const { return a; } }; struct B : A { \tint a = 2; \tint getA()const override { return a; } };  #define cout cout\u0026lt;\u0026lt;__FILE__\u0026lt;\u0026lt;\u0026#34;:\u0026#34;\u0026lt;\u0026lt;__LINE__\u0026lt;\u0026lt;\u0026#34;: Exception: \u0026#34;  void testException() { \ttry \t{  // 抛出子类指针类型的异常 \t//throw new B;  // 抛出子类对象类型的异常 \tthrow B(); \t} \tcatch (const A e) \t{ \tcout \u0026lt;\u0026lt; e.",
   "keywords": [
     "C++"
   ],
-  "articleBody": " 普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h\nstruct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { int a = 2; int getA()const override { return a; } }; #define cout cout void testException() { try { // 抛出子类指针类型的异常 \t//throw new B;  // 抛出子类对象类型的异常 \tthrow B(); } catch (const A e) { cout  e.getA()  endl; throw; // 继续向上抛出异常，抛出的仍是原始的异常对象或指针  // 这里抛出的仍然是 B 类型的对象，而不是 e \t} catch (const A* e) // 与 catch (const A\u0026 e) 效果相同 \t{ cout  e-getA()  endl; throw; // 继续向上抛出指针类型的异常，所以可以不 delete \t} catch (const B e) { cout  e.getA()  endl; } catch (const B* e) { cout  e-getA()  endl; delete e; // 不向上抛出，需要 delete 指针，以免内存泄漏 \t} } main.cpp\n#include \"Exception.h\" int main() { try { testException(); } catch (const B e) { cout  e.getA()  endl; } catch (const B* e) { cout  e-getA()  endl; delete e; } catch (const A e) { cout  e.getA()  endl; } catch (const A* e) { cout  e-getA()  endl; delete e; } catch (...) { cout  \"...\\n\"; } return 0; } 输出：\nC:\\ExceptionTest.h:27: Exception: 1 C:\\main.cpp:95: Exception: 2 ",
+  "articleBody": " 普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h\nstruct A { \tint a = 1; \tvirtual int getA()const { return a; } }; struct B : A { \tint a = 2; \tint getA()const override { return a; } };  #define cout cout void testException() { \ttry \t{  // 抛出子类指针类型的异常 \t//throw new B;  // 抛出子类对象类型的异常 \tthrow B(); \t} \tcatch (const A e) \t{ \tcout  e.getA()  endl; \tthrow; // 继续向上抛出异常，抛出的仍是原始的异常对象或指针  // 这里抛出的仍然是 B 类型的对象，而不是 e \t} \tcatch (const A* e) // 与 catch (const A\u0026 e) 效果相同 \t{ \tcout  e-getA()  endl; \tthrow; // 继续向上抛出指针类型的异常，所以可以不 delete \t} \tcatch (const B e) { \tcout  e.getA()  endl; \t} \tcatch (const B* e) \t{ \tcout  e-getA()  endl; \tdelete e; // 不向上抛出，需要 delete 指针，以免内存泄漏 \t} } main.cpp\n#include \"Exception.h\" int main() { \ttry \t{ \ttestException(); \t} \tcatch (const B e) { \tcout  e.getA()  endl; \t} \tcatch (const B* e) { \tcout  e-getA()  endl; \tdelete e; \t} \tcatch (const A e) { \tcout  e.getA()  endl; \t} \tcatch (const A* e) { \tcout  e-getA()  endl; \tdelete e; \t} \tcatch (...) \t{ \tcout  \"...\\n\"; \t}  \treturn 0; } 输出：\nC:\\ExceptionTest.h:27: Exception: 1 C:\\main.cpp:95: Exception: 2 ",
   "wordCount" : "221",
   "inLanguage": "en",
   "datePublished": "2022-09-14T11:08:56+08:00",
@@ -207,80 +207,80 @@ struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { in
 <li>建议将 <code>noexcept</code> 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 <code>noexcept</code> 时，它使编译器可以在多种不同的上下文中生成更高效的代码</li>
 </ul>
 <p><em>Exception.h</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">A</span> {
-	<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getA</span>()<span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> a; }
-};
-<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">B</span> <span style="color:#f92672">:</span> A
-{
-	<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
-	<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getA</span>()<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span> { <span style="color:#66d9ef">return</span> a; }
-};
-
-<span style="color:#75715e">#define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testException</span>() {
-	<span style="color:#66d9ef">try</span>
-	{
-        <span style="color:#75715e">// 抛出子类指针类型的异常
-</span><span style="color:#75715e"></span>		<span style="color:#75715e">//throw new B;
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 抛出子类对象类型的异常
-</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">throw</span> B();
-	}
-	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> A e)
-	{
-		cout <span style="color:#f92672">&lt;&lt;</span> e.getA() <span style="color:#f92672">&lt;&lt;</span> endl;
-		<span style="color:#66d9ef">throw</span>;          <span style="color:#75715e">// 继续向上抛出异常，抛出的仍是原始的异常对象或指针
-</span><span style="color:#75715e"></span>                        <span style="color:#75715e">// 这里抛出的仍然是 B 类型的对象，而不是 e
-</span><span style="color:#75715e"></span>	}
-	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> A<span style="color:#f92672">*</span> e)  <span style="color:#75715e">// 与 catch (const A&amp; e) 效果相同
-</span><span style="color:#75715e"></span>	{
-		cout <span style="color:#f92672">&lt;&lt;</span> e<span style="color:#f92672">-&gt;</span>getA() <span style="color:#f92672">&lt;&lt;</span> endl;
-		<span style="color:#66d9ef">throw</span>;          <span style="color:#75715e">// 继续向上抛出指针类型的异常，所以可以不 delete
-</span><span style="color:#75715e"></span>	}
-	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> B e) {
-		cout <span style="color:#f92672">&lt;&lt;</span> e.getA() <span style="color:#f92672">&lt;&lt;</span> endl;
-	}
-	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> B<span style="color:#f92672">*</span> e)
-	{
-		cout <span style="color:#f92672">&lt;&lt;</span> e<span style="color:#f92672">-&gt;</span>getA() <span style="color:#f92672">&lt;&lt;</span> endl;
-		<span style="color:#66d9ef">delete</span> e;       <span style="color:#75715e">// 不向上抛出，需要 delete 指针，以免内存泄漏
-</span><span style="color:#75715e"></span>	}
-}
-</code></pre></div><p><em>main.cpp</em></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Exception.h&#34;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span>
-<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-{
-	<span style="color:#66d9ef">try</span>
-	{
-		testException();
-	}
-	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> B e) {
-		cout <span style="color:#f92672">&lt;&lt;</span> e.getA() <span style="color:#f92672">&lt;&lt;</span> endl;
-	}
-	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> B<span style="color:#f92672">*</span> e) {
-		cout <span style="color:#f92672">&lt;&lt;</span> e<span style="color:#f92672">-&gt;</span>getA() <span style="color:#f92672">&lt;&lt;</span> endl;
-		<span style="color:#66d9ef">delete</span> e;
-	}
-	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> A e) {
-		cout <span style="color:#f92672">&lt;&lt;</span> e.getA() <span style="color:#f92672">&lt;&lt;</span> endl;
-	}
-	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> A<span style="color:#f92672">*</span> e) {
-		cout <span style="color:#f92672">&lt;&lt;</span> e<span style="color:#f92672">-&gt;</span>getA() <span style="color:#f92672">&lt;&lt;</span> endl;
-		<span style="color:#66d9ef">delete</span> e;
-	}
-	<span style="color:#66d9ef">catch</span> (...)
-	{
-		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-	}
-
-	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">C:\ExceptionTest.h:27: Exception: 1
-C:\main.cpp:95: Exception: 2
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">A</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getA</span>()<span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> a; }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">B</span> <span style="color:#f92672">:</span> A
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getA</span>()<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span> { <span style="color:#66d9ef">return</span> a; }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">testException</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 抛出子类指针类型的异常
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#75715e">//throw new B;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// 抛出子类对象类型的异常
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#66d9ef">throw</span> B();
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> A e)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> e.getA() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">throw</span>;          <span style="color:#75715e">// 继续向上抛出异常，抛出的仍是原始的异常对象或指针
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                        <span style="color:#75715e">// 这里抛出的仍然是 B 类型的对象，而不是 e
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> A<span style="color:#f92672">*</span> e)  <span style="color:#75715e">// 与 catch (const A&amp; e) 效果相同
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	{
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> e<span style="color:#f92672">-&gt;</span>getA() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">throw</span>;          <span style="color:#75715e">// 继续向上抛出指针类型的异常，所以可以不 delete
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> B e) {
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> e.getA() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> B<span style="color:#f92672">*</span> e)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> e<span style="color:#f92672">-&gt;</span>getA() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">delete</span> e;       <span style="color:#75715e">// 不向上抛出，需要 delete 指针，以免内存泄漏
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><em>main.cpp</em></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Exception.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">try</span>
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		testException();
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> B e) {
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> e.getA() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> B<span style="color:#f92672">*</span> e) {
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> e<span style="color:#f92672">-&gt;</span>getA() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">delete</span> e;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> A e) {
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> e.getA() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> (<span style="color:#66d9ef">const</span> A<span style="color:#f92672">*</span> e) {
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> e<span style="color:#f92672">-&gt;</span>getA() <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">delete</span> e;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">catch</span> (...)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>C:\ExceptionTest.h:27: Exception: 1
+</span></span><span style="display:flex;"><span>C:\main.cpp:95: Exception: 2
+</span></span></code></pre></div>
 
   </div>
 

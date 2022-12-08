@@ -12,7 +12,7 @@
  树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
  树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
  “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
- 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status &amp; 0x08) != 0); } bool wolf(int status){ return ((status &amp; 0x04) !">
+ 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){  return ((status &amp; 0x08) != 0); } bool wolf(int status){  return ((status &amp; 0x04) !">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -21,7 +21,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -56,7 +56,7 @@ if (!doNotTrack) {
  树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
  树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
  “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
- 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status &amp; 0x08) != 0); } bool wolf(int status){ return ((status &amp; 0x04) !" />
+ 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){  return ((status &amp; 0x08) != 0); } bool wolf(int status){  return ((status &amp; 0x04) !" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-06T08:56:06&#43;08:00" />
@@ -72,7 +72,7 @@ if (!doNotTrack) {
  树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
  树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
  “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
- 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status &amp; 0x08) != 0); } bool wolf(int status){ return ((status &amp; 0x04) !"/>
+ 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){  return ((status &amp; 0x08) != 0); } bool wolf(int status){  return ((status &amp; 0x04) !"/>
 
 
 <script type="application/ld+json">
@@ -101,11 +101,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "数据结构与算法——队列的应用",
   "name": "数据结构与算法——队列的应用",
-  "description": "一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构\n 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）\n 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）\n 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：\n “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：\n 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status \u0026amp; 0x08) != 0); } bool wolf(int status){ return ((status \u0026amp; 0x04) !",
+  "description": "一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构\n 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）\n 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）\n 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：\n “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：\n 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){  return ((status \u0026amp; 0x08) != 0); } bool wolf(int status){  return ((status \u0026amp; 0x04) !",
   "keywords": [
     "数据结构与算法"
   ],
-  "articleBody": "一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构\n 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）\n 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）\n 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：\n “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：\n 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status \u0026 0x08) != 0); } bool wolf(int status){ return ((status \u0026 0x04) != 0); } bool goat(int status){ return ((status \u0026 0x02) != 0); } bool cabbage(int status){ return ((status \u0026 0x01) != 0); }  安全状态判断  bool safe(int status) // 返回 true:安全，false:不安全 { if ((goat(status) == cabbage(status)) \u0026\u0026 (goat(status) != farmer(status))) return(false); // 羊吃白菜  if ((goat(status) == wolf(status)) \u0026\u0026 (goat(status) != farmer(status))) return(false); // 狼吃羊  return(true); // 其它状态为安全 }   问题求解：试探法\n  算法抽象：问题变为从状态 0000（整数0）出发，寻找全部由安全状态构成的状态序列，以状态 1111（整数15）为最终目标。\n 状态序列中每个状态都可以从前一状态通过农夫（可以带一样东西）划船过河的动作到达。 序列中不能出现 重复 状态    算法设计\n 定义一个整数队列 moveTo，它的每个元素表示一个可以安全到达的中间状态 还需要定义一个数据结构 记录已被访问过的各个状态，以及已被发现的能够到达当前这个状态的路径  用顺序表 route 的第 i 个元素记录状态 i 是否已被访问过 若 route[i] 已被访问过，则在这个顺序表元素中记入前驱状态值；-1 表示未被访问 route 的大小（长度）为 16      算法实现\nvoid solve() { int movers, i, location, newlocation; vectorint route(END+1, -1); // 记录已考虑的状态路径  queueint moveTo; // 准备初值  moveTo.push(0x00); route[0]=0; while (!moveTo.empty() \u0026\u0026 route[15] == -1) { // 得到现在的状态  int status = moveTo.front(); moveTo.pop(); for (movers = 1; movers  8; movers  1) { // 农夫总是在移动，随农夫移动的也只能是在农夫同侧的东西  if (farmer(status) == (bool)(status \u0026 movers)) { // 随农夫移动以后的状态  int newstatus = status ^ (0x08 | movers); // 安全的，并且未考虑过的走法  // 确保状态不能重复，重复状态没有意义，还有可能造成死循环  if (safe(newstatus) \u0026\u0026 (route[newstatus] == -1)) { route[newstatus] = status; moveTo.push(newstatus); } } } } // 反向打印出路径  if (route[15] != -1) { cout  \"The reverse path is : \"  endl; for (int status = 15; status = 0; status = route[status]) { cout  \"The status is : \"  bitset4(status)  endl; if (status == 0) break; } } else{ cout  \"No solution.\"  endl; } } 输出：\nThe reverse path is : The status is : 1111 The status is : 0101 The status is : 1101 The status is : 0001 The status is : 1011 The status is : 0010 The status is : 1010 The status is : 0000   总结：这个算法只能输出其中的一种解，这个问题还有另一种路径\n  三、另一个思考题 五人提灯过独木桥：\n 有一盏灯能使用 30 秒，要在灯灭前过这座独木桥 一家五口人，每人过桥的速度不同：哥哥 1 秒，弟弟 3 秒，爸爸 6 秒，妈妈 8 秒，奶奶 12 秒 每次只能过 2 个人，而且天黑，过桥时必须有灯照明  ",
+  "articleBody": "一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构\n 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）\n 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）\n 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：\n “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：\n 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){  return ((status \u0026 0x08) != 0); } bool wolf(int status){  return ((status \u0026 0x04) != 0); } bool goat(int status){  return ((status \u0026 0x02) != 0); } bool cabbage(int status){  return ((status \u0026 0x01) != 0); }  安全状态判断  bool safe(int status) // 返回 true:安全，false:不安全 {  if ((goat(status) == cabbage(status)) \u0026\u0026 (goat(status) != farmer(status)))  return(false); // 羊吃白菜  if ((goat(status) == wolf(status)) \u0026\u0026 (goat(status) != farmer(status)))  return(false); // 狼吃羊  return(true); // 其它状态为安全 }   问题求解：试探法\n  算法抽象：问题变为从状态 0000（整数0）出发，寻找全部由安全状态构成的状态序列，以状态 1111（整数15）为最终目标。\n 状态序列中每个状态都可以从前一状态通过农夫（可以带一样东西）划船过河的动作到达。 序列中不能出现 重复 状态    算法设计\n 定义一个整数队列 moveTo，它的每个元素表示一个可以安全到达的中间状态 还需要定义一个数据结构 记录已被访问过的各个状态，以及已被发现的能够到达当前这个状态的路径  用顺序表 route 的第 i 个元素记录状态 i 是否已被访问过 若 route[i] 已被访问过，则在这个顺序表元素中记入前驱状态值；-1 表示未被访问 route 的大小（长度）为 16      算法实现\nvoid solve() {  int movers, i, location, newlocation;  vectorint route(END+1, -1); // 记录已考虑的状态路径  queueint moveTo;  // 准备初值  moveTo.push(0x00);  route[0]=0;  while (!moveTo.empty() \u0026\u0026 route[15] == -1) {  // 得到现在的状态  int status = moveTo.front();  moveTo.pop();  for (movers = 1; movers  8; movers  1) {  // 农夫总是在移动，随农夫移动的也只能是在农夫同侧的东西  if (farmer(status) == (bool)(status \u0026 movers)) {  // 随农夫移动以后的状态  int newstatus = status ^ (0x08 | movers);  // 安全的，并且未考虑过的走法  // 确保状态不能重复，重复状态没有意义，还有可能造成死循环  if (safe(newstatus) \u0026\u0026 (route[newstatus] == -1)) {  route[newstatus] = status;  moveTo.push(newstatus);  }  }  }  }  // 反向打印出路径  if (route[15] != -1) {  cout  \"The reverse path is : \"  endl;  for (int status = 15; status = 0; status = route[status]) {  cout  \"The status is : \"  bitset4(status)  endl;  if (status == 0) break;  }  }  else{  cout  \"No solution.\"  endl;  } } 输出：\nThe reverse path is : The status is : 1111 The status is : 0101 The status is : 1101 The status is : 0001 The status is : 1011 The status is : 0010 The status is : 1010 The status is : 0000   总结：这个算法只能输出其中的一种解，这个问题还有另一种路径\n  三、另一个思考题 五人提灯过独木桥：\n 有一盏灯能使用 30 秒，要在灯灭前过这座独木桥 一家五口人，每人过桥的速度不同：哥哥 1 秒，弟弟 3 秒，爸爸 6 秒，妈妈 8 秒，奶奶 12 秒 每次只能过 2 个人，而且天黑，过桥时必须有灯照明  ",
   "wordCount" : "337",
   "inLanguage": "en",
   "datePublished": "2022-04-06T08:56:06+08:00",
@@ -273,32 +273,32 @@ if (!doNotTrack) {
 <li>用整数 <code>status</code> 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 <code>1000</code>，整数 0x0F 表示的状态 <code>1111</code></li>
 <li>如何从上述状态中得到每个角色所在位置？</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">farmer</span>(<span style="color:#66d9ef">int</span> status){ 
-    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x08</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
-}
-<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">wolf</span>(<span style="color:#66d9ef">int</span> status){ 
-    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x04</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
-}
-<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">goat</span>(<span style="color:#66d9ef">int</span> status){ 
-    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x02</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
-}
-<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">cabbage</span>(<span style="color:#66d9ef">int</span> status){ 
-    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x01</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
-}
-</code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/%e4%ba%ba%e7%8b%bc%e7%be%8a%e8%8f%9c%e7%8a%b6%e6%80%81.jpg" alt="人狼羊菜状态"  />
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">farmer</span>(<span style="color:#66d9ef">int</span> status){ 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x08</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">wolf</span>(<span style="color:#66d9ef">int</span> status){ 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x04</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">goat</span>(<span style="color:#66d9ef">int</span> status){ 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x02</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">cabbage</span>(<span style="color:#66d9ef">int</span> status){ 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x01</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/%e4%ba%ba%e7%8b%bc%e7%be%8a%e8%8f%9c%e7%8a%b6%e6%80%81.jpg" alt="人狼羊菜状态"  />
 </p>
 <ul>
 <li>安全状态判断</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">safe</span>(<span style="color:#66d9ef">int</span> status) <span style="color:#75715e">// 返回 true:安全，false:不安全
-</span><span style="color:#75715e"></span>{
-    <span style="color:#66d9ef">if</span> ((goat(status) <span style="color:#f92672">==</span> cabbage(status)) <span style="color:#f92672">&amp;&amp;</span> (goat(status) <span style="color:#f92672">!=</span> farmer(status)))
-        <span style="color:#66d9ef">return</span>(false); <span style="color:#75715e">// 羊吃白菜
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> ((goat(status) <span style="color:#f92672">==</span> wolf(status)) <span style="color:#f92672">&amp;&amp;</span> (goat(status) <span style="color:#f92672">!=</span> farmer(status)))
-        <span style="color:#66d9ef">return</span>(false); <span style="color:#75715e">// 狼吃羊
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span>(true); <span style="color:#75715e">// 其它状态为安全
-</span><span style="color:#75715e"></span>}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">safe</span>(<span style="color:#66d9ef">int</span> status) <span style="color:#75715e">// 返回 true:安全，false:不安全
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((goat(status) <span style="color:#f92672">==</span> cabbage(status)) <span style="color:#f92672">&amp;&amp;</span> (goat(status) <span style="color:#f92672">!=</span> farmer(status)))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>(false); <span style="color:#75715e">// 羊吃白菜
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> ((goat(status) <span style="color:#f92672">==</span> wolf(status)) <span style="color:#f92672">&amp;&amp;</span> (goat(status) <span style="color:#f92672">!=</span> farmer(status)))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>(false); <span style="color:#75715e">// 狼吃羊
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span>(true); <span style="color:#75715e">// 其它状态为安全
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div></li>
 <li>
 <p>问题求解：试探法</p>
 <p><img loading="lazy" style="margin: auto;" src="../img/%e4%ba%ba%e7%8b%bc%e7%be%8a%e8%8f%9c%e9%97%ae%e9%a2%98%e6%b1%82%e8%a7%a3.jpg" alt="人狼羊菜问题求解.jpg"  />
@@ -326,54 +326,54 @@ if (!doNotTrack) {
 </li>
 <li>
 <p>算法实现</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">solve</span>() {
-    <span style="color:#66d9ef">int</span> movers, i, location, newlocation;
-    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> route(END<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// 记录已考虑的状态路径
-</span><span style="color:#75715e"></span>    queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> moveTo;
-    <span style="color:#75715e">// 准备初值
-</span><span style="color:#75715e"></span>    moveTo.push(<span style="color:#ae81ff">0x00</span>);
-    route[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
-    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>moveTo.empty() <span style="color:#f92672">&amp;&amp;</span> route[<span style="color:#ae81ff">15</span>] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
-        <span style="color:#75715e">// 得到现在的状态
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> status <span style="color:#f92672">=</span> moveTo.front();
-        moveTo.pop();
-        <span style="color:#66d9ef">for</span> (movers <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; movers <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">8</span>; movers <span style="color:#f92672">&lt;&lt;=</span> <span style="color:#ae81ff">1</span>) {
-            <span style="color:#75715e">// 农夫总是在移动，随农夫移动的也只能是在农夫同侧的东西
-</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (farmer(status) <span style="color:#f92672">==</span> (<span style="color:#66d9ef">bool</span>)(status <span style="color:#f92672">&amp;</span> movers)) {
-                <span style="color:#75715e">// 随农夫移动以后的状态
-</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> newstatus <span style="color:#f92672">=</span> status <span style="color:#f92672">^</span> (<span style="color:#ae81ff">0x08</span> <span style="color:#f92672">|</span> movers);
-                <span style="color:#75715e">// 安全的，并且未考虑过的走法
-</span><span style="color:#75715e"></span>                <span style="color:#75715e">// 确保状态不能重复，重复状态没有意义，还有可能造成死循环
-</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span> (safe(newstatus) <span style="color:#f92672">&amp;&amp;</span> (route[newstatus] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)) {
-                    route[newstatus] <span style="color:#f92672">=</span> status;
-                    moveTo.push(newstatus); 
-                }
-            }
-        }
-    }
-    <span style="color:#75715e">// 反向打印出路径
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (route[<span style="color:#ae81ff">15</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) { 
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The reverse path is : &#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> status <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>; status <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; status <span style="color:#f92672">=</span> route[status]) {
-            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The status is : &#34;</span> <span style="color:#f92672">&lt;&lt;</span> bitset<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span><span style="color:#f92672">&gt;</span>(status) <span style="color:#f92672">&lt;&lt;</span> endl;
-            <span style="color:#66d9ef">if</span> (status <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">break</span>;
-        }
-    }
-    <span style="color:#66d9ef">else</span>{
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No solution.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-}
-</code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The reverse path is : 
-The status is : 1111
-The status is : 0101
-The status is : 1101
-The status is : 0001
-The status is : 1011
-The status is : 0010
-The status is : 1010
-The status is : 0000
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">solve</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> movers, i, location, newlocation;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> route(END<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// 记录已考虑的状态路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> moveTo;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 准备初值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    moveTo.push(<span style="color:#ae81ff">0x00</span>);
+</span></span><span style="display:flex;"><span>    route[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>moveTo.empty() <span style="color:#f92672">&amp;&amp;</span> route[<span style="color:#ae81ff">15</span>] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 得到现在的状态
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> status <span style="color:#f92672">=</span> moveTo.front();
+</span></span><span style="display:flex;"><span>        moveTo.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (movers <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; movers <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">8</span>; movers <span style="color:#f92672">&lt;&lt;=</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 农夫总是在移动，随农夫移动的也只能是在农夫同侧的东西
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (farmer(status) <span style="color:#f92672">==</span> (<span style="color:#66d9ef">bool</span>)(status <span style="color:#f92672">&amp;</span> movers)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 随农夫移动以后的状态
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> newstatus <span style="color:#f92672">=</span> status <span style="color:#f92672">^</span> (<span style="color:#ae81ff">0x08</span> <span style="color:#f92672">|</span> movers);
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// 安全的，并且未考虑过的走法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#75715e">// 确保状态不能重复，重复状态没有意义，还有可能造成死循环
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span> (safe(newstatus) <span style="color:#f92672">&amp;&amp;</span> (route[newstatus] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)) {
+</span></span><span style="display:flex;"><span>                    route[newstatus] <span style="color:#f92672">=</span> status;
+</span></span><span style="display:flex;"><span>                    moveTo.push(newstatus); 
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 反向打印出路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (route[<span style="color:#ae81ff">15</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) { 
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The reverse path is : &#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> status <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>; status <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; status <span style="color:#f92672">=</span> route[status]) {
+</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The status is : &#34;</span> <span style="color:#f92672">&lt;&lt;</span> bitset<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span><span style="color:#f92672">&gt;</span>(status) <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (status <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>{
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No solution.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>The reverse path is : 
+</span></span><span style="display:flex;"><span>The status is : 1111
+</span></span><span style="display:flex;"><span>The status is : 0101
+</span></span><span style="display:flex;"><span>The status is : 1101
+</span></span><span style="display:flex;"><span>The status is : 0001
+</span></span><span style="display:flex;"><span>The status is : 1011
+</span></span><span style="display:flex;"><span>The status is : 0010
+</span></span><span style="display:flex;"><span>The status is : 1010
+</span></span><span style="display:flex;"><span>The status is : 0000
+</span></span></code></pre></div></li>
 <li>
 <p>总结：这个算法只能输出其中的一种解，这个问题还有另一种路径</p>
 </li>

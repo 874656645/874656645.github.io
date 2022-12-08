@@ -145,6 +145,30 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Unreal——Subsystem（子系统）
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Programming Subsystems</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-12-07 10:34:53 +0800 CST'>December 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——Subsystem（子系统）" href="https://874656645.github.io/posts/257-unreal-subsystem%E5%AD%90%E7%B3%BB%E7%BB%9F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Unreal——项目和插件
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、插件  插件是为特定目的设计的代码和数据的集合； 开发人员可以很容易的在单个项目中启用或禁用他们； 插件分为运行时（runtime gameplay functionality）、编辑器（editor functionality）  二、模块  项目本身也是一个模块  三、依赖 </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-12-07 09:59:17 +0800 CST'>December 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——项目和插件" href="https://874656645.github.io/posts/256-unreal-%E9%A1%B9%E7%9B%AE%E5%92%8C%E6%8F%92%E4%BB%B6/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Unreal5——开发、使用问题汇总
     </h2>
   </header>
@@ -161,8 +185,10 @@ Editor Preferences -&gt; Source Code
 Editor 右下角
   C&#43;&#43; Live Coding 热编译
 Ctrl &#43; Alt &#43; F11
-  C&#43;&#43; 项目中使用插件
-如果编译过程中提示错误 ERROR: Expecting to find a type to be declared in a module rules named ‘JsonLibrary’ in UE5Rules...</p>
+  重新构建 C&#43;&#43; 工程
+注意：需要关闭 Editor
+VS Code: Ctrl &#43; Shift &#43; B
+  C&#43;&#43; 项目中使用插件...</p>
   </section>
   <footer class="entry-footer"><span title='2022-11-10 09:01:48 +0800 CST'>November 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal5——开发、使用问题汇总" href="https://874656645.github.io/posts/252-unreal5-%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"></a>
@@ -196,48 +222,10 @@ Origin Longitude = -122.390533
 Origin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C&#43;&#43; 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目
 VS 2022 解决方案类似下图：
   添加下面的代码到 project.Build.cs 文件：
-// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; }); // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion....</p>
+// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; });  // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion....</p>
   </section>
   <footer class="entry-footer"><span title='2022-10-19 14:25:50 +0800 CST'>October 19, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal" href="https://874656645.github.io/posts/250-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——使用蓝图获取 uasset 资源
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>方法一：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按路径获取资产（Get Asset by Path） 获取路径下的所有类型资产；
-  通过 获取完整名称（GetFullName） &#43; 包含（Contains） 筛选需要的资产；
-  通过 获取资产（GetAsset） 获取资产对象
-  资产对象的属性：
-  方法二：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按对象路径获取资产（Get Asset by Object Path） 直接获取想要的资产对象；
-  再通过 获取资产（GetAsset） &#43; cast 将资产对象转换为需要的对象类型；
-  注意：资产路径的格式：
- map : World&#39;/Game/Maps/NewWorld.NewWorld&#39; 蓝图类 : 要加 _C 例如 Blueprint&#39;/Game/Blueprints/MySpringArmPawn.MySpringArmPawn_C&#39;  参考：
- UE4 | BP | 使用蓝图获取Uasset资源 关于UE4动态资源加载(蓝图类)  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-11 17:40:41 +0800 CST'>August 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——使用蓝图获取 uasset 资源" href="https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——蓝图接口
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  蓝图接口（Blueprint Interface） 是一个或多个函数的集合——只有名称，没有实现。
-  由于接口函数没有实现，作为设计人员，所能做的就是指定一系列类型化输入和输出。
-  蓝图接口也有一定的局限性：
- 不能包含变量 不能编辑图表 不能添加组件    其他蓝图类 Actor 实现蓝图接口：
-在 类设置 中添加接口
-  参考：
- 蓝图接口 【教程】UE4中接口的使用–蓝图篇（一）  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-10 11:27:36 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——蓝图接口" href="https://874656645.github.io/posts/218-unreal-%E8%93%9D%E5%9B%BE%E6%8E%A5%E5%8F%A3/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

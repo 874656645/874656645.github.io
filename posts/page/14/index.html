@@ -160,11 +160,51 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>ArcGIS 处理 Shape 字段
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>注：ArcMap 版本为 10.6.1
+一、将 shape 字段处理为 WKT 文本
+ 在属性表中添加一个 Text 类型的字段，大小尽量大一些； 使用字段计算功能 shape file 的字符串类型字段的大小有限制（254）  二、
+def MySub(feat):  partnum = 0   # Count the number of points in the current multipart feature  partcount = feat.partCount  pntcount = 0  str = &#39;&#39;   # Enter while loop for each part in the feature (if a singlepart   # feature, this will occur only once)  while partnum &lt; partcount:  part = feat....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-05-23 17:41:51 +0800 CST'>May 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to ArcGIS 处理 Shape 字段" href="https://874656645.github.io/posts/194-arcgis-%E5%A4%84%E7%90%86-shape-%E5%AD%97%E6%AE%B5/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>使用 VS2022 部署、运行和调试 Linux MSBuild 项目
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、设置 Linux 环境 1. 确保已安装用于 Visual Studio 的 Linux 开发工作负荷 2. Linux 所需环境 sudo apt-get install openssh-server g&#43;&#43; gdb make ninja-build rsync zip
+确保 ssh 服务在 Linux 计算机上运行
+sudo service ssh start
+参考官方文档
+二、连接到远程 Linux 打开【工具】&gt;【选项】&gt;【跨平台】&gt;【连接管理器】进行添加设置
+也可以连接到 WSL，参考官方文档
+三、创建 Linux MSBuild 项目 四、配置 Linux MSBuild 项目 大部分的默认配置都不需要修改，只需关注几个地方
+调试设置
+包含目录是 Linux 上项目的路径
+库目录可使用相对路径
+如果依赖的是动态库，需要在 Linux 端设置 LD_LIBRARY_PATH
+最后在 Linux 环境中生成的项目目录如下
+还可以在【调试】中打开【Linux控制台】
+参考官方文档</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-05-18 12:02:56 +0800 CST'>May 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 使用 VS2022 部署、运行和调试 Linux MSBuild 项目" href="https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 继承构造
     </h2>
   </header>
   <section class="entry-content">
-    <p>通过 using 可以方便的使用父类的构造函数和其他函数； 优先使用子类的构造和函数，如果没有找到匹配的才会调用基类的； 可在子类的初始化列表中调用父类的构造函数，并对子类的成员进行列表初始化；  class BS { int q; double w; public: BS() : q(0), w(0) {} BS(int k) : q(k), w(100) {} BS(double x) : q(-1), w(x) {} BS(int k, double x) : q(k), w(x) {} void Show() const { std::cout &lt;&lt; q &lt;&lt;&#34;, &#34; &lt;&lt; w &lt;&lt; &#39;\n&#39;; } int fn(int j) { cout &lt;&lt; &#34;BS::fn(int)\n&#34;; return 0; } double fn(double w) { cout &lt;&lt; &#34;BS::fn(double)\n&#34;; return 0; } void fn(const char * s) { cout &lt;&lt; &#34;BS::fn(const char *)\n&#34;; } }; class DR : public BS { short j; public: using BS::BS; DR() : j(-100) {} // DR needs its own default constructor  DR(double x) : BS(2*x), j(int(x)) {} DR(int i) : j(-2), BS(i, 0....</p>
+    <p>通过 using 可以方便的使用父类的构造函数和其他函数； 优先使用子类的构造和函数，如果没有找到匹配的才会调用基类的； 可在子类的初始化列表中调用父类的构造函数，并对子类的成员进行列表初始化；  class BS {  int q;  double w; public:  BS() : q(0), w(0) {}  BS(int k) : q(k), w(100) {}  BS(double x) : q(-1), w(x) {}  BS(int k, double x) : q(k), w(x) {}  void Show() const {  std::cout &lt;&lt; q &lt;&lt;&#34;, &#34; &lt;&lt; w &lt;&lt; &#39;\n&#39;;  }   int fn(int j) {  cout &lt;&lt; &#34;BS::fn(int)\n&#34;;  return 0;  }  double fn(double w) {  cout &lt;&lt; &#34;BS::fn(double)\n&#34;;  return 0;  }  void fn(const char * s) {  cout &lt;&lt; &#34;BS::fn(const char *)\n&#34;;  } }; class DR : public BS {  short j; public:  using BS::BS;  DR() : j(-100) {} // DR needs its own default constructor  DR(double x) : BS(2*x), j(int(x)) {}  DR(int i) : j(-2), BS(i, 0....</p>
   </section>
   <footer class="entry-footer"><span title='2022-05-13 16:30:07 +0800 CST'>May 13, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 继承构造" href="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/"></a>
@@ -178,7 +218,7 @@ if (!doNotTrack) {
   <section class="entry-content">
     <p>委托构造的使用方法类似成员列表初始化的变种；
 注意：
- 如果在一个构造函数中使用了本类的委托构造，就不能再对成员使用列表初始化了； 会先执行委托构造函数的函数体，然后再执行本身的函数体； 虽然可以在构造函数中调用其他的构造函数，但已经被初始化的成员变量还会被当前的构造函数进行重置，有可能导致又变为原来的未初始化状态；  class Test{ public: Test():Test(0, 0.1){ s = &#34;Ah&#34;; cout &lt;&lt; &#34;Test()\n&#34;; } Test(int ii):Test(ii, 0.1, &#34;Hi&#34;){ cout &lt;&lt; &#34;Test(int)\n&#34;; } Test(int ii, double dd):Test(ii, dd, &#34;Hi&#34;){ cout &lt;&lt; &#34;Test(int, double)\n&#34;; } Test(int ii, double dd, string ss):i(ii), d(dd), s(ss){ cout &lt;&lt; &#34;Test(int, double, string)\n&#34;; } void print(){ cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#34;\td = &#34; &lt;&lt; d &lt;&lt; &#34;\ts = &#34; &lt;&lt; s &lt;&lt; endl; } private: int i; double d; string s; }; int main() { Test t(10); t....</p>
+ 如果在一个构造函数中使用了本类的委托构造，就不能再对成员使用列表初始化了； 会先执行委托构造函数的函数体，然后再执行本身的函数体； 虽然可以在构造函数中调用其他的构造函数，但已经被初始化的成员变量还会被当前的构造函数进行重置，有可能导致又变为原来的未初始化状态；  class Test{ public:  Test():Test(0, 0.1){  s = &#34;Ah&#34;;  cout &lt;&lt; &#34;Test()\n&#34;;  }  Test(int ii):Test(ii, 0.1, &#34;Hi&#34;){  cout &lt;&lt; &#34;Test(int)\n&#34;;  }  Test(int ii, double dd):Test(ii, dd, &#34;Hi&#34;){  cout &lt;&lt; &#34;Test(int, double)\n&#34;;  }  Test(int ii, double dd, string ss):i(ii), d(dd), s(ss){  cout &lt;&lt; &#34;Test(int, double, string)\n&#34;;  }   void print(){  cout &lt;&lt; &#34;i = &#34; &lt;&lt; i &lt;&lt; &#34;\td = &#34; &lt;&lt; d &lt;&lt; &#34;\ts = &#34; &lt;&lt; s &lt;&lt; endl;  } private:  int i;  double d;  string s; }; int main() {  Test t(10);  t....</p>
   </section>
   <footer class="entry-footer"><span title='2022-05-13 15:37:16 +0800 CST'>May 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 委托构造" href="https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/"></a>
@@ -190,39 +230,11 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){ cout &lt;&lt; &#34;after main exit.\n&#34;; cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() { cout &lt;&lt; &#34;Hello World\n&#34;; on_exit(f, (char*)&#34;this is message&#34;); cout &lt;&lt; &#34;end of main.\n&#34;; return 0; } 输出：
+    <p> 静态变量在 main 函数前执行初始化 on_exit 注册的函数在 main 执行后再执行  void f(int state, void* msg){  cout &lt;&lt; &#34;after main exit.\n&#34;;  cout &lt;&lt; &#34;state: &#34; &lt;&lt; state &lt;&lt; &#34;\tmessage: &#34; &lt;&lt; (char*)msg &lt;&lt; endl; } int main() {  cout &lt;&lt; &#34;Hello World\n&#34;;  on_exit(f, (char*)&#34;this is message&#34;);  cout &lt;&lt; &#34;end of main.\n&#34;;  return 0; } 输出：
 Hello World end of main. after main exit. state: 0	message: this is message </p>
   </section>
   <footer class="entry-footer"><span title='2022-05-12 16:02:52 +0800 CST'>May 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to main 函数执行完后所执行的代码" href="https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>大端、小端字节序
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
-  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
- 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
-            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-21 16:04:58 +0800 CST'>April 21, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 大端、小端字节序" href="https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 内存对齐 alignof alignas max_align_t
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>alignof( type-id ) 查询类型的对齐要求，以字节为单位
-struct Storage { char a; int b; double c; long long d; }; // struct alignas(alignof(long double)) AlignasStorage { // struct alignas(long double) AlignasStorage { struct alignas(std::max_align_t) AlignasStorage { // max_align_t 相当于 alignof(long double) 内存对齐为 16 字节  // 这三种写法都可以  char a; int b; double c; long long d; }; struct Empty {}; struct alignas(64) Empty64 {}; int main() { std::cout &lt;&lt; alignof(Storage) &lt;&lt; std::endl; // 8  std::cout &lt;&lt; sizeof(Storage) &lt;&lt; std::endl; // 24 内存对齐为 8 字节，所以大小为 8 的整数倍  std::cout &lt;&lt; alignof(AlignasStorage) &lt;&lt; std::endl; // 16  std::cout &lt;&lt; sizeof(AlignasStorage) &lt;&lt; std::endl; // 32 内存对齐为 16 字节，所以大小为 16 的整数倍  int a = 10; int &amp;b = a; std::cout &lt;&lt; alignof(b) &lt;&lt; std::endl; // 4 引用类型返回引用类型的对齐要求  int x[10]; std::cout &lt;&lt; alignof(x) &lt;&lt; std::endl; // 4 数组类型返回元素类型的对齐要求  std::cout &lt;&lt; &#34;Alignment of&#34; &#34;\n&#34; &#34;- char : &#34; &lt;&lt; alignof(char) &lt;&lt; &#34;\n&#34; // 1  &#34;- pointer : &#34; &lt;&lt; alignof(int*) &lt;&lt; &#34;\n&#34; // 8  &#34;- int : &#34; &lt;&lt; alignof(int) &lt;&lt; &#34;\n&#34; // 4  &#34;- long long : &#34; &lt;&lt; alignof(long long) &lt;&lt; &#34;\n&#34; // 8  &#34;- empty class : &#34; &lt;&lt; alignof(Empty) &lt;&lt; &#34;\n&#34; // 1  &#34;- alignas(64) Empty: &#34; &lt;&lt; alignof(Empty64) &lt;&lt; &#34;\n&#34;; // 64  return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-19 19:23:40 +0800 CST'>April 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 内存对齐 alignof alignas max_align_t" href="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

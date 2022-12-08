@@ -160,6 +160,34 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>大端、小端字节序
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
+  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
+ 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
+            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-21 16:04:58 +0800 CST'>April 21, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 大端、小端字节序" href="https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;11 内存对齐 alignof alignas max_align_t
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>alignof( type-id ) 查询类型的对齐要求，以字节为单位
+struct Storage {  char a;  int b;  double c;  long long d; };  // struct alignas(alignof(long double)) AlignasStorage { // struct alignas(long double) AlignasStorage { struct alignas(std::max_align_t) AlignasStorage { // max_align_t 相当于 alignof(long double) 内存对齐为 16 字节  // 这三种写法都可以  char a;  int b;  double c;  long long d; };  struct Empty {};  struct alignas(64) Empty64 {};  int main() {  std::cout &lt;&lt; alignof(Storage) &lt;&lt; std::endl; // 8  std::cout &lt;&lt; sizeof(Storage) &lt;&lt; std::endl; // 24 内存对齐为 8 字节，所以大小为 8 的整数倍  std::cout &lt;&lt; alignof(AlignasStorage) &lt;&lt; std::endl; // 16  std::cout &lt;&lt; sizeof(AlignasStorage) &lt;&lt; std::endl; // 32 内存对齐为 16 字节，所以大小为 16 的整数倍  int a = 10;  int &amp;b = a;  std::cout &lt;&lt; alignof(b) &lt;&lt; std::endl; // 4 引用类型返回引用类型的对齐要求  int x[10];  std::cout &lt;&lt; alignof(x) &lt;&lt; std::endl; // 4 数组类型返回元素类型的对齐要求   std::cout &lt;&lt; &#34;Alignment of&#34; &#34;\n&#34;  &#34;- char : &#34; &lt;&lt; alignof(char) &lt;&lt; &#34;\n&#34; // 1  &#34;- pointer : &#34; &lt;&lt; alignof(int*) &lt;&lt; &#34;\n&#34; // 8  &#34;- int : &#34; &lt;&lt; alignof(int) &lt;&lt; &#34;\n&#34; // 4  &#34;- long long : &#34; &lt;&lt; alignof(long long) &lt;&lt; &#34;\n&#34; // 8  &#34;- empty class : &#34; &lt;&lt; alignof(Empty) &lt;&lt; &#34;\n&#34; // 1  &#34;- alignas(64) Empty: &#34; &lt;&lt; alignof(Empty64) &lt;&lt; &#34;\n&#34;; // 64   return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-19 19:23:40 +0800 CST'>April 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 内存对齐 alignof alignas max_align_t" href="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Cesium4Unreal——Editing Tileset Materials
     </h2>
   </header>
@@ -217,48 +245,6 @@ Origin Height = 1570.879421
   </section>
   <footer class="entry-footer"><span title='2022-04-16 10:34:27 +0800 CST'>April 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Cesium4Unreal——Using Custom Controllers" href="https://874656645.github.io/posts/183-cesium-unreal-using-custom-controllers/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Transition Between Locations
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>目标 学习使用虚幻引擎的蓝图系统编程，实现在地球上的两个位置之间平稳飞行。
- 在虚幻引擎中使用地图坐标 在感兴趣的位置创建 viewpoints 创建一个蓝图，使位置的切换变得平滑  第一步：创建一个关卡 参考前面的步骤创关卡，并定位到澳大利亚悉尼
-Origin Latitude = -33.871799 Origin Longitude = 151.206696 Origin Height = 3000.0
-第二步：添加 DynamicPawn actor 第三步：在蓝图中设置转换   打开关卡蓝图
-  蓝图联接图
-  创建墨尔本经纬度向量
-longitude = 144.9631
-latitude = -37.8136
-height = 2000
-第四步：自定义飞行过渡 设置飞行曲线：
- Fly To Altitude Profile Curve Fly to Maximum Altitude Curve Fly to Progress Curve  添加 Fly To Curves actor，这是一个UCurveFloat，这个函数用来控制计算从源头到目的地的路径插值。
-  在【内容】面板右击，选择【其他】【曲线】，选择【CurveFloat】，并命名...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-15 16:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Transition Between Locations" href="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
-参考快速入门，删除【世界大纲试图】中的所有默认的 actors
-  创建持久关卡(Persistent Level)
-在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
-这个关卡就是 Persistent Level，它代表了整个地球。
-  世界场景设置
-打开【世界场景设置】面板，勾选【启用场景合成】
-禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

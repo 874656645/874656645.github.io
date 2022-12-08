@@ -9,7 +9,25 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 10 Nov 2022 09:01:48 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/cesium-for-ue5/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Dec 2022 10:34:53 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/cesium-for-ue5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unreal——Subsystem（子系统）</title>
+      <link>https://874656645.github.io/posts/257-unreal-subsystem%E5%AD%90%E7%B3%BB%E7%BB%9F/</link>
+      <pubDate>Wed, 07 Dec 2022 10:34:53 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/257-unreal-subsystem%E5%AD%90%E7%B3%BB%E7%BB%9F/</guid>
+      <description>Programming Subsystems</description>
+    </item>
+    
+    <item>
+      <title>Unreal——项目和插件</title>
+      <link>https://874656645.github.io/posts/256-unreal-%E9%A1%B9%E7%9B%AE%E5%92%8C%E6%8F%92%E4%BB%B6/</link>
+      <pubDate>Wed, 07 Dec 2022 09:59:17 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/256-unreal-%E9%A1%B9%E7%9B%AE%E5%92%8C%E6%8F%92%E4%BB%B6/</guid>
+      <description>一、插件  插件是为特定目的设计的代码和数据的集合； 开发人员可以很容易的在单个项目中启用或禁用他们； 插件分为运行时（runtime gameplay functionality）、编辑器（editor functionality）  二、模块  项目本身也是一个模块  三、依赖 </description>
+    </item>
+    
     <item>
       <title>Unreal5——开发、使用问题汇总</title>
       <link>https://874656645.github.io/posts/252-unreal5-%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/</link>
@@ -28,8 +46,10 @@ Editor Preferences -&amp;gt; Source Code
 Editor 右下角
   C++ Live Coding 热编译
 Ctrl + Alt + F11
-  C++ 项目中使用插件
-如果编译过程中提示错误 ERROR: Expecting to find a type to be declared in a module rules named &amp;lsquo;JsonLibrary&amp;rsquo; in UE5Rules</description>
+  重新构建 C++ 工程
+注意：需要关闭 Editor
+VS Code: Ctrl + Shift + B
+  C++ 项目中使用插件</description>
     </item>
     
     <item>
@@ -57,7 +77,7 @@ Origin Longitude = -122.390533
 Origin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C++ 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目
 VS 2022 解决方案类似下图：
   添加下面的代码到 project.Build.cs 文件：
-// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &amp;#34;CesiumRuntime&amp;#34; }); // Tell Unreal Engine to use C++17 CppStandard = CppStandardVersion.</description>
+// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &amp;#34;CesiumRuntime&amp;#34; });  // Tell Unreal Engine to use C++17 CppStandard = CppStandardVersion.</description>
     </item>
     
     <item>
@@ -169,7 +189,7 @@ RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个�
 推荐将 像素流送插件（Pixel Streaming Input） 组件添加到 PlayerController 中。
 三、从播放器页面到 UE 的通信 app.js 文件提供两个可在 HTML 播放器页面进行调用的 JavaScript 函数，以便用户从浏览器向虚幻引擎程序发送事件和命令：emitCommand 和 emitUIInteraction 函数。
   js 代码：
-// 从播放器页面到UE4的通信  let testButton = document.</description>
+ // 从播放器页面到UE4的通信  let testButton = document.</description>
     </item>
     
     <item>
@@ -228,7 +248,7 @@ RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个�
       
       <guid>https://874656645.github.io/posts/198-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF%E5%92%8C%E8%BD%AF%E4%BB%B6/</guid>
       <description>软件和插件：
- Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&#39; `CityEngine VR Experience for Unreal Engine&#39; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera Water 插件 基于精确地理的太阳定位工具  蓝图开发：
+ Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&amp;rsquo; `CityEngine VR Experience for Unreal Engine&amp;rsquo; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera Water 插件 基于精确地理的太阳定位工具  蓝图开发：
  通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：</description>
     </item>
     

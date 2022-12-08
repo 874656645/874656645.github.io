@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,6 +157,38 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>vector
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>vector 常用操作 #include &lt;iostream&gt;#include &lt;vector&gt; int main() {  //1.定义和初始化  vector&lt;int&gt; vec1; //默认初始化，vec1为空  vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2  vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&lt;int&gt; vec4(10); //10个值为0的元素  vector&lt;int&gt; vec5(10,4); //10个值为4的元素   //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); // 尾部添加元素  vec1.insert(vec1.end(),5,3); // 从vec1.back位置插入5个值为3的元素   //2.2 删除函数  vec1.pop_back(); // 删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()&#43;2); // 删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); // 清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&lt;int&gt;().swap(V); // 利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  // 且只有存储对象时才有效   //2....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-29 19:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to vector" href="https://874656645.github.io/posts/55-vector/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43; STL
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>STL六大组件
+STL（Standard Template Library），即标准模板库，是一个具有工业强度的，高效的C&#43;&#43;程序库。STL中包括六大组件：容器、算法、迭代器、适配器、仿函数、空间配置器
+适配器：适配器是一种设计模式(设计模式是一套被反复使用的、多数人知晓的、经过分类编目的、代码设计经验的总结)，该中模式是将一个类的接口转换成客户希望的另外一个接口。
+一、容器 序列式容器（vector、deque、list）、关联式容器（map、set）、容器适配器（stack、queue、priority_queue）
+1. vector 是一种动态数组，在内存中具有连续的存储空间，支持快速随机访问。由于具有连续的存储空间，所以在插入和删除操作方面，效率比较慢
+2. deque deque 是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
+3. list list 是 STL 实现的双向链表，与 vector 相比, 它允许快速的插入和删除，但是随机访问却比较慢
+4. map、multimap、unordered_map、unordered_multimap  map 是 STL 的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似 list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然 stack、queue、priority_queue 中也可以存放元素，但在 STL 中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而 stack、queue、priority_queue 只是在底层将其他容器进行了封装
+std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack;  std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue;  std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择 deque 作为 stack 和 queue 的底层默认容器？...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-29 17:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; STL" href="https://874656645.github.io/posts/54-c&#43;&#43;-stl/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>new、delete 与内存
     </h2>
   </header>
@@ -165,7 +197,7 @@ if (!doNotTrack) {
 1、new / delete 具体步骤 new
  第一步：调用 operator new 函数分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象 第二步：编译器运行相应的构造函数以构造对象，并为其传入初值 第三部：对象构造完成后，返回一个指向该对象的指针  delete
  第一步：调用对象的析构函数 第二步：编译器调用 operator delete 函数释放内存空间  2、new/delete 与 malloc/free 的区别是什么？  malloc/free 是 C 语言的标准库函数， new/delete 是 C&#43;&#43; 的运算符。它们都可用于申请动态内存和释放内存 malloc/free 不会去自动调用构造和析构函数，对于基本数据类型的对象而言，光用 malloc/free 无法满足动态对象的要求 malloc/free 需要指定分配内存的大小，而 new/delete 会自动计算所需内存大小 new 返回的是指定对象的指针，而 malloc 返回的是 void*，因此 malloc 的返回值一般都需要进行强制类型转换  operator new 重载：
-class Person{ public: Person(){ id = 0; score = 0; cout &lt;&lt; &#34;Person()&#34; &lt;&lt; endl; } Person(int id, int score):id(id),score(score){ cout &lt;&lt; &#34;Person(int, int)&#34; &lt;&lt; endl; } Person(const Person &amp;p){ cout &lt;&lt; &#34;Person(const Person &amp;p)&#34; &lt;&lt; endl; id = p....</p>
+class Person{ public:  Person(){  id = 0;  score = 0;  cout &lt;&lt; &#34;Person()&#34; &lt;&lt; endl;  }  Person(int id, int score):id(id),score(score){  cout &lt;&lt; &#34;Person(int, int)&#34; &lt;&lt; endl;  }  Person(const Person &amp;p){  cout &lt;&lt; &#34;Person(const Person &amp;p)&#34; &lt;&lt; endl;  id = p....</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-29 15:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to new、delete 与内存" href="https://874656645.github.io/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/"></a>
@@ -177,7 +209,7 @@ class Person{ public: Person(){ id = 0; score = 0; cout &lt;&lt; &#34;Person()&#
     </h2>
   </header>
   <section class="entry-content">
-    <p>在堆上声明一个数组 int main( ) { #if 0// 方式一： int** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &lt; 4; i&#43;&#43;){ pArr[i] = new int[8]; } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ pArr[i][j] = i * j; } } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ if(j == 0) cout &lt;&lt; endl; cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;; } } // 删除 for(int i = 0; i &lt; 4; &#43;&#43;i){ delete [] pArr[i]; } delete [] pArr; #endif  // 方式二：  cout &lt;&lt; sizeof(int[5]) &lt;&lt; endl; // 初始化  int(*pArr)[8] = new int[4][8]; memset(pArr, 0, sizeof(int[4][8])); // 或者  // int(*pArr)[8] = new int[4][8]{{0}};  cout &lt;&lt; sizeof(int[4][8]) &lt;&lt; endl; for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ pArr[i][j] = i * j; } } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;; } cout &lt;&lt; endl; } cout &lt;&lt; endl; delete[] pArr; // 取地址  int arr[3][4]{{0}}; int(*p)[3][4] = &amp;arr; cout &lt;&lt; arr[2][3] &lt;&lt; endl; cout &lt;&lt; *p[2][3] &lt;&lt; endl; return 0; } 输出：...</p>
+    <p>在堆上声明一个数组 int main( ) { #if 0// 方式一： int** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &lt; 4; i&#43;&#43;){ pArr[i] = new int[8]; } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ pArr[i][j] = i * j; } } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ if(j == 0) cout &lt;&lt; endl; cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;; } } // 删除 for(int i = 0; i &lt; 4; &#43;&#43;i){ delete [] pArr[i]; } delete [] pArr; #endif  // 方式二：  cout &lt;&lt; sizeof(int[5]) &lt;&lt; endl;  // 初始化  int(*pArr)[8] = new int[4][8];  memset(pArr, 0, sizeof(int[4][8]));  // 或者  // int(*pArr)[8] = new int[4][8]{{0}};  cout &lt;&lt; sizeof(int[4][8]) &lt;&lt; endl;   for(int i = 0; i &lt; 4; &#43;&#43;i){  for(int j = 0; j &lt; 8; &#43;&#43;j){  pArr[i][j] = i * j;  }  }  for(int i = 0; i &lt; 4; &#43;&#43;i){  for(int j = 0; j &lt; 8; &#43;&#43;j){  cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;;  }  cout &lt;&lt; endl;  }  cout &lt;&lt; endl;  delete[] pArr;   // 取地址  int arr[3][4]{{0}};  int(*p)[3][4] = &amp;arr;  cout &lt;&lt; arr[2][3] &lt;&lt; endl;  cout &lt;&lt; *p[2][3] &lt;&lt; endl;   return 0; } 输出：...</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-29 14:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to new 二维数组" href="https://874656645.github.io/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"></a>
@@ -196,33 +228,6 @@ class Person{ public: Person(){ id = 0; score = 0; cout &lt;&lt; &#34;Person()&#
   </section>
   <footer class="entry-footer"><span title='2021-12-28 17:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 类其它总结" href="https://874656645.github.io/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>构造函数重载与互调
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>构造函数可以互调，但不能在函数体内，只能通过初始化列表的形式 构造函数中不要写业务逻辑 析构函数中不要 delete this ，这会导致析构递归，最终导致栈溢出  class Test{ public: Test(int a, int b, int c){ _a = a; _b = b; _c = c; } // 正确  Test(int a, int b):Test(a, b, 100){ } /* // 错误 Test(int a, int b){ _a = a; _b = b; Test(a, b, 100); // 此处只是产生一个临时对象，马上又被释放掉了，没有任何意义 } */ int getA(){ return _a; } int getB(){ return _b; } int getC(){ return _c; } private: int _a; int _b; int _c; }; int main( ) { Test t1(10, 20); cout &lt;&lt; t1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-28 16:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 构造函数重载与互调" href="https://874656645.github.io/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>类的成员函数作为回调函数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>思路是借助类的静态成员函数
-方式一：
-class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback); b.setCur(); Handle(A::callback); return 0; } 方式二：
-class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } static void callback(void *a){ ((A*)a)-&gt;print(); } private: int m_a; }; typedef void (*FUN)(void *); void Handle(void *a, FUN call){ call(a); } int main( ) { A a(10), b(20); Handle(&amp;a, A::callback); Handle(&amp;b, A::callback); return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-28 14:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类的成员函数作为回调函数" href="https://874656645.github.io/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

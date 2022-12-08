@@ -145,6 +145,46 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
+参考快速入门，删除【世界大纲试图】中的所有默认的 actors
+  创建持久关卡(Persistent Level)
+在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
+这个关卡就是 Persistent Level，它代表了整个地球。
+  世界场景设置
+打开【世界场景设置】面板，勾选【启用场景合成】
+禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Cesium4Unreal——Place Objects On Globe
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。
+可以从以下几方面解决（由易到难）：
+ 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置
+当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象
+开始放置的地方：
+修改 CesiumGeoreference 原点后：
+四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。
+现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。
+需要注意两点：
+ 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-15 10:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Place Objects On Globe" href="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Cesium4Unreal——Photogrammetry 倾斜摄影
     </h2>
   </header>
@@ -208,36 +248,10 @@ ArcMap WMTS</p>
   <footer class="entry-footer"><span title='2021-12-17 22:34:27 +0800 CST'>December 17, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to ArcMap 加载天地图服务" href="https://874656645.github.io/posts/27-arcmap-%E5%8A%A0%E8%BD%BD%E5%A4%A9%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>ArcGIS 字段计算（自增、随机数）
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、随机数 python 脚本
-import random def randNum(): res = random.randint(1, 7) return res 2、自增 python 脚本
-total = 0 def accumulate(increment): global total if total: total &#43;= increment else: total = increment return total </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-11-25 11:36:19 +0800 CST'>November 25, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcGIS 字段计算（自增、随机数）" href="https://874656645.github.io/posts/17-arcgis-%E5%AD%97%E6%AE%B5%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>spatialite 随机数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、随机数 SQL 脚本
-update &#34;CYBuildings2&#34; set &#34;imgIndex&#34; = FLOOR(1 &#43; (RANDOM()&#43;9223372036854775808)/2.0/9223372036854775808 * 7); </p>
-  </section>
-  <footer class="entry-footer">1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to spatialite 随机数" href="https://874656645.github.io/posts/16-spatialite-%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/categories/gis/page/5/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/categories/gis/page/7/">Next Page »</a>
   </nav>
 </footer>
     </main>

@@ -150,7 +150,7 @@ if (!doNotTrack) {
   </header>
   <section class="entry-content">
     <p>一、暴力算法 $\mathcal{O}(n^3)$ 遍历数组的所有子数组集合，并对其求和，筛选出和的最大值
-int maxSumOfSub1(int* array, int length){ int maxSum = 0; int startIndex = 0, endIndex = 0; for(int i = 0; i &lt; length; i&#43;&#43;){ for(int j = i; j &lt; length; j&#43;&#43;){ int sum = 0; for(int k = i; k &lt;= j; k&#43;&#43;) sum &#43;= array[k]; if(maxSum &lt; sum){ maxSum = sum; startIndex = i; endIndex = j; } } } cout &lt;&lt; &#34;Begin:&#34; &lt;&lt; startIndex &lt;&lt; &#34; End:&#34; &lt;&lt; endIndex &lt;&lt; &#34; Num:&#34; &lt;&lt; maxSum &lt;&lt; endl; return maxSum; } 二、前缀和 $\mathcal{O}(n^2)$ 先把数组的前 i 项和求出来并将其保存到数组中，然后计算所有子数组集合的和，筛选其中最大的...</p>
+int maxSumOfSub1(int* array, int length){  int maxSum = 0;  int startIndex = 0, endIndex = 0;  for(int i = 0; i &lt; length; i&#43;&#43;){  for(int j = i; j &lt; length; j&#43;&#43;){  int sum = 0;  for(int k = i; k &lt;= j; k&#43;&#43;)  sum &#43;= array[k];  if(maxSum &lt; sum){  maxSum = sum;  startIndex = i;  endIndex = j;  }  }  }   cout &lt;&lt; &#34;Begin:&#34; &lt;&lt; startIndex &lt;&lt; &#34; End:&#34; &lt;&lt; endIndex &lt;&lt; &#34; Num:&#34; &lt;&lt; maxSum &lt;&lt; endl;  return maxSum; } 二、前缀和 $\mathcal{O}(n^2)$ 先把数组的前 i 项和求出来并将其保存到数组中，然后计算所有子数组集合的和，筛选其中最大的...</p>
   </section>
   <footer class="entry-footer"><span title='2022-03-19 15:35:35 +0800 CST'>March 19, 2022</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——连续子数组最大和" href="https://874656645.github.io/posts/152-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/"></a>

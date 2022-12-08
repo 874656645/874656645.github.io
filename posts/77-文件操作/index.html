@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>文件操作 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in); ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app); if (!ifs) { cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl; return; } if (!ofs) { cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl; return; } char ch; while (ifs.get(ch)) { cout &lt;&lt; ch; ofs &lt;&lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &lt;&lt; &#34;Age: &#34; &lt;&lt; m_age &lt;&lt; &#34; ID: &#34; &lt;&lt; m_id &lt;&lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.">
+<meta name="description" content="一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std;  void ReadWriteFile(){  ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in);  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app);  if (!ifs)  {  cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl;  return;  }  if (!ofs)  {  cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl;  return;  }  char ch;  while (ifs.get(ch))  {  cout &lt;&lt; ch;  ofs &lt;&lt; ch;  }   ifs.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -16,7 +16,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="文件操作" />
-<meta property="og:description" content="一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in); ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app); if (!ifs) { cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl; return; } if (!ofs) { cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl; return; } char ch; while (ifs.get(ch)) { cout &lt;&lt; ch; ofs &lt;&lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &lt;&lt; &#34;Age: &#34; &lt;&lt; m_age &lt;&lt; &#34; ID: &#34; &lt;&lt; m_id &lt;&lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target." />
+<meta property="og:description" content="一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std;  void ReadWriteFile(){  ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in);  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app);  if (!ifs)  {  cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl;  return;  }  if (!ofs)  {  cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl;  return;  }  char ch;  while (ifs.get(ch))  {  cout &lt;&lt; ch;  ofs &lt;&lt; ch;  }   ifs." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-16T09:47:21&#43;08:00" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="文件操作"/>
-<meta name="twitter:description" content="一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in); ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app); if (!ifs) { cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl; return; } if (!ofs) { cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl; return; } char ch; while (ifs.get(ch)) { cout &lt;&lt; ch; ofs &lt;&lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &lt;&lt; &#34;Age: &#34; &lt;&lt; m_age &lt;&lt; &#34; ID: &#34; &lt;&lt; m_id &lt;&lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target."/>
+<meta name="twitter:description" content="一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &lt;iostream&gt;#include &lt;fstream&gt;using namespace std;  void ReadWriteFile(){  ifstream ifs(&#34;D:\\Users\\cui_z\\Desktop\\source.txt&#34;, ios::in);  ofstream ofs(&#34;D:\\Users\\cui_z\\Desktop\\target.txt&#34;, ios::out | ios::app);  if (!ifs)  {  cout &lt;&lt; &#34;输入文件打开失败&#34; &lt;&lt; endl;  return;  }  if (!ofs)  {  cout &lt;&lt; &#34;输出文件打开失败&#34; &lt;&lt; endl;  return;  }  char ch;  while (ifs.get(ch))  {  cout &lt;&lt; ch;  ofs &lt;&lt; ch;  }   ifs."/>
 
 
 <script type="application/ld+json">
@@ -86,11 +86,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "文件操作",
   "name": "文件操作",
-  "description": "一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include \u0026lt;iostream\u0026gt;#include \u0026lt;fstream\u0026gt;using namespace std; void ReadWriteFile(){ ifstream ifs(\u0026#34;D:\\\\Users\\\\cui_z\\\\Desktop\\\\source.txt\u0026#34;, ios::in); ofstream ofs(\u0026#34;D:\\\\Users\\\\cui_z\\\\Desktop\\\\target.txt\u0026#34;, ios::out | ios::app); if (!ifs) { cout \u0026lt;\u0026lt; \u0026#34;输入文件打开失败\u0026#34; \u0026lt;\u0026lt; endl; return; } if (!ofs) { cout \u0026lt;\u0026lt; \u0026#34;输出文件打开失败\u0026#34; \u0026lt;\u0026lt; endl; return; } char ch; while (ifs.get(ch)) { cout \u0026lt;\u0026lt; ch; ofs \u0026lt;\u0026lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \\r\\n 表示，二进制是以 \\n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \\n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout \u0026lt;\u0026lt; \u0026#34;Age: \u0026#34; \u0026lt;\u0026lt; m_age \u0026lt;\u0026lt; \u0026#34; ID: \u0026#34; \u0026lt;\u0026lt; m_id \u0026lt;\u0026lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(\u0026#34;D:\\\\Users\\\\cui_z\\\\Desktop\\\\target.",
+  "description": "一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include \u0026lt;iostream\u0026gt;#include \u0026lt;fstream\u0026gt;using namespace std;  void ReadWriteFile(){  ifstream ifs(\u0026#34;D:\\\\Users\\\\cui_z\\\\Desktop\\\\source.txt\u0026#34;, ios::in);  ofstream ofs(\u0026#34;D:\\\\Users\\\\cui_z\\\\Desktop\\\\target.txt\u0026#34;, ios::out | ios::app);  if (!ifs)  {  cout \u0026lt;\u0026lt; \u0026#34;输入文件打开失败\u0026#34; \u0026lt;\u0026lt; endl;  return;  }  if (!ofs)  {  cout \u0026lt;\u0026lt; \u0026#34;输出文件打开失败\u0026#34; \u0026lt;\u0026lt; endl;  return;  }  char ch;  while (ifs.get(ch))  {  cout \u0026lt;\u0026lt; ch;  ofs \u0026lt;\u0026lt; ch;  }   ifs.",
   "keywords": [
     "C++"
   ],
-  "articleBody": "一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include #include using namespace std; void ReadWriteFile(){ ifstream ifs(\"D:\\\\Users\\\\cui_z\\\\Desktop\\\\source.txt\", ios::in); ofstream ofs(\"D:\\\\Users\\\\cui_z\\\\Desktop\\\\target.txt\", ios::out | ios::app); if (!ifs) { cout  \"输入文件打开失败\"  endl; return; } if (!ofs) { cout  \"输出文件打开失败\"  endl; return; } char ch; while (ifs.get(ch)) { cout  ch; ofs  ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \\r\\n 表示，二进制是以 \\n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \\n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout  \"Age: \"  m_age  \" ID: \"  m_id  endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(\"D:\\\\Users\\\\cui_z\\\\Desktop\\\\target.txt\", ios::out | ios::binary); if (!ofs) { cout  \"存储文件打开失败\"  endl; return; } Person p1(10, 20), p2(30, 40); ofs.write((const char*)\u0026p1, sizeof(Person)); ofs.write((const char*)\u0026p2, sizeof(Person)); ofs.close(); // 读取二进制  ifstream ifs(\"D:\\\\Users\\\\cui_z\\\\Desktop\\\\target.txt\", ios::in | ios::binary); if (!ifs) { cout  \"读取文件打开失败\"  endl; return; } Person p3, p4; ifs.read((char*)\u0026p3, sizeof(Person)); ifs.read((char*)\u0026p4, sizeof(Person)); p3.show(); p4.show(); ifs.close(); } ",
+  "articleBody": "一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include #include using namespace std;  void ReadWriteFile(){  ifstream ifs(\"D:\\\\Users\\\\cui_z\\\\Desktop\\\\source.txt\", ios::in);  ofstream ofs(\"D:\\\\Users\\\\cui_z\\\\Desktop\\\\target.txt\", ios::out | ios::app);  if (!ifs)  {  cout  \"输入文件打开失败\"  endl;  return;  }  if (!ofs)  {  cout  \"输出文件打开失败\"  endl;  return;  }  char ch;  while (ifs.get(ch))  {  cout  ch;  ofs  ch;  }   ifs.close();  ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \\r\\n 表示，二进制是以 \\n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \\n 存储和表示  class Person { private:  int m_age;  int m_id; public:  Person():m_age(0), m_id(0){   }  Person(int age, int id){  m_age = age;  m_id = id;  }  ~Person() = default;  void show(){  cout  \"Age: \"  m_age  \" ID: \"  m_id  endl;  } };  void BinaryReadWrite(){  // 存储二进制  ofstream ofs(\"D:\\\\Users\\\\cui_z\\\\Desktop\\\\target.txt\", ios::out | ios::binary);  if (!ofs)  {  cout  \"存储文件打开失败\"  endl;  return;  }  Person p1(10, 20), p2(30, 40);  ofs.write((const char*)\u0026p1, sizeof(Person));  ofs.write((const char*)\u0026p2, sizeof(Person));  ofs.close();  // 读取二进制  ifstream ifs(\"D:\\\\Users\\\\cui_z\\\\Desktop\\\\target.txt\", ios::in | ios::binary);  if (!ifs)  {  cout  \"读取文件打开失败\"  endl;  return;  }  Person p3, p4;  ifs.read((char*)\u0026p3, sizeof(Person));  ifs.read((char*)\u0026p4, sizeof(Person));  p3.show();  p4.show();  ifs.close(); } ",
   "wordCount" : "177",
   "inLanguage": "en",
   "datePublished": "2022-01-16T09:47:21+08:00",
@@ -222,86 +222,86 @@ if (!doNotTrack) {
 <p><img loading="lazy" style="margin: auto;" src="../img/%e8%be%93%e5%85%a5%e8%be%93%e5%87%ba%e6%b5%81.png" alt="输入输出流"  />
 </p>
 <h2 id="二文本文件">二、文本文件<a hidden class="anchor" aria-hidden="true" href="#二文本文件">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;fstream&gt;</span><span style="color:#75715e">
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ReadWriteFile</span>(){
-    ifstream ifs(<span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">cui_z</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">source.txt&#34;</span>, ios<span style="color:#f92672">::</span>in);
-    ofstream ofs(<span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">cui_z</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">target.txt&#34;</span>, ios<span style="color:#f92672">::</span>out <span style="color:#f92672">|</span> ios<span style="color:#f92672">::</span>app);
-    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ifs)
-    {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;输入文件打开失败&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">return</span>;
-    }
-    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ofs)
-    {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;输出文件打开失败&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">return</span>;
-    }
-    <span style="color:#66d9ef">char</span> ch;
-    <span style="color:#66d9ef">while</span> (ifs.get(ch))
-    {
-        cout <span style="color:#f92672">&lt;&lt;</span> ch;
-        ofs <span style="color:#f92672">&lt;&lt;</span> ch;
-    }
-
-    ifs.close();
-    ofs.close();    
-}
-</code></pre></div><h2 id="三二进制文件">三、二进制文件<a hidden class="anchor" aria-hidden="true" href="#三二进制文件">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;fstream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">ReadWriteFile</span>(){
+</span></span><span style="display:flex;"><span>    ifstream ifs(<span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">cui_z</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">source.txt&#34;</span>, ios<span style="color:#f92672">::</span>in);
+</span></span><span style="display:flex;"><span>    ofstream ofs(<span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">cui_z</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">target.txt&#34;</span>, ios<span style="color:#f92672">::</span>out <span style="color:#f92672">|</span> ios<span style="color:#f92672">::</span>app);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ifs)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;输入文件打开失败&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ofs)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;输出文件打开失败&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> ch;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (ifs.get(ch))
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> ch;
+</span></span><span style="display:flex;"><span>        ofs <span style="color:#f92672">&lt;&lt;</span> ch;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ifs.close();
+</span></span><span style="display:flex;"><span>    ofs.close();    
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="三二进制文件">三、二进制文件<a hidden class="anchor" aria-hidden="true" href="#三二进制文件">#</a></h2>
 <ul>
 <li>文本文件和二进制文件在计算机中都是以二进制的方式存储的</li>
 <li>程序中的对象都是二进制存储的</li>
 <li><em>Windows</em> 中的文本文件换行符用 <code>\r\n</code> 表示，二进制是以 <code>\n</code> 存储，所以存储和显示时会做一下转换</li>
 <li><em>Linux</em> 中二进制和文本文件换行都是以 <code>\n</code> 存储和表示</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>
-{
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">int</span> m_age;
-    <span style="color:#66d9ef">int</span> m_id;
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    Person()<span style="color:#f92672">:</span>m_age(<span style="color:#ae81ff">0</span>), m_id(<span style="color:#ae81ff">0</span>){
-        
-    }
-    Person(<span style="color:#66d9ef">int</span> age, <span style="color:#66d9ef">int</span> id){
-        m_age <span style="color:#f92672">=</span> age;
-        m_id <span style="color:#f92672">=</span> id;
-    }
-    <span style="color:#f92672">~</span>Person() <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
-    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show</span>(){
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Age: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_age <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; ID: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_id <span style="color:#f92672">&lt;&lt;</span> endl;
-    }
-};
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">BinaryReadWrite</span>(){
-    <span style="color:#75715e">// 存储二进制
-</span><span style="color:#75715e"></span>    ofstream ofs(<span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">cui_z</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">target.txt&#34;</span>, ios<span style="color:#f92672">::</span>out <span style="color:#f92672">|</span> ios<span style="color:#f92672">::</span>binary);
-    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ofs)
-    {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;存储文件打开失败&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">return</span>;
-    }
-    Person p1(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>), p2(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>);
-    ofs.write((<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>p1, <span style="color:#66d9ef">sizeof</span>(Person));
-    ofs.write((<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>p2, <span style="color:#66d9ef">sizeof</span>(Person));
-    ofs.close();
-    <span style="color:#75715e">// 读取二进制
-</span><span style="color:#75715e"></span>    ifstream ifs(<span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">cui_z</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">target.txt&#34;</span>, ios<span style="color:#f92672">::</span>in <span style="color:#f92672">|</span> ios<span style="color:#f92672">::</span>binary);
-    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ifs)
-    {
-        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;读取文件打开失败&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-        <span style="color:#66d9ef">return</span>;
-    }
-    Person p3, p4;
-    ifs.read((<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>p3, <span style="color:#66d9ef">sizeof</span>(Person));
-    ifs.read((<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>p4, <span style="color:#66d9ef">sizeof</span>(Person));
-    p3.show();
-    p4.show();
-    ifs.close();
-}
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_age;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m_id;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Person()<span style="color:#f92672">:</span>m_age(<span style="color:#ae81ff">0</span>), m_id(<span style="color:#ae81ff">0</span>){
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Person(<span style="color:#66d9ef">int</span> age, <span style="color:#66d9ef">int</span> id){
+</span></span><span style="display:flex;"><span>        m_age <span style="color:#f92672">=</span> age;
+</span></span><span style="display:flex;"><span>        m_id <span style="color:#f92672">=</span> id;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>Person() <span style="color:#f92672">=</span> <span style="color:#66d9ef">default</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show</span>(){
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Age: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_age <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; ID: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m_id <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">BinaryReadWrite</span>(){
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 存储二进制
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ofstream ofs(<span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">cui_z</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">target.txt&#34;</span>, ios<span style="color:#f92672">::</span>out <span style="color:#f92672">|</span> ios<span style="color:#f92672">::</span>binary);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ofs)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;存储文件打开失败&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Person p1(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>), p2(<span style="color:#ae81ff">30</span>, <span style="color:#ae81ff">40</span>);
+</span></span><span style="display:flex;"><span>    ofs.write((<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>p1, <span style="color:#66d9ef">sizeof</span>(Person));
+</span></span><span style="display:flex;"><span>    ofs.write((<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>p2, <span style="color:#66d9ef">sizeof</span>(Person));
+</span></span><span style="display:flex;"><span>    ofs.close();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 读取二进制
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ifstream ifs(<span style="color:#e6db74">&#34;D:</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Users</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">cui_z</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">Desktop</span><span style="color:#ae81ff">\\</span><span style="color:#e6db74">target.txt&#34;</span>, ios<span style="color:#f92672">::</span>in <span style="color:#f92672">|</span> ios<span style="color:#f92672">::</span>binary);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>ifs)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;读取文件打开失败&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    Person p3, p4;
+</span></span><span style="display:flex;"><span>    ifs.read((<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>p3, <span style="color:#66d9ef">sizeof</span>(Person));
+</span></span><span style="display:flex;"><span>    ifs.read((<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>p4, <span style="color:#66d9ef">sizeof</span>(Person));
+</span></span><span style="display:flex;"><span>    p3.show();
+</span></span><span style="display:flex;"><span>    p4.show();
+</span></span><span style="display:flex;"><span>    ifs.close();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
 
   </div>
 

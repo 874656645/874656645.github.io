@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,12 +157,40 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>工厂方法模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>工厂方法模式 = 简单工厂模式 &#43; 开闭原则
+类的个数成倍增多，维护成本很高
+适用场景：
+ 客户端不知道它所需要的对象的类 抽象工厂类通过其子类来指定创建哪个对象  // 工厂方法模式 class AbstractFruit{ public:  virtual void showName() = 0; }; class Apple : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl;  } }; class Banana : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl;  } }; class Pear : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl;  } }; // 抽象工厂 class AbstractFruitFactory{ public:  virtual AbstractFruit* CreateFruit() = 0; }; class AppleFactory : public AbstractFruitFactory{ public:  AbstractFruit* CreateFruit() override{  return new Apple;  } }; class PearFactory : public AbstractFruitFactory{ public:  AbstractFruit* CreateFruit() override{  return new Pear;  } }; class BananaFactory : public AbstractFruitFactory{ public:  AbstractFruit* CreateFruit() override{  return new Banana;  } }; int main() {  AbstractFruitFactory* factory = nullptr;  AbstractFruit* fruit = nullptr;  factory = new AppleFactory;  fruit = factory-&gt;CreateFruit();  fruit-&gt;showName();  delete fruit;  delete factory;  factory = new BananaFactory;  fruit = factory-&gt;CreateFruit();  fruit-&gt;showName();  delete fruit;  delete factory;  factory = new PearFactory;  fruit = factory-&gt;CreateFruit();  fruit-&gt;showName();  delete fruit;  delete factory;  return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-31 15:51:36 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 工厂方法模式" href="https://874656645.github.io/posts/105-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>简单工厂模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 实现了客户端与功能类的解耦 但是违反了类的单一职责原则，整个类的代码冗长，阅读难度、维护难度和测试难度也很大 违反了开闭原则，增添功能要修改源代码  适用场景：
+ 工厂类负责创建的对象比较少，不会造成工厂方法中的业务逻辑太过复杂 客户端只知道传入工厂类的参数，对于如何创建对象并不关心  // 简单工厂模式 class AbstractFruit{ public:  virtual void showName() = 0; }; class Apple : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl;  } }; class Banana : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl;  } }; class Pear : public AbstractFruit{ public:  void showName() override{  cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl;  } }; class FruitFactory{ public:  static AbstractFruit* CreateFruit(string flag){  if(flag == &#34;apple&#34;){  return new Apple;  }  else if(flag == &#34;banana&#34;){  return new Banana;  }  else if(flag == &#34;pear&#34;){  return new Pear;  }  else{  return nullptr;  }  } }; int main() {  AbstractFruit* fruit = FruitFactory::CreateFruit(&#34;apple&#34;);  fruit-&gt;showName();  delete fruit;  fruit = FruitFactory::CreateFruit(&#34;banana&#34;);  fruit-&gt;showName();  delete fruit;  fruit = FruitFactory::CreateFruit(&#34;pear&#34;);  fruit-&gt;showName();  delete fruit;  return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-31 15:14:38 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 简单工厂模式" href="https://874656645.github.io/posts/104-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>依赖倒转原则
     </h2>
   </header>
   <section class="entry-content">
     <p>传统过程式设计 传统的过程式设计倾向于使高层次的模块依赖于低层次的模块，抽象层依赖于具体实现层
-// 底层实现 class BankWorker{ public: void saveService(){ cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl; } void transferService(){ cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl; } void payService(){ cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl; } }; // 中层封装 void doSaveBusiness(BankWorker* worker){ worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){ worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){ worker-&gt;payService(); } // 高层调用 void test1(){ BankWorker* bw = new BankWorker; doSaveBusiness(bw); doPayBusiness(bw); doTransferBusiness(bw); delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public: virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public: void doBusiness()override{ cout &lt;&lt; &#34;办理存款业务....</p>
+// 底层实现 class BankWorker{ public:  void saveService(){  cout &lt;&lt; &#34;办理存款业务...&#34; &lt;&lt; endl;  }  void transferService(){  cout &lt;&lt; &#34;办理转账业务...&#34; &lt;&lt; endl;  }  void payService(){  cout &lt;&lt; &#34;办理支付业务...&#34; &lt;&lt; endl;  } }; // 中层封装 void doSaveBusiness(BankWorker* worker){  worker-&gt;saveService(); } void doTransferBusiness(BankWorker* worker){  worker-&gt;transferService(); } void doPayBusiness(BankWorker* worker){  worker-&gt;payService(); } // 高层调用 void test1(){  BankWorker* bw = new BankWorker;  doSaveBusiness(bw);  doPayBusiness(bw);  doTransferBusiness(bw);  delete bw; } 依赖倒转 // 抽象层 class AbstractWorker{ public:  virtual void doBusiness() = 0; }; // 实现层 class SaveBankWorker:public AbstractWorker{ public:  void doBusiness()override{  cout &lt;&lt; &#34;办理存款业务....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-31 11:35:37 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 依赖倒转原则" href="https://874656645.github.io/posts/103-%E4%BE%9D%E8%B5%96%E5%80%92%E8%BD%AC%E5%8E%9F%E5%88%99/"></a>
@@ -175,7 +203,7 @@ if (!doNotTrack) {
   </header>
   <section class="entry-content">
     <p>优先使用组合的方式，而不是继承
-class AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl; } }; class DaZhong:public AbstractCar{ public: void run()override{ cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl; } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public: Person(){ car = nullptr; } Person(AbstractCar* c){ car = c; } void drive(){ car-&gt;run(); delete car; } void drive(AbstractCar* car){ car-&gt;run(); delete car; } private: AbstractCar* car; }; void test2(){ // 方式一：  Person* p = new Person(new BMW); p-&gt;drive(); delete p; p = new Person(new DaZhong); p-&gt;drive(); delete p; // 方式二：  Person pp; pp....</p>
+class AbstractCar{ public:  virtual void run() = 0; }; class BMW:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;BMW run&#34; &lt;&lt; endl;  } }; class DaZhong:public AbstractCar{ public:  void run()override{  cout &lt;&lt; &#34;DaZhong run&#34; &lt;&lt; endl;  } }; #if 0// 错误的做法 class Person : public BMW{ public: void drive(){ run(); } }; void test1(){ Person p; p.drive(); } #endif // 正确做法 class Person{ public:  Person(){  car = nullptr;  }  Person(AbstractCar* c){  car = c;  }  void drive(){  car-&gt;run();  delete car;  }  void drive(AbstractCar* car){  car-&gt;run();  delete car;  } private:  AbstractCar* car; }; void test2(){  // 方式一：  Person* p = new Person(new BMW);  p-&gt;drive();  delete p;  p = new Person(new DaZhong);  p-&gt;drive();  delete p;   // 方式二：  Person pp;  pp....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-30 21:45:22 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 合成复用原则" href="https://874656645.github.io/posts/102-%E5%90%88%E6%88%90%E5%A4%8D%E7%94%A8%E5%8E%9F%E5%88%99/"></a>
@@ -189,37 +217,10 @@ class AbstractCar{ public: virtual void run() = 0; }; class BMW:public AbstractC
   <section class="entry-content">
     <p>又叫最少知识原则
 封装一个中间层进行隔离
-class AbstractBuilding{ public: virtual string getQuality()const = 0; virtual void sale() = 0; }; class BuildingA:public AbstractBuilding{ public: BuildingA(){ m_quality = &#34;高品质&#34;; } string getQuality()const override{ return m_quality; } void sale()override{ cout &lt;&lt; &#34;楼盘A：&#34; &lt;&lt; m_quality &lt;&lt; endl; } private: string m_quality; }; class BuildingB:public AbstractBuilding{ public: BuildingB(){ m_quality = &#34;低品质&#34;; } string getQuality()const override{ return m_quality; } void sale()override{ cout &lt;&lt; &#34;楼盘B：&#34; &lt;&lt; m_quality &lt;&lt; endl; } private: string m_quality; }; // 错误的做法 // 客户端 void test1(){ string myRequest = &#34;低品质&#34;; BuildingA* bA = new BuildingA; if(bA-&gt;getQuality() == myRequest){ bA-&gt;sale(); delete bA; } BuildingB* bB = new BuildingB; if(bB-&gt;getQuality() == myRequest){ bB-&gt;sale(); delete bB; } } // 正确做法 // 封装一个中间类 class Mediator{ public: Mediator(){ AbstractBuilding* b = new BuildingA; vb....</p>
+class AbstractBuilding{ public:  virtual string getQuality()const = 0;  virtual void sale() = 0; }; class BuildingA:public AbstractBuilding{ public:  BuildingA(){  m_quality = &#34;高品质&#34;;  }  string getQuality()const override{  return m_quality;  }  void sale()override{  cout &lt;&lt; &#34;楼盘A：&#34; &lt;&lt; m_quality &lt;&lt; endl;  } private:  string m_quality; }; class BuildingB:public AbstractBuilding{ public:  BuildingB(){  m_quality = &#34;低品质&#34;;  }  string getQuality()const override{  return m_quality;  }  void sale()override{  cout &lt;&lt; &#34;楼盘B：&#34; &lt;&lt; m_quality &lt;&lt; endl;  } private:  string m_quality; }; // 错误的做法 // 客户端 void test1(){  string myRequest = &#34;低品质&#34;;  BuildingA* bA = new BuildingA;  if(bA-&gt;getQuality() == myRequest){  bA-&gt;sale();  delete bA;  }  BuildingB* bB = new BuildingB;  if(bB-&gt;getQuality() == myRequest){  bB-&gt;sale();  delete bB;  } } // 正确做法 // 封装一个中间类 class Mediator{ public:  Mediator(){  AbstractBuilding* b = new BuildingA;  vb....</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-30 20:38:36 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 迪米特法则" href="https://874656645.github.io/posts/101-%E8%BF%AA%E7%B1%B3%E7%89%B9%E6%B3%95%E5%88%99/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>开闭原则
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码
-如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
-class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a &#43; m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-30 20:05:30 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 开闭原则" href="https://874656645.github.io/posts/100-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>面向对象设计原则
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>原则目的：高内聚，低耦合
- 单一职责原则 Single Responsibility Principal（SRP）：类的职责单一，对外只提供一种功能 开闭原则 Open-Closed Principal（OCP）：对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码 里氏代换原则 Liskov Substitution Principal（LSP）：任何抽象类出现的地方都可以用他的实现类进行替换（多态） 依赖倒转原则 Dependence Inversion Principal（DIP）：依赖于抽象（接口），不要依赖具体的实现（类），针对接口编程 接口隔离原则 Interface Segregation Principal（ISP）：一个接口应该只提供一种对外功能，不应该把所有操作都封装到一个接口中去 合成复用原则 Composite Reuse Principal（CRP）：对于继承和组合，优先使用组合 迪米特法则 Law of Demeter（LoD）：一个对象应当对其他对象尽可能少的了解，从而降低各个对象之间的耦合。例如在一个程序中，各个模块之间相互调用时，通常会提供一个统一的接口来实现。这样其他模块不需要了解另外一个模块的内部实现细节（黑盒原理）  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-30 19:17:09 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 面向对象设计原则" href="https://874656645.github.io/posts/99-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

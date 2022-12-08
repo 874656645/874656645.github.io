@@ -145,6 +145,30 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Unreal——Subsystem（子系统）
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Programming Subsystems</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-12-07 10:34:53 +0800 CST'>December 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——Subsystem（子系统）" href="https://874656645.github.io/posts/257-unreal-subsystem%E5%AD%90%E7%B3%BB%E7%BB%9F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Unreal——项目和插件
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、插件  插件是为特定目的设计的代码和数据的集合； 开发人员可以很容易的在单个项目中启用或禁用他们； 插件分为运行时（runtime gameplay functionality）、编辑器（editor functionality）  二、模块  项目本身也是一个模块  三、依赖 </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-12-07 09:59:17 +0800 CST'>December 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——项目和插件" href="https://874656645.github.io/posts/256-unreal-%E9%A1%B9%E7%9B%AE%E5%92%8C%E6%8F%92%E4%BB%B6/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Unreal5——开发、使用问题汇总
     </h2>
   </header>
@@ -161,8 +185,10 @@ Editor Preferences -&gt; Source Code
 Editor 右下角
   C&#43;&#43; Live Coding 热编译
 Ctrl &#43; Alt &#43; F11
-  C&#43;&#43; 项目中使用插件
-如果编译过程中提示错误 ERROR: Expecting to find a type to be declared in a module rules named ‘JsonLibrary’ in UE5Rules...</p>
+  重新构建 C&#43;&#43; 工程
+注意：需要关闭 Editor
+VS Code: Ctrl &#43; Shift &#43; B
+  C&#43;&#43; 项目中使用插件...</p>
   </section>
   <footer class="entry-footer"><span title='2022-11-10 09:01:48 +0800 CST'>November 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal5——开发、使用问题汇总" href="https://874656645.github.io/posts/252-unreal5-%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"></a>
@@ -196,37 +222,10 @@ Origin Longitude = -122.390533
 Origin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C&#43;&#43; 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目
 VS 2022 解决方案类似下图：
   添加下面的代码到 project.Build.cs 文件：
-// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; }); // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion....</p>
+// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; });  // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion....</p>
   </section>
   <footer class="entry-footer"><span title='2022-10-19 14:25:50 +0800 CST'>October 19, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal" href="https://874656645.github.io/posts/250-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>GIS——Global Mapper 使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  【File】-&gt;【Create New Map Catalog】
-  Export
-  导出灰度图
- 关闭【地图渲晕（Disable Hill Shading）】，默认是开启状态，关闭后，并使用【梯度渲染（Gradient Shader）】   导出 PNG 设置    </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-09 11:44:36 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to GIS——Global Mapper 使用" href="https://874656645.github.io/posts/232-gis-global-mapper-%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>GIS——GeoServer 发布 ArcGIS 切片的 WMTS 服务
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、部署环境和软件版本 操作系统 版本 win10 JDK 版本 OpenJDK11U-jdk_x64_windows_hotspot_11.0.16.1_1 GeoServer 版本 2.21.1 GeoWebCache 版本 1.21.1 二、说明  安装 JDK，配置 java 环境。 Windows 平台可安装 GeoServer Exe 安装包。 也可以通过 Tomcat 起动服务，需要下载 GeoServer 和 GeoWebCache 的 war 包，并放到 tomcat/webapps 目录下，如果只是发布切片服务，配置 GeoWebCache 即可。  三、软件下载  下载 GeoServer 也可GeoServer 官网下载 下载 GeoWebCache，解压待用  四、配置 GeoServer  将 GeoWebCache 中的 jar 包 \geowebcache\WEB-INF\lib\gwc-arcgiscache-1.21.1.jar 拷贝到 GeoServer 安装目录 \webapps\geoserver\WEB-INF\lib。 解压 GeoServer 安装目录下的 jar 包 \webapps\geoserver\WEB-INF\lib\gs-gwc-2.21.1.jar 到 gs-gwc-2.21.1 文件夹，将 GeoWebCache 中的 \geowebcache\WEB-INF\geowebcache-arcgiscache-context....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-31 11:19:28 +0800 CST'>August 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to GIS——GeoServer 发布 ArcGIS 切片的 WMTS 服务" href="https://874656645.github.io/posts/226-gis-geoserver-%E5%8F%91%E5%B8%83-arcgis-%E5%88%87%E7%89%87%E7%9A%84-wmts-%E6%9C%8D%E5%8A%A1/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

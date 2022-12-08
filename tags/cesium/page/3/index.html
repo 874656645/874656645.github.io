@@ -145,6 +145,40 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Unreal——DefaultGraphicsRHI
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>注意： UE5 默认使用的是 DX12，有可能会在渲染方面出现奇怪的问题，需要特别注意。
+RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个平台的图形 API 包装成统一接口，供上层渲染来使用，让业务不用过多的关注 API 细节（实际还得关注RHI 细节）。从代码结构上来看，RHI 封装的比较贴合于现代的图形 API(vulkan, metal, DX12)，也支持 opengl/opengles。这个接口是广义上的概念，不仅指 C&#43;&#43; 的纯虚基类，也包括一些全局变量，全局函数等。
+参考：
+ UE4/UE5的RHI(Vulkan为例)  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-04 14:57:18 +0800 CST'>August 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——DefaultGraphicsRHI" href="https://874656645.github.io/posts/214-unreal-defaultgraphicsrhi/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Unreal——像素流送播放器页面与 UE 通信
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、HTML 页面  必须包含 webRtcPlayer.js 脚本文件，该文件处理浏览器和虚幻引擎应用间的通信，接受并显示来自服务器的媒体流。在非必要的情况下，请勿修改此JavaScript文件。
+&lt;script type=&#34;text/javascript&#34; src=&#34;scripts/webRtcPlayer.js&#34;&gt;&lt;/script&gt; 建议包含 app.js 脚本文件，此文件将设置处理键盘、鼠标和触摸事件的事件监听器，其还包含数个可在播放器页面使用的函数。
+&lt;script type=&#34;text/javascript&#34; src=&#34;scripts/app.js&#34;&gt;&lt;/script&gt; 页面必须含有一个 ID 为 player 的 div 元素。该元素可被流送自 UE4 应用的视频帧所替换。
+&lt;div id=&#34;player&#34;&gt;&lt;/div&gt; 页面加载时必须调用 app.js 文件提供的 load 函数。  二、访问像素流送蓝图 API 在虚幻引擎中运行的像素流送插件会公开一个蓝图API，可在 gameplay 逻辑中使用该 API 处理播放器 HTML 页面发送的自定义 UI 事件，并将事件从虚幻引擎发送到播放器页面，实现网页客户端与 UE 运行程序之间的交互通信。
+推荐将 像素流送插件（Pixel Streaming Input） 组件添加到 PlayerController 中。
+三、从播放器页面到 UE 的通信 app.js 文件提供两个可在 HTML 播放器页面进行调用的 JavaScript 函数，以便用户从浏览器向虚幻引擎程序发送事件和命令：emitCommand 和 emitUIInteraction 函数。
+  js 代码：
+ // 从播放器页面到UE4的通信  let testButton = document....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-08 17:50:31 +0800 CST'>July 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——像素流送播放器页面与 UE 通信" href="https://874656645.github.io/posts/203-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81%E6%92%AD%E6%94%BE%E5%99%A8%E9%A1%B5%E9%9D%A2%E4%B8%8E-ue-%E9%80%9A%E4%BF%A1/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Unreal——像素流送
     </h2>
   </header>
@@ -199,39 +233,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-06-30 15:12:06 +0800 CST'>June 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——智慧城市项目搭建" href="https://874656645.github.io/posts/199-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——智慧城市项目技术路线和软件
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>软件和插件：
- Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&#39; `CityEngine VR Experience for Unreal Engine&#39; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera Water 插件 基于精确地理的太阳定位工具  蓝图开发：
- 通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-06-29 10:18:09 +0800 CST'>June 29, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——智慧城市项目技术路线和软件" href="https://874656645.github.io/posts/198-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF%E5%92%8C%E8%BD%AF%E4%BB%B6/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Editing Tileset Materials
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Cesium for Unreal 插件的材质被设计成模块化的，所以可以被很容易地添加和删除。
-目标  浏览和理解现有的 Cesium for Unreal 3D Tileset 的材质 基于包含在 Cesium for Unreal 插件内的材质实例文件创建自定义材质 修改 tileset 的材质 了解 tileset mesh 的材质限制  Material Instances Cesium for Unreal 通过使用 Material Instances 实现最大的灵活度，每个材质实例通过使用更多的材质图层来应用图像叠加，水，或其他材质效果。
-![MaterialInstances](./img/MaterialInstances.jpg)  图层资产：包含将显示在给定层上的材质图层节点 混合资产：包含一个节点，该节点确定该材质图层将如何与下面的图层混合 每个材质图层和材质图层混合都可以像其他材质对象一样在材质编辑器中编辑  创建应用到整个 tileset 的材质   在插件目录找到 MI_CesiumThreeOverlaysAndClipping 材质实例文件，并把它拷贝到项目的内容文件夹中，将其改名为 MI_GroundTint。
-  在【内容】面板右击，创建一个【材质图层】资产，并将其命名为 ML_GroundTint。
-  双击 ML_GroundTint，打开材质编辑窗口，点击【SetMaterialAttributes】节点，在【细节】面板中的【属性设置类型】数组中添加两个元素，第一个元素设置为默认值【BaseColor】，第二个元素设置为【Opacity】。
-  添加一个【Constant3Vector】节点，并右击节点，将其【转换为参数】，并命名为 Color。
-  添加一个【Constant】节点，，将其【转换为参数】，并命名为 Opacity。
-  右击 Color 节点，在【细节】面板设置默认颜色，比如红色，设置 Opacity 的默认值为 0....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-17 16:24:27 +0800 CST'>April 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Editing Tileset Materials" href="https://874656645.github.io/posts/185-cesium-unreal-editing-tileset-materials/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

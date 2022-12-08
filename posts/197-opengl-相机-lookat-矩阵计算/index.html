@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>OpenGL 相机 LookAt 矩阵计算 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="OpenGL" />
-<meta name="description" content="原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { // 1.">
+<meta name="description" content="原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { 	// 1.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -16,7 +16,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="OpenGL 相机 LookAt 矩阵计算" />
-<meta property="og:description" content="原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { // 1." />
+<meta property="og:description" content="原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { 	// 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-06-28T14:23:38&#43;08:00" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="OpenGL 相机 LookAt 矩阵计算"/>
-<meta name="twitter:description" content="原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { // 1."/>
+<meta name="twitter:description" content="原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { 	// 1."/>
 
 
 <script type="application/ld+json">
@@ -86,11 +86,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "OpenGL 相机 LookAt 矩阵计算",
   "name": "OpenGL 相机 LookAt 矩阵计算",
-  "description": "原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\\begin{equation} T = \\begin{bmatrix*}[c] R \u0026amp; t \\newline 0^T \u0026amp; 1 \\end{bmatrix*} \\end{equation}$$ 分块矩阵求逆公式 $$\\begin{equation} M = \\begin{bmatrix*}[c] A \u0026amp; B \\newline 0 \u0026amp; D \\end{bmatrix*} \\space\\space\\space\\space M^{-1} = \\begin{bmatrix*}[c] A^{-1} \u0026amp; -A^{-1}BD^{-1} \\newline 0 \u0026amp; D^{-1} \\end{bmatrix*} \\end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\\begin{equation} T^{-1} = \\begin{bmatrix*}[c] R^{-1} \u0026amp; -R^{-1}t \\newline 0^T \u0026amp; 1 \\end{bmatrix*} = \\begin{bmatrix*}[c] R^T \u0026amp; -R^Tt \\newline 0^T \u0026amp; 1 \\end{bmatrix*} \\end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { // 1.",
+  "description": "原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\\begin{equation} T = \\begin{bmatrix*}[c] R \u0026amp; t \\newline 0^T \u0026amp; 1 \\end{bmatrix*} \\end{equation}$$ 分块矩阵求逆公式 $$\\begin{equation} M = \\begin{bmatrix*}[c] A \u0026amp; B \\newline 0 \u0026amp; D \\end{bmatrix*} \\space\\space\\space\\space M^{-1} = \\begin{bmatrix*}[c] A^{-1} \u0026amp; -A^{-1}BD^{-1} \\newline 0 \u0026amp; D^{-1} \\end{bmatrix*} \\end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\\begin{equation} T^{-1} = \\begin{bmatrix*}[c] R^{-1} \u0026amp; -R^{-1}t \\newline 0^T \u0026amp; 1 \\end{bmatrix*} = \\begin{bmatrix*}[c] R^T \u0026amp; -R^Tt \\newline 0^T \u0026amp; 1 \\end{bmatrix*} \\end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { \t// 1.",
   "keywords": [
     "OpenGL"
   ],
-  "articleBody": " 原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\\begin{equation} T = \\begin{bmatrix*}[c] R \u0026 t \\newline 0^T \u0026 1 \\end{bmatrix*} \\end{equation}$$ 分块矩阵求逆公式 $$\\begin{equation} M = \\begin{bmatrix*}[c] A \u0026 B \\newline 0 \u0026 D \\end{bmatrix*} \\space\\space\\space\\space M^{-1} = \\begin{bmatrix*}[c] A^{-1} \u0026 -A^{-1}BD^{-1} \\newline 0 \u0026 D^{-1} \\end{bmatrix*} \\end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\\begin{equation} T^{-1} = \\begin{bmatrix*}[c] R^{-1} \u0026 -R^{-1}t \\newline 0^T \u0026 1 \\end{bmatrix*} = \\begin{bmatrix*}[c] R^T \u0026 -R^Tt \\newline 0^T \u0026 1 \\end{bmatrix*} \\end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { // 1. 计算方向 \tglm::vec3 zAxis = glm::normalize(camPos - target); // 2. 计算相机右轴 \tglm::vec3 xAxis = glm::normalize(glm::cross(camUp, zAxis)); // 3. 计算相机向上的向量 \tglm::vec3 yAxis = glm::normalize(glm::cross(zAxis, xAxis)); // 创建位移和旋转矩阵 \t// glm 中采用 [col][row] 方式存储 \tglm::mat4 trans = glm::mat4(1.f); trans[3][0] = -camPos.x; trans[3][1] = -camPos.y; trans[3][2] = -camPos.z; glm::mat4 rotation = glm::mat4(1.f); rotation[0][0] = xAxis.x; rotation[1][0] = xAxis.y; rotation[2][0] = xAxis.z; rotation[0][1] = yAxis.x; rotation[1][1] = yAxis.y; rotation[2][1] = yAxis.z; rotation[0][2] = zAxis.x; rotation[1][2] = zAxis.y; rotation[2][2] = zAxis.z; // 先平移再旋转 \treturn rotation * trans; } 方法二：  先构建相机的变换矩阵，然后对矩阵求逆\nglm::mat4 Camera::calculateLookAtMatrix() { // 相机位移矩阵 \tglm::mat4 camTrans = glm::mat4(1.f); camTrans = glm::translate(camTrans, camPos); // 相机旋转矩阵 \tglm::vec3 zAxis = glm::normalize(-camFront);\t// 相机的Z轴是从目标点指向相机点，与相机照射的方向相反 \tglm::vec3 xAxis = glm::normalize(glm::cross(camUp, zAxis)); glm::vec3 yAxis = glm::normalize(glm::cross(zAxis, xAxis)); // 用相机的 X Y Z 轴单位向量构建旋转矩阵（列向量优先） \tglm::mat4 camRotate = glm::mat4(glm::vec4(xAxis, 0.f), glm::vec4(yAxis, 0.f) , glm::vec4(zAxis, 0.f), glm::vec4(0.f, 0.f, 0.f, 1.f)); glm::mat4 camMat = camTrans * camRotate; return glm::inverse(camMat); } 参考：\n 刚体运动中变换矩阵的逆 计算机图形学OpenGL：7.1、摄像机LookAt矩阵 OpenGL，Qt实现：1入门篇(已更完) OpenGL渲染引擎-从理论到实践 OpenGL shader 最好的OpenGL教程之一  ",
+  "articleBody": " 原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\\begin{equation} T = \\begin{bmatrix*}[c] R \u0026 t \\newline 0^T \u0026 1 \\end{bmatrix*} \\end{equation}$$ 分块矩阵求逆公式 $$\\begin{equation} M = \\begin{bmatrix*}[c] A \u0026 B \\newline 0 \u0026 D \\end{bmatrix*} \\space\\space\\space\\space M^{-1} = \\begin{bmatrix*}[c] A^{-1} \u0026 -A^{-1}BD^{-1} \\newline 0 \u0026 D^{-1} \\end{bmatrix*} \\end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\\begin{equation} T^{-1} = \\begin{bmatrix*}[c] R^{-1} \u0026 -R^{-1}t \\newline 0^T \u0026 1 \\end{bmatrix*} = \\begin{bmatrix*}[c] R^T \u0026 -R^Tt \\newline 0^T \u0026 1 \\end{bmatrix*} \\end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { \t// 1. 计算方向 \tglm::vec3 zAxis = glm::normalize(camPos - target); \t// 2. 计算相机右轴 \tglm::vec3 xAxis = glm::normalize(glm::cross(camUp, zAxis)); \t// 3. 计算相机向上的向量 \tglm::vec3 yAxis = glm::normalize(glm::cross(zAxis, xAxis)); \t// 创建位移和旋转矩阵 \t// glm 中采用 [col][row] 方式存储 \tglm::mat4 trans = glm::mat4(1.f); \ttrans[3][0] = -camPos.x; \ttrans[3][1] = -camPos.y; \ttrans[3][2] = -camPos.z; \tglm::mat4 rotation = glm::mat4(1.f); \trotation[0][0] = xAxis.x; \trotation[1][0] = xAxis.y; \trotation[2][0] = xAxis.z; \trotation[0][1] = yAxis.x; \trotation[1][1] = yAxis.y; \trotation[2][1] = yAxis.z; \trotation[0][2] = zAxis.x; \trotation[1][2] = zAxis.y; \trotation[2][2] = zAxis.z; \t// 先平移再旋转 \treturn rotation * trans; } 方法二：  先构建相机的变换矩阵，然后对矩阵求逆\nglm::mat4 Camera::calculateLookAtMatrix() { \t// 相机位移矩阵 \tglm::mat4 camTrans = glm::mat4(1.f); \tcamTrans = glm::translate(camTrans, camPos); \t// 相机旋转矩阵 \tglm::vec3 zAxis = glm::normalize(-camFront);\t// 相机的Z轴是从目标点指向相机点，与相机照射的方向相反 \tglm::vec3 xAxis = glm::normalize(glm::cross(camUp, zAxis)); \tglm::vec3 yAxis = glm::normalize(glm::cross(zAxis, xAxis)); \t// 用相机的 X Y Z 轴单位向量构建旋转矩阵（列向量优先） \tglm::mat4 camRotate = glm::mat4(glm::vec4(xAxis, 0.f), glm::vec4(yAxis, 0.f) \t, glm::vec4(zAxis, 0.f), glm::vec4(0.f, 0.f, 0.f, 1.f)); \tglm::mat4 camMat = camTrans * camRotate; \treturn glm::inverse(camMat); } 参考：\n 刚体运动中变换矩阵的逆 计算机图形学OpenGL：7.1、摄像机LookAt矩阵 OpenGL，Qt实现：1入门篇(已更完) OpenGL渲染引擎-从理论到实践 OpenGL shader 最好的OpenGL教程之一  ",
   "wordCount" : "237",
   "inLanguage": "en",
   "datePublished": "2022-06-28T14:23:38+08:00",
@@ -269,53 +269,53 @@ R^T &amp; -R^Tt \newline
 </ol>
 <p><img loading="lazy" style="margin: auto;" src=".././img/lookat%e7%9f%a9%e9%98%b5%e8%ae%a1%e7%ae%97.jpg" alt="lookat矩阵计算"  />
 </p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">glm<span style="color:#f92672">::</span>mat4 Camera<span style="color:#f92672">::</span>calculateLookAtMatrix()
-{
-	<span style="color:#75715e">// 1. 计算方向
-</span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 zAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(camPos <span style="color:#f92672">-</span> target);
-	<span style="color:#75715e">// 2. 计算相机右轴
-</span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 xAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(camUp, zAxis));
-	<span style="color:#75715e">// 3. 计算相机向上的向量
-</span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 yAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(zAxis, xAxis));
-	<span style="color:#75715e">// 创建位移和旋转矩阵
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// glm 中采用 [col][row] 方式存储
-</span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>mat4 trans <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(<span style="color:#ae81ff">1.f</span>);
-	trans[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>camPos.x;
-	trans[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>camPos.y;
-	trans[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>camPos.z;
-	glm<span style="color:#f92672">::</span>mat4 rotation <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(<span style="color:#ae81ff">1.f</span>);
-	rotation[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> xAxis.x;
-	rotation[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> xAxis.y;
-	rotation[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> xAxis.z;
-	rotation[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> yAxis.x;
-	rotation[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> yAxis.y;
-	rotation[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> yAxis.z;
-	rotation[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> zAxis.x;
-	rotation[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> zAxis.y;
-	rotation[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> zAxis.z;
-	<span style="color:#75715e">// 先平移再旋转
-</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> rotation <span style="color:#f92672">*</span> trans;
-}
-</code></pre></div><ol start="5">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>glm<span style="color:#f92672">::</span>mat4 Camera<span style="color:#f92672">::</span>calculateLookAtMatrix()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 1. 计算方向
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 zAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(camPos <span style="color:#f92672">-</span> target);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 2. 计算相机右轴
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 xAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(camUp, zAxis));
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 3. 计算相机向上的向量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 yAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(zAxis, xAxis));
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 创建位移和旋转矩阵
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// glm 中采用 [col][row] 方式存储
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>mat4 trans <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(<span style="color:#ae81ff">1.f</span>);
+</span></span><span style="display:flex;"><span>	trans[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>camPos.x;
+</span></span><span style="display:flex;"><span>	trans[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>camPos.y;
+</span></span><span style="display:flex;"><span>	trans[<span style="color:#ae81ff">3</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>camPos.z;
+</span></span><span style="display:flex;"><span>	glm<span style="color:#f92672">::</span>mat4 rotation <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(<span style="color:#ae81ff">1.f</span>);
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> xAxis.x;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> xAxis.y;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> xAxis.z;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> yAxis.x;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> yAxis.y;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> yAxis.z;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> zAxis.x;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> zAxis.y;
+</span></span><span style="display:flex;"><span>	rotation[<span style="color:#ae81ff">2</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> zAxis.z;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 先平移再旋转
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">return</span> rotation <span style="color:#f92672">*</span> trans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol start="5">
 <li><strong>方法二：</strong></li>
 </ol>
 <p>先构建相机的变换矩阵，然后对矩阵求逆</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">glm<span style="color:#f92672">::</span>mat4 Camera<span style="color:#f92672">::</span>calculateLookAtMatrix()
-{
-	<span style="color:#75715e">// 相机位移矩阵
-</span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>mat4 camTrans <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(<span style="color:#ae81ff">1.f</span>);
-	camTrans <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>translate(camTrans, camPos);
-	<span style="color:#75715e">// 相机旋转矩阵
-</span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 zAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(<span style="color:#f92672">-</span>camFront);	<span style="color:#75715e">// 相机的Z轴是从目标点指向相机点，与相机照射的方向相反
-</span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 xAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(camUp, zAxis));
-	glm<span style="color:#f92672">::</span>vec3 yAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(zAxis, xAxis));
-	<span style="color:#75715e">// 用相机的 X Y Z 轴单位向量构建旋转矩阵（列向量优先）
-</span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>mat4 camRotate <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(glm<span style="color:#f92672">::</span>vec4(xAxis, <span style="color:#ae81ff">0.f</span>), glm<span style="color:#f92672">::</span>vec4(yAxis, <span style="color:#ae81ff">0.f</span>)
-		, glm<span style="color:#f92672">::</span>vec4(zAxis, <span style="color:#ae81ff">0.f</span>), glm<span style="color:#f92672">::</span>vec4(<span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">1.f</span>));
-	glm<span style="color:#f92672">::</span>mat4 camMat <span style="color:#f92672">=</span> camTrans <span style="color:#f92672">*</span> camRotate;
-	<span style="color:#66d9ef">return</span> glm<span style="color:#f92672">::</span>inverse(camMat);
-}
-</code></pre></div><p>参考：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>glm<span style="color:#f92672">::</span>mat4 Camera<span style="color:#f92672">::</span>calculateLookAtMatrix()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 相机位移矩阵
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>mat4 camTrans <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(<span style="color:#ae81ff">1.f</span>);
+</span></span><span style="display:flex;"><span>	camTrans <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>translate(camTrans, camPos);
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 相机旋转矩阵
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 zAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(<span style="color:#f92672">-</span>camFront);	<span style="color:#75715e">// 相机的Z轴是从目标点指向相机点，与相机照射的方向相反
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>vec3 xAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(camUp, zAxis));
+</span></span><span style="display:flex;"><span>	glm<span style="color:#f92672">::</span>vec3 yAxis <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>normalize(glm<span style="color:#f92672">::</span>cross(zAxis, xAxis));
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// 用相机的 X Y Z 轴单位向量构建旋转矩阵（列向量优先）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	glm<span style="color:#f92672">::</span>mat4 camRotate <span style="color:#f92672">=</span> glm<span style="color:#f92672">::</span>mat4(glm<span style="color:#f92672">::</span>vec4(xAxis, <span style="color:#ae81ff">0.f</span>), glm<span style="color:#f92672">::</span>vec4(yAxis, <span style="color:#ae81ff">0.f</span>)
+</span></span><span style="display:flex;"><span>		, glm<span style="color:#f92672">::</span>vec4(zAxis, <span style="color:#ae81ff">0.f</span>), glm<span style="color:#f92672">::</span>vec4(<span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">1.f</span>));
+</span></span><span style="display:flex;"><span>	glm<span style="color:#f92672">::</span>mat4 camMat <span style="color:#f92672">=</span> camTrans <span style="color:#f92672">*</span> camRotate;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> glm<span style="color:#f92672">::</span>inverse(camMat);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>参考：</p>
 <ol>
 <li><a href="https://blog.csdn.net/weixin_39329788/article/details/115671344">刚体运动中变换矩阵的逆</a></li>
 <li><a href="https://www.bilibili.com/video/BV1HZ4y1C7Jy/?spm_id_from=333.788&amp;vd_source=fac6b86ea4dccfe9c6ae9e95c13fc297">计算机图形学OpenGL：7.1、摄像机LookAt矩阵</a></li>
