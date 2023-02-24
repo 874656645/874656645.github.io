@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>CMake 打包可安装程序 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="CMake" />
-<meta name="description" content="可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC  &#34;${PROJECT_BINARY_DIR}&#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &#34;${PROJECT_BINARY_DIR}/TutorialConfig.">
+<meta name="description" content="可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &#34;${PROJECT_BINARY_DIR}/TutorialConfig.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/141-cmake-%E6%89%93%E5%8C%85%E5%8F%AF%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -16,7 +16,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="CMake 打包可安装程序" />
-<meta property="og:description" content="可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC  &#34;${PROJECT_BINARY_DIR}&#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &#34;${PROJECT_BINARY_DIR}/TutorialConfig." />
+<meta property="og:description" content="可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &#34;${PROJECT_BINARY_DIR}/TutorialConfig." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/141-cmake-%E6%89%93%E5%8C%85%E5%8F%AF%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-01T21:45:45&#43;08:00" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="CMake 打包可安装程序"/>
-<meta name="twitter:description" content="可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC  &#34;${PROJECT_BINARY_DIR}&#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &#34;${PROJECT_BINARY_DIR}/TutorialConfig."/>
+<meta name="twitter:description" content="可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES &#34;${PROJECT_BINARY_DIR}/TutorialConfig."/>
 
 
 <script type="application/ld+json">
@@ -86,11 +86,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "CMake 打包可安装程序",
   "name": "CMake 打包可安装程序",
-  "description": "可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH \u0026#34;Use tutorial provided math implementation\u0026#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # \u0026#34;${PROJECT_BINARY_DIR}\u0026#34; # \u0026#34;${PROJECT_SOURCE_DIR}/MathFunctions\u0026#34; # ) target_include_directories(Tutorial PUBLIC  \u0026#34;${PROJECT_BINARY_DIR}\u0026#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES \u0026#34;${PROJECT_BINARY_DIR}/TutorialConfig.",
+  "description": "可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH \u0026#34;Use tutorial provided math implementation\u0026#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # \u0026#34;${PROJECT_BINARY_DIR}\u0026#34; # \u0026#34;${PROJECT_SOURCE_DIR}/MathFunctions\u0026#34; # ) target_include_directories(Tutorial PUBLIC \u0026#34;${PROJECT_BINARY_DIR}\u0026#34; )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES \u0026#34;${PROJECT_BINARY_DIR}/TutorialConfig.",
   "keywords": [
     "CMake"
   ],
-  "articleBody": " 可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH \"Use tutorial provided math implementation\" ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # \"${PROJECT_BINARY_DIR}\" # \"${PROJECT_SOURCE_DIR}/MathFunctions\" # ) target_include_directories(Tutorial PUBLIC  \"${PROJECT_BINARY_DIR}\" )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES \"${PROJECT_BINARY_DIR}/TutorialConfig.h\"  DESTINATION include )## 测试 enable_testing()# does the application run add_test(NAME Runs COMMAND Tutorial 25)# does the usage message work? add_test(NAME Usage COMMAND Tutorial)set_tests_properties(Usage  PROPERTIES PASS_REGULAR_EXPRESSION \"Usage:.*number\"  )# define a function to simplify adding tests function(do_test target arg result) add_test(NAME Comp${arg} COMMAND ${target} ${arg}) set_tests_properties(Comp${arg}  PROPERTIES PASS_REGULAR_EXPRESSION ${result}  )endfunction()# do a bunch of result based tests do_test(Tutorial 4 \"4 is 2\")do_test(Tutorial 9 \"9 is 3\")do_test(Tutorial 5 \"5 is 2.236\")do_test(Tutorial 7 \"7 is 2.645\")do_test(Tutorial 25 \"25 is 5\")do_test(Tutorial -25 \"-25 is (-nan|nan|0)\")do_test(Tutorial 0.0001 \"0.0001 is 0.01\")## Packaging an Installer # 此模块将打包项目当前平台所需的任何运行时库 include(InstallRequiredSystemLibraries)# 设置一些 CPack 变量来存储这个项目的许可证和版本信息 set(CPACK_RESOURCE_FILE_LICENSE \"${CMAKE_CURRENT_SOURCE_DIR}/License.txt\")set(CPACK_PACKAGE_VERSION_MAJOR \"${Tutorial_VERSION_MAJOR}\")set(CPACK_PACKAGE_VERSION_MINOR \"${Tutorial_VERSION_MINOR}\")# 为源包选择一种文件格式 # ZIP (.zip) # TGZ (.tar.gz) # TBZ2 (.tar.bz2) # 等格式 set(CPACK_SOURCE_GENERATOR \"TGZ\")include(CPack)二、像往常一样 build 工程 cmake --build . --config Release\n三、执行打包命令  cpack：构建二进制发行版 cpack -G ZIP -C Debug：指定发行包的文件格式和配置类型 cpack --config CPackSourceConfig.cmake：打包带有源码的可发行包  ",
+  "articleBody": " 可以在各种平台上提供二进制和源代码发行版。 InstallRequiredSystemLibraries CPack  一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码 # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH \"Use tutorial provided math implementation\" ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # \"${PROJECT_BINARY_DIR}\" # \"${PROJECT_SOURCE_DIR}/MathFunctions\" # ) target_include_directories(Tutorial PUBLIC \"${PROJECT_BINARY_DIR}\" )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES \"${PROJECT_BINARY_DIR}/TutorialConfig.h\" DESTINATION include )## 测试 enable_testing()# does the application run add_test(NAME Runs COMMAND Tutorial 25)# does the usage message work? add_test(NAME Usage COMMAND Tutorial)set_tests_properties(Usage PROPERTIES PASS_REGULAR_EXPRESSION \"Usage:.*number\" )# define a function to simplify adding tests function(do_test target arg result) add_test(NAME Comp${arg} COMMAND ${target} ${arg}) set_tests_properties(Comp${arg} PROPERTIES PASS_REGULAR_EXPRESSION ${result} )endfunction()# do a bunch of result based tests do_test(Tutorial 4 \"4 is 2\")do_test(Tutorial 9 \"9 is 3\")do_test(Tutorial 5 \"5 is 2.236\")do_test(Tutorial 7 \"7 is 2.645\")do_test(Tutorial 25 \"25 is 5\")do_test(Tutorial -25 \"-25 is (-nan|nan|0)\")do_test(Tutorial 0.0001 \"0.0001 is 0.01\")## Packaging an Installer # 此模块将打包项目当前平台所需的任何运行时库 include(InstallRequiredSystemLibraries)# 设置一些 CPack 变量来存储这个项目的许可证和版本信息 set(CPACK_RESOURCE_FILE_LICENSE \"${CMAKE_CURRENT_SOURCE_DIR}/License.txt\")set(CPACK_PACKAGE_VERSION_MAJOR \"${Tutorial_VERSION_MAJOR}\")set(CPACK_PACKAGE_VERSION_MINOR \"${Tutorial_VERSION_MINOR}\")# 为源包选择一种文件格式 # ZIP (.zip) # TGZ (.tar.gz) # TBZ2 (.tar.bz2) # 等格式 set(CPACK_SOURCE_GENERATOR \"TGZ\")include(CPack)二、像往常一样 build 工程 cmake --build . --config Release\n三、执行打包命令  cpack：构建二进制发行版 cpack -G ZIP -C Debug：指定发行包的文件格式和配置类型 cpack --config CPackSourceConfig.cmake：打包带有源码的可发行包  ",
   "wordCount" : "200",
   "inLanguage": "en",
   "datePublished": "2022-03-01T21:45:45+08:00",
@@ -216,94 +216,94 @@ if (!doNotTrack) {
 <li><code>CPack</code></li>
 </ul>
 <h3 id="一需要在顶层-cmakeliststxt-文件的底部添加几行代码">一、需要在顶层 CMakeLists.txt 文件的底部添加几行代码<a hidden class="anchor" aria-hidden="true" href="#一需要在顶层-cmakeliststxt-文件的底部添加几行代码">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CMake" data-lang="CMake"><span style="display:flex;"><span><span style="color:#75715e"># 设置CMake版本最低要求
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>project(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.1</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 指定 C++ 标准
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD</span> <span style="color:#e6db74">11</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color:#e6db74">True</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置编译选项
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>option(<span style="color:#e6db74">USE_MYMATH</span> <span style="color:#e6db74">&#34;Use tutorial provided math implementation&#34;</span> <span style="color:#e6db74">ON</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 生成一个头文件，传递 CMake 的一些设置到源代码
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>configure_file(<span style="color:#e6db74">TutorialConfig.h.in</span> <span style="color:#e6db74">TutorialConfig.h</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加 MathFunctions library
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># add_subdirectory(MathFunctions)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>if(<span style="color:#e6db74">USE_MYMATH</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  add_subdirectory(<span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  list(<span style="color:#e6db74">APPEND</span> <span style="color:#e6db74">EXTRA_LIBS</span> <span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>endif()<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_executable(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">main.cpp</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># target_link_libraries(Tutorial PUBLIC MathFunctions)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>target_link_libraries(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> <span style="color:#f92672">${</span>EXTRA_LIBS<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加头文件查找路径
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># target_include_directories(Tutorial PUBLIC 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#                             &#34;${PROJECT_BINARY_DIR}&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#                             &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#                         )
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>target_include_directories(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> 
-</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>
-</span></span><span style="display:flex;"><span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## 安装
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>install(<span style="color:#e6db74">TARGETS</span> <span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">bin</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>install(<span style="color:#e6db74">FILES</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}/TutorialConfig.h&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">include</span>
-</span></span><span style="display:flex;"><span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## 测试
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>enable_testing()<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># does the application run
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Runs</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">25</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># does the usage message work?
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Usage</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">Tutorial</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set_tests_properties(<span style="color:#e6db74">Usage</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">PASS_REGULAR_EXPRESSION</span> <span style="color:#e6db74">&#34;Usage:.*number&#34;</span>
-</span></span><span style="display:flex;"><span>  )<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># define a function to simplify adding tests
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>function(<span style="color:#e6db74">do_test</span> <span style="color:#e6db74">target</span> <span style="color:#e6db74">arg</span> <span style="color:#e6db74">result</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Comp</span><span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#f92672">${</span>target<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  set_tests_properties(<span style="color:#e6db74">Comp</span><span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">PASS_REGULAR_EXPRESSION</span> <span style="color:#f92672">${</span>result<span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>    )<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>endfunction()<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># do a bunch of result based tests
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">4</span> <span style="color:#e6db74">&#34;4 is 2&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">9</span> <span style="color:#e6db74">&#34;9 is 3&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">5</span> <span style="color:#e6db74">&#34;5 is 2.236&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">7</span> <span style="color:#e6db74">&#34;7 is 2.645&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">25</span> <span style="color:#e6db74">&#34;25 is 5&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">-25</span> <span style="color:#e6db74">&#34;-25 is (-nan|nan|0)&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">0.0001</span> <span style="color:#e6db74">&#34;0.0001 is 0.01&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## Packaging an Installer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 此模块将打包项目当前平台所需的任何运行时库
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>include(<span style="color:#e6db74">InstallRequiredSystemLibraries</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置一些 CPack 变量来存储这个项目的许可证和版本信息
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CPACK_RESOURCE_FILE_LICENSE</span> <span style="color:#e6db74">&#34;${CMAKE_CURRENT_SOURCE_DIR}/License.txt&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_PACKAGE_VERSION_MAJOR</span> <span style="color:#e6db74">&#34;${Tutorial_VERSION_MAJOR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_PACKAGE_VERSION_MINOR</span> <span style="color:#e6db74">&#34;${Tutorial_VERSION_MINOR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 为源包选择一种文件格式
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># ZIP (.zip)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># TGZ (.tar.gz)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># TBZ2 (.tar.bz2)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 等格式
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CPACK_SOURCE_GENERATOR</span> <span style="color:#e6db74">&#34;TGZ&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>include(<span style="color:#e6db74">CPack</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><h3 id="二像往常一样-build-工程">二、像往常一样 build 工程<a hidden class="anchor" aria-hidden="true" href="#二像往常一样-build-工程">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-CMake" data-lang="CMake"><span style="color:#75715e"># 设置CMake版本最低要求
+</span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
+</span><span style="color:#75715e"></span>project(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.1</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 指定 C++ 标准
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD</span> <span style="color:#e6db74">11</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color:#e6db74">True</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置编译选项
+</span><span style="color:#75715e"></span>option(<span style="color:#e6db74">USE_MYMATH</span> <span style="color:#e6db74">&#34;Use tutorial provided math implementation&#34;</span> <span style="color:#e6db74">ON</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 生成一个头文件，传递 CMake 的一些设置到源代码
+</span><span style="color:#75715e"></span>configure_file(<span style="color:#e6db74">TutorialConfig.h.in</span> <span style="color:#e6db74">TutorialConfig.h</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加 MathFunctions library
+</span><span style="color:#75715e"># add_subdirectory(MathFunctions)
+</span><span style="color:#75715e"></span>if(<span style="color:#e6db74">USE_MYMATH</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  add_subdirectory(<span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  list(<span style="color:#e6db74">APPEND</span> <span style="color:#e6db74">EXTRA_LIBS</span> <span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>endif()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
+</span><span style="color:#75715e"></span>add_executable(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">main.cpp</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># target_link_libraries(Tutorial PUBLIC MathFunctions)
+</span><span style="color:#75715e"></span>target_link_libraries(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> <span style="color:#f92672">${</span>EXTRA_LIBS<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加头文件查找路径
+</span><span style="color:#75715e"># target_include_directories(Tutorial PUBLIC 
+</span><span style="color:#75715e">#                             &#34;${PROJECT_BINARY_DIR}&#34;
+</span><span style="color:#75715e">#                             &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;
+</span><span style="color:#75715e">#                         )
+</span><span style="color:#75715e"></span>target_include_directories(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> 
+                            <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## 安装
+</span><span style="color:#75715e"></span>install(<span style="color:#e6db74">TARGETS</span> <span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">bin</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>install(<span style="color:#e6db74">FILES</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}/TutorialConfig.h&#34;</span>
+  <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">include</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## 测试
+</span><span style="color:#75715e"></span>enable_testing()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># does the application run
+</span><span style="color:#75715e"></span>add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Runs</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">25</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># does the usage message work?
+</span><span style="color:#75715e"></span>add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Usage</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">Tutorial</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set_tests_properties(<span style="color:#e6db74">Usage</span>
+  <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">PASS_REGULAR_EXPRESSION</span> <span style="color:#e6db74">&#34;Usage:.*number&#34;</span>
+  )<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># define a function to simplify adding tests
+</span><span style="color:#75715e"></span>function(<span style="color:#e6db74">do_test</span> <span style="color:#e6db74">target</span> <span style="color:#e6db74">arg</span> <span style="color:#e6db74">result</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Comp</span><span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#f92672">${</span>target<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  set_tests_properties(<span style="color:#e6db74">Comp</span><span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span>
+    <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">PASS_REGULAR_EXPRESSION</span> <span style="color:#f92672">${</span>result<span style="color:#f92672">}</span>
+    )<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>endfunction()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># do a bunch of result based tests
+</span><span style="color:#75715e"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">4</span> <span style="color:#e6db74">&#34;4 is 2&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">9</span> <span style="color:#e6db74">&#34;9 is 3&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">5</span> <span style="color:#e6db74">&#34;5 is 2.236&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">7</span> <span style="color:#e6db74">&#34;7 is 2.645&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">25</span> <span style="color:#e6db74">&#34;25 is 5&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">-25</span> <span style="color:#e6db74">&#34;-25 is (-nan|nan|0)&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">0.0001</span> <span style="color:#e6db74">&#34;0.0001 is 0.01&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## Packaging an Installer
+</span><span style="color:#75715e"># 此模块将打包项目当前平台所需的任何运行时库
+</span><span style="color:#75715e"></span>include(<span style="color:#e6db74">InstallRequiredSystemLibraries</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置一些 CPack 变量来存储这个项目的许可证和版本信息
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CPACK_RESOURCE_FILE_LICENSE</span> <span style="color:#e6db74">&#34;${CMAKE_CURRENT_SOURCE_DIR}/License.txt&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_PACKAGE_VERSION_MAJOR</span> <span style="color:#e6db74">&#34;${Tutorial_VERSION_MAJOR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_PACKAGE_VERSION_MINOR</span> <span style="color:#e6db74">&#34;${Tutorial_VERSION_MINOR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 为源包选择一种文件格式
+</span><span style="color:#75715e"># ZIP (.zip)
+</span><span style="color:#75715e"># TGZ (.tar.gz)
+</span><span style="color:#75715e"># TBZ2 (.tar.bz2)
+</span><span style="color:#75715e"># 等格式
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CPACK_SOURCE_GENERATOR</span> <span style="color:#e6db74">&#34;TGZ&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>include(<span style="color:#e6db74">CPack</span>)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><h3 id="二像往常一样-build-工程">二、像往常一样 build 工程<a hidden class="anchor" aria-hidden="true" href="#二像往常一样-build-工程">#</a></h3>
 <p><code>cmake --build . --config Release</code></p>
 <h3 id="三执行打包命令">三、执行打包命令<a hidden class="anchor" aria-hidden="true" href="#三执行打包命令">#</a></h3>
 <ul>
@@ -340,7 +340,7 @@ if (!doNotTrack) {
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

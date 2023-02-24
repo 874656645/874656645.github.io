@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>函数指针 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std;  // 声明函数指针变量 int (*fn)(int) = NULL;  // 定义函数指针类型 typedef int (*Fn)(int);  int cal(int v){  return v; };  int max(int a, int b){  return a &gt; b ? a : b; }  // 函数指针做为参数 void proc(int v, Fn f){  cout &lt;&lt; f(v) &lt;&lt; endl; };  // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){  // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x &gt; y ?">
+<meta name="description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; int max(int a, int b){ return a &gt; b ? a : b; } // 函数指针做为参数 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){ // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x &gt; y ?">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -16,7 +16,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="函数指针" />
-<meta property="og:description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std;  // 声明函数指针变量 int (*fn)(int) = NULL;  // 定义函数指针类型 typedef int (*Fn)(int);  int cal(int v){  return v; };  int max(int a, int b){  return a &gt; b ? a : b; }  // 函数指针做为参数 void proc(int v, Fn f){  cout &lt;&lt; f(v) &lt;&lt; endl; };  // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){  // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x &gt; y ?" />
+<meta property="og:description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; int max(int a, int b){ return a &gt; b ? a : b; } // 函数指针做为参数 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){ // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x &gt; y ?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-16T14:34:27&#43;08:00" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="函数指针"/>
-<meta name="twitter:description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std;  // 声明函数指针变量 int (*fn)(int) = NULL;  // 定义函数指针类型 typedef int (*Fn)(int);  int cal(int v){  return v; };  int max(int a, int b){  return a &gt; b ? a : b; }  // 函数指针做为参数 void proc(int v, Fn f){  cout &lt;&lt; f(v) &lt;&lt; endl; };  // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){  // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x &gt; y ?"/>
+<meta name="twitter:description" content="#include &lt;iostream&gt;#include &lt;cstdlib&gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; int max(int a, int b){ return a &gt; b ? a : b; } // 函数指针做为参数 void proc(int v, Fn f){ cout &lt;&lt; f(v) &lt;&lt; endl; }; // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){ // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x &gt; y ?"/>
 
 
 <script type="application/ld+json">
@@ -86,11 +86,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "函数指针",
   "name": "函数指针",
-  "description": "#include \u0026lt;iostream\u0026gt;#include \u0026lt;cstdlib\u0026gt;using namespace std;  // 声明函数指针变量 int (*fn)(int) = NULL;  // 定义函数指针类型 typedef int (*Fn)(int);  int cal(int v){  return v; };  int max(int a, int b){  return a \u0026gt; b ? a : b; }  // 函数指针做为参数 void proc(int v, Fn f){  cout \u0026lt;\u0026lt; f(v) \u0026lt;\u0026lt; endl; };  // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){  // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x \u0026gt; y ?",
+  "description": "#include \u0026lt;iostream\u0026gt;#include \u0026lt;cstdlib\u0026gt;using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; int max(int a, int b){ return a \u0026gt; b ? a : b; } // 函数指针做为参数 void proc(int v, Fn f){ cout \u0026lt;\u0026lt; f(v) \u0026lt;\u0026lt; endl; }; // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){ // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x \u0026gt; y ?",
   "keywords": [
     "C++"
   ],
-  "articleBody": "#include #include using namespace std;  // 声明函数指针变量 int (*fn)(int) = NULL;  // 定义函数指针类型 typedef int (*Fn)(int);  int cal(int v){  return v; };  int max(int a, int b){  return a  b ? a : b; }  // 函数指针做为参数 void proc(int v, Fn f){  cout  f(v)  endl; };  // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){  // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x  y ? y : x;};  // 返回一个全局函数  if(fName == \"max\"){  fp = max;  }   return fp; } // 或者下面的方式 typedef int (*RetFP)(int, int); RetFP retFP(string fName){  int (*fp)(int,int) = [](int x, int y){ return x  y ? y : x;};  if(fName == \"max\"){  fp = max;  }  return fp; }   int main() {  fn = cal;  cout  (*fn)(10)  endl;  cout  fn(10)  endl;   Fn f1 = cal;  cout  (*f1)(20)  endl;   proc(30, cal);   auto myFP = retFP(\"max\");  cout  myFP(3, 6)  endl;   return 0; } Start 10 10 20 30 0 Finish 成员函数指针：\nstruct type {  int i;   type(): i(3) {}   void f(int v) const  {  // this-i = v; // compile error: this is a pointer to const  const_casttype*(this)-i = v; // OK as long as the type object isn't const  } };  int main() {  type t; // if this was const type t, then t.f(4) would be undefined behavior  t.f(4);  std::cout  \"type::i = \"  t.i  '\\n'; // type::i = 4   void (type::*pmf)(int) const = \u0026type::f; // pointer to member function  (t.*pmf)(40);  std::cout  \"type::i = \"  t.i  '\\n'; // type::i = 40 } ",
+  "articleBody": "#include #include using namespace std; // 声明函数指针变量 int (*fn)(int) = NULL; // 定义函数指针类型 typedef int (*Fn)(int); int cal(int v){ return v; }; int max(int a, int b){ return a  b ? a : b; } // 函数指针做为参数 void proc(int v, Fn f){ cout  f(v)  endl; }; // 函数指针作为函数返回值 int (* retFP(string fName))(int, int){ // lambda 表达式作为函数指针返回  int (*fp)(int,int) = [](int x, int y){ return x  y ? y : x;}; // 返回一个全局函数  if(fName == \"max\"){ fp = max; } return fp; } // 或者下面的方式 typedef int (*RetFP)(int, int); RetFP retFP(string fName){ int (*fp)(int,int) = [](int x, int y){ return x  y ? y : x;}; if(fName == \"max\"){ fp = max; } return fp; } int main() { fn = cal; cout  (*fn)(10)  endl; cout  fn(10)  endl; Fn f1 = cal; cout  (*f1)(20)  endl; proc(30, cal); auto myFP = retFP(\"max\"); cout  myFP(3, 6)  endl; return 0; } Start 10 10 20 30 0 Finish 成员函数指针：\nstruct type { int i; type(): i(3) {} void f(int v) const { // this-i = v; // compile error: this is a pointer to const  const_casttype*(this)-i = v; // OK as long as the type object isn't const  } }; int main() { type t; // if this was const type t, then t.f(4) would be undefined behavior  t.f(4); std::cout  \"type::i = \"  t.i  '\\n'; // type::i = 4  void (type::*pmf)(int) const = \u0026type::f; // pointer to member function  (t.*pmf)(40); std::cout  \"type::i = \"  t.i  '\\n'; // type::i = 40 } ",
   "wordCount" : "266",
   "inLanguage": "en",
   "datePublished": "2021-12-16T14:34:27+08:00",
@@ -193,99 +193,99 @@ if (!doNotTrack) {
 </div>
   </header> 
 
-  <div class="post-content"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 声明函数指针变量
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>fn)(<span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> NULL;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 定义函数指针类型
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span> (<span style="color:#f92672">*</span>Fn)(<span style="color:#66d9ef">int</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">cal</span>(<span style="color:#66d9ef">int</span> v){ 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> v;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">max</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b <span style="color:#f92672">?</span> a : b;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 函数指针做为参数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">proc</span>(<span style="color:#66d9ef">int</span> v, Fn f){
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> f(v) <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 函数指针作为函数返回值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span> retFP(string fName))(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>){
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// lambda 表达式作为函数指针返回
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>fp)(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> [](<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y){ <span style="color:#66d9ef">return</span> x <span style="color:#f92672">&gt;</span> y <span style="color:#f92672">?</span> y : x;};
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 返回一个全局函数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(fName <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;max&#34;</span>){
-</span></span><span style="display:flex;"><span>        fp <span style="color:#f92672">=</span> max;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> fp;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 或者下面的方式
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span> (<span style="color:#f92672">*</span>RetFP)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
-</span></span><span style="display:flex;"><span>RetFP <span style="color:#a6e22e">retFP</span>(string fName){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>fp)(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> [](<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y){ <span style="color:#66d9ef">return</span> x <span style="color:#f92672">&gt;</span> y <span style="color:#f92672">?</span> y : x;};
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(fName <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;max&#34;</span>){
-</span></span><span style="display:flex;"><span>        fp <span style="color:#f92672">=</span> max;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> fp;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    fn <span style="color:#f92672">=</span> cal;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">*</span>fn)(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> fn(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    Fn f1 <span style="color:#f92672">=</span> cal;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">*</span>f1)(<span style="color:#ae81ff">20</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    proc(<span style="color:#ae81ff">30</span>, cal);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> myFP <span style="color:#f92672">=</span> retFP(<span style="color:#e6db74">&#34;max&#34;</span>);
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> myFP(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Start
-</span></span><span style="display:flex;"><span>10
-</span></span><span style="display:flex;"><span>10
-</span></span><span style="display:flex;"><span>20
-</span></span><span style="display:flex;"><span>30
-</span></span><span style="display:flex;"><span>0
-</span></span><span style="display:flex;"><span>Finish
-</span></span></code></pre></div><p><strong>成员函数指针：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">type</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i;
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>    type()<span style="color:#f92672">:</span> i(<span style="color:#ae81ff">3</span>) {}
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> v) <span style="color:#66d9ef">const</span>
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// this-&gt;i = v;                 // compile error: this is a pointer to const
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span>type<span style="color:#f92672">*&gt;</span>(<span style="color:#66d9ef">this</span>)<span style="color:#f92672">-&gt;</span>i <span style="color:#f92672">=</span> v; <span style="color:#75715e">// OK as long as the type object isn&#39;t const
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() 
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    type t; <span style="color:#75715e">// if this was const type t, then t.f(4) would be undefined behavior
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    t.f(<span style="color:#ae81ff">4</span>);
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;type::i = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;       <span style="color:#75715e">// type::i = 4
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> (type<span style="color:#f92672">::*</span>pmf)(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">const</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>type<span style="color:#f92672">::</span>f; <span style="color:#75715e">// pointer to member function
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    (t.<span style="color:#f92672">*</span>pmf)(<span style="color:#ae81ff">40</span>);
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;type::i = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;       <span style="color:#75715e">// type::i = 40
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div>
+  <div class="post-content"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;cstdlib&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#75715e">// 声明函数指针变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>fn)(<span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> NULL;
+
+<span style="color:#75715e">// 定义函数指针类型
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span> (<span style="color:#f92672">*</span>Fn)(<span style="color:#66d9ef">int</span>);
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">cal</span>(<span style="color:#66d9ef">int</span> v){ 
+    <span style="color:#66d9ef">return</span> v;
+};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">max</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
+    <span style="color:#66d9ef">return</span> a <span style="color:#f92672">&gt;</span> b <span style="color:#f92672">?</span> a : b;
+}
+
+<span style="color:#75715e">// 函数指针做为参数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">proc</span>(<span style="color:#66d9ef">int</span> v, Fn f){
+    cout <span style="color:#f92672">&lt;&lt;</span> f(v) <span style="color:#f92672">&lt;&lt;</span> endl;
+};
+
+<span style="color:#75715e">// 函数指针作为函数返回值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span> retFP(string fName))(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>){
+    <span style="color:#75715e">// lambda 表达式作为函数指针返回
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>fp)(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> [](<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y){ <span style="color:#66d9ef">return</span> x <span style="color:#f92672">&gt;</span> y <span style="color:#f92672">?</span> y : x;};
+    <span style="color:#75715e">// 返回一个全局函数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(fName <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;max&#34;</span>){
+        fp <span style="color:#f92672">=</span> max;
+    }
+
+    <span style="color:#66d9ef">return</span> fp;
+}
+<span style="color:#75715e">// 或者下面的方式
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">typedef</span> <span style="color:#a6e22e">int</span> (<span style="color:#f92672">*</span>RetFP)(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>);
+RetFP <span style="color:#a6e22e">retFP</span>(string fName){
+    <span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>fp)(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>) <span style="color:#f92672">=</span> [](<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y){ <span style="color:#66d9ef">return</span> x <span style="color:#f92672">&gt;</span> y <span style="color:#f92672">?</span> y : x;};
+    <span style="color:#66d9ef">if</span>(fName <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;max&#34;</span>){
+        fp <span style="color:#f92672">=</span> max;
+    }
+    <span style="color:#66d9ef">return</span> fp;
+}
+
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    fn <span style="color:#f92672">=</span> cal;
+    cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">*</span>fn)(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
+    cout <span style="color:#f92672">&lt;&lt;</span> fn(<span style="color:#ae81ff">10</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
+    
+    Fn f1 <span style="color:#f92672">=</span> cal;
+    cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">*</span>f1)(<span style="color:#ae81ff">20</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
+
+    proc(<span style="color:#ae81ff">30</span>, cal);
+
+    <span style="color:#66d9ef">auto</span> myFP <span style="color:#f92672">=</span> retFP(<span style="color:#e6db74">&#34;max&#34;</span>);
+    cout <span style="color:#f92672">&lt;&lt;</span> myFP(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">6</span>) <span style="color:#f92672">&lt;&lt;</span> endl;
+    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Start
+10
+10
+20
+30
+0
+Finish
+</code></pre></div><p><strong>成员函数指针：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">type</span>
+{
+    <span style="color:#66d9ef">int</span> i;
+ 
+    type()<span style="color:#f92672">:</span> i(<span style="color:#ae81ff">3</span>) {}
+ 
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> v) <span style="color:#66d9ef">const</span>
+    {
+        <span style="color:#75715e">// this-&gt;i = v;                 // compile error: this is a pointer to const
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span>type<span style="color:#f92672">*&gt;</span>(<span style="color:#66d9ef">this</span>)<span style="color:#f92672">-&gt;</span>i <span style="color:#f92672">=</span> v; <span style="color:#75715e">// OK as long as the type object isn&#39;t const
+</span><span style="color:#75715e"></span>    }
+};
+ 
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() 
+{
+    type t; <span style="color:#75715e">// if this was const type t, then t.f(4) would be undefined behavior
+</span><span style="color:#75715e"></span>    t.f(<span style="color:#ae81ff">4</span>);
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;type::i = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;       <span style="color:#75715e">// type::i = 4
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">void</span> (type<span style="color:#f92672">::*</span>pmf)(<span style="color:#66d9ef">int</span>) <span style="color:#66d9ef">const</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>type<span style="color:#f92672">::</span>f; <span style="color:#75715e">// pointer to member function
+</span><span style="color:#75715e"></span>    (t.<span style="color:#f92672">*</span>pmf)(<span style="color:#ae81ff">40</span>);
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;type::i = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> t.i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;       <span style="color:#75715e">// type::i = 40
+</span><span style="color:#75715e"></span>}
+</code></pre></div>
 
   </div>
 
@@ -312,7 +312,7 @@ if (!doNotTrack) {
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

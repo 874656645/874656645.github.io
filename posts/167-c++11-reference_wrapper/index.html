@@ -13,7 +13,7 @@
   std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。
   能隐式转换成 T&amp;。
     在 vector 中存储引用类型：
-#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() {  std::list&lt;int&gt; l(10);  std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1   std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end());  // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v.">
+#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() { std::list&lt;int&gt; l(10); std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1  std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end()); // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/167-c&#43;&#43;11-reference_wrapper/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -22,7 +22,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -58,7 +58,7 @@ if (!doNotTrack) {
   std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。
   能隐式转换成 T&amp;。
     在 vector 中存储引用类型：
-#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() {  std::list&lt;int&gt; l(10);  std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1   std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end());  // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v." />
+#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() { std::list&lt;int&gt; l(10); std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1  std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end()); // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/167-c&#43;&#43;11-reference_wrapper/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-07T13:43:10&#43;08:00" />
@@ -75,7 +75,7 @@ if (!doNotTrack) {
   std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。
   能隐式转换成 T&amp;。
     在 vector 中存储引用类型：
-#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() {  std::list&lt;int&gt; l(10);  std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1   std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end());  // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v."/>
+#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() { std::list&lt;int&gt; l(10); std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1  std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end()); // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v."/>
 
 
 <script type="application/ld+json">
@@ -104,11 +104,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "C++11 std::reference_wrapper",
   "name": "C\u002b\u002b11 std::reference_wrapper",
-  "description": "创建一个对象或函数的引用，对象必须是 可复制(CopyConstructible)、可赋值(CopyAssignable) 的。\n  它经常被用作在标准容器(如 std::vector )中存储引用的机制，而标准容器通常不能保存引用。\n  辅助函数 std::ref 与 std::cref 常用于生成 std::reference_wrapper 对象。\n  std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。\n  能隐式转换成 T\u0026amp;。\n    在 vector 中存储引用类型：\n#include \u0026lt;iostream\u0026gt;#include \u0026lt;list\u0026gt;#include \u0026lt;vector\u0026gt;#include \u0026lt;random\u0026gt;#include \u0026lt;functional\u0026gt;#include \u0026lt;algorithm\u0026gt; int main() {  std::list\u0026lt;int\u0026gt; l(10);  std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 +1   std::vector\u0026lt;std::reference_wrapper\u0026lt;int\u0026gt;\u0026gt; v(l.begin(), l.end());  // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v.",
+  "description": "创建一个对象或函数的引用，对象必须是 可复制(CopyConstructible)、可赋值(CopyAssignable) 的。\n  它经常被用作在标准容器(如 std::vector )中存储引用的机制，而标准容器通常不能保存引用。\n  辅助函数 std::ref 与 std::cref 常用于生成 std::reference_wrapper 对象。\n  std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。\n  能隐式转换成 T\u0026amp;。\n    在 vector 中存储引用类型：\n#include \u0026lt;iostream\u0026gt;#include \u0026lt;list\u0026gt;#include \u0026lt;vector\u0026gt;#include \u0026lt;random\u0026gt;#include \u0026lt;functional\u0026gt;#include \u0026lt;algorithm\u0026gt; int main() { std::list\u0026lt;int\u0026gt; l(10); std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 +1  std::vector\u0026lt;std::reference_wrapper\u0026lt;int\u0026gt;\u0026gt; v(l.begin(), l.end()); // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v.",
   "keywords": [
     "C++"
   ],
-  "articleBody": "  创建一个对象或函数的引用，对象必须是 可复制(CopyConstructible)、可赋值(CopyAssignable) 的。\n  它经常被用作在标准容器(如 std::vector )中存储引用的机制，而标准容器通常不能保存引用。\n  辅助函数 std::ref 与 std::cref 常用于生成 std::reference_wrapper 对象。\n  std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。\n  能隐式转换成 T\u0026。\n    在 vector 中存储引用类型：\n#include #include #include #include #include #include  int main() {  std::listint l(10);  std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 +1   std::vectorstd::reference_wrapperint v(l.begin(), l.end());  // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v.begin(), v.end(), std::mt19937{std::random_device{}()});   std::cout  \"Contents of the list: \";  for (int n : l) {  std::cout  n  ' ';  }  std::cout  '\\n';   std::cout  \"Contents of the list, as seen through a shuffled vector: \";  for (int i : v) {  std::cout  i  ' ';  }  std::cout  '\\n';   std::cout  \"Doubling the values in the initial list...\\n\";  for (int\u0026 i : l) {  i *= 2;  }   std::cout  \"Contents of the list, after doubling: \";  for (int i : l) {  std::cout  i  ' ';  }  std::cout  '\\n';   std::cout  \"Contents of the list, as seen through a shuffled vector: \";  for (int i : v) {  std::cout  i  ' ';  }  std::cout  '\\n'; } 输出：\nContents of the list: -4 -3 -2 -1 0 1 2 3 4 5 Contents of the list, as seen through a shuffled vector: -3 2 0 3 -1 4 -4 1 5 -2 Doubling the values in the initial list... Contents of the list, after doubling: -8 -6 -4 -2 0 2 4 6 8 10 Contents of the list, as seen through a shuffled vector: -6 4 0 6 -2 8 -8 2 10 -4   声明引用类型的数组\nint main() {  int x = 5, y = 7, z = 8;  std::reference_wrapperint arr[] {x, y, z};  // int\u0026 arr[]{x,y,z}; // error: declaration of ‘arr’ as array of references  for (auto a: arr)  std::cout  a  \" \";  std::cout  std::endl;  x = 50;  std::cout  \"-----------\\n\";  for (auto a: arr)  std::cout  a  \" \"; } 输出：\n5 7 8 ----------- 50 7 8   与 T\u0026 和 T 隐式转换\nvoid func(int\u0026 a, int b){  cout  \"in func: a = \"  a  \", b = \"  b  endl;  a++;  b++; }  int main() {  int a = 10, b = 20;  cout  \"in main: a = \"  a  \", b = \"  b  endl;  func(ref(a), ref(b)); // 虽然传递的是 b 的引用，但函数形参不是引用类型  // ，所以函数内的 b 是一个拷贝  cout  \"in main: a = \"  a  \", b = \"  b  endl;  return 0; } 输出：\nin main: a = 10, b = 20 in func: a = 10, b = 20 in main: a = 11, b = 20   T\u0026 与 reference_wrapper 区别\nint main() {  cout  boolalpha;  int x = 5, y = 7;  reference_wrapperint r = x; // or auto r = ref(x);  cout  is_sameint\u0026, decltype(r.get())::value  \"\\n\"; // true  cout  is_sameint\u0026, decltype(r)::value  \"\\n\"; // false  cout  (\u0026x == \u0026r.get())  \"\\n\"; // true  r = y;  cout  (\u0026y == \u0026r.get())  \"\\n\"; // true  r.get()=70;  cout  y; // 70  return 0; }   包裹函数指针\n个人感觉，可以替代 函数指针 了，类似 std::function\nvoid func(int a, int b) {  cout  \"a = \"  a \",\";  cout  \"b = \"  b  endl; }  void func1(int i) {  cout  \"i = \"  i  endl; }  void func2(const reference_wrappervoid(int,int)\u0026 f){  cout  \"in func2 invoke f:\"  endl;  f(10, 20); }  int main() {  // 包裹函数指针  int x = 5, y = 7;  reference_wrappervoid(int,int) f0 = func;  f0(x, y); // a = 5,b = 7  func2(f0); // in func2 invoke f:  // a = 10,b = 20   auto f1 = std::ref(func);  f1(5,7); // a = 5,b = 7   using Examp = reference_wrappervoid(int);  Examp f = func1;  f(10); // i = 10   using ExampFc = functionvoid(int);  ExampFc ff = func1;  ff(20); // i = 20   return 0; }   参考：\n std::reference_wrapper C++ Difference between std::ref(T) and T\u0026? C++11中std::reference_wrapper的理解  ",
+  "articleBody": "  创建一个对象或函数的引用，对象必须是 可复制(CopyConstructible)、可赋值(CopyAssignable) 的。\n  它经常被用作在标准容器(如 std::vector )中存储引用的机制，而标准容器通常不能保存引用。\n  辅助函数 std::ref 与 std::cref 常用于生成 std::reference_wrapper 对象。\n  std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。\n  能隐式转换成 T\u0026。\n    在 vector 中存储引用类型：\n#include #include #include #include #include #include  int main() { std::listint l(10); std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 +1  std::vectorstd::reference_wrapperint v(l.begin(), l.end()); // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v.begin(), v.end(), std::mt19937{std::random_device{}()}); std::cout  \"Contents of the list: \"; for (int n : l) { std::cout  n  ' '; } std::cout  '\\n'; std::cout  \"Contents of the list, as seen through a shuffled vector: \"; for (int i : v) { std::cout  i  ' '; } std::cout  '\\n'; std::cout  \"Doubling the values in the initial list...\\n\"; for (int\u0026 i : l) { i *= 2; } std::cout  \"Contents of the list, after doubling: \"; for (int i : l) { std::cout  i  ' '; } std::cout  '\\n'; std::cout  \"Contents of the list, as seen through a shuffled vector: \"; for (int i : v) { std::cout  i  ' '; } std::cout  '\\n'; } 输出：\nContents of the list: -4 -3 -2 -1 0 1 2 3 4 5 Contents of the list, as seen through a shuffled vector: -3 2 0 3 -1 4 -4 1 5 -2 Doubling the values in the initial list... Contents of the list, after doubling: -8 -6 -4 -2 0 2 4 6 8 10 Contents of the list, as seen through a shuffled vector: -6 4 0 6 -2 8 -8 2 10 -4   声明引用类型的数组\nint main() { int x = 5, y = 7, z = 8; std::reference_wrapperint arr[] {x, y, z}; // int\u0026 arr[]{x,y,z}; // error: declaration of ‘arr’ as array of references  for (auto a: arr) std::cout  a  \" \"; std::cout  std::endl; x = 50; std::cout  \"-----------\\n\"; for (auto a: arr) std::cout  a  \" \"; } 输出：\n5 7 8 ----------- 50 7 8   与 T\u0026 和 T 隐式转换\nvoid func(int\u0026 a, int b){ cout  \"in func: a = \"  a  \", b = \"  b  endl; a++; b++; } int main() { int a = 10, b = 20; cout  \"in main: a = \"  a  \", b = \"  b  endl; func(ref(a), ref(b)); // 虽然传递的是 b 的引用，但函数形参不是引用类型  // ，所以函数内的 b 是一个拷贝  cout  \"in main: a = \"  a  \", b = \"  b  endl; return 0; } 输出：\nin main: a = 10, b = 20 in func: a = 10, b = 20 in main: a = 11, b = 20   T\u0026 与 reference_wrapper 区别\nint main() { cout  boolalpha; int x = 5, y = 7; reference_wrapperint r = x; // or auto r = ref(x);  cout  is_sameint\u0026, decltype(r.get())::value  \"\\n\"; // true  cout  is_sameint\u0026, decltype(r)::value  \"\\n\"; // false  cout  (\u0026x == \u0026r.get())  \"\\n\"; // true  r = y; cout  (\u0026y == \u0026r.get())  \"\\n\"; // true  r.get()=70; cout  y; // 70  return 0; }   包裹函数指针\n个人感觉，可以替代 函数指针 了，类似 std::function\nvoid func(int a, int b) { cout  \"a = \"  a \",\"; cout  \"b = \"  b  endl; } void func1(int i) { cout  \"i = \"  i  endl; } void func2(const reference_wrappervoid(int,int)\u0026 f){ cout  \"in func2 invoke f:\"  endl; f(10, 20); } int main() { // 包裹函数指针  int x = 5, y = 7; reference_wrappervoid(int,int) f0 = func; f0(x, y); // a = 5,b = 7  func2(f0); // in func2 invoke f:  // a = 10,b = 20  auto f1 = std::ref(func); f1(5,7); // a = 5,b = 7  using Examp = reference_wrappervoid(int); Examp f = func1; f(10); // i = 10  using ExampFc = functionvoid(int); ExampFc ff = func1; ff(20); // i = 20  return 0; }   参考：\n std::reference_wrapper C++ Difference between std::ref(T) and T\u0026? C++11中std::reference_wrapper的理解  ",
   "wordCount" : "662",
   "inLanguage": "en",
   "datePublished": "2022-04-07T13:43:10+08:00",
@@ -231,159 +231,159 @@ if (!doNotTrack) {
 <ol>
 <li>
 <p><strong>在 <code>vector</code> 中存储引用类型：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;list&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;random&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;functional&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>list<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> l(<span style="color:#ae81ff">10</span>);
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>iota(l.begin(), l.end(), <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>);  <span style="color:#75715e">// 从 -4 开始，逐个 +1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> v(l.begin(), l.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>shuffle(v.begin(), v.end(), std<span style="color:#f92672">::</span>mt19937{std<span style="color:#f92672">::</span>random_device{}()});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Contents of the list: &#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n : l) {
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Contents of the list, as seen through a shuffled vector: &#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i : v) {
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Doubling the values in the initial list...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> i : l) {
-</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Contents of the list, after doubling: &#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i : l) {
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Contents of the list, as seen through a shuffled vector: &#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i : v) {
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Contents of the list: -4 -3 -2 -1 0 1 2 3 4 5 
-</span></span><span style="display:flex;"><span>Contents of the list, as seen through a shuffled vector: -3 2 0 3 -1 4 -4 1 5 -2 
-</span></span><span style="display:flex;"><span>Doubling the values in the initial list...
-</span></span><span style="display:flex;"><span>Contents of the list, after doubling: -8 -6 -4 -2 0 2 4 6 8 10 
-</span></span><span style="display:flex;"><span>Contents of the list, as seen through a shuffled vector: -6 4 0 6 -2 8 -8 2 10 -4 
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;list&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;random&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;functional&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;algorithm&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    std<span style="color:#f92672">::</span>list<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> l(<span style="color:#ae81ff">10</span>);
+    std<span style="color:#f92672">::</span>iota(l.begin(), l.end(), <span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>);  <span style="color:#75715e">// 从 -4 开始，逐个 +1
+</span><span style="color:#75715e"></span>
+    std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> v(l.begin(), l.end());
+    <span style="color:#75715e">// 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它
+</span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>shuffle(v.begin(), v.end(), std<span style="color:#f92672">::</span>mt19937{std<span style="color:#f92672">::</span>random_device{}()});
+
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Contents of the list: &#34;</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> n : l) {
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> n <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
+    }
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Contents of the list, as seen through a shuffled vector: &#34;</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i : v) {
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
+    }
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Doubling the values in the initial list...</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> i : l) {
+        i <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>;
+    }
+
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Contents of the list, after doubling: &#34;</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i : l) {
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
+    }
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Contents of the list, as seen through a shuffled vector: &#34;</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i : v) {
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
+    }
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Contents of the list: -4 -3 -2 -1 0 1 2 3 4 5 
+Contents of the list, as seen through a shuffled vector: -3 2 0 3 -1 4 -4 1 5 -2 
+Doubling the values in the initial list...
+Contents of the list, after doubling: -8 -6 -4 -2 0 2 4 6 8 10 
+Contents of the list, as seen through a shuffled vector: -6 4 0 6 -2 8 -8 2 10 -4 
+</code></pre></div></li>
 <li>
 <p><strong>声明引用类型的数组</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>, z <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> arr[] {x, y, z};
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// int&amp; arr[]{x,y,z}; // error: declaration of ‘arr’ as array of references
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> a: arr)
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-----------</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> a: arr)
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
-</span></span><span style="display:flex;"><span>}    
-</span></span></code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>5 7 8 
-</span></span><span style="display:flex;"><span>-----------
-</span></span><span style="display:flex;"><span>50 7 8 
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>, z <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;
+    std<span style="color:#f92672">::</span>reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> arr[] {x, y, z};
+    <span style="color:#75715e">// int&amp; arr[]{x,y,z}; // error: declaration of ‘arr’ as array of references
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> a: arr)
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    x <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>;
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-----------</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> a: arr)
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+}    
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">5 7 8 
+-----------
+50 7 8 
+</code></pre></div></li>
 <li>
 <p><strong>与 <code>T&amp;</code> 和 <code>T</code> 隐式转换</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> a, <span style="color:#66d9ef">int</span> b){
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;in func: a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    a<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>    b<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;in main: a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    func(ref(a), ref(b)); <span style="color:#75715e">// 虽然传递的是 b 的引用，但函数形参不是引用类型
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                          <span style="color:#75715e">// ，所以函数内的 b 是一个拷贝
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;in main: a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>输出：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>in main: a = 10, b = 20
-</span></span><span style="display:flex;"><span>in func: a = 10, b = 20
-</span></span><span style="display:flex;"><span>in main: a = 11, b = 20
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> a, <span style="color:#66d9ef">int</span> b){
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;in func: a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+    a<span style="color:#f92672">++</span>;
+    b<span style="color:#f92672">++</span>;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;in main: a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+    func(ref(a), ref(b)); <span style="color:#75715e">// 虽然传递的是 b 的引用，但函数形参不是引用类型
+</span><span style="color:#75715e"></span>                          <span style="color:#75715e">// ，所以函数内的 b 是一个拷贝
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;in main: a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">in main: a = 10, b = 20
+in func: a = 10, b = 20
+in main: a = 11, b = 20
+</code></pre></div></li>
 <li>
 <p><strong><code>T&amp;</code> 与 <code>reference_wrapper</code> 区别</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> boolalpha;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
-</span></span><span style="display:flex;"><span>    reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> r <span style="color:#f92672">=</span> x;   <span style="color:#75715e">// or auto r = ref(x);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> is_same<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">decltype</span>(r.get())<span style="color:#f92672">&gt;::</span>value <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;    <span style="color:#75715e">// true    
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> is_same<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">decltype</span>(r)<span style="color:#f92672">&gt;::</span>value <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;          <span style="color:#75715e">// false
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">&amp;</span>x <span style="color:#f92672">==</span> <span style="color:#f92672">&amp;</span>r.get()) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;                           <span style="color:#75715e">// true
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    r <span style="color:#f92672">=</span> y;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">&amp;</span>y <span style="color:#f92672">==</span> <span style="color:#f92672">&amp;</span>r.get()) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;                           <span style="color:#75715e">// true
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    r.get()<span style="color:#f92672">=</span><span style="color:#ae81ff">70</span>;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> y;                                                  <span style="color:#75715e">// 70
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    cout <span style="color:#f92672">&lt;&lt;</span> boolalpha;
+    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
+    reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> r <span style="color:#f92672">=</span> x;   <span style="color:#75715e">// or auto r = ref(x);
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> is_same<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">decltype</span>(r.get())<span style="color:#f92672">&gt;::</span>value <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;    <span style="color:#75715e">// true    
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> is_same<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>, <span style="color:#66d9ef">decltype</span>(r)<span style="color:#f92672">&gt;::</span>value <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;          <span style="color:#75715e">// false
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">&amp;</span>x <span style="color:#f92672">==</span> <span style="color:#f92672">&amp;</span>r.get()) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;                           <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span>    r <span style="color:#f92672">=</span> y;
+    cout <span style="color:#f92672">&lt;&lt;</span> (<span style="color:#f92672">&amp;</span>y <span style="color:#f92672">==</span> <span style="color:#f92672">&amp;</span>r.get()) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;                           <span style="color:#75715e">// true
+</span><span style="color:#75715e"></span>    r.get()<span style="color:#f92672">=</span><span style="color:#ae81ff">70</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> y;                                                  <span style="color:#75715e">// 70
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div></li>
 <li>
 <p><strong>包裹函数指针</strong></p>
 <p>个人感觉，可以替代 <strong><a href="../26-%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/">函数指针</a></strong> 了，类似 <code>std::function</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&#34;</span>;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func1</span>(<span style="color:#66d9ef">int</span> i)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;i = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func2</span>(<span style="color:#66d9ef">const</span> reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;&amp;</span> f){
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;in func2 invoke f:&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    f(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 包裹函数指针
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
-</span></span><span style="display:flex;"><span>    reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;</span> f0 <span style="color:#f92672">=</span> func;
-</span></span><span style="display:flex;"><span>    f0(x, y);       <span style="color:#75715e">// a = 5,b = 7
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    func2(f0);      <span style="color:#75715e">// in func2 invoke f:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#75715e">// a = 10,b = 20
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> f1 <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>ref(func);
-</span></span><span style="display:flex;"><span>    f1(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">7</span>);        <span style="color:#75715e">// a = 5,b = 7
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> Examp <span style="color:#f92672">=</span> reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;</span>;
-</span></span><span style="display:flex;"><span>    Examp f <span style="color:#f92672">=</span> func1;
-</span></span><span style="display:flex;"><span>    f(<span style="color:#ae81ff">10</span>);          <span style="color:#75715e">// i = 10
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">using</span> ExampFc <span style="color:#f92672">=</span> function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;</span>;
-</span></span><span style="display:flex;"><span>    ExampFc ff <span style="color:#f92672">=</span> func1;
-</span></span><span style="display:flex;"><span>    ff(<span style="color:#ae81ff">20</span>);         <span style="color:#75715e">// i = 20
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b)
+{
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span><span style="color:#e6db74">&#34;,&#34;</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;b = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func1</span>(<span style="color:#66d9ef">int</span> i)
+{
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;i = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> i <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func2</span>(<span style="color:#66d9ef">const</span> reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;&amp;</span> f){
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;in func2 invoke f:&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    f(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>);
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#75715e">// 包裹函数指针
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
+    reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;</span> f0 <span style="color:#f92672">=</span> func;
+    f0(x, y);       <span style="color:#75715e">// a = 5,b = 7
+</span><span style="color:#75715e"></span>    func2(f0);      <span style="color:#75715e">// in func2 invoke f:
+</span><span style="color:#75715e"></span>                    <span style="color:#75715e">// a = 10,b = 20
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">auto</span> f1 <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>ref(func);
+    f1(<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">7</span>);        <span style="color:#75715e">// a = 5,b = 7
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">using</span> Examp <span style="color:#f92672">=</span> reference_wrapper<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;</span>;
+    Examp f <span style="color:#f92672">=</span> func1;
+    f(<span style="color:#ae81ff">10</span>);          <span style="color:#75715e">// i = 10
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">using</span> ExampFc <span style="color:#f92672">=</span> function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;</span>;
+    ExampFc ff <span style="color:#f92672">=</span> func1;
+    ff(<span style="color:#ae81ff">20</span>);         <span style="color:#75715e">// i = 20
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div></li>
 </ol>
 <p><strong>参考：</strong></p>
 <ol>
@@ -418,7 +418,7 @@ if (!doNotTrack) {
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

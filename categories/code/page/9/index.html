@@ -145,6 +145,53 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>OpenGL 纹理采样
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>有两个不同的概念：像素（Pixel）和纹素（Texel）
+  在纹理上查询纹素有两种方式：
+ 点查（Point Query）：小纹理，而要对纹理放大 范围查（Range Query）：动态生成 Mipmap    小纹理：低分辨率纹理应用到高分辨率设备，会产生马赛克问题
+ Nearest：邻近点
+ Bilinear：双线性插值
+ Bicubic：     大纹理：高分辨率纹理应用到低分辨率设备，会有 锯齿（Jaggies） 和 摩尔纹（Moire） 等 走样（Aliasing） 的问题
+ 多重采样（supersampling）    面采样求平均值
+  Mipmap：图像金字塔
+ 具有速度快、只是近似值且只能是方形范围的特点 会额外占用 1/3 的原始纹理显存空间，总共 4/3 的显存占用    三线性插值（Trilinear interpolation）:
+ 先在相邻两层 Mipmap 中分别进行 Bilinear 插值，再在结果之上进行线性插值 局限性：会存在 overblur 的问题    各项异性过滤（Anisotropic Filtering）（Ripmap）：
+ 对于平行于坐标轴的矩形区域查询有较好的表现，但是对于非矩形区域仍是效果不佳 会额外占用 3 倍的显存空间   纹理映射的不规则区域    EWA Filtering:...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-10 09:47:35 +0800 CST'>July 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to OpenGL 纹理采样" href="https://874656645.github.io/posts/205-opengl-%E7%BA%B9%E7%90%86%E9%87%87%E6%A0%B7/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>OpenGL 重心坐标与插值
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 重心坐标在投影下不是不变的，所以如果要获取光栅化后三角形内部像素点的深度，不能使用光栅化后三角形的重心坐标进行插值，而是要先找到像素点中心位置对应的三维世界的三维坐标，在三维世界中进行深度插值计算。  参考：
+ 利用重心坐标平滑插值三角形顶点的任何属性 GAMES101-现代计算机图形学入门-闫令琪  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-09 21:22:21 +0800 CST'>July 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to OpenGL 重心坐标与插值" href="https://874656645.github.io/posts/204-opengl-%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87%E4%B8%8E%E6%8F%92%E5%80%BC/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>OpenGL 相机 LookAt 矩阵计算
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>原理：   相机的运动实际上是对世界坐标系中的物体进行反向运动变换 相机的运动矩阵与其他物体的变换矩阵类似  先缩放变换，再进行旋转，最后进行平移   所以 glm::lookAt 函数返回的是相机变换矩阵的逆矩阵  先对相机的平移矩阵求逆，然后乘以旋转矩阵的逆矩阵（参考计算矩阵乘积的逆矩阵公式）    注意事项：   相机矩阵的 Z轴 与相机的照射方向相反 glm 中的矩阵是列向量优先 正交矩阵的逆矩阵等于它的转置  刚体运动中变换矩阵的逆矩阵求解：   刚体运动变换矩阵： $$\begin{equation} T = \begin{bmatrix*}[c] R &amp; t \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$ 分块矩阵求逆公式 $$\begin{equation} M = \begin{bmatrix*}[c] A &amp; B \newline 0 &amp; D \end{bmatrix*} \space\space\space\space M^{-1} = \begin{bmatrix*}[c] A^{-1} &amp; -A^{-1}BD^{-1} \newline 0 &amp; D^{-1} \end{bmatrix*} \end{equation}$$ 刚体运动变换矩阵的逆矩阵： $$\begin{equation} T^{-1} = \begin{bmatrix*}[c] R^{-1} &amp; -R^{-1}t \newline 0^T &amp; 1 \end{bmatrix*} = \begin{bmatrix*}[c] R^T &amp; -R^Tt \newline 0^T &amp; 1 \end{bmatrix*} \end{equation}$$  方法一：  glm::mat4 Camera::calculateLookAtMatrix() { // 1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-28 14:23:38 +0800 CST'>June 28, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to OpenGL 相机 LookAt 矩阵计算" href="https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>OpenGL 渲染管线
     </h2>
   </header>
@@ -172,59 +219,10 @@ Games101 闫令琪
     </h2>
   </header>
   <section class="entry-content">
-    <p> 信号函数没有返回值，且只是一个函数声明，必须有 signals: 声明 槽函数的函数标签必须和信号函数相同（相同的返回值类型和形参列表） Qt5 后成员函数也可作为 slots，可以不用 slots: 声明 slots: 声明前要添加访问权限修饰符 信号函数和槽函数其实都可以被重载   // signal 和 slots 都可以重载  // Qt5的方式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot1)() = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun1, this, pSlot1);  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  void(MainWindow::*pSlot2)(int,QString) = &amp;MainWindow::onShowMainWindow;  connect(&amp;sw, pFun2, this, pSlot2);   // Qt4的方式  // 1. SIGNAL、SLOT宏会把信号和槽转成字符串，所以就不能进行编译期错误检查  // 2. 槽函数前面必须有 slots 标签，否则无法识别为槽函数  connect(&amp;sw, SIGNAL(showMainWindow()), this, SLOT(onShowMainWindow()));  connect(&amp;sw, SIGNAL(showMainWindow(int,QString))  , this, SLOT(onShowMainWindow(int,QString)));   // Lambda 表达式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun1,  [](){  qDebug()&lt;&lt;&#34;没有参数的信号&#34;;  }  );  void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow;  connect(&amp;sw, pFun2,  [](int a, QString msg){  qDebug()&lt;&lt;a&lt;&lt;msg;  }  );   // Lambda 表达式使用注意事项  // 如果b3是局部变量或者成员变量，lambda不要使用引用传值  QPushButton *b3 = new QPushButton(this);  b3-&gt;setText(&#34;Lambda&#34;);  int a = 10, b = 100;  connect(&amp;b2/*b3*/, &amp;QPushButton::clicked,  [=](){ // 此处使用 &amp; 传值会有问题  qDebug()&lt;&lt;a&lt;&lt;b;  }  ); </p>
+    <p> 信号函数没有返回值，且只是一个函数声明，必须有 signals: 声明 槽函数的函数标签必须和信号函数相同（相同的返回值类型和形参列表） Qt5 后成员函数也可作为 slots，可以不用 slots: 声明 slots: 声明前要添加访问权限修饰符 信号函数和槽函数其实都可以被重载  // signal 和 slots 都可以重载  // Qt5的方式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow; void(MainWindow::*pSlot1)() = &amp;MainWindow::onShowMainWindow; connect(&amp;sw, pFun1, this, pSlot1); void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow; void(MainWindow::*pSlot2)(int,QString) = &amp;MainWindow::onShowMainWindow; connect(&amp;sw, pFun2, this, pSlot2); // Qt4的方式  // 1. SIGNAL、SLOT宏会把信号和槽转成字符串，所以就不能进行编译期错误检查  // 2. 槽函数前面必须有 slots 标签，否则无法识别为槽函数  connect(&amp;sw, SIGNAL(showMainWindow()), this, SLOT(onShowMainWindow())); connect(&amp;sw, SIGNAL(showMainWindow(int,QString)) , this, SLOT(onShowMainWindow(int,QString))); // Lambda 表达式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow; connect(&amp;sw, pFun1, [](){ qDebug()&lt;&lt;&#34;没有参数的信号&#34;; } ); void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow; connect(&amp;sw, pFun2, [](int a, QString msg){ qDebug()&lt;&lt;a&lt;&lt;msg; } ); // Lambda 表达式使用注意事项  // 如果b3是局部变量或者成员变量，lambda不要使用引用传值  QPushButton *b3 = new QPushButton(this); b3-&gt;setText(&#34;Lambda&#34;); int a = 10, b = 100; connect(&amp;b2/*b3*/, &amp;QPushButton::clicked, [=](){ // 此处使用 &amp; 传值会有问题  qDebug()&lt;&lt;a&lt;&lt;b; } ); </p>
   </section>
   <footer class="entry-footer"><span title='2022-06-14 09:45:15 +0800 CST'>June 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt 信号和槽" href="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、通用引用  类型声明形式为 type&amp;&amp; 其中 type 类型是要进行推导的，如果类型推导没有发生，那么 type&amp;&amp; 代表一个右值引用 如果一个对象被声明为 auto&amp;&amp;，这个形参或者对象就是一个通用引用 通用引用，如果它被右值初始化，就会对应地成为右值引用；如果它被左值初始化，就会成为左值引用 如果在一个类模板里面看见了一个函数形参类型为 T&amp;&amp;，也不一定就是通用引用，可能并没有发生类型推导  void f(Widget&amp;&amp; param); //右值引用 Widget&amp;&amp; var1 = Widget(); //右值引用 auto&amp;&amp; var2 = var1; //通用引用（不是右值引用）  template&lt;typename T&gt; void f(std::vector&lt;T&gt;&amp;&amp; param); //右值引用  template&lt;typename T&gt; void f(T&amp;&amp; param); //通用引用（不是右值引用）  template &lt;typename T&gt; void f(const T&amp;&amp; param); //param是一个右值引用，因为添加了 const 限定符  // 函数模板 一般可能是通用引用 template &lt;typename T&gt; void print_reference_type(T &amp;&amp;i) { // T&amp;&amp; 或是 auto&amp;&amp;  if (std::is_lvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;lvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else if (std::is_rvalue_reference&lt;decltype(i)&gt;::value) {  std::cout &lt;&lt; &#34;rvalue: &#34; &lt;&lt; i &lt;&lt; std::endl;  } else {  std::cout &lt;&lt; &#34;unknown value: &#34; &lt;&lt; i &lt;&lt; std::endl;  } }  // 因为 push_back 在有一个特定的 vector 实例之前不可能存在， // 而实例化 vector 时的类型已经决定了 push_back 的声明 // 所以在这里并没有发生类型推导 template&lt;class T, class Allocator = allocator&lt;T&gt;&gt; //来自C&#43;&#43;标准 class vector { public:  void push_back(T&amp;&amp; x);  … } 一个记录任意函数调用的时间开销的函数模板...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-06-11 20:48:22 +0800 CST'>June 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考" href="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C 实现继承和多态
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>C中的继承和多态</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-05-24 09:15:13 +0800 CST'>May 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C 实现继承和多态" href="https://874656645.github.io/posts/195-c-%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>使用 VS2022 部署、运行和调试 Linux MSBuild 项目
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、设置 Linux 环境 1. 确保已安装用于 Visual Studio 的 Linux 开发工作负荷 2. Linux 所需环境 sudo apt-get install openssh-server g&#43;&#43; gdb make ninja-build rsync zip
-确保 ssh 服务在 Linux 计算机上运行
-sudo service ssh start
-参考官方文档
-二、连接到远程 Linux 打开【工具】&gt;【选项】&gt;【跨平台】&gt;【连接管理器】进行添加设置
-也可以连接到 WSL，参考官方文档
-三、创建 Linux MSBuild 项目 四、配置 Linux MSBuild 项目 大部分的默认配置都不需要修改，只需关注几个地方
-调试设置
-包含目录是 Linux 上项目的路径
-库目录可使用相对路径
-如果依赖的是动态库，需要在 Linux 端设置 LD_LIBRARY_PATH
-最后在 Linux 环境中生成的项目目录如下
-还可以在【调试】中打开【Linux控制台】
-参考官方文档</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-05-18 12:02:56 +0800 CST'>May 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 使用 VS2022 部署、运行和调试 Linux MSBuild 项目" href="https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
@@ -236,7 +234,7 @@ sudo service ssh start
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

@@ -149,7 +149,7 @@ if (!doNotTrack) {
     </h2>
   </header>
   <section class="entry-content">
-    <p>const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() {  const int x = 0;  *(int*)&amp;x = 2;  cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3;  int y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10;  y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0   return 0; } struct T{  int x = 0;  const int y = 0;  int q() const{  *(int*)&amp;y = y &#43; 1;  return y;  } }; int main() {  T m;  const T n;  int x = m....</p>
+    <p>const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() { const int x = 0; *(int*)&amp;x = 2; cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3; int y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10; y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  return 0; } struct T{ int x = 0; const int y = 0; int q() const{ *(int*)&amp;y = y &#43; 1; return y; } }; int main() { T m; const T n; int x = m....</p>
   </section>
   <footer class="entry-footer"><span title='2022-09-15 11:13:34 +0800 CST'>September 15, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——类型转换杂记" href="https://874656645.github.io/posts/239-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%9D%82%E8%AE%B0/"></a>
@@ -186,7 +186,7 @@ if (!doNotTrack) {
   </header>
   <section class="entry-content">
     <p>普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h
-struct A { 	int a = 1; 	virtual int getA()const { return a; } }; struct B : A { 	int a = 2; 	int getA()const override { return a; } };  #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { 	try 	{  // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); 	} 	catch (const A e) 	{ 	cout &lt;&lt; e....</p>
+struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { int a = 2; int getA()const override { return a; } }; #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { try { // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); } catch (const A e) { cout &lt;&lt; e....</p>
   </section>
   <footer class="entry-footer"><span title='2022-09-14 11:08:56 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——异常的使用" href="https://874656645.github.io/posts/236-c&#43;&#43;-%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BD%BF%E7%94%A8/"></a>
@@ -199,7 +199,7 @@ struct A { 	int a = 1; 	virtual int getA()const { return a; } }; struct B : A { 
   </header>
   <section class="entry-content">
     <p>案例一：
-class A { public:  int a;  A(int x) :a(x) {   } }; class B : public A { public:  B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A   } }; class C { public:  C() {   } }; class D : virtual public A, public C { public:  D(int x) :A(x) {   } }; class E : /*public A,*/ public B, public D { // 不允许存在直接基类和间接虚基类的情况 public:  E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } };  int main(){  E e(0);  //cout &lt;&lt; e....</p>
+class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A  } }; class C { public: C() { } }; class D : virtual public A, public C { public: D(int x) :A(x) { } }; class E : /*public A,*/ public B, public D { // 不允许存在直接基类和间接虚基类的情况 public: E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } }; int main(){ E e(0); //cout &lt;&lt; e....</p>
   </section>
   <footer class="entry-footer"><span title='2022-09-12 16:00:03 +0800 CST'>September 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——多继承与虚基类" href="https://874656645.github.io/posts/235-c&#43;&#43;-%E5%A4%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E8%99%9A%E5%9F%BA%E7%B1%BB/"></a>
@@ -214,7 +214,7 @@ class A { public:  int a;  A(int x) :a(x) {   } }; class B : public A { public: 
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

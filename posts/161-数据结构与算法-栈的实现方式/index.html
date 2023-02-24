@@ -9,7 +9,7 @@
 <meta name="keywords" content="数据结构与算法" />
 <meta name="description" content="栈的物理实现有 顺序栈 和 链式栈
 一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：
-template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size;  top = -1;  st = new T[mSize];  }  arrStack() { // 创建一个顺序栈的实例  top = -1;  }  ~arrStack() {  delete [] st;  }  void clear() {  top = -1;  } // 清空栈 };  bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl;  return false;  } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item;  return true;  } }  bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl;  return false;  } else {  item = st[top--]; // 返回栈顶，并缩减1  return true;  } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：">
+template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item; return true; } } bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -18,7 +18,7 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -50,7 +50,7 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="数据结构与算法——栈的实现方式" />
 <meta property="og:description" content="栈的物理实现有 顺序栈 和 链式栈
 一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：
-template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size;  top = -1;  st = new T[mSize];  }  arrStack() { // 创建一个顺序栈的实例  top = -1;  }  ~arrStack() {  delete [] st;  }  void clear() {  top = -1;  } // 清空栈 };  bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl;  return false;  } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item;  return true;  } }  bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl;  return false;  } else {  item = st[top--]; // 返回栈顶，并缩减1  return true;  } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：" />
+template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item; return true; } } bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-03T20:03:03&#43;08:00" />
@@ -63,7 +63,7 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
 <meta name="twitter:title" content="数据结构与算法——栈的实现方式"/>
 <meta name="twitter:description" content="栈的物理实现有 顺序栈 和 链式栈
 一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：
-template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size;  top = -1;  st = new T[mSize];  }  arrStack() { // 创建一个顺序栈的实例  top = -1;  }  ~arrStack() {  delete [] st;  }  void clear() {  top = -1;  } // 清空栈 };  bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl;  return false;  } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item;  return true;  } }  bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl;  return false;  } else {  item = st[top--]; // 返回栈顶，并缩减1  return true;  } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义："/>
+template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item; return true; } } bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义："/>
 
 
 <script type="application/ld+json">
@@ -92,11 +92,11 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
   "@type": "BlogPosting",
   "headline": "数据结构与算法——栈的实现方式",
   "name": "数据结构与算法——栈的实现方式",
-  "description": "栈的物理实现有 顺序栈 和 链式栈\n一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：\ntemplate \u0026lt;class T\u0026gt; class arrStack : public Stack \u0026lt;T\u0026gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size;  top = -1;  st = new T[mSize];  }  arrStack() { // 创建一个顺序栈的实例  top = -1;  }  ~arrStack() {  delete [] st;  }  void clear() {  top = -1;  } // 清空栈 };  bool arrStack\u0026lt;T\u0026gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout \u0026lt;\u0026lt; \u0026#34;栈满溢出\u0026#34; \u0026lt;\u0026lt; endl;  return false;  } else { // 新元素入栈并修改栈顶指针  st[++top] = item;  return true;  } }  bool arrStack\u0026lt;T\u0026gt;::pop(T\u0026amp; item) { // 出栈  if (top == -1) { // 栈为空  cout \u0026lt;\u0026lt; \u0026#34;栈为空，不能执行出栈操作\u0026#34;\u0026lt;\u0026lt; endl;  return false;  } else {  item = st[top--]; // 返回栈顶，并缩减1  return true;  } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：",
+  "description": "栈的物理实现有 顺序栈 和 链式栈\n一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：\ntemplate \u0026lt;class T\u0026gt; class arrStack : public Stack \u0026lt;T\u0026gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack\u0026lt;T\u0026gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout \u0026lt;\u0026lt; \u0026#34;栈满溢出\u0026#34; \u0026lt;\u0026lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[++top] = item; return true; } } bool arrStack\u0026lt;T\u0026gt;::pop(T\u0026amp; item) { // 出栈  if (top == -1) { // 栈为空  cout \u0026lt;\u0026lt; \u0026#34;栈为空，不能执行出栈操作\u0026#34;\u0026lt;\u0026lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：",
   "keywords": [
     "数据结构与算法"
   ],
-  "articleBody": "栈的物理实现有 顺序栈 和 链式栈\n一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：\ntemplate class T class arrStack : public Stack T { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size;  top = -1;  st = new T[mSize];  }  arrStack() { // 创建一个顺序栈的实例  top = -1;  }  ~arrStack() {  delete [] st;  }  void clear() {  top = -1;  } // 清空栈 };  bool arrStackT::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout  \"栈满溢出\"  endl;  return false;  } else { // 新元素入栈并修改栈顶指针  st[++top] = item;  return true;  } }  bool arrStackT::pop(T\u0026 item) { // 出栈  if (top == -1) { // 栈为空  cout  \"栈为空，不能执行出栈操作\" endl;  return false;  } else {  item = st[top--]; // 返回栈顶，并缩减1  return true;  } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：\ntemplate class T class Link{ private:  T data;  Link* next{nullptr}; public:  Link(T info, Link* nextValue); };  template class T class lnkStack : public Stack T { private: // 栈的链式存储  LinkT* top; // 指向栈顶的指针  int size; // 存放元素的个数 public: // 栈运算的链式实现  lnkStack(int defSize) { // 构造函数  top = nullptr;  size = 0;  }  ~lnkStack() { // 析构函数  clear();  } };  // 具有两个参数的Link构造函数 Link(const T info, Link* nextValue) {  data = info;  next = nextValue; }  // 入栈操作的链式实现 bool lnkStackT:: push(const T item) {  LinkT* tmp = new LinkT(item, top);  top = tmp;  size++;  return true; }  // 出栈操作的链式实现 bool lnkStackT:: pop(T\u0026 item) {  Link T *tmp;  if (size == 0) {  cout  \"栈为空，不能执行出栈操作\" endl;  return false;  }  item = top-data;  tmp = top-next;  delete top;  top = tmp;  size--;  return true; } 三、顺序栈与链式栈的比较   时间效率\n顺序栈和链式栈都是 $\\mathcal{O}(1)$ 的时间复杂度\n  空间效率\n 顺序栈须说明一个固定的长度 链式栈的长度可变，但增加了结构性开销（增加了一个指针变量）    实际应用中，顺序栈比链式栈用得更广泛，尤其在能预测栈中最大数据量的情况下，一般是用顺序栈来实现\n  ",
+  "articleBody": "栈的物理实现有 顺序栈 和 链式栈\n一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：\ntemplate class T class arrStack : public Stack T { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStackT::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout  \"栈满溢出\"  endl; return false; } else { // 新元素入栈并修改栈顶指针  st[++top] = item; return true; } } bool arrStackT::pop(T\u0026 item) { // 出栈  if (top == -1) { // 栈为空  cout  \"栈为空，不能执行出栈操作\" endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：\ntemplate class T class Link{ private: T data; Link* next{nullptr}; public: Link(T info, Link* nextValue); }; template class T class lnkStack : public Stack T { private: // 栈的链式存储  LinkT* top; // 指向栈顶的指针  int size; // 存放元素的个数 public: // 栈运算的链式实现  lnkStack(int defSize) { // 构造函数  top = nullptr; size = 0; } ~lnkStack() { // 析构函数  clear(); } }; // 具有两个参数的Link构造函数 Link(const T info, Link* nextValue) { data = info; next = nextValue; } // 入栈操作的链式实现 bool lnkStackT:: push(const T item) { LinkT* tmp = new LinkT(item, top); top = tmp; size++; return true; } // 出栈操作的链式实现 bool lnkStackT:: pop(T\u0026 item) { Link T *tmp; if (size == 0) { cout  \"栈为空，不能执行出栈操作\" endl; return false; } item = top-data; tmp = top-next; delete top; top = tmp; size--; return true; } 三、顺序栈与链式栈的比较   时间效率\n顺序栈和链式栈都是 $\\mathcal{O}(1)$ 的时间复杂度\n  空间效率\n 顺序栈须说明一个固定的长度 链式栈的长度可变，但增加了结构性开销（增加了一个指针变量）    实际应用中，顺序栈比链式栈用得更广泛，尤其在能预测栈中最大数据量的情况下，一般是用顺序栈来实现\n  ",
   "wordCount" : "289",
   "inLanguage": "en",
   "datePublished": "2022-04-03T20:03:03+08:00",
@@ -241,107 +241,107 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
 <li>注意<strong>上溢、下溢</strong>问题</li>
 </ol>
 <p><strong>类定义：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">arrStack</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Stack <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> { 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 栈的顺序存储
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> mSize; <span style="color:#75715e">// 栈中最多可存放的元素个数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> top; <span style="color:#75715e">// 栈顶位置，应小于mSize
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    T <span style="color:#f92672">*</span>st; <span style="color:#75715e">// 存放栈元素的数组
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 栈的运算的顺序实现
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    arrStack(<span style="color:#66d9ef">int</span> size) { <span style="color:#75715e">// 创建一个给定长度的顺序栈实例
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        mSize <span style="color:#f92672">=</span> size; 
-</span></span><span style="display:flex;"><span>        top <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; 
-</span></span><span style="display:flex;"><span>        st <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> T[mSize]; 
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>    arrStack() { <span style="color:#75715e">// 创建一个顺序栈的实例
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        top <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; 
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>arrStack() { 
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">delete</span> [] st; 
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">clear</span>() { 
-</span></span><span style="display:flex;"><span>        top <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; 
-</span></span><span style="display:flex;"><span>    } <span style="color:#75715e">// 清空栈
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> arrStack<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>push(<span style="color:#66d9ef">const</span> T item) { <span style="color:#75715e">// 入栈
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (top <span style="color:#f92672">==</span> mSize<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) { <span style="color:#75715e">// 栈已满
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;栈满溢出&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl; 
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false; 
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> { <span style="color:#75715e">// 新元素入栈并修改栈顶指针
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        st[<span style="color:#f92672">++</span>top] <span style="color:#f92672">=</span> item; 
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true; 
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> arrStack<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>pop(T<span style="color:#f92672">&amp;</span> item) { <span style="color:#75715e">// 出栈
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (top <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) { <span style="color:#75715e">// 栈为空
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;栈为空，不能执行出栈操作&#34;</span><span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false; 
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> { 
-</span></span><span style="display:flex;"><span>        item <span style="color:#f92672">=</span> st[top<span style="color:#f92672">--</span>]; <span style="color:#75715e">// 返回栈顶，并缩减1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> true; 
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="二链式栈linked-stack">二、链式栈（Linked Stack）<a hidden class="anchor" aria-hidden="true" href="#二链式栈linked-stack">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">arrStack</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Stack <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> { 
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 栈的顺序存储
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> mSize; <span style="color:#75715e">// 栈中最多可存放的元素个数
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> top; <span style="color:#75715e">// 栈顶位置，应小于mSize
+</span><span style="color:#75715e"></span>    T <span style="color:#f92672">*</span>st; <span style="color:#75715e">// 存放栈元素的数组
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 栈的运算的顺序实现
+</span><span style="color:#75715e"></span>    arrStack(<span style="color:#66d9ef">int</span> size) { <span style="color:#75715e">// 创建一个给定长度的顺序栈实例
+</span><span style="color:#75715e"></span>        mSize <span style="color:#f92672">=</span> size; 
+        top <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; 
+        st <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> T[mSize]; 
+    } 
+    arrStack() { <span style="color:#75715e">// 创建一个顺序栈的实例
+</span><span style="color:#75715e"></span>        top <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; 
+    }
+    <span style="color:#f92672">~</span>arrStack() { 
+        <span style="color:#66d9ef">delete</span> [] st; 
+    } 
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">clear</span>() { 
+        top <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; 
+    } <span style="color:#75715e">// 清空栈
+</span><span style="color:#75715e"></span>};
+
+<span style="color:#66d9ef">bool</span> arrStack<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>push(<span style="color:#66d9ef">const</span> T item) { <span style="color:#75715e">// 入栈
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (top <span style="color:#f92672">==</span> mSize<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) { <span style="color:#75715e">// 栈已满
+</span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;栈满溢出&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl; 
+        <span style="color:#66d9ef">return</span> false; 
+    } <span style="color:#66d9ef">else</span> { <span style="color:#75715e">// 新元素入栈并修改栈顶指针
+</span><span style="color:#75715e"></span>        st[<span style="color:#f92672">++</span>top] <span style="color:#f92672">=</span> item; 
+        <span style="color:#66d9ef">return</span> true; 
+    } 
+}
+
+<span style="color:#66d9ef">bool</span> arrStack<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>pop(T<span style="color:#f92672">&amp;</span> item) { <span style="color:#75715e">// 出栈
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (top <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) { <span style="color:#75715e">// 栈为空
+</span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;栈为空，不能执行出栈操作&#34;</span><span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">return</span> false; 
+    } <span style="color:#66d9ef">else</span> { 
+        item <span style="color:#f92672">=</span> st[top<span style="color:#f92672">--</span>]; <span style="color:#75715e">// 返回栈顶，并缩减1
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> true; 
+    } 
+}
+</code></pre></div><h2 id="二链式栈linked-stack">二、链式栈（Linked Stack）<a hidden class="anchor" aria-hidden="true" href="#二链式栈linked-stack">#</a></h2>
 <ol>
 <li>用单链表方式存储，其中指针的方向是从栈顶向下链接</li>
 <li>理论上没有大小限制</li>
 </ol>
 <p><strong>类定义：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Link</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    T data;
-</span></span><span style="display:flex;"><span>    Link<span style="color:#f92672">*</span> next{<span style="color:#66d9ef">nullptr</span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    Link(T info, Link<span style="color:#f92672">*</span> nextValue);
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">lnkStack</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Stack <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 栈的链式存储
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Link<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> top; <span style="color:#75715e">// 指向栈顶的指针
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> size; <span style="color:#75715e">// 存放元素的个数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 栈运算的链式实现
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    lnkStack(<span style="color:#66d9ef">int</span> defSize) { <span style="color:#75715e">// 构造函数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        top <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>; 
-</span></span><span style="display:flex;"><span>        size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; 
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">~</span>lnkStack() { <span style="color:#75715e">// 析构函数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        clear(); 
-</span></span><span style="display:flex;"><span>    } 
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 具有两个参数的Link构造函数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>Link(<span style="color:#66d9ef">const</span> T info, Link<span style="color:#f92672">*</span> nextValue) {
-</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> info;
-</span></span><span style="display:flex;"><span>    next <span style="color:#f92672">=</span> nextValue;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 入栈操作的链式实现
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> lnkStack<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span> push(<span style="color:#66d9ef">const</span> T item) {
-</span></span><span style="display:flex;"><span>    Link<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> tmp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Link<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(item, top); 
-</span></span><span style="display:flex;"><span>    top <span style="color:#f92672">=</span> tmp; 
-</span></span><span style="display:flex;"><span>    size<span style="color:#f92672">++</span>; 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true; 
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 出栈操作的链式实现
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> lnkStack<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span> pop(T<span style="color:#f92672">&amp;</span> item) {
-</span></span><span style="display:flex;"><span>    Link <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>tmp; 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (size <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) { 
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;栈为空，不能执行出栈操作&#34;</span><span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false; 
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    item <span style="color:#f92672">=</span> top<span style="color:#f92672">-&gt;</span>data;
-</span></span><span style="display:flex;"><span>    tmp <span style="color:#f92672">=</span> top<span style="color:#f92672">-&gt;</span>next; 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">delete</span> top; 
-</span></span><span style="display:flex;"><span>    top <span style="color:#f92672">=</span> tmp; 
-</span></span><span style="display:flex;"><span>    size<span style="color:#f92672">--</span>; 
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true; 
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="三顺序栈与链式栈的比较">三、顺序栈与链式栈的比较<a hidden class="anchor" aria-hidden="true" href="#三顺序栈与链式栈的比较">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Link</span>{
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+    T data;
+    Link<span style="color:#f92672">*</span> next{<span style="color:#66d9ef">nullptr</span>};
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Link(T info, Link<span style="color:#f92672">*</span> nextValue);
+};
+
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">T</span><span style="color:#f92672">&gt;</span> 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">lnkStack</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Stack <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> {
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 栈的链式存储
+</span><span style="color:#75715e"></span>    Link<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> top; <span style="color:#75715e">// 指向栈顶的指针
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> size; <span style="color:#75715e">// 存放元素的个数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span> <span style="color:#75715e">// 栈运算的链式实现
+</span><span style="color:#75715e"></span>    lnkStack(<span style="color:#66d9ef">int</span> defSize) { <span style="color:#75715e">// 构造函数
+</span><span style="color:#75715e"></span>        top <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>; 
+        size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; 
+    } 
+    <span style="color:#f92672">~</span>lnkStack() { <span style="color:#75715e">// 析构函数
+</span><span style="color:#75715e"></span>        clear(); 
+    } 
+};
+
+<span style="color:#75715e">// 具有两个参数的Link构造函数
+</span><span style="color:#75715e"></span>Link(<span style="color:#66d9ef">const</span> T info, Link<span style="color:#f92672">*</span> nextValue) {
+    data <span style="color:#f92672">=</span> info;
+    next <span style="color:#f92672">=</span> nextValue;
+}
+
+<span style="color:#75715e">// 入栈操作的链式实现
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> lnkStack<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span> push(<span style="color:#66d9ef">const</span> T item) {
+    Link<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;*</span> tmp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Link<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span>(item, top); 
+    top <span style="color:#f92672">=</span> tmp; 
+    size<span style="color:#f92672">++</span>; 
+    <span style="color:#66d9ef">return</span> true; 
+}
+
+<span style="color:#75715e">// 出栈操作的链式实现
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">bool</span> lnkStack<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span> pop(T<span style="color:#f92672">&amp;</span> item) {
+    Link <span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;</span> <span style="color:#f92672">*</span>tmp; 
+    <span style="color:#66d9ef">if</span> (size <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) { 
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;栈为空，不能执行出栈操作&#34;</span><span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">return</span> false; 
+    }
+    item <span style="color:#f92672">=</span> top<span style="color:#f92672">-&gt;</span>data;
+    tmp <span style="color:#f92672">=</span> top<span style="color:#f92672">-&gt;</span>next; 
+    <span style="color:#66d9ef">delete</span> top; 
+    top <span style="color:#f92672">=</span> tmp; 
+    size<span style="color:#f92672">--</span>; 
+    <span style="color:#66d9ef">return</span> true; 
+}
+</code></pre></div><h2 id="三顺序栈与链式栈的比较">三、顺序栈与链式栈的比较<a hidden class="anchor" aria-hidden="true" href="#三顺序栈与链式栈的比较">#</a></h2>
 <ol>
 <li>
 <p>时间效率<br>
@@ -385,7 +385,7 @@ template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // �
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

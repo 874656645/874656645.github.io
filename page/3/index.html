@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,6 +157,54 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>第一步：创建一个关卡  创建一个空的 Unreal 关卡； 登录 Cesium ion 并添加 Cesium World Terrain 和 CesiumSunSky； 设置 CesiumGeoreference 的坐标为 San Francisco International Airport (SFO)；
+Origin Latitude = 37.61779
+Origin Longitude = -122.390533
+Origin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C&#43;&#43; 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目
+VS 2022 解决方案类似下图：
+  添加下面的代码到 project.Build.cs 文件：
+// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; }); // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-10-19 14:25:50 +0800 CST'>October 19, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal" href="https://874656645.github.io/posts/250-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——malloc、calloc、realloc、指针杂记
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>void printArr(int *A, int size){ printf(&#34;Elements of array: &#34;); for(int i = 0; i &lt; size; &#43;&#43;i){ printf(&#34;%d\t&#34;, A[i]); } printf(&#34;\n&#34;); } int main() { int C[3][2][2] = {{{1,2},{3,4}},{{5,6},{7,8}},{{9,10},{11,12}}}; // 虽然地址相同，但代表的意义却不相同  printf(&#34;%p\t%p\t%p\t%p\t%p\t%p \n&#34;, C, *C, C[0], C[0][0], &amp;C[0][0], &amp;C[0][0][0]); printf(&#34;%p\t%p\t%p\n&#34;, *C&#43;1, C[0]&#43;1, C[0][1]); printf(&#34;%p\t%p\n&#34;, C, C[0][0] &#43; 1); printf(&#34;%p\t%p\n&#34;, C, &amp;C[0][0] &#43; 1); // 分配空间，但不会对元素进行初始化  int *A = (int*)malloc(3 * sizeof(int)); for(int i = 0; i &lt; 3; &#43;&#43;i){ A[i] = i&#43;1; } printArr(A, 3); // 分配空间，并将元素初始化为0  int *B = (int*)calloc(3, sizeof(int)); printArr(B, 3); // 重新分配一块空间（新空间可大可小）  // 并把原来的数据拷贝过来  // 如果新空间首地址与原来空间地址不同，会将原来的内存空间释放  // ，注意：此时不能再继续访问原来的地址，虽然原来的指针并未置空  int *D = (int*)realloc(A, 10 * sizeof(int)); printf(&#34;%p\t%p\n&#34;, A, D); printArr(A, 3); // 此时不能访问 A 了，这是危险的行为  printArr(D, 10); // 等同于重新分配了空间  D = (int*)realloc(NULL, 3 * sizeof(int)); // int *D = (int*)malloc(3 * sizeof(int));  printf(&#34;%p\t%p\n&#34;, A, D); printArr(D, 3); // 等同于释放了内存空间并将指针置为空值  D = (int*)realloc(D, 0); // free(D);D = nullptr;  printf(&#34;%p\n&#34;, D); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-10-02 22:18:02 +0800 CST'>October 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——malloc、calloc、realloc、指针杂记" href="https://874656645.github.io/posts/249-c&#43;&#43;-malloc-calloc-realloc-%E6%8C%87%E9%92%88%E6%9D%82%E8%AE%B0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——计算最大和子矩阵问题
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>描述 计算矩阵中，最大和的子矩阵，并输出最大的和
+测试用例 用例一：
+$$\begin{equation} \begin{bmatrix*}[c] -3 &amp; -5 &amp; -1 &amp; 5 \newline 2 &amp; -4 &amp; -2 &amp; 4 \newline -1 &amp; 3 &amp; -1 &amp; 3 \end{bmatrix*} \end{equation}$$
+用例二：
+$$\begin{equation} \begin{bmatrix*}[c] -3 &amp; -5 &amp; -1 &amp; 5 \newline 9 &amp; -4 &amp; -2 &amp; 4 \newline -1 &amp; 3 &amp; -1 &amp; 3 \end{bmatrix*} \end{equation}$$
+用例三：
+$$\begin{equation} \begin{bmatrix*}[c] -3 &amp; -5 &amp; -1 &amp; 5 \newline 7 &amp; -4 &amp; -2 &amp; 4 \newline -1 &amp; 3 &amp; -1 &amp; 3 \end{bmatrix*} \end{equation}$$...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-27 18:42:52 +0800 CST'>September 27, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——计算最大和子矩阵问题" href="https://874656645.github.io/posts/248-c&#43;&#43;-%E8%AE%A1%E7%AE%97%E6%9C%80%E5%A4%A7%E5%92%8C%E7%9F%A9%E9%98%B5%E9%97%AE%E9%A2%98/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——旋转骰子问题
     </h2>
   </header>
@@ -164,7 +212,7 @@ if (!doNotTrack) {
     <p>方法一：使用字符串 注意 ：
  字符与字符相加返回的是一个整数 字符串与字符相加的问题：  可以使用 &#43; 号运算符，但其中一个操作数需要是 string 类型 如果需要连续相加多个字符，前两个操作数必须有一个是 string 类型的 可以使用 string.append 方法   控制台输入字符串的问题，如果直接使用 cin &gt;&gt; str，遇到空格和回车都会终止读取  例如：在字符串 s 后面添加 ‘a’、‘b’、‘c’ 三个字符
 参考 C&#43;&#43; 运算符优先级和结合性
-string s; s = s &#43; &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 正确 s &#43;= &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 错误 s = &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39; &#43; s;	// 错误 int main(){  string LR = &#34;1625&#34;, FB = &#34;3645&#34;, AC = &#34;1324&#34;; 	string mov; 	getline(cin, mov); 	for (char c : mov) { 	string tmp = &#34;&#34;; 	switch (c) 	{ 	case &#39;L&#39;: 	case &#39;R&#39;: 	{ 	if (c == &#39;L&#39;) { 	// LR = tmp &#43; LR[3] &#43; LR[0] &#43; LR[1] &#43; LR[2]; 	LR = LR[3] &#43; string(LR, 0, 3); 	} 	else 	{ 	// LR = tmp &#43; LR[1] &#43; LR[2] &#43; LR[3] &#43; LR[0]; 	LR = string(LR, 1, 3) &#43; LR[0]; 	}  	// FB = tmp &#43; FB[0] &#43; LR[1] &#43; FB[2] &#43; LR[3]; 	FB[1] = LR[1]; 	FB[3] = LR[3]; 	// AC = tmp &#43; LR[0] &#43; AC[1] &#43; LR[2] &#43; AC[3]; 	AC[0] = LR[0]; 	AC[2] = LR[2]; 	break; 	} 	case &#39;F&#39;: 	case &#39;B&#39;: 	{ 	if (c == &#39;F&#39;) 	{ 	// FB = tmp &#43; FB[3] &#43; FB[0] &#43; FB[1] &#43; FB[2]; 	FB = FB[3] &#43; string(FB, 0, 3); 	} 	else 	{ 	// FB = tmp &#43; FB[1] &#43; FB[2] &#43; FB[3] &#43; FB[0]; 	FB = string(FB, 1, 3) &#43; FB[0]; 	} 	// LR = tmp &#43; LR[0] &#43; FB[1] &#43; LR[2] &#43; FB[3]; 	LR[1] = FB[1]; 	LR[3] = FB[3]; 	// AC = tmp &#43; AC[0] &#43; FB[0] &#43; AC[2] &#43; FB[2]; 	AC[1] = FB[0]; 	AC[3] = FB[2]; 	break; 	} 	case &#39;A&#39;: 	case &#39;C&#39;: 	{ 	if (c == &#39;A&#39;) 	{ 	AC = tmp &#43; AC[3] &#43; AC[0] &#43; AC[1] &#43; AC[2]; 	} 	else 	{ 	AC = tmp &#43; AC[1] &#43; AC[2] &#43; AC[3] &#43; AC[0]; 	} 	LR = tmp &#43; AC[0] &#43; LR[1] &#43; AC[2] &#43; LR[3]; 	FB = tmp &#43; AC[1] &#43; FB[1] &#43; AC[3] &#43; FB[3]; 	break; 	} 	default: 	break; 	} 	}  	cout &lt;&lt; LR[0] &lt;&lt; LR[2] &lt;&lt; FB[0] &lt;&lt; FB[2] &lt;&lt; LR[3] &lt;&lt; LR[1];   return 0; } 方法二：使用 deque 容器 int main() { 	//string LR = &#34;1625&#34;, FB = &#34;3645&#34;, AC = &#34;1324&#34;; 	deque&lt;char&gt; LR, FB, AC; 	LR....</p>
+string s; s = s &#43; &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 正确 s &#43;= &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 错误 s = &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39; &#43; s;	// 错误 int main(){ string LR = &#34;1625&#34;, FB = &#34;3645&#34;, AC = &#34;1324&#34;; string mov; getline(cin, mov); for (char c : mov) { string tmp = &#34;&#34;; switch (c) { case &#39;L&#39;: case &#39;R&#39;: { if (c == &#39;L&#39;) { // LR = tmp &#43; LR[3] &#43; LR[0] &#43; LR[1] &#43; LR[2]; 	LR = LR[3] &#43; string(LR, 0, 3); } else { // LR = tmp &#43; LR[1] &#43; LR[2] &#43; LR[3] &#43; LR[0]; 	LR = string(LR, 1, 3) &#43; LR[0]; } // FB = tmp &#43; FB[0] &#43; LR[1] &#43; FB[2] &#43; LR[3]; 	FB[1] = LR[1]; FB[3] = LR[3]; // AC = tmp &#43; LR[0] &#43; AC[1] &#43; LR[2] &#43; AC[3]; 	AC[0] = LR[0]; AC[2] = LR[2]; break; } case &#39;F&#39;: case &#39;B&#39;: { if (c == &#39;F&#39;) { // FB = tmp &#43; FB[3] &#43; FB[0] &#43; FB[1] &#43; FB[2]; 	FB = FB[3] &#43; string(FB, 0, 3); } else { // FB = tmp &#43; FB[1] &#43; FB[2] &#43; FB[3] &#43; FB[0]; 	FB = string(FB, 1, 3) &#43; FB[0]; } // LR = tmp &#43; LR[0] &#43; FB[1] &#43; LR[2] &#43; FB[3]; 	LR[1] = FB[1]; LR[3] = FB[3]; // AC = tmp &#43; AC[0] &#43; FB[0] &#43; AC[2] &#43; FB[2]; 	AC[1] = FB[0]; AC[3] = FB[2]; break; } case &#39;A&#39;: case &#39;C&#39;: { if (c == &#39;A&#39;) { AC = tmp &#43; AC[3] &#43; AC[0] &#43; AC[1] &#43; AC[2]; } else { AC = tmp &#43; AC[1] &#43; AC[2] &#43; AC[3] &#43; AC[0]; } LR = tmp &#43; AC[0] &#43; LR[1] &#43; AC[2] &#43; LR[3]; FB = tmp &#43; AC[1] &#43; FB[1] &#43; AC[3] &#43; FB[3]; break; } default: break; } } cout &lt;&lt; LR[0] &lt;&lt; LR[2] &lt;&lt; FB[0] &lt;&lt; FB[2] &lt;&lt; LR[3] &lt;&lt; LR[1]; return 0; } 方法二：使用 deque 容器 int main() { //string LR = &#34;1625&#34;, FB = &#34;3645&#34;, AC = &#34;1324&#34;; 	deque&lt;char&gt; LR, FB, AC; LR....</p>
   </section>
   <footer class="entry-footer"><span title='2022-09-23 16:30:43 +0800 CST'>September 23, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——旋转骰子问题" href="https://874656645.github.io/posts/247-c&#43;&#43;-%E6%97%8B%E8%BD%AC%E9%AA%B0%E5%AD%90%E9%97%AE%E9%A2%98/"></a>
@@ -177,46 +225,10 @@ string s; s = s &#43; &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 正确
   </header>
   <section class="entry-content">
     <p>目标 对输入的字符串中的单词，把给定的索引区间中的单词逆序
-方法一  通过 strtok（strtok_s、strtok_r） 分割字符串 使用 list 容器存储各个单词 可以通过前插的方式反转指定区间的单词 也可以通过前后交换的方式反转指定区间的单词 顺序输出 list 中的单词  int main(){  string str = &#34;I am a developer&#34;; 	char *cArr = new char[str.size()&#43;1]{0}; 	strcpy_s(cArr, str.size()&#43;1, str.c_str());	// 注意：第二个参数，要拷贝的字符串的长度包括结尾的 &#39;\0&#39; 	char *w = nullptr, *rest = nullptr; 	list&lt;string&gt; wordList; 	w = strtok_s(cArr, &#34; &#34;, &amp;rest); 	while (w) 	{ 	wordList.push_back(w); 	w = strtok_s(nullptr, &#34; &#34;, &amp;rest); 	} 	int startIndex = 0, endIndex = 0; 	cin &gt;&gt; startIndex &gt;&gt; endIndex; 	int len = wordList....</p>
+方法一  通过 strtok（strtok_s、strtok_r） 分割字符串 使用 list 容器存储各个单词 可以通过前插的方式反转指定区间的单词 也可以通过前后交换的方式反转指定区间的单词 顺序输出 list 中的单词  int main(){ string str = &#34;I am a developer&#34;; char *cArr = new char[str.size()&#43;1]{0}; strcpy_s(cArr, str.size()&#43;1, str.c_str());	// 注意：第二个参数，要拷贝的字符串的长度包括结尾的 &#39;\0&#39; 	char *w = nullptr, *rest = nullptr; list&lt;string&gt; wordList; w = strtok_s(cArr, &#34; &#34;, &amp;rest); while (w) { wordList.push_back(w); w = strtok_s(nullptr, &#34; &#34;, &amp;rest); } int startIndex = 0, endIndex = 0; cin &gt;&gt; startIndex &gt;&gt; endIndex; int len = wordList....</p>
   </section>
   <footer class="entry-footer"><span title='2022-09-22 16:52:07 +0800 CST'>September 22, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——List、strcpy_s、strtok_s 使用" href="https://874656645.github.io/posts/246-c&#43;&#43;-liststrcpy_sstrtok_s-%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——类模板双栈模拟队列
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-20 22:14:24 +0800 CST'>September 20, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——类模板双栈模拟队列" href="https://874656645.github.io/posts/245-c&#43;&#43;-%E7%B1%BB%E6%A8%A1%E6%9D%BF%E5%8F%8C%E6%A0%88%E6%A8%A1%E6%8B%9F%E9%98%9F%E5%88%97/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——类模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-18 18:07:48 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——类模板" href="https://874656645.github.io/posts/244-c&#43;&#43;-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——函数模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-18 17:28:56 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——函数模板" href="https://874656645.github.io/posts/243-c&#43;&#43;-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
@@ -228,7 +240,7 @@ string s; s = s &#43; &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 正确
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

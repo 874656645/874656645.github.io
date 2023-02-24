@@ -20,7 +20,7 @@ cmake -G &#34;Visual Studio 14 2015 Win64&#34; cmake -G &#34;Visual Studio 16 20
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -228,15 +228,15 @@ cmake -G &#34;Visual Studio 14 2015 Win64&#34; cmake -G &#34;Visual Studio 16 20
 </div>
 
   <div class="post-content"><h2 id="一cmakeliststxt-文件示例">一、CMakeLists.txt 文件示例<a hidden class="anchor" aria-hidden="true" href="#一cmakeliststxt-文件示例">#</a></h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cmake" data-lang="cmake"><span style="display:flex;"><span><span style="color:#75715e"># 设置CMake版本最低要求
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>project(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">1.0</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_executable(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">main.cpp</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><h2 id="二cmake-相关命令">二、CMake 相关命令<a hidden class="anchor" aria-hidden="true" href="#二cmake-相关命令">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmake" data-lang="cmake"><span style="color:#75715e"># 设置CMake版本最低要求
+</span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
+</span><span style="color:#75715e"></span>project(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">1.0</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
+</span><span style="color:#75715e"></span>add_executable(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">main.cpp</span>)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><h2 id="二cmake-相关命令">二、CMake 相关命令<a hidden class="anchor" aria-hidden="true" href="#二cmake-相关命令">#</a></h2>
 <ol>
 <li>
 <p><code>cmake ..</code> 含有 <code>CMakeLists.txt</code> 文件的路径，根据 <code>CMakeLists.txt</code> 文件构建对应的工程；</p>
@@ -249,16 +249,16 @@ cmake -G &#34;Visual Studio 14 2015 Win64&#34; cmake -G &#34;Visual Studio 16 20
 </li>
 <li>
 <p>指定编译工具为 MSVC（<a href="https://cmake.org/cmake/help/v3.15/manual/cmake-generators.7.html">不同的 CMake 版本，命令写法不同</a>）：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;Visual Studio 14 2015 Win64&#34;</span>
-</span></span><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;Visual Studio 16 2019&#34;</span> -A x64
-</span></span><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;Visual Studio 16 2019&#34;</span> -A Win32
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cmake -G <span style="color:#e6db74">&#34;Visual Studio 14 2015 Win64&#34;</span>
+cmake -G <span style="color:#e6db74">&#34;Visual Studio 16 2019&#34;</span> -A x64
+cmake -G <span style="color:#e6db74">&#34;Visual Studio 16 2019&#34;</span> -A Win32
+</code></pre></div></li>
 <li>
 <p>在 <code>Windows</code> 中使用 <code>MinGW</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;MinGW Makefiles&#34;</span> -DCMAKE_BUILD_TYPE<span style="color:#f92672">=</span>Release -DCMAKE_C_COMPILER<span style="color:#f92672">=</span>gcc -DCMAKE_CXX_COMPILER<span style="color:#f92672">=</span>g++ -DCMAKE_SYSROOT<span style="color:#f92672">=</span>D:/msys64/ucrt64/bin ..
-</span></span><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;MinGW Makefiles&#34;</span> -DCMAKE_BUILD_TYPE<span style="color:#f92672">=</span>Debug -DCMAKE_C_COMPILER<span style="color:#f92672">=</span>clang -DCMAKE_CXX_COMPILER<span style="color:#f92672">=</span>clang++ ..
-</span></span><span style="display:flex;"><span>cmake -G <span style="color:#e6db74">&#34;MinGW Makefiles&#34;</span> -DCMAKE_BUILD_TYPE<span style="color:#f92672">=</span>Debug ..
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cmake -G <span style="color:#e6db74">&#34;MinGW Makefiles&#34;</span> -DCMAKE_BUILD_TYPE<span style="color:#f92672">=</span>Release -DCMAKE_C_COMPILER<span style="color:#f92672">=</span>gcc -DCMAKE_CXX_COMPILER<span style="color:#f92672">=</span>g++ -DCMAKE_SYSROOT<span style="color:#f92672">=</span>D:/msys64/ucrt64/bin ..
+cmake -G <span style="color:#e6db74">&#34;MinGW Makefiles&#34;</span> -DCMAKE_BUILD_TYPE<span style="color:#f92672">=</span>Debug -DCMAKE_C_COMPILER<span style="color:#f92672">=</span>clang -DCMAKE_CXX_COMPILER<span style="color:#f92672">=</span>clang++ ..
+cmake -G <span style="color:#e6db74">&#34;MinGW Makefiles&#34;</span> -DCMAKE_BUILD_TYPE<span style="color:#f92672">=</span>Debug ..
+</code></pre></div></li>
 <li>
 <p><code>cmake --install . --prefix &quot;E:/VSCode-Projects/CMake/Install&quot;</code> 指定安装路径，在 Windows 中，如果不指定 <code>--prefix</code> 参数，64位默认会安装到 <code>C:\Program Files</code></p>
 </li>
@@ -308,7 +308,7 @@ cmake -G &#34;Visual Studio 14 2015 Win64&#34; cmake -G &#34;Visual Studio 16 20
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

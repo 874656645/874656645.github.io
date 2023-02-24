@@ -8,8 +8,8 @@
 <title>C&#43;&#43;17 变长参数模板 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="任意个数、任意类别的模板参数
-template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) {  std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
- C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) {  std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) {  std::cout &lt;&lt; value &lt;&lt; std::endl;  my_printf(args...); } int main() {  my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;);  return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename.">
+template&lt;typename... Ts&gt; class Magic; // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) { std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
+ C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) { std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) { std::cout &lt;&lt; value &lt;&lt; std::endl; my_printf(args...); } int main() { my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;); return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/176-c&#43;&#43;17-%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -18,7 +18,7 @@ template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&l
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -49,8 +49,8 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="C&#43;&#43;17 变长参数模板" />
 <meta property="og:description" content="任意个数、任意类别的模板参数
-template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) {  std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
- C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) {  std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) {  std::cout &lt;&lt; value &lt;&lt; std::endl;  my_printf(args...); } int main() {  my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;);  return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename." />
+template&lt;typename... Ts&gt; class Magic; // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) { std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
+ C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) { std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) { std::cout &lt;&lt; value &lt;&lt; std::endl; my_printf(args...); } int main() { my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;); return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/176-c&#43;&#43;17-%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-04-13T10:49:20&#43;08:00" />
@@ -62,8 +62,8 @@ template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&l
 
 <meta name="twitter:title" content="C&#43;&#43;17 变长参数模板"/>
 <meta name="twitter:description" content="任意个数、任意类别的模板参数
-template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) {  std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
- C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) {  std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) {  std::cout &lt;&lt; value &lt;&lt; std::endl;  my_printf(args...); } int main() {  my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;);  return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename."/>
+template&lt;typename... Ts&gt; class Magic; // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) { std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
+ C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) { std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) { std::cout &lt;&lt; value &lt;&lt; std::endl; my_printf(args...); } int main() { my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;); return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename."/>
 
 
 <script type="application/ld+json">
@@ -92,11 +92,11 @@ template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&l
   "@type": "BlogPosting",
   "headline": "C++17 变长参数模板",
   "name": "C\u002b\u002b17 变长参数模板",
-  "description": "任意个数、任意类别的模板参数\ntemplate\u0026lt;typename... Ts\u0026gt; class Magic;  // 计算参数的个数 template\u0026lt;typename... Ts\u0026gt; void magic(Ts... args) {  std::cout \u0026lt;\u0026lt; sizeof...(args) \u0026lt;\u0026lt; std::endl; }   递归解包：\n C++17 之前  template\u0026lt;typename T0\u0026gt; void my_printf(T0 value) {  std::cout \u0026lt;\u0026lt; value \u0026lt;\u0026lt; std::endl; } template\u0026lt;typename T, typename... Ts\u0026gt; void my_printf(T value, Ts... args) {  std::cout \u0026lt;\u0026lt; value \u0026lt;\u0026lt; std::endl;  my_printf(args...); } int main() {  my_printf(1, 2.2, \u0026#34;abc\u0026#34;, \u0026#39;a\u0026#39;);  return 0; }  C++17 变参模板展开：  template\u0026lt;typename T, typename.",
+  "description": "任意个数、任意类别的模板参数\ntemplate\u0026lt;typename... Ts\u0026gt; class Magic; // 计算参数的个数 template\u0026lt;typename... Ts\u0026gt; void magic(Ts... args) { std::cout \u0026lt;\u0026lt; sizeof...(args) \u0026lt;\u0026lt; std::endl; }   递归解包：\n C++17 之前  template\u0026lt;typename T0\u0026gt; void my_printf(T0 value) { std::cout \u0026lt;\u0026lt; value \u0026lt;\u0026lt; std::endl; } template\u0026lt;typename T, typename... Ts\u0026gt; void my_printf(T value, Ts... args) { std::cout \u0026lt;\u0026lt; value \u0026lt;\u0026lt; std::endl; my_printf(args...); } int main() { my_printf(1, 2.2, \u0026#34;abc\u0026#34;, \u0026#39;a\u0026#39;); return 0; }  C++17 变参模板展开：  template\u0026lt;typename T, typename.",
   "keywords": [
     "C++"
   ],
-  "articleBody": "  任意个数、任意类别的模板参数\ntemplatetypename... Ts class Magic;  // 计算参数的个数 templatetypename... Ts void magic(Ts... args) {  std::cout  sizeof...(args)  std::endl; }   递归解包：\n C++17 之前  templatetypename T0 void my_printf(T0 value) {  std::cout  value  std::endl; } templatetypename T, typename... Ts void my_printf(T value, Ts... args) {  std::cout  value  std::endl;  my_printf(args...); } int main() {  my_printf(1, 2.2, \"abc\", 'a');  return 0; }  C++17 变参模板展开：  templatetypename T, typename... Ts void my_printf(T t, Ts... ts) {  std::cout  t  std::endl;  if constexpr (sizeof...(ts)  0) my_printf(ts...); } int main() {  my_printf(1, 1.2f, 3.4, 'a'); }   C++17 之前初始化列表展开：\ntemplate typename... Ts void my_printf1(Ts... msg) {  // 利用数组初始化  using var = int[];  (void)var{0, (std::cout  msg  std::endl, 0)...}; } template typename... Ts void my_printf2(Ts... msg) {  // 利用 initializer_list  (void)initializer_listint{(std::cout  msg  std::endl, 0)...}; }   C++17 折叠表达式：\ntemplatetypename... Ts void my_printf(Ts ... ts) {  ((std::cout  ts  std::endl), ...); }   ",
+  "articleBody": "  任意个数、任意类别的模板参数\ntemplatetypename... Ts class Magic; // 计算参数的个数 templatetypename... Ts void magic(Ts... args) { std::cout  sizeof...(args)  std::endl; }   递归解包：\n C++17 之前  templatetypename T0 void my_printf(T0 value) { std::cout  value  std::endl; } templatetypename T, typename... Ts void my_printf(T value, Ts... args) { std::cout  value  std::endl; my_printf(args...); } int main() { my_printf(1, 2.2, \"abc\", 'a'); return 0; }  C++17 变参模板展开：  templatetypename T, typename... Ts void my_printf(T t, Ts... ts) { std::cout  t  std::endl; if constexpr (sizeof...(ts)  0) my_printf(ts...); } int main() { my_printf(1, 1.2f, 3.4, 'a'); }   C++17 之前初始化列表展开：\ntemplate typename... Ts void my_printf1(Ts... msg) { // 利用数组初始化  using var = int[]; (void)var{0, (std::cout  msg  std::endl, 0)...}; } template typename... Ts void my_printf2(Ts... msg) { // 利用 initializer_list  (void)initializer_listint{(std::cout  msg  std::endl, 0)...}; }   C++17 折叠表达式：\ntemplatetypename... Ts void my_printf(Ts ... ts) { ((std::cout  ts  std::endl), ...); }   ",
   "wordCount" : "149",
   "inLanguage": "en",
   "datePublished": "2022-04-13T10:49:20+08:00",
@@ -202,66 +202,66 @@ template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&l
   <div class="post-content"><ol>
 <li>
 <p>任意个数、任意类别的模板参数</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Magic</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// 计算参数的个数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> magic(Ts... args) {
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>...(args) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span> 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Magic</span>;
+
+<span style="color:#75715e">// 计算参数的个数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> magic(Ts... args) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>...(args) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+}
+</code></pre></div></li>
 <li>
 <p><strong>递归</strong>解包：</p>
 <ul>
 <li>C++17 之前</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T0<span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> my_printf(T0 value) {
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> value <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> my_printf(T value, Ts... args) {
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> value <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>    my_printf(args...);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    my_printf(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2.2</span>, <span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#e6db74">&#39;a&#39;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T0<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> my_printf(T0 value) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> value <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+}
+<span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> my_printf(T value, Ts... args) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> value <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    my_printf(args...);
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    my_printf(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2.2</span>, <span style="color:#e6db74">&#34;abc&#34;</span>, <span style="color:#e6db74">&#39;a&#39;</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><ul>
 <li>C++17 变参模板展开：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> my_printf(T t, Ts... ts) {
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> t <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">constexpr</span> (<span style="color:#66d9ef">sizeof</span>...(ts) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) my_printf(ts...);
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    my_printf(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1.2f</span>, <span style="color:#ae81ff">3.4</span>, <span style="color:#e6db74">&#39;a&#39;</span>);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T, <span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> my_printf(T t, Ts... ts) {
+    std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> t <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">constexpr</span> (<span style="color:#66d9ef">sizeof</span>...(ts) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) my_printf(ts...);
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    my_printf(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1.2f</span>, <span style="color:#ae81ff">3.4</span>, <span style="color:#e6db74">&#39;a&#39;</span>);
+}
+</code></pre></div></li>
 <li>
 <p>C++17 之前<strong>初始化列表展开</strong>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> my_printf1(Ts... msg) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 利用数组初始化
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">using</span> var <span style="color:#f92672">=</span> <span style="color:#66d9ef">int</span>[];
-</span></span><span style="display:flex;"><span>    (<span style="color:#66d9ef">void</span>)var{<span style="color:#ae81ff">0</span>, (std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> msg <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl, <span style="color:#ae81ff">0</span>)...};
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span> 
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> my_printf2(Ts... msg) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 利用 initializer_list
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    (<span style="color:#66d9ef">void</span>)initializer_list<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{(std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> msg <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl, <span style="color:#ae81ff">0</span>)...};
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span> 
+<span style="color:#66d9ef">void</span> my_printf1(Ts... msg) {
+    <span style="color:#75715e">// 利用数组初始化
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">using</span> var <span style="color:#f92672">=</span> <span style="color:#66d9ef">int</span>[];
+    (<span style="color:#66d9ef">void</span>)var{<span style="color:#ae81ff">0</span>, (std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> msg <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl, <span style="color:#ae81ff">0</span>)...};
+}
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span> 
+<span style="color:#66d9ef">void</span> my_printf2(Ts... msg) {
+    <span style="color:#75715e">// 利用 initializer_list
+</span><span style="color:#75715e"></span>    (<span style="color:#66d9ef">void</span>)initializer_list<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{(std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> msg <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl, <span style="color:#ae81ff">0</span>)...};
+}
+</code></pre></div></li>
 <li>
 <p>C++17 <a href="../177-c++17-%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><strong>折叠表达式</strong></a>：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> my_printf(Ts ... ts) {
-</span></span><span style="display:flex;"><span>    ((std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> ts <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl), ...);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">template</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span>... Ts<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> my_printf(Ts ... ts) {
+    ((std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> ts <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl), ...);
+}
+</code></pre></div></li>
 </ol>
 
 
@@ -290,7 +290,7 @@ template&lt;typename... Ts&gt; class Magic;  // 计算参数的个数 template&l
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

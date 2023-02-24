@@ -9,9 +9,9 @@
 <meta name="keywords" content="emcc, js, c&#43;&#43;" />
 <meta name="description" content="WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C&#43;&#43; 调用 JavaScript 的方法：
  使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C&#43;&#43; 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：
-int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;);  emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;);  return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
+int EMSCRIPTEN_KEEPALIVE runScript(){ emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;); emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;); return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
   EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。
-#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), {  alert(&#39;hello world!">
+#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), { alert(&#39;hello world!&#39;); throw &#39;all done&#39;; // exception }); EM_JS(void, take_args, (int x, float y), { console.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -20,7 +20,7 @@ int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -52,9 +52,9 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="Emscripten——C&#43;&#43; 调用 Js 回调函数" />
 <meta property="og:description" content="WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C&#43;&#43; 调用 JavaScript 的方法：
  使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C&#43;&#43; 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：
-int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;);  emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;);  return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
+int EMSCRIPTEN_KEEPALIVE runScript(){ emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;); emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;); return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
   EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。
-#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), {  alert(&#39;hello world!" />
+#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), { alert(&#39;hello world!&#39;); throw &#39;all done&#39;; // exception }); EM_JS(void, take_args, (int x, float y), { console." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-26T10:34:44&#43;08:00" />
@@ -67,9 +67,9 @@ int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&
 <meta name="twitter:title" content="Emscripten——C&#43;&#43; 调用 Js 回调函数"/>
 <meta name="twitter:description" content="WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C&#43;&#43; 调用 JavaScript 的方法：
  使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C&#43;&#43; 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：
-int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;);  emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;);  return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
+int EMSCRIPTEN_KEEPALIVE runScript(){ emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;); emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;); return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
   EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。
-#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), {  alert(&#39;hello world!"/>
+#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), { alert(&#39;hello world!&#39;); throw &#39;all done&#39;; // exception }); EM_JS(void, take_args, (int x, float y), { console."/>
 
 
 <script type="application/ld+json">
@@ -98,11 +98,11 @@ int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&
   "@type": "BlogPosting",
   "headline": "Emscripten——C++ 调用 Js 回调函数",
   "name": "Emscripten——C\u002b\u002b 调用 Js 回调函数",
-  "description": "WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C++ 调用 JavaScript 的方法：\n 使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C++ 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：\nint EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(\u0026#34;alert(\u0026#39;hi\u0026#39;)\u0026#34;);  emscripten_run_script(\u0026#34;console.log(\u0026#39;hello world!\u0026#39;)\u0026#34;);  return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。\n  EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。\n#include \u0026lt;emscripten.h\u0026gt; EM_JS(void, myAlert, (), {  alert(\u0026#39;hello world!",
+  "description": "WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C++ 调用 JavaScript 的方法：\n 使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C++ 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：\nint EMSCRIPTEN_KEEPALIVE runScript(){ emscripten_run_script(\u0026#34;alert(\u0026#39;hi\u0026#39;)\u0026#34;); emscripten_run_script(\u0026#34;console.log(\u0026#39;hello world!\u0026#39;)\u0026#34;); return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。\n  EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。\n#include \u0026lt;emscripten.h\u0026gt; EM_JS(void, myAlert, (), { alert(\u0026#39;hello world!\u0026#39;); throw \u0026#39;all done\u0026#39;; // exception }); EM_JS(void, take_args, (int x, float y), { console.",
   "keywords": [
     "emcc", "js", "c++"
   ],
-  "articleBody": "WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C++ 调用 JavaScript 的方法：\n 使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C++ 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：\nint EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(\"alert('hi')\");  emscripten_run_script(\"console.log('hello world!')\");  return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。\n  EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。\n#include  EM_JS(void, myAlert, (), {  alert('hello world!');  throw 'all done'; // exception });  EM_JS(void, take_args, (int x, float y), {  console.log('I received: ' + [x, y]); });  EM_JS(void, say_hello, (const char* cstr), {  console.log('Hello, ', UTF8ToString(cstr)); });  EM_JS(int, add_forty_two, (int n), {  return n + 42; });  EM_JS(int, get_memory_size, (), {  return HEAP8.length; });  int main() {  myAlert();  take_args(10, 20.4f);  say_hello(\"C++\");  int x = add_forty_two(100);  int y = get_memory_size();  cout  \"return value of add_forty_two is \"  x  endl;  cout  \"HEAP8 memory size is \"  y  endl;  return 0; }   EM_ASM 的使用方式与 inline assembly 代码类似\n#include  int main() {  EM_ASM(  alert('hello world!');  throw 'all done';  );   // pass params from C to javascript  EM_ASM({  console.log('I received: ' + $0);  }, 100);   // return value back  int x = EM_ASM_INT({  console.log('I received: ' + $0);  return $0 + 1;  }, 100);   printf(\"%d\\n\", x);   return 0; }   注意：\n 您需要使用适当的宏 EM_ASM_INT 或 EM_ASM_DOUBLE 来指定返回值是 int 还是 double; 输入参数使用 $0，$1 等; return 被用来提供从 JavaScript 发送回 c 的值; 使用 { 和 } 来封装代码，以便将代码与稍后传递的参数区分开来，后面是输入参数； 当使用 EM_ASM 宏时，请确保只使用单引号，双引号将导致编译器无法检测到的语法错误    js 回调 目标： 在 WebAssembly 端接收并解析 JSON 字符串后，做一些逻辑处理，然后返回修改后的 JSON 字符串\nC++ 代码：\n#include int jsonParse(const char *jsonStr) {  auto j = nlohmann::json::parse(jsonStr);  if (j.find(\"data\") != j.end())  {  j[\"data\"] = \"Hi there!\";  string res = j.dump();   EM_ASM({  if (typeof window.onRspHandler == 'function')  {  window.onRspHandler(UTF8ToString($0))  }  }, res.c_str());  }   return 0; } 使用 EM_ASM 调用外部 js 的 window.onRspHandler 回调方法。EM_ASM 大括号内可以书写任意的 JavaScript 代码，并且可以对其进行传参操作。在本例中，我们将 result 传递给 EM_ASM 方法，其 $0 为传参的等价替换，若还有更多参数则可以写为 $1、$2 等。\njs 代码：\n// js 回调函数 window.onRspHandler = (result) = {  console.log(result); // 在控制台输出: {\"data\":\"Hi there!\"} };  const jsonstr = JSON.stringify({data:\"Hello Json!\"}); const ptr = allocateUTF8(jsonstr); Module._jsonParse(ptr); _free(ptr); 参考：\n Interacting with code  ",
+  "articleBody": "WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C++ 调用 JavaScript 的方法：\n 使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C++ 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：\nint EMSCRIPTEN_KEEPALIVE runScript(){ emscripten_run_script(\"alert('hi')\"); emscripten_run_script(\"console.log('hello world!')\"); return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。\n  EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。\n#include  EM_JS(void, myAlert, (), { alert('hello world!'); throw 'all done'; // exception }); EM_JS(void, take_args, (int x, float y), { console.log('I received: ' + [x, y]); }); EM_JS(void, say_hello, (const char* cstr), { console.log('Hello, ', UTF8ToString(cstr)); }); EM_JS(int, add_forty_two, (int n), { return n + 42; }); EM_JS(int, get_memory_size, (), { return HEAP8.length; }); int main() { myAlert(); take_args(10, 20.4f); say_hello(\"C++\"); int x = add_forty_two(100); int y = get_memory_size(); cout  \"return value of add_forty_two is \"  x  endl; cout  \"HEAP8 memory size is \"  y  endl; return 0; }   EM_ASM 的使用方式与 inline assembly 代码类似\n#include  int main() { EM_ASM( alert('hello world!'); throw 'all done'; ); // pass params from C to javascript  EM_ASM({ console.log('I received: ' + $0); }, 100); // return value back  int x = EM_ASM_INT({ console.log('I received: ' + $0); return $0 + 1; }, 100); printf(\"%d\\n\", x); return 0; }   注意：\n 您需要使用适当的宏 EM_ASM_INT 或 EM_ASM_DOUBLE 来指定返回值是 int 还是 double; 输入参数使用 $0，$1 等; return 被用来提供从 JavaScript 发送回 c 的值; 使用 { 和 } 来封装代码，以便将代码与稍后传递的参数区分开来，后面是输入参数； 当使用 EM_ASM 宏时，请确保只使用单引号，双引号将导致编译器无法检测到的语法错误    js 回调 目标： 在 WebAssembly 端接收并解析 JSON 字符串后，做一些逻辑处理，然后返回修改后的 JSON 字符串\nC++ 代码：\n#include int jsonParse(const char *jsonStr) { auto j = nlohmann::json::parse(jsonStr); if (j.find(\"data\") != j.end()) { j[\"data\"] = \"Hi there!\"; string res = j.dump(); EM_ASM({ if (typeof window.onRspHandler == 'function') { window.onRspHandler(UTF8ToString($0)) } }, res.c_str()); } return 0; } 使用 EM_ASM 调用外部 js 的 window.onRspHandler 回调方法。EM_ASM 大括号内可以书写任意的 JavaScript 代码，并且可以对其进行传参操作。在本例中，我们将 result 传递给 EM_ASM 方法，其 $0 为传参的等价替换，若还有更多参数则可以写为 $1、$2 等。\njs 代码：\n// js 回调函数 window.onRspHandler = (result) = { console.log(result); // 在控制台输出: {\"data\":\"Hi there!\"} }; const jsonstr = JSON.stringify({data:\"Hello Json!\"}); const ptr = allocateUTF8(jsonstr); Module._jsonParse(ptr); _free(ptr); 参考：\n Interacting with code  ",
   "wordCount" : "329",
   "inLanguage": "en",
   "datePublished": "2022-03-26T10:34:44+08:00",
@@ -229,77 +229,77 @@ int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&
 <ol>
 <li>
 <p>最直接但稍微慢的方式是使用 <code>emscripten_run_script()</code>。这有效地使用 <code>eval()</code> 在 C/C++ 中运行指定的 JavaScript 代码。例如，调用浏览器的 <code>alert()</code> 函数，例如下面的代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> EMSCRIPTEN_KEEPALIVE <span style="color:#a6e22e">runScript</span>(){
-</span></span><span style="display:flex;"><span>    emscripten_run_script(<span style="color:#e6db74">&#34;alert(&#39;hi&#39;)&#34;</span>);
-</span></span><span style="display:flex;"><span>    emscripten_run_script(<span style="color:#e6db74">&#34;console.log(&#39;hello world!&#39;)&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> EMSCRIPTEN_KEEPALIVE <span style="color:#a6e22e">runScript</span>(){
+    emscripten_run_script(<span style="color:#e6db74">&#34;alert(&#39;hi&#39;)&#34;</span>);
+    emscripten_run_script(<span style="color:#e6db74">&#34;console.log(&#39;hello world!&#39;)&#34;</span>);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div></li>
 <li>
 <p>从 C 中调用 JavaScript 接口的一种更快的方法是编写 <code>inline JavaScript</code>，使用 <code>EM_JS()</code> 或 <code>EM_ASM()</code> (以及其它相关的宏)。</p>
 <ul>
 <li>
 <p><code>EM_JS</code> 是在 C 文件中声明一个 JavaScript 函数，使用方法参考<a href="https://emscripten.org/docs/api_reference/emscripten.h.html?highlight=em_js">这里</a>。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten.h&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>EM_JS(<span style="color:#66d9ef">void</span>, myAlert, (), {
-</span></span><span style="display:flex;"><span>    alert(<span style="color:#960050;background-color:#1e0010">&#39;</span>hello world<span style="color:#f92672">!</span><span style="color:#960050;background-color:#1e0010">&#39;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>all done<span style="color:#960050;background-color:#1e0010">&#39;</span>;       <span style="color:#75715e">// exception
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>EM_JS(<span style="color:#66d9ef">void</span>, take_args, (<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">float</span> y), {
-</span></span><span style="display:flex;"><span>    console.log(<span style="color:#960050;background-color:#1e0010">&#39;</span>I received: <span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">+</span> [x, y]);
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>EM_JS(<span style="color:#66d9ef">void</span>, say_hello, (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> cstr), {
-</span></span><span style="display:flex;"><span>    console.log(<span style="color:#960050;background-color:#1e0010">&#39;</span>Hello, <span style="color:#960050;background-color:#1e0010">&#39;</span>, UTF8ToString(cstr));
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>EM_JS(<span style="color:#66d9ef">int</span>, add_forty_two, (<span style="color:#66d9ef">int</span> n), {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">42</span>;
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>EM_JS(<span style="color:#66d9ef">int</span>, get_memory_size, (), {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> HEAP8.length;
-</span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    myAlert();
-</span></span><span style="display:flex;"><span>    take_args(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20.4f</span>);
-</span></span><span style="display:flex;"><span>    say_hello(<span style="color:#e6db74">&#34;C++&#34;</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> add_forty_two(<span style="color:#ae81ff">100</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> get_memory_size();
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;return value of add_forty_two is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;HEAP8 memory size is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+EM_JS(<span style="color:#66d9ef">void</span>, myAlert, (), {
+    alert(<span style="color:#960050;background-color:#1e0010">&#39;</span>hello world<span style="color:#f92672">!</span><span style="color:#960050;background-color:#1e0010">&#39;</span>);
+    <span style="color:#66d9ef">throw</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>all done<span style="color:#960050;background-color:#1e0010">&#39;</span>;       <span style="color:#75715e">// exception
+</span><span style="color:#75715e"></span>});
+
+EM_JS(<span style="color:#66d9ef">void</span>, take_args, (<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">float</span> y), {
+    console.log(<span style="color:#960050;background-color:#1e0010">&#39;</span>I received: <span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">+</span> [x, y]);
+});
+
+EM_JS(<span style="color:#66d9ef">void</span>, say_hello, (<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> cstr), {
+    console.log(<span style="color:#960050;background-color:#1e0010">&#39;</span>Hello, <span style="color:#960050;background-color:#1e0010">&#39;</span>, UTF8ToString(cstr));
+});
+
+EM_JS(<span style="color:#66d9ef">int</span>, add_forty_two, (<span style="color:#66d9ef">int</span> n), {
+    <span style="color:#66d9ef">return</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">42</span>;
+});
+
+EM_JS(<span style="color:#66d9ef">int</span>, get_memory_size, (), {
+    <span style="color:#66d9ef">return</span> HEAP8.length;
+});
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    myAlert();
+    take_args(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20.4f</span>);
+    say_hello(<span style="color:#e6db74">&#34;C++&#34;</span>);
+    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> add_forty_two(<span style="color:#ae81ff">100</span>);
+    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> get_memory_size();
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;return value of add_forty_two is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;HEAP8 memory size is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div></li>
 <li>
 <p><code>EM_ASM</code> 的使用方式与 <code>inline assembly</code> 代码类似</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten.h&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
-</span></span><span style="display:flex;"><span>    EM_ASM(
-</span></span><span style="display:flex;"><span>        alert(<span style="color:#960050;background-color:#1e0010">&#39;</span>hello world<span style="color:#f92672">!</span><span style="color:#960050;background-color:#1e0010">&#39;</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>all done<span style="color:#960050;background-color:#1e0010">&#39;</span>;
-</span></span><span style="display:flex;"><span>    );
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// pass params from C to javascript
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    EM_ASM({
-</span></span><span style="display:flex;"><span>        console.log(<span style="color:#960050;background-color:#1e0010">&#39;</span>I received: <span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>    }, <span style="color:#ae81ff">100</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// return value back
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> EM_ASM_INT({
-</span></span><span style="display:flex;"><span>        console.log(<span style="color:#960050;background-color:#1e0010">&#39;</span>I received: <span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    }, <span style="color:#ae81ff">100</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, x);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    EM_ASM(
+        alert(<span style="color:#960050;background-color:#1e0010">&#39;</span>hello world<span style="color:#f92672">!</span><span style="color:#960050;background-color:#1e0010">&#39;</span>);
+        <span style="color:#66d9ef">throw</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>all done<span style="color:#960050;background-color:#1e0010">&#39;</span>;
+    );
+
+    <span style="color:#75715e">// pass params from C to javascript
+</span><span style="color:#75715e"></span>    EM_ASM({
+        console.log(<span style="color:#960050;background-color:#1e0010">&#39;</span>I received: <span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">0</span>);
+    }, <span style="color:#ae81ff">100</span>);
+
+    <span style="color:#75715e">// return value back
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> EM_ASM_INT({
+        console.log(<span style="color:#960050;background-color:#1e0010">&#39;</span>I received: <span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">+</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">0</span>);
+        <span style="color:#66d9ef">return</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+    }, <span style="color:#ae81ff">100</span>);
+
+    printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, x);
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div></li>
 </ul>
 <p><strong>注意：</strong></p>
 <ul>
@@ -314,37 +314,37 @@ int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&
 <h2 id="js-回调">js 回调<a hidden class="anchor" aria-hidden="true" href="#js-回调">#</a></h2>
 <p><strong>目标：</strong> 在 WebAssembly 端接收并解析 JSON 字符串后，做一些逻辑处理，然后返回修改后的 JSON 字符串</p>
 <p>C++ 代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten.h&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">jsonParse</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>jsonStr)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> j <span style="color:#f92672">=</span> nlohmann<span style="color:#f92672">::</span>json<span style="color:#f92672">::</span>parse(jsonStr);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (j.find(<span style="color:#e6db74">&#34;data&#34;</span>) <span style="color:#f92672">!=</span> j.end())
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        j[<span style="color:#e6db74">&#34;data&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hi there!&#34;</span>;
-</span></span><span style="display:flex;"><span>        string res <span style="color:#f92672">=</span> j.dump();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        EM_ASM({
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (typeof window.onRspHandler <span style="color:#f92672">==</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>function<span style="color:#960050;background-color:#1e0010">&#39;</span>)
-</span></span><span style="display:flex;"><span>            {
-</span></span><span style="display:flex;"><span>                window.onRspHandler(UTF8ToString(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">0</span>))
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }, res.c_str());
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>使用 <code>EM_ASM</code> 调用外部 js 的 <code>window.onRspHandler</code> 回调方法。<code>EM_ASM</code> 大括号内可以书写任意的 JavaScript 代码，并且可以对其进行传参操作。在本例中，我们将 result 传递给 EM_ASM 方法，其 <code>$0</code> 为传参的等价替换，若还有更多参数则可以写为 <code>$1、$2</code> 等。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;emscripten.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">jsonParse</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>jsonStr)
+{
+    <span style="color:#66d9ef">auto</span> j <span style="color:#f92672">=</span> nlohmann<span style="color:#f92672">::</span>json<span style="color:#f92672">::</span>parse(jsonStr);
+    <span style="color:#66d9ef">if</span> (j.find(<span style="color:#e6db74">&#34;data&#34;</span>) <span style="color:#f92672">!=</span> j.end())
+    {
+        j[<span style="color:#e6db74">&#34;data&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Hi there!&#34;</span>;
+        string res <span style="color:#f92672">=</span> j.dump();
+
+        EM_ASM({
+            <span style="color:#66d9ef">if</span> (typeof window.onRspHandler <span style="color:#f92672">==</span> <span style="color:#960050;background-color:#1e0010">&#39;</span>function<span style="color:#960050;background-color:#1e0010">&#39;</span>)
+            {
+                window.onRspHandler(UTF8ToString(<span style="color:#960050;background-color:#1e0010">$</span><span style="color:#ae81ff">0</span>))
+            }
+        }, res.c_str());
+    }
+
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>使用 <code>EM_ASM</code> 调用外部 js 的 <code>window.onRspHandler</code> 回调方法。<code>EM_ASM</code> 大括号内可以书写任意的 JavaScript 代码，并且可以对其进行传参操作。在本例中，我们将 result 传递给 EM_ASM 方法，其 <code>$0</code> 为传参的等价替换，若还有更多参数则可以写为 <code>$1、$2</code> 等。</p>
 <p>js 代码：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#75715e">// js 回调函数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>window.<span style="color:#a6e22e">onRspHandler</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">result</span>) =&gt; {
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>); <span style="color:#75715e">// 在控制台输出: {&#34;data&#34;:&#34;Hi there!&#34;}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">jsonstr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({<span style="color:#a6e22e">data</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Hello Json!&#34;</span>});
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ptr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">allocateUTF8</span>(<span style="color:#a6e22e">jsonstr</span>);
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">_jsonParse</span>(<span style="color:#a6e22e">ptr</span>);
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">ptr</span>);
-</span></span></code></pre></div><p><strong>参考：</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// js 回调函数
+</span><span style="color:#75715e"></span>window.<span style="color:#a6e22e">onRspHandler</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">result</span>) =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">result</span>); <span style="color:#75715e">// 在控制台输出: {&#34;data&#34;:&#34;Hi there!&#34;}
+</span><span style="color:#75715e"></span>};
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">jsonstr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>({<span style="color:#a6e22e">data</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;Hello Json!&#34;</span>});
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ptr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">allocateUTF8</span>(<span style="color:#a6e22e">jsonstr</span>);
+<span style="color:#a6e22e">Module</span>.<span style="color:#a6e22e">_jsonParse</span>(<span style="color:#a6e22e">ptr</span>);
+<span style="color:#a6e22e">_free</span>(<span style="color:#a6e22e">ptr</span>);
+</code></pre></div><p><strong>参考：</strong></p>
 <ol>
 <li><a href="https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html?highlight=free#interacting-with-code-direct-function-calls">Interacting with code</a></li>
 </ol>
@@ -377,7 +377,7 @@ int EMSCRIPTEN_KEEPALIVE runScript(){  emscripten_run_script(&#34;alert(&#39;hi&
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

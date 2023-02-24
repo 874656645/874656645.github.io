@@ -19,7 +19,7 @@ mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/wi
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -205,51 +205,51 @@ mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/wi
   <div class="post-content"><ol start="0">
 <li>
 <p>安装相关依赖</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yum install -y perl-ExtUtils-Embed <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>readline-devel zlib-devel pam-devel <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>libxml2-devel libxslt-devel openldap-devel <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>python-devel openssl-devel cmakepcre-develnanowget  <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>gcc gcc-c++ ncurses-devel perl git
-</span></span></code></pre></div><p>`</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum install -y perl-ExtUtils-Embed <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>readline-devel zlib-devel pam-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>libxml2-devel libxslt-devel openldap-devel <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>python-devel openssl-devel cmakepcre-develnanowget  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>gcc gcc-c++ ncurses-devel perl git
+</code></pre></div><p>`</p>
 </li>
 <li>
 <p>编译命令：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mkdir ~/nginx_sources ~/nginx
-</span></span><span style="display:flex;"><span>cd ~/nginx_sources
-</span></span><span style="display:flex;"><span>git clone https://github.com/winshining/nginx-http-flv-module.git
-</span></span><span style="display:flex;"><span>curl -O -L http://hg.nginx.org/nginx/archive/stable-1.22.tar.gz     <span style="color:#75715e"># 其他版本 http://hg.nginx.org/nginx/archive/release-1.23.1.zip</span>
-</span></span><span style="display:flex;"><span>tar xzvf stable-1.22.tar.gz
-</span></span><span style="display:flex;"><span>cd nginx-stable-1.22
-</span></span><span style="display:flex;"><span>./auto/configure --prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/nginx&#34;</span> --sbin-path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/nginx&#34;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-select_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-poll_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-file-aio <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_ssl_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_realip_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_sub_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_flv_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--add-module<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../nginx-http-flv-module&#34;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_mp4_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_gzip_static_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_secure_link_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_stub_status_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-http_perl_module <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>--with-ld-opt<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-Wl,-E&#34;</span>
-</span></span><span style="display:flex;"><span>make
-</span></span><span style="display:flex;"><span>make install
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir ~/nginx_sources ~/nginx
+cd ~/nginx_sources
+git clone https://github.com/winshining/nginx-http-flv-module.git
+curl -O -L http://hg.nginx.org/nginx/archive/stable-1.22.tar.gz     <span style="color:#75715e"># 其他版本 http://hg.nginx.org/nginx/archive/release-1.23.1.zip</span>
+tar xzvf stable-1.22.tar.gz
+cd nginx-stable-1.22
+./auto/configure --prefix<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/nginx&#34;</span> --sbin-path<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/nginx&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-select_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-poll_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-file-aio <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-http_ssl_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-http_realip_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-http_sub_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-http_flv_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--add-module<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;../nginx-http-flv-module&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-http_mp4_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-http_gzip_static_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-http_secure_link_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-http_stub_status_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-http_perl_module <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--with-ld-opt<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;-Wl,-E&#34;</span>
+make
+make install
+</code></pre></div></li>
 <li>
 <p>注意事项：</p>
 <p>在目录: <code>/usr/local/lib64/perl5</code> 文件夹下也有需要的动态库和文件（ <code>nginx.so</code> 文件和 <code>nginx.pm</code> 文件）</p>
 </li>
 <li>
 <p>移植后运行，如果出现如下错误提示，说明缺少依赖的动态库 <strong><code>nginx.so</code></strong> 和 <strong><code>nginx.pm</code></strong> 文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Can&#39;t load &#39;./nginx&#39; for module nginx: ./nginx: cannot dynamically load executable at /usr/lib64/perl5/DynaLoader.pm line 190.
-</span></span><span style="display:flex;"><span>at -e line 0.
-</span></span><span style="display:flex;"><span>Compilation failed in require.
-</span></span><span style="display:flex;"><span>BEGIN failed--compilation aborted.
-</span></span><span style="display:flex;"><span>nginx: [alert] perl_parse() failed: 255
-</span></span></code></pre></div><p>`</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Can&#39;t load &#39;./nginx&#39; for module nginx: ./nginx: cannot dynamically load executable at /usr/lib64/perl5/DynaLoader.pm line 190.
+at -e line 0.
+Compilation failed in require.
+BEGIN failed--compilation aborted.
+nginx: [alert] perl_parse() failed: 255
+</code></pre></div><p>`</p>
 </li>
 </ol>
 <p>参考：</p>
@@ -284,7 +284,7 @@ mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/wi
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

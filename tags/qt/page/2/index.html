@@ -165,9 +165,9 @@ QProcess::startDetached(&#34;taskkill -t -f /IM iexplore.exe&#34;);
     </h2>
   </header>
   <section class="entry-content">
-    <p>QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
+    <p> QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
 以QString做为形参变量传递  qDebug(msg.toUtf8());
-QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) {  QFile file(logFileName);  file.open(QIODevice::WriteOnly | QIODevice::Append);  QTextStream text_stream(&amp;file);  text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;;  file.flush();  file.close(); }  QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;;  QDir dir(fileName);  if (!dir.exists())  {  // 注：不能创建两级文件夹  bool ismkdir = dir....</p>
+QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } </p>
   </section>
   <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt QString 中文乱码" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
@@ -181,7 +181,7 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

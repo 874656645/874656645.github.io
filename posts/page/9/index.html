@@ -160,6 +160,65 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Compile FFmpeg on CentOS
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>0. 编译的版本  ffmpeg-4.4 nasm-2.14.02 yasm-1.3.0 H.264 H.265 fdk-aac-2.0.0  1. Get the Dependencies   需要 superuser 或者 root 用户
+# yum install autoconf automake bzip2 bzip2-devel cmake freetype-devel gcc gcc-c&#43;&#43; git libtool make pkgconfig zlib-devel
+  新建 ffmpeg_sources 文件夹，把需要的源代码都放到这个文件夹中
+mkdir ~/ffmpeg_sources
+  新建 ffmpeg_build 文件夹，把构建的项目文件都放到这个文件夹中
+mkdir ~/ffmpeg_build
+  新建 bin 文件夹，把编译生成的文件都放到这个文件夹中
+mkdir ~/bin
+  2. Install NASM assembler 一些库使用的汇编程序。强烈建议这样做，否则构建可能会非常缓慢。
+cd ~/ffmpeg_sources curl -O -L https://www....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-15 14:55:49 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Compile FFmpeg on CentOS" href="https://874656645.github.io/posts/220-compile-ffmpeg-on-centos/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Unreal——使用蓝图获取 uasset 资源
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>方法一：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按路径获取资产（Get Asset by Path） 获取路径下的所有类型资产；
+  通过 获取完整名称（GetFullName） &#43; 包含（Contains） 筛选需要的资产；
+  通过 获取资产（GetAsset） 获取资产对象
+  资产对象的属性：
+  方法二：   可以通过 获取资产注册表（Get Asset Registry） &#43; 按对象路径获取资产（Get Asset by Object Path） 直接获取想要的资产对象；
+  再通过 获取资产（GetAsset） &#43; cast 将资产对象转换为需要的对象类型；
+  注意：资产路径的格式：
+ map : World&#39;/Game/Maps/NewWorld.NewWorld&#39; 蓝图类 : 要加 _C 例如 Blueprint&#39;/Game/Blueprints/MySpringArmPawn.MySpringArmPawn_C&#39;  参考：
+ UE4 | BP | 使用蓝图获取Uasset资源 关于UE4动态资源加载(蓝图类)  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-11 17:40:41 +0800 CST'>August 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——使用蓝图获取 uasset 资源" href="https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Unreal——蓝图接口
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  蓝图接口（Blueprint Interface） 是一个或多个函数的集合——只有名称，没有实现。
+  由于接口函数没有实现，作为设计人员，所能做的就是指定一系列类型化输入和输出。
+  蓝图接口也有一定的局限性：
+ 不能包含变量 不能编辑图表 不能添加组件    其他蓝图类 Actor 实现蓝图接口：
+在 类设置 中添加接口
+  参考：
+ 蓝图接口 【教程】UE4中接口的使用–蓝图篇（一）  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-10 11:27:36 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——蓝图接口" href="https://874656645.github.io/posts/218-unreal-%E8%93%9D%E5%9B%BE%E6%8E%A5%E5%8F%A3/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Unreal——Actor 蓝图类
     </h2>
   </header>
@@ -197,60 +256,6 @@ Pawn 是 Actor 的子类，作为游戏内的形象或人像（例如游戏中�
   <footer class="entry-footer"><span title='2022-08-10 10:02:42 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——通用基类（Actor、Pawn、Character等）" href="https://874656645.github.io/posts/216-unreal-%E9%80%9A%E7%94%A8%E5%9F%BA%E7%B1%BBactorpawncharacter%E7%AD%89/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——蓝图函数、事件和宏
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  函数调用会等待函数执行结果，事件调用只是触发但不会等待
-事件是异步执行，触发后，会在新的线程中执行，所以可以使用 Delay，函数和宏的调用是同步执行，是单线程的，所以在函数中不能使用 Timeline、Delay 和 Http 请求 等操作。
-  事件没有返回值，函数和宏可以有返回值
-  函数和事件可以跨蓝图类访问，而宏只可以在定义的蓝图类内访问（宏库可以跨蓝图类访问）
-  函数可以用局部变量，事件没有局部变量
-  因为函数执行顺序有保证，所以优先使用函数
-  函数可以被继承，而宏不可以被继承，子类无法使用父类的宏
-  没有返回值的函数，在被子类 Overide 时，会变成事件
-  参考：
- UE4蓝图之函数、事件、宏的区别 【UE4笔记】Event&amp;Function事件和函数的区别 [UE4]函数和事件的区别  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-09 19:38:55 +0800 CST'>August 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——蓝图函数、事件和宏" href="https://874656645.github.io/posts/215-unreal-%E8%93%9D%E5%9B%BE%E5%87%BD%E6%95%B0%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%AE%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——DefaultGraphicsRHI
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>注意： UE5 默认使用的是 DX12，有可能会在渲染方面出现奇怪的问题，需要特别注意。
-RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个平台的图形 API 包装成统一接口，供上层渲染来使用，让业务不用过多的关注 API 细节（实际还得关注RHI 细节）。从代码结构上来看，RHI 封装的比较贴合于现代的图形 API(vulkan, metal, DX12)，也支持 opengl/opengles。这个接口是广义上的概念，不仅指 C&#43;&#43; 的纯虚基类，也包括一些全局变量，全局函数等。
-参考：
- UE4/UE5的RHI(Vulkan为例)  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-04 14:57:18 +0800 CST'>August 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——DefaultGraphicsRHI" href="https://874656645.github.io/posts/214-unreal-defaultgraphicsrhi/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>判断点是否在多边形内部
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  射线法：不需考虑精度误差和多边形点给出的顺序。
-  转角法：要求多边形是有顺序的，按照多边形顶点逆时针顺序，从 P 点到顶点 Vi 分别做连线，其中 αi 为 Vi 和 Vi&#43;1 之间的夹角。其中 α 角度逆时针为正，顺时针为负，这样所有到顶点做连线之间夹角和为(环绕数)0，这点P在多边形外部，否则在内部。
-  射线法改进：针对有方向的多边形，通过判断射线穿过的边和点的位置（比如点在线的左侧为正，右侧为负），和为 0 则点在外部。
-  叉积法：适用凸多边形，如果一个点在多边形所有有向边的左边，那么这个点一定在多边形内部。
-  面积法：类似叉积法，适用凸多边形。如果点在多边形内部或者边上，那么点与多边形所有边组成的三角形面积和等于多边形面积。
-  参考：
- 详谈判断点在多边形内的七种方法（最全面） hdu1756 hrbust1429 为例  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-02 17:43:53 +0800 CST'>August 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 判断点是否在多边形内部" href="https://874656645.github.io/posts/213-%E5%88%A4%E6%96%AD%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E9%83%A8/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/posts/page/8/">« Prev Page</a>
@@ -261,7 +266,7 @@ RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个�
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

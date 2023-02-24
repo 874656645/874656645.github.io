@@ -145,6 +145,51 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——栈
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、栈  后进先出  是一种限制访问端口的线性表   主要操作  进栈（push） 出栈（pop）   应用  表达式求值（中缀表达式、后缀表达式） 消除递归 深度优先搜索（树、图）    二、栈的抽象数据类型 template &lt;class T&gt; class Stack { public: // 栈的运算集  void clear(); // 变为空栈  bool push(const T item); // item入栈，成功返回真，否则假  bool pop(T&amp; item); // 返回栈顶内容并弹出，成功返回真，否则假  bool top(T&amp; item); // 返回栈顶但不弹出，成功返回真，否则假  bool isEmpty(); // 若栈已空返回真  bool isFull(); // 若栈已满返回真 }; 三、思考题   若入栈顺序为 1,2,3,4 的话，则出栈的顺序可以有哪些?...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-31 22:04:28 +0800 CST'>March 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——栈" href="https://874656645.github.io/posts/160-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>WebIDL Binder 提供一种简单、轻量级的方法来绑定 C&#43;&#43; 代码。
+WebIDL Binder 使用 WebIDL 定义了一种 接口语言 来把 C&#43;&#43; 和 JavaScript 粘合在一起。
+该绑定器支持可以用 WebIDL 表达的 c&#43;&#43; 类型的子集。这个子集对于大多数情况来说已经足够了。
+接下来，通过一个简单的例子来看一下绑定的流程，使用 WebIDL Binder 进行绑定的过程分为三个阶段：
+ 创建一个 WebIDL 文件，用来描述 C&#43;&#43; 接口； 使用绑定器生成 C&#43;&#43; 和 JavaScript 的胶水代码； 使用 EMScripten 编译此胶水代码；  第一步：创建 WebIDL 接口文件 创建一个描述将要绑定的 C&#43;&#43; 类型的 WebIDL 接口文件。该文件将复制 C&#43;&#43; 头文件中的一些信息。比如，我们想绑定下面的 C&#43;&#43; 类（my_classes.h）：
+class Foo { public: int getVal(); void setVal(int v); private: int m_val{0}; }; class Bar { public: Bar(long val); ~Bar(); void doSomething(); private: int m_val; }; IDL 接口文件就可以写成下面的形式（my_classes....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-29 11:00:18 +0800 CST'>March 29, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——使用 WebIDL Binder 绑定 C&#43;&#43; 代码" href="https://874656645.github.io/posts/159-emscripten-%E4%BD%BF%E7%94%A8-webidl-binder-%E7%BB%91%E5%AE%9A-c&#43;&#43;-%E4%BB%A3%E7%A0%81/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Emscripten——C&#43;&#43; 调用 Js 回调函数
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C&#43;&#43; 调用 JavaScript 的方法：
+ 使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C&#43;&#43; 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：
+int EMSCRIPTEN_KEEPALIVE runScript(){ emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;); emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;); return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
+  EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。
+#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), { alert(&#39;hello world!&#39;); throw &#39;all done&#39;; // exception }); EM_JS(void, take_args, (int x, float y), { console....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-26 10:34:44 +0800 CST'>March 26, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 调用 Js 回调函数" href="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Emscripten——js 调用 C&#43;&#43; 接口
     </h2>
   </header>
@@ -152,10 +197,11 @@ if (!doNotTrack) {
     <p>Emscripten 提供了许多方法来在 JavaScript 和编译后的 C 或 c&#43;&#43; 之间连接和交互，我们先来看看 js 调用 WASM 的情况。
 一、使用 ccall 或 cwrap callall() 调用带有指定参数的编译过的 C 函数 并返回结果，而 cwrap() 封装了编译过的 C 函数并返回一个可以正常调用的 JavaScript 函数。因此，如果计划多次调用一个编译后的函数，cwrap() 会更有用。
 例如下面的 C main.cpp 文件：
-#include &lt;math.h&gt; extern &#34;C&#34; {   int int_sqrt(int x) {  return sqrt(x);  }  } 使用下面的命令进行编译：
+#include &lt;math.h&gt; extern &#34;C&#34; { int int_sqrt(int x) { return sqrt(x); } } 使用下面的命令进行编译：
 emcc main.cpp -o function.html -s EXPORTED_FUNCTIONS=_int_sqrt -s EXPORTED_RUNTIME_METHODS=ccall,cwrap
 EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的函数会被删掉），EXPORTED_RUNTIME_METHODS 告诉编译器我们需要用到的运行时方法 ccall 和 cwrap，否则这些方法也会被优化掉
-编译后就可以在 js 中通过 cwrap 使用了：...</p>
+编译后就可以在 js 中通过 cwrap 使用了：
+int_sqrt = Module.cwrap(&#39;int_sqrt&#39;, &#39;number&#39;, [&#39;number&#39;]) int_sqrt(12) // return 3 int_sqrt(28) // return 5 第一个参数是被 wrap 的 C 函数的名字（没有下划线），第二个参数是函数返回值在类型（如果没有返回值，使用 JavaScript 的 null 类型），第三个参数是一个参数数组（如果没有参数，可以省略）。...</p>
   </section>
   <footer class="entry-footer"><span title='2022-03-25 10:06:38 +0800 CST'>March 25, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——js 调用 C&#43;&#43; 接口" href="https://874656645.github.io/posts/157-emscripten-js-%E8%B0%83%E7%94%A8-c&#43;&#43;-%E6%8E%A5%E5%8F%A3/"></a>
@@ -168,68 +214,10 @@ EXPORTED_FUNCTIONS 告诉编译器哪些函数我们想要导出（不指定的�
   </header>
   <section class="entry-content">
     <p>使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
-# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget}  PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ....</p>
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ....</p>
   </section>
   <footer class="entry-footer"><span title='2022-03-24 17:45:14 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——使用 CMake 构建并用 Make 编译" href="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——C&#43;&#43; 函数导出
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>导出 C&#43;&#43; 函数到 js 有多种方式：
-  方式一：在编译的时候指定
-在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
-  方式二：修改 C&#43;&#43; 函数
-在 C&#43;&#43; 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
-#include &lt;emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) {  printf(&#34;我的函数已被调用\n&#34;);  return 0; }  #ifdef __cplusplus extern &#34;C&#34; { #endif   int EMSCRIPTEN_KEEPALIVE sayHello(){  cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl;  return 0;  }  int sayHello1()  {  Person p;  cout &lt;&lt; p....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-24 17:31:30 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 函数导出" href="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——Hello World
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>编译   新建 main.cpp 文件
-#include &lt;iostream&gt;using namespace std; int main(){  cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl;  return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
-执行命令 em&#43;&#43; main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
-  使用 node 测试
-测试命令 node a.out.js，会在控制台输出 cout 的内容
-  使用 html 页面 测试
-执行命令 em&#43;&#43; main.cpp -o hello.html，会在同级目录下生成三个文件：
- hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件
-在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-24 17:03:19 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——Hello World" href="https://874656645.github.io/posts/154-emscripten-hello-world/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——安装
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>启用 Linux 环境 这里使用的是 WSL（Windows Subsystem Linux）环境，环境配置参考这里
-Linux 安装 Emscripten Download and install
-  安装 python3
-sudo apt install python3
-  安装 git
-sudo apt install git
-  创建目录并 clone emsdk
-sudo git clone https://github.com/emscripten-core/emsdk.git
-  更新 emsdk 并激活
-cd emsdk  git pull  # Download and install the latest SDK tools. ./emsdk install latest  # Make the &#34;latest&#34; SDK &#34;active&#34; for the current user....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-24 16:41:50 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——安装" href="https://874656645.github.io/posts/153-emscripten-%E5%AE%89%E8%A3%85/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
@@ -241,7 +229,7 @@ cd emsdk  git pull  # Download and install the latest SDK tools. ./emsdk install
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

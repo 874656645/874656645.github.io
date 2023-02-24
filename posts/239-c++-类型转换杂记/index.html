@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>C&#43;&#43;——类型转换杂记 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() {  const int x = 0;  *(int*)&amp;x = 2;  cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3;  int y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10;  y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0   return 0; } struct T{  int x = 0;  const int y = 0;  int q() const{  *(int*)&amp;y = y &#43; 1;  return y;  } }; int main() {  T m;  const T n;  int x = m.">
+<meta name="description" content="const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() { const int x = 0; *(int*)&amp;x = 2; cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3; int y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10; y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  return 0; } struct T{ int x = 0; const int y = 0; int q() const{ *(int*)&amp;y = y &#43; 1; return y; } }; int main() { T m; const T n; int x = m.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/239-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%9D%82%E8%AE%B0/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -16,7 +16,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="C&#43;&#43;——类型转换杂记" />
-<meta property="og:description" content="const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() {  const int x = 0;  *(int*)&amp;x = 2;  cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3;  int y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10;  y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0   return 0; } struct T{  int x = 0;  const int y = 0;  int q() const{  *(int*)&amp;y = y &#43; 1;  return y;  } }; int main() {  T m;  const T n;  int x = m." />
+<meta property="og:description" content="const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() { const int x = 0; *(int*)&amp;x = 2; cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3; int y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10; y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  return 0; } struct T{ int x = 0; const int y = 0; int q() const{ *(int*)&amp;y = y &#43; 1; return y; } }; int main() { T m; const T n; int x = m." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/239-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%9D%82%E8%AE%B0/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-15T11:13:34&#43;08:00" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="C&#43;&#43;——类型转换杂记"/>
-<meta name="twitter:description" content="const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() {  const int x = 0;  *(int*)&amp;x = 2;  cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3;  int y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10;  y = x;  cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0   return 0; } struct T{  int x = 0;  const int y = 0;  int q() const{  *(int*)&amp;y = y &#43; 1;  return y;  } }; int main() {  T m;  const T n;  int x = m."/>
+<meta name="twitter:description" content="const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() { const int x = 0; *(int*)&amp;x = 2; cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3; int y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10; y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  return 0; } struct T{ int x = 0; const int y = 0; int q() const{ *(int*)&amp;y = y &#43; 1; return y; } }; int main() { T m; const T n; int x = m."/>
 
 
 <script type="application/ld+json">
@@ -86,11 +86,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "C++——类型转换杂记",
   "name": "C\u002b\u002b——类型转换杂记",
-  "description": "const_cast 和 static_cast int x = 65536; (short \u0026amp;)x = 65535; cout\u0026lt;\u0026lt;x; int main() {  const int x = 0;  *(int*)\u0026amp;x = 2;  cout \u0026lt;\u0026lt; \u0026#34;x = \u0026#34; \u0026lt;\u0026lt; x \u0026lt;\u0026lt; endl; // x = 0  (int\u0026amp;)x = 3;  int y = x;  cout \u0026lt;\u0026lt; \u0026#34;y = \u0026#34; \u0026lt;\u0026lt; y \u0026lt;\u0026lt; endl; // y = 0  const_cast\u0026lt;int\u0026amp;\u0026gt;(x) = 10;  y = x;  cout \u0026lt;\u0026lt; \u0026#34;y = \u0026#34; \u0026lt;\u0026lt; y \u0026lt;\u0026lt; endl; // y = 0   return 0; } struct T{  int x = 0;  const int y = 0;  int q() const{  *(int*)\u0026amp;y = y + 1;  return y;  } }; int main() {  T m;  const T n;  int x = m.",
+  "description": "const_cast 和 static_cast int x = 65536; (short \u0026amp;)x = 65535; cout\u0026lt;\u0026lt;x; int main() { const int x = 0; *(int*)\u0026amp;x = 2; cout \u0026lt;\u0026lt; \u0026#34;x = \u0026#34; \u0026lt;\u0026lt; x \u0026lt;\u0026lt; endl; // x = 0  (int\u0026amp;)x = 3; int y = x; cout \u0026lt;\u0026lt; \u0026#34;y = \u0026#34; \u0026lt;\u0026lt; y \u0026lt;\u0026lt; endl; // y = 0  const_cast\u0026lt;int\u0026amp;\u0026gt;(x) = 10; y = x; cout \u0026lt;\u0026lt; \u0026#34;y = \u0026#34; \u0026lt;\u0026lt; y \u0026lt;\u0026lt; endl; // y = 0  return 0; } struct T{ int x = 0; const int y = 0; int q() const{ *(int*)\u0026amp;y = y + 1; return y; } }; int main() { T m; const T n; int x = m.",
   "keywords": [
     "C++"
   ],
-  "articleBody": "const_cast 和 static_cast int x = 65536; (short \u0026)x = 65535; coutx; int main() {  const int x = 0;  *(int*)\u0026x = 2;  cout  \"x = \"  x  endl; // x = 0  (int\u0026)x = 3;  int y = x;  cout  \"y = \"  y  endl; // y = 0  const_castint\u0026(x) = 10;  y = x;  cout  \"y = \"  y  endl; // y = 0   return 0; } struct T{  int x = 0;  const int y = 0;  int q() const{  *(int*)\u0026y = y + 1;  return y;  } }; int main() {  T m;  const T n;  int x = m.q(); // 修改可写对象 m 的只读成员 m.y 的值  cout  m.y  endl; // 1  x = n.q(); // 修改只读对象 n 的只读成员 n.y 的值  cout  n.y  endl; // 1   return 0; } // x 为const全局变量，即全局只读变量，内存分配在受保护的区域 const int x = 0; // y 为可写易变全局变量 volatile int y = 0;  int main() {  // z 为const自动变量，内存分配在受保护的区域  const int z = 0;  // 正确：x有const但被忽略，因为现在只读x的值，转换目标为右值  int w = static_castint(x);  cout  \"w = \"  w  endl;  // 错误：转换结果为右值，不能对其赋值  // static_cast(x) = 0;  // 错误：不能去除x的const只读属性，转换目标为左值  // static_cast(x) = 0;  // 错误：转换结果为右值，不能对其赋值  // static_cast(w) = 0;  // 正确：转换为有址传统左值引用，可添加volatile  static_castvolatile int\u0026(w) = 1;  cout  \"w = \"  w  endl;  // 错误：无法去除const，将原类型const int*转换为int*，转换用作左值  // *static_cast(\u0026x) = 0;  // 错误：无法去除全局变量y的volatile属性  // static_cast(y) = 0;  int\u0026\u0026 p = 0;  static_castint\u0026(p) = 4; // 正确：无址引用左值变量p是有址的，转换为有址左值  cout  \"p = \"  p  endl;  int\u0026 q = w;  // static_cast(q) = 4; // 错误：可以转换，但转换后的类型无址，不能对其赋值  *const_castint*(\u0026z) = 3; // 正确：运行无异常，但并不能修改z的值  *(int*)\u0026z = 3; // 正确：运行无异常，但并不能修改z的值  const_castint\u0026(y) = 4; // 正确：可以去除全局变量y的volatile属性，::y=4   // 下面的语句会导致程序不执行后面的输出语句  // 全局const只读变量内存受到保护，下面的语句会引发异常 ： 写入位置 0x00007FF75487BDC0 时发生访问冲突。  // const_cast(x) = 3; // 正确：但运行时出现页面保护访问冲突，x仍然是0  // *const_cast(\u0026x) = 3; // 正确：但运行时出现页面保护访问冲突，x仍然是0  // *(int*)\u0026x = 3; // 正确：但运行时出现页面保护访问冲突，x仍然是0  cout  \"x = \"  x  endl;  cout  \"y = \"  y  endl;  cout  \"z = \"  z  endl;  return 0; } class Test{ public:  int number;  const int nn;  Test(int m):nn(m){  number = m;  }  void dec()const{  // number--; // error: decrement of member ‘Test::number’ in read-only object  const_castTest*(this)-number--;  // nn--; // error: decrement of member ‘Test::nn’ in read-only object  const_castint\u0026(nn)--;  } };  int main() { \tTest a(7); \ta.dec(); \tcout  a.nn  endl; // 6 \tcout  a.number  endl; // 6 \tconst int xx = 0; \tconst static int\u0026 yy = 0; // 临时匿名变量，注意与上一句的差别 \tvolatile int zz = 0; \tint ww = *const_castint*(\u0026xx) = 2; \tcout  xx  endl; // 0 \tcout  ww  endl; // 2 \ta.*const_castint Test::*(\u0026Test::nn) = 3; \tcout  a.nn  endl; // 3 \tconst_castvolatile int\u0026(yy) = 4; // 这条语句的执行与编译器有关 \t// VS 可以通过，其他的待测试 \t// 有些编译器可能这句不会执行，从而导致后面的语句也都不会被执行 \tww = yy; \tcout  yy  endl;\t// 4 \tcout  ww  endl;\t// 4 \tconst_castint\u0026(zz) = 7; \t//const_cast(zz) = 6; \tcout  zz  endl;\t// 7 \tww = const_castconst int\u0026(zz); \tww = *const_castconst int*(\u0026zz); \tcout  ww  endl;\t// 7 \tconst_castvolatile int\u0026(ww) = 5; \tcout  ww  endl;\t// 5  \treturn 0; } dynamic_cast  检查是否有虚函数  struct B{  virtual B\u0026 f(){ // 注意：* 或 \u0026 才能发生协变  cout  \"B\\n\";  return *this;  } }a, \u0026b = a; struct D : B{  D\u0026 f()override{  cout  \"D\\n\";  return *this;  } }c, \u0026d = c; int main() {  D* p1 = static_castD*(\u0026a);  p1-f(); // B  D* p2 = static_castD*(\u0026b);  p2-f(); // B  D* p3 = dynamic_castD*(\u0026a); // warning: dynamic_cast of ‘B a’ to ‘struct D*’ can never succeed  cout  p3  endl; // 0  // p3-f();  D* p4 = dynamic_castD*(\u0026b); // warning: dynamic_cast of ‘B a’ to ‘struct D*’ can never succeed  cout  p4  endl; // 0  // p4-f();  B* p5 = dynamic_castB*(\u0026c);  p5-f(); // D  B* p6 = dynamic_castB*(\u0026d);  p6-f(); // D  D\u0026 r1 = static_castD\u0026(a); // 语法正确，但不安全的自上向下转换  r1.f(); // B  D\u0026 r2 = static_castD\u0026(b); // 语法正确，但不安全的自上向下转换  r2.f(); // B  // B\u0026 r3 = dynamic_cast(c); // 语法正确，且为安全的自下向上赋值  B\u0026 r3 = c;  r3.f(); // D  B\u0026 r4 = d; // 语法正确，且为安全的自下向上赋值  r4.f(); // D  B\u0026\u0026 rr1 = static_castD\u0026\u0026(c); // 将子类向上转换为父类的无址引用  rr1.f(); // D  B\u0026\u0026 rr2 = dynamic_castD\u0026\u0026(c);  rr2.f(); // D  B\u0026\u0026 rr3 = static_castD\u0026\u0026(d);  rr3.f(); // D  B\u0026 r5 = dynamic_castD\u0026(rr3); // 将父类的无址引用转换为子类的有址引用，并赋值给父类的有址引用  r5.f(); // D   return 0; } reinterpret_cast ",
+  "articleBody": "const_cast 和 static_cast int x = 65536; (short \u0026)x = 65535; coutx; int main() { const int x = 0; *(int*)\u0026x = 2; cout  \"x = \"  x  endl; // x = 0  (int\u0026)x = 3; int y = x; cout  \"y = \"  y  endl; // y = 0  const_castint\u0026(x) = 10; y = x; cout  \"y = \"  y  endl; // y = 0  return 0; } struct T{ int x = 0; const int y = 0; int q() const{ *(int*)\u0026y = y + 1; return y; } }; int main() { T m; const T n; int x = m.q(); // 修改可写对象 m 的只读成员 m.y 的值  cout  m.y  endl; // 1  x = n.q(); // 修改只读对象 n 的只读成员 n.y 的值  cout  n.y  endl; // 1  return 0; } // x 为const全局变量，即全局只读变量，内存分配在受保护的区域 const int x = 0; // y 为可写易变全局变量 volatile int y = 0; int main() { // z 为const自动变量，内存分配在受保护的区域  const int z = 0; // 正确：x有const但被忽略，因为现在只读x的值，转换目标为右值  int w = static_castint(x); cout  \"w = \"  w  endl; // 错误：转换结果为右值，不能对其赋值  // static_cast(x) = 0;  // 错误：不能去除x的const只读属性，转换目标为左值  // static_cast(x) = 0;  // 错误：转换结果为右值，不能对其赋值  // static_cast(w) = 0;  // 正确：转换为有址传统左值引用，可添加volatile  static_castvolatile int\u0026(w) = 1; cout  \"w = \"  w  endl; // 错误：无法去除const，将原类型const int*转换为int*，转换用作左值  // *static_cast(\u0026x) = 0;  // 错误：无法去除全局变量y的volatile属性  // static_cast(y) = 0;  int\u0026\u0026 p = 0; static_castint\u0026(p) = 4; // 正确：无址引用左值变量p是有址的，转换为有址左值  cout  \"p = \"  p  endl; int\u0026 q = w; // static_cast(q) = 4; // 错误：可以转换，但转换后的类型无址，不能对其赋值  *const_castint*(\u0026z) = 3; // 正确：运行无异常，但并不能修改z的值  *(int*)\u0026z = 3; // 正确：运行无异常，但并不能修改z的值  const_castint\u0026(y) = 4; // 正确：可以去除全局变量y的volatile属性，::y=4  // 下面的语句会导致程序不执行后面的输出语句  // 全局const只读变量内存受到保护，下面的语句会引发异常 ： 写入位置 0x00007FF75487BDC0 时发生访问冲突。  // const_cast(x) = 3; // 正确：但运行时出现页面保护访问冲突，x仍然是0  // *const_cast(\u0026x) = 3; // 正确：但运行时出现页面保护访问冲突，x仍然是0  // *(int*)\u0026x = 3; // 正确：但运行时出现页面保护访问冲突，x仍然是0  cout  \"x = \"  x  endl; cout  \"y = \"  y  endl; cout  \"z = \"  z  endl; return 0; } class Test{ public: int number; const int nn; Test(int m):nn(m){ number = m; } void dec()const{ // number--; // error: decrement of member ‘Test::number’ in read-only object  const_castTest*(this)-number--; // nn--; // error: decrement of member ‘Test::nn’ in read-only object  const_castint\u0026(nn)--; } }; int main() { Test a(7); a.dec(); cout  a.nn  endl; // 6 \tcout  a.number  endl; // 6 \tconst int xx = 0; const static int\u0026 yy = 0; // 临时匿名变量，注意与上一句的差别 \tvolatile int zz = 0; int ww = *const_castint*(\u0026xx) = 2; cout  xx  endl; // 0 \tcout  ww  endl; // 2 \ta.*const_castint Test::*(\u0026Test::nn) = 3; cout  a.nn  endl; // 3 \tconst_castvolatile int\u0026(yy) = 4; // 这条语句的执行与编译器有关 \t// VS 可以通过，其他的待测试 \t// 有些编译器可能这句不会执行，从而导致后面的语句也都不会被执行 \tww = yy; cout  yy  endl;\t// 4 \tcout  ww  endl;\t// 4 \tconst_castint\u0026(zz) = 7; //const_cast(zz) = 6; \tcout  zz  endl;\t// 7 \tww = const_castconst int\u0026(zz); ww = *const_castconst int*(\u0026zz); cout  ww  endl;\t// 7 \tconst_castvolatile int\u0026(ww) = 5; cout  ww  endl;\t// 5  return 0; } dynamic_cast  检查是否有虚函数  struct B{ virtual B\u0026 f(){ // 注意：* 或 \u0026 才能发生协变  cout  \"B\\n\"; return *this; } }a, \u0026b = a; struct D : B{ D\u0026 f()override{ cout  \"D\\n\"; return *this; } }c, \u0026d = c; int main() { D* p1 = static_castD*(\u0026a); p1-f(); // B  D* p2 = static_castD*(\u0026b); p2-f(); // B  D* p3 = dynamic_castD*(\u0026a); // warning: dynamic_cast of ‘B a’ to ‘struct D*’ can never succeed  cout  p3  endl; // 0  // p3-f();  D* p4 = dynamic_castD*(\u0026b); // warning: dynamic_cast of ‘B a’ to ‘struct D*’ can never succeed  cout  p4  endl; // 0  // p4-f();  B* p5 = dynamic_castB*(\u0026c); p5-f(); // D  B* p6 = dynamic_castB*(\u0026d); p6-f(); // D  D\u0026 r1 = static_castD\u0026(a); // 语法正确，但不安全的自上向下转换  r1.f(); // B  D\u0026 r2 = static_castD\u0026(b); // 语法正确，但不安全的自上向下转换  r2.f(); // B  // B\u0026 r3 = dynamic_cast(c); // 语法正确，且为安全的自下向上赋值  B\u0026 r3 = c; r3.f(); // D  B\u0026 r4 = d; // 语法正确，且为安全的自下向上赋值  r4.f(); // D  B\u0026\u0026 rr1 = static_castD\u0026\u0026(c); // 将子类向上转换为父类的无址引用  rr1.f(); // D  B\u0026\u0026 rr2 = dynamic_castD\u0026\u0026(c); rr2.f(); // D  B\u0026\u0026 rr3 = static_castD\u0026\u0026(d); rr3.f(); // D  B\u0026 r5 = dynamic_castD\u0026(rr3); // 将父类的无址引用转换为子类的有址引用，并赋值给父类的有址引用  r5.f(); // D  return 0; } reinterpret_cast ",
   "wordCount" : "710",
   "inLanguage": "en",
   "datePublished": "2022-09-15T11:13:34+08:00",
@@ -217,139 +217,139 @@ if (!doNotTrack) {
 </p>
 <p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-const_cast.jpg" alt="C&#43;&#43;-const_cast"  />
 </p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">65536</span>;
-</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">short</span> <span style="color:#f92672">&amp;</span>)x <span style="color:#f92672">=</span> <span style="color:#ae81ff">65535</span>;
-</span></span><span style="display:flex;"><span>cout<span style="color:#f92672">&lt;&lt;</span>x;
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">*</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;        <span style="color:#75715e">// x = 0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    (<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>)x <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> x;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;y = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;        <span style="color:#75715e">// y = 0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(x) <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
-</span></span><span style="display:flex;"><span>    y <span style="color:#f92672">=</span> x;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;y = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;        <span style="color:#75715e">// y = 0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">T</span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">q</span>() <span style="color:#66d9ef">const</span>{
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">*</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>y <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> y;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    T m;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> T n;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> m.q();  <span style="color:#75715e">// 修改可写对象 m 的只读成员 m.y 的值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> m.y <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    x <span style="color:#f92672">=</span> n.q();      <span style="color:#75715e">// 修改只读对象 n 的只读成员 n.y 的值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> n.y <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">// x 为const全局变量，即全局只读变量，内存分配在受保护的区域
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;                            
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// y 为可写易变全局变量
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// z 为const自动变量，内存分配在受保护的区域
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> z <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 正确：x有const但被忽略，因为现在只读x的值，转换目标为右值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> w <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(x); 
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;w = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> w <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 错误：转换结果为右值，不能对其赋值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// static_cast&lt;int&gt;(x) = 0;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 错误：不能去除x的const只读属性，转换目标为左值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// static_cast&lt;int&amp;&gt;(x) = 0;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 错误：转换结果为右值，不能对其赋值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// static_cast&lt;int&gt;(w) = 0;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 正确：转换为有址传统左值引用，可添加volatile
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(w) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; 
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;w = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> w <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 错误：无法去除const，将原类型const int*转换为int*，转换用作左值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// *static_cast&lt;int*&gt;(&amp;x) = 0;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 错误：无法去除全局变量y的volatile属性
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// static_cast&lt;int&amp;&gt;(y) = 0;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&amp;</span> p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(p) <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;   <span style="color:#75715e">// 正确：无址引用左值变量p是有址的，转换为有址左值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;p = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> q <span style="color:#f92672">=</span> w;
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// static_cast&lt;int&amp;&amp;&gt;(q) = 4;  // 错误：可以转换，但转换后的类型无址，不能对其赋值 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">*</span><span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>z) <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;    <span style="color:#75715e">// 正确：运行无异常，但并不能修改z的值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">*</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>z <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;                  <span style="color:#75715e">// 正确：运行无异常，但并不能修改z的值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(y) <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;    <span style="color:#75715e">// 正确：可以去除全局变量y的volatile属性，::y=4
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 下面的语句会导致程序不执行后面的输出语句
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 全局const只读变量内存受到保护，下面的语句会引发异常 ： 写入位置 0x00007FF75487BDC0 时发生访问冲突。
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// const_cast&lt;int&amp;&gt;(x) = 3;    // 正确：但运行时出现页面保护访问冲突，x仍然是0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// *const_cast&lt;int*&gt;(&amp;x) = 3;    // 正确：但运行时出现页面保护访问冲突，x仍然是0 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// *(int*)&amp;x = 3;    // 正确：但运行时出现页面保护访问冲突，x仍然是0  
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;y = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;z = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> z <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-cast%e7%b3%bb%e5%88%97%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2%e7%a4%ba%e4%be%8b.jpg" alt="C&#43;&#43;-cast系列类型转换示例.jpg"  />
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">65536</span>;
+(<span style="color:#66d9ef">short</span> <span style="color:#f92672">&amp;</span>)x <span style="color:#f92672">=</span> <span style="color:#ae81ff">65535</span>;
+cout<span style="color:#f92672">&lt;&lt;</span>x;
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#f92672">*</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;        <span style="color:#75715e">// x = 0
+</span><span style="color:#75715e"></span>    (<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span>)x <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> x;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;y = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;        <span style="color:#75715e">// y = 0
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(x) <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+    y <span style="color:#f92672">=</span> x;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;y = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;        <span style="color:#75715e">// y = 0
+</span><span style="color:#75715e"></span>    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">T</span>{
+    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">q</span>() <span style="color:#66d9ef">const</span>{
+        <span style="color:#f92672">*</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>y <span style="color:#f92672">=</span> y <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+        <span style="color:#66d9ef">return</span> y;
+    }
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    T m;
+    <span style="color:#66d9ef">const</span> T n;
+    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> m.q();  <span style="color:#75715e">// 修改可写对象 m 的只读成员 m.y 的值
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> m.y <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 1
+</span><span style="color:#75715e"></span>    x <span style="color:#f92672">=</span> n.q();      <span style="color:#75715e">// 修改只读对象 n 的只读成员 n.y 的值
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> n.y <span style="color:#f92672">&lt;&lt;</span> endl;    <span style="color:#75715e">// 1
+</span><span style="color:#75715e"></span>    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// x 为const全局变量，即全局只读变量，内存分配在受保护的区域
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;                            
+<span style="color:#75715e">// y 为可写易变全局变量
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#75715e">// z 为const自动变量，内存分配在受保护的区域
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> z <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#75715e">// 正确：x有const但被忽略，因为现在只读x的值，转换目标为右值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> w <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(x); 
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;w = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> w <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#75715e">// 错误：转换结果为右值，不能对其赋值
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// static_cast&lt;int&gt;(x) = 0;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 错误：不能去除x的const只读属性，转换目标为左值
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// static_cast&lt;int&amp;&gt;(x) = 0;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 错误：转换结果为右值，不能对其赋值
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// static_cast&lt;int&gt;(w) = 0;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 正确：转换为有址传统左值引用，可添加volatile
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(w) <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; 
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;w = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> w <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#75715e">// 错误：无法去除const，将原类型const int*转换为int*，转换用作左值
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// *static_cast&lt;int*&gt;(&amp;x) = 0;
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 错误：无法去除全局变量y的volatile属性
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// static_cast&lt;int&amp;&gt;(y) = 0;
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&amp;</span> p <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(p) <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;   <span style="color:#75715e">// 正确：无址引用左值变量p是有址的，转换为有址左值
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;p = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> q <span style="color:#f92672">=</span> w;
+    <span style="color:#75715e">// static_cast&lt;int&amp;&amp;&gt;(q) = 4;  // 错误：可以转换，但转换后的类型无址，不能对其赋值 
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">*</span><span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>z) <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;    <span style="color:#75715e">// 正确：运行无异常，但并不能修改z的值
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">*</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>z <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;                  <span style="color:#75715e">// 正确：运行无异常，但并不能修改z的值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(y) <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;    <span style="color:#75715e">// 正确：可以去除全局变量y的volatile属性，::y=4
+</span><span style="color:#75715e"></span>    
+    <span style="color:#75715e">// 下面的语句会导致程序不执行后面的输出语句
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 全局const只读变量内存受到保护，下面的语句会引发异常 ： 写入位置 0x00007FF75487BDC0 时发生访问冲突。
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// const_cast&lt;int&amp;&gt;(x) = 3;    // 正确：但运行时出现页面保护访问冲突，x仍然是0
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// *const_cast&lt;int*&gt;(&amp;x) = 3;    // 正确：但运行时出现页面保护访问冲突，x仍然是0 
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// *(int*)&amp;x = 3;    // 正确：但运行时出现页面保护访问冲突，x仍然是0  
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;y = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;z = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> z <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-cast%e7%b3%bb%e5%88%97%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2%e7%a4%ba%e4%be%8b.jpg" alt="C&#43;&#43;-cast系列类型转换示例.jpg"  />
 
 <img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-cast%e7%b3%bb%e5%88%97%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2%e7%a4%ba%e4%be%8b1.jpg" alt="C&#43;&#43;-cast系列类型转换示例1.jpg"  />
 
 <img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-cast%e7%b3%bb%e5%88%97%e7%b1%bb%e5%9e%8b%e8%bd%ac%e6%8d%a2%e7%a4%ba%e4%be%8b%e9%94%99%e8%af%af.jpg" alt="C&#43;&#43;-cast系列类型转换示例错误.jpg"  />
 </p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> number;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> nn;
-</span></span><span style="display:flex;"><span>    Test(<span style="color:#66d9ef">int</span> m)<span style="color:#f92672">:</span>nn(m){
-</span></span><span style="display:flex;"><span>        number <span style="color:#f92672">=</span> m;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dec</span>()<span style="color:#66d9ef">const</span>{
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// number--;       // error: decrement of member ‘Test::number’ in read-only object
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span>Test<span style="color:#f92672">*&gt;</span>(<span style="color:#66d9ef">this</span>)<span style="color:#f92672">-&gt;</span>number<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// nn--;           // error: decrement of member ‘Test::nn’ in read-only object
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(nn)<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>	Test a(<span style="color:#ae81ff">7</span>);
-</span></span><span style="display:flex;"><span>	a.dec();
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> a.nn <span style="color:#f92672">&lt;&lt;</span> endl;                   <span style="color:#75715e">// 6
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	cout <span style="color:#f92672">&lt;&lt;</span> a.number <span style="color:#f92672">&lt;&lt;</span> endl;               <span style="color:#75715e">// 6
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> yy <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;               <span style="color:#75715e">// 临时匿名变量，注意与上一句的差别
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span> zz <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">int</span> ww <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>xx) <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> xx <span style="color:#f92672">&lt;&lt;</span> endl;                     <span style="color:#75715e">// 0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	cout <span style="color:#f92672">&lt;&lt;</span> ww <span style="color:#f92672">&lt;&lt;</span> endl;                     <span style="color:#75715e">// 2
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	a.<span style="color:#f92672">*</span><span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span> Test<span style="color:#f92672">::*&gt;</span>(<span style="color:#f92672">&amp;</span>Test<span style="color:#f92672">::</span>nn) <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> a.nn <span style="color:#f92672">&lt;&lt;</span> endl;                   <span style="color:#75715e">// 3
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(yy) <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;      <span style="color:#75715e">// 这条语句的执行与编译器有关
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	                                        <span style="color:#75715e">// VS 可以通过，其他的待测试
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	                                        <span style="color:#75715e">// 有些编译器可能这句不会执行，从而导致后面的语句也都不会被执行
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	ww <span style="color:#f92672">=</span> yy;
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> yy <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 4
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	cout <span style="color:#f92672">&lt;&lt;</span> ww <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 4
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(zz) <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">//const_cast&lt;const int&amp;&gt;(zz) = 6;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	cout <span style="color:#f92672">&lt;&lt;</span> zz <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 7
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	ww <span style="color:#f92672">=</span> <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(zz);
-</span></span><span style="display:flex;"><span>	ww <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>zz);
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> ww <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 7
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(ww) <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
-</span></span><span style="display:flex;"><span>	cout <span style="color:#f92672">&lt;&lt;</span> ww <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 5
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-const_cast%e7%a4%ba%e4%be%8b.jpg" alt="C&#43;&#43;-const_cast示例.jpg"  />
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> number;
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> nn;
+    Test(<span style="color:#66d9ef">int</span> m)<span style="color:#f92672">:</span>nn(m){
+        number <span style="color:#f92672">=</span> m;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dec</span>()<span style="color:#66d9ef">const</span>{
+        <span style="color:#75715e">// number--;       // error: decrement of member ‘Test::number’ in read-only object
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span>Test<span style="color:#f92672">*&gt;</span>(<span style="color:#66d9ef">this</span>)<span style="color:#f92672">-&gt;</span>number<span style="color:#f92672">--</span>;
+        <span style="color:#75715e">// nn--;           // error: decrement of member ‘Test::nn’ in read-only object
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(nn)<span style="color:#f92672">--</span>;
+    }
+};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+	Test a(<span style="color:#ae81ff">7</span>);
+	a.dec();
+	cout <span style="color:#f92672">&lt;&lt;</span> a.nn <span style="color:#f92672">&lt;&lt;</span> endl;                   <span style="color:#75715e">// 6
+</span><span style="color:#75715e"></span>	cout <span style="color:#f92672">&lt;&lt;</span> a.number <span style="color:#f92672">&lt;&lt;</span> endl;               <span style="color:#75715e">// 6
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> yy <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;               <span style="color:#75715e">// 临时匿名变量，注意与上一句的差别
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span> zz <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+	<span style="color:#66d9ef">int</span> ww <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>xx) <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+	cout <span style="color:#f92672">&lt;&lt;</span> xx <span style="color:#f92672">&lt;&lt;</span> endl;                     <span style="color:#75715e">// 0
+</span><span style="color:#75715e"></span>	cout <span style="color:#f92672">&lt;&lt;</span> ww <span style="color:#f92672">&lt;&lt;</span> endl;                     <span style="color:#75715e">// 2
+</span><span style="color:#75715e"></span>	a.<span style="color:#f92672">*</span><span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span> Test<span style="color:#f92672">::*&gt;</span>(<span style="color:#f92672">&amp;</span>Test<span style="color:#f92672">::</span>nn) <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+	cout <span style="color:#f92672">&lt;&lt;</span> a.nn <span style="color:#f92672">&lt;&lt;</span> endl;                   <span style="color:#75715e">// 3
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(yy) <span style="color:#f92672">=</span> <span style="color:#ae81ff">4</span>;      <span style="color:#75715e">// 这条语句的执行与编译器有关
+</span><span style="color:#75715e"></span>	                                        <span style="color:#75715e">// VS 可以通过，其他的待测试
+</span><span style="color:#75715e"></span>	                                        <span style="color:#75715e">// 有些编译器可能这句不会执行，从而导致后面的语句也都不会被执行
+</span><span style="color:#75715e"></span>	ww <span style="color:#f92672">=</span> yy;
+	cout <span style="color:#f92672">&lt;&lt;</span> yy <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 4
+</span><span style="color:#75715e"></span>	cout <span style="color:#f92672">&lt;&lt;</span> ww <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 4
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(zz) <span style="color:#f92672">=</span> <span style="color:#ae81ff">7</span>;
+	<span style="color:#75715e">//const_cast&lt;const int&amp;&gt;(zz) = 6;
+</span><span style="color:#75715e"></span>	cout <span style="color:#f92672">&lt;&lt;</span> zz <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 7
+</span><span style="color:#75715e"></span>	ww <span style="color:#f92672">=</span> <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(zz);
+	ww <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>zz);
+	cout <span style="color:#f92672">&lt;&lt;</span> ww <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 7
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(ww) <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+	cout <span style="color:#f92672">&lt;&lt;</span> ww <span style="color:#f92672">&lt;&lt;</span> endl;						<span style="color:#75715e">// 5
+</span><span style="color:#75715e"></span>
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-const_cast%e7%a4%ba%e4%be%8b.jpg" alt="C&#43;&#43;-const_cast示例.jpg"  />
 </p>
 <p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-const_cast%e7%a4%ba%e4%be%8b1.jpg" alt="C&#43;&#43;-const_cast示例1.jpg"  />
 </p>
@@ -359,55 +359,55 @@ if (!doNotTrack) {
 </ul>
 <p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-dynamic_cast.jpg" alt="C&#43;&#43;-dynamic_cast"  />
 </p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">B</span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> B<span style="color:#f92672">&amp;</span> f(){         <span style="color:#75715e">// 注意：* 或 &amp; 才能发生协变
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}a, <span style="color:#f92672">&amp;</span>b <span style="color:#f92672">=</span> a;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">D</span> <span style="color:#f92672">:</span> B{
-</span></span><span style="display:flex;"><span>    D<span style="color:#f92672">&amp;</span> f()<span style="color:#66d9ef">override</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}c, <span style="color:#f92672">&amp;</span>d <span style="color:#f92672">=</span> c;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    D<span style="color:#f92672">*</span> p1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>a);
-</span></span><span style="display:flex;"><span>    p1<span style="color:#f92672">-&gt;</span>f();                        <span style="color:#75715e">// B
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    D<span style="color:#f92672">*</span> p2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>b);
-</span></span><span style="display:flex;"><span>    p2<span style="color:#f92672">-&gt;</span>f();                        <span style="color:#75715e">// B
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    D<span style="color:#f92672">*</span> p3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>a);    <span style="color:#75715e">// warning: dynamic_cast of ‘B a’ to ‘struct D*’ can never succeed
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> p3 <span style="color:#f92672">&lt;&lt;</span> endl;              <span style="color:#75715e">// 0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// p3-&gt;f();                      
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    D<span style="color:#f92672">*</span> p4 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>b);    <span style="color:#75715e">// warning: dynamic_cast of ‘B a’ to ‘struct D*’ can never succeed
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> p4 <span style="color:#f92672">&lt;&lt;</span> endl;              <span style="color:#75715e">// 0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// p4-&gt;f();                     
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B<span style="color:#f92672">*</span> p5 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>B<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>c); 
-</span></span><span style="display:flex;"><span>    p5<span style="color:#f92672">-&gt;</span>f();                        <span style="color:#75715e">// D     
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B<span style="color:#f92672">*</span> p6 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>B<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>d); 
-</span></span><span style="display:flex;"><span>    p6<span style="color:#f92672">-&gt;</span>f();                        <span style="color:#75715e">// D
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    D<span style="color:#f92672">&amp;</span> r1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&gt;</span>(a);     <span style="color:#75715e">// 语法正确，但不安全的自上向下转换
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    r1.f();                         <span style="color:#75715e">// B
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    D<span style="color:#f92672">&amp;</span> r2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&gt;</span>(b);     <span style="color:#75715e">// 语法正确，但不安全的自上向下转换
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    r2.f();                         <span style="color:#75715e">// B
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// B&amp; r3 = dynamic_cast&lt;D&amp;&gt;(c);    // 语法正确，且为安全的自下向上赋值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;</span> r3 <span style="color:#f92672">=</span> c;
-</span></span><span style="display:flex;"><span>    r3.f();                         <span style="color:#75715e">// D
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;</span> r4 <span style="color:#f92672">=</span> d;    <span style="color:#75715e">// 语法正确，且为安全的自下向上赋值
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    r4.f();                         <span style="color:#75715e">// D
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;&amp;</span> rr1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&amp;&gt;</span>(c);      <span style="color:#75715e">// 将子类向上转换为父类的无址引用
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    rr1.f();                        <span style="color:#75715e">// D
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;&amp;</span> rr2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&amp;&gt;</span>(c);
-</span></span><span style="display:flex;"><span>    rr2.f();                        <span style="color:#75715e">// D
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;&amp;</span> rr3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&amp;&gt;</span>(d);
-</span></span><span style="display:flex;"><span>    rr3.f();                        <span style="color:#75715e">// D
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;</span> r5 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&gt;</span>(rr3);     <span style="color:#75715e">// 将父类的无址引用转换为子类的有址引用，并赋值给父类的有址引用
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    r5.f();                         <span style="color:#75715e">// D
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h2 id="reinterpret_cast">reinterpret_cast<a hidden class="anchor" aria-hidden="true" href="#reinterpret_cast">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">B</span>{
+    <span style="color:#66d9ef">virtual</span> B<span style="color:#f92672">&amp;</span> f(){         <span style="color:#75715e">// 注意：* 或 &amp; 才能发生协变
+</span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+    }
+}a, <span style="color:#f92672">&amp;</span>b <span style="color:#f92672">=</span> a;
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">D</span> <span style="color:#f92672">:</span> B{
+    D<span style="color:#f92672">&amp;</span> f()<span style="color:#66d9ef">override</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+    }
+}c, <span style="color:#f92672">&amp;</span>d <span style="color:#f92672">=</span> c;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    D<span style="color:#f92672">*</span> p1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>a);
+    p1<span style="color:#f92672">-&gt;</span>f();                        <span style="color:#75715e">// B
+</span><span style="color:#75715e"></span>    D<span style="color:#f92672">*</span> p2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>b);
+    p2<span style="color:#f92672">-&gt;</span>f();                        <span style="color:#75715e">// B
+</span><span style="color:#75715e"></span>    D<span style="color:#f92672">*</span> p3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>a);    <span style="color:#75715e">// warning: dynamic_cast of ‘B a’ to ‘struct D*’ can never succeed
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> p3 <span style="color:#f92672">&lt;&lt;</span> endl;              <span style="color:#75715e">// 0
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// p3-&gt;f();                      
+</span><span style="color:#75715e"></span>    D<span style="color:#f92672">*</span> p4 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>b);    <span style="color:#75715e">// warning: dynamic_cast of ‘B a’ to ‘struct D*’ can never succeed
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> p4 <span style="color:#f92672">&lt;&lt;</span> endl;              <span style="color:#75715e">// 0
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// p4-&gt;f();                     
+</span><span style="color:#75715e"></span>    B<span style="color:#f92672">*</span> p5 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>B<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>c); 
+    p5<span style="color:#f92672">-&gt;</span>f();                        <span style="color:#75715e">// D     
+</span><span style="color:#75715e"></span>    B<span style="color:#f92672">*</span> p6 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>B<span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>d); 
+    p6<span style="color:#f92672">-&gt;</span>f();                        <span style="color:#75715e">// D
+</span><span style="color:#75715e"></span>    D<span style="color:#f92672">&amp;</span> r1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&gt;</span>(a);     <span style="color:#75715e">// 语法正确，但不安全的自上向下转换
+</span><span style="color:#75715e"></span>    r1.f();                         <span style="color:#75715e">// B
+</span><span style="color:#75715e"></span>    D<span style="color:#f92672">&amp;</span> r2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&gt;</span>(b);     <span style="color:#75715e">// 语法正确，但不安全的自上向下转换
+</span><span style="color:#75715e"></span>    r2.f();                         <span style="color:#75715e">// B
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// B&amp; r3 = dynamic_cast&lt;D&amp;&gt;(c);    // 语法正确，且为安全的自下向上赋值
+</span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;</span> r3 <span style="color:#f92672">=</span> c;
+    r3.f();                         <span style="color:#75715e">// D
+</span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;</span> r4 <span style="color:#f92672">=</span> d;    <span style="color:#75715e">// 语法正确，且为安全的自下向上赋值
+</span><span style="color:#75715e"></span>    r4.f();                         <span style="color:#75715e">// D
+</span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;&amp;</span> rr1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&amp;&gt;</span>(c);      <span style="color:#75715e">// 将子类向上转换为父类的无址引用
+</span><span style="color:#75715e"></span>    rr1.f();                        <span style="color:#75715e">// D
+</span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;&amp;</span> rr2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&amp;&gt;</span>(c);
+    rr2.f();                        <span style="color:#75715e">// D
+</span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;&amp;</span> rr3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&amp;&gt;</span>(d);
+    rr3.f();                        <span style="color:#75715e">// D
+</span><span style="color:#75715e"></span>    B<span style="color:#f92672">&amp;</span> r5 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>D<span style="color:#f92672">&amp;&gt;</span>(rr3);     <span style="color:#75715e">// 将父类的无址引用转换为子类的有址引用，并赋值给父类的有址引用
+</span><span style="color:#75715e"></span>    r5.f();                         <span style="color:#75715e">// D
+</span><span style="color:#75715e"></span>    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h2 id="reinterpret_cast">reinterpret_cast<a hidden class="anchor" aria-hidden="true" href="#reinterpret_cast">#</a></h2>
 <p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-reinterpret_cast.jpg" alt="C&#43;&#43;-reinterpret_cast"  />
 </p>
 <p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-reinterpret_cast%e6%a1%88%e4%be%8b1.jpg" alt="C&#43;&#43;-reinterpret_cast案例1"  />
@@ -443,7 +443,7 @@ if (!doNotTrack) {
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

@@ -160,6 +160,46 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>map multimap 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
+ 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; m_name &lt;&lt; &#34; 工资：&#34; &lt;&lt; m_salary &lt;&lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&lt;Worker&gt; &amp;v){ string nameSeed = &#34;ABCDEFGHIJ&#34;; for(int i = 0; i &lt; nameSeed....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-20 20:18:25 +0800 CST'>January 20, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to map multimap 容器" href="https://874656645.github.io/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>set multiset 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>关联式容器 底层结构使用红黑树实现（二叉树-&gt;二叉搜索树-&gt;平衡二叉树-&gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
+class Person{ public: Person(string name, int age, int height){ this-&gt;m_name = name; this-&gt;m_age = age; this-&gt;m_height = height; } bool operator&lt;(const Person &amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&gt;m_age == p2.m_age){ return this-&gt;m_height &gt; p2.m_height; } return this-&gt;m_age &lt; p2.m_age; } void printPerson()const{ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set&lt;Person&gt; lp; lp....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-18 21:20:48 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to set multiset 容器" href="https://874656645.github.io/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>list 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>注意事项  双向循环链表 不支持随机访问 因为不支持随机访问，所以也不能用全局的排序算法 sort 一般不支持随机访问的容器会自己提供 sort 方法 自定义类型要指定排序规则  排序案例 案例描述：将 Person 自定义数据类型进行排序，Person 中属性有姓名、年龄、身高
+排序规则：按照年龄进行升序，如果年龄相同按照身高进行降序
+class Person{ public: Person(string name, int age, int height){ this-&gt;m_name = name; this-&gt;m_age = age; this-&gt;m_height = height; } bool operator&lt;(const Person &amp;p2){ if(this-&gt;m_age == p2.m_age){ return this-&gt;m_height &gt; p2.m_height; } return this-&gt;m_age &lt; p2.m_age; } void printPerson()const{ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { list&lt;Person&gt; lp; lp....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-18 20:26:45 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to list 容器" href="https://874656645.github.io/posts/86-list-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>queue 队列容器适配器
     </h2>
   </header>
@@ -185,44 +225,6 @@ empty()</p>
   <footer class="entry-footer"><span title='2022-01-16 22:17:43 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to stack 栈容器适配器" href="https://874656645.github.io/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>评委打分案例
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
-分析：
- 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public:  Player(string name){  m_name = name;  m_avgScore = 0;  }  void setAvgScore(int v){  m_avgScore = v;  }  void printInfo()const{  cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl;  } private:  string m_name;  int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){  string nameSeed = &#34;ABCDE&#34;;  for(int i = 0; i &lt; nameSeed....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>生成随机数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>#include &lt;ctime&gt;using namespace std;  int main() {  srand((unsigned int)time(NULL));  cout &lt;&lt; rand() % 40 &lt;&lt; endl;  return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>deque 容器
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/posts/page/34/">« Prev Page</a>
@@ -233,7 +235,7 @@ empty()</p>
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

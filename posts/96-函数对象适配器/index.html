@@ -11,7 +11,7 @@
   仿函数适配器 not1、not2
   仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了
   仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器
-  class MyPrint : public binary_function&lt;int, int, void&gt;{ public:  void operator()(int v, int val) const{  cout &lt;&lt; &#34;v: &#34; &lt;&lt; v &lt;&lt; &#34;, val: &#34; &lt;&lt; val &lt;&lt; &#34;, v &#43; val: &#34; &lt;&lt; v &#43; val &lt;&lt; endl;  } }; void myPrint(int v, int val){  cout &lt;&lt; v &#43; val &lt;&lt; &#34; &#34;; } class MySort: public binary_function&lt;int, int, bool&gt;{ public:  bool operator() (int lhs, int rhs)const{  return lhs &gt; rhs;  } }; class MyGreater: public unary_function&lt;int, bool&gt;{ public:  bool operator()(int v)const{  return v &gt; 50;  } };  void printVec(const vector&lt;int&gt; &amp;v){  for(const auto &amp;p : v){  cout &lt;&lt; p &lt;&lt; &#34; &#34;;  }  cout &lt;&lt; endl; } class Person{ public:  Person(int id, int age):id(id), age(age){}  void show(){  cout &lt;&lt; &#34;id: &#34; &lt;&lt; id &lt;&lt; &#34;, age: &#34; &lt;&lt; age &lt;&lt; endl;  }  int id;  int age; }; int main(){   vector&lt;int&gt; v;  for(int i = 0; i &lt; 10; &#43;&#43;i){  v.">
+  class MyPrint : public binary_function&lt;int, int, void&gt;{ public: void operator()(int v, int val) const{ cout &lt;&lt; &#34;v: &#34; &lt;&lt; v &lt;&lt; &#34;, val: &#34; &lt;&lt; val &lt;&lt; &#34;, v &#43; val: &#34; &lt;&lt; v &#43; val &lt;&lt; endl; } }; void myPrint(int v, int val){ cout &lt;&lt; v &#43; val &lt;&lt; &#34; &#34;; } class MySort: public binary_function&lt;int, int, bool&gt;{ public: bool operator() (int lhs, int rhs)const{ return lhs &gt; rhs; } }; class MyGreater: public unary_function&lt;int, bool&gt;{ public: bool operator()(int v)const{ return v &gt; 50; } }; void printVec(const vector&lt;int&gt; &amp;v){ for(const auto &amp;p : v){ cout &lt;&lt; p &lt;&lt; &#34; &#34;; } cout &lt;&lt; endl; } class Person{ public: Person(int id, int age):id(id), age(age){} void show(){ cout &lt;&lt; &#34;id: &#34; &lt;&lt; id &lt;&lt; &#34;, age: &#34; &lt;&lt; age &lt;&lt; endl; } int id; int age; }; int main(){ vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -20,7 +20,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -54,7 +54,7 @@ if (!doNotTrack) {
   仿函数适配器 not1、not2
   仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了
   仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器
-  class MyPrint : public binary_function&lt;int, int, void&gt;{ public:  void operator()(int v, int val) const{  cout &lt;&lt; &#34;v: &#34; &lt;&lt; v &lt;&lt; &#34;, val: &#34; &lt;&lt; val &lt;&lt; &#34;, v &#43; val: &#34; &lt;&lt; v &#43; val &lt;&lt; endl;  } }; void myPrint(int v, int val){  cout &lt;&lt; v &#43; val &lt;&lt; &#34; &#34;; } class MySort: public binary_function&lt;int, int, bool&gt;{ public:  bool operator() (int lhs, int rhs)const{  return lhs &gt; rhs;  } }; class MyGreater: public unary_function&lt;int, bool&gt;{ public:  bool operator()(int v)const{  return v &gt; 50;  } };  void printVec(const vector&lt;int&gt; &amp;v){  for(const auto &amp;p : v){  cout &lt;&lt; p &lt;&lt; &#34; &#34;;  }  cout &lt;&lt; endl; } class Person{ public:  Person(int id, int age):id(id), age(age){}  void show(){  cout &lt;&lt; &#34;id: &#34; &lt;&lt; id &lt;&lt; &#34;, age: &#34; &lt;&lt; age &lt;&lt; endl;  }  int id;  int age; }; int main(){   vector&lt;int&gt; v;  for(int i = 0; i &lt; 10; &#43;&#43;i){  v." />
+  class MyPrint : public binary_function&lt;int, int, void&gt;{ public: void operator()(int v, int val) const{ cout &lt;&lt; &#34;v: &#34; &lt;&lt; v &lt;&lt; &#34;, val: &#34; &lt;&lt; val &lt;&lt; &#34;, v &#43; val: &#34; &lt;&lt; v &#43; val &lt;&lt; endl; } }; void myPrint(int v, int val){ cout &lt;&lt; v &#43; val &lt;&lt; &#34; &#34;; } class MySort: public binary_function&lt;int, int, bool&gt;{ public: bool operator() (int lhs, int rhs)const{ return lhs &gt; rhs; } }; class MyGreater: public unary_function&lt;int, bool&gt;{ public: bool operator()(int v)const{ return v &gt; 50; } }; void printVec(const vector&lt;int&gt; &amp;v){ for(const auto &amp;p : v){ cout &lt;&lt; p &lt;&lt; &#34; &#34;; } cout &lt;&lt; endl; } class Person{ public: Person(int id, int age):id(id), age(age){} void show(){ cout &lt;&lt; &#34;id: &#34; &lt;&lt; id &lt;&lt; &#34;, age: &#34; &lt;&lt; age &lt;&lt; endl; } int id; int age; }; int main(){ vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/96-%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E9%80%82%E9%85%8D%E5%99%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-27T21:55:47&#43;08:00" />
@@ -69,7 +69,7 @@ if (!doNotTrack) {
   仿函数适配器 not1、not2
   仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了
   仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器
-  class MyPrint : public binary_function&lt;int, int, void&gt;{ public:  void operator()(int v, int val) const{  cout &lt;&lt; &#34;v: &#34; &lt;&lt; v &lt;&lt; &#34;, val: &#34; &lt;&lt; val &lt;&lt; &#34;, v &#43; val: &#34; &lt;&lt; v &#43; val &lt;&lt; endl;  } }; void myPrint(int v, int val){  cout &lt;&lt; v &#43; val &lt;&lt; &#34; &#34;; } class MySort: public binary_function&lt;int, int, bool&gt;{ public:  bool operator() (int lhs, int rhs)const{  return lhs &gt; rhs;  } }; class MyGreater: public unary_function&lt;int, bool&gt;{ public:  bool operator()(int v)const{  return v &gt; 50;  } };  void printVec(const vector&lt;int&gt; &amp;v){  for(const auto &amp;p : v){  cout &lt;&lt; p &lt;&lt; &#34; &#34;;  }  cout &lt;&lt; endl; } class Person{ public:  Person(int id, int age):id(id), age(age){}  void show(){  cout &lt;&lt; &#34;id: &#34; &lt;&lt; id &lt;&lt; &#34;, age: &#34; &lt;&lt; age &lt;&lt; endl;  }  int id;  int age; }; int main(){   vector&lt;int&gt; v;  for(int i = 0; i &lt; 10; &#43;&#43;i){  v."/>
+  class MyPrint : public binary_function&lt;int, int, void&gt;{ public: void operator()(int v, int val) const{ cout &lt;&lt; &#34;v: &#34; &lt;&lt; v &lt;&lt; &#34;, val: &#34; &lt;&lt; val &lt;&lt; &#34;, v &#43; val: &#34; &lt;&lt; v &#43; val &lt;&lt; endl; } }; void myPrint(int v, int val){ cout &lt;&lt; v &#43; val &lt;&lt; &#34; &#34;; } class MySort: public binary_function&lt;int, int, bool&gt;{ public: bool operator() (int lhs, int rhs)const{ return lhs &gt; rhs; } }; class MyGreater: public unary_function&lt;int, bool&gt;{ public: bool operator()(int v)const{ return v &gt; 50; } }; void printVec(const vector&lt;int&gt; &amp;v){ for(const auto &amp;p : v){ cout &lt;&lt; p &lt;&lt; &#34; &#34;; } cout &lt;&lt; endl; } class Person{ public: Person(int id, int age):id(id), age(age){} void show(){ cout &lt;&lt; &#34;id: &#34; &lt;&lt; id &lt;&lt; &#34;, age: &#34; &lt;&lt; age &lt;&lt; endl; } int id; int age; }; int main(){ vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v."/>
 
 
 <script type="application/ld+json">
@@ -98,11 +98,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "函数对象适配器",
   "name": "函数对象适配器",
-  "description": "仿函数适配器 bind1st、bind2nd 将二元仿函数转为一元仿函数\n  仿函数适配器 not1、not2\n  仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了\n  仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器\n  class MyPrint : public binary_function\u0026lt;int, int, void\u0026gt;{ public:  void operator()(int v, int val) const{  cout \u0026lt;\u0026lt; \u0026#34;v: \u0026#34; \u0026lt;\u0026lt; v \u0026lt;\u0026lt; \u0026#34;, val: \u0026#34; \u0026lt;\u0026lt; val \u0026lt;\u0026lt; \u0026#34;, v + val: \u0026#34; \u0026lt;\u0026lt; v + val \u0026lt;\u0026lt; endl;  } }; void myPrint(int v, int val){  cout \u0026lt;\u0026lt; v + val \u0026lt;\u0026lt; \u0026#34; \u0026#34;; } class MySort: public binary_function\u0026lt;int, int, bool\u0026gt;{ public:  bool operator() (int lhs, int rhs)const{  return lhs \u0026gt; rhs;  } }; class MyGreater: public unary_function\u0026lt;int, bool\u0026gt;{ public:  bool operator()(int v)const{  return v \u0026gt; 50;  } };  void printVec(const vector\u0026lt;int\u0026gt; \u0026amp;v){  for(const auto \u0026amp;p : v){  cout \u0026lt;\u0026lt; p \u0026lt;\u0026lt; \u0026#34; \u0026#34;;  }  cout \u0026lt;\u0026lt; endl; } class Person{ public:  Person(int id, int age):id(id), age(age){}  void show(){  cout \u0026lt;\u0026lt; \u0026#34;id: \u0026#34; \u0026lt;\u0026lt; id \u0026lt;\u0026lt; \u0026#34;, age: \u0026#34; \u0026lt;\u0026lt; age \u0026lt;\u0026lt; endl;  }  int id;  int age; }; int main(){   vector\u0026lt;int\u0026gt; v;  for(int i = 0; i \u0026lt; 10; ++i){  v.",
+  "description": "仿函数适配器 bind1st、bind2nd 将二元仿函数转为一元仿函数\n  仿函数适配器 not1、not2\n  仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了\n  仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器\n  class MyPrint : public binary_function\u0026lt;int, int, void\u0026gt;{ public: void operator()(int v, int val) const{ cout \u0026lt;\u0026lt; \u0026#34;v: \u0026#34; \u0026lt;\u0026lt; v \u0026lt;\u0026lt; \u0026#34;, val: \u0026#34; \u0026lt;\u0026lt; val \u0026lt;\u0026lt; \u0026#34;, v + val: \u0026#34; \u0026lt;\u0026lt; v + val \u0026lt;\u0026lt; endl; } }; void myPrint(int v, int val){ cout \u0026lt;\u0026lt; v + val \u0026lt;\u0026lt; \u0026#34; \u0026#34;; } class MySort: public binary_function\u0026lt;int, int, bool\u0026gt;{ public: bool operator() (int lhs, int rhs)const{ return lhs \u0026gt; rhs; } }; class MyGreater: public unary_function\u0026lt;int, bool\u0026gt;{ public: bool operator()(int v)const{ return v \u0026gt; 50; } }; void printVec(const vector\u0026lt;int\u0026gt; \u0026amp;v){ for(const auto \u0026amp;p : v){ cout \u0026lt;\u0026lt; p \u0026lt;\u0026lt; \u0026#34; \u0026#34;; } cout \u0026lt;\u0026lt; endl; } class Person{ public: Person(int id, int age):id(id), age(age){} void show(){ cout \u0026lt;\u0026lt; \u0026#34;id: \u0026#34; \u0026lt;\u0026lt; id \u0026lt;\u0026lt; \u0026#34;, age: \u0026#34; \u0026lt;\u0026lt; age \u0026lt;\u0026lt; endl; } int id; int age; }; int main(){ vector\u0026lt;int\u0026gt; v; for(int i = 0; i \u0026lt; 10; ++i){ v.",
   "keywords": [
     "C++", "STL"
   ],
-  "articleBody": "  仿函数适配器 bind1st、bind2nd 将二元仿函数转为一元仿函数\n  仿函数适配器 not1、not2\n  仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了\n  仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器\n  class MyPrint : public binary_functionint, int, void{ public:  void operator()(int v, int val) const{  cout  \"v: \"  v  \", val: \"  val  \", v + val: \"  v + val  endl;  } }; void myPrint(int v, int val){  cout  v + val  \" \"; } class MySort: public binary_functionint, int, bool{ public:  bool operator() (int lhs, int rhs)const{  return lhs  rhs;  } }; class MyGreater: public unary_functionint, bool{ public:  bool operator()(int v)const{  return v  50;  } };  void printVec(const vectorint \u0026v){  for(const auto \u0026p : v){  cout  p  \" \";  }  cout  endl; } class Person{ public:  Person(int id, int age):id(id), age(age){}  void show(){  cout  \"id: \"  id  \", age: \"  age  endl;  }  int id;  int age; }; int main(){   vectorint v;  for(int i = 0; i  10; ++i){  v.push_back(rand() % 100);  }  // bind1st bind2nd  for_each(v.begin(), v.end(), bind1st(MyPrint(), 100));  cout  endl;  // ptr_fun  for_each(v.begin(), v.end(), bind2nd(ptr_fun(myPrint), 100));  cout  endl;  printVec(v);  // not1 not2  sort(v.begin(), v.end(), not2(MySort()));  printVec(v);  auto it = find_if(v.begin(), v.end(), not1(MyGreater()));  if(it != v.end()){  cout  *it  endl;  }  // mem_fun_ref mem_fun  vectorPerson vp;  vp.emplace_back(Person(1, 2));  vp.emplace_back(Person(3, 4));  vp.emplace_back(Person(5, 6));  for_each(vp.begin(), vp.end(), mem_fun_ref(\u0026Person::show));  cout  \"--------------\"  endl;  vectorPerson* vpp;  vpp.emplace_back(new Person(1, 2));  vpp.emplace_back(new Person(3, 4));  vpp.emplace_back(new Person(5, 6));  for_each(vpp.begin(), vpp.end(), mem_fun(\u0026Person::show));  return 0; } v: 100, val: 83, v + val: 183 v: 100, val: 86, v + val: 186 v: 100, val: 77, v + val: 177 v: 100, val: 15, v + val: 115 v: 100, val: 93, v + val: 193 v: 100, val: 35, v + val: 135 v: 100, val: 86, v + val: 186 v: 100, val: 92, v + val: 192 v: 100, val: 49, v + val: 149 v: 100, val: 21, v + val: 121  183 186 177 115 193 135 186 192 149 121 83 86 77 15 93 35 86 92 49 21 15 21 35 49 77 83 86 86 92 93 15 id: 1, age: 2 id: 3, age: 4 id: 5, age: 6 -------------- id: 1, age: 2 id: 3, age: 4 id: 5, age: 6 ",
+  "articleBody": "  仿函数适配器 bind1st、bind2nd 将二元仿函数转为一元仿函数\n  仿函数适配器 not1、not2\n  仿函数适配器 ptr_fun 将普通函数转为函数对象，然后就可以与其它仿函数适配器一起使用了\n  仿函数适配器 mem_fun、mem_fun_ref 将成员函数转为适配器\n  class MyPrint : public binary_functionint, int, void{ public: void operator()(int v, int val) const{ cout  \"v: \"  v  \", val: \"  val  \", v + val: \"  v + val  endl; } }; void myPrint(int v, int val){ cout  v + val  \" \"; } class MySort: public binary_functionint, int, bool{ public: bool operator() (int lhs, int rhs)const{ return lhs  rhs; } }; class MyGreater: public unary_functionint, bool{ public: bool operator()(int v)const{ return v  50; } }; void printVec(const vectorint \u0026v){ for(const auto \u0026p : v){ cout  p  \" \"; } cout  endl; } class Person{ public: Person(int id, int age):id(id), age(age){} void show(){ cout  \"id: \"  id  \", age: \"  age  endl; } int id; int age; }; int main(){ vectorint v; for(int i = 0; i  10; ++i){ v.push_back(rand() % 100); } // bind1st bind2nd  for_each(v.begin(), v.end(), bind1st(MyPrint(), 100)); cout  endl; // ptr_fun  for_each(v.begin(), v.end(), bind2nd(ptr_fun(myPrint), 100)); cout  endl; printVec(v); // not1 not2  sort(v.begin(), v.end(), not2(MySort())); printVec(v); auto it = find_if(v.begin(), v.end(), not1(MyGreater())); if(it != v.end()){ cout  *it  endl; } // mem_fun_ref mem_fun  vectorPerson vp; vp.emplace_back(Person(1, 2)); vp.emplace_back(Person(3, 4)); vp.emplace_back(Person(5, 6)); for_each(vp.begin(), vp.end(), mem_fun_ref(\u0026Person::show)); cout  \"--------------\"  endl; vectorPerson* vpp; vpp.emplace_back(new Person(1, 2)); vpp.emplace_back(new Person(3, 4)); vpp.emplace_back(new Person(5, 6)); for_each(vpp.begin(), vpp.end(), mem_fun(\u0026Person::show)); return 0; } v: 100, val: 83, v + val: 183 v: 100, val: 86, v + val: 186 v: 100, val: 77, v + val: 177 v: 100, val: 15, v + val: 115 v: 100, val: 93, v + val: 193 v: 100, val: 35, v + val: 135 v: 100, val: 86, v + val: 186 v: 100, val: 92, v + val: 192 v: 100, val: 49, v + val: 149 v: 100, val: 21, v + val: 121 183 186 177 115 193 135 186 192 149 121 83 86 77 15 93 35 86 92 49 21 15 21 35 49 77 83 86 86 92 93 15 id: 1, age: 2 id: 3, age: 4 id: 5, age: 6 -------------- id: 1, age: 2 id: 3, age: 4 id: 5, age: 6 ",
   "wordCount" : "379",
   "inLanguage": "en",
   "datePublished": "2022-01-27T21:55:47+08:00",
@@ -219,100 +219,100 @@ if (!doNotTrack) {
 <p>仿函数适配器 <em>mem_fun、mem_fun_ref</em> 将成员函数转为适配器</p>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyPrint</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> binary_function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">void</span><span style="color:#f92672">&gt;</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span> v, <span style="color:#66d9ef">int</span> val) <span style="color:#66d9ef">const</span>{
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;v: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, val: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> val <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, v + val: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">+</span> val <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">myPrint</span>(<span style="color:#66d9ef">int</span> v, <span style="color:#66d9ef">int</span> val){
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">+</span> val <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MySort</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> binary_function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>() (<span style="color:#66d9ef">int</span> lhs, <span style="color:#66d9ef">int</span> rhs)<span style="color:#66d9ef">const</span>{
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> lhs <span style="color:#f92672">&gt;</span> rhs;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyGreater</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> unary_function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span> v)<span style="color:#66d9ef">const</span>{
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> v <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">50</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printVec</span>(<span style="color:#66d9ef">const</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p : v){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    Person(<span style="color:#66d9ef">int</span> id, <span style="color:#66d9ef">int</span> age)<span style="color:#f92672">:</span>id(id), age(age){}
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show</span>(){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;id: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> id <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, age: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> age <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> id;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> age;
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>i){
-</span></span><span style="display:flex;"><span>        v.push_back(rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// bind1st bind2nd
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    for_each(v.begin(), v.end(), bind1st(MyPrint(), <span style="color:#ae81ff">100</span>));
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ptr_fun
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    for_each(v.begin(), v.end(), bind2nd(ptr_fun(myPrint), <span style="color:#ae81ff">100</span>)); 
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    printVec(v);
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// not1 not2
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sort(v.begin(), v.end(), not2(MySort()));
-</span></span><span style="display:flex;"><span>    printVec(v);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> find_if(v.begin(), v.end(), not1(MyGreater()));
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">!=</span> v.end()){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// mem_fun_ref mem_fun
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;</span> vp;
-</span></span><span style="display:flex;"><span>    vp.emplace_back(Person(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>));
-</span></span><span style="display:flex;"><span>    vp.emplace_back(Person(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>));
-</span></span><span style="display:flex;"><span>    vp.emplace_back(Person(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>));
-</span></span><span style="display:flex;"><span>    for_each(vp.begin(), vp.end(), mem_fun_ref(<span style="color:#f92672">&amp;</span>Person<span style="color:#f92672">::</span>show));
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;--------------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">*&gt;</span> vpp;
-</span></span><span style="display:flex;"><span>    vpp.emplace_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>));
-</span></span><span style="display:flex;"><span>    vpp.emplace_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>));
-</span></span><span style="display:flex;"><span>    vpp.emplace_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>));
-</span></span><span style="display:flex;"><span>    for_each(vpp.begin(), vpp.end(), mem_fun(<span style="color:#f92672">&amp;</span>Person<span style="color:#f92672">::</span>show));
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>v: 100, val: 83, v + val: 183
-</span></span><span style="display:flex;"><span>v: 100, val: 86, v + val: 186
-</span></span><span style="display:flex;"><span>v: 100, val: 77, v + val: 177
-</span></span><span style="display:flex;"><span>v: 100, val: 15, v + val: 115
-</span></span><span style="display:flex;"><span>v: 100, val: 93, v + val: 193
-</span></span><span style="display:flex;"><span>v: 100, val: 35, v + val: 135
-</span></span><span style="display:flex;"><span>v: 100, val: 86, v + val: 186
-</span></span><span style="display:flex;"><span>v: 100, val: 92, v + val: 192
-</span></span><span style="display:flex;"><span>v: 100, val: 49, v + val: 149
-</span></span><span style="display:flex;"><span>v: 100, val: 21, v + val: 121
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>183 186 177 115 193 135 186 192 149 121 
-</span></span><span style="display:flex;"><span>83 86 77 15 93 35 86 92 49 21 
-</span></span><span style="display:flex;"><span>15 21 35 49 77 83 86 86 92 93 
-</span></span><span style="display:flex;"><span>15
-</span></span><span style="display:flex;"><span>id: 1, age: 2
-</span></span><span style="display:flex;"><span>id: 3, age: 4
-</span></span><span style="display:flex;"><span>id: 5, age: 6
-</span></span><span style="display:flex;"><span>--------------
-</span></span><span style="display:flex;"><span>id: 1, age: 2
-</span></span><span style="display:flex;"><span>id: 3, age: 4
-</span></span><span style="display:flex;"><span>id: 5, age: 6
-</span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyPrint</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> binary_function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">void</span><span style="color:#f92672">&gt;</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">void</span> <span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span> v, <span style="color:#66d9ef">int</span> val) <span style="color:#66d9ef">const</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;v: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, val: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> val <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, v + val: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">+</span> val <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+};
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">myPrint</span>(<span style="color:#66d9ef">int</span> v, <span style="color:#66d9ef">int</span> val){
+    cout <span style="color:#f92672">&lt;&lt;</span> v <span style="color:#f92672">+</span> val <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+}
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MySort</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> binary_function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>() (<span style="color:#66d9ef">int</span> lhs, <span style="color:#66d9ef">int</span> rhs)<span style="color:#66d9ef">const</span>{
+        <span style="color:#66d9ef">return</span> lhs <span style="color:#f92672">&gt;</span> rhs;
+    }
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyGreater</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> unary_function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">bool</span> <span style="color:#66d9ef">operator</span>()(<span style="color:#66d9ef">int</span> v)<span style="color:#66d9ef">const</span>{
+        <span style="color:#66d9ef">return</span> v <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">50</span>;
+    }
+};
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printVec</span>(<span style="color:#66d9ef">const</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>v){
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>p : v){
+        cout <span style="color:#f92672">&lt;&lt;</span> p <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+    }
+    cout <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Person(<span style="color:#66d9ef">int</span> id, <span style="color:#66d9ef">int</span> age)<span style="color:#f92672">:</span>id(id), age(age){}
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;id: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> id <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;, age: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> age <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#66d9ef">int</span> id;
+    <span style="color:#66d9ef">int</span> age;
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+
+    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> v;
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; <span style="color:#f92672">++</span>i){
+        v.push_back(rand() <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span>);
+    }
+    <span style="color:#75715e">// bind1st bind2nd
+</span><span style="color:#75715e"></span>    for_each(v.begin(), v.end(), bind1st(MyPrint(), <span style="color:#ae81ff">100</span>));
+    cout <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#75715e">// ptr_fun
+</span><span style="color:#75715e"></span>    for_each(v.begin(), v.end(), bind2nd(ptr_fun(myPrint), <span style="color:#ae81ff">100</span>)); 
+    cout <span style="color:#f92672">&lt;&lt;</span> endl;
+    printVec(v);
+    <span style="color:#75715e">// not1 not2
+</span><span style="color:#75715e"></span>    sort(v.begin(), v.end(), not2(MySort()));
+    printVec(v);
+    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> find_if(v.begin(), v.end(), not1(MyGreater()));
+    <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">!=</span> v.end()){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>it <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#75715e">// mem_fun_ref mem_fun
+</span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">&gt;</span> vp;
+    vp.emplace_back(Person(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>));
+    vp.emplace_back(Person(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>));
+    vp.emplace_back(Person(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>));
+    for_each(vp.begin(), vp.end(), mem_fun_ref(<span style="color:#f92672">&amp;</span>Person<span style="color:#f92672">::</span>show));
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;--------------&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    vector<span style="color:#f92672">&lt;</span>Person<span style="color:#f92672">*&gt;</span> vpp;
+    vpp.emplace_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>));
+    vpp.emplace_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>));
+    vpp.emplace_back(<span style="color:#66d9ef">new</span> Person(<span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>));
+    for_each(vpp.begin(), vpp.end(), mem_fun(<span style="color:#f92672">&amp;</span>Person<span style="color:#f92672">::</span>show));
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">v: 100, val: 83, v + val: 183
+v: 100, val: 86, v + val: 186
+v: 100, val: 77, v + val: 177
+v: 100, val: 15, v + val: 115
+v: 100, val: 93, v + val: 193
+v: 100, val: 35, v + val: 135
+v: 100, val: 86, v + val: 186
+v: 100, val: 92, v + val: 192
+v: 100, val: 49, v + val: 149
+v: 100, val: 21, v + val: 121
+
+183 186 177 115 193 135 186 192 149 121 
+83 86 77 15 93 35 86 92 49 21 
+15 21 35 49 77 83 86 86 92 93 
+15
+id: 1, age: 2
+id: 3, age: 4
+id: 5, age: 6
+--------------
+id: 1, age: 2
+id: 3, age: 4
+id: 5, age: 6
+</code></pre></div>
 
   </div>
 
@@ -340,7 +340,7 @@ if (!doNotTrack) {
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

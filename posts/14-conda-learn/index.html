@@ -9,12 +9,13 @@
 <meta name="keywords" content="" />
 <meta name="description" content="miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
 set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
-1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free  # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free  # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
+1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
 2、搜索某个库的所有版本 conda search gdal
 3、查看当前环境下已安装的包 conda list
 4、创建一个虚拟环境 conda create --name python34 python=3.4
 5、激活某个环境 activate python34 // for windows
-source activate python34 // for Linux &amp; Mac">
+source activate python34 // for Linux &amp; Mac
+6、取消激活 conda deactivate // for windows">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/14-conda-learn/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -23,7 +24,7 @@ source activate python34 // for Linux &amp; Mac">
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -55,12 +56,13 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="Conda Learn" />
 <meta property="og:description" content="miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
 set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
-1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free  # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free  # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
+1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
 2、搜索某个库的所有版本 conda search gdal
 3、查看当前环境下已安装的包 conda list
 4、创建一个虚拟环境 conda create --name python34 python=3.4
 5、激活某个环境 activate python34 // for windows
-source activate python34 // for Linux &amp; Mac" />
+source activate python34 // for Linux &amp; Mac
+6、取消激活 conda deactivate // for windows" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/14-conda-learn/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-06-04T10:16:11&#43;08:00" />
@@ -72,12 +74,13 @@ source activate python34 // for Linux &amp; Mac" />
 <meta name="twitter:title" content="Conda Learn"/>
 <meta name="twitter:description" content="miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
 set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
-1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free  # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free  # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
+1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
 2、搜索某个库的所有版本 conda search gdal
 3、查看当前环境下已安装的包 conda list
 4、创建一个虚拟环境 conda create --name python34 python=3.4
 5、激活某个环境 activate python34 // for windows
-source activate python34 // for Linux &amp; Mac"/>
+source activate python34 // for Linux &amp; Mac
+6、取消激活 conda deactivate // for windows"/>
 
 
 <script type="application/ld+json">
@@ -106,11 +109,11 @@ source activate python34 // for Linux &amp; Mac"/>
   "@type": "BlogPosting",
   "headline": "Conda Learn",
   "name": "Conda Learn",
-  "description": "miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32\nset CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64\n1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free  # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free  # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件\n2、搜索某个库的所有版本 conda search gdal\n3、查看当前环境下已安装的包 conda list\n4、创建一个虚拟环境 conda create --name python34 python=3.4\n5、激活某个环境 activate python34 // for windows\nsource activate python34 // for Linux \u0026amp; Mac",
+  "description": "miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32\nset CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64\n1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件\n2、搜索某个库的所有版本 conda search gdal\n3、查看当前环境下已安装的包 conda list\n4、创建一个虚拟环境 conda create --name python34 python=3.4\n5、激活某个环境 activate python34 // for windows\nsource activate python34 // for Linux \u0026amp; Mac\n6、取消激活 conda deactivate // for windows",
   "keywords": [
     
   ],
-  "articleBody": "miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32\nset CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64\n1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free  # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free  # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件\n2、搜索某个库的所有版本 conda search gdal\n3、查看当前环境下已安装的包 conda list\n4、创建一个虚拟环境 conda create --name python34 python=3.4\n5、激活某个环境 activate python34 // for windows\nsource activate python34 // for Linux \u0026 Mac\n6、取消激活 conda deactivate // for windows\nsource conda deactivate // for Linux \u0026 Mac\n7、删除一个环境 conda remove --name python34 --all\n8、查看已安装的环境 conda info -e\n9、查看当前激活环境下的安装包 conda list\n10、查看某个指定环境的安装包 conda list -n python34\n11、安装到当前激活环境 conda install gdal\n12、安装到指定环境 conda install -n python34 numpy\n13、清理 conda clean -p // 删除没有用的包\nconda clean -t // 删除tar打包\n14、查看帮助 conda --help conda -h conda env -h conda update -h 15、查看当前所有环境 conda info --envs\n",
+  "articleBody": "miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32\nset CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64\n1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件\n2、搜索某个库的所有版本 conda search gdal\n3、查看当前环境下已安装的包 conda list\n4、创建一个虚拟环境 conda create --name python34 python=3.4\n5、激活某个环境 activate python34 // for windows\nsource activate python34 // for Linux \u0026 Mac\n6、取消激活 conda deactivate // for windows\nsource conda deactivate // for Linux \u0026 Mac\n7、删除一个环境 conda remove --name python34 --all\n8、查看已安装的环境 conda info -e\n9、查看当前激活环境下的安装包 conda list\n10、查看某个指定环境的安装包 conda list -n python34\n11、安装到当前激活环境 conda install gdal\n12、安装到指定环境 conda install -n python34 numpy\n13、清理 conda clean -p // 删除没有用的包\nconda clean -t // 删除tar打包\n14、查看帮助 conda --help conda -h conda env -h conda update -h 15、查看当前所有环境 conda info --envs\n",
   "wordCount" : "136",
   "inLanguage": "en",
   "datePublished": "2019-06-04T10:16:11+08:00",
@@ -266,15 +269,16 @@ source activate python34 // for Linux &amp; Mac"/>
 <p><code>set CONDA_FORCE_32BIT=1  // 指定 conda 的工作平台为 win-32</code><br>
 <code>set CONDA_FORCE_32BIT=   // 指定 conda 的工作平台为 x64</code></p>
 <h3 id="1指定conda的资源镜像">1、指定conda的资源镜像<a hidden class="anchor" aria-hidden="true" href="#1指定conda的资源镜像">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span># 推荐使用中科大的
-</span></span><span style="display:flex;"><span>conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span># 清华的镜像好像用不了了
-</span></span><span style="display:flex;"><span>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span># 设置搜索时显示通道地址
-</span></span><span style="display:flex;"><span>conda config --set show_channel_urls yes
-</span></span></code></pre></div><p>执行此命令后会在当前的用户文件夹下生成一个 <strong><em>.condarc</em></strong> 的配置文件</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># 推荐使用中科大的
+conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free
+
+# 清华的镜像好像用不了了
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+
+# 设置搜索时显示通道地址
+conda config --set show_channel_urls yes
+
+</code></pre></div><p>执行此命令后会在当前的用户文件夹下生成一个 <strong><em>.condarc</em></strong> 的配置文件</p>
 <h3 id="2搜索某个库的所有版本">2、搜索某个库的所有版本<a hidden class="anchor" aria-hidden="true" href="#2搜索某个库的所有版本">#</a></h3>
 <p><code>conda search gdal</code></p>
 <h3 id="3查看当前环境下已安装的包">3、查看当前环境下已安装的包<a hidden class="anchor" aria-hidden="true" href="#3查看当前环境下已安装的包">#</a></h3>
@@ -303,11 +307,11 @@ source activate python34 // for Linux &amp; Mac"/>
 <p><code>conda clean -p    // 删除没有用的包</code><br>
 <code>conda clean -t    // 删除tar打包</code></p>
 <h3 id="14查看帮助">14、查看帮助<a hidden class="anchor" aria-hidden="true" href="#14查看帮助">#</a></h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>conda --help
-</span></span><span style="display:flex;"><span>conda -h
-</span></span><span style="display:flex;"><span>conda env -h
-</span></span><span style="display:flex;"><span>conda update -h
-</span></span></code></pre></div><h3 id="15查看当前所有环境">15、查看当前所有环境<a hidden class="anchor" aria-hidden="true" href="#15查看当前所有环境">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">conda --help
+conda -h
+conda env -h
+conda update -h
+</code></pre></div><h3 id="15查看当前所有环境">15、查看当前所有环境<a hidden class="anchor" aria-hidden="true" href="#15查看当前所有环境">#</a></h3>
 <p><code>conda info --envs</code></p>
 
 
@@ -333,7 +337,7 @@ source activate python34 // for Linux &amp; Mac"/>
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

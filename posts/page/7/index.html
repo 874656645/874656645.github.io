@@ -160,6 +160,44 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——派生类修改基类成员的访问权限
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>案例一：
+class A { int x, y; public: int getx() { return x; } protected: int gety() { return y; } }; class B : private A /* public A */ /* protected A */{ bool visible; public: using A::getx; A::gety;	// deprecated }; 案例二：
+class MyList { struct Node { int v; Node* next; Node(int v, Node* n) { this-&gt;v = v; next = n; } ~Node() { cout &lt;&lt; &#34;~Node()\n&#34;; delete next; next = nullptr; } } *head; public: MyList() { head = nullptr; } ~MyList() { if (head !...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-04 20:45:58 +0800 CST'>September 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——派生类修改基类成员的访问权限" href="https://874656645.github.io/posts/230-c&#43;&#43;-%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%BF%AE%E6%94%B9%E5%9F%BA%E7%B1%BB%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——Const、volatile、mutable
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 含有私有 const 实例数据成员的类必须定义构造函数，且该实例数据成员必须通过构造函数参数列表初始化 虽然 this 是隐含参数，也可以通过添加 const、volatile 修饰符实现函数重载 成员变量的类型会随着对象实例的类型变化而变化，比如一个 volatile int 类型的成员变量，如果对象实例为 const 的，则此时成员变量的类型为 const volatile int 经实验，mutable 不可以和 static、const 一起使用，但可以与 volatile 搭配使用  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-03 19:54:33 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——Const、volatile、mutable" href="https://874656645.github.io/posts/229-c&#43;&#43;-constvolatilemutable/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——成员指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: int a; // 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; // C&#43;&#43;17 支持 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; static int num; public: Crowd(); Crowd(int x); ~Crowd(); // 类体内函数定义 	// 会被内联处理 	int f() { b&#43;&#43;; cout &lt;&lt; &#34;F()\n&#34;; return b; } // const this 指针，参数类型不同，所以可被重载 	int f()const { cout &lt;&lt; &#34;const F()\n&#34;; return b; } static int getNum(); static Crowd&amp; dec(Crowd&amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { a = 0; b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd()\n&#34;; } Crowd::Crowd(int x): a(x) { b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd(int)\n&#34;; } Crowd::~Crowd() { Crowd::num--; } int Crowd::getNum() { return Crowd::num; } Crowd&amp; Crowd::dec(Crowd&amp; a) { a....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-03 16:44:14 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——成员指针" href="https://874656645.github.io/posts/228-c&#43;&#43;-%E6%88%90%E5%91%98%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
     </h2>
   </header>
@@ -181,57 +219,6 @@ if (!doNotTrack) {
   <footer class="entry-footer"><span title='2022-08-31 11:19:28 +0800 CST'>August 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to GIS——GeoServer 发布 ArcGIS 切片的 WMTS 服务" href="https://874656645.github.io/posts/226-gis-geoserver-%E5%8F%91%E5%B8%83-arcgis-%E5%88%87%E7%89%87%E7%9A%84-wmts-%E6%9C%8D%E5%8A%A1/"></a>
 </article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>STL——map 排序相关
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>声明变量时指定排序规则  通过指定模板的第三个参数，对象类型，C&#43;&#43; 2a 支持 lambda 对象
-struct MyCom{  bool operator()(const string key1, const string key2)const{  return key1 &gt; key2;  } };  int main() {  // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;};  map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} };   // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}};   for(const auto&amp; item : myMap1){  cout &lt;&lt; item....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-30 14:22:02 +0800 CST'>August 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to STL——map 排序相关" href="https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>ArcGIS Desktop 制作影像切片
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>ArcGIS Desktop 10.6 一、生成切片方案 打开 ArcGIS Desktop，打开 工具箱( Tools Box ) –&gt; 系统工具箱( System Tools Box ) –&gt; 数据管理工具( Data Managment Tools ) –&gt; 切片缓存( Tile Cache )–&gt; 生成切片缓存切片方案( Generate Tile Cache Tiling Scheme )
-重要参数：
- 切片格式( Tile Format )：主要是 PNGx、JPEG、MIXED，MIXED 混合格式，指的是在切片的时候，如果检测到瓦片内有透明区域，则这个瓦片使用 PNG32 格式，如果没有，则使用 JPEG 格式。这样做可以在不失去透明通道的前提下，有效降低瓦片数据文件的大小。 切片压缩质量( Tile Compression Quality )：仅对 JPEG（包括 MIXED 中使用 JPEG 的瓦片）有效，参数值需要介于 1-100 之间，默认是 75。 存储格式( Storage Format )：  COMPACT 紧凑格式，也就是把多个瓦片（最多128x128个）存储到一个 bundle 文件的形式，避免出现大量碎文件； EXPLODED 分散格式，就是把每一个瓦片存储成一个图片文件，这个形式的瓦片不能和 tpk 包一起使用。    CGCS2000 切片方案...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-29 11:09:11 +0800 CST'>August 29, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to ArcGIS Desktop 制作影像切片" href="https://874656645.github.io/posts/224-arcgis-desktop-%E5%88%B6%E4%BD%9C%E5%BD%B1%E5%83%8F%E5%88%87%E7%89%87/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>GIS——GeoServer 地图服务
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>GeoServer Version 2.21.1 一、WMS 服务   获取服务能力元数据：
-  可在网址中指定 version=1.1.0 和 service=WMS 参数
-  获取整个 geoserver 的服务能力，默认 WMS_Capabilities 的 version 是 1.3.0 的
-http://172.16.17.127:8066/geoserver/wms?request=getCapabilities
-http://172.16.17.127:8066/geoserver/wms?request=getCapabilities&amp;version=1.1.0
-请求网址中不包含工作空间的 1.1.1 版本的 xml 样例
-请求网址中不包含工作空间的 1.3.0 版本的 xml 样例
-  获取其中某个工作空间的服务能力，需要在 geoserver 后面添加工作空间名称
-http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version=1.1.0
-请求网址中包含工作空间的 1.1.1 版本的 xml 样例
-请求网址中包含工作空间的 1.3.0 版本的 xml 样例
-  注意：
- 1.3.0 版本的空间参考标签为 &lt;CRS&gt;，而 1.1.0 版本的空间参考标签为 &lt;SRS&gt; 如果请求的网址指定了工作空间，图层名中就不需要有工作空间名了（比如：cite:hl_2017 和 hl_2017） 1.1.0 版本的图层中包含 geoserver 以图层组方式发布的服务图层，而 1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-23 10:34:42 +0800 CST'>August 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to GIS——GeoServer 地图服务" href="https://874656645.github.io/posts/223-gis-geoserver-%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/posts/page/6/">« Prev Page</a>
@@ -242,7 +229,7 @@ http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

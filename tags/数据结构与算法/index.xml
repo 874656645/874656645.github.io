@@ -17,8 +17,8 @@
       
       <guid>https://874656645.github.io/posts/255-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/</guid>
       <description>先序遍历
-template&amp;lt;typename T&amp;gt; void PreOrder(BinaryTreeNode&amp;lt;T&amp;gt;* root){  stack&amp;lt;BinaryTreeNode&amp;lt;T&amp;gt;*&amp;gt; aStack;  BinaryTreeNode&amp;lt;T&amp;gt;* pointer = root;  aStack.push(nullptr); // 栈底监视哨  while(pointer){ // 或者 !aStack.empty()  Visit(pointer); // 访问当前结点  if(pointer-&amp;gt;rightchild() != nullptr){ // 右孩子入栈  aStack.push(pointer-&amp;gt;rightchild());  }  if(pointer-&amp;gt;leftchild() != nullptr){ // 左路下降  pointer = pointer-&amp;gt;leftchild();  }else{ // 左子树访问完毕，转向访问右子树  pointer = aStack.top();  aStack.pop();  }  } }   中序遍历
-template&amp;lt;typename T&amp;gt; void InOrder(BinaryTreeNode&amp;lt;T&amp;gt;* root){  stack&amp;lt;BinaryTreeNode&amp;lt;T&amp;gt;*&amp;gt; aStack;  BinaryTreeNode&amp;lt;T&amp;gt;* pointer = root;  while(!</description>
+template&amp;lt;typename T&amp;gt; void PreOrder(BinaryTreeNode&amp;lt;T&amp;gt;* root){ stack&amp;lt;BinaryTreeNode&amp;lt;T&amp;gt;*&amp;gt; aStack; BinaryTreeNode&amp;lt;T&amp;gt;* pointer = root; aStack.push(nullptr); // 栈底监视哨  while(pointer){ // 或者 !aStack.empty()  Visit(pointer); // 访问当前结点  if(pointer-&amp;gt;rightchild() != nullptr){ // 右孩子入栈  aStack.push(pointer-&amp;gt;rightchild()); } if(pointer-&amp;gt;leftchild() != nullptr){ // 左路下降  pointer = pointer-&amp;gt;leftchild(); }else{ // 左子树访问完毕，转向访问右子树  pointer = aStack.top(); aStack.pop(); } } }   中序遍历
+template&amp;lt;typename T&amp;gt; void InOrder(BinaryTreeNode&amp;lt;T&amp;gt;* root){ stack&amp;lt;BinaryTreeNode&amp;lt;T&amp;gt;*&amp;gt; aStack; BinaryTreeNode&amp;lt;T&amp;gt;* pointer = root; while(!aStack.empty() || pointer){ if(pointer){ // Visit(pointer); // 前序访问点  aStack.</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@ template&amp;lt;typename T&amp;gt; void InOrder(BinaryTreeNode&amp;lt;T&amp;gt;*
       <guid>https://874656645.github.io/posts/253-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95kmp-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/</guid>
       <description>  模式串 next 向量计算：
   字符串比较
-int mystrcmp(const char* str1, const char* str2){  int i = 0;  while(str1[i] == str2[i] &amp;amp;&amp;amp; str1[i] != &amp;#39;\0&amp;#39;){  i++;  }  return str1[i] - str2[i]; }   </description>
+int mystrcmp(const char* str1, const char* str2){ int i = 0; while(str1[i] == str2[i] &amp;amp;&amp;amp; str1[i] != &amp;#39;\0&amp;#39;){ i++; } return str1[i] - str2[i]; }   </description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@ int mystrcmp(const char* str1, const char* str2){  int i = 0;  while(str1[i] == 
  树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
  树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
  “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
- 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){  return ((status &amp;amp; 0x08) != 0); } bool wolf(int status){  return ((status &amp;amp; 0x04) !</description>
+ 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status &amp;amp; 0x08) != 0); } bool wolf(int status){ return ((status &amp;amp; 0x04) !</description>
     </item>
     
     <item>
@@ -72,7 +72,7 @@ int mystrcmp(const char* str1, const char* str2){  int i = 0;  while(str1[i] == 
  关键是如何防止假溢出    队列溢出
  上溢 下溢 假溢出：当 rear = mSize-1 时，再作插入运算就会产生溢出，如果这时队列的前端还有许多空位置，这种现象称为假溢出    循环队列
  为了解决假溢出的问题，需要采用循环队列的方式： % mSize 另外一个问题就是如何区分空队列还是满队列？空一个队列空间，空队列状态时，令 front = rear，若 (rear + 1) % mSize == front，我们认为此时队列已满，但实际上 rear 指向的空间并没有被利用    循环队列类定义
-  template &amp;lt;class T&amp;gt; class arrQueue: public Queue&amp;lt;T&amp;gt; { private:  int mSize; // 存放队列的数组的大小  int front; // 表示队头所在位置的下标  int rear; // 表示待入队元素所在位置的下标  T *qu; // 存放类型为T的队列元素的数组 public: // 队列的运算集  arrQueue(int size) { // 创建队列的实例  mSize = size + 1; // 浪费一个存储空间，以区别队列空和队列满  qu = new T[mSize];  front = rear = 0;  }  ~arrQueue() { // 消除该实例，并释放其空间  delete[] qu;  } }  // 入队操作 template&amp;lt;class T&amp;gt; bool arrQueue&amp;lt;T&amp;gt; :: enQueue(const T item) {  // item入队，插入队尾  if (((rear + 1 ) % mSize) == front) {  cout &amp;lt;&amp;lt; &amp;#34;队列已满，溢出&amp;#34; &amp;lt;&amp;lt; endl;  return false;  }  qu[rear] = item;  rear = (rear + 1) % mSize; // 循环后继  return true; }  // 出队操作 bool arrQueue&amp;lt;T&amp;gt; :: deQueue(T&amp;amp; item) {  // 返回队头元素并从队列中删除  if ( front == rear) {  cout &amp;lt;&amp;lt; &amp;#34;队列为空&amp;#34; &amp;lt;&amp;lt; endl;  return false;  }  item = qu[front];  front = (front + 1) % mSize; // 这里并没有真的删除队列空间的元素，而是把头指针循环后移  return true; } 二、链式队列   用单链表方式存储，队列中每个元素对于链表中的一个结点</description>
+  template &amp;lt;class T&amp;gt; class arrQueue: public Queue&amp;lt;T&amp;gt; { private: int mSize; // 存放队列的数组的大小  int front; // 表示队头所在位置的下标  int rear; // 表示待入队元素所在位置的下标  T *qu; // 存放类型为T的队列元素的数组 public: // 队列的运算集  arrQueue(int size) { // 创建队列的实例  mSize = size + 1; // 浪费一个存储空间，以区别队列空和队列满  qu = new T[mSize]; front = rear = 0; } ~arrQueue() { // 消除该实例，并释放其空间  delete[] qu; } } // 入队操作 template&amp;lt;class T&amp;gt; bool arrQueue&amp;lt;T&amp;gt; :: enQueue(const T item) { // item入队，插入队尾  if (((rear + 1 ) % mSize) == front) { cout &amp;lt;&amp;lt; &amp;#34;队列已满，溢出&amp;#34; &amp;lt;&amp;lt; endl; return false; } qu[rear] = item; rear = (rear + 1) % mSize; // 循环后继  return true; } // 出队操作 bool arrQueue&amp;lt;T&amp;gt; :: deQueue(T&amp;amp; item) { // 返回队头元素并从队列中删除  if ( front == rear) { cout &amp;lt;&amp;lt; &amp;#34;队列为空&amp;#34; &amp;lt;&amp;lt; endl; return false; } item = qu[front]; front = (front + 1) % mSize; // 这里并没有真的删除队列空间的元素，而是把头指针循环后移  return true; } 二、链式队列   用单链表方式存储，队列中每个元素对于链表中的一个结点</description>
     </item>
     
     <item>
@@ -84,7 +84,7 @@ int mystrcmp(const char* str1, const char* str2){  int i = 0;  while(str1[i] == 
       <description>一、队列   队列特点
  访问受限的线性表 先进先出 插入在一端进行，删除在另一端进行    主要元素
  队头 队尾    主要操作
- 入队列 出队列 取队首元素 判断队列是否为空    二、队列的抽象数据类型 template &amp;lt;class T&amp;gt; class Queue {  // 队列的运算集 public:  // 变为空队列  void clear();  // 将item插入队尾，成功则返回真，否则返回假  bool enQueue(const T item);  // 返回队头元素并将其从队列中删除，成功则返回真  bool deQueue(T &amp;amp; item);  // 返回队头元素，但不删除，成功则返回真  bool getFront(T &amp;amp; item);  // 返回真，若队列已空  bool isEmpty();  // 返回真，若队列已满  bool isFull(); }; 三、队列的实现方式 队列的物理实现又分为顺序队列和链式队列</description>
+ 入队列 出队列 取队首元素 判断队列是否为空    二、队列的抽象数据类型 template &amp;lt;class T&amp;gt; class Queue { // 队列的运算集 public: // 变为空队列  void clear(); // 将item插入队尾，成功则返回真，否则返回假  bool enQueue(const T item); // 返回队头元素并将其从队列中删除，成功则返回真  bool deQueue(T &amp;amp; item); // 返回队头元素，但不删除，成功则返回真  bool getFront(T &amp;amp; item); // 返回真，若队列已空  bool isEmpty(); // 返回真，若队列已满  bool isFull(); }; 三、队列的实现方式 队列的物理实现又分为顺序队列和链式队列</description>
     </item>
     
     <item>
@@ -109,7 +109,7 @@ int mystrcmp(const char* str1, const char* str2){  int i = 0;  while(str1[i] == 
       <guid>https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid>
       <description>栈的物理实现有 顺序栈 和 链式栈
 一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：
-template &amp;lt;class T&amp;gt; class arrStack : public Stack &amp;lt;T&amp;gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size;  top = -1;  st = new T[mSize];  }  arrStack() { // 创建一个顺序栈的实例  top = -1;  }  ~arrStack() {  delete [] st;  }  void clear() {  top = -1;  } // 清空栈 };  bool arrStack&amp;lt;T&amp;gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &amp;lt;&amp;lt; &amp;#34;栈满溢出&amp;#34; &amp;lt;&amp;lt; endl;  return false;  } else { // 新元素入栈并修改栈顶指针  st[++top] = item;  return true;  } }  bool arrStack&amp;lt;T&amp;gt;::pop(T&amp;amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &amp;lt;&amp;lt; &amp;#34;栈为空，不能执行出栈操作&amp;#34;&amp;lt;&amp;lt; endl;  return false;  } else {  item = st[top--]; // 返回栈顶，并缩减1  return true;  } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：</description>
+template &amp;lt;class T&amp;gt; class arrStack : public Stack &amp;lt;T&amp;gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack&amp;lt;T&amp;gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &amp;lt;&amp;lt; &amp;#34;栈满溢出&amp;#34; &amp;lt;&amp;lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[++top] = item; return true; } } bool arrStack&amp;lt;T&amp;gt;::pop(T&amp;amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &amp;lt;&amp;lt; &amp;#34;栈为空，不能执行出栈操作&amp;#34;&amp;lt;&amp;lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：</description>
     </item>
     
     <item>
@@ -128,7 +128,7 @@ template &amp;lt;class T&amp;gt; class arrStack : public Stack &amp;lt;T&amp;gt;
       
       <guid>https://874656645.github.io/posts/152-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84%E6%9C%80%E5%A4%A7%E5%92%8C/</guid>
       <description>一、暴力算法 $\mathcal{O}(n^3)$ 遍历数组的所有子数组集合，并对其求和，筛选出和的最大值
-int maxSumOfSub1(int* array, int length){  int maxSum = 0;  int startIndex = 0, endIndex = 0;  for(int i = 0; i &amp;lt; length; i++){  for(int j = i; j &amp;lt; length; j++){  int sum = 0;  for(int k = i; k &amp;lt;= j; k++)  sum += array[k];  if(maxSum &amp;lt; sum){  maxSum = sum;  startIndex = i;  endIndex = j;  }  }  }   cout &amp;lt;&amp;lt; &amp;#34;Begin:&amp;#34; &amp;lt;&amp;lt; startIndex &amp;lt;&amp;lt; &amp;#34; End:&amp;#34; &amp;lt;&amp;lt; endIndex &amp;lt;&amp;lt; &amp;#34; Num:&amp;#34; &amp;lt;&amp;lt; maxSum &amp;lt;&amp;lt; endl;  return maxSum; } 二、前缀和 $\mathcal{O}(n^2)$ 先把数组的前 i 项和求出来并将其保存到数组中，然后计算所有子数组集合的和，筛选其中最大的</description>
+int maxSumOfSub1(int* array, int length){ int maxSum = 0; int startIndex = 0, endIndex = 0; for(int i = 0; i &amp;lt; length; i++){ for(int j = i; j &amp;lt; length; j++){ int sum = 0; for(int k = i; k &amp;lt;= j; k++) sum += array[k]; if(maxSum &amp;lt; sum){ maxSum = sum; startIndex = i; endIndex = j; } } } cout &amp;lt;&amp;lt; &amp;#34;Begin:&amp;#34; &amp;lt;&amp;lt; startIndex &amp;lt;&amp;lt; &amp;#34; End:&amp;#34; &amp;lt;&amp;lt; endIndex &amp;lt;&amp;lt; &amp;#34; Num:&amp;#34; &amp;lt;&amp;lt; maxSum &amp;lt;&amp;lt; endl; return maxSum; } 二、前缀和 $\mathcal{O}(n^2)$ 先把数组的前 i 项和求出来并将其保存到数组中，然后计算所有子数组集合的和，筛选其中最大的</description>
     </item>
     
     <item>

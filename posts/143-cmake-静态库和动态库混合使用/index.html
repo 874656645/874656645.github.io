@@ -18,7 +18,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -96,7 +96,7 @@ if (!doNotTrack) {
   "keywords": [
     "CMake"
   ],
-  "articleBody": " 将原来的 静态库 MathFunctions拆分为动态库 MathFunctions.dll 和静态库 SqrtLibrary.lib 两个库。MathFunctions.dll 动态库会使用 SqrtLibrary.lib 静态库。 BUILD_SHARED_LIBS  在顶层的 CMakeLists.txt 文件中添加 BUILD_SHARED_LIBS，如果这个标记存在且为真，则将导致所有库都被构建为共享库，除非该库被显式地设置为静态库。这个变量通常作为 option() 添加到项目中，以便项目的每个用户可以决定他们是要使用共享库还是静态库构建项目。\n顶层的 CMakeLists.txt 文件修改如下：\n# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.2)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# control where the static and shared libraries are built so that on windows # we don't need to tinker with the path to run the executable # 指定静态库和动态库的生成路径 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY \"${PROJECT_BINARY_DIR}\")set(CMAKE_LIBRARY_OUTPUT_DIRECTORY \"${PROJECT_BINARY_DIR}\")set(CMAKE_RUNTIME_OUTPUT_DIRECTORY \"${PROJECT_BINARY_DIR}\")# 生成共享库选项 option(BUILD_SHARED_LIBS \"Build using shared libraries\" ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加编译子模块 MathFunctions library add_subdirectory(MathFunctions)# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# 依赖共享库 MathFunctions target_link_libraries(Tutorial PUBLIC MathFunctions)# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # \"${PROJECT_BINARY_DIR}\" # \"${PROJECT_SOURCE_DIR}/MathFunctions\" # ) target_include_directories(Tutorial PUBLIC  \"${PROJECT_BINARY_DIR}\" )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES \"${PROJECT_BINARY_DIR}/TutorialConfig.h\"  DESTINATION include )# enable dashboard scripting include(CTest)# does the application run add_test(NAME Runs COMMAND Tutorial 25)# does the usage message work? add_test(NAME Usage COMMAND Tutorial)set_tests_properties(Usage  PROPERTIES PASS_REGULAR_EXPRESSION \"Usage:.*number\"  )# define a function to simplify adding tests function(do_test target arg result) add_test(NAME Comp${arg} COMMAND ${target} ${arg}) set_tests_properties(Comp${arg}  PROPERTIES PASS_REGULAR_EXPRESSION ${result}  )endfunction()# do a bunch of result based tests do_test(Tutorial 4 \"4 is 2\")do_test(Tutorial 9 \"9 is 3\")do_test(Tutorial 5 \"5 is 2.236\")do_test(Tutorial 7 \"7 is 2.645\")do_test(Tutorial 25 \"25 is 5\")do_test(Tutorial -25 \"-25 is (-nan|nan|0)\")do_test(Tutorial 0.0001 \"0.0001 is 0.01\")## Packaging an Installer # 此模块将打包项目当前平台所需的任何运行时库 include(InstallRequiredSystemLibraries)set(CPACK_RESOURCE_FILE_LICENSE \"${CMAKE_CURRENT_SOURCE_DIR}/License.txt\")set(CPACK_PACKAGE_VERSION_MAJOR \"${Tutorial_VERSION_MAJOR}\")set(CPACK_PACKAGE_VERSION_MINOR \"${Tutorial_VERSION_MINOR}\")set(CPACK_SOURCE_GENERATOR \"TGZ\")include(CPack)在 Mathfunctions/Cmakelists.txt 中，我们需要创建一个 Sqrtlibrary，当启用 USE_MYMATH 时，将有条件地构建和安装。\n# add the library that runs add_library(MathFunctions MathFunctions.cxx)# 将当前二进制目录添加到包含目录列表中 target_include_directories(MathFunctions  INTERFACE ${CMAKE_CURRENT_SOURCE_DIR} )# should we use our own math functions # 是否使用 USE_MYMATH 选项 option(USE_MYMATH \"Use tutorial provided math implementation\" ON)if(USE_MYMATH) # 设置程序中使用到的宏定义  target_compile_definitions(MathFunctions PRIVATE \"USE_MYMATH\") # first we add the executable that generates the table  add_executable(MakeTable MakeTable.cxx) # add the command to generate the source code  add_custom_command(  OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Table.h  COMMAND MakeTable ${CMAKE_CURRENT_BINARY_DIR}/Table.h  DEPENDS MakeTable  ) # 添加静态库  # library that just does sqrt  add_library(SqrtLibrary STATIC  mysqrt.cxx  ${CMAKE_CURRENT_BINARY_DIR}/Table.h  ) # state that we depend on our binary dir to find Table.h  target_include_directories(SqrtLibrary  PRIVATE ${CMAKE_CURRENT_BINARY_DIR}  )  # state that SqrtLibrary need PIC(position independent code) when the default is shared libraries  # 如果将一个没有位置独立代码(position independent code)的静态库与一个有位置独立代码的库组合在一起使用，  # 就要显示设置目标的属性，否则会有链接错误  set_target_properties(SqrtLibrary PROPERTIES  POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS}  ) target_link_libraries(MathFunctions PRIVATE SqrtLibrary)endif()# define the symbol stating we are using the declspec(dllexport) when # building on windows # 声明dll导出宏定义 target_compile_definitions(MathFunctions PRIVATE \"EXPORTING_MYMATH\")# install rules # 安装规则 set(installable_libs MathFunctions)if(TARGET SqrtLibrary) list(APPEND installable_libs SqrtLibrary)endif()install(TARGETS ${installable_libs} DESTINATION lib)install(FILES MathFunctions.h DESTINATION include)",
+  "articleBody": " 将原来的 静态库 MathFunctions拆分为动态库 MathFunctions.dll 和静态库 SqrtLibrary.lib 两个库。MathFunctions.dll 动态库会使用 SqrtLibrary.lib 静态库。 BUILD_SHARED_LIBS  在顶层的 CMakeLists.txt 文件中添加 BUILD_SHARED_LIBS，如果这个标记存在且为真，则将导致所有库都被构建为共享库，除非该库被显式地设置为静态库。这个变量通常作为 option() 添加到项目中，以便项目的每个用户可以决定他们是要使用共享库还是静态库构建项目。\n顶层的 CMakeLists.txt 文件修改如下：\n# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.2)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# control where the static and shared libraries are built so that on windows # we don't need to tinker with the path to run the executable # 指定静态库和动态库的生成路径 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY \"${PROJECT_BINARY_DIR}\")set(CMAKE_LIBRARY_OUTPUT_DIRECTORY \"${PROJECT_BINARY_DIR}\")set(CMAKE_RUNTIME_OUTPUT_DIRECTORY \"${PROJECT_BINARY_DIR}\")# 生成共享库选项 option(BUILD_SHARED_LIBS \"Build using shared libraries\" ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加编译子模块 MathFunctions library add_subdirectory(MathFunctions)# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# 依赖共享库 MathFunctions target_link_libraries(Tutorial PUBLIC MathFunctions)# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # \"${PROJECT_BINARY_DIR}\" # \"${PROJECT_SOURCE_DIR}/MathFunctions\" # ) target_include_directories(Tutorial PUBLIC \"${PROJECT_BINARY_DIR}\" )## 安装 install(TARGETS Tutorial DESTINATION bin)install(FILES \"${PROJECT_BINARY_DIR}/TutorialConfig.h\" DESTINATION include )# enable dashboard scripting include(CTest)# does the application run add_test(NAME Runs COMMAND Tutorial 25)# does the usage message work? add_test(NAME Usage COMMAND Tutorial)set_tests_properties(Usage PROPERTIES PASS_REGULAR_EXPRESSION \"Usage:.*number\" )# define a function to simplify adding tests function(do_test target arg result) add_test(NAME Comp${arg} COMMAND ${target} ${arg}) set_tests_properties(Comp${arg} PROPERTIES PASS_REGULAR_EXPRESSION ${result} )endfunction()# do a bunch of result based tests do_test(Tutorial 4 \"4 is 2\")do_test(Tutorial 9 \"9 is 3\")do_test(Tutorial 5 \"5 is 2.236\")do_test(Tutorial 7 \"7 is 2.645\")do_test(Tutorial 25 \"25 is 5\")do_test(Tutorial -25 \"-25 is (-nan|nan|0)\")do_test(Tutorial 0.0001 \"0.0001 is 0.01\")## Packaging an Installer # 此模块将打包项目当前平台所需的任何运行时库 include(InstallRequiredSystemLibraries)set(CPACK_RESOURCE_FILE_LICENSE \"${CMAKE_CURRENT_SOURCE_DIR}/License.txt\")set(CPACK_PACKAGE_VERSION_MAJOR \"${Tutorial_VERSION_MAJOR}\")set(CPACK_PACKAGE_VERSION_MINOR \"${Tutorial_VERSION_MINOR}\")set(CPACK_SOURCE_GENERATOR \"TGZ\")include(CPack)在 Mathfunctions/Cmakelists.txt 中，我们需要创建一个 Sqrtlibrary，当启用 USE_MYMATH 时，将有条件地构建和安装。\n# add the library that runs add_library(MathFunctions MathFunctions.cxx)# 将当前二进制目录添加到包含目录列表中 target_include_directories(MathFunctions INTERFACE ${CMAKE_CURRENT_SOURCE_DIR} )# should we use our own math functions # 是否使用 USE_MYMATH 选项 option(USE_MYMATH \"Use tutorial provided math implementation\" ON)if(USE_MYMATH) # 设置程序中使用到的宏定义  target_compile_definitions(MathFunctions PRIVATE \"USE_MYMATH\") # first we add the executable that generates the table  add_executable(MakeTable MakeTable.cxx) # add the command to generate the source code  add_custom_command( OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Table.h COMMAND MakeTable ${CMAKE_CURRENT_BINARY_DIR}/Table.h DEPENDS MakeTable ) # 添加静态库  # library that just does sqrt  add_library(SqrtLibrary STATIC mysqrt.cxx ${CMAKE_CURRENT_BINARY_DIR}/Table.h ) # state that we depend on our binary dir to find Table.h  target_include_directories(SqrtLibrary PRIVATE ${CMAKE_CURRENT_BINARY_DIR} )  # state that SqrtLibrary need PIC(position independent code) when the default is shared libraries  # 如果将一个没有位置独立代码(position independent code)的静态库与一个有位置独立代码的库组合在一起使用，  # 就要显示设置目标的属性，否则会有链接错误  set_target_properties(SqrtLibrary PROPERTIES POSITION_INDEPENDENT_CODE ${BUILD_SHARED_LIBS} ) target_link_libraries(MathFunctions PRIVATE SqrtLibrary)endif()# define the symbol stating we are using the declspec(dllexport) when # building on windows # 声明dll导出宏定义 target_compile_definitions(MathFunctions PRIVATE \"EXPORTING_MYMATH\")# install rules # 安装规则 set(installable_libs MathFunctions)if(TARGET SqrtLibrary) list(APPEND installable_libs SqrtLibrary)endif()install(TARGETS ${installable_libs} DESTINATION lib)install(FILES MathFunctions.h DESTINATION include)",
   "wordCount" : "369",
   "inLanguage": "en",
   "datePublished": "2022-03-05T19:28:43+08:00",
@@ -205,152 +205,152 @@ if (!doNotTrack) {
 </ul>
 <p>在顶层的 CMakeLists.txt 文件中添加 <code>BUILD_SHARED_LIBS</code>，如果这个标记存在且为真，则将导致所有库都被构建为共享库，除非该库被显式地设置为静态库。这个变量通常作为 <code>option()</code> 添加到项目中，以便项目的每个用户可以决定他们是要使用共享库还是静态库构建项目。</p>
 <p><strong>顶层的 CMakeLists.txt 文件修改如下：</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CMake" data-lang="CMake"><span style="display:flex;"><span><span style="color:#75715e"># 设置CMake版本最低要求
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>project(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.2</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 指定 C++ 标准
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD</span> <span style="color:#e6db74">11</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color:#e6db74">True</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># control where the static and shared libraries are built so that on windows
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># we don&#39;t need to tinker with the path to run the executable
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 指定静态库和动态库的生成路径
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_ARCHIVE_OUTPUT_DIRECTORY</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_LIBRARY_OUTPUT_DIRECTORY</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_RUNTIME_OUTPUT_DIRECTORY</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 生成共享库选项
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>option(<span style="color:#e6db74">BUILD_SHARED_LIBS</span> <span style="color:#e6db74">&#34;Build using shared libraries&#34;</span> <span style="color:#e6db74">ON</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 生成一个头文件，传递 CMake 的一些设置到源代码
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>configure_file(<span style="color:#e6db74">TutorialConfig.h.in</span> <span style="color:#e6db74">TutorialConfig.h</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加编译子模块 MathFunctions library
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_subdirectory(<span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_executable(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">main.cpp</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 依赖共享库 MathFunctions
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>target_link_libraries(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> <span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加头文件查找路径
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># target_include_directories(Tutorial PUBLIC 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#                             &#34;${PROJECT_BINARY_DIR}&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#                             &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#                         )
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>target_include_directories(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> 
-</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>
-</span></span><span style="display:flex;"><span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## 安装
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>install(<span style="color:#e6db74">TARGETS</span> <span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">bin</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>install(<span style="color:#e6db74">FILES</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}/TutorialConfig.h&#34;</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">include</span>
-</span></span><span style="display:flex;"><span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># enable dashboard scripting
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>include(<span style="color:#e6db74">CTest</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># does the application run
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Runs</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">25</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># does the usage message work?
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Usage</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">Tutorial</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set_tests_properties(<span style="color:#e6db74">Usage</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">PASS_REGULAR_EXPRESSION</span> <span style="color:#e6db74">&#34;Usage:.*number&#34;</span>
-</span></span><span style="display:flex;"><span>  )<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># define a function to simplify adding tests
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>function(<span style="color:#e6db74">do_test</span> <span style="color:#e6db74">target</span> <span style="color:#e6db74">arg</span> <span style="color:#e6db74">result</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Comp</span><span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#f92672">${</span>target<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  set_tests_properties(<span style="color:#e6db74">Comp</span><span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">PASS_REGULAR_EXPRESSION</span> <span style="color:#f92672">${</span>result<span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>    )<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>endfunction()<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># do a bunch of result based tests
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">4</span> <span style="color:#e6db74">&#34;4 is 2&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">9</span> <span style="color:#e6db74">&#34;9 is 3&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">5</span> <span style="color:#e6db74">&#34;5 is 2.236&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">7</span> <span style="color:#e6db74">&#34;7 is 2.645&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">25</span> <span style="color:#e6db74">&#34;25 is 5&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">-25</span> <span style="color:#e6db74">&#34;-25 is (-nan|nan|0)&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">0.0001</span> <span style="color:#e6db74">&#34;0.0001 is 0.01&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## Packaging an Installer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 此模块将打包项目当前平台所需的任何运行时库
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>include(<span style="color:#e6db74">InstallRequiredSystemLibraries</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_RESOURCE_FILE_LICENSE</span> <span style="color:#e6db74">&#34;${CMAKE_CURRENT_SOURCE_DIR}/License.txt&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_PACKAGE_VERSION_MAJOR</span> <span style="color:#e6db74">&#34;${Tutorial_VERSION_MAJOR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_PACKAGE_VERSION_MINOR</span> <span style="color:#e6db74">&#34;${Tutorial_VERSION_MINOR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_SOURCE_GENERATOR</span> <span style="color:#e6db74">&#34;TGZ&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>include(<span style="color:#e6db74">CPack</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>在 <code>Mathfunctions/Cmakelists.txt</code> 中，我们需要创建一个 <code>Sqrtlibrary</code>，当启用 <code>USE_MYMATH</code> 时，将有条件地构建和安装。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-CMake" data-lang="CMake"><span style="display:flex;"><span><span style="color:#75715e"># add the library that runs
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>add_library(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">MathFunctions.cxx</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 将当前二进制目录添加到包含目录列表中
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>target_include_directories(<span style="color:#e6db74">MathFunctions</span> 
-</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">INTERFACE</span> <span style="color:#f92672">${</span>CMAKE_CURRENT_SOURCE_DIR<span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># should we use our own math functions
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 是否使用 USE_MYMATH 选项
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>option(<span style="color:#e6db74">USE_MYMATH</span> <span style="color:#e6db74">&#34;Use tutorial provided math implementation&#34;</span> <span style="color:#e6db74">ON</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>if(<span style="color:#e6db74">USE_MYMATH</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># 设置程序中使用到的宏定义
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  target_compile_definitions(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">PRIVATE</span> <span style="color:#e6db74">&#34;USE_MYMATH&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># first we add the executable that generates the table
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  add_executable(<span style="color:#e6db74">MakeTable</span> <span style="color:#e6db74">MakeTable.cxx</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># add the command to generate the source code
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  add_custom_command(
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">OUTPUT</span> <span style="color:#f92672">${</span>CMAKE_CURRENT_BINARY_DIR<span style="color:#f92672">}</span><span style="color:#e6db74">/Table.h</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">MakeTable</span> <span style="color:#f92672">${</span>CMAKE_CURRENT_BINARY_DIR<span style="color:#f92672">}</span><span style="color:#e6db74">/Table.h</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">DEPENDS</span> <span style="color:#e6db74">MakeTable</span>
-</span></span><span style="display:flex;"><span>    )<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># 添加静态库
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e"># library that just does sqrt
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  add_library(<span style="color:#e6db74">SqrtLibrary</span> <span style="color:#e6db74">STATIC</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#e6db74">mysqrt.cxx</span>
-</span></span><span style="display:flex;"><span>              <span style="color:#f92672">${</span>CMAKE_CURRENT_BINARY_DIR<span style="color:#f92672">}</span><span style="color:#e6db74">/Table.h</span>
-</span></span><span style="display:flex;"><span>              )<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># state that we depend on our binary dir to find Table.h
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  target_include_directories(<span style="color:#e6db74">SqrtLibrary</span> 
-</span></span><span style="display:flex;"><span>                             <span style="color:#e6db74">PRIVATE</span> <span style="color:#f92672">${</span>CMAKE_CURRENT_BINARY_DIR<span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                             )<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># state that SqrtLibrary need PIC(position independent code) when the default is shared libraries
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e"># 如果将一个没有位置独立代码(position independent code)的静态库与一个有位置独立代码的库组合在一起使用，
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e"># 就要显示设置目标的属性，否则会有链接错误
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  set_target_properties(<span style="color:#e6db74">SqrtLibrary</span> <span style="color:#e6db74">PROPERTIES</span>
-</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">POSITION_INDEPENDENT_CODE</span> <span style="color:#f92672">${</span>BUILD_SHARED_LIBS<span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>                        )<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  target_link_libraries(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">PRIVATE</span> <span style="color:#e6db74">SqrtLibrary</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>endif()<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># define the symbol stating we are using the declspec(dllexport) when
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># building on windows
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 声明dll导出宏定义
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>target_compile_definitions(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">PRIVATE</span> <span style="color:#e6db74">&#34;EXPORTING_MYMATH&#34;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># install rules
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装规则
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>set(<span style="color:#e6db74">installable_libs</span> <span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>if(<span style="color:#e6db74">TARGET</span> <span style="color:#e6db74">SqrtLibrary</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>  list(<span style="color:#e6db74">APPEND</span> <span style="color:#e6db74">installable_libs</span> <span style="color:#e6db74">SqrtLibrary</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>endif()<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>install(<span style="color:#e6db74">TARGETS</span> <span style="color:#f92672">${</span>installable_libs<span style="color:#f92672">}</span> <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">lib</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>install(<span style="color:#e6db74">FILES</span> <span style="color:#e6db74">MathFunctions.h</span> <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">include</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-CMake" data-lang="CMake"><span style="color:#75715e"># 设置CMake版本最低要求
+</span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
+</span><span style="color:#75715e"></span>project(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.2</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 指定 C++ 标准
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD</span> <span style="color:#e6db74">11</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color:#e6db74">True</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># control where the static and shared libraries are built so that on windows
+</span><span style="color:#75715e"># we don&#39;t need to tinker with the path to run the executable
+</span><span style="color:#75715e"># 指定静态库和动态库的生成路径
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_ARCHIVE_OUTPUT_DIRECTORY</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_LIBRARY_OUTPUT_DIRECTORY</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_RUNTIME_OUTPUT_DIRECTORY</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 生成共享库选项
+</span><span style="color:#75715e"></span>option(<span style="color:#e6db74">BUILD_SHARED_LIBS</span> <span style="color:#e6db74">&#34;Build using shared libraries&#34;</span> <span style="color:#e6db74">ON</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 生成一个头文件，传递 CMake 的一些设置到源代码
+</span><span style="color:#75715e"></span>configure_file(<span style="color:#e6db74">TutorialConfig.h.in</span> <span style="color:#e6db74">TutorialConfig.h</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加编译子模块 MathFunctions library
+</span><span style="color:#75715e"></span>add_subdirectory(<span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
+</span><span style="color:#75715e"></span>add_executable(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">main.cpp</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 依赖共享库 MathFunctions
+</span><span style="color:#75715e"></span>target_link_libraries(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> <span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加头文件查找路径
+</span><span style="color:#75715e"># target_include_directories(Tutorial PUBLIC 
+</span><span style="color:#75715e">#                             &#34;${PROJECT_BINARY_DIR}&#34;
+</span><span style="color:#75715e">#                             &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;
+</span><span style="color:#75715e">#                         )
+</span><span style="color:#75715e"></span>target_include_directories(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> 
+                            <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## 安装
+</span><span style="color:#75715e"></span>install(<span style="color:#e6db74">TARGETS</span> <span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">bin</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>install(<span style="color:#e6db74">FILES</span> <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}/TutorialConfig.h&#34;</span>
+  <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">include</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># enable dashboard scripting
+</span><span style="color:#75715e"></span>include(<span style="color:#e6db74">CTest</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># does the application run
+</span><span style="color:#75715e"></span>add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Runs</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">25</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># does the usage message work?
+</span><span style="color:#75715e"></span>add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Usage</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">Tutorial</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set_tests_properties(<span style="color:#e6db74">Usage</span>
+  <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">PASS_REGULAR_EXPRESSION</span> <span style="color:#e6db74">&#34;Usage:.*number&#34;</span>
+  )<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># define a function to simplify adding tests
+</span><span style="color:#75715e"></span>function(<span style="color:#e6db74">do_test</span> <span style="color:#e6db74">target</span> <span style="color:#e6db74">arg</span> <span style="color:#e6db74">result</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  add_test(<span style="color:#e6db74">NAME</span> <span style="color:#e6db74">Comp</span><span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span> <span style="color:#e6db74">COMMAND</span> <span style="color:#f92672">${</span>target<span style="color:#f92672">}</span> <span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  set_tests_properties(<span style="color:#e6db74">Comp</span><span style="color:#f92672">${</span>arg<span style="color:#f92672">}</span>
+    <span style="color:#e6db74">PROPERTIES</span> <span style="color:#e6db74">PASS_REGULAR_EXPRESSION</span> <span style="color:#f92672">${</span>result<span style="color:#f92672">}</span>
+    )<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>endfunction()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># do a bunch of result based tests
+</span><span style="color:#75715e"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">4</span> <span style="color:#e6db74">&#34;4 is 2&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">9</span> <span style="color:#e6db74">&#34;9 is 3&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">5</span> <span style="color:#e6db74">&#34;5 is 2.236&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">7</span> <span style="color:#e6db74">&#34;7 is 2.645&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">25</span> <span style="color:#e6db74">&#34;25 is 5&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">-25</span> <span style="color:#e6db74">&#34;-25 is (-nan|nan|0)&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>do_test(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">0.0001</span> <span style="color:#e6db74">&#34;0.0001 is 0.01&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">## Packaging an Installer
+</span><span style="color:#75715e"># 此模块将打包项目当前平台所需的任何运行时库
+</span><span style="color:#75715e"></span>include(<span style="color:#e6db74">InstallRequiredSystemLibraries</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_RESOURCE_FILE_LICENSE</span> <span style="color:#e6db74">&#34;${CMAKE_CURRENT_SOURCE_DIR}/License.txt&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_PACKAGE_VERSION_MAJOR</span> <span style="color:#e6db74">&#34;${Tutorial_VERSION_MAJOR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_PACKAGE_VERSION_MINOR</span> <span style="color:#e6db74">&#34;${Tutorial_VERSION_MINOR}&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CPACK_SOURCE_GENERATOR</span> <span style="color:#e6db74">&#34;TGZ&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>include(<span style="color:#e6db74">CPack</span>)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><p>在 <code>Mathfunctions/Cmakelists.txt</code> 中，我们需要创建一个 <code>Sqrtlibrary</code>，当启用 <code>USE_MYMATH</code> 时，将有条件地构建和安装。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-CMake" data-lang="CMake"><span style="color:#75715e"># add the library that runs
+</span><span style="color:#75715e"></span>add_library(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">MathFunctions.cxx</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 将当前二进制目录添加到包含目录列表中
+</span><span style="color:#75715e"></span>target_include_directories(<span style="color:#e6db74">MathFunctions</span> 
+            <span style="color:#e6db74">INTERFACE</span> <span style="color:#f92672">${</span>CMAKE_CURRENT_SOURCE_DIR<span style="color:#f92672">}</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># should we use our own math functions
+</span><span style="color:#75715e"># 是否使用 USE_MYMATH 选项
+</span><span style="color:#75715e"></span>option(<span style="color:#e6db74">USE_MYMATH</span> <span style="color:#e6db74">&#34;Use tutorial provided math implementation&#34;</span> <span style="color:#e6db74">ON</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>if(<span style="color:#e6db74">USE_MYMATH</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># 设置程序中使用到的宏定义
+</span><span style="color:#75715e"></span>  target_compile_definitions(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">PRIVATE</span> <span style="color:#e6db74">&#34;USE_MYMATH&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># first we add the executable that generates the table
+</span><span style="color:#75715e"></span>  add_executable(<span style="color:#e6db74">MakeTable</span> <span style="color:#e6db74">MakeTable.cxx</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># add the command to generate the source code
+</span><span style="color:#75715e"></span>  add_custom_command(
+    <span style="color:#e6db74">OUTPUT</span> <span style="color:#f92672">${</span>CMAKE_CURRENT_BINARY_DIR<span style="color:#f92672">}</span><span style="color:#e6db74">/Table.h</span>
+    <span style="color:#e6db74">COMMAND</span> <span style="color:#e6db74">MakeTable</span> <span style="color:#f92672">${</span>CMAKE_CURRENT_BINARY_DIR<span style="color:#f92672">}</span><span style="color:#e6db74">/Table.h</span>
+    <span style="color:#e6db74">DEPENDS</span> <span style="color:#e6db74">MakeTable</span>
+    )<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># 添加静态库
+</span><span style="color:#75715e"></span>  <span style="color:#75715e"># library that just does sqrt
+</span><span style="color:#75715e"></span>  add_library(<span style="color:#e6db74">SqrtLibrary</span> <span style="color:#e6db74">STATIC</span>
+              <span style="color:#e6db74">mysqrt.cxx</span>
+              <span style="color:#f92672">${</span>CMAKE_CURRENT_BINARY_DIR<span style="color:#f92672">}</span><span style="color:#e6db74">/Table.h</span>
+              )<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># state that we depend on our binary dir to find Table.h
+</span><span style="color:#75715e"></span>  target_include_directories(<span style="color:#e6db74">SqrtLibrary</span> 
+                             <span style="color:#e6db74">PRIVATE</span> <span style="color:#f92672">${</span>CMAKE_CURRENT_BINARY_DIR<span style="color:#f92672">}</span>
+                             )<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#75715e"># state that SqrtLibrary need PIC(position independent code) when the default is shared libraries
+</span><span style="color:#75715e"></span>  <span style="color:#75715e"># 如果将一个没有位置独立代码(position independent code)的静态库与一个有位置独立代码的库组合在一起使用，
+</span><span style="color:#75715e"></span>  <span style="color:#75715e"># 就要显示设置目标的属性，否则会有链接错误
+</span><span style="color:#75715e"></span>  set_target_properties(<span style="color:#e6db74">SqrtLibrary</span> <span style="color:#e6db74">PROPERTIES</span>
+                        <span style="color:#e6db74">POSITION_INDEPENDENT_CODE</span> <span style="color:#f92672">${</span>BUILD_SHARED_LIBS<span style="color:#f92672">}</span>
+                        )<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  target_link_libraries(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">PRIVATE</span> <span style="color:#e6db74">SqrtLibrary</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>endif()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># define the symbol stating we are using the declspec(dllexport) when
+</span><span style="color:#75715e"># building on windows
+</span><span style="color:#75715e"># 声明dll导出宏定义
+</span><span style="color:#75715e"></span>target_compile_definitions(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">PRIVATE</span> <span style="color:#e6db74">&#34;EXPORTING_MYMATH&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># install rules
+</span><span style="color:#75715e"># 安装规则
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">installable_libs</span> <span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>if(<span style="color:#e6db74">TARGET</span> <span style="color:#e6db74">SqrtLibrary</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  list(<span style="color:#e6db74">APPEND</span> <span style="color:#e6db74">installable_libs</span> <span style="color:#e6db74">SqrtLibrary</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>endif()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>install(<span style="color:#e6db74">TARGETS</span> <span style="color:#f92672">${</span>installable_libs<span style="color:#f92672">}</span> <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">lib</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>install(<span style="color:#e6db74">FILES</span> <span style="color:#e6db74">MathFunctions.h</span> <span style="color:#e6db74">DESTINATION</span> <span style="color:#e6db74">include</span>)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div>
 
   </div>
 
@@ -377,7 +377,7 @@ if (!doNotTrack) {
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

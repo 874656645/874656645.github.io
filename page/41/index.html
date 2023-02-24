@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.94.2" /><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
@@ -157,11 +157,49 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>操作符重载
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>还有类型转换函数
+#include &lt;iostream&gt; using namespace std; class Complex{ // friend Complex complexAdd(Complex &amp;c1, Complex &amp;c2);  // friend Complex operator&#43;(Complex &amp;c1, Complex &amp;c2);  // friend Complex&amp; operator&#43;= (Complex &amp;c1, Complex &amp;c2);  friend ostream&amp; operator&lt;&lt;(ostream &amp;os, Complex &amp;c); friend istream&amp; operator&gt;&gt;(istream &amp;is, Complex &amp;c); public: Complex(){ cout &lt;&lt; &#34;Complex()...&#34; &lt;&lt; endl; a = 0; b = 0; } Complex(int a, int b){ cout &lt;&lt; &#34;Complex(int, int)...&#34; &lt;&lt; endl; this-&gt;a = a; this-&gt;b = b; } ~Complex(){ cout &lt;&lt; &#34;~Complex()....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-03 13:54:11 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 操作符重载" href="https://874656645.github.io/posts/59-%E6%93%8D%E4%BD%9C%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>具有链表特性的类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>买卖货物问题：
+#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 具有链表特性的类" href="https://874656645.github.io/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>STL 总结
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL 常用的容器有哪些以及各自的特点是什么?    名称 特点     vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector 扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-30 10:34:27 +0800 CST'>December 30, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL 总结" href="https://874656645.github.io/posts/56-stl-%E6%80%BB%E7%BB%93/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>vector
     </h2>
   </header>
   <section class="entry-content">
-    <p>vector 常用操作 #include &lt;iostream&gt;#include &lt;vector&gt; int main() {  //1.定义和初始化  vector&lt;int&gt; vec1; //默认初始化，vec1为空  vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2  vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&lt;int&gt; vec4(10); //10个值为0的元素  vector&lt;int&gt; vec5(10,4); //10个值为4的元素   //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); // 尾部添加元素  vec1.insert(vec1.end(),5,3); // 从vec1.back位置插入5个值为3的元素   //2.2 删除函数  vec1.pop_back(); // 删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()&#43;2); // 删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); // 清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&lt;int&gt;().swap(V); // 利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  // 且只有存储对象时才有效   //2....</p>
+    <p>vector 常用操作 #include &lt;iostream&gt;#include &lt;vector&gt; int main() { //1.定义和初始化  vector&lt;int&gt; vec1; //默认初始化，vec1为空  vector&lt;int&gt; vec2(vec1); //使用vec1初始化vec2  vector&lt;int&gt; vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2  vector&lt;int&gt; vec4(10); //10个值为0的元素  vector&lt;int&gt; vec5(10,4); //10个值为4的元素  //2.常用操作方法  //2.1 添加函数  vec1.push_back(100); // 尾部添加元素  vec1.insert(vec1.end(),5,3); // 从vec1.back位置插入5个值为3的元素  //2.2 删除函数  vec1.pop_back(); // 删除末尾元素  vec1.erase(vec1.begin(),vec1.begin()&#43;2); // 删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移  vec1.clear(); // 清空元素，元素在内存中并未消失，通常使用swap()来清空  vector&lt;int&gt;().swap(V); // 利用swap函数和临时对象交换内存，交换以后，临时对象消失，释放内存。  // 必须是同类型的 vector  // 且只有存储对象时才有效  //2.3 遍历函数  vec1[0]; //取得第一个元素  vec1....</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-29 19:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to vector" href="https://874656645.github.io/posts/55-vector/"></a>
@@ -181,53 +219,10 @@ STL（Standard Template Library），即标准模板库，是一个具有工业�
 2. deque deque 是 double ended queue 的缩写，双向队列不论在尾部或头部插入元素，都十分迅速。而在中间插入元素则会比较费时，因为必须移动中间其他的元素。与 vector 不同，deque 不能保证将所有元素存储在连续的存储空间上
 3. list list 是 STL 实现的双向链表，与 vector 相比, 它允许快速的插入和删除，但是随机访问却比较慢
 4. map、multimap、unordered_map、unordered_multimap  map 是 STL 的一个关联容器，它是一种键值对容器，里面的数据都是成对出现的，且键值是唯一的，可在我们处理一对一数据的时候，在编程上提供快速通道。map内部自建一颗红黑树(一种非严格意义上的平衡二叉树)，这颗树具有对数据自动排序的功能，所以在map内部所有的数据都是有序的。 multimap 中的元素也是有序的，但允许存在相同键值的 unordered_map 中的元素是唯一的，但无序（也不是插入顺序），而是根据它们的散列值（hash values）组织成桶（buckets），从而允许通过键值直接快速访问单个元素（速度一般比 map 更快） unordered_multimap 无序且不唯一  5. set、multiset、unordered_set、unordered_multiset  set 的含义是集合，它是一个有序的容器，里面的元素都是唯一且排序好的，支持插入、删除、查找等操作，就像一个集合一样，所有的操作都是严格在 logn时间内完成，效率非常高，使用方法类似 list multiset 也是排序好的，但是可以存有相同的元素 unordered_set 无序但元素是不可重复的 unordered_multiset 无序，元素也不唯一  二、容器适配器 虽然 stack、queue、priority_queue 中也可以存放元素，但在 STL 中并没有将其划分在容器的行列，而是将其称为容器适配器，这是因为每个容器在底层都有自己的实现方式，而 stack、queue、priority_queue 只是在底层将其他容器进行了封装
-std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack;  std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue;  std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择 deque 作为 stack 和 queue 的底层默认容器？...</p>
+std::stack template&lt;class T, class Container = deque&lt;T&gt;&gt; class stack; std::queue template&lt;class T, class Container = deque&lt;T&gt;&gt; class queue; std::priority_queue template&lt;class T, class Container = vector&lt;T&gt;, class Compare = less&lt;typename Container::value_type&gt;&gt; class priority_queue; 为什么选择 deque 作为 stack 和 queue 的底层默认容器？...</p>
   </section>
   <footer class="entry-footer"><span title='2021-12-29 17:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; STL" href="https://874656645.github.io/posts/54-c&#43;&#43;-stl/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>new、delete 与内存
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>C&#43;&#43; 中 new 操作符内幕：new operator、operator new、placement new 
-1、new / delete 具体步骤 new
- 第一步：调用 operator new 函数分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象 第二步：编译器运行相应的构造函数以构造对象，并为其传入初值 第三部：对象构造完成后，返回一个指向该对象的指针  delete
- 第一步：调用对象的析构函数 第二步：编译器调用 operator delete 函数释放内存空间  2、new/delete 与 malloc/free 的区别是什么？  malloc/free 是 C 语言的标准库函数， new/delete 是 C&#43;&#43; 的运算符。它们都可用于申请动态内存和释放内存 malloc/free 不会去自动调用构造和析构函数，对于基本数据类型的对象而言，光用 malloc/free 无法满足动态对象的要求 malloc/free 需要指定分配内存的大小，而 new/delete 会自动计算所需内存大小 new 返回的是指定对象的指针，而 malloc 返回的是 void*，因此 malloc 的返回值一般都需要进行强制类型转换  operator new 重载：
-class Person{ public:  Person(){  id = 0;  score = 0;  cout &lt;&lt; &#34;Person()&#34; &lt;&lt; endl;  }  Person(int id, int score):id(id),score(score){  cout &lt;&lt; &#34;Person(int, int)&#34; &lt;&lt; endl;  }  Person(const Person &amp;p){  cout &lt;&lt; &#34;Person(const Person &amp;p)&#34; &lt;&lt; endl;  id = p....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-29 15:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to new、delete 与内存" href="https://874656645.github.io/posts/53-new-delete-%E4%B8%8E%E5%86%85%E5%AD%98/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>new 二维数组
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>在堆上声明一个数组 int main( ) { #if 0// 方式一： int** pArr = NULL; pArr = new int*[4]; for(int i = 0; i &lt; 4; i&#43;&#43;){ pArr[i] = new int[8]; } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ pArr[i][j] = i * j; } } for(int i = 0; i &lt; 4; &#43;&#43;i){ for(int j = 0; j &lt; 8; &#43;&#43;j){ if(j == 0) cout &lt;&lt; endl; cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;; } } // 删除 for(int i = 0; i &lt; 4; &#43;&#43;i){ delete [] pArr[i]; } delete [] pArr; #endif  // 方式二：  cout &lt;&lt; sizeof(int[5]) &lt;&lt; endl;  // 初始化  int(*pArr)[8] = new int[4][8];  memset(pArr, 0, sizeof(int[4][8]));  // 或者  // int(*pArr)[8] = new int[4][8]{{0}};  cout &lt;&lt; sizeof(int[4][8]) &lt;&lt; endl;   for(int i = 0; i &lt; 4; &#43;&#43;i){  for(int j = 0; j &lt; 8; &#43;&#43;j){  pArr[i][j] = i * j;  }  }  for(int i = 0; i &lt; 4; &#43;&#43;i){  for(int j = 0; j &lt; 8; &#43;&#43;j){  cout &lt;&lt; pArr[i][j] &lt;&lt; &#39;\t&#39;;  }  cout &lt;&lt; endl;  }  cout &lt;&lt; endl;  delete[] pArr;   // 取地址  int arr[3][4]{{0}};  int(*p)[3][4] = &amp;arr;  cout &lt;&lt; arr[2][3] &lt;&lt; endl;  cout &lt;&lt; *p[2][3] &lt;&lt; endl;   return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-29 14:34:27 +0800 CST'>December 29, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to new 二维数组" href="https://874656645.github.io/posts/52-new-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>类其它总结
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1. this指针 this 指针是一个隐含于每一个非静态成员函数中的特殊指针，它指向调用该成员函数的对象的首地址
- 当对一个对象调用成员函数时，编译程序先将对象的地址赋给 this 指针，然后调用成员函数，每次成员函数存取数据成员时，都隐式使用 this 指针 this 指针被隐含地声明为: ClassName *const this，这意味着不能给 this 指针赋值 this 是个右值，所以不能取 this 的地址  2. delete this  类的成员函数中可以调用 delete this，但是在释放后，对象后续调用的方法不能再用到 this 指针 delete this 释放了类对象的内存空间，但是内存空间却并不是马上被回收到系统中，此时其中的值是不确定的 delete 的本质是为将被释放的内存调用一个或多个析构函数，如果在类的析构函数中调用 delete this，会陷入无限递归，造成栈溢出  3. 一个空类class中有什么？ 构造函数、拷贝构造函数、析构函数、赋值运算符重载、取地址操作符重载、被 const 修饰的取地址操作符重载
-4. C&#43;&#43; 计算一个类的 sizeof  一个空的类 sizeof 返回 1，因为一个空类也要实例化，所谓类的实例化就是在内存中分配一块地址 类内的普通成员函数不参与 sizeof 的统计，因为 sizeof 是针对实例的，而普通成员函数，是针对类体的 一个类如果含有虚函数，则这个类中有一个指向虚函数表的指针（虚函数指针），32位程序占4个字节，64位程序占8个字节 静态成员不影响类的大小，被编译器放在程序的数据段中 普通继承的类sizeof，会得到基类的大小加上派生类自身成员的大小 当存在虚拟继承时，派生类中会有一个指向虚基类表的指针。所以其大小应为普通继承的大小，再加上虚基类表的指针大小  5. 构造函数和析构函数能被继承吗? 不能。构造函数和析构函数是用来处理对象的创建和析构的，它们只知道对在它们的特殊层次的对象做什么
-6. 构造函数能不能是虚函数？ 不能。虚函数对应一个虚函数表，可是这个虚函数表存储在对象的内存空间的。问题就在于，如果构造函数是虚的，就需要通过 虚函数表来调用，可是对象还没有实例化，也就是内存空间还没有，就不会有虚函数表...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-28 17:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类其它总结" href="https://874656645.github.io/posts/51-%E7%B1%BB%E5%85%B6%E5%AE%83%E6%80%BB%E7%BB%93/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
@@ -239,7 +234,7 @@ class Person{ public:  Person(){  id = 0;  score = 0;  cout &lt;&lt; &#34;Person
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

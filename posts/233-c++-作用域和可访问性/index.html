@@ -8,7 +8,7 @@
 <title>C&#43;&#43;——作用域和可访问性 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="一、 命名空间   嵌套命名空间
-namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){  cout &lt;&lt; &#34;B::C::g(long)\n&#34;;  }  }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{  int y = 1;  int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;;  }  void g(void){  cout &lt;&lt; &#34;B::C::g(void)\n&#34;;  } };  static int xx = 1;  class A{ public:  int xx;  A(int xx){  A::xx = xx;  } }; int main() {  static int xx = 2;  A a(3);  cout &lt;&lt; a.">
+namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){ cout &lt;&lt; &#34;B::C::g(long)\n&#34;; } }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{ int y = 1; int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;; } void g(void){ cout &lt;&lt; &#34;B::C::g(void)\n&#34;; } }; static int xx = 1; class A{ public: int xx; A(int xx){ A::xx = xx; } }; int main() { static int xx = 2; A a(3); cout &lt;&lt; a.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/233-c&#43;&#43;-%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -17,7 +17,7 @@ namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声�
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -48,7 +48,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="C&#43;&#43;——作用域和可访问性" />
 <meta property="og:description" content="一、 命名空间   嵌套命名空间
-namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){  cout &lt;&lt; &#34;B::C::g(long)\n&#34;;  }  }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{  int y = 1;  int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;;  }  void g(void){  cout &lt;&lt; &#34;B::C::g(void)\n&#34;;  } };  static int xx = 1;  class A{ public:  int xx;  A(int xx){  A::xx = xx;  } }; int main() {  static int xx = 2;  A a(3);  cout &lt;&lt; a." />
+namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){ cout &lt;&lt; &#34;B::C::g(long)\n&#34;; } }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{ int y = 1; int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;; } void g(void){ cout &lt;&lt; &#34;B::C::g(void)\n&#34;; } }; static int xx = 1; class A{ public: int xx; A(int xx){ A::xx = xx; } }; int main() { static int xx = 2; A a(3); cout &lt;&lt; a." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/233-c&#43;&#43;-%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-09T17:35:34&#43;08:00" />
@@ -60,7 +60,7 @@ namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声�
 
 <meta name="twitter:title" content="C&#43;&#43;——作用域和可访问性"/>
 <meta name="twitter:description" content="一、 命名空间   嵌套命名空间
-namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){  cout &lt;&lt; &#34;B::C::g(long)\n&#34;;  }  }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{  int y = 1;  int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;;  }  void g(void){  cout &lt;&lt; &#34;B::C::g(void)\n&#34;;  } };  static int xx = 1;  class A{ public:  int xx;  A(int xx){  A::xx = xx;  } }; int main() {  static int xx = 2;  A a(3);  cout &lt;&lt; a."/>
+namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){ cout &lt;&lt; &#34;B::C::g(long)\n&#34;; } }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{ int y = 1; int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;; } void g(void){ cout &lt;&lt; &#34;B::C::g(void)\n&#34;; } }; static int xx = 1; class A{ public: int xx; A(int xx){ A::xx = xx; } }; int main() { static int xx = 2; A a(3); cout &lt;&lt; a."/>
 
 
 <script type="application/ld+json">
@@ -89,11 +89,11 @@ namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声�
   "@type": "BlogPosting",
   "headline": "C++——作用域和可访问性",
   "name": "C\u002b\u002b——作用域和可访问性",
-  "description": "一、 命名空间   嵌套命名空间\nnamespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){  cout \u0026lt;\u0026lt; \u0026#34;B::C::g(long)\\n\u0026#34;;  }  }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{  int y = 1;  int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout \u0026lt;\u0026lt; \u0026#34;B::C::g(int)\\n\u0026#34;;  }  void g(void){  cout \u0026lt;\u0026lt; \u0026#34;B::C::g(void)\\n\u0026#34;;  } };  static int xx = 1;  class A{ public:  int xx;  A(int xx){  A::xx = xx;  } }; int main() {  static int xx = 2;  A a(3);  cout \u0026lt;\u0026lt; a.",
+  "description": "一、 命名空间   嵌套命名空间\nnamespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){ cout \u0026lt;\u0026lt; \u0026#34;B::C::g(long)\\n\u0026#34;; } }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{ int y = 1; int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout \u0026lt;\u0026lt; \u0026#34;B::C::g(int)\\n\u0026#34;; } void g(void){ cout \u0026lt;\u0026lt; \u0026#34;B::C::g(void)\\n\u0026#34;; } }; static int xx = 1; class A{ public: int xx; A(int xx){ A::xx = xx; } }; int main() { static int xx = 2; A a(3); cout \u0026lt;\u0026lt; a.",
   "keywords": [
     "C++"
   ],
-  "articleBody": "一、 命名空间   嵌套命名空间\nnamespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){  cout  \"B::C::g(long)\\n\";  }  }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{  int y = 1;  int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout  \"B::C::g(int)\\n\";  }  void g(void){  cout  \"B::C::g(void)\\n\";  } };  static int xx = 1;  class A{ public:  int xx;  A(int xx){  A::xx = xx;  } }; int main() {  static int xx = 2;  A a(3);  cout  a.xx  endl; // 3  cout  ::xx  endl; // 1  cout  xx  endl; // 2  ::xx = 0;  cout  ::xx  endl; // 0  cout  \u0026::xx  endl; // 0x557c5799c010  cout  \u0026xx  endl; // 0x557c5799c014   cout  B::C::x + B::C::y  endl; // 3   g(4); // B::C::g(int)  g(4l); // B::C::g(long)  cout  x  endl; // 2  // g(); // error: no matching function for call to ‘g()’  // using 之前没有该原型   return 0; }   匿名命名空间\n类似静态声明，匿名命名空间中的变量和函数只能在当前模块中使用\nMyTestNamespace cpp 文件：\nnamespace MyTestNamespace {   // 匿名命名空间  namespace {  int noName = 11;  void noNameFunc() {  std::cout  \"no name namespace\\n\";  }  }   void globalFunc();   void MyTestClass::testFun() {  globalFunc();  std::cout  noName  std::endl;  noNameFunc();  } }   二、对象作用域 ",
+  "articleBody": "一、 命名空间   嵌套命名空间\nnamespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){ cout  \"B::C::g(long)\\n\"; } }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{ int y = 1; int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout  \"B::C::g(int)\\n\"; } void g(void){ cout  \"B::C::g(void)\\n\"; } }; static int xx = 1; class A{ public: int xx; A(int xx){ A::xx = xx; } }; int main() { static int xx = 2; A a(3); cout  a.xx  endl; // 3  cout  ::xx  endl; // 1  cout  xx  endl; // 2  ::xx = 0; cout  ::xx  endl; // 0  cout  \u0026::xx  endl; // 0x557c5799c010  cout  \u0026xx  endl; // 0x557c5799c014  cout  B::C::x + B::C::y  endl; // 3  g(4); // B::C::g(int)  g(4l); // B::C::g(long)  cout  x  endl; // 2  // g(); // error: no matching function for call to ‘g()’  // using 之前没有该原型  return 0; }   匿名命名空间\n类似静态声明，匿名命名空间中的变量和函数只能在当前模块中使用\nMyTestNamespace cpp 文件：\nnamespace MyTestNamespace { // 匿名命名空间  namespace { int noName = 11; void noNameFunc() { std::cout  \"no name namespace\\n\"; } } void globalFunc(); void MyTestClass::testFun() { globalFunc(); std::cout  noName  std::endl; noNameFunc(); } }   二、对象作用域 ",
   "wordCount" : "234",
   "inLanguage": "en",
   "datePublished": "2022-09-09T17:35:34+08:00",
@@ -217,88 +217,88 @@ namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声�
 <ol>
 <li>
 <p>嵌套命名空间</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> B{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">namespace</span> C{
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> x;       <span style="color:#75715e">// 声明变量
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(<span style="color:#66d9ef">int</span>);        <span style="color:#75715e">// 声明函数原型
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(<span style="color:#66d9ef">long</span>){
-</span></span><span style="display:flex;"><span>            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::C::g(long)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    };
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> B<span style="color:#f92672">::</span>C<span style="color:#f92672">::</span>x;              <span style="color:#75715e">// 声明引用变量 x，把它引入到当前作用域
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                            <span style="color:#75715e">// 就不能在当前作用域定义同名变量了
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> B;          <span style="color:#75715e">// 引用命名空间，但不会把函数和变量引入到当前作用域
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                            <span style="color:#75715e">// 在当前作用域中仍然可以定义同名的变量和函数
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> B<span style="color:#f92672">::</span>C<span style="color:#f92672">::</span>g;              <span style="color:#75715e">// 声明引用 void g(int) 和 void g(long)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                            <span style="color:#75715e">// 将函数名为 g 的所有函数都引入到当前作用域
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> B<span style="color:#f92672">::</span>C{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;              <span style="color:#75715e">// 定义变量 x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(<span style="color:#66d9ef">int</span> a){          <span style="color:#75715e">// 定义函数 void g(int)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::C::g(int)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(<span style="color:#66d9ef">void</span>){
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::C::g(void)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>{
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> xx;
-</span></span><span style="display:flex;"><span>    A(<span style="color:#66d9ef">int</span> xx){
-</span></span><span style="display:flex;"><span>        A<span style="color:#f92672">::</span>xx <span style="color:#f92672">=</span> xx;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>    A a(<span style="color:#ae81ff">3</span>);
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> a.xx <span style="color:#f92672">&lt;&lt;</span> endl;               <span style="color:#75715e">// 3
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>xx <span style="color:#f92672">&lt;&lt;</span> endl;               <span style="color:#75715e">// 1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> xx <span style="color:#f92672">&lt;&lt;</span> endl;                 <span style="color:#75715e">// 2
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#f92672">::</span>xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>xx <span style="color:#f92672">&lt;&lt;</span> endl;               <span style="color:#75715e">// 0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;::</span>xx <span style="color:#f92672">&lt;&lt;</span> endl;              <span style="color:#75715e">// 0x557c5799c010
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;</span>xx <span style="color:#f92672">&lt;&lt;</span> endl;                <span style="color:#75715e">// 0x557c5799c014
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> B<span style="color:#f92672">::</span>C<span style="color:#f92672">::</span>x <span style="color:#f92672">+</span> B<span style="color:#f92672">::</span>C<span style="color:#f92672">::</span>y <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 3
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    g(<span style="color:#ae81ff">4</span>);                               <span style="color:#75715e">// B::C::g(int)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    g(<span style="color:#ae81ff">4l</span>);                              <span style="color:#75715e">// B::C::g(long)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;                  <span style="color:#75715e">// 2
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// g();                             // error: no matching function for call to ‘g()’
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                                        <span style="color:#75715e">// using 之前没有该原型
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">namespace</span> B{
+    <span style="color:#66d9ef">namespace</span> C{
+        <span style="color:#66d9ef">extern</span> <span style="color:#66d9ef">int</span> x;       <span style="color:#75715e">// 声明变量
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(<span style="color:#66d9ef">int</span>);        <span style="color:#75715e">// 声明函数原型
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(<span style="color:#66d9ef">long</span>){
+            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::C::g(long)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+        }
+    };
+};
+<span style="color:#66d9ef">using</span> B<span style="color:#f92672">::</span>C<span style="color:#f92672">::</span>x;              <span style="color:#75715e">// 声明引用变量 x，把它引入到当前作用域
+</span><span style="color:#75715e"></span>                            <span style="color:#75715e">// 就不能在当前作用域定义同名变量了
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> B;          <span style="color:#75715e">// 引用命名空间，但不会把函数和变量引入到当前作用域
+</span><span style="color:#75715e"></span>                            <span style="color:#75715e">// 在当前作用域中仍然可以定义同名的变量和函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> B<span style="color:#f92672">::</span>C<span style="color:#f92672">::</span>g;              <span style="color:#75715e">// 声明引用 void g(int) 和 void g(long)
+</span><span style="color:#75715e"></span>                            <span style="color:#75715e">// 将函数名为 g 的所有函数都引入到当前作用域
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">namespace</span> B<span style="color:#f92672">::</span>C{
+    <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;              <span style="color:#75715e">// 定义变量 x
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(<span style="color:#66d9ef">int</span> a){          <span style="color:#75715e">// 定义函数 void g(int)
+</span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::C::g(int)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(<span style="color:#66d9ef">void</span>){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::C::g(void)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+};
+
+<span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> xx;
+    A(<span style="color:#66d9ef">int</span> xx){
+        A<span style="color:#f92672">::</span>xx <span style="color:#f92672">=</span> xx;
+    }
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+    A a(<span style="color:#ae81ff">3</span>);
+    cout <span style="color:#f92672">&lt;&lt;</span> a.xx <span style="color:#f92672">&lt;&lt;</span> endl;               <span style="color:#75715e">// 3
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>xx <span style="color:#f92672">&lt;&lt;</span> endl;               <span style="color:#75715e">// 1
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> xx <span style="color:#f92672">&lt;&lt;</span> endl;                 <span style="color:#75715e">// 2
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">::</span>xx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">::</span>xx <span style="color:#f92672">&lt;&lt;</span> endl;               <span style="color:#75715e">// 0
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;::</span>xx <span style="color:#f92672">&lt;&lt;</span> endl;              <span style="color:#75715e">// 0x557c5799c010
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;</span>xx <span style="color:#f92672">&lt;&lt;</span> endl;                <span style="color:#75715e">// 0x557c5799c014
+</span><span style="color:#75715e"></span>
+    cout <span style="color:#f92672">&lt;&lt;</span> B<span style="color:#f92672">::</span>C<span style="color:#f92672">::</span>x <span style="color:#f92672">+</span> B<span style="color:#f92672">::</span>C<span style="color:#f92672">::</span>y <span style="color:#f92672">&lt;&lt;</span> endl;  <span style="color:#75715e">// 3
+</span><span style="color:#75715e"></span>
+    g(<span style="color:#ae81ff">4</span>);                               <span style="color:#75715e">// B::C::g(int)
+</span><span style="color:#75715e"></span>    g(<span style="color:#ae81ff">4l</span>);                              <span style="color:#75715e">// B::C::g(long)
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;                  <span style="color:#75715e">// 2
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// g();                             // error: no matching function for call to ‘g()’
+</span><span style="color:#75715e"></span>                                        <span style="color:#75715e">// using 之前没有该原型
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div></li>
 <li>
 <p>匿名命名空间</p>
 <p>类似静态声明，匿名命名空间中的变量和函数只能在当前模块中使用</p>
 <p><em>MyTestNamespace cpp</em> 文件：</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">namespace</span> MyTestNamespace {
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 匿名命名空间
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">namespace</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> noName <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">noNameFunc</span>() {
-</span></span><span style="display:flex;"><span>            std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;no name namespace</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">globalFunc</span>();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> MyTestClass<span style="color:#f92672">::</span>testFun() {
-</span></span><span style="display:flex;"><span>        globalFunc();
-</span></span><span style="display:flex;"><span>        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> noName <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
-</span></span><span style="display:flex;"><span>        noNameFunc();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">namespace</span> MyTestNamespace {
+
+    <span style="color:#75715e">// 匿名命名空间
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">namespace</span> {
+        <span style="color:#66d9ef">int</span> noName <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
+        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">noNameFunc</span>() {
+            std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;no name namespace</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+        }
+    }
+
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">globalFunc</span>();
+
+    <span style="color:#66d9ef">void</span> MyTestClass<span style="color:#f92672">::</span>testFun() {
+        globalFunc();
+        std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> noName <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+        noNameFunc();
+    }
+}
+</code></pre></div></li>
 </ol>
 <h2 id="二对象作用域">二、对象作用域<a hidden class="anchor" aria-hidden="true" href="#二对象作用域">#</a></h2>
 
@@ -328,7 +328,7 @@ namespace B{  namespace C{  extern int x; // 声明变量  void g(int); // 声�
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

@@ -8,7 +8,7 @@
 <title>Emscripten——Hello World | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="emcc, js, c&#43;&#43;" />
 <meta name="description" content="编译   新建 main.cpp 文件
-#include &lt;iostream&gt;using namespace std; int main(){  cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl;  return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
+#include &lt;iostream&gt;using namespace std; int main(){ cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl; return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
 执行命令 em&#43;&#43; main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
   使用 node 测试
 测试命令 node a.out.js，会在控制台输出 cout 的内容
@@ -24,7 +24,7 @@
 
 <script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
 <link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
-<script defer crossorigin="anonymous" src="/assets/js/highlight.min.4dcb3c4f38462f66c6b6137227726f5543cb934cca9788f041c087e374491df2.js" integrity="sha256-Tcs8TzhGL2bGthNyJ3JvVUPLk0zKl4jwQcCH43RJHfI="
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
     onload="hljs.initHighlightingOnLoad();"></script>
 <link rel="icon" href="https://874656645.github.io/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
@@ -55,7 +55,7 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="Emscripten——Hello World" />
 <meta property="og:description" content="编译   新建 main.cpp 文件
-#include &lt;iostream&gt;using namespace std; int main(){  cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl;  return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
+#include &lt;iostream&gt;using namespace std; int main(){ cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl; return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
 执行命令 em&#43;&#43; main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
   使用 node 测试
 测试命令 node a.out.js，会在控制台输出 cout 的内容
@@ -74,7 +74,7 @@ if (!doNotTrack) {
 
 <meta name="twitter:title" content="Emscripten——Hello World"/>
 <meta name="twitter:description" content="编译   新建 main.cpp 文件
-#include &lt;iostream&gt;using namespace std; int main(){  cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl;  return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
+#include &lt;iostream&gt;using namespace std; int main(){ cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl; return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
 执行命令 em&#43;&#43; main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
   使用 node 测试
 测试命令 node a.out.js，会在控制台输出 cout 的内容
@@ -110,11 +110,11 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "Emscripten——Hello World",
   "name": "Emscripten——Hello World",
-  "description": "编译   新建 main.cpp 文件\n#include \u0026lt;iostream\u0026gt;using namespace std; int main(){  cout \u0026lt;\u0026lt; \u0026#34;hello world!\u0026#34; \u0026lt;\u0026lt; endl;  return 0; }   使用 emcc 或 em++ 编译 C++ 文件\n执行命令 em++ main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。\n  使用 node 测试\n测试命令 node a.out.js，会在控制台输出 cout 的内容\n  使用 html 页面 测试\n执行命令 em++ main.cpp -o hello.html，会在同级目录下生成三个文件：\n hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件\n在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面",
+  "description": "编译   新建 main.cpp 文件\n#include \u0026lt;iostream\u0026gt;using namespace std; int main(){ cout \u0026lt;\u0026lt; \u0026#34;hello world!\u0026#34; \u0026lt;\u0026lt; endl; return 0; }   使用 emcc 或 em++ 编译 C++ 文件\n执行命令 em++ main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。\n  使用 node 测试\n测试命令 node a.out.js，会在控制台输出 cout 的内容\n  使用 html 页面 测试\n执行命令 em++ main.cpp -o hello.html，会在同级目录下生成三个文件：\n hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件\n在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面",
   "keywords": [
     "emcc", "js", "c++"
   ],
-  "articleBody": "编译   新建 main.cpp 文件\n#include using namespace std; int main(){  cout  \"hello world!\"  endl;  return 0; }   使用 emcc 或 em++ 编译 C++ 文件\n执行命令 em++ main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。\n  使用 node 测试\n测试命令 node a.out.js，会在控制台输出 cout 的内容\n  使用 html 页面 测试\n执行命令 em++ main.cpp -o hello.html，会在同级目录下生成三个文件：\n hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件\n在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面\n执行命令 em++ main.cpp -o hello.html -gsource-map，会在同级目录下生成四个文件：\n hello.html hello.js hello.wasm testHello.wasm.map：带有调试信息的 wasm 文件映射，在浏览器的调试窗口就可以看到 cpp 文件并进行调试了    静态网页服务器 这里使用的是 http-server\n 安装 node.js 安装 http-server: npm install http-server -g 启动服务器：http-server . -p 8000  WASM 调试  在编译命令中添加 -gsource-map 参数 确保网站根目录下有 C++ 或 C 源文件 如果使用 cmake 编译，在编译命令中还需要添加 -DCMAKE_BUILD_TYPE=Debug 参数  ",
+  "articleBody": "编译   新建 main.cpp 文件\n#include using namespace std; int main(){ cout  \"hello world!\"  endl; return 0; }   使用 emcc 或 em++ 编译 C++ 文件\n执行命令 em++ main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。\n  使用 node 测试\n测试命令 node a.out.js，会在控制台输出 cout 的内容\n  使用 html 页面 测试\n执行命令 em++ main.cpp -o hello.html，会在同级目录下生成三个文件：\n hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件\n在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面\n执行命令 em++ main.cpp -o hello.html -gsource-map，会在同级目录下生成四个文件：\n hello.html hello.js hello.wasm testHello.wasm.map：带有调试信息的 wasm 文件映射，在浏览器的调试窗口就可以看到 cpp 文件并进行调试了    静态网页服务器 这里使用的是 http-server\n 安装 node.js 安装 http-server: npm install http-server -g 启动服务器：http-server . -p 8000  WASM 调试  在编译命令中添加 -gsource-map 参数 确保网站根目录下有 C++ 或 C 源文件 如果使用 cmake 编译，在编译命令中还需要添加 -DCMAKE_BUILD_TYPE=Debug 参数  ",
   "wordCount" : "104",
   "inLanguage": "en",
   "datePublished": "2022-03-24T17:03:19+08:00",
@@ -238,13 +238,13 @@ if (!doNotTrack) {
 <ol>
 <li>
 <p>新建 main.cpp 文件</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;hello world!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(){
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;hello world!&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div></li>
 <li>
 <p>使用 <code>emcc</code> 或 <code>em++</code> 编译 C++ 文件<br>
 执行命令 <code>em++ main.cpp</code>，会在同级目录下生成 <code>a.out.js</code> 和 <code>a.out.wasm</code> 两个文件。</p>
@@ -318,7 +318,7 @@ if (!doNotTrack) {
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2022 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
