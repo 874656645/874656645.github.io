@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——Const、volatile、mutable
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 含有私有 const 实例数据成员的类必须定义构造函数，且该实例数据成员必须通过构造函数参数列表初始化 虽然 this 是隐含参数，也可以通过添加 const、volatile 修饰符实现函数重载 成员变量的类型会随着对象实例的类型变化而变化，比如一个 volatile int 类型的成员变量，如果对象实例为 const 的，则此时成员变量的类型为 const volatile int 经实验，mutable 不可以和 static、const 一起使用，但可以与 volatile 搭配使用  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-03 19:54:33 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——Const、volatile、mutable" href="https://874656645.github.io/posts/229-c&#43;&#43;-constvolatilemutable/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——成员指针
     </h2>
   </header>
@@ -192,18 +204,6 @@ static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部�
   </section>
   <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、通用引用  类型声明形式为 type&amp;&amp; 其中 type 类型是要进行推导的，如果类型推导没有发生，那么 type&amp;&amp; 代表一个右值引用 如果一个对象被声明为 auto&amp;&amp;，这个形参或者对象就是一个通用引用 通用引用，如果它被右值初始化，就会对应地成为右值引用；如果它被左值初始化，就会成为左值引用 如果在一个类模板里面看见了一个函数形参类型为 T&amp;&amp;，也不一定就是通用引用，可能并没有发生类型推导  void f(Widget&amp;&amp; param); //右值引用 Widget&amp;&amp; var1 = Widget(); //右值引用 auto&amp;&amp; var2 = var1; //通用引用（不是右值引用）  template&lt;typename T&gt; void f(std::vector&lt;T&gt;&amp;&amp; param); //右值引用  template&lt;typename T&gt; void f(T&amp;&amp; param); //通用引用（不是右值引用）  template &lt;typename T&gt; void f(const T&amp;&amp; param); //param是一个右值引用，因为添加了 const 限定符  // 函数模板 一般可能是通用引用 template &lt;typename T&gt; void print_reference_type(T &amp;&amp;i) { // T&amp;&amp; 或是 auto&amp;&amp;  if (std::is_lvalue_reference&lt;decltype(i)&gt;::value) { std::cout &lt;&lt; &#34;lvalue: &#34; &lt;&lt; i &lt;&lt; std::endl; } else if (std::is_rvalue_reference&lt;decltype(i)&gt;::value) { std::cout &lt;&lt; &#34;rvalue: &#34; &lt;&lt; i &lt;&lt; std::endl; } else { std::cout &lt;&lt; &#34;unknown value: &#34; &lt;&lt; i &lt;&lt; std::endl; } } // 因为 push_back 在有一个特定的 vector 实例之前不可能存在， // 而实例化 vector 时的类型已经决定了 push_back 的声明 // 所以在这里并没有发生类型推导 template&lt;class T, class Allocator = allocator&lt;T&gt;&gt; //来自C&#43;&#43;标准 class vector { public: void push_back(T&amp;&amp; x); … } 一个记录任意函数调用的时间开销的函数模板...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-06-11 20:48:22 +0800 CST'>June 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考" href="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

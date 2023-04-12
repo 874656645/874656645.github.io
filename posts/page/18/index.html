@@ -160,6 +160,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;17 变长参数模板
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>任意个数、任意类别的模板参数
+template&lt;typename... Ts&gt; class Magic; // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) { std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
+ C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) { std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) { std::cout &lt;&lt; value &lt;&lt; std::endl; my_printf(args...); } int main() { my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;); return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-13 10:49:20 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;17 变长参数模板" href="https://874656645.github.io/posts/176-c&#43;&#43;17-%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;17 使用结构化绑定来解包绑定的返回值
     </h2>
   </header>
@@ -209,21 +223,6 @@ template &lt;typename U&gt; T add(U x) { auto copy (val); // Get a copy of the v
   </section>
   <footer class="entry-footer"><span title='2022-04-11 17:51:55 +0800 CST'>April 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to const_cast" href="https://874656645.github.io/posts/172-const_cast/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>类型转换函数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、转换函数 Conversion Functions(operators) 在 C&#43;&#43; 中，使用类作为具体类型，对现实世界对象进行抽象。有时，需要隐式地将一种具体类型转换为另一种具体类型或 C&#43;&#43; 内建数据类型。转换函数在这种情况下发挥着重要作用。它类似于类中的运算符重载函数。
-转换函数写法：operator typeName();
- 转换函数必须是类的成员函数 转换函数不能指定返回值类型 转换函数不能有形参  例如下面的类：
-class Fraction { public: Fraction(int numerator, int denominator = 1) :m_numerator(numerator), m_denominator(denominator) { } //转换函数  operator double() const { return (double)m_numerator / m_denominator; } private: int m_numerator; //分子  int m_denominator; //分母 }; int main() { Fraction f(8,5); double d = 4 &#43; f; cout &lt;&lt; d &lt;&lt; endl; return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-10 15:39:37 +0800 CST'>April 10, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类型转换函数" href="https://874656645.github.io/posts/171-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

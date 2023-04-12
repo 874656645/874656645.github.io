@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——打印枚举常量字符串
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>#include &lt;stdio.h&gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(&#34;%s\n&#34;, STR(MyType_One)); printf(&#34;%s\n&#34;, STR(HELLO_WORLD)); printf(&#34;%s\n&#34;, STR(MY_INT)); printf(&#34;%s\n&#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：
+MyType_One HELLO_WORLD MY_INT 7777 </p>
+  </section>
+  <footer class="entry-footer"><span title='2023-04-12 22:02:53 +0800 CST'>April 12, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——打印枚举常量字符串" href="https://874656645.github.io/posts/261-c&#43;&#43;-%E6%89%93%E5%8D%B0%E6%9E%9A%E4%B8%BE%E5%B8%B8%E9%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Git——TortoiseGit 分支相关操作
     </h2>
   </header>
@@ -207,24 +220,6 @@ template&lt;typename T&gt; void InOrder(BinaryTreeNode&lt;T&gt;* root){ stack&lt
   </section>
   <footer class="entry-footer"><span title='2022-11-13 19:46:40 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树遍历" href="https://874656645.github.io/posts/255-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——二叉树
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、相关概念   结点：根节、叶节点、分支结点、兄弟结点、父子结点
-  边、路径
-  结点深度、高度、层数
- 根节点为第 0 层 深度指从根节点到该节点的边的数量 高度指从此节点到叶节点的结点数量    满二叉树、完全二叉树
- 满二叉树指除了度为 0 的叶节点就是度为 2 的分支节点 完全二叉树指只有最下面的两层度是小于 2 的，且最下面的结点都集中在左侧    扩充二叉树
-  二叉树性质
-  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-11-13 17:58:17 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树" href="https://874656645.github.io/posts/254-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

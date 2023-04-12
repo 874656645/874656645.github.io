@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——异常的使用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h
+struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { int a = 2; int getA()const override { return a; } }; #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { try { // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); } catch (const A e) { cout &lt;&lt; e....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-14 11:08:56 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——异常的使用" href="https://874656645.github.io/posts/236-c&#43;&#43;-%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——多继承与虚基类
     </h2>
   </header>
@@ -191,20 +204,6 @@ namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明�
   </section>
   <footer class="entry-footer"><span title='2022-09-06 22:28:34 +0800 CST'>September 6, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——父类与子类、基类与派生类" href="https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——派生类修改基类成员的访问权限
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>案例一：
-class A { int x, y; public: int getx() { return x; } protected: int gety() { return y; } }; class B : private A /* public A */ /* protected A */{ bool visible; public: using A::getx; A::gety;	// deprecated }; 案例二：
-class MyList { struct Node { int v; Node* next; Node(int v, Node* n) { this-&gt;v = v; next = n; } ~Node() { cout &lt;&lt; &#34;~Node()\n&#34;; delete next; next = nullptr; } } *head; public: MyList() { head = nullptr; } ~MyList() { if (head !...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-04 20:45:58 +0800 CST'>September 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——派生类修改基类成员的访问权限" href="https://874656645.github.io/posts/230-c&#43;&#43;-%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%BF%AE%E6%94%B9%E5%9F%BA%E7%B1%BB%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

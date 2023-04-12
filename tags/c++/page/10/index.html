@@ -145,6 +145,22 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Emscripten——C&#43;&#43; 调用 Js 回调函数
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>WASM 调用 js 代码 Emscripten 提供了两种方式，用于从 C/C&#43;&#43; 调用 JavaScript 的方法：
+ 使用 emscripten_run_script() 运行脚本 编写 inline JavaScript。    最直接但稍微慢的方式是使用 emscripten_run_script()。这有效地使用 eval() 在 C/C&#43;&#43; 中运行指定的 JavaScript 代码。例如，调用浏览器的 alert() 函数，例如下面的代码：
+int EMSCRIPTEN_KEEPALIVE runScript(){ emscripten_run_script(&#34;alert(&#39;hi&#39;)&#34;); emscripten_run_script(&#34;console.log(&#39;hello world!&#39;)&#34;); return 0; }   从 C 中调用 JavaScript 接口的一种更快的方法是编写 inline JavaScript，使用 EM_JS() 或 EM_ASM() (以及其它相关的宏)。
+  EM_JS 是在 C 文件中声明一个 JavaScript 函数，使用方法参考这里。
+#include &lt;emscripten.h&gt; EM_JS(void, myAlert, (), { alert(&#39;hello world!&#39;); throw &#39;all done&#39;; // exception }); EM_JS(void, take_args, (int x, float y), { console....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-26 10:34:44 +0800 CST'>March 26, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 调用 Js 回调函数" href="https://874656645.github.io/posts/158-emscripten-c&#43;&#43;-%E8%B0%83%E7%94%A8-js-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Emscripten——js 调用 C&#43;&#43; 接口
     </h2>
   </header>
@@ -210,27 +226,6 @@ int_sqrt = Module.cwrap(&#39;int_sqrt&#39;, &#39;number&#39;, [&#39;number&#39;]
   </section>
   <footer class="entry-footer"><span title='2022-03-24 17:03:19 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Emscripten——Hello World" href="https://874656645.github.io/posts/154-emscripten-hello-world/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Emscripten——安装
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>启用 Linux 环境 这里使用的是 WSL（Windows Subsystem Linux）环境，环境配置参考这里
-Linux 安装 Emscripten Download and install
-  安装 python3
-sudo apt install python3
-  安装 git
-sudo apt install git
-  创建目录并 clone emsdk
-sudo git clone https://github.com/emscripten-core/emsdk.git
-  更新 emsdk 并激活
-cd emsdk git pull # Download and install the latest SDK tools. ./emsdk install latest # Make the &#34;latest&#34; SDK &#34;active&#34; for the current user. (writes .emscripten file) ....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-03-24 16:41:50 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Emscripten——安装" href="https://874656645.github.io/posts/153-emscripten-%E5%AE%89%E8%A3%85/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -160,6 +160,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 mutable 关键字
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、修饰类成员变量 此关键字只能应用于类的非静态和非常量数据成员，mutable 是为了让 const 对象的某些数据成员可以被修改。static 是类的成员，不属于对象，常对象和常函数只会限制类的成员变量修改，所以类的 static 数据成员不需要 mutable 修饰，在常对象和常函数中也能被修改。
+class Person{ public: int getAge() const{ m_count&#43;&#43;; s_count&#43;&#43;; return m_age; } int getCount()const{ return m_count; } private: int m_age{20}; mutable int m_count{0}; public: static int s_count; }; int Person::s_count = 0; int main() { Person p; p.getAge(); p.getAge(); p.getAge(); cout &lt;&lt; p.getCount() &lt;&lt; endl; // 3  cout &lt;&lt; p.s_count &lt;&lt; endl; // 3  return 0; } 二、修饰匿名函数 表示可以修改按值传入的变量的副本（不是值本身），类似于不带 const 关键字的形参。使用 mutable 关键字后对按值传入的变量进行的修改，不会将改变传递到 Lambda 表达式之外。如果不加 mutable 关键字，按值传入的变量是只读的，即使在 Lambda 表达式内部也不可修改...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 mutable 关键字" href="https://874656645.github.io/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 auto 与 decltype 关键字
     </h2>
   </header>
@@ -214,18 +227,6 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-17 22:25:34 +0800 CST'>February 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Linux 静态库与动态库" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>gcc 相关
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、gcc 工作流程  预处理 —— -E  宏替换 头文件展开 去掉注释 生成 .i 文件   编译 —— -S  生成 .s 文件 汇编文件   汇编 —— -c  生成 .o 文件 二进制文件   链接  二、gcc 常用参数  -v / --version -I : 编译时指定头文件路径 -c : 生成二进制文件 .o -o : 指定生成的文件名 -g : gdb 调试，生成带有调试信息的二进制文件（Debug模式） -D : 编译时指定一个宏 -Wall : 显示警告信息 -On : 优化代码，n 是优化级别（1，2，3）  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-16 21:44:06 +0800 CST'>February 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to gcc 相关" href="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

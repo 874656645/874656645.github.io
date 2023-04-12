@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>具有链表特性的类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>买卖货物问题：
+#include &lt;iostream&gt; using namespace std; class Goods{ public: Goods(){ m_pNext = nullptr; m_weight = 0; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } Goods(int weight){ m_pNext = nullptr; m_weight = weight; total_weight &#43;= m_weight; cout &lt;&lt; &#34;买入了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } ~Goods(){ total_weight -= m_weight; // m_pNext 不是在本类中 new 的，所以也不用 delete  this-&gt;m_pNext = nullptr; cout &lt;&lt; &#34;卖出了货物，重量是：&#34; &lt;&lt; m_weight &lt;&lt; endl; } static int getTotalWeight(){ return total_weight; } Goods *m_pNext; private: int m_weight; static int total_weight; }; int Goods::total_weight = 0; void buy(Goods *&amp;head, int weight){ Goods *pNewGoods = new Goods(weight); if(head == nullptr){ head = pNewGoods; } else{ pNewGoods-&gt;m_pNext = head; head = pNewGoods; } } void sale(Goods *&amp;head){ if(head == nullptr){ cout &lt;&lt; &#34;没有货物了&#34; &lt;&lt; endl; return; } Goods *temp = head; head = head-&gt;m_pNext; delete temp; temp = nullptr; } int main( ) { Goods *head = nullptr; int choice; do{ // 提供菜单  cout &lt;&lt; &#34;输入 1 进货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 2 出货&#34; &lt;&lt; endl; cout &lt;&lt; &#34;输入 0 退出&#34; &lt;&lt; endl; cin &gt;&gt; choice; switch(choice){ case 0: // 退出  return 0; case 1: { // 进货  int w = 0; cout &lt;&lt; &#34;输入货物重量：&#34; &lt;&lt; endl; cin &gt;&gt; w; buy(head, w); break; } case 2: // 出货  sale(head); break; } cout &lt;&lt; &#34;目前货物的总重量是：&#34; &lt;&lt; Goods::getTotalWeight() &lt;&lt; endl; }while(1); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-03 09:21:17 +0800 CST'>January 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 具有链表特性的类" href="https://874656645.github.io/posts/58-%E5%85%B7%E6%9C%89%E9%93%BE%E8%A1%A8%E7%89%B9%E6%80%A7%E7%9A%84%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>new、delete 与内存
     </h2>
   </header>
@@ -196,21 +209,6 @@ class Person{ public: Person(){ id = 0; score = 0; cout &lt;&lt; &#34;Person()&#
   </section>
   <footer class="entry-footer"><span title='2021-12-28 16:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 构造函数重载与互调" href="https://874656645.github.io/posts/50-%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E4%B8%8E%E4%BA%92%E8%B0%83/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>类的成员函数作为回调函数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>思路是借助类的静态成员函数
-方式一：
-class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } void setCur(){ s_curA = this; } static void callback(){ s_curA-&gt;print(); } private: static A* s_curA; int m_a; }; A* A::s_curA = nullptr; typedef void (*FUN_S)(); void Handle(FUN_S call){ call(); } int main( ) { A a(10), b(20); a.setCur(); Handle(A::callback); b.setCur(); Handle(A::callback); return 0; } 方式二：
-class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } static void callback(void *a){ ((A*)a)-&gt;print(); } private: int m_a; }; typedef void (*FUN)(void *); void Handle(void *a, FUN call){ call(a); } int main( ) { A a(10), b(20); Handle(&amp;a, A::callback); Handle(&amp;b, A::callback); return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-28 14:34:27 +0800 CST'>December 28, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类的成员函数作为回调函数" href="https://874656645.github.io/posts/49-%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

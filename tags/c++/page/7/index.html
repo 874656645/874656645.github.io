@@ -145,6 +145,21 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>大端、小端字节序
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
+  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
+ 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
+            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-21 16:04:58 +0800 CST'>April 21, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 大端、小端字节序" href="https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 内存对齐 alignof alignas max_align_t
     </h2>
   </header>
@@ -195,19 +210,6 @@ std::pair&lt;int,int&gt; divide_remainder(int dividend, int divisor){ int f = di
   </section>
   <footer class="entry-footer"><span title='2022-04-12 19:02:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;17 使用结构化绑定来解包绑定的返回值" href="https://874656645.github.io/posts/175-c&#43;&#43;17-%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A%E6%9D%A5%E8%A7%A3%E5%8C%85%E7%BB%91%E5%AE%9A%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 大括号初始化
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>( expression-list )：优先调用非聚合初始化，且会存在隐式转换 = expression： { initializer-list }：如果有聚合初始化（initializer_list&lt;&gt;），就调用聚合初始化，没有的话就调用符合条件的非聚合初始化 = { initializer-list }：同上 使用 auto 声明的变量括号初始化，只允许一个参数的情况 {} 与 () 调用构造函数初始化的方式，不同点在于 {} 没有类型的隐式转换，比如 int x(1.2); 和 int x = 1.2; 通过隐式的对浮点值进行向下取整，然后将其转换为整型，从而将 x 的值初始化为 1。相反的， int x{1.2}; 将会遇到编译错误，初始化列表中的初始值，需要与变量声明的类型完全匹配。  测试代码一：
-// #define AGGREGATE_INIT class Test{ public: Test(int a, float b, char* c){ cout &lt;&lt; &#34;int float char* initialize...&#34; &lt;&lt; endl; } Test(int a, int b, int c){ cout &lt;&lt; &#34;int int int initialize....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-12 18:51:42 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 大括号初始化" href="https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

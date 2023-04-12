@@ -157,6 +157,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 std::ref, std::cref 与 std::bind
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>函数模板 ref 与 cref 是生成 std::reference_wrapper 类型对象的帮助函数，主要是与 std::bind 一起使用，默认情况下，std::bind 无法使用变量引用传递，即使原来的函数形参是引用类型的
+void f(int&amp; n1, int&amp; n2, const int&amp; n3) { std::cout &lt;&lt; &#34;In function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;; &#43;&#43;n1; // 增加存储于函数对象的 n1 副本  &#43;&#43;n2; // 增加 main() 的 n2  // &#43;&#43;n3; // 编译错误 error: increment of read-only reference ‘n3’ } int main() { int n1 = 1, n2 = 2, n3 = 3; // 函数对象 bound_f  // 默认会将此时变量值的副本做为函数对象的参数（函数参数特例化）  std::function&lt;void()&gt; bound_f = std::bind(f, n1, std::ref(n2), std::cref(n3)); n1 = 10; n2 = 11; n3 = 12; std::cout &lt;&lt; &#34;Before function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;; bound_f(); std::cout &lt;&lt; &#34;After function: &#34; &lt;&lt; n1 &lt;&lt; &#39; &#39; &lt;&lt; n2 &lt;&lt; &#39; &#39; &lt;&lt; n3 &lt;&lt; &#39;\n&#39;; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-07 10:40:34 +0800 CST'>April 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::ref, std::cref 与 std::bind" href="https://874656645.github.io/posts/166-c&#43;&#43;11-refcref-%E4%B8%8E-bind/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——队列的应用
     </h2>
   </header>
@@ -219,20 +232,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-04-04 14:12:42 +0800 CST'>April 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——栈的应用" href="https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——栈的实现方式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>栈的物理实现有 顺序栈 和 链式栈
-一、顺序栈（Array-based Stack）  使用向量实现，本质上是顺序表的简化版  栈有固定大小   关键是确定哪一端作为栈顶 注意上溢、下溢问题  类定义：
-template &lt;class T&gt; class arrStack : public Stack &lt;T&gt; { private: // 栈的顺序存储  int mSize; // 栈中最多可存放的元素个数  int top; // 栈顶位置，应小于mSize  T *st; // 存放栈元素的数组 public: // 栈的运算的顺序实现  arrStack(int size) { // 创建一个给定长度的顺序栈实例  mSize = size; top = -1; st = new T[mSize]; } arrStack() { // 创建一个顺序栈的实例  top = -1; } ~arrStack() { delete [] st; } void clear() { top = -1; } // 清空栈 }; bool arrStack&lt;T&gt;::push(const T item) { // 入栈  if (top == mSize-1) { // 栈已满  cout &lt;&lt; &#34;栈满溢出&#34; &lt;&lt; endl; return false; } else { // 新元素入栈并修改栈顶指针  st[&#43;&#43;top] = item; return true; } } bool arrStack&lt;T&gt;::pop(T&amp; item) { // 出栈  if (top == -1) { // 栈为空  cout &lt;&lt; &#34;栈为空，不能执行出栈操作&#34;&lt;&lt; endl; return false; } else { item = st[top--]; // 返回栈顶，并缩减1  return true; } } 二、链式栈（Linked Stack）  用单链表方式存储，其中指针的方向是从栈顶向下链接 理论上没有大小限制  类定义：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-03 20:03:03 +0800 CST'>April 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——栈的实现方式" href="https://874656645.github.io/posts/161-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

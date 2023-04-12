@@ -145,6 +145,26 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>编译过程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>各个 .cpp 文件是独立编译的，如果有其它的类和函数会先在本 .o 文件中生成符号，由最后的链接器去其它 .o 文件找具体的函数定义
+ .c .cpp 文件经过 预编译器拷贝头文件、宏展开 生成 .i 文件（文本文件）
+g&#43;&#43; -E main.cpp -o main.i .i 文件经过 编译器 生成汇编程序 .s（文本文件）
+g&#43;&#43; -S main.i -o main.s .s 文件经过 汇编器 生成可定位目标文件 .o （二进制）
+Windows:
+g&#43;&#43; -c main.s -o main.obj
+Linux:
+g&#43;&#43; -c main.s -o main.o .o 文件经过 链接器 生成可执行目标文件 .exe .dll
+g&#43;&#43; main.s -o main  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-12 20:12:00 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 编译过程" href="https://874656645.github.io/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>函数模板
     </h2>
   </header>
@@ -200,19 +220,6 @@ void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char
   </section>
   <footer class="entry-footer"><span title='2022-01-08 14:01:27 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 实现一个简单的字符串类" href="https://874656645.github.io/posts/66-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>静态数组初始化
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1. 声明静态数组后一定要进行初始化，否则里面的值都是未知的 int main() { int ia[3] = {0}; // 这虽然只是给第一个元素赋了值，但剩余未赋值的元素都会初始化为0  char ca[3] = {0}; double da[3]; bool ba[3]; short sa[3]; float fa[3]; for(auto &amp; i : da){ cout &lt;&lt; i &lt;&lt; endl; } return 0; } 输出：
-6.95128e-310 4.63759e-310 0 2. C&#43;&#43; 数组指针和数组类型  数组类型和数组指针（数组名）不是一种类型，只是恰好指向的地址相同而已 数组名是指针常量（int * const），代表数组中第一个元素的地址 数组类型代表整个数组  int main() { int arr[10]; cout &lt;&lt; arr &lt;&lt; endl; cout &lt;&lt; arr &#43; 1 &lt;&lt; endl; cout &lt;&lt; &#34;----------&#34; &lt;&lt; endl; cout &lt;&lt; &amp;arr &lt;&lt; endl; cout &lt;&lt; &amp;arr &#43; 1 &lt;&lt; endl; return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-08 13:50:12 +0800 CST'>January 8, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 静态数组初始化" href="https://874656645.github.io/posts/65-%E9%9D%99%E6%80%81%E6%95%B0%E7%BB%84%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -157,6 +157,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43; 杂记
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Compile FFmpeg on CentOS
     </h2>
   </header>
@@ -232,26 +246,6 @@ cd ~/ffmpeg_sources curl -O -L https://www....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-10 11:23:12 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——Actor 蓝图类" href="https://874656645.github.io/posts/217-unreal-actor-%E8%93%9D%E5%9B%BE%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——通用基类（Actor、Pawn、Character等）
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Actor
-  Actor 是可以放到关卡中的任何对象，例如摄像机、静态网格体或玩家出生点位置
-  Actor 支持 3D 变换，例如转换、旋转和缩放
-  Actor 在 UE 中是只是一个可以挂载 Component的类而已。所以，需要挂载组件的时候，才应该继承自 Actor 类。很多时候，写一个 Manager 或者一个 Data 又或者只是解析一个Config，只需要写一个 C&#43;&#43; 类就可以了
-  可以通过 gameplay 代码（C&#43;&#43; 或蓝图）创建（生成）或销毁 Actor，在蓝图中使用 从类生成Actor 节点，生成后就自动添加到场景中并能在场景中看到
-    Pawn
-Pawn 是 Actor 的子类，作为游戏内的形象或人像（例如游戏中的角色）。玩家或游戏的 AI 可以控制 Pawn，将其作为非玩家角色（NPC），可以理解为在游戏中的肉体。
-  Character
- 角色（Character） 是计划用作玩家角色的 Pawn Actor 的子类。角色子类包括碰撞设置、双足运动的输入绑定以及用于玩家控制动作的其他代码 相比于 Pawn 类，Character 类提供了一个Movement 组件，这个组件提供了角色移动基本逻辑功能，包括角色的移动和跳跃，还可以依据需求扩展出不同的移动状态，比如爬行、蹲伏 当对象逻辑简单、不需要过多的逻辑动作（比如方块、飞船）那么可以选择继承 Pawn 而不是继承 Character 类    Controller...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-10 10:02:42 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——通用基类（Actor、Pawn、Character等）" href="https://874656645.github.io/posts/216-unreal-%E9%80%9A%E7%94%A8%E5%9F%BA%E7%B1%BBactorpawncharacter%E7%AD%89/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

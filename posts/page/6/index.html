@@ -160,6 +160,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——异常的使用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h
+struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { int a = 2; int getA()const override { return a; } }; #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { try { // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); } catch (const A e) { cout &lt;&lt; e....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-14 11:08:56 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——异常的使用" href="https://874656645.github.io/posts/236-c&#43;&#43;-%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——多继承与虚基类
     </h2>
   </header>
@@ -209,18 +222,6 @@ namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明�
   </section>
   <footer class="entry-footer"><span title='2022-09-09 11:44:36 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to GIS——Global Mapper 使用" href="https://874656645.github.io/posts/232-gis-global-mapper-%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——父类与子类、基类与派生类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;&amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  class A { int x, y; public: virtual ~A() { cout &lt;&lt; &#34;~A()\n&#34;; } int getx() { return x; } virtual int vf() const { return 1; } protected: int gety() { return y; } }; class B : protected A { friend int main(); bool visible; public: ~B() { cout &lt;&lt; &#34;~B()\n&#34;; } using A::gety; A* getFather(){ return this; } private: virtual int vf() const { // 子类内部不受继承方式的影响 	const A *pa = this; // 将子类指针赋值给父类指针 	const A&amp; ra = *this; // 将父类引用指向子类对象 	A a = *this; // 将子类对象赋值给父类对象 	// 父类对象 a 生命期在函数结束后结束 	// 输出：~A() 	cout &lt;&lt; &#34;in B::vf() A::vf()：&#34; &lt;&lt; A::vf() &lt;&lt; endl; cout &lt;&lt; &#34;in B::vf() a....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-06 22:28:34 +0800 CST'>September 6, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——父类与子类、基类与派生类" href="https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
