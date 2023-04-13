@@ -173,7 +173,7 @@ class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(in
       <pubDate>Sun, 11 Sep 2022 20:34:53 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</guid>
-      <description>一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &amp;lt;&amp;lt; &amp;#34;Construct A\n&amp;#34;; } virtual void d() { cout &amp;lt;&amp;lt; &amp;#34;Deconstruct A\n&amp;#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &amp;lt;&amp;lt; &amp;#34;Construct B\n&amp;#34;; } void d()override { cout &amp;lt;&amp;lt; &amp;#34;Deconstruct B\n&amp;#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 </description>
+      <description>一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &amp;lt;&amp;lt; &amp;#34;Construct A\n&amp;#34;; } virtual void d() { cout &amp;lt;&amp;lt; &amp;#34;Deconstruct A\n&amp;#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &amp;lt;&amp;lt; &amp;#34;Construct B\n&amp;#34;; } void d()override { cout &amp;lt;&amp;lt; &amp;#34;Deconstruct B\n&amp;#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 参考：</description>
     </item>
     
     <item>
