@@ -157,6 +157,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Qt CMake
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>cmake_minimum_required(VERSION 3.5)project(07_TCP LANGUAGES CXX)# 将编译目录包含到Include目录 set(CMAKE_INCLUDE_CURRENT_DIR ON)set(CMAKE_AUTOUIC ON)set(CMAKE_AUTOMOC ON)set(CMAKE_AUTORCC ON)# 根据 Qt 版本的环境变量，设置使用的 Qt 版本 set(CMAKE_PREFIX_PATH $ENV{QTDIR5141_64})set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED ON)# QtCreator supports the following variables for Android, which are identical to qmake Android variables. # Check http://doc.qt.io/qt-5/deployment-android.html for more information. # They need to be set before the find_package(Qt5 ...) call. #if(ANDROID) # set(ANDROID_PACKAGE_SOURCE_DIR &#34;${CMAKE_CURRENT_SOURCE_DIR}/android&#34;) # if (ANDROID_ABI STREQUAL &#34;armeabi-v7a&#34;) # set(ANDROID_EXTRA_LIBS # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so) # endif() #endif() # 工程中会用到的Qt模块 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)if(ANDROID) add_library(07_TCP SHARED main....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-15 16:10:27 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt CMake" href="https://874656645.github.io/posts/207-qt-cmake/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>OpenGL Shading Frequencies
     </h2>
   </header>
@@ -219,24 +231,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-07-08 17:50:31 +0800 CST'>July 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——像素流送播放器页面与 UE 通信" href="https://874656645.github.io/posts/203-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81%E6%92%AD%E6%94%BE%E5%99%A8%E9%A1%B5%E9%9D%A2%E4%B8%8E-ue-%E9%80%9A%E4%BF%A1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——像素流送
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>有两种方式启动三维渲染服务器  一、方式一：使用 UE Editor 作为渲染服务器  启用像素流送插件
-【Pixel Streaming】 启用触控设备输入（可选）
-【编辑（Edit）】 &gt; 【项目设置（Project Settings）】 &gt; 【引擎（Engine）】 &gt; 【输入（Input category）】 下启用 【固定显示触控界面（Always Show Touch Interface）】 设置 设置额外启动参数
-【编辑（Edit）】 &gt; 【编辑器偏好（Editor Preferences…）】 &gt; 【关卡编辑器（Level Editor）】 &gt; 【播放（Play）】 &gt; 【额外启动参数（Additional Launch Parameters）】中添加参数 -AudioMixer -PixelStreamingIP=localhost -PixelStreamingPort=8888 -AllowPixelStreamingCommands 启动游戏
-通过独立进程游戏的模式启动游戏
-  二、方式二：通过打包的程序  打包前对 UE Editor 进行配置，参照方式一的前两步 启动【打包项目】
- 设置启动程序的命令行标签  按住 Alt 键并拖动 .exe 文件即可在相同文件夹中（或在其他任意处）新建一个快捷方式 右键点击快捷方式并从上下文菜单中选择 属性（Properties） 在 快捷方式属性（Shortcut Properties） 窗口的 快捷方式（Shortcut） 选项卡中，在 目标（Target） 域的末尾附加文本 -AudioMixer -PixelStreamingIP=localhost -PixelStreamingPort=8888 -RenderOffScreen 并点击 确认    三、启动服务器 启动一个服务，在虚幻引擎应用程序和客户端浏览器间建立点对点的连接（WebRTC）...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-08 15:50:34 +0800 CST'>July 8, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——像素流送" href="https://874656645.github.io/posts/202-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

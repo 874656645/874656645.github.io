@@ -157,6 +157,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Crawl Pictures From Website
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &#34;dmd&#34; save_path = &#39;E:/python/manhuadao/pics/&#39; __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#39;} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath(&#39;//div[@class=&#34;read-bottom&#34;]//a[@class=&#34;next&#34;]/@href&#39;) # print(next) for href in next_urls: nexturl = href....</p>
+  </section>
+  <footer class="entry-footer"><span title='2019-02-28 15:00:16 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Crawl Pictures From Website" href="https://874656645.github.io/posts/9-crawl-pictures-from-website/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Python Virtualenv
     </h2>
   </header>
@@ -228,20 +240,6 @@ cd electron-yarn-cz
   </section>
   <footer class="entry-footer"><span title='2019-01-31 15:44:09 +0800 CST'>January 31, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Learn Electron" href="https://874656645.github.io/posts/5-learn-electron/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Netstat
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>win10查看端口使用情况 1. 察看所有已使用的端口 netstat -ano
-2. 查看特定端口的使用 netstat -ano|findstr &#34;443&#34;
-3. 查看占用端口的进程PID tasklist|findstr &#34;7648&#34;</p>
-  </section>
-  <footer class="entry-footer"><span title='2018-12-28 16:10:00 +0800 CST'>December 28, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Netstat" href="https://874656645.github.io/posts/4-netstat/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

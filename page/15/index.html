@@ -157,6 +157,21 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>ArcGIS 处理 Shape 字段
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>注：ArcMap 版本为 10.6.1
+一、将 shape 字段处理为 WKT 文本
+ 在属性表中添加一个 Text 类型的字段，大小尽量大一些； 使用字段计算功能 shape file 的字符串类型字段的大小有限制（254）  二、
+def MySub(feat): partnum = 0 # Count the number of points in the current multipart feature partcount = feat.partCount pntcount = 0 str = &#39;&#39; # Enter while loop for each part in the feature (if a singlepart  # feature, this will occur only once) while partnum &lt; partcount: part = feat....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-05-23 17:41:51 +0800 CST'>May 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to ArcGIS 处理 Shape 字段" href="https://874656645.github.io/posts/194-arcgis-%E5%A4%84%E7%90%86-shape-%E5%AD%97%E6%AE%B5/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>使用 VS2022 部署、运行和调试 Linux MSBuild 项目
     </h2>
   </header>
@@ -217,21 +232,6 @@ Hello World end of main. after main exit. state: 0	message: this is message </p>
   </section>
   <footer class="entry-footer"><span title='2022-05-12 16:02:52 +0800 CST'>May 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to main 函数执行完后所执行的代码" href="https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>大端、小端字节序
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
-  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
- 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
-            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-21 16:04:58 +0800 CST'>April 21, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 大端、小端字节序" href="https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

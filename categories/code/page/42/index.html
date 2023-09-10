@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>explicit（显式）关键字
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>修饰构造函数，防止隐式转换，赋值初始化，赋值列表初始化 修饰转换函数，可以防止隐式转换，但按语境转换除外 explicit 可加在带多个参数的构造方法上(converting to ‘XXX’ from initializer list)  struct B { explicit B(int) {} explicit operator bool() const { return true; } }; int main() { B b1(1); // OK：直接初始化  B b2 = 1; // 错误：被 explicit 修饰构造函数的对象不可以赋值初始化  B b3{ 1 }; // OK：直接列表初始化  B b4 = { 1 }; // 错误：被 explicit 修饰构造函数的对象不可以赋值列表初始化  B b5 = (B)1; // OK：允许 static_cast 的显式转换  if (b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b6(b1); // OK：被 explicit 修饰转换函数 B::operator bool() 的对象可以从 B 到 bool 的按语境转换  bool b7 = b1; // 错误：被 explicit 修饰转换函数 B::operator bool() 的对象不可以隐式转换  bool b8 = static_cast&lt;bool&gt;(b1); // OK：static_cast 进行直接初始化  return 0; } 从初始化列表隐式转换：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-15 12:34:27 +0800 CST'>December 15, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to explicit（显式）关键字" href="https://874656645.github.io/posts/24-explicit-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43; 字符串常量存储
     </h2>
   </header>
@@ -203,29 +215,10 @@ QString与操作系统间读写，会自动将UTF-8与操作系统的编码做�
   <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt QString 中文乱码" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Git Commond
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、Git 常用命令 1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git
- 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
- 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
-2、更新远程仓库代码到本地 git pull blog master
-3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
-git commit -am &#34;update&#34;
-4、push推送到远程仓库 git push blog master
-5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
-6、删除配置的远程仓库别名 git remote remove blog...</p>
-  </section>
-  <footer class="entry-footer"><span title='2018-12-15 22:45:47 +0800 CST'>December 15, 2018</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git Commond" href="https://874656645.github.io/posts/3-git-commond/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/categories/code/page/41/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/categories/code/page/43/">Next Page »</a>
   </nav>
 </footer>
     </main>

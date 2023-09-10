@@ -145,6 +145,24 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 std::reference_wrapper
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>创建一个对象或函数的引用，对象必须是 可复制(CopyConstructible)、可赋值(CopyAssignable) 的。
+  它经常被用作在标准容器(如 std::vector )中存储引用的机制，而标准容器通常不能保存引用。
+  辅助函数 std::ref 与 std::cref 常用于生成 std::reference_wrapper 对象。
+  std::reference_wrapper 也用于按引用传递参数给 std::bind 或 std::thread 的构造函数。
+  能隐式转换成 T&amp;。
+    在 vector 中存储引用类型：
+#include &lt;iostream&gt;#include &lt;list&gt;#include &lt;vector&gt;#include &lt;random&gt;#include &lt;functional&gt;#include &lt;algorithm&gt; int main() { std::list&lt;int&gt; l(10); std::iota(l.begin(), l.end(), -4); // 从 -4 开始，逐个 &#43;1  std::vector&lt;std::reference_wrapper&lt;int&gt;&gt; v(l.begin(), l.end()); // 不能在 list 上用 shuffle （要求随机访问），但能在 vector 上使用它  std::shuffle(v....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-07 13:43:10 +0800 CST'>April 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 std::reference_wrapper" href="https://874656645.github.io/posts/167-c&#43;&#43;11-reference_wrapper/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 std::ref, std::cref 与 std::bind
     </h2>
   </header>
@@ -203,23 +221,6 @@ void f(int&amp; n1, int&amp; n2, const int&amp; n3) { std::cout &lt;&lt; &#34;In
   </section>
   <footer class="entry-footer"><span title='2022-04-05 09:03:06 +0800 CST'>April 5, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——队列" href="https://874656645.github.io/posts/163-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——栈的应用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>栈的特点是后进先出，所以常用来处理具有递归结构的数据
- 深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义
- 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$  后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
-    中缀表达式
- 运算符在中间 需要括号改变优先级  例如：$4\ *\ x\ *\ (2\ *\ x\ &#43;\ a)\ –\ c$
-  后缀表达式...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-04 14:12:42 +0800 CST'>April 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——栈的应用" href="https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

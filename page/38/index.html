@@ -157,6 +157,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>异常接口声明
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>C&#43;&#43; 异常
+ C&#43;&#43;11 不再建议使用异常规范  // 异常规范 只能抛出 int float char 三种类型的异常 C&#43;&#43;11以后不再建议使用 void func1() throw(int, float, char){ throw &#34;string&#34;; // terminate called after throwing an instance of &#39;char const*&#39; } // 不能抛出任何类型的异常 OK void func2() throw(){ throw -1; // terminate called after throwing an instance of &#39;int&#39; } // 可以抛出任何类型的异常 void func3(){ throw &#34;error&#34;; } int main() { try{ func1(); } catch(char const * e){ cout &lt;&lt; e &lt;&lt; endl; } catch(....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-15 18:26:49 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 异常接口声明" href="https://874656645.github.io/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>栈解旋 Unwinding
     </h2>
   </header>
@@ -204,18 +217,6 @@ Start exception finally 0 Finish 二、std::exception class exception { public: 
   </section>
   <footer class="entry-footer"><span title='2022-01-15 13:36:04 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 自定义数组实现" href="https://874656645.github.io/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>类模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ public: Person(T age){ this-&gt;m_age = age; } void Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } private: T m_age; }; int main() { Person&lt;int&gt; p(20); p.Show(); cout &lt;&lt; p &lt;&lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&lt;class T&gt; Person&lt;T&gt;::Person(T age){ this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() { Person&lt;int&gt; p(20); p....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

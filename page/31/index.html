@@ -157,6 +157,19 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>适配器模式
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式
+class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &lt;&lt; endl; } }; class TargetInterface{ public: virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public: MyAdaptor(int param):param(param){} void operator()(int v){ print(v, param); } private: MyPrint print; int param; }; MyAdaptor myBind2nd(int v){ return MyAdaptor(v); } int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v.push_back(i); } for_each(v.begin(), v....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-01 16:07:36 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 适配器模式" href="https://874656645.github.io/posts/110-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>外观模式
     </h2>
   </header>
@@ -204,21 +217,6 @@ class Singleton{ public: static Singleton* getInstance(){ if(s_instance == nullp
   </section>
   <footer class="entry-footer"><span title='2022-01-31 17:44:49 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 抽象工厂模式" href="https://874656645.github.io/posts/106-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>工厂方法模式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>工厂方法模式 = 简单工厂模式 &#43; 开闭原则
-类的个数成倍增多，维护成本很高
-适用场景：
- 客户端不知道它所需要的对象的类 抽象工厂类通过其子类来指定创建哪个对象  // 工厂方法模式 class AbstractFruit{ public: virtual void showName() = 0; }; class Apple : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是苹果！&#34; &lt;&lt; endl; } }; class Banana : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是香蕉！&#34; &lt;&lt; endl; } }; class Pear : public AbstractFruit{ public: void showName() override{ cout &lt;&lt; &#34;我是鸭梨！&#34; &lt;&lt; endl; } }; // 抽象工厂 class AbstractFruitFactory{ public: virtual AbstractFruit* CreateFruit() = 0; }; class AppleFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Apple; } }; class PearFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Pear; } }; class BananaFactory : public AbstractFruitFactory{ public: AbstractFruit* CreateFruit() override{ return new Banana; } }; int main() { AbstractFruitFactory* factory = nullptr; AbstractFruit* fruit = nullptr; factory = new AppleFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new BananaFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; factory = new PearFactory; fruit = factory-&gt;CreateFruit(); fruit-&gt;showName(); delete fruit; delete factory; return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-31 15:51:36 +0800 CST'>January 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 工厂方法模式" href="https://874656645.github.io/posts/105-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

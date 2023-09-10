@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——父类与子类、基类与派生类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;&amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  class A { int x, y; public: virtual ~A() { cout &lt;&lt; &#34;~A()\n&#34;; } int getx() { return x; } virtual int vf() const { return 1; } protected: int gety() { return y; } }; class B : protected A { friend int main(); bool visible; public: ~B() { cout &lt;&lt; &#34;~B()\n&#34;; } using A::gety; A* getFather(){ return this; } private: virtual int vf() const { // 子类内部不受继承方式的影响 	const A *pa = this; // 将子类指针赋值给父类指针 	const A&amp; ra = *this; // 将父类引用指向子类对象 	A a = *this; // 将子类对象赋值给父类对象 	// 父类对象 a 生命期在函数结束后结束 	// 输出：~A() 	cout &lt;&lt; &#34;in B::vf() A::vf()：&#34; &lt;&lt; A::vf() &lt;&lt; endl; cout &lt;&lt; &#34;in B::vf() a....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-06 22:28:34 +0800 CST'>September 6, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——父类与子类、基类与派生类" href="https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——派生类修改基类成员的访问权限
     </h2>
   </header>
@@ -191,19 +203,6 @@ class MyList { struct Node { int v; Node* next; Node(int v, Node* n) { this-&gt;
   </section>
   <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>STL——map 排序相关
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>声明变量时指定排序规则  通过指定模板的第三个参数，对象类型，C&#43;&#43; 2a 支持 lambda 对象
-struct MyCom{ bool operator()(const string key1, const string key2)const{ return key1 &gt; key2; } }; int main() { // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;}; map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} }; // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}}; for(const auto&amp; item : myMap1){ cout &lt;&lt; item....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-30 14:22:02 +0800 CST'>August 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to STL——map 排序相关" href="https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

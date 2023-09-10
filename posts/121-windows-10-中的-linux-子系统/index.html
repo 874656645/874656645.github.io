@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Windows 10 中的 Linux 子系统 | Slow is Smooth and Smooth is Fast</title>
-<meta name="keywords" content="Linux" />
+<meta name="keywords" content="Ubuntu" />
 <meta name="description" content="WSL 的基本命令
 一、自动安装 满足 Win10 系统版本要求的（ Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11）可以使用这种方式
 查看方式，Win &#43; R 打开运行窗口，输入 winver 查看
@@ -75,7 +75,7 @@ wsl --unregister Ubuntu
 <meta property="og:url" content="https://874656645.github.io/posts/121-windows-10-%E4%B8%AD%E7%9A%84-linux-%E5%AD%90%E7%B3%BB%E7%BB%9F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-13T11:01:34&#43;08:00" />
 <meta property="article:modified_time" content="2022-02-13T11:01:34&#43;08:00" />
-
+<meta property="og:see_also" content="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
@@ -124,7 +124,7 @@ wsl --unregister Ubuntu
   "name": "Windows 10 中的 Linux 子系统",
   "description": "WSL 的基本命令\n一、自动安装 满足 Win10 系统版本要求的（ Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11）可以使用这种方式\n查看方式，Win + R 打开运行窗口，输入 winver 查看\n  安装 WSL\nwsl --install\n  查看可用的 Linux 发行版\nwsl -l -o\n  查看已安装的 Linux 分发版\nwsl -l -v\n  注销 Linux 发行版\nwsl --unregister Ubuntu\n  可以直接从官网下载 Linux 发行版的安装包，然后将 appx 扩展名改为 zip，解压到想要放置的目录，双击 ubuntu.exe 启动，参考手动安装\n  二、手动安装  注意：以下命令都是在以管理员权限运行的 PowerShell 中完成   启用 “适用于 Linux 的 Windows 子系统” 可选功能",
   "keywords": [
-    "Linux"
+    "Ubuntu"
   ],
   "articleBody": "WSL 的基本命令\n一、自动安装 满足 Win10 系统版本要求的（ Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11）可以使用这种方式\n查看方式，Win + R 打开运行窗口，输入 winver 查看\n  安装 WSL\nwsl --install\n  查看可用的 Linux 发行版\nwsl -l -o\n  查看已安装的 Linux 分发版\nwsl -l -v\n  注销 Linux 发行版\nwsl --unregister Ubuntu\n  可以直接从官网下载 Linux 发行版的安装包，然后将 appx 扩展名改为 zip，解压到想要放置的目录，双击 ubuntu.exe 启动，参考手动安装\n  二、手动安装  注意：以下命令都是在以管理员权限运行的 PowerShell 中完成   启用 “适用于 Linux 的 Windows 子系统” 可选功能\ndism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart 启用 “虚拟机平台” 可选功能\ndism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart 重启电脑 查看 WSL 状态信息，默认版本等\nwsl --status\n 更新 WSL\nwsl --update 下载 Ubuntu 版本，将扩展名 .appx 改为 zip，解压到文件夹，双击 ubuntu.exe 启动运行  ",
   "wordCount" : "95",
@@ -293,7 +293,7 @@ wsl --unregister Ubuntu
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="https://874656645.github.io/tags/linux/">Linux</a></li>
+      <li><a href="https://874656645.github.io/tags/ubuntu/">Ubuntu</a></li>
     </ul>
 <nav class="paginav">
   <a class="prev" href="https://874656645.github.io/posts/122-vim-%E4%BD%BF%E7%94%A8/">

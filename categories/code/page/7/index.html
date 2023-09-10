@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>STL——map 排序相关
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>声明变量时指定排序规则  通过指定模板的第三个参数，对象类型，C&#43;&#43; 2a 支持 lambda 对象
+struct MyCom{ bool operator()(const string key1, const string key2)const{ return key1 &gt; key2; } }; int main() { // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;}; map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} }; // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}}; for(const auto&amp; item : myMap1){ cout &lt;&lt; item....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-30 14:22:02 +0800 CST'>August 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL——map 排序相关" href="https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Compile Nginx on CentOS
     </h2>
   </header>
@@ -209,20 +222,6 @@ cd ~/ffmpeg_sources curl -O -L https://www....</p>
   </section>
   <footer class="entry-footer"><span title='2022-08-02 17:43:53 +0800 CST'>August 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 判断点是否在多边形内部" href="https://874656645.github.io/posts/213-%E5%88%A4%E6%96%AD%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E9%83%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Qt 多线程
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、注意事项：  线程处理类继承于 QObject 线程处理类对象不能有父对象 处理完成后向外发信号 即使 QThread 线程内部的处理对象运行结束了，QThread 线程对象也不会自动释放，需要手动 quit() &#43; wait() 线程处理类对象创建成功后，需要通过 moveToThread() 函数移动到 QThread 对象中 需要通过其他线程发信号来启动另外线程中的处理类对象的处理函数 子线程中不要操作图形界面  二、connect 第五个参数的作用 指定信号和槽的连接方式：自动连接、直接连接、队列连接，多线程时才有意义，默认为 Qt::AutoConnection。
- Qt::AutoConnection（自动连接）：多线程时是 Qt::QueuedConnection（队列连接），单线程时是 Qt::DirectConnection（直接连接） Qt::QueuedConnection（队列连接）：槽函数所在线程和信号接收者所在线程相同 Qt::DirectConnection（直接连接）：槽函数所在线程和信号发送者所在线程相同  三、代码示例   线程处理类
-class MyThreadPro : public QObject { Q_OBJECT public: explicit MyThreadPro(QObject *parent = nullptr); // 后台处理函数  void startProcessing(); // 是否结束标识位  void setFlag(bool b = false); signals: // 向其他线程发送信号  void myTimeout(); private: bool stopRunning; };   主窗口类...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-18 22:17:00 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Qt 多线程" href="https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

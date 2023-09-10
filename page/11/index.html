@@ -157,6 +157,20 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Qt 多线程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、注意事项：  线程处理类继承于 QObject 线程处理类对象不能有父对象 处理完成后向外发信号 即使 QThread 线程内部的处理对象运行结束了，QThread 线程对象也不会自动释放，需要手动 quit() &#43; wait() 线程处理类对象创建成功后，需要通过 moveToThread() 函数移动到 QThread 对象中 需要通过其他线程发信号来启动另外线程中的处理类对象的处理函数 子线程中不要操作图形界面  二、connect 第五个参数的作用 指定信号和槽的连接方式：自动连接、直接连接、队列连接，多线程时才有意义，默认为 Qt::AutoConnection。
+ Qt::AutoConnection（自动连接）：多线程时是 Qt::QueuedConnection（队列连接），单线程时是 Qt::DirectConnection（直接连接） Qt::QueuedConnection（队列连接）：槽函数所在线程和信号接收者所在线程相同 Qt::DirectConnection（直接连接）：槽函数所在线程和信号发送者所在线程相同  三、代码示例   线程处理类
+class MyThreadPro : public QObject { Q_OBJECT public: explicit MyThreadPro(QObject *parent = nullptr); // 后台处理函数  void startProcessing(); // 是否结束标识位  void setFlag(bool b = false); signals: // 向其他线程发送信号  void myTimeout(); private: bool stopRunning; };   主窗口类...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-18 22:17:00 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt 多线程" href="https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>OpenGL 视差贴图（Parallax Mapping）
     </h2>
   </header>
@@ -203,18 +217,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-07-15 21:13:10 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt TCP" href="https://874656645.github.io/posts/208-qt-tcp/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Qt CMake
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>cmake_minimum_required(VERSION 3.5)project(07_TCP LANGUAGES CXX)# 将编译目录包含到Include目录 set(CMAKE_INCLUDE_CURRENT_DIR ON)set(CMAKE_AUTOUIC ON)set(CMAKE_AUTOMOC ON)set(CMAKE_AUTORCC ON)# 根据 Qt 版本的环境变量，设置使用的 Qt 版本 set(CMAKE_PREFIX_PATH $ENV{QTDIR5141_64})set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED ON)# QtCreator supports the following variables for Android, which are identical to qmake Android variables. # Check http://doc.qt.io/qt-5/deployment-android.html for more information. # They need to be set before the find_package(Qt5 ...) call. #if(ANDROID) # set(ANDROID_PACKAGE_SOURCE_DIR &#34;${CMAKE_CURRENT_SOURCE_DIR}/android&#34;) # if (ANDROID_ABI STREQUAL &#34;armeabi-v7a&#34;) # set(ANDROID_EXTRA_LIBS # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so) # endif() #endif() # 工程中会用到的Qt模块 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)if(ANDROID) add_library(07_TCP SHARED main....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-15 16:10:27 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Qt CMake" href="https://874656645.github.io/posts/207-qt-cmake/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

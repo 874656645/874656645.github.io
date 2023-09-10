@@ -89,8 +89,8 @@ if (!doNotTrack) {
   "keywords": [
     "Git Commonds"
   ],
-  "articleBody": "一、设置本地git的账户邮箱和用户名   查看是否设置了邮箱和用户名\ngit config user.name git config user.email   设置邮箱和用户名\ngit config --global user.name \"Git账号\" git config --global user.email \"Git邮箱\"   二、生成 SSH 密钥 在 git bash 中输入命令 ssh-keygen -t rsa -C \"你的Git邮箱\"，敲三次回车，就会在目录 我的电脑—C盘—用户—你自己的用户 目录下生成 .ssh 文件夹\n三、将SSH公钥添加到GitLab账户   在 .ssh 文件夹下，使用记事本打开 id_rsa.pub 公钥文件，复制里面的内容\n  打开 gitlab 网站的 SSH keys，将复制的文本粘贴进去即可\n  四、TortoiseGit 使用 git SSH 密钥 打开 TortoiseGit setting 指定 SSH client 为 git 的 ssh.exe\n参考：\n Windows下GitLab配置SSH  ",
-  "wordCount" : "63",
+  "articleBody": "一、设置本地git的账户邮箱和用户名   查看是否设置了邮箱和用户名\ngit config user.name git config user.email   设置邮箱和用户名\ngit config --global user.name \"Git账号\" git config --global user.email \"Git邮箱\"   二、生成 SSH 密钥 在 git bash 中输入命令 ssh-keygen -t rsa -C \"你的Git邮箱\"，敲三次回车，就会在目录 我的电脑—C盘—用户—你自己的用户 目录下生成 .ssh 文件夹\n三、将 SSH 公钥添加到 GitLab 账户   在 .ssh 文件夹下，使用记事本打开 id_rsa.pub 公钥文件，复制里面的内容\n  打开 gitlab 网站的 SSH keys，将复制的文本粘贴进去即可\n  四、TortoiseGit 使用 git SSH 密钥 打开 TortoiseGit setting 指定 SSH client 为 git 的 ssh.exe\n参考：\n Windows 下 GitLab 配置 SSH  ",
+  "wordCount" : "71",
   "inLanguage": "en",
   "datePublished": "2023-02-22T20:09:10+08:00",
   "dateModified": "2023-02-22T20:09:10+08:00",
@@ -205,7 +205,7 @@ if (!doNotTrack) {
                 <li>
                     <a href="#%e4%ba%8c%e7%94%9f%e6%88%90-ssh-%e5%af%86%e9%92%a5" aria-label="二、生成 SSH 密钥">二、生成 SSH 密钥</a></li>
                 <li>
-                    <a href="#%e4%b8%89%e5%b0%86ssh%e5%85%ac%e9%92%a5%e6%b7%bb%e5%8a%a0%e5%88%b0gitlab%e8%b4%a6%e6%88%b7" aria-label="三、将SSH公钥添加到GitLab账户">三、将SSH公钥添加到GitLab账户</a></li>
+                    <a href="#%e4%b8%89%e5%b0%86-ssh-%e5%85%ac%e9%92%a5%e6%b7%bb%e5%8a%a0%e5%88%b0-gitlab-%e8%b4%a6%e6%88%b7" aria-label="三、将 SSH 公钥添加到 GitLab 账户">三、将 SSH 公钥添加到 GitLab 账户</a></li>
                 <li>
                     <a href="#%e5%9b%9btortoisegit-%e4%bd%bf%e7%94%a8-git-ssh-%e5%af%86%e9%92%a5" aria-label="四、TortoiseGit 使用 git SSH 密钥">四、TortoiseGit 使用 git SSH 密钥</a>
                 </li>
@@ -229,7 +229,7 @@ git config --global user.email <span style="color:#e6db74">&#34;Git邮箱&#34;</
 </ol>
 <h2 id="二生成-ssh-密钥">二、生成 SSH 密钥<a hidden class="anchor" aria-hidden="true" href="#二生成-ssh-密钥">#</a></h2>
 <p>在 git bash 中输入命令 <code>ssh-keygen -t rsa -C &quot;你的Git邮箱&quot;</code>，<strong>敲三次回车</strong>，就会在目录 <em>我的电脑&mdash;&gt;C盘&mdash;&gt;用户&mdash;&gt;你自己的用户</em> 目录下生成 <em>.ssh</em> 文件夹</p>
-<h2 id="三将ssh公钥添加到gitlab账户">三、将SSH公钥添加到GitLab账户<a hidden class="anchor" aria-hidden="true" href="#三将ssh公钥添加到gitlab账户">#</a></h2>
+<h2 id="三将-ssh-公钥添加到-gitlab-账户">三、将 SSH 公钥添加到 GitLab 账户<a hidden class="anchor" aria-hidden="true" href="#三将-ssh-公钥添加到-gitlab-账户">#</a></h2>
 <ol>
 <li>
 <p>在 <em>.ssh</em> 文件夹下，使用记事本打开 <em>id_rsa.pub</em> 公钥文件，复制里面的内容</p>
@@ -246,7 +246,7 @@ git config --global user.email <span style="color:#e6db74">&#34;Git邮箱&#34;</
 </p>
 <p>参考：</p>
 <ol>
-<li><a href="https://www.jianshu.com/p/74f1531c49a0">Windows下GitLab配置SSH</a></li>
+<li><a href="https://www.jianshu.com/p/74f1531c49a0">Windows 下 GitLab 配置 SSH</a></li>
 </ol>
 
 

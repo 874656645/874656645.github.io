@@ -9,7 +9,28 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 12 Apr 2023 22:02:53 +0800</lastBuildDate><atom:link href="https://874656645.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Sep 2023 14:55:17 +0800</lastBuildDate><atom:link href="https://874656645.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WSL Ubuntu_2204 使用</title>
+      <link>https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sun, 10 Sep 2023 14:55:17 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/</guid>
+      <description>WSL 中使用 Ubuntu_2204 参考：Windows 10 中的 Linux 子系统
+配置开发环境   Linux 常用命令参考
+  安装常用开发环境
+sudo apt-get install build-essential
+  安装 python 2.7  注意：Ubuntu_2204 中自带 python3，所以 python2 需要进行手动安装和配置。    查看已安装的版本
+ls /usr/bin/python*
+  安装 python2
+sudo apt-get install python2
+  设置默认版本
+sudo update-alternatives --list python
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
+sudo update-alternatives --config python</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43;——打印枚举常量字符串</title>
       <link>https://874656645.github.io/posts/261-c&#43;&#43;-%E6%89%93%E5%8D%B0%E6%9E%9A%E4%B8%BE%E5%B8%B8%E9%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
@@ -17,7 +38,8 @@
       
       <guid>https://874656645.github.io/posts/261-c&#43;&#43;-%E6%89%93%E5%8D%B0%E6%9E%9A%E4%B8%BE%E5%B8%B8%E9%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
       <description>#include &amp;lt;stdio.h&amp;gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(&amp;#34;%s\n&amp;#34;, STR(MyType_One)); printf(&amp;#34;%s\n&amp;#34;, STR(HELLO_WORLD)); printf(&amp;#34;%s\n&amp;#34;, STR(MY_INT)); printf(&amp;#34;%s\n&amp;#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：
-MyType_One HELLO_WORLD MY_INT 7777 </description>
+MyType_One HELLO_WORLD MY_INT 7777 参考：
+ c++中#与##的作用  </description>
     </item>
     
     <item>
@@ -1768,7 +1790,7 @@ struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(s
     </item>
     
     <item>
-      <title>Linux 常用命令</title>
+      <title>Ubuntu 常用命令</title>
       <link>https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Mon, 07 Feb 2022 08:33:51 +0800</pubDate>
       

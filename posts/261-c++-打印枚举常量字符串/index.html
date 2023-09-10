@@ -8,7 +8,8 @@
 <title>C&#43;&#43;——打印枚举常量字符串 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
 <meta name="description" content="#include &lt;stdio.h&gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(&#34;%s\n&#34;, STR(MyType_One)); printf(&#34;%s\n&#34;, STR(HELLO_WORLD)); printf(&#34;%s\n&#34;, STR(MY_INT)); printf(&#34;%s\n&#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：
-MyType_One HELLO_WORLD MY_INT 7777 ">
+MyType_One HELLO_WORLD MY_INT 7777 参考：
+ c&#43;&#43;中#与##的作用  ">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/261-c&#43;&#43;-%E6%89%93%E5%8D%B0%E6%9E%9A%E4%B8%BE%E5%B8%B8%E9%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -48,7 +49,8 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="C&#43;&#43;——打印枚举常量字符串" />
 <meta property="og:description" content="#include &lt;stdio.h&gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(&#34;%s\n&#34;, STR(MyType_One)); printf(&#34;%s\n&#34;, STR(HELLO_WORLD)); printf(&#34;%s\n&#34;, STR(MY_INT)); printf(&#34;%s\n&#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：
-MyType_One HELLO_WORLD MY_INT 7777 " />
+MyType_One HELLO_WORLD MY_INT 7777 参考：
+ c&#43;&#43;中#与##的作用  " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/261-c&#43;&#43;-%E6%89%93%E5%8D%B0%E6%9E%9A%E4%B8%BE%E5%B8%B8%E9%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-04-12T22:02:53&#43;08:00" />
@@ -60,7 +62,8 @@ MyType_One HELLO_WORLD MY_INT 7777 " />
 
 <meta name="twitter:title" content="C&#43;&#43;——打印枚举常量字符串"/>
 <meta name="twitter:description" content="#include &lt;stdio.h&gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(&#34;%s\n&#34;, STR(MyType_One)); printf(&#34;%s\n&#34;, STR(HELLO_WORLD)); printf(&#34;%s\n&#34;, STR(MY_INT)); printf(&#34;%s\n&#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：
-MyType_One HELLO_WORLD MY_INT 7777 "/>
+MyType_One HELLO_WORLD MY_INT 7777 参考：
+ c&#43;&#43;中#与##的作用  "/>
 
 
 <script type="application/ld+json">
@@ -89,12 +92,12 @@ MyType_One HELLO_WORLD MY_INT 7777 "/>
   "@type": "BlogPosting",
   "headline": "C++——打印枚举常量字符串",
   "name": "C\u002b\u002b——打印枚举常量字符串",
-  "description": "#include \u0026lt;stdio.h\u0026gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(\u0026#34;%s\\n\u0026#34;, STR(MyType_One)); printf(\u0026#34;%s\\n\u0026#34;, STR(HELLO_WORLD)); printf(\u0026#34;%s\\n\u0026#34;, STR(MY_INT)); printf(\u0026#34;%s\\n\u0026#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：\nMyType_One HELLO_WORLD MY_INT 7777 ",
+  "description": "#include \u0026lt;stdio.h\u0026gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(\u0026#34;%s\\n\u0026#34;, STR(MyType_One)); printf(\u0026#34;%s\\n\u0026#34;, STR(HELLO_WORLD)); printf(\u0026#34;%s\\n\u0026#34;, STR(MY_INT)); printf(\u0026#34;%s\\n\u0026#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：\nMyType_One HELLO_WORLD MY_INT 7777 参考：\n c++中#与##的作用  ",
   "keywords": [
     "C++"
   ],
-  "articleBody": "#include #define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(\"%s\\n\", STR(MyType_One)); printf(\"%s\\n\", STR(HELLO_WORLD)); printf(\"%s\\n\", STR(MY_INT)); printf(\"%s\\n\", STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：\nMyType_One HELLO_WORLD MY_INT 7777 ",
-  "wordCount" : "50",
+  "articleBody": "#include #define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(\"%s\\n\", STR(MyType_One)); printf(\"%s\\n\", STR(HELLO_WORLD)); printf(\"%s\\n\", STR(MY_INT)); printf(\"%s\\n\", STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：\nMyType_One HELLO_WORLD MY_INT 7777 参考：\n c++中#与##的作用  ",
+  "wordCount" : "52",
   "inLanguage": "en",
   "datePublished": "2023-04-12T22:02:53+08:00",
   "dateModified": "2023-04-12T22:02:53+08:00",
@@ -222,7 +225,11 @@ MyType_One HELLO_WORLD MY_INT 7777 "/>
 HELLO_WORLD
 MY_INT
 7777
-</code></pre></div>
+</code></pre></div><p>参考：</p>
+<ol>
+<li><a href="https://blog.csdn.net/weixin_51729207/article/details/127828955">c++中#与##的作用</a></li>
+</ol>
+
 
   </div>
 
@@ -231,6 +238,11 @@ MY_INT
       <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>WSL Ubuntu_2204 使用</span>
+  </a>
   <a class="next" href="https://874656645.github.io/posts/260-git-tortoisegit-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/">
     <span class="title">Next Page »</span>
     <br>
