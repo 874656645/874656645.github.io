@@ -163,21 +163,16 @@ if (!doNotTrack) {
   <section class="entry-content">
     <p>Linux 命令大全
 一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
-2. 安装软件 sudo apt install tree
-3. 删除不需要的包 sudo apt autoremove
-4. 查看已安装的软件 dpkg -l | grep openssh-server
-5. 查看软件安装的路径 dpkg -L openssh-server
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr
+6. 查看软件安装的路径 dpkg -L openssh-server
 whereis gdb
-二、shell 操作和常用命令 1、查看输入的命令历史 history
-2、删除光标前面的字符串 ctrl &#43; u
-3、删除光标后面的字符串 ctrl &#43; k
-4、光标定位到头部 ctrl &#43; a
-5、光标定位到尾部 ctrl &#43; e
-6、命令、路径补全 Tab
-7、缩写别名 alias
-8、查看说明 man 5 passwd
-9、宿主目录 ~
-10、查看目录内容 tree ~...</p>
+which gcovr 需要软件包的路径在环境变量 $PATH 中
+7. 查看 apt 中软件的版本 apt-show-versions -a gcovr
+apt show gcovr
+sudo apt-cache policy libssl-dev
+8. 列出已安装的软件 apt list --installed...</p>
   </section>
   <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Ubuntu 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>

@@ -145,6 +145,20 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>指针函数和函数指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  指针函数本质是一个函数，返回值是一个指针；
+  函数指针是指向函数的一个指针变量；
+  #include &lt;iostream&gt;#include &lt;cstdlib&gt; using namespace std; // 指针函数fun char * fun(const char * p) { cout &lt;&lt; &#34;fun: &#34; &lt;&lt; p &lt;&lt; endl; return nullptr; }; // 函数指针pf char * (*pf)(const char * p); int main() { pf = fun; // 函数指针pf指向函数fun  pf(&#34;Hello&#34;); return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-16 12:34:27 +0800 CST'>December 16, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 指针函数和函数指针" href="https://874656645.github.io/posts/25-%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0%E5%92%8C%E5%87%BD%E6%95%B0%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>explicit（显式）关键字
     </h2>
   </header>
@@ -200,20 +214,6 @@ QProcess::startDetached(&#34;taskkill -t -f /IM iexplore.exe&#34;);
   </section>
   <footer class="entry-footer"><span title='2021-12-06 12:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Qt QProcess 使用" href="https://874656645.github.io/posts/21-qprocess-%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Qt QString 中文乱码
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> QString使用的是UTF-8编码 从字符常量中获取中文  QString msg = QString::fromLocal8Bit(&#34;This is a debug message at 中文&#34;);
-以QString做为形参变量传递  qDebug(msg.toUtf8());
-QString与操作系统间读写，会自动将UTF-8与操作系统的编码做转换（比如日志系统）  void QtLog::WriteLine(const QString &amp;logFileName, const QString &amp;logMsg) { QFile file(logFileName); file.open(QIODevice::WriteOnly | QIODevice::Append); QTextStream text_stream(&amp;file); text_stream &lt;&lt; logMsg &lt;&lt; &#34;\r\n&#34;; file.flush(); file.close(); } QString strAppDir = QCoreApplication::applicationDirPath(); // 不用转码  QString message, text, fileName = strAppDir &#43; &#34;/Log/&#34;; QDir dir(fileName); if (!dir.exists()) { // 注：不能创建两级文件夹  bool ismkdir = dir.mkdir(fileName); } </p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-06 11:34:27 +0800 CST'>December 6, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Qt QString 中文乱码" href="https://874656645.github.io/posts/20-qstring-%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

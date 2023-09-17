@@ -9,7 +9,26 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 10 Sep 2023 14:55:17 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 11 Sep 2023 09:34:47 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>WSL Ubuntu 使用 SonarQube</title>
+      <link>https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/</link>
+      <pubDate>Mon, 11 Sep 2023 09:34:47 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/</guid>
+      <description>下载 Build Wrapper：
+{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip
+  下载 SonarScanner：
+https://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file
+  配置环境变量：
+export PATH=&amp;quot;/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH&amp;quot;
+  安装 CMake
+sudo apt install cmake
+  安装 gcovr（计算 gtest 单元测试分支覆盖率）
+sudo apt install gcovr
+   注意：Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr 安装 gtest 库    6.1. 获取 gtest 源码</description>
+    </item>
+    
     <item>
       <title>WSL Ubuntu_2204 使用</title>
       <link>https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/</link>

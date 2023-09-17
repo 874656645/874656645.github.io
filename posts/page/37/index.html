@@ -160,6 +160,18 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>deque 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>巧妙收缩 vector 空间
     </h2>
   </header>
@@ -204,18 +216,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-01-16 09:47:21 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 文件操作" href="https://874656645.github.io/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>格式化输出
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>#include &lt;iostream&gt;#include &lt;cstdlib&gt;#include &lt;cstring&gt;#include &lt;iomanip&gt; // 控制符头文件using namespace std; // 格式化输出 void func(){ // 方式一：使用成员方法  int number = 10; cout &lt;&lt; number &lt;&lt; endl; cout.unsetf(ios::dec); // 八进制  cout.setf(ios::oct); cout.setf(ios::showbase); cout &lt;&lt; number &lt;&lt; endl; // 012  // 十六进制  cout.unsetf(ios::oct); cout.setf(ios::hex); cout &lt;&lt; number &lt;&lt; endl; // 0xa  // 固定宽度  cout.width(10); cout.fill(&#39;*&#39;); cout &lt;&lt; number &lt;&lt; endl; // *******0xa  // 上面的设置只对当前输出有效，下次的输出格式要重新设置  cout.setf(ios::left); cout.width(10); cout....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 09:12:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 格式化输出" href="https://874656645.github.io/posts/76-%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -157,6 +157,25 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Git——stash TortoiseGit 将一个分支上的修改转移到另一个分支上
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 通过 git status 查看当前改动的状态  一、commit 操作之前 git stash //把修改的内容暂存起来 git checkout dev //切换到正确的分支 git stash pop //将存储的修改取出来 二、已经 commit git reset HEAD^ // 撤回到刚刚 commit 之前的状态
+然后执行第一种情况的操作
+三、使用 TortoiseGit   stash changes
+  弹出对话框，点击 OK 按钮
+  切换分支
+  stash pop
+  参考：
+ Git如何将一个分支上的修改转移到另一个分支上 在 TortoiseGit 中使用 stash 操作  </p>
+  </section>
+  <footer class="entry-footer"><span title='2023-02-22 17:10:24 +0800 CST'>February 22, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Git——stash TortoiseGit 将一个分支上的修改转移到另一个分支上" href="https://874656645.github.io/posts/258-git-stash-%E5%B0%86%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A%E7%9A%84%E4%BF%AE%E6%94%B9%E8%BD%AC%E7%A7%BB%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Unreal——Subsystem（子系统）
     </h2>
   </header>
@@ -209,20 +228,6 @@ template&lt;typename T&gt; void InOrder(BinaryTreeNode&lt;T&gt;* root){ stack&lt
   </section>
   <footer class="entry-footer"><span title='2022-11-13 17:58:17 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树" href="https://874656645.github.io/posts/254-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——KMP 字符串匹配算法
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  模式串 next 向量计算：
-  字符串比较
-int mystrcmp(const char* str1, const char* str2){ int i = 0; while(str1[i] == str2[i] &amp;&amp; str1[i] != &#39;\0&#39;){ i&#43;&#43;; } return str1[i] - str2[i]; }   </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-11-13 14:56:36 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——KMP 字符串匹配算法" href="https://874656645.github.io/posts/253-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95kmp-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

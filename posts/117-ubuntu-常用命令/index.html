@@ -9,21 +9,16 @@
 <meta name="keywords" content="Linux" />
 <meta name="description" content="Linux 命令大全
 一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
-2. 安装软件 sudo apt install tree
-3. 删除不需要的包 sudo apt autoremove
-4. 查看已安装的软件 dpkg -l | grep openssh-server
-5. 查看软件安装的路径 dpkg -L openssh-server
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr
+6. 查看软件安装的路径 dpkg -L openssh-server
 whereis gdb
-二、shell 操作和常用命令 1、查看输入的命令历史 history
-2、删除光标前面的字符串 ctrl &#43; u
-3、删除光标后面的字符串 ctrl &#43; k
-4、光标定位到头部 ctrl &#43; a
-5、光标定位到尾部 ctrl &#43; e
-6、命令、路径补全 Tab
-7、缩写别名 alias
-8、查看说明 man 5 passwd
-9、宿主目录 ~
-10、查看目录内容 tree ~">
+which gcovr 需要软件包的路径在环境变量 $PATH 中
+7. 查看 apt 中软件的版本 apt-show-versions -a gcovr
+apt show gcovr
+sudo apt-cache policy libssl-dev
+8. 列出已安装的软件 apt list --installed">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -64,26 +59,22 @@ if (!doNotTrack) {
 </script><meta property="og:title" content="Ubuntu 常用命令" />
 <meta property="og:description" content="Linux 命令大全
 一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
-2. 安装软件 sudo apt install tree
-3. 删除不需要的包 sudo apt autoremove
-4. 查看已安装的软件 dpkg -l | grep openssh-server
-5. 查看软件安装的路径 dpkg -L openssh-server
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr
+6. 查看软件安装的路径 dpkg -L openssh-server
 whereis gdb
-二、shell 操作和常用命令 1、查看输入的命令历史 history
-2、删除光标前面的字符串 ctrl &#43; u
-3、删除光标后面的字符串 ctrl &#43; k
-4、光标定位到头部 ctrl &#43; a
-5、光标定位到尾部 ctrl &#43; e
-6、命令、路径补全 Tab
-7、缩写别名 alias
-8、查看说明 man 5 passwd
-9、宿主目录 ~
-10、查看目录内容 tree ~" />
+which gcovr 需要软件包的路径在环境变量 $PATH 中
+7. 查看 apt 中软件的版本 apt-show-versions -a gcovr
+apt show gcovr
+sudo apt-cache policy libssl-dev
+8. 列出已安装的软件 apt list --installed" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-07T08:33:51&#43;08:00" />
 <meta property="article:modified_time" content="2022-02-07T08:33:51&#43;08:00" />
 <meta property="og:see_also" content="https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/" /><meta property="og:see_also" content="https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/" /><meta property="og:see_also" content="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/" /><meta property="og:see_also" content="https://874656645.github.io/posts/122-vim-%E4%BD%BF%E7%94%A8/" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/" /><meta property="og:see_also" content="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/121-windows-10-%E4%B8%AD%E7%9A%84-linux-%E5%AD%90%E7%B3%BB%E7%BB%9F/" />
 
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
@@ -91,21 +82,16 @@ whereis gdb
 <meta name="twitter:title" content="Ubuntu 常用命令"/>
 <meta name="twitter:description" content="Linux 命令大全
 一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
-2. 安装软件 sudo apt install tree
-3. 删除不需要的包 sudo apt autoremove
-4. 查看已安装的软件 dpkg -l | grep openssh-server
-5. 查看软件安装的路径 dpkg -L openssh-server
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr
+6. 查看软件安装的路径 dpkg -L openssh-server
 whereis gdb
-二、shell 操作和常用命令 1、查看输入的命令历史 history
-2、删除光标前面的字符串 ctrl &#43; u
-3、删除光标后面的字符串 ctrl &#43; k
-4、光标定位到头部 ctrl &#43; a
-5、光标定位到尾部 ctrl &#43; e
-6、命令、路径补全 Tab
-7、缩写别名 alias
-8、查看说明 man 5 passwd
-9、宿主目录 ~
-10、查看目录内容 tree ~"/>
+which gcovr 需要软件包的路径在环境变量 $PATH 中
+7. 查看 apt 中软件的版本 apt-show-versions -a gcovr
+apt show gcovr
+sudo apt-cache policy libssl-dev
+8. 列出已安装的软件 apt list --installed"/>
 
 
 <script type="application/ld+json">
@@ -134,12 +120,12 @@ whereis gdb
   "@type": "BlogPosting",
   "headline": "Ubuntu 常用命令",
   "name": "Ubuntu 常用命令",
-  "description": "Linux 命令大全\n一、更新和升级包 1. 更新和升级包 sudo apt update \u0026amp;\u0026amp; sudo apt upgrade\n2. 安装软件 sudo apt install tree\n3. 删除不需要的包 sudo apt autoremove\n4. 查看已安装的软件 dpkg -l | grep openssh-server\n5. 查看软件安装的路径 dpkg -L openssh-server\nwhereis gdb\n二、shell 操作和常用命令 1、查看输入的命令历史 history\n2、删除光标前面的字符串 ctrl + u\n3、删除光标后面的字符串 ctrl + k\n4、光标定位到头部 ctrl + a\n5、光标定位到尾部 ctrl + e\n6、命令、路径补全 Tab\n7、缩写别名 alias\n8、查看说明 man 5 passwd\n9、宿主目录 ~\n10、查看目录内容 tree ~",
+  "description": "Linux 命令大全\n一、更新和升级包 1. 更新和升级包 sudo apt update \u0026amp;\u0026amp; sudo apt upgrade\n2. 安装常用开发环境 sudo apt-get install build-essential\n3. 安装软件 sudo apt install tree\n4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr\n6. 查看软件安装的路径 dpkg -L openssh-server\nwhereis gdb\nwhich gcovr 需要软件包的路径在环境变量 $PATH 中\n7. 查看 apt 中软件的版本 apt-show-versions -a gcovr\napt show gcovr\nsudo apt-cache policy libssl-dev\n8. 列出已安装的软件 apt list --installed",
   "keywords": [
     "Linux"
   ],
-  "articleBody": "Linux 命令大全\n一、更新和升级包 1. 更新和升级包 sudo apt update \u0026\u0026 sudo apt upgrade\n2. 安装软件 sudo apt install tree\n3. 删除不需要的包 sudo apt autoremove\n4. 查看已安装的软件 dpkg -l | grep openssh-server\n5. 查看软件安装的路径 dpkg -L openssh-server\nwhereis gdb\n二、shell 操作和常用命令 1、查看输入的命令历史 history\n2、删除光标前面的字符串 ctrl + u\n3、删除光标后面的字符串 ctrl + k\n4、光标定位到头部 ctrl + a\n5、光标定位到尾部 ctrl + e\n6、命令、路径补全 Tab\n7、缩写别名 alias\n8、查看说明 man 5 passwd\n9、宿主目录 ~\n10、查看目录内容 tree ~\n11、打印工作目录 pwd\n12、表示当前用户是普通用户 $ 13、表示当前用户是超级用户 # 14、切换超级用户 sudo su\n15、 查看文件和目录 ls ls -a ls -l # -rwxrw-r-- 1 rick rick 0 Feb 12 18:37 test ls -lh ls -alF # drwxr-xr-x 1 rick rick 4096 Feb 12 18:37 rick/ ll 16、 cd cd /home/rick cd ~ cd cd - # 切换到上一个的历史目录 17、 mkdir 目录名 mkdir aa mkdir aa/bb rm aa -r mkdir aa/bb/cc -p 18、 touch 文件名  如果文件不存在，则创建文件 如果文件存在，更新文件时间  19、 rmdir 删除空目录  只能删除空目录  20、 rm 删除目录和文件  删除后很难恢复  rm -r # 用递归的方式删除目录 rm -ri # 提示 rm aa/* -r # 删除 aa 目录下的所有文件和目录 21、 cp 拷贝 cp file file1 # file1 不存在，则创建 file1 并把 file 中的内容拷贝进去 cp file file1 # file1 存在，则会用 file 中的内容覆盖 file1 中的内容 cp file dir # 将 file 拷贝到 dir 目录下 cp dir dir1 # dir1 目录不存在，则把 dir 的所有子目录拷贝到 dir1 目录下 rm dir1/* -r cp dir dir1 # dir1 目录存在，则把 dir 整个目录拷贝到 dir1 目录下 cp -r nginx_build/* nginx 22、 mv mv file file1 # file1 不存在，则是将 file 文件改名为 file1 mv file file1 # file1 存在，则用 file 中的内容覆盖 file1 中的内容，并删除 file mv file dir # dir 存在，将 file 移动到 dir 目录下 mv dir dir1 # dir1 不存在，就是将 dir 改名为 dir1 mv dir dir1 # dir1 存在，则将 dir 目录移动到 dir1下 23、 cat 将文件内容打印到终端  适用文件内容较小的情况  23、 more 将文件内容打印到终端  不能向上翻页 Enter 向下滚动一行 空格：向下翻页 退出：q  23、 less 将文件内容打印到终端  Enter 或 ctrl + n : 向下滚动一行 ctrl + p : 向上滚动一行 pgdn : 向下翻页 空格 : 向下翻页 pgup : 向上翻页 q : 退出  23、 head 打印文件内容的前 10 行到终端 24、 tail 打印文件内容的后 10 行到终端 25、 ln 创建软硬链接  创建软链接 ln -s 全文件名 链接名称 创建硬链接（在其他多个目录中管理文件，并且能时时同步修改） ln 文件名 链接名  26、 chmod 修改权限 chmod uo-rw program chmod u+r,g-x program chmod -440 program chmod 777 program 27、 chown 修改所有者或所属组 sudo chown sys program sudo chown rick:sys program 28、 chgrp 所属组 sudo chgrp rick program\n29、 find 查找 find ./ -name \"program\" # 按文件名查找 find ./ -type f # 按文件类型查找（7种） find ./ -size -4k find ./ -size +2k -size -10k # 按文件大小查找 find ./ -ctime -1 # 按日期查找（-ctime、-mtime、-atime） find ./ -type d -exec ls -l {} \\; # 查找指定目录，并列出该目录中文件详细信息 find ./ -type d | xargs ls -l # 利用管道，效率较高 30、 grep 所属组 grep -r \"hello\" ./ -n 31、 写入文件 ls -l  fileinfo\n32、 usermod 修改用户组 # 查看当前用户所属组 groups 用户名 # 一个用户仅仅属于某一个组，而不是同时属于多个组 sudo usermod -g 组名 用户名 # 给一个用户添加一个新的组，同时保留原来的组 sudo usermod -a -G 组名 用户名 33、查看环境变量 env\n34、修改环境变量 修改 ~/.bashrc 文件（当前用户）或 /etc/profile 文件（所有用户）\nexport PATH=\"/mnt/h/wsl/emsdk:/mnt/h/wsl/emsdk/upstream/emscripten:/mnt/h/wsl/emsdk/node/14.18.2_64bit/bin:$PATH\" source ~/.bashrc 35、ldd 列出动态库依赖关系 ldd 是 list, dynamic, dependencies 的缩写\nldd ffmpeg\n36、which 查找文件 which bash\n37、查看进程信息 ps -ef | grep nginx\n38、查看程序占用的端口 netstat -tunlp | grep 80\nlsof -i:80\n39、查看进程 ID（PID） pgrep -l nginx\n39、杀死进程 kill -9 PID\nkill PID1 PID2 PID3\n三、Linux 文件类型          - 普通文件   d 目录   l 符号链接   p 管道   s 套接字   c 字符设备（鼠标、键盘）   b 块设备（U盘、硬盘)    四、用户类型          user 文件所有者（rwx）   group 文件所属组用户（rw-）   other 其他用户（r--）    五、权限          r 读   w 写   x 执行    六、压缩包管理 1. 常见压缩格式  .gz –gzip .bz2 –bzip2  2. 常用压缩命令  gzip file 压缩 gunzip *.gz 解压 tar  .gz 压缩 tar -czvf test.tar.gz aa program .bz2 压缩 tar -cjvf test.tar.bz2 aa program .gz 解压 tar -xzvf test.tar.gz -C /tmp .bz2 解压 tar -xjvf test.tar.bz2 -C /tmp 详细列举归档文件 tar -tvf nginx.tar.gz   rar 需要安装 sudo apt-get install rar\nrar a all aa program\nrar a all aa/ program -r 目录加 -r\nrar x all.rar /tmp zip / unzip 需要安装 sudo apt-get install zip\nzip myzip aa program -r\nunzip myzip.zip -d /tmp  七、软件安装和制作 1. 在线安装 – ubuntu  安装：sudo apt-get(apt) install 安装包名称 卸载：sudo apt-get(apt) remove 软件名称 软件列表更新：sudo apt-get(apt) update 清空缓存：sudo apt-get(apt) clean 缓存路径：/var/cache/apt/archives 中的红色 *.deb 文件  2. 软件包安装  安装：sudo dpkg -i xxx.deb 卸载：sudo dpkg -r 软件名称  3. 源码安装 4. 查看已安装软件 dpkg -l | grep openssh-server\n5. 查看软件安装路径 dpkg -L openssh-server\n八、ubuntu 启用 root 用户 1. 修改 sshd_config 中的 PermitRootLogin sudo vim /etc/ssh/sshd_config\n2. 重启 ssh 守护进程 sudo service ssh restart\n如果终端显示 ssh:unrecognized service，可能是因为服务没开启，通过命令 service ssh status 查看服务状态，可通过命令 sudo /etc/init.d/ssh start 启动服务\n",
-  "wordCount" : "705",
+  "articleBody": "Linux 命令大全\n一、更新和升级包 1. 更新和升级包 sudo apt update \u0026\u0026 sudo apt upgrade\n2. 安装常用开发环境 sudo apt-get install build-essential\n3. 安装软件 sudo apt install tree\n4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr\n6. 查看软件安装的路径 dpkg -L openssh-server\nwhereis gdb\nwhich gcovr 需要软件包的路径在环境变量 $PATH 中\n7. 查看 apt 中软件的版本 apt-show-versions -a gcovr\napt show gcovr\nsudo apt-cache policy libssl-dev\n8. 列出已安装的软件 apt list --installed\n二、pip 使用 1. 安装软件 pip3 install -U gcovr\n2. 列出 pip 已安装的包 pip3 list\n3.查看安装包信息 pip3 show gcovr\n4. 安装 pip_search pip3 install pip_search pip_search gcovr 三、shell 操作和常用命令 1、查看输入的命令历史 history\n2、删除光标前面的字符串 ctrl + u\n3、删除光标后面的字符串 ctrl + k\n4、光标定位到头部 ctrl + a\n5、光标定位到尾部 ctrl + e\n6、命令、路径补全 Tab\n7、缩写别名 alias\n8、查看说明 man 5 passwd\n9、宿主目录 ~\n10、查看目录内容 tree ~\n11、打印工作目录 pwd\n12、表示当前用户是普通用户 $ 13、表示当前用户是超级用户 # 14、切换超级用户 sudo su\n15、 查看文件和目录 ls ls -a ls -l # -rwxrw-r-- 1 rick rick 0 Feb 12 18:37 test ls -lh ls -alF # drwxr-xr-x 1 rick rick 4096 Feb 12 18:37 rick/ ll 16、 cd cd /home/rick cd ~ cd cd - # 切换到上一个的历史目录 17、 mkdir 目录名 mkdir aa mkdir aa/bb rm aa -r mkdir aa/bb/cc -p 18、 touch 文件名  如果文件不存在，则创建文件 如果文件存在，更新文件时间  19、 rmdir 删除空目录  只能删除空目录  20、 rm 删除目录和文件  删除后很难恢复  rm -r # 用递归的方式删除目录 rm -ri # 提示 rm aa/* -r # 删除 aa 目录下的所有文件和目录 21、 cp 拷贝 cp file file1 # file1 不存在，则创建 file1 并把 file 中的内容拷贝进去 cp file file1 # file1 存在，则会用 file 中的内容覆盖 file1 中的内容 cp file dir # 将 file 拷贝到 dir 目录下 cp dir dir1 # dir1 目录不存在，则把 dir 的所有子目录拷贝到 dir1 目录下 rm dir1/* -r cp dir dir1 # dir1 目录存在，则把 dir 整个目录拷贝到 dir1 目录下 cp -r nginx_build/* nginx 22、 mv mv file file1 # file1 不存在，则是将 file 文件改名为 file1 mv file file1 # file1 存在，则用 file 中的内容覆盖 file1 中的内容，并删除 file mv file dir # dir 存在，将 file 移动到 dir 目录下 mv dir dir1 # dir1 不存在，就是将 dir 改名为 dir1 mv dir dir1 # dir1 存在，则将 dir 目录移动到 dir1下 23、 cat 将文件内容打印到终端  适用文件内容较小的情况  23、 more 将文件内容打印到终端  不能向上翻页 Enter 向下滚动一行 空格：向下翻页 退出：q  23、 less 将文件内容打印到终端  Enter 或 ctrl + n : 向下滚动一行 ctrl + p : 向上滚动一行 pgdn : 向下翻页 空格 : 向下翻页 pgup : 向上翻页 q : 退出  23、 head 打印文件内容的前 10 行到终端 24、 tail 打印文件内容的后 10 行到终端 25、 ln 创建软硬链接  创建软链接 ln -s 原文件名 链接名称 创建硬链接（在其他多个目录中管理文件，并且能时时同步修改） ln 文件名 链接名  26、 chmod 修改权限 chmod uo-rw program chmod u+r,g-x program chmod -440 program chmod 777 program 27、 chown 修改所有者或所属组 sudo chown sys program sudo chown rick:sys program 28、 chgrp 所属组 sudo chgrp rick program\n29、 find 查找 find ./ -name \"program\" # 按文件名查找 find ./ -type f # 按文件类型查找（7种） find ./ -size -4k find ./ -size +2k -size -10k # 按文件大小查找 find ./ -ctime -1 # 按日期查找（-ctime、-mtime、-atime） find ./ -type d -exec ls -l {} \\; # 查找指定目录，并列出该目录中文件详细信息 find ./ -type d | xargs ls -l # 利用管道，效率较高 30、 grep 所属组 grep -r \"hello\" ./ -n 31、 写入文件 ls -l  fileinfo\n32、 usermod 修改用户组 # 查看当前用户所属组 groups 用户名 # 一个用户仅仅属于某一个组，而不是同时属于多个组 sudo usermod -g 组名 用户名 # 给一个用户添加一个新的组，同时保留原来的组 sudo usermod -a -G 组名 用户名 33、查看环境变量 env\n34、修改环境变量 修改 ~/.bashrc 文件（当前用户）或 /etc/profile 文件（所有用户）\nexport PATH=\"/mnt/h/wsl/emsdk:/mnt/h/wsl/emsdk/upstream/emscripten:/mnt/h/wsl/emsdk/node/14.18.2_64bit/bin:$PATH\" source ~/.bashrc 35、ldd 列出动态库依赖关系 ldd 是 list, dynamic, dependencies 的缩写\nldd ffmpeg\n36、which 查找文件 which bash\n37、查看进程信息 ps -ef | grep nginx\n38、查看程序占用的端口 netstat -tunlp | grep 80\nlsof -i:80\n39、查看进程 ID（PID） pgrep -l nginx\n39、杀死进程 kill -9 PID\nkill PID1 PID2 PID3\n四、Linux 文件类型          - 普通文件   d 目录   l 符号链接   p 管道   s 套接字   c 字符设备（鼠标、键盘）   b 块设备（U盘、硬盘)    五、用户类型          user 文件所有者（rwx）   group 文件所属组用户（rw-）   other 其他用户（r--）    六、权限          r 读   w 写   x 执行    七、压缩包管理 1. 常见压缩格式  .gz –gzip .bz2 –bzip2  2. 常用压缩命令  gzip file 压缩 gunzip *.gz 解压 tar  .gz 压缩 tar -czvf test.tar.gz aa program .bz2 压缩 tar -cjvf test.tar.bz2 aa program .gz 解压 tar -xzvf test.tar.gz -C /tmp .bz2 解压 tar -xjvf test.tar.bz2 -C /tmp 详细列举归档文件 tar -tvf nginx.tar.gz   rar 需要安装 sudo apt-get install rar\nrar a all aa program\nrar a all aa/ program -r 目录加 -r\nrar x all.rar /tmp zip / unzip 需要安装 sudo apt-get install zip\nzip myzip aa program -r\nunzip myzip.zip -d /tmp  八、软件安装和制作 1. 在线安装 – ubuntu  安装：sudo apt-get(apt) install 安装包名称 卸载：sudo apt-get(apt) remove 软件名称 软件列表更新：sudo apt-get(apt) update 清空缓存：sudo apt-get(apt) clean 缓存路径：/var/cache/apt/archives 中的红色 *.deb 文件  2. 软件包安装  安装：sudo dpkg -i xxx.deb 卸载：sudo dpkg -r 软件名称  3. 源码安装 4. 查看已安装软件 dpkg -l | grep openssh-server\n5. 查看软件安装路径 dpkg -L openssh-server\n九、ubuntu 启用 root 用户 1. 修改 sshd_config 中的 PermitRootLogin sudo vim /etc/ssh/sshd_config\n2. 重启 ssh 守护进程 sudo service ssh restart\n如果终端显示 ssh:unrecognized service，可能是因为服务没开启，通过命令 service ssh status 查看服务状态，可通过命令 sudo /etc/init.d/ssh start 启动服务\n参考  ubuntu下查看用pip安装的包的位置以及dist-packages和site-packages区别 Linux：Ubuntu系统查看软件所有版本，安装指定版本软件 Linux Ubuntu 20.04LTS安装OpenSSL步骤 apt-get安装、卸载、更新、查询软件包  ",
+  "wordCount" : "772",
   "inLanguage": "en",
   "datePublished": "2022-02-07T08:33:51+08:00",
   "dateModified": "2022-02-07T08:33:51+08:00",
@@ -252,16 +238,34 @@ whereis gdb
                 <li>
                     <a href="#1-%e6%9b%b4%e6%96%b0%e5%92%8c%e5%8d%87%e7%ba%a7%e5%8c%85" aria-label="1. 更新和升级包">1. 更新和升级包</a></li>
                 <li>
-                    <a href="#2-%e5%ae%89%e8%a3%85%e8%bd%af%e4%bb%b6" aria-label="2. 安装软件">2. 安装软件</a></li>
+                    <a href="#2-%e5%ae%89%e8%a3%85%e5%b8%b8%e7%94%a8%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83" aria-label="2. 安装常用开发环境">2. 安装常用开发环境</a></li>
                 <li>
-                    <a href="#3-%e5%88%a0%e9%99%a4%e4%b8%8d%e9%9c%80%e8%a6%81%e7%9a%84%e5%8c%85" aria-label="3. 删除不需要的包">3. 删除不需要的包</a></li>
+                    <a href="#3-%e5%ae%89%e8%a3%85%e8%bd%af%e4%bb%b6" aria-label="3. 安装软件">3. 安装软件</a></li>
                 <li>
-                    <a href="#4-%e6%9f%a5%e7%9c%8b%e5%b7%b2%e5%ae%89%e8%a3%85%e7%9a%84%e8%bd%af%e4%bb%b6" aria-label="4. 查看已安装的软件">4. 查看已安装的软件</a></li>
+                    <a href="#4-%e5%88%a0%e9%99%a4%e4%b8%8d%e9%9c%80%e8%a6%81%e7%9a%84%e5%8c%85" aria-label="4. 删除不需要的包">4. 删除不需要的包</a></li>
                 <li>
-                    <a href="#5-%e6%9f%a5%e7%9c%8b%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85%e7%9a%84%e8%b7%af%e5%be%84" aria-label="5. 查看软件安装的路径">5. 查看软件安装的路径</a></li></ul>
+                    <a href="#5-%e6%9f%a5%e7%9c%8b%e5%b7%b2%e5%ae%89%e8%a3%85%e7%9a%84%e8%bd%af%e4%bb%b6" aria-label="5. 查看已安装的软件">5. 查看已安装的软件</a></li>
+                <li>
+                    <a href="#6-%e6%9f%a5%e7%9c%8b%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85%e7%9a%84%e8%b7%af%e5%be%84" aria-label="6. 查看软件安装的路径">6. 查看软件安装的路径</a></li>
+                <li>
+                    <a href="#7-%e6%9f%a5%e7%9c%8b-apt-%e4%b8%ad%e8%bd%af%e4%bb%b6%e7%9a%84%e7%89%88%e6%9c%ac" aria-label="7. 查看 apt 中软件的版本">7. 查看 <code>apt</code> 中软件的版本</a></li>
+                <li>
+                    <a href="#8-%e5%88%97%e5%87%ba%e5%b7%b2%e5%ae%89%e8%a3%85%e7%9a%84%e8%bd%af%e4%bb%b6" aria-label="8. 列出已安装的软件">8. 列出已安装的软件</a></li></ul>
                 </li>
                 <li>
-                    <a href="#%e4%ba%8cshell-%e6%93%8d%e4%bd%9c%e5%92%8c%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="二、shell 操作和常用命令">二、shell 操作和常用命令</a><ul>
+                    <a href="#%e4%ba%8cpip-%e4%bd%bf%e7%94%a8" aria-label="二、pip 使用">二、pip 使用</a><ul>
+                        
+                <li>
+                    <a href="#1-%e5%ae%89%e8%a3%85%e8%bd%af%e4%bb%b6" aria-label="1. 安装软件">1. 安装软件</a></li>
+                <li>
+                    <a href="#2-%e5%88%97%e5%87%ba-pip-%e5%b7%b2%e5%ae%89%e8%a3%85%e7%9a%84%e5%8c%85" aria-label="2. 列出 pip 已安装的包">2. 列出 pip 已安装的包</a></li>
+                <li>
+                    <a href="#3%e6%9f%a5%e7%9c%8b%e5%ae%89%e8%a3%85%e5%8c%85%e4%bf%a1%e6%81%af" aria-label="3.查看安装包信息">3.查看安装包信息</a></li>
+                <li>
+                    <a href="#4-%e5%ae%89%e8%a3%85-pip_search" aria-label="4. 安装 pip_search">4. 安装 pip_search</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%89shell-%e6%93%8d%e4%bd%9c%e5%92%8c%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="三、shell 操作和常用命令">三、shell 操作和常用命令</a><ul>
                         
                 <li>
                     <a href="#1%e6%9f%a5%e7%9c%8b%e8%be%93%e5%85%a5%e7%9a%84%e5%91%bd%e4%bb%a4%e5%8e%86%e5%8f%b2" aria-label="1、查看输入的命令历史">1、查看输入的命令历史</a></li>
@@ -351,13 +355,13 @@ whereis gdb
                     <a href="#39%e6%9d%80%e6%ad%bb%e8%bf%9b%e7%a8%8bhttpslinuxcnarticle-2116-1html" aria-label="39、杀死进程">39、<a href="https://linux.cn/article-2116-1.html">杀死进程</a></a></li></ul>
                 </li>
                 <li>
-                    <a href="#%e4%b8%89linux-%e6%96%87%e4%bb%b6%e7%b1%bb%e5%9e%8b" aria-label="三、Linux 文件类型">三、Linux 文件类型</a></li>
+                    <a href="#%e5%9b%9blinux-%e6%96%87%e4%bb%b6%e7%b1%bb%e5%9e%8b" aria-label="四、Linux 文件类型">四、Linux 文件类型</a></li>
                 <li>
-                    <a href="#%e5%9b%9b%e7%94%a8%e6%88%b7%e7%b1%bb%e5%9e%8b" aria-label="四、用户类型">四、用户类型</a></li>
+                    <a href="#%e4%ba%94%e7%94%a8%e6%88%b7%e7%b1%bb%e5%9e%8b" aria-label="五、用户类型">五、用户类型</a></li>
                 <li>
-                    <a href="#%e4%ba%94%e6%9d%83%e9%99%90" aria-label="五、权限">五、权限</a></li>
+                    <a href="#%e5%85%ad%e6%9d%83%e9%99%90" aria-label="六、权限">六、权限</a></li>
                 <li>
-                    <a href="#%e5%85%ad%e5%8e%8b%e7%bc%a9%e5%8c%85%e7%ae%a1%e7%90%86" aria-label="六、压缩包管理">六、压缩包管理</a><ul>
+                    <a href="#%e4%b8%83%e5%8e%8b%e7%bc%a9%e5%8c%85%e7%ae%a1%e7%90%86" aria-label="七、压缩包管理">七、压缩包管理</a><ul>
                         
                 <li>
                     <a href="#1-%e5%b8%b8%e8%a7%81%e5%8e%8b%e7%bc%a9%e6%a0%bc%e5%bc%8f" aria-label="1. 常见压缩格式">1. 常见压缩格式</a></li>
@@ -365,7 +369,7 @@ whereis gdb
                     <a href="#2-%e5%b8%b8%e7%94%a8%e5%8e%8b%e7%bc%a9%e5%91%bd%e4%bb%a4" aria-label="2. 常用压缩命令">2. 常用压缩命令</a></li></ul>
                 </li>
                 <li>
-                    <a href="#%e4%b8%83%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85%e5%92%8c%e5%88%b6%e4%bd%9c" aria-label="七、软件安装和制作">七、软件安装和制作</a><ul>
+                    <a href="#%e5%85%ab%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85%e5%92%8c%e5%88%b6%e4%bd%9c" aria-label="八、软件安装和制作">八、软件安装和制作</a><ul>
                         
                 <li>
                     <a href="#1-%e5%9c%a8%e7%ba%bf%e5%ae%89%e8%a3%85----ubuntu" aria-label="1. 在线安装 &amp;ndash; ubuntu">1. 在线安装 &ndash; ubuntu</a></li>
@@ -379,15 +383,16 @@ whereis gdb
                     <a href="#5-%e6%9f%a5%e7%9c%8b%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85%e8%b7%af%e5%be%84" aria-label="5. 查看软件安装路径">5. 查看软件安装路径</a></li></ul>
                 </li>
                 <li>
-                    <a href="#%e5%85%abubuntu-%e5%90%af%e7%94%a8-root-%e7%94%a8%e6%88%b7" aria-label="八、ubuntu 启用 root 用户">八、ubuntu 启用 root 用户</a><ul>
+                    <a href="#%e4%b9%9dubuntu-%e5%90%af%e7%94%a8-root-%e7%94%a8%e6%88%b7" aria-label="九、ubuntu 启用 root 用户">九、ubuntu 启用 root 用户</a><ul>
                         
                 <li>
                     <a href="#1-%e4%bf%ae%e6%94%b9-sshd_config-%e4%b8%ad%e7%9a%84-permitrootlogin" aria-label="1. 修改 sshd_config 中的 PermitRootLogin">1. 修改 sshd_config 中的 PermitRootLogin</a></li>
                 <li>
-                    <a href="#2-%e9%87%8d%e5%90%af-ssh-%e5%ae%88%e6%8a%a4%e8%bf%9b%e7%a8%8b" aria-label="2. 重启 ssh 守护进程">2. 重启 ssh 守护进程</a>
+                    <a href="#2-%e9%87%8d%e5%90%af-ssh-%e5%ae%88%e6%8a%a4%e8%bf%9b%e7%a8%8b" aria-label="2. 重启 ssh 守护进程">2. 重启 ssh 守护进程</a></li></ul>
                 </li>
-            </ul>
-            </li>
+                <li>
+                    <a href="#%e5%8f%82%e8%80%83" aria-label="参考">参考</a>
+                </li>
             </ul>
         </div>
     </details>
@@ -397,16 +402,48 @@ whereis gdb
 <h2 id="一更新和升级包">一、更新和升级包<a hidden class="anchor" aria-hidden="true" href="#一更新和升级包">#</a></h2>
 <h3 id="1-更新和升级包">1. 更新和升级包<a hidden class="anchor" aria-hidden="true" href="#1-更新和升级包">#</a></h3>
 <p><code>sudo apt update &amp;&amp; sudo apt upgrade</code></p>
-<h3 id="2-安装软件">2. 安装软件<a hidden class="anchor" aria-hidden="true" href="#2-安装软件">#</a></h3>
+<h3 id="2-安装常用开发环境">2. 安装常用开发环境<a hidden class="anchor" aria-hidden="true" href="#2-安装常用开发环境">#</a></h3>
+<p><code>sudo apt-get install build-essential</code></p>
+<h3 id="3-安装软件">3. 安装软件<a hidden class="anchor" aria-hidden="true" href="#3-安装软件">#</a></h3>
 <p><code>sudo apt install tree</code></p>
-<h3 id="3-删除不需要的包">3. 删除不需要的包<a hidden class="anchor" aria-hidden="true" href="#3-删除不需要的包">#</a></h3>
-<p><code>sudo apt autoremove</code></p>
-<h3 id="4-查看已安装的软件">4. 查看已安装的软件<a hidden class="anchor" aria-hidden="true" href="#4-查看已安装的软件">#</a></h3>
-<p><code>dpkg -l | grep openssh-server</code></p>
-<h3 id="5-查看软件安装的路径">5. 查看软件安装的路径<a hidden class="anchor" aria-hidden="true" href="#5-查看软件安装的路径">#</a></h3>
+<h3 id="4-删除不需要的包">4. 删除不需要的包<a hidden class="anchor" aria-hidden="true" href="#4-删除不需要的包">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt remove gcovr  
+sudo apt autoremove
+</code></pre></div><h3 id="5-查看已安装的软件">5. 查看已安装的软件<a hidden class="anchor" aria-hidden="true" href="#5-查看已安装的软件">#</a></h3>
+<p><code>dpkg -l | grep gcovr</code></p>
+<h3 id="6-查看软件安装的路径">6. 查看软件安装的路径<a hidden class="anchor" aria-hidden="true" href="#6-查看软件安装的路径">#</a></h3>
 <p><code>dpkg -L openssh-server</code><br>
-<code>whereis gdb</code></p>
-<h2 id="二shell-操作和常用命令">二、shell 操作和常用命令<a hidden class="anchor" aria-hidden="true" href="#二shell-操作和常用命令">#</a></h2>
+<code>whereis gdb</code><br>
+<code>which gcovr</code> 需要软件包的路径在环境变量 <code>$PATH</code> 中</p>
+<h3 id="7-查看-apt-中软件的版本">7. 查看 <code>apt</code> 中软件的版本<a hidden class="anchor" aria-hidden="true" href="#7-查看-apt-中软件的版本">#</a></h3>
+<p><code>apt-show-versions -a gcovr</code></p>
+<p><code>apt show gcovr</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-apt-show.jpg" alt="Ubuntu-apt-show"  />
+</p>
+<p><code>sudo apt-cache policy libssl-dev</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-apt-catche.jpg" alt="Ubuntu-apt-catche"  />
+</p>
+<h3 id="8-列出已安装的软件">8. 列出已安装的软件<a hidden class="anchor" aria-hidden="true" href="#8-列出已安装的软件">#</a></h3>
+<p><code>apt list --installed</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-apt-list-installed.jpg" alt="Ubuntu-apt-list-installed"  />
+</p>
+<h2 id="二pip-使用">二、pip 使用<a hidden class="anchor" aria-hidden="true" href="#二pip-使用">#</a></h2>
+<h3 id="1-安装软件">1. 安装软件<a hidden class="anchor" aria-hidden="true" href="#1-安装软件">#</a></h3>
+<p><code>pip3 install -U gcovr</code></p>
+<h3 id="2-列出-pip-已安装的包">2. 列出 pip 已安装的包<a hidden class="anchor" aria-hidden="true" href="#2-列出-pip-已安装的包">#</a></h3>
+<p><code>pip3 list</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-pip3-list.jpg" alt="Ubuntu-pip3-list"  />
+</p>
+<h3 id="3查看安装包信息">3.查看安装包信息<a hidden class="anchor" aria-hidden="true" href="#3查看安装包信息">#</a></h3>
+<p><code>pip3 show gcovr</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-pip3-show.jpg" alt="Ubuntu-pip3-show"  />
+</p>
+<h3 id="4-安装-pip_search">4. 安装 pip_search<a hidden class="anchor" aria-hidden="true" href="#4-安装-pip_search">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip3 install pip_search  
+pip_search gcovr
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/pip_pip_search.jpg" alt="pip_search and pip show package"  />
+</p>
+<h2 id="三shell-操作和常用命令">三、shell 操作和常用命令<a hidden class="anchor" aria-hidden="true" href="#三shell-操作和常用命令">#</a></h2>
 <h3 id="1查看输入的命令历史">1、查看输入的命令历史<a hidden class="anchor" aria-hidden="true" href="#1查看输入的命令历史">#</a></h3>
 <p><code>history</code></p>
 <h3 id="2删除光标前面的字符串">2、删除光标前面的字符串<a hidden class="anchor" aria-hidden="true" href="#2删除光标前面的字符串">#</a></h3>
@@ -506,7 +543,7 @@ mv dir dir1     <span style="color:#75715e"># dir1 存在，则将 dir 目录移
 <h3 id="24-tail-打印文件内容的后-10-行到终端">24、 <code>tail</code> 打印文件内容的后 10 行到终端<a hidden class="anchor" aria-hidden="true" href="#24-tail-打印文件内容的后-10-行到终端">#</a></h3>
 <h3 id="25-ln-创建软硬链接">25、 <code>ln</code> 创建软硬链接<a hidden class="anchor" aria-hidden="true" href="#25-ln-创建软硬链接">#</a></h3>
 <ol>
-<li>创建软链接 <code>ln -s 全文件名 链接名称</code></li>
+<li>创建软链接 <code>ln -s 原文件名 链接名称</code></li>
 <li>创建硬链接（在其他多个目录中管理文件，并且能时时同步修改） <code>ln 文件名 链接名</code></li>
 </ol>
 <p><img loading="lazy" style="margin: auto;" src="../img/%e7%a1%ac%e9%93%be%e6%8e%a5.jpg" alt="硬链接"  />
@@ -563,7 +600,7 @@ source ~/.bashrc
 <h3 id="39杀死进程httpslinuxcnarticle-2116-1html">39、<a href="https://linux.cn/article-2116-1.html">杀死进程</a><a hidden class="anchor" aria-hidden="true" href="#39杀死进程httpslinuxcnarticle-2116-1html">#</a></h3>
 <p><code>kill -9 PID</code><br>
 <code>kill PID1 PID2 PID3</code></p>
-<h2 id="三linux-文件类型">三、Linux 文件类型<a hidden class="anchor" aria-hidden="true" href="#三linux-文件类型">#</a></h2>
+<h2 id="四linux-文件类型">四、Linux 文件类型<a hidden class="anchor" aria-hidden="true" href="#四linux-文件类型">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -602,7 +639,7 @@ source ~/.bashrc
 </tr>
 </tbody>
 </table>
-<h2 id="四用户类型">四、用户类型<a hidden class="anchor" aria-hidden="true" href="#四用户类型">#</a></h2>
+<h2 id="五用户类型">五、用户类型<a hidden class="anchor" aria-hidden="true" href="#五用户类型">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -625,7 +662,7 @@ source ~/.bashrc
 </tr>
 </tbody>
 </table>
-<h2 id="五权限">五、权限<a hidden class="anchor" aria-hidden="true" href="#五权限">#</a></h2>
+<h2 id="六权限">六、权限<a hidden class="anchor" aria-hidden="true" href="#六权限">#</a></h2>
 <table>
 <thead>
 <tr>
@@ -648,7 +685,7 @@ source ~/.bashrc
 </tr>
 </tbody>
 </table>
-<h2 id="六压缩包管理">六、压缩包管理<a hidden class="anchor" aria-hidden="true" href="#六压缩包管理">#</a></h2>
+<h2 id="七压缩包管理">七、压缩包管理<a hidden class="anchor" aria-hidden="true" href="#七压缩包管理">#</a></h2>
 <h3 id="1-常见压缩格式">1. 常见压缩格式<a hidden class="anchor" aria-hidden="true" href="#1-常见压缩格式">#</a></h3>
 <ul>
 <li>.gz       &ndash;gzip</li>
@@ -675,7 +712,7 @@ source ~/.bashrc
 <code>zip myzip aa program -r</code><br>
 <code>unzip myzip.zip -d /tmp</code></li>
 </ul>
-<h2 id="七软件安装和制作">七、软件安装和制作<a hidden class="anchor" aria-hidden="true" href="#七软件安装和制作">#</a></h2>
+<h2 id="八软件安装和制作">八、软件安装和制作<a hidden class="anchor" aria-hidden="true" href="#八软件安装和制作">#</a></h2>
 <h3 id="1-在线安装----ubuntu">1. 在线安装 &ndash; ubuntu<a hidden class="anchor" aria-hidden="true" href="#1-在线安装----ubuntu">#</a></h3>
 <ul>
 <li>安装：<code>sudo apt-get(apt) install 安装包名称</code></li>
@@ -694,7 +731,7 @@ source ~/.bashrc
 <p><code>dpkg -l | grep openssh-server</code></p>
 <h3 id="5-查看软件安装路径">5. 查看软件安装路径<a hidden class="anchor" aria-hidden="true" href="#5-查看软件安装路径">#</a></h3>
 <p><code>dpkg -L openssh-server</code></p>
-<h2 id="八ubuntu-启用-root-用户">八、ubuntu 启用 root 用户<a hidden class="anchor" aria-hidden="true" href="#八ubuntu-启用-root-用户">#</a></h2>
+<h2 id="九ubuntu-启用-root-用户">九、ubuntu 启用 root 用户<a hidden class="anchor" aria-hidden="true" href="#九ubuntu-启用-root-用户">#</a></h2>
 <h3 id="1-修改-sshd_config-中的-permitrootlogin">1. 修改 sshd_config 中的 PermitRootLogin<a hidden class="anchor" aria-hidden="true" href="#1-修改-sshd_config-中的-permitrootlogin">#</a></h3>
 <p><code>sudo vim /etc/ssh/sshd_config</code></p>
 <p><img loading="lazy" style="margin: auto;" src="../img/ubuntu_sshd_config.jpg" alt="ubuntu_sshd_config"  />
@@ -702,6 +739,13 @@ source ~/.bashrc
 <h3 id="2-重启-ssh-守护进程">2. 重启 ssh 守护进程<a hidden class="anchor" aria-hidden="true" href="#2-重启-ssh-守护进程">#</a></h3>
 <p><code>sudo service ssh restart</code></p>
 <p>如果终端显示 <code>ssh:unrecognized service</code>，可能是因为服务没开启，通过命令 <code>service ssh status</code> 查看服务状态，可通过命令 <code>sudo /etc/init.d/ssh start</code> 启动服务</p>
+<h2 id="参考">参考<a hidden class="anchor" aria-hidden="true" href="#参考">#</a></h2>
+<ol>
+<li><a href="https://blog.csdn.net/nyist_yangguang/article/details/106260809">ubuntu下查看用pip安装的包的位置以及dist-packages和site-packages区别</a></li>
+<li><a href="https://blog.csdn.net/weixin_38184741/article/details/106344712">Linux：Ubuntu系统查看软件所有版本，安装指定版本软件</a></li>
+<li><a href="https://blog.csdn.net/wu10188/article/details/124970453">Linux Ubuntu 20.04LTS安装OpenSSL步骤</a></li>
+<li><a href="https://blog.csdn.net/xiaiming0/article/details/123958847">apt-get安装、卸载、更新、查询软件包</a></li>
+</ol>
 
 
   </div>

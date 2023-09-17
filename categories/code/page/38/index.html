@@ -145,6 +145,21 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>定义一个只能在堆上（栈上）生成对象的类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、只能在堆上 方法：将析构函数设置为私有
+原因：C&#43;&#43; 是静态绑定语言，编译器管理栈上对象的生命周期，编译器在为类对象分配栈空间时，会先检查类的析构函数的访问性。若析构函数不可访问，则不能在栈上创建对象
+class Test { public: void printT(){ cout &lt;&lt; &#34;printT&#34; &lt;&lt; endl; } void freeT(){ delete this; } private: ~Test(){ cout &lt;&lt; &#34;~Test()&#34; &lt;&lt; endl; } }; int main( ) { // 不能在栈上创建对象  //Test t; // prog.cc:25:10: error: variable of type &#39;Test&#39; has private destructor  // 只能在堆上创建对象  Test *t = new Test; t-&gt;printT(); // 销毁对象  t-&gt;freeT(); return 0; } 输出：
+Start printT ~Test() 0 Finish 二、只能在栈上 方法：将 new 和 delete 重载为私有...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-27 17:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 定义一个只能在堆上（栈上）生成对象的类" href="https://874656645.github.io/posts/46-%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E5%8F%AA%E8%83%BD%E5%9C%A8%E5%A0%86%E4%B8%8A%E6%A0%88%E4%B8%8A%E7%94%9F%E6%88%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>抽象类、接口类、聚合类
     </h2>
   </header>
@@ -200,22 +215,6 @@ int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能�
   </section>
   <footer class="entry-footer"><span title='2021-12-26 15:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 函数默认参数和占位参数" href="https://874656645.github.io/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>内存区间划分
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：
-三、全局变量与静态变量的区别 作用域不同
-全局变量默认是 extern 的
-静态变量是文件作用域
-C/C&#43;&#43; 中 extern 关键字详解</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-26 14:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 内存区间划分" href="https://874656645.github.io/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

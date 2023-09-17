@@ -145,6 +145,28 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>WSL Ubuntu 使用 SonarQube
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>下载 Build Wrapper：
+{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip
+  下载 SonarScanner：
+https://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file
+  配置环境变量：
+export PATH=&#34;/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH&#34;
+  安装 CMake
+sudo apt install cmake
+  安装 gcovr（计算 gtest 单元测试分支覆盖率）
+sudo apt install gcovr
+   注意：Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr 安装 gtest 库    6.1. 获取 gtest 源码...</p>
+  </section>
+  <footer class="entry-footer"><span title='2023-09-11 09:34:47 +0800 CST'>September 11, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to WSL Ubuntu 使用 SonarQube" href="https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>WSL Ubuntu_2204 使用
     </h2>
   </header>
@@ -189,6 +211,29 @@ wsl --unregister Ubuntu
   </section>
   <footer class="entry-footer"><span title='2022-02-13 11:01:34 +0800 CST'>February 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Windows 10 中的 Linux 子系统" href="https://874656645.github.io/posts/121-windows-10-%E4%B8%AD%E7%9A%84-linux-%E5%AD%90%E7%B3%BB%E7%BB%9F/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Ubuntu 常用命令
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Linux 命令大全
+一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr
+6. 查看软件安装的路径 dpkg -L openssh-server
+whereis gdb
+which gcovr 需要软件包的路径在环境变量 $PATH 中
+7. 查看 apt 中软件的版本 apt-show-versions -a gcovr
+apt show gcovr
+sudo apt-cache policy libssl-dev
+8. 列出已安装的软件 apt list --installed...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
 </article>
     </main>
     
