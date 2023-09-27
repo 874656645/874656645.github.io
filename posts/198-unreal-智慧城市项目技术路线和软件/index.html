@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Unreal——智慧城市项目技术路线和软件 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Cesium, UE5" />
+<meta name="description" content="软件和插件：
+ Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&#39; `CityEngine VR Experience for Unreal Engine&#39; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera Water 插件 基于精确地理的太阳定位工具  蓝图开发：
+ 通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/198-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF%E5%92%8C%E8%BD%AF%E4%BB%B6/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Unreal——智慧城市项目技术路线和软件" />
+<meta property="og:description" content="软件和插件：
+ Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&#39; `CityEngine VR Experience for Unreal Engine&#39; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera Water 插件 基于精确地理的太阳定位工具  蓝图开发：
+ 通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/198-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF%E5%92%8C%E8%BD%AF%E4%BB%B6/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-06-29T10:18:09&#43;08:00" />
+<meta property="article:modified_time" content="2022-06-29T10:18:09&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/257-unreal-subsystem%E5%AD%90%E7%B3%BB%E7%BB%9F/" /><meta property="og:see_also" content="https://874656645.github.io/posts/256-unreal-%E9%A1%B9%E7%9B%AE%E5%92%8C%E6%8F%92%E4%BB%B6/" /><meta property="og:see_also" content="https://874656645.github.io/posts/252-unreal5-%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" /><meta property="og:see_also" content="https://874656645.github.io/posts/251-cesium-unreal-importing-quixel-assets/" /><meta property="og:see_also" content="https://874656645.github.io/posts/250-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/" /><meta property="og:see_also" content="https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Unreal——智慧城市项目技术路线和软件"/>
+<meta name="twitter:description" content="软件和插件：
+ Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine&#39; `CityEngine VR Experience for Unreal Engine&#39; datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera Water 插件 基于精确地理的太阳定位工具  蓝图开发：
+ 通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果："/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Unreal——智慧城市项目技术路线和软件",
+      "item": "https://874656645.github.io/posts/198-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF%E5%92%8C%E8%BD%AF%E4%BB%B6/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Unreal——智慧城市项目技术路线和软件",
+  "name": "Unreal——智慧城市项目技术路线和软件",
+  "description": "软件和插件：\n Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine' `CityEngine VR Experience for Unreal Engine' datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera Water 插件 基于精确地理的太阳定位工具  蓝图开发：\n 通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：",
+  "keywords": [
+    "Cesium", "UE5"
+  ],
+  "articleBody": "软件和插件：\n Blender 和 BlenderGis 插件 C4D CityEngine Unreal Engine `Cesium for Unreal Engine' `CityEngine VR Experience for Unreal Engine' datasmith for Unreal Engine CesiumLab 地编素材库（city park environment collection） HDRI 插件和 HDRI 素材 ArchViz Explorer 项目，场景 Pawn 操作 Factory Environment Collection json读取插件：json assets、json library、jsonxmlhelper、varest 网页插件：web ui 视频流：web camera Water 插件 基于精确地理的太阳定位工具  蓝图开发：\n 通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转 Cesium 场景搭建 3DTiles 模型加载 3DMax 场景导入 UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI） 天气切换 控制器切换（自由、人行、驾驶） 长度测量（射线——由通道检测线条，缆索Actor） 面积测量 添加POI  三维效果：\n 材质 PBR 粒子效果（magic_circle_creator） 光影效果 天气模拟（天气插件 Ultra Dynamic Sky） 后处理：环境光遮蔽、MSAA、景深与镜头效果、屏幕空间反射、扫描线、泛光 自发光材质  数据：\n 场数据 DEM DOM DGN 矢量切片 3DMax 3DTiles 白模 倾斜摄影 精细模型 点云 BIM  行业动态：\n 免费混合现实3D地理空间可视化示例项目：Project Anywhere XR  几何压缩 meshopt\n服务：\n WMS WMTS WFS OGC  三维分析:\n Nanite 虚拟微多边形 Lumen 动态全局光照 VSM 虚拟贴图  rule processor 基于规则动态生成模型\n飞渡技术交流\n 支持的二三维数据格式？ 这些数据是怎么融合的？ 数据存储在本地还是服务器？如果存放在服务器，又是如何请求拉取的？ 地理坐标系统是什么？地形、倾斜摄影等具有空间信息的模型与手工模型（3d Max、SketchUp等）又是如何配准融合的？ MicroStation、 Revit、PKPM、IFC等BIM数据是如何导入构建的？模型是参数化构建的吗？BIM模型的信息是如何存储呢？支持HLOD层次加载吗？这些BIM模型如何与地形、倾斜摄影等地理信息模型融合呢？ 千万构件在场景中是如何组织、加载和调度的？怎么保证渲染端的流畅性？ 不同样式的风格是怎么切换的？可以自己设置风格参数吗？还是在预设的样式中选择？ 矢量体块是二维图（包括道路、楼房、地块、草地等信息）拉伸起来的吗？ 二三维一体化以及切换是如何实现的呢？ 楼宇拆解是在数据模型方面做了组织实现的吗？ 分层分户信息查询功能，导入的shp属性数据格式是如何与户模型挂接的？是把楼中的每一户模型都分离了吗还是处理成了大概的包围盒呢？ 城市级车辆是如何同屏实时运行的？车流的路径是如何做的？车流与模型支持物理碰撞吗？ 整个城市中的路灯、垃圾桶、或者马路上的栏杆是如何添加、组织和渲染的？ 阴影是如何计算的？抗锯齿用的是什么技术？反射是如何实现的？ 渲染引擎是什么？  ",
+  "wordCount" : "128",
+  "inLanguage": "en",
+  "datePublished": "2022-06-29T10:18:09+08:00",
+  "dateModified": "2022-06-29T10:18:09+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/198-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E8%B7%AF%E7%BA%BF%E5%92%8C%E8%BD%AF%E4%BB%B6/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Unreal——智慧城市项目技术路线和软件
+    </h1>
+    <div class="post-meta"><span title='2022-06-29 10:18:09 +0800 CST'>June 29, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><p><strong>软件和插件：</strong></p>
+<ol>
+<li><a href="https://www.blender.org/download/"><code>Blender</code></a> 和 <code>BlenderGis</code> 插件</li>
+<li>C4D</li>
+<li>CityEngine</li>
+<li><a href="https://www.unrealengine.com/zh-CN/download"><code>Unreal Engine</code></a></li>
+<li><a href="https://www.unrealengine.com/marketplace/zh-CN/product/87b0d05800a545d49bf858ef3458c4f7">`Cesium for Unreal Engine'</a></li>
+<li><a href="https://community.esri.com/t5/arcgis-cityengine-documents/cityengine-vr-experience-for-unreal-engine/ta-p/910835">`CityEngine VR Experience for Unreal Engine'</a></li>
+<li><a href="https://www.unrealengine.com/zh-CN/datasmith/plugins">datasmith for Unreal Engine</a></li>
+<li><code>CesiumLab</code></li>
+<li>地编素材库（<a href="https://www.unrealengine.com/marketplace/zh-CN/product/city-park-environment-collection-lite">city park environment collection</a>）</li>
+<li><code>HDRI</code> 插件和 <a href="https://polyhaven.com//hdris"><code>HDRI</code> 素材</a></li>
+<li><a href="https://www.unrealengine.com/marketplace/zh-CN/product/archviz-explorer"><code>ArchViz Explorer</code> 项目</a>，场景 <code>Pawn</code> 操作</li>
+<li><a href="https://www.unrealengine.com/marketplace/zh-CN/product/factory-environment-collection">Factory Environment Collection</a></li>
+<li>json读取插件：json assets、json library、jsonxmlhelper、varest</li>
+<li>网页插件：<a href="https://github.com/tracerinteractive/UnrealEngine">web ui</a></li>
+<li>视频流：<a href="https://www.unrealengine.com/marketplace/zh-CN/product/webcamera">web camera</a></li>
+<li><a href="https://docs.unrealengine.com/5.0/zh-CN/water-system-in-unreal-engine/">Water 插件</a></li>
+<li><a href="https://docs.unrealengine.com/5.0/zh-CN/geographically-accurate-sun-positioning-tool-in-unreal-engine/">基于精确地理的太阳定位工具</a></li>
+</ol>
+<p><strong>蓝图开发：</strong></p>
+<ol>
+<li>通过鼠标左键、右键和滚轮控制相机移动、缩放和旋转</li>
+<li>Cesium 场景搭建</li>
+<li>3DTiles 模型加载</li>
+<li>3DMax 场景导入</li>
+<li>UI界面搭建（用户界面、控件蓝图、商城UI插件Custom UI）</li>
+<li>天气切换</li>
+<li>控制器切换（自由、人行、驾驶）</li>
+<li>长度测量（射线——由通道检测线条，缆索Actor）</li>
+<li>面积测量</li>
+<li>添加POI</li>
+</ol>
+<p><strong>三维效果：</strong></p>
+<ul>
+<li>材质</li>
+<li>PBR</li>
+<li>粒子效果（<a href="https://www.unrealengine.com/marketplace/zh-CN/product/magic-circle-creator">magic_circle_creator</a>）</li>
+<li>光影效果</li>
+<li>天气模拟（天气插件 <a href="https://www.unrealengine.com/marketplace/zh-CN/product/ultra-dynamic-sky">Ultra Dynamic Sky</a>）</li>
+<li>后处理：环境光遮蔽、MSAA、景深与镜头效果、屏幕空间反射、扫描线、泛光</li>
+<li>自发光材质</li>
+</ul>
+<p><strong>数据：</strong></p>
+<ul>
+<li>场数据</li>
+<li>DEM</li>
+<li>DOM</li>
+<li>DGN</li>
+<li>矢量切片</li>
+<li>3DMax</li>
+<li>3DTiles</li>
+<li>白模</li>
+<li>倾斜摄影</li>
+<li>精细模型</li>
+<li>点云</li>
+<li>BIM</li>
+</ul>
+<p><strong>行业动态：</strong></p>
+<ol>
+<li><a href="https://www.unrealengine.com/zh-CN/blog/introducing-project-anywhere-xr-a-free-sample-project-for-mixed-reality-3d-geospatial-visualization">免费混合现实3D地理空间可视化示例项目：Project Anywhere XR</a></li>
+</ol>
+<p>几何压缩  meshopt</p>
+<p>服务：</p>
+<ul>
+<li>WMS</li>
+<li>WMTS</li>
+<li>WFS</li>
+<li>OGC</li>
+</ul>
+<p><strong>三维分析:</strong></p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/GIS_%e4%b8%89%e7%bb%b4%e5%88%86%e6%9e%90.jpg" alt="GIS_三维分析"  />
+</p>
+<ul>
+<li>Nanite 虚拟微多边形</li>
+<li>Lumen 动态全局光照</li>
+<li>VSM 虚拟贴图</li>
+</ul>
+<p>rule processor 基于规则动态生成模型</p>
+<p><strong>飞渡技术交流</strong></p>
+<ol>
+<li>支持的二三维数据格式？</li>
+<li>这些数据是怎么融合的？</li>
+<li>数据存储在本地还是服务器？如果存放在服务器，又是如何请求拉取的？</li>
+<li>地理坐标系统是什么？地形、倾斜摄影等具有空间信息的模型与手工模型（3d Max、SketchUp等）又是如何配准融合的？</li>
+<li>MicroStation、 Revit、PKPM、IFC等BIM数据是如何导入构建的？模型是参数化构建的吗？BIM模型的信息是如何存储呢？支持HLOD层次加载吗？这些BIM模型如何与地形、倾斜摄影等地理信息模型融合呢？</li>
+<li>千万构件在场景中是如何组织、加载和调度的？怎么保证渲染端的流畅性？</li>
+<li>不同样式的风格是怎么切换的？可以自己设置风格参数吗？还是在预设的样式中选择？</li>
+<li>矢量体块是二维图（包括道路、楼房、地块、草地等信息）拉伸起来的吗？</li>
+<li>二三维一体化以及切换是如何实现的呢？</li>
+<li>楼宇拆解是在数据模型方面做了组织实现的吗？</li>
+<li>分层分户信息查询功能，导入的shp属性数据格式是如何与户模型挂接的？是把楼中的每一户模型都分离了吗还是处理成了大概的包围盒呢？</li>
+<li>城市级车辆是如何同屏实时运行的？车流的路径是如何做的？车流与模型支持物理碰撞吗？</li>
+<li>整个城市中的路灯、垃圾桶、或者马路上的栏杆是如何添加、组织和渲染的？</li>
+<li>阴影是如何计算的？抗锯齿用的是什么技术？反射是如何实现的？</li>
+<li>渲染引擎是什么？</li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/cesium/">Cesium</a></li>
+      <li><a href="https://874656645.github.io/tags/ue5/">UE5</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/199-unreal-%E6%99%BA%E6%85%A7%E5%9F%8E%E5%B8%82%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Unreal——智慧城市项目搭建</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/197-opengl-%E7%9B%B8%E6%9C%BA-lookat-%E7%9F%A9%E9%98%B5%E8%AE%A1%E7%AE%97/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>OpenGL 相机 LookAt 矩阵计算</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

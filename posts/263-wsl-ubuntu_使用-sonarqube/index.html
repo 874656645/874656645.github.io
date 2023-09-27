@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>WSL Ubuntu 使用 SonarQube | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Ubuntu" />
+<meta name="description" content="下载 Build Wrapper：
+{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip
+  下载 SonarScanner：
+https://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file
+  配置环境变量：
+export PATH=&quot;/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH&quot;
+注意：
+ 配置的 build-wrapper-linux-x86 和 sonar-scanner-5.0.1.3006-linux 文件夹要有 可执行权限 sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限    安装 CMake
+sudo apt install cmake
+  安装 gcovr（计算 gtest 单元测试分支覆盖率）
+sudo apt install gcovr
+注意：
+ Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr   安装 gtest 库">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="WSL Ubuntu 使用 SonarQube" />
+<meta property="og:description" content="下载 Build Wrapper：
+{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip
+  下载 SonarScanner：
+https://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file
+  配置环境变量：
+export PATH=&quot;/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH&quot;
+注意：
+ 配置的 build-wrapper-linux-x86 和 sonar-scanner-5.0.1.3006-linux 文件夹要有 可执行权限 sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限    安装 CMake
+sudo apt install cmake
+  安装 gcovr（计算 gtest 单元测试分支覆盖率）
+sudo apt install gcovr
+注意：
+ Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr   安装 gtest 库" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-11T09:34:47&#43;08:00" />
+<meta property="article:modified_time" content="2023-09-11T09:34:47&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/260-git-tortoisegit-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/" /><meta property="og:see_also" content="https://874656645.github.io/posts/259-git-tortoisegit-%E9%85%8D%E7%BD%AE-ssh-/" /><meta property="og:see_also" content="https://874656645.github.io/posts/258-git-stash-%E5%B0%86%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A%E7%9A%84%E4%BF%AE%E6%94%B9%E8%BD%AC%E7%A7%BB%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A/" /><meta property="og:see_also" content="https://874656645.github.io/posts/121-windows-10-%E4%B8%AD%E7%9A%84-linux-%E5%AD%90%E7%B3%BB%E7%BB%9F/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="WSL Ubuntu 使用 SonarQube"/>
+<meta name="twitter:description" content="下载 Build Wrapper：
+{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip
+  下载 SonarScanner：
+https://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file
+  配置环境变量：
+export PATH=&quot;/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH&quot;
+注意：
+ 配置的 build-wrapper-linux-x86 和 sonar-scanner-5.0.1.3006-linux 文件夹要有 可执行权限 sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限    安装 CMake
+sudo apt install cmake
+  安装 gcovr（计算 gtest 单元测试分支覆盖率）
+sudo apt install gcovr
+注意：
+ Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr   安装 gtest 库"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "WSL Ubuntu 使用 SonarQube",
+      "item": "https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "WSL Ubuntu 使用 SonarQube",
+  "name": "WSL Ubuntu 使用 SonarQube",
+  "description": "下载 Build Wrapper：\n{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip\n  下载 SonarScanner：\nhttps://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file\n  配置环境变量：\nexport PATH=\u0026quot;/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH\u0026quot;\n注意：\n 配置的 build-wrapper-linux-x86 和 sonar-scanner-5.0.1.3006-linux 文件夹要有 可执行权限 sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限    安装 CMake\nsudo apt install cmake\n  安装 gcovr（计算 gtest 单元测试分支覆盖率）\nsudo apt install gcovr\n注意：\n Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr   安装 gtest 库",
+  "keywords": [
+    "Ubuntu"
+  ],
+  "articleBody": "  下载 Build Wrapper：\n{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip\n  下载 SonarScanner：\nhttps://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file\n  配置环境变量：\nexport PATH=\"/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH\"\n注意：\n 配置的 build-wrapper-linux-x86 和 sonar-scanner-5.0.1.3006-linux 文件夹要有 可执行权限 sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限    安装 CMake\nsudo apt install cmake\n  安装 gcovr（计算 gtest 单元测试分支覆盖率）\nsudo apt install gcovr\n注意：\n Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr   安装 gtest 库\n  6.1. 获取 gtest 源码\nsudo apt-get install libgtest-dev\n  6.2. 查看源码文件\nls /usr/src\n  6.3. 编译生成动态库\ncd /usr/src/gtest sudo mkdir build cd build sudo cmake .. sudo make   6.4. 将编译生成好的库拷贝到系统目录下\nsudo cp libgtest*.a /usr/local/lib\n  6.5. 测试验证\n编写 gtest.cpp\n#include int add(int a,int b) { return a+b; } TEST(testCase,test0) { EXPECT_EQ(add(2,3),5); } int main(int argc,char **argv) { testing::InitGoogleTest(\u0026argc,argv); return RUN_ALL_TESTS(); } 编译\ng++ gtest.cpp -lgtest -lpthread\n运行\na.out\n    Ubuntu 系统中已包含 curl、ssl、crypto、pthread 等库，可通过创建所需版本的软连接实现，安装路径在 /usr/lib/x86_64-linux-gnu/，可通过以下命令查看已有版本\n  ls -l libssl* ls -l libcrypto* ls -l libcurl* ls -l libpthread* ssl 报错  undefined reference to 'sk_num' undefined reference to 'sk_value' undefined reference to 'sk_pop_free' 可降低 ssl 库的版本，需注意 ssl、crypto 版本要匹配\n查看 curl、openssl 版本  curl --versioin\n安装旧版的 ssl crypto  wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.20_amd64.deb\n或者\ncurl http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb -o libssl1.0.0\nsudo dpkg -i libssl1.0.0\n进入下面的网站，可以查找所需的组件自行下载安装，下载时注意 i386（x86） 和 amd64（x64） 的区别\nhttp://security.ubuntu.com/ubuntu/pool/main/o/openssl1.0/\nhttp://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb\n构建  cmake -B build -G \"Unix Makefiles\" -DMAPBAR_COMPILE_FOR_STD=1 -DCMAKE_BUILD_TYPE=Release -DMAPBAR_PLATFORM=\"linux_x64\" -DMBMAKE_BUILD_TEST=1\n编译  build-wrapper-linux-x86-64 --out-dir reports cmake --build build/ --config Release\n运行可执行文件  编译完后需运行一下 test 工程的可执行文件，再执行下面的命令\n分析单元测试覆盖率  gcovr --sonarqube -o reports/coverage.xml\n添加配置文件  在项目根目录创建文件 sonar-project.properties 并添加如下文本内容\nsonar.projectKey=test sonar.login=sqp_7f7b3255b802865006af3b0a61bbef19fe209641 sonar.scm.disabled=true sonar.sources=src sonar.test=test sonar.cfamily.build-wrapper-output=reports sonar.coverageReportPaths=reports/coverage.xml sonar.host.url={SonarQube URL} 扫描并将结果上传到网站  sonar-scanner\n参考\n ubuntu 下安装 Gtest 和测试 Ubuntu 安装 OpenGL 【OpenGL】Ubuntu 20.04 配置 OpenGL 环境 解决Ubuntu22.04缺少libssl.so.1.1问题 ubuntu 安装 openssl 1.1 Ubuntu20.04 安装curl3和curl4 在 Ubuntu Linux 上安装 Deb 文件的 3 种方法 | Linux 中国 SonarSource sample C and C++ projects with SonarCloud or SonarQube analysis configured linux-cmake-gcovr-gh-actions-sc  ",
+  "wordCount" : "281",
+  "inLanguage": "en",
+  "datePublished": "2023-09-11T09:34:47+08:00",
+  "dateModified": "2023-09-11T09:34:47+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      WSL Ubuntu 使用 SonarQube
+    </h1>
+    <div class="post-meta"><span title='2023-09-11 09:34:47 +0800 CST'>September 11, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><ol>
+<li>
+<p>下载 Build Wrapper：<br>
+{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip</p>
+</li>
+<li>
+<p>下载 SonarScanner：<br>
+<a href="https://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file">https://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file</a></p>
+</li>
+<li>
+<p>配置环境变量：<br>
+<code>export PATH=&quot;/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH&quot;</code></p>
+<p><!-- raw HTML omitted --><strong>注意</strong><!-- raw HTML omitted -->：</p>
+<ul>
+<li>配置的 <code>build-wrapper-linux-x86</code> 和 <code>sonar-scanner-5.0.1.3006-linux</code> 文件夹要有 <strong>可执行权限</strong></li>
+<li>sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限</li>
+</ul>
+</li>
+<li>
+<p>安装 CMake<br>
+<code>sudo apt install cmake</code></p>
+</li>
+<li>
+<p>安装 gcovr（计算 gtest 单元测试分支覆盖率）<br>
+<code>sudo apt install gcovr</code></p>
+<p><!-- raw HTML omitted --><strong>注意</strong><!-- raw HTML omitted -->：</p>
+<ul>
+<li><code>Ubuntu 1804</code> 系统中通过 <code>apt</code> 安装的 <code>gcovr</code> 版本太低，不支持参数 <code>--sonarqube</code>，可通过 <code>pip3</code> 安装 5.0 版本</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip3 install pip_search
+pip_search gcovr
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-pip-search.jpg" alt="Ubuntu-pip-search"  />
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip3 install -U gcovr
+pip3 show gcovr
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-pip3-show.jpg" alt="Ubuntu-pip3-show"  />
+</p>
+</li>
+<li>
+<p>安装 gtest 库</p>
+<ul>
+<li>
+<p>6.1. 获取 <code>gtest</code> 源码</p>
+<p><code>sudo apt-get install libgtest-dev</code></p>
+</li>
+<li>
+<p>6.2. 查看源码文件</p>
+<p><code>ls /usr/src</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Linux-gtest-src.jpg" alt="Linux-gtest-src"  />
+</p>
+</li>
+<li>
+<p>6.3. 编译生成动态库</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /usr/src/gtest
+sudo mkdir build
+cd build 
+sudo cmake ..
+sudo make
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/Linux-gtest-lib.jpg" alt="Linux-gtest-lib"  />
+</p>
+</li>
+<li>
+<p>6.4. 将编译生成好的库拷贝到系统目录下</p>
+<p><code>sudo cp libgtest*.a /usr/local/lib</code></p>
+</li>
+<li>
+<p>6.5. 测试验证</p>
+<p>编写 gtest.cpp</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span><span style="color:#75715e">&lt;gtest/gtest.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> a,<span style="color:#66d9ef">int</span> b)
+{
+    <span style="color:#66d9ef">return</span> a<span style="color:#f92672">+</span>b;
+}
+
+TEST(testCase,test0)
+{
+    EXPECT_EQ(add(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>),<span style="color:#ae81ff">5</span>);
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc,<span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv)
+{
+  testing<span style="color:#f92672">::</span>InitGoogleTest(<span style="color:#f92672">&amp;</span>argc,argv);
+  <span style="color:#66d9ef">return</span> RUN_ALL_TESTS();
+}
+</code></pre></div><p>编译</p>
+<p><code>g++  gtest.cpp -lgtest -lpthread</code></p>
+<p>运行</p>
+<p><code>a.out</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Linux-gtest-demo.jpg" alt="Linux-gtest-demo.jpg"  />
+</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Ubuntu 系统中已包含 <code>curl</code>、<code>ssl</code>、<code>crypto</code>、<code>pthread</code> 等库，可通过创建所需版本的软连接实现，安装路径在 <code>/usr/lib/x86_64-linux-gnu/</code>，可通过以下命令查看已有版本</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -l libssl*  
+ls -l libcrypto*  
+ls -l libcurl*  
+ls -l libpthread*
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/ls-l-libcurl-libssl-libcrypto.jpg" alt="ls-l-libcurl-libssl-libcrypto"  />
+</p>
+<ol start="8">
+<li>ssl 报错</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">undefined reference to <span style="color:#e6db74">&#39;sk_num&#39;</span> 
+undefined reference to <span style="color:#e6db74">&#39;sk_value&#39;</span> 
+undefined reference to <span style="color:#e6db74">&#39;sk_pop_free&#39;</span>
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/ssl-error.jpg" alt="ssl-error.jpg"  />
+</p>
+<p>可降低 <code>ssl</code> 库的版本，需注意 <code>ssl</code>、<code>crypto</code> 版本要匹配</p>
+<ol start="9">
+<li>查看 <code>curl、openssl</code> 版本</li>
+</ol>
+<p><code>curl --versioin</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/curl-version.jpg" alt="curl-version"  />
+</p>
+<ol start="10">
+<li>安装旧版的 <code>ssl crypto</code></li>
+</ol>
+<p><code>wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.20_amd64.deb</code><br>
+或者<br>
+<code>curl http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb -o libssl1.0.0</code></p>
+<p><code>sudo dpkg -i libssl1.0.0</code></p>
+<p>进入下面的网站，可以查找所需的组件自行下载安装，下载时注意 <strong>i386（x86）</strong> 和 <strong>amd64（x64）</strong> 的区别</p>
+<p><a href="http://security.ubuntu.com/ubuntu/pool/main/o/openssl1.0/">http://security.ubuntu.com/ubuntu/pool/main/o/openssl1.0/</a></p>
+<p><a href="http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb">http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb</a></p>
+<ol start="11">
+<li>构建</li>
+</ol>
+<p><code>cmake -B build -G &quot;Unix Makefiles&quot; -DMAPBAR_COMPILE_FOR_STD=1 -DCMAKE_BUILD_TYPE=Release -DMAPBAR_PLATFORM=&quot;linux_x64&quot; -DMBMAKE_BUILD_TEST=1</code></p>
+<ol start="12">
+<li>编译</li>
+</ol>
+<p><code>build-wrapper-linux-x86-64 --out-dir reports cmake --build build/ --config Release</code></p>
+<ol start="13">
+<li>运行可执行文件</li>
+</ol>
+<p>编译完后需运行一下 test 工程的可执行文件，再执行下面的命令</p>
+<ol start="14">
+<li>分析单元测试覆盖率</li>
+</ol>
+<p><code>gcovr --sonarqube -o reports/coverage.xml</code></p>
+<ol start="15">
+<li>添加配置文件</li>
+</ol>
+<p>在项目根目录创建文件 <code>sonar-project.properties</code> 并添加如下文本内容</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">sonar.projectKey=test
+sonar.login=sqp_7f7b3255b802865006af3b0a61bbef19fe209641
+sonar.scm.disabled=true
+sonar.sources=src
+sonar.test=test
+sonar.cfamily.build-wrapper-output=reports
+sonar.coverageReportPaths=reports/coverage.xml
+sonar.host.url={SonarQube URL}
+</code></pre></div><ol start="16">
+<li>扫描并将结果上传到网站</li>
+</ol>
+<p><code>sonar-scanner</code></p>
+<p>参考</p>
+<ol>
+<li><a href="https://blog.csdn.net/Swallow_he/article/details/120065786">ubuntu 下安装 Gtest 和测试</a></li>
+<li><a href="https://blog.csdn.net/qq_40520596/article/details/111663646">Ubuntu 安装 OpenGL</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/427278169">【OpenGL】Ubuntu 20.04 配置 OpenGL 环境</a></li>
+<li><a href="https://blog.csdn.net/Asgard_Hu/article/details/127532328">解决Ubuntu22.04缺少libssl.so.1.1问题</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/606839580">ubuntu 安装 openssl 1.1</a></li>
+<li><a href="https://blog.csdn.net/lyx88333/article/details/125947200">Ubuntu20.04 安装curl3和curl4</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/339632982">在 Ubuntu Linux 上安装 Deb 文件的 3 种方法 | Linux 中国</a></li>
+<li><a href="https://github.com/sonarsource-cfamily-examples">SonarSource sample C and C++ projects with SonarCloud or SonarQube analysis configured</a></li>
+<li><a href="https://github.com/sonarsource-cfamily-examples/linux-cmake-gcovr-gh-actions-sc/tree/main">linux-cmake-gcovr-gh-actions-sc</a></li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/ubuntu/">Ubuntu</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>WSL Ubuntu_2204 使用</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

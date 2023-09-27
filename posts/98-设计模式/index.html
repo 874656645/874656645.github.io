@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>设计模式 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;, 设计模式" />
+<meta name="description" content="设计模式
+一、概念  设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。 软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。 在一定环境下，用固定套路解决问题。 设计模式的基础是多态。  二、目的  学习设计模式有助于更加深入的理解面向对象思想 如何将代码分散在几个不同的类中 为什么要有接口 何谓针对抽象编程 何时不应该使用继承 如何不修改源代码增加新功能 更好地阅读和理解现有类库与其它系统中的源代码  三、软件设计模式种类 GoF 提出的设计模式有 23 种，加简单工厂模式，一共 24 种
+1、创建型模式 Creational 6种 如何创建对象
+ 单例模式 简单工厂模式 工厂方法模式 抽象工厂模式 原型模式 建造者模式  2、结构型模式 Structural 7种 如何实现类或对象的组合
+让类和类进行组合，获得更大的结构
+ 适配器模式 桥接模式 组合模式 装饰模式 外观模式 享元模式 代理模式  3、行为型模式 Behavioral 11种 类或对象怎样交互以及怎样分配职责
+ 职责链模式 命令模式 解释器模式 迭代器模式 中介模式 备忘录模式 观察者模式 状态模式 策略模式 模板方法模式 访问者模式  ">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="设计模式" />
+<meta property="og:description" content="设计模式
+一、概念  设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。 软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。 在一定环境下，用固定套路解决问题。 设计模式的基础是多态。  二、目的  学习设计模式有助于更加深入的理解面向对象思想 如何将代码分散在几个不同的类中 为什么要有接口 何谓针对抽象编程 何时不应该使用继承 如何不修改源代码增加新功能 更好地阅读和理解现有类库与其它系统中的源代码  三、软件设计模式种类 GoF 提出的设计模式有 23 种，加简单工厂模式，一共 24 种
+1、创建型模式 Creational 6种 如何创建对象
+ 单例模式 简单工厂模式 工厂方法模式 抽象工厂模式 原型模式 建造者模式  2、结构型模式 Structural 7种 如何实现类或对象的组合
+让类和类进行组合，获得更大的结构
+ 适配器模式 桥接模式 组合模式 装饰模式 外观模式 享元模式 代理模式  3、行为型模式 Behavioral 11种 类或对象怎样交互以及怎样分配职责
+ 职责链模式 命令模式 解释器模式 迭代器模式 中介模式 备忘录模式 观察者模式 状态模式 策略模式 模板方法模式 访问者模式  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/98-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-30T11:57:37&#43;08:00" />
+<meta property="article:modified_time" content="2022-01-30T11:57:37&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="设计模式"/>
+<meta name="twitter:description" content="设计模式
+一、概念  设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。 软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。 在一定环境下，用固定套路解决问题。 设计模式的基础是多态。  二、目的  学习设计模式有助于更加深入的理解面向对象思想 如何将代码分散在几个不同的类中 为什么要有接口 何谓针对抽象编程 何时不应该使用继承 如何不修改源代码增加新功能 更好地阅读和理解现有类库与其它系统中的源代码  三、软件设计模式种类 GoF 提出的设计模式有 23 种，加简单工厂模式，一共 24 种
+1、创建型模式 Creational 6种 如何创建对象
+ 单例模式 简单工厂模式 工厂方法模式 抽象工厂模式 原型模式 建造者模式  2、结构型模式 Structural 7种 如何实现类或对象的组合
+让类和类进行组合，获得更大的结构
+ 适配器模式 桥接模式 组合模式 装饰模式 外观模式 享元模式 代理模式  3、行为型模式 Behavioral 11种 类或对象怎样交互以及怎样分配职责
+ 职责链模式 命令模式 解释器模式 迭代器模式 中介模式 备忘录模式 观察者模式 状态模式 策略模式 模板方法模式 访问者模式  "/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "设计模式",
+      "item": "https://874656645.github.io/posts/98-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "设计模式",
+  "name": "设计模式",
+  "description": "设计模式\n一、概念  设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。 软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。 在一定环境下，用固定套路解决问题。 设计模式的基础是多态。  二、目的  学习设计模式有助于更加深入的理解面向对象思想 如何将代码分散在几个不同的类中 为什么要有接口 何谓针对抽象编程 何时不应该使用继承 如何不修改源代码增加新功能 更好地阅读和理解现有类库与其它系统中的源代码  三、软件设计模式种类 GoF 提出的设计模式有 23 种，加简单工厂模式，一共 24 种\n1、创建型模式 Creational 6种 如何创建对象\n 单例模式 简单工厂模式 工厂方法模式 抽象工厂模式 原型模式 建造者模式  2、结构型模式 Structural 7种 如何实现类或对象的组合\n让类和类进行组合，获得更大的结构\n 适配器模式 桥接模式 组合模式 装饰模式 外观模式 享元模式 代理模式  3、行为型模式 Behavioral 11种 类或对象怎样交互以及怎样分配职责\n 职责链模式 命令模式 解释器模式 迭代器模式 中介模式 备忘录模式 观察者模式 状态模式 策略模式 模板方法模式 访问者模式  ",
+  "keywords": [
+    "C++", "设计模式"
+  ],
+  "articleBody": "设计模式\n一、概念  设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。 软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。 在一定环境下，用固定套路解决问题。 设计模式的基础是多态。  二、目的  学习设计模式有助于更加深入的理解面向对象思想 如何将代码分散在几个不同的类中 为什么要有接口 何谓针对抽象编程 何时不应该使用继承 如何不修改源代码增加新功能 更好地阅读和理解现有类库与其它系统中的源代码  三、软件设计模式种类 GoF 提出的设计模式有 23 种，加简单工厂模式，一共 24 种\n1、创建型模式 Creational 6种 如何创建对象\n 单例模式 简单工厂模式 工厂方法模式 抽象工厂模式 原型模式 建造者模式  2、结构型模式 Structural 7种 如何实现类或对象的组合\n让类和类进行组合，获得更大的结构\n 适配器模式 桥接模式 组合模式 装饰模式 外观模式 享元模式 代理模式  3、行为型模式 Behavioral 11种 类或对象怎样交互以及怎样分配职责\n 职责链模式 命令模式 解释器模式 迭代器模式 中介模式 备忘录模式 观察者模式 状态模式 策略模式 模板方法模式 访问者模式  ",
+  "wordCount" : "58",
+  "inLanguage": "en",
+  "datePublished": "2022-01-30T11:57:37+08:00",
+  "dateModified": "2022-01-30T11:57:37+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/98-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      设计模式
+    </h1>
+    <div class="post-meta"><span title='2022-01-30 11:57:37 +0800 CST'>January 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e6%a6%82%e5%bf%b5" aria-label="一、概念">一、概念</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e7%9b%ae%e7%9a%84" aria-label="二、目的">二、目的</a></li>
+                <li>
+                    <a href="#%e4%b8%89%e8%bd%af%e4%bb%b6%e8%ae%be%e8%ae%a1%e6%a8%a1%e5%bc%8f%e7%a7%8d%e7%b1%bb" aria-label="三、软件设计模式种类">三、软件设计模式种类</a><ul>
+                        
+                <li>
+                    <a href="#1%e5%88%9b%e5%bb%ba%e5%9e%8b%e6%a8%a1%e5%bc%8f-creational-6%e7%a7%8d" aria-label="1、创建型模式 Creational 6种">1、创建型模式 <em>Creational 6种</em></a></li>
+                <li>
+                    <a href="#2%e7%bb%93%e6%9e%84%e5%9e%8b%e6%a8%a1%e5%bc%8f-structural-7%e7%a7%8d" aria-label="2、结构型模式 Structural 7种">2、结构型模式 <em>Structural 7种</em></a></li>
+                <li>
+                    <a href="#3%e8%a1%8c%e4%b8%ba%e5%9e%8b%e6%a8%a1%e5%bc%8f-behavioral-11%e7%a7%8d" aria-label="3、行为型模式 Behavioral 11种">3、行为型模式 <em>Behavioral 11种</em></a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><a href="http://www.uml.org.cn/chanpin/intro/WebHelp/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E8%BF%B7%E4%BD%A0%E6%89%8B%E5%86%8C.htm">设计模式</a></p>
+<h2 id="一概念">一、概念<a hidden class="anchor" aria-hidden="true" href="#一概念">#</a></h2>
+<ol>
+<li>设计模式是在特定环境下人们解决某类重复出现的问题的一套成功或有效的解决方案。</li>
+<li>软件模式并非仅限于设计模式，还包括架构模式、分析模式、过程模式等。</li>
+<li>在一定环境下，用固定套路解决问题。</li>
+<li>设计模式的基础是<strong>多态</strong>。</li>
+</ol>
+<h2 id="二目的">二、目的<a hidden class="anchor" aria-hidden="true" href="#二目的">#</a></h2>
+<ol>
+<li>学习设计模式有助于更加深入的理解面向对象思想</li>
+<li>如何将代码分散在几个不同的类中</li>
+<li>为什么要有接口</li>
+<li>何谓针对抽象编程</li>
+<li>何时不应该使用继承</li>
+<li>如何不修改源代码增加新功能</li>
+<li>更好地阅读和理解现有类库与其它系统中的源代码</li>
+</ol>
+<h2 id="三软件设计模式种类">三、软件设计模式种类<a hidden class="anchor" aria-hidden="true" href="#三软件设计模式种类">#</a></h2>
+<p><em>GoF</em> 提出的设计模式有 <em>23</em> 种，加简单工厂模式，一共 <em>24</em> 种</p>
+<h3 id="1创建型模式-creational-6种">1、创建型模式 <em>Creational 6种</em><a hidden class="anchor" aria-hidden="true" href="#1创建型模式-creational-6种">#</a></h3>
+<p>如何创建对象</p>
+<ul>
+<li><strong><a href="../107-%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a></strong></li>
+<li><strong><a href="../104-%E7%AE%80%E5%8D%95%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">简单工厂模式</a></strong></li>
+<li><strong><a href="../105-%E5%B7%A5%E5%8E%82%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">工厂方法模式</a></strong></li>
+<li><strong><a href="../106-%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/">抽象工厂模式</a></strong></li>
+<li>原型模式</li>
+<li>建造者模式</li>
+</ul>
+<h3 id="2结构型模式-structural-7种">2、结构型模式 <em>Structural 7种</em><a hidden class="anchor" aria-hidden="true" href="#2结构型模式-structural-7种">#</a></h3>
+<p>如何实现类或对象的组合</p>
+<p>让类和类进行组合，获得更大的结构</p>
+<ul>
+<li><strong><a href="../110-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/">适配器模式</a></strong></li>
+<li>桥接模式</li>
+<li>组合模式</li>
+<li><strong><a href="../115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/">装饰模式</a></strong></li>
+<li><strong><a href="../109-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/">外观模式</a></strong></li>
+<li>享元模式</li>
+<li><strong><a href="../108-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">代理模式</a></strong></li>
+</ul>
+<h3 id="3行为型模式-behavioral-11种">3、行为型模式 <em>Behavioral 11种</em><a hidden class="anchor" aria-hidden="true" href="#3行为型模式-behavioral-11种">#</a></h3>
+<p>类或对象怎样交互以及怎样分配职责</p>
+<ul>
+<li>职责链模式</li>
+<li><strong><a href="../113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/">命令模式</a></strong></li>
+<li>解释器模式</li>
+<li>迭代器模式</li>
+<li>中介模式</li>
+<li>备忘录模式</li>
+<li><strong><a href="../114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/">观察者模式</a></strong></li>
+<li>状态模式</li>
+<li><strong><a href="../112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a></strong></li>
+<li><strong><a href="../111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/">模板方法模式</a></strong></li>
+<li>访问者模式</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+      <li><a href="https://874656645.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/99-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>面向对象设计原则</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/97-uml-%E7%BB%9F%E4%B8%80%E5%BB%BA%E6%A8%A1%E8%AF%AD%E8%A8%80/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>UML 统一建模语言</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>处理哈希冲突 on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/tags/%E5%A4%84%E7%90%86%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81/</link>
+    <description>Recent content in 处理哈希冲突 on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Fri, 25 Feb 2022 17:23:49 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/%E5%A4%84%E7%90%86%E5%93%88%E5%B8%8C%E5%86%B2%E7%AA%81/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>哈希法与冲突处理</title>
+      <link>https://874656645.github.io/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/</link>
+      <pubDate>Fri, 25 Feb 2022 17:23:49 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/</guid>
+      <description>哈希表及处理冲突的方法
+一、哈希法与哈希表  哈希法又称散列法、杂凑法以及关键字地址计算法等，相应的表称为哈希表。 这种方法的基本思想是：首先在元素的关键字 k 和元素的存储位置 p 之间建立一个对应关系 f，使得 p = f(k)，f 称为哈希函数。 创建哈希表时，把关键字为 k 的元素直接存入地址为 f(k) 的单元；以后当查找关键字为 k 的元素时，再利用哈希函数计算出该元素的存储位置 p=f(k)，从而达到按关键字直接存取元素的目的。  二、冲突 当关键字集合很大时，关键字值不同的元素可能会映象到哈希表的同一地址上，即 k1 ≠ k2，但 f(k1) = f(k2)，这种现象称为冲突，此时称 k1 和 k2 为同义词。
+三、哈希函数构造方法 构造哈希函数的原则是：
+ 函数本身便于计算； 计算出来的地址分布均匀，即对任一关键字 k，f(k) 对应不同地址的概率相等，目的是尽可能减少冲突  常用的构造方法：
+ 数字分析法 平方取中法 分段叠加法 除留余数法：假设哈希表长为 m，p 为小于等于 m 的最大素数，则哈希函数为 f(k)=k % p 伪随机数法  四、冲突处理方法 1. 开放地址法（Open addressing） 这种方法也称再散列法，其基本思想是：当关键字key的哈希地址p=H（key）出现冲突时，以p为基础，产生另一个哈希地址p1，如果p1仍然冲突，再以p为基础，产生另一个哈希地址p2，…，直到找出一个不冲突的哈希地址pi
+ 线性探测 二次探测 伪随机探测  线性探测再散列的优点是：只要哈希表不满，就一定能找到一个不冲突的哈希地址，而二次探测再散列和伪随机探测再散列则不一定；缺点是线性探测再散列容易产生二次聚集
+2. 再哈希法 这种方法是同时构造多个不同的哈希函数，当哈希地址Hi=RH1（key）发生冲突时，再计算Hi=RH2（key）……，直到冲突不再产生。这种方法不易产生聚集，但增加了计算时间</description>
+    </item>
+    
+  </channel>
+</rss>

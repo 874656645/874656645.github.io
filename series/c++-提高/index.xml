@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>C&#43;&#43; 提高 on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/series/c&#43;&#43;-%E6%8F%90%E9%AB%98/</link>
+    <description>Recent content in C&#43;&#43; 提高 on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 24 Jan 2022 20:53:57 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/c++-%E6%8F%90%E9%AB%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>机房预约系统案例</title>
+      <link>https://874656645.github.io/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Mon, 24 Jan 2022 20:53:57 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/94-%E6%9C%BA%E6%88%BF%E9%A2%84%E7%BA%A6%E7%B3%BB%E7%BB%9F%E6%A1%88%E4%BE%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>演讲比赛流程管理案例</title>
+      <link>https://874656645.github.io/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Sat, 22 Jan 2022 17:21:43 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/92-%E6%BC%94%E8%AE%B2%E6%AF%94%E8%B5%9B%E6%B5%81%E7%A8%8B%E7%AE%A1%E7%90%86%E6%A1%88%E4%BE%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>评委打分案例</title>
+      <link>https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/</link>
+      <pubDate>Sun, 16 Jan 2022 22:10:49 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/</guid>
+      <description>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
+分析：
+ 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34;的平均分为：&amp;#34; &amp;lt;&amp;lt; m_avgScore &amp;lt;&amp;lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&amp;lt;Player&amp;gt; &amp;amp;v){ string nameSeed = &amp;#34;ABCDE&amp;#34;; for(int i = 0; i &amp;lt; nameSeed.</description>
+    </item>
+    
+    <item>
+      <title>文件操作</title>
+      <link>https://874656645.github.io/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+      <pubDate>Sun, 16 Jan 2022 09:47:21 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/77-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+      <description>一、文件读写  文件输入流 ifstream 文件输出流 ofstream 文件输入输出流 fstream 文件的打开方式 文件流的状态 文件流的定位：文件指针（输入指针、输出指针）  二、文本文件 #include &amp;lt;iostream&amp;gt;#include &amp;lt;fstream&amp;gt;using namespace std; void ReadWriteFile(){ ifstream ifs(&amp;#34;D:\\Users\\cui_z\\Desktop\\source.txt&amp;#34;, ios::in); ofstream ofs(&amp;#34;D:\\Users\\cui_z\\Desktop\\target.txt&amp;#34;, ios::out | ios::app); if (!ifs) { cout &amp;lt;&amp;lt; &amp;#34;输入文件打开失败&amp;#34; &amp;lt;&amp;lt; endl; return; } if (!ofs) { cout &amp;lt;&amp;lt; &amp;#34;输出文件打开失败&amp;#34; &amp;lt;&amp;lt; endl; return; } char ch; while (ifs.get(ch)) { cout &amp;lt;&amp;lt; ch; ofs &amp;lt;&amp;lt; ch; } ifs.close(); ofs.close(); } 三、二进制文件  文本文件和二进制文件在计算机中都是以二进制的方式存储的 程序中的对象都是二进制存储的 Windows 中的文本文件换行符用 \r\n 表示，二进制是以 \n 存储，所以存储和显示时会做一下转换 Linux 中二进制和文本文件换行都是以 \n 存储和表示  class Person { private: int m_age; int m_id; public: Person():m_age(0), m_id(0){ } Person(int age, int id){ m_age = age; m_id = id; } ~Person() = default; void show(){ cout &amp;lt;&amp;lt; &amp;#34;Age: &amp;#34; &amp;lt;&amp;lt; m_age &amp;lt;&amp;lt; &amp;#34; ID: &amp;#34; &amp;lt;&amp;lt; m_id &amp;lt;&amp;lt; endl; } }; void BinaryReadWrite(){ // 存储二进制  ofstream ofs(&amp;#34;D:\\Users\\cui_z\\Desktop\\target.</description>
+    </item>
+    
+    <item>
+      <title>格式化输出</title>
+      <link>https://874656645.github.io/posts/76-%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/</link>
+      <pubDate>Sun, 16 Jan 2022 09:12:08 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/76-%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/</guid>
+      <description>#include &amp;lt;iostream&amp;gt;#include &amp;lt;cstdlib&amp;gt;#include &amp;lt;cstring&amp;gt;#include &amp;lt;iomanip&amp;gt; // 控制符头文件using namespace std; // 格式化输出 void func(){ // 方式一：使用成员方法  int number = 10; cout &amp;lt;&amp;lt; number &amp;lt;&amp;lt; endl; cout.unsetf(ios::dec); // 八进制  cout.setf(ios::oct); cout.setf(ios::showbase); cout &amp;lt;&amp;lt; number &amp;lt;&amp;lt; endl; // 012  // 十六进制  cout.unsetf(ios::oct); cout.setf(ios::hex); cout &amp;lt;&amp;lt; number &amp;lt;&amp;lt; endl; // 0xa  // 固定宽度  cout.width(10); cout.fill(&amp;#39;*&amp;#39;); cout &amp;lt;&amp;lt; number &amp;lt;&amp;lt; endl; // *******0xa  // 上面的设置只对当前输出有效，下次的输出格式要重新设置  cout.setf(ios::left); cout.width(10); cout.</description>
+    </item>
+    
+    <item>
+      <title>异常接口声明</title>
+      <link>https://874656645.github.io/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/</link>
+      <pubDate>Sat, 15 Jan 2022 18:26:49 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/</guid>
+      <description>C++ 异常
+ C++11 不再建议使用异常规范  // 异常规范 只能抛出 int float char 三种类型的异常 C++11以后不再建议使用 void func1() throw(int, float, char){ throw &amp;#34;string&amp;#34;; // terminate called after throwing an instance of &amp;#39;char const*&amp;#39; } // 不能抛出任何类型的异常 OK void func2() throw(){ throw -1; // terminate called after throwing an instance of &amp;#39;int&amp;#39; } // 可以抛出任何类型的异常 void func3(){ throw &amp;#34;error&amp;#34;; } int main() { try{ func1(); } catch(char const * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; } catch(.</description>
+    </item>
+    
+    <item>
+      <title>栈解旋 Unwinding</title>
+      <link>https://874656645.github.io/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/</link>
+      <pubDate>Sat, 15 Jan 2022 18:07:46 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/</guid>
+      <description>异常被抛出后，从进入 try 块起到异常被抛出前，这期间在栈上构造的所有对象都会被自动析构，析构的顺序与构造的顺序相反。
+与 return 类似
+class Test{ public: Test(string name){ m_name = name; cout &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34;被构造了&amp;#34; &amp;lt;&amp;lt; endl; } ~Test(){ cout &amp;lt;&amp;lt; m_name &amp;lt;&amp;lt; &amp;#34;被析构了&amp;#34; &amp;lt;&amp;lt; endl; } private: string m_name; }; double func1(int x, int y){ Test t1(&amp;#34;t1&amp;#34;), t2(&amp;#34;t2&amp;#34;); if(y == 0){ throw y; } return x / y; } int main() { try{ Test t3(&amp;#34;t3&amp;#34;), t4(&amp;#34;t4&amp;#34;); func1(10, 0); } catch(int e){ cout &amp;lt;&amp;lt; &amp;#34;除数为 &amp;#34; &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; } return 0; } t3被构造了 t4被构造了 t1被构造了 t2被构造了 t2被析构了 t1被析构了 t4被析构了 t3被析构了 除数为 0 </description>
+    </item>
+    
+    <item>
+      <title>异常</title>
+      <link>https://874656645.github.io/posts/57-%E5%BC%82%E5%B8%B8/</link>
+      <pubDate>Sat, 15 Jan 2022 17:34:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/57-%E5%BC%82%E5%B8%B8/</guid>
+      <description>一、try、catch、throw  可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型 C++ 异常机制是跨函数的，且是必须处理的。如果中间函数没有处理就一直抛到最顶层，如果 main 函数也不处理，程序就会挂掉  int main( ) { try{ throw &amp;#34;exception&amp;#34;; }catch(const char * e){ cout &amp;lt;&amp;lt; e &amp;lt;&amp;lt; endl; }catch(...){ // 捕获所有异常  cout &amp;lt;&amp;lt; &amp;#34;...&amp;#34; &amp;lt;&amp;lt; endl; } { cout &amp;lt;&amp;lt; &amp;#34;finally&amp;#34; &amp;lt;&amp;lt; endl; } return 0; } 输出：
+Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp;amp; rhs) throw(); exception&amp;amp; operator=(const exception&amp;amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：</description>
+    </item>
+    
+    <item>
+      <title>类型转换</title>
+      <link>https://874656645.github.io/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Sat, 15 Jan 2022 15:55:28 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</guid>
+      <description>1. static_cast&amp;lt;&amp;gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&amp;lt;&amp;gt;  // 1. 内置对象  int a = 97; char c = static_cast&amp;lt;char&amp;gt;(a); // OK  cout &amp;lt;&amp;lt; c &amp;lt;&amp;lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&amp;lt;Animal&amp;gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;amp;a;  // char *pc = static_cast&amp;lt;char*&amp;gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &amp;lt;&amp;lt; pc &amp;lt;&amp;lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&amp;lt;Building*&amp;gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4.</description>
+    </item>
+    
+    <item>
+      <title>自定义数组实现</title>
+      <link>https://874656645.github.io/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/</link>
+      <pubDate>Sat, 15 Jan 2022 13:36:04 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/</guid>
+      <description>要求  可以对内置数据类型以及自定义数据类型的数据进行存储 将数组中的数据存储到堆区 构造函数中可以传入数组的容量 提供对应的拷贝构造函数以及 operator= 防止浅拷贝问题 提供尾插法和尾删法对数组中的数据进行增加和删除 可以通过下标的方式访问数组中的元素 可以获取数组中当前元素个数和数组的容量  实现 template&amp;lt;class T&amp;gt; class MyArray{ public: MyArray(int capacity){ this-&amp;gt;m_capacity = capacity; this-&amp;gt;m_size = 0; this-&amp;gt;m_addr = new T[this-&amp;gt;m_capacity]; } MyArray(const MyArray&amp;amp; arr){ if(arr.m_addr == NULL){ return; } // 深拷贝  this-&amp;gt;m_capacity = arr.m_capacity; this-&amp;gt;m_size = arr.m_size; this-&amp;gt;m_addr = new T[this-&amp;gt;m_capacity]; for(int i = 0; i &amp;lt; m_size; ++i){ // T 类型是可拷贝的，= 运算符也是深拷贝  this-&amp;gt;m_addr[i] = arr.m_addr[i]; } } MyArray&amp;amp; operator=(const MyArray&amp;amp; arr){ if(this == &amp;amp;arr){ return *this; } if(this-&amp;gt;m_addr !</description>
+    </item>
+    
+    <item>
+      <title>类模板</title>
+      <link>https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/</link>
+      <pubDate>Wed, 12 Jan 2022 22:47:51 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/</guid>
+      <description>一、类模板写法 1. 声明和定义写在一起 template&amp;lt;class T&amp;gt; class Person{ public: Person(T age){ this-&amp;gt;m_age = age; } void Show(){ cout &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; endl; } private: T m_age; }; int main() { Person&amp;lt;int&amp;gt; p(20); p.Show(); cout &amp;lt;&amp;lt; p &amp;lt;&amp;lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&amp;lt;class T&amp;gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&amp;lt;class T&amp;gt; Person&amp;lt;T&amp;gt;::Person(T age){ this-&amp;gt;m_age = age; } template&amp;lt;class T&amp;gt; void Person&amp;lt;T&amp;gt;::Show(){ cout &amp;lt;&amp;lt; this-&amp;gt;m_age &amp;lt;&amp;lt; endl; } int main() { Person&amp;lt;int&amp;gt; p(20); p.</description>
+    </item>
+    
+    <item>
+      <title>编译过程</title>
+      <link>https://874656645.github.io/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/</link>
+      <pubDate>Wed, 12 Jan 2022 20:12:00 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/</guid>
+      <description>各个 .cpp 文件是独立编译的，如果有其它的类和函数会先在本 .o 文件中生成符号，由最后的链接器去其它 .o 文件找具体的函数定义
+ .c .cpp 文件经过 预编译器拷贝头文件、宏展开 生成 .i 文件（文本文件）
+g++ -E main.cpp -o main.i .i 文件经过 编译器 生成汇编程序 .s（文本文件）
+g++ -S main.i -o main.s .s 文件经过 汇编器 生成可定位目标文件 .o （二进制）
+Windows:
+g++ -c main.s -o main.obj
+Linux:
+g++ -c main.s -o main.o .o 文件经过 链接器 生成可执行目标文件 .exe .dll
+g++ main.s -o main  </description>
+    </item>
+    
+    <item>
+      <title>函数模板</title>
+      <link>https://874656645.github.io/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/</link>
+      <pubDate>Tue, 11 Jan 2022 21:40:09 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/</guid>
+      <description>函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C++ 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
+编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&amp;lt;class T&amp;gt; T MyAdd(T a, T b){ return a + b; } // 函数一 int MyAdd(int a, int b){ return a + b; } // 函数二 int MyAdd(int a, char c){ return a + c; } int main() { cout &amp;lt;&amp;lt; MyAdd(1, 2) &amp;lt;&amp;lt; endl; // 优先调用普通函数  cout &amp;lt;&amp;lt; MyAdd&amp;lt;&amp;gt;(1, 2) &amp;lt;&amp;lt; endl; // 强制调用模板函数  cout &amp;lt;&amp;lt; MyAdd(1.</description>
+    </item>
+    
+  </channel>
+</rss>

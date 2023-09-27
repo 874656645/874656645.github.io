@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>STL | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="" />
+<meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/series/stl/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/series/stl/index.xml">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="STL" />
+<meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://874656645.github.io/series/stl/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="STL"/>
+<meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
+
+
+</head>
+
+<body class="list dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/series/">Series</a></div>
+  <h1>STL</h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>deque 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>巧妙收缩 vector 空间
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 100000; &#43;&#43;i){ v.push_back(i); } cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; v.resize(10); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; vector&lt;int&gt;(v).swap(v); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>vector 中的元素存放在堆上还是栈上
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete()....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 15:50:29 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to vector 中的元素存放在堆上还是栈上" href="https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>STL Hello World
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 平时要有容器、算法、迭代器的思维模式 容器提供迭代器，算法使用迭代器  // 算法 int count(int* begin, int* end, int val){ int n = 0; while(begin != end){ if(*begin == val){ n&#43;&#43;; } begin&#43;&#43;; } return n; } int main() { // 容器  int arr[] = {1, 3, 0, 5, 1, 3, 1, 0}; // 迭代器  int* begin = arr; int* end = *(&amp;arr &#43; 1); int n = count(begin, end, 1); cout &lt;&lt; &#34;count: &#34; &lt;&lt; n &lt;&lt; endl; return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 12:31:08 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL Hello World" href="https://874656645.github.io/posts/78-stl-hello-world/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>STL 总结
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1、六大组件介绍  容器：数据结构，用来存放数据 算法：常用算法 迭代器：容器和算法之间的胶合剂，“范型指针” 仿函数：一种重载了operator()的类，使得这个类的使用看上去像一个函数 配置器：为容器分配并管理内存 适配器：修改其他组件接口  2、STL 常用的容器有哪些以及各自的特点是什么?    名称 特点     vector 底层数据结构为数组，支持快速随机访问   list 底层数据结构为双向链表，支持快速增删   deque 底层数据结构为一个中央控制器和多个缓冲区，支持首尾（中间不能）快速增删，也支持随机访问   stack 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   queue 底层一般用deque/list实现，封闭头部即可，不用vector的原因应该是容量大小有限制，扩容耗时   priority_queue 底层数据结构一般为vector为底层容器，堆heap为处理规则来管理底层容器实现   set 底层数据结构为红黑树，有序，不重复   multiset 底层数据结构为红黑树，有序，可重复   map 底层数据结构为红黑树，有序，不重复   multimap 底层数据结构为红黑树，有序，可重复   unordered_set 底层数据结构为hash表，无序，不重复   unordered_multiset 底层数据结构为hash表，无序，可重复   unordered_map 底层数据结构为hash表，无序，不重复   unordered_multimap 底层数据结构为hash表，无序，可重复    3、vector 和 list 的区别  vector底层实现是数组，所以在内存中是连续存放的，随机读取效率高，但插入、删除效率低；list底层实现是双向链表，所以在内存中是任意存放的，插入、删除效率高，但访问元素效率低 vector在中间节点进行插入、删除会导致内存拷贝，而list不会 vector一次性分配好内存，不够时才进行2倍扩容；list每次插入新节点都会进行内存申请  4、vector 扩容原理 以原内存空间大小的两倍配置一份新的内存空间，并将原空间数据拷贝过来进行初始化...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-30 10:34:27 +0800 CST'>December 30, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to STL 总结" href="https://874656645.github.io/posts/56-stl-%E6%80%BB%E7%BB%93/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://874656645.github.io/series/stl/page/2/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/series/stl/page/4/">Next Page »</a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

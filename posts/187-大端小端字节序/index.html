@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>大端、小端字节序 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;" />
+<meta name="description" content="一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
+  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
+ 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
+            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="大端、小端字节序" />
+<meta property="og:description" content="一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
+  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
+ 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
+            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-21T16:04:58&#43;08:00" />
+<meta property="article:modified_time" content="2022-04-21T16:04:58&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="大端、小端字节序"/>
+<meta name="twitter:description" content="一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）
+  有些类型的长度是超过 1 个字节的，比如 C/C&#43;&#43; 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。
+ 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：
+            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状："/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "大端、小端字节序",
+      "item": "https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "大端、小端字节序",
+  "name": "大端、小端字节序",
+  "description": "一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）\n  有些类型的长度是超过 1 个字节的，比如 C/C++ 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。\n 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：\n            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：",
+  "keywords": [
+    "C++"
+  ],
+  "articleBody": "一、概念   计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）\n  有些类型的长度是超过 1 个字节的，比如 C/C++ 中，short 类型一般是 2 个字节，int 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。\n 大端模式：是指数据的高字节保存在内存的低地址中，而数据的低字节保存在内存的高地址中（高低低高） 小端模式：是指数据的高字节保存在内存的高地址中，而数据的低字节保存在内存的低地址中（高高低低）    假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：\n            内存地址 0x4000 8000（低地址） 0x4000 8001 0x4000 8002 0x4000 8003（高地址）   大端模式 0x12 0x34 0x56 0x78   小端模式 0x78 0x56 0x34 0x12      现状：\n Intel 的 80×86 系列芯片使用小端存储模式 ARM 芯片默认采用小端，但可以切换为大端 MIPS 芯片采用大端，但可以在大小端之间切换 在网络上传输的数据普遍采用的都是大端    二、判断字节序  不同的 CPU 有不同的字节序类型，这些字节序是指整数在内存中保存的顺序，也叫做主机序 内存的读写永远从低地址开始读/写（起始地址），从低到高 对一个对象取地址，这个指针是对象使用的最低字节地址（对象的起始地址） 大端模式（Big endian）：将高序字节存储在起始地址 小端模式（Little endian）：将低序字节存储在起始地址    通过将多字节数据强制类型转换成单字节数据，再通过判断起始存储位置是数据高字节还是低字节进行检测\nint i = 1; char *p = (char*)\u0026i; // 读取 int 的第一个字节（起始地址） if(*p == 1){ printf(\"Little Endian\"); } else{ printf(\"Big Endian\"); }   利用联合体 union 的存放顺序是所有成员都从低地址开始存放这一特性进行检测\nbool isBigEndian() { union uendian { int nNum; char cLowAddressValue; }; uendian u; u.nNum = 0x12345678; if ( u.cLowAddressValue == 0x12 ) return true; return false; }   Linux 操作系统中相关的源代码\nstatic union { char c[4]; unsigned long mylong; } endian_test = {{ 'l', '?', '?', 'b' } }; #define ENDIANNESS ((char)endian_test.mylong)   测试\n  void show_bytes(unsigned char* start, size_t len){ for(size_t i = 0; i  len; ++i){ printf(\" %.2x\", start[i]); } printf(\"\\n\"); } void show_int(int x){ show_bytes((unsigned char*)\u0026x, sizeof(int)); } void show_float(float x){ show_bytes((unsigned char*)\u0026x, sizeof(float)); } void show_pointer(void* x){ show_bytes((unsigned char*)\u0026x, sizeof(void*)); } void test_show_bytes(int val){ int ival = val; float fval = (float)ival; int* pval = \u0026ival; cout  hex  ival  endl; show_int(ival); cout  hex  fval  endl; show_float(fval); cout  hex  pval  endl; show_pointer(pval); } int main() { int i = 12345; test_show_bytes(i); return 0; } 输出：\n3039\r39 30 00 00\r12345\r00 e4 40 46\r0x7fffbf791af8\rf8 1a 79 bf ff 7f 00 00\r参考：\n 关于高位字节与低位字节简洁明了的说明，以及高低字节序转换函数 大端模式、小端模式、高字节序、低字节序、MSB、LSB 大端和小端（Big endian and Little endian） 大端小端。。。 二进制、16进制、大端小端  ",
+  "wordCount" : "265",
+  "inLanguage": "en",
+  "datePublished": "2022-04-21T16:04:58+08:00",
+  "dateModified": "2022-04-21T16:04:58+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/187-%E5%A4%A7%E7%AB%AF%E5%B0%8F%E7%AB%AF%E5%AD%97%E8%8A%82%E5%BA%8F/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      大端、小端字节序
+    </h1>
+    <div class="post-meta"><span title='2022-04-21 16:04:58 +0800 CST'>April 21, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e6%a6%82%e5%bf%b5" aria-label="一、概念">一、概念</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%88%a4%e6%96%ad%e5%ad%97%e8%8a%82%e5%ba%8f" aria-label="二、判断字节序">二、判断字节序</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="一概念">一、概念<a hidden class="anchor" aria-hidden="true" href="#一概念">#</a></h2>
+<ol>
+<li>
+<p>计算机系统中内存是以字节为单位进行编址的，每个地址单元都唯一的对应着 1 个字节（8 bit）</p>
+</li>
+<li>
+<p>有些类型的长度是超过 1 个字节的，比如 <code>C/C++</code> 中，<code>short</code> 类型一般是 2 个字节，<code>int</code> 类型一般 4 个字节等。因此这里就存在如何安排多字节数据中，各字节存放顺序的问题。正是因为不同的安排顺序导致了大端存储模式和小端存储模式的存在。</p>
+<ul>
+<li><strong>大端模式：<strong>是指数据的</strong>高字节</strong>保存在内存的<strong>低地址</strong>中，而数据的<strong>低字节</strong>保存在内存的<strong>高地址</strong>中（高低低高）</li>
+<li><strong>小端模式：<strong>是指数据的</strong>高字节</strong>保存在内存的<strong>高地址</strong>中，而数据的<strong>低字节</strong>保存在内存的<strong>低地址</strong>中（高高低低）</li>
+</ul>
+</li>
+<li>
+<p>假如有一个 4 字节的数据为 0x12345678（十进制：305419896，0x12 为高字节，0x78 为低字节），若将其存放于地址 0x4000 8000 中，则有：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">内存地址</td>
+<td style="text-align:left">0x4000 8000（低地址）</td>
+<td style="text-align:left">0x4000 8001</td>
+<td style="text-align:left">0x4000 8002</td>
+<td style="text-align:left">0x4000 8003（高地址）</td>
+</tr>
+<tr>
+<td style="text-align:left">大端模式</td>
+<td style="text-align:left">0x12</td>
+<td style="text-align:left">0x34</td>
+<td style="text-align:left">0x56</td>
+<td style="text-align:left">0x78</td>
+</tr>
+<tr>
+<td style="text-align:left">小端模式</td>
+<td style="text-align:left">0x78</td>
+<td style="text-align:left">0x56</td>
+<td style="text-align:left">0x34</td>
+<td style="text-align:left">0x12</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>现状：</strong></p>
+<ul>
+<li>Intel 的 80×86 系列芯片使用小端存储模式</li>
+<li>ARM 芯片默认采用小端，但可以切换为大端</li>
+<li>MIPS 芯片采用大端，但可以在大小端之间切换</li>
+<li>在网络上传输的数据普遍采用的都是大端</li>
+</ul>
+</li>
+</ol>
+<h2 id="二判断字节序">二、判断字节序<a hidden class="anchor" aria-hidden="true" href="#二判断字节序">#</a></h2>
+<ul>
+<li>不同的 CPU 有不同的字节序类型，这些字节序是指整数在内存中保存的顺序，也叫做<strong>主机序</strong></li>
+<li>内存的读写永远从低地址开始读/写（起始地址），<strong>从低到高</strong></li>
+<li>对一个对象取地址，这个指针是对象使用的最低字节地址（对象的起始地址）</li>
+<li><strong>大端模式（Big endian）</strong>：将高序字节存储在起始地址</li>
+<li><strong>小端模式（Little endian）</strong>：将低序字节存储在起始地址</li>
+</ul>
+<ol>
+<li>
+<p>通过将多字节数据强制类型转换成单字节数据，再通过判断起始存储位置是数据高字节还是低字节进行检测</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;   
+<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>i; <span style="color:#75715e">// 读取 int 的第一个字节（起始地址）  
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">*</span>p <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>){    
+    printf(<span style="color:#e6db74">&#34;Little Endian&#34;</span>); 
+}
+<span style="color:#66d9ef">else</span>{
+    printf(<span style="color:#e6db74">&#34;Big Endian&#34;</span>);
+}
+</code></pre></div></li>
+<li>
+<p>利用联合体 <code>union</code> 的存放顺序是所有成员都从低地址开始存放这一特性进行检测</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isBigEndian</span>()
+{
+    <span style="color:#66d9ef">union</span> <span style="color:#a6e22e">uendian</span>
+    {
+        <span style="color:#66d9ef">int</span> nNum;
+        <span style="color:#66d9ef">char</span> cLowAddressValue;
+    };
+
+    uendian u;
+    u.nNum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x12345678</span>;
+
+    <span style="color:#66d9ef">if</span> ( u.cLowAddressValue <span style="color:#f92672">==</span> <span style="color:#ae81ff">0x12</span> )     <span style="color:#66d9ef">return</span> true;
+
+    <span style="color:#66d9ef">return</span> false;
+}
+</code></pre></div></li>
+<li>
+<p>Linux 操作系统中相关的源代码</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">static</span> <span style="color:#66d9ef">union</span> { <span style="color:#66d9ef">char</span> c[<span style="color:#ae81ff">4</span>]; <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> mylong; } endian_test <span style="color:#f92672">=</span> {{ <span style="color:#e6db74">&#39;l&#39;</span>, <span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span> } };
+
+<span style="color:#75715e">#define ENDIANNESS ((char)endian_test.mylong)
+</span></code></pre></div></li>
+<li>
+<p>测试</p>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_bytes</span>(<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> start, size_t len){
+    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; <span style="color:#f92672">++</span>i){
+        printf(<span style="color:#e6db74">&#34; %.2x&#34;</span>, start[i]);
+    }
+    printf(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_int</span>(<span style="color:#66d9ef">int</span> x){
+    show_bytes((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_float</span>(<span style="color:#66d9ef">float</span> x){
+    show_bytes((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">float</span>));
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">show_pointer</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span> x){
+    show_bytes((<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>x, <span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">void</span><span style="color:#f92672">*</span>));
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test_show_bytes</span>(<span style="color:#66d9ef">int</span> val){
+    <span style="color:#66d9ef">int</span> ival <span style="color:#f92672">=</span> val;
+    <span style="color:#66d9ef">float</span> fval <span style="color:#f92672">=</span> (<span style="color:#66d9ef">float</span>)ival;
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> pval <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>ival;
+    
+    cout <span style="color:#f92672">&lt;&lt;</span> hex <span style="color:#f92672">&lt;&lt;</span> ival <span style="color:#f92672">&lt;&lt;</span> endl;
+    show_int(ival);
+    
+    cout <span style="color:#f92672">&lt;&lt;</span> hex <span style="color:#f92672">&lt;&lt;</span> fval <span style="color:#f92672">&lt;&lt;</span> endl;
+    show_float(fval);
+    
+    cout <span style="color:#f92672">&lt;&lt;</span> hex <span style="color:#f92672">&lt;&lt;</span> pval <span style="color:#f92672">&lt;&lt;</span> endl;
+    show_pointer(pval);
+}
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">12345</span>;
+    test_show_bytes(i);
+    
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<pre tabindex="0"><code class="language-test" data-lang="test">3039
+ 39 30 00 00
+12345
+ 00 e4 40 46
+0x7fffbf791af8
+ f8 1a 79 bf ff 7f 00 00
+</code></pre><p>参考：</p>
+<ol>
+<li><a href="https://blog.csdn.net/q13721879013/article/details/109197803">关于高位字节与低位字节简洁明了的说明，以及高低字节序转换函数</a></li>
+<li><a href="https://blog.csdn.net/qq_39400113/article/details/119463013">大端模式、小端模式、高字节序、低字节序、MSB、LSB</a></li>
+<li><a href="https://www.cnblogs.com/luxiaoxun/archive/2012/09/05/2671697.html">大端和小端（Big endian and Little endian）</a></li>
+<li><a href="https://blog.csdn.net/qq_16334327/article/details/80200869">大端小端。。。</a></li>
+<li><a href="https://blog.csdn.net/android_cai_niao/article/details/121421706">二进制、16进制、大端小端</a></li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/188-main-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E5%AE%8C%E5%90%8E%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%A3%E7%A0%81/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>main 函数执行完后所执行的代码</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>C&#43;&#43;11 内存对齐 alignof alignas max_align_t</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

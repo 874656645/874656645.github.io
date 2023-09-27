@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Ubuntu 常用命令 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Linux" />
+<meta name="description" content="Linux 命令大全
+ 注意：需提前配置系统环境，比如系统编码为 UTF-8  系统环境配置 1. 设置系统语言   查看系统支持的字符集：locale、locale -a
+  查看时间：date
+  安装中文语言包：sudo apt install language-pack-zh-hans
+  添加到系统配置文件 .bashrc
+export LANG=zh_CN.UTF-8
+  重新加载：source .bashrc   一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Ubuntu 常用命令" />
+<meta property="og:description" content="Linux 命令大全
+ 注意：需提前配置系统环境，比如系统编码为 UTF-8  系统环境配置 1. 设置系统语言   查看系统支持的字符集：locale、locale -a
+  查看时间：date
+  安装中文语言包：sudo apt install language-pack-zh-hans
+  添加到系统配置文件 .bashrc
+export LANG=zh_CN.UTF-8
+  重新加载：source .bashrc   一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-07T08:33:51&#43;08:00" />
+<meta property="article:modified_time" content="2022-02-07T08:33:51&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/260-git-tortoisegit-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/" /><meta property="og:see_also" content="https://874656645.github.io/posts/259-git-tortoisegit-%E9%85%8D%E7%BD%AE-ssh-/" /><meta property="og:see_also" content="https://874656645.github.io/posts/258-git-stash-%E5%B0%86%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A%E7%9A%84%E4%BF%AE%E6%94%B9%E8%BD%AC%E7%A7%BB%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A/" /><meta property="og:see_also" content="https://874656645.github.io/posts/191-%E4%BD%BF%E7%94%A8-vs2022-%E9%83%A8%E7%BD%B2%E8%BF%90%E8%A1%8C%E5%92%8C%E8%B0%83%E8%AF%95-linux-msbuild-%E9%A1%B9%E7%9B%AE/" /><meta property="og:see_also" content="https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/" /><meta property="og:see_also" content="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/260-git-tortoisegit-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/" /><meta property="og:see_also" content="https://874656645.github.io/posts/259-git-tortoisegit-%E9%85%8D%E7%BD%AE-ssh-/" /><meta property="og:see_also" content="https://874656645.github.io/posts/258-git-stash-%E5%B0%86%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A%E7%9A%84%E4%BF%AE%E6%94%B9%E8%BD%AC%E7%A7%BB%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A/" /><meta property="og:see_also" content="https://874656645.github.io/posts/121-windows-10-%E4%B8%AD%E7%9A%84-linux-%E5%AD%90%E7%B3%BB%E7%BB%9F/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Ubuntu 常用命令"/>
+<meta name="twitter:description" content="Linux 命令大全
+ 注意：需提前配置系统环境，比如系统编码为 UTF-8  系统环境配置 1. 设置系统语言   查看系统支持的字符集：locale、locale -a
+  查看时间：date
+  安装中文语言包：sudo apt install language-pack-zh-hans
+  添加到系统配置文件 .bashrc
+export LANG=zh_CN.UTF-8
+  重新加载：source .bashrc   一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Ubuntu 常用命令",
+      "item": "https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Ubuntu 常用命令",
+  "name": "Ubuntu 常用命令",
+  "description": "Linux 命令大全\n 注意：需提前配置系统环境，比如系统编码为 UTF-8  系统环境配置 1. 设置系统语言   查看系统支持的字符集：locale、locale -a\n  查看时间：date\n  安装中文语言包：sudo apt install language-pack-zh-hans\n  添加到系统配置文件 .bashrc\nexport LANG=zh_CN.UTF-8\n  重新加载：source .bashrc   一、更新和升级包 1. 更新和升级包 sudo apt update \u0026amp;\u0026amp; sudo apt upgrade\n2. 安装常用开发环境 sudo apt-get install build-essential\n3. 安装软件 sudo apt install tree\n4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr",
+  "keywords": [
+    "Linux"
+  ],
+  "articleBody": "Linux 命令大全\n 注意：需提前配置系统环境，比如系统编码为 UTF-8  系统环境配置 1. 设置系统语言   查看系统支持的字符集：locale、locale -a\n  查看时间：date\n  安装中文语言包：sudo apt install language-pack-zh-hans\n  添加到系统配置文件 .bashrc\nexport LANG=zh_CN.UTF-8\n  重新加载：source .bashrc   一、更新和升级包 1. 更新和升级包 sudo apt update \u0026\u0026 sudo apt upgrade\n2. 安装常用开发环境 sudo apt-get install build-essential\n3. 安装软件 sudo apt install tree\n4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr\n6. 查看软件安装的路径 dpkg -L openssh-server\nwhereis gdb\nwhich gcovr 需要软件包的路径在环境变量 $PATH 中\n7. 查看 apt 中软件的版本 apt-show-versions -a gcovr\napt show gcovr\nsudo apt-cache policy libssl-dev\n8. 列出已安装的软件 apt list --installed\n二、pip 使用 1. Ubuntu 1804 安装 pip 安装 pip3：sudo apt install python3-pip\n安装 pip2：sudo apt install python-pip\n2. 安装软件 pip3 install -U gcovr\n3. 列出 pip 已安装的包 pip3 list\n4.查看安装包信息 pip3 show gcovr\n5. 安装 pip_search pip3 install pip_search pip_search gcovr 三、shell 操作和常用命令 1、查看输入的命令历史 history\n2、删除光标前面的字符串 ctrl + u\n3、删除光标后面的字符串 ctrl + k\n4、光标定位到头部 ctrl + a\n5、光标定位到尾部 ctrl + e\n6、命令、路径补全 Tab\n7、缩写别名 alias\n8、查看说明 man 5 passwd\n9、宿主目录 ~\n10、查看目录内容 tree ~\n11、打印工作目录 pwd\n12、表示当前用户是普通用户 $ 13、表示当前用户是超级用户 # 14、切换超级用户 sudo su\n15、 查看文件和目录 ls ls -a ls -l # -rwxrw-r-- 1 rick rick 0 Feb 12 18:37 test ls -lh ls -alF # drwxr-xr-x 1 rick rick 4096 Feb 12 18:37 rick/ ll 16、 cd cd /home/rick cd ~ cd cd - # 切换到上一个的历史目录 17、 mkdir 目录名 mkdir aa mkdir aa/bb rm aa -r mkdir aa/bb/cc -p 18、 touch 文件名  如果文件不存在，则创建文件 如果文件存在，更新文件时间  19、 rmdir 删除空目录  只能删除空目录  20、 rm 删除目录和文件  删除后很难恢复  rm -r # 用递归的方式删除目录 rm -ri # 提示 rm aa/* -r # 删除 aa 目录下的所有文件和目录 21、 cp 拷贝 cp file file1 # file1 不存在，则创建 file1 并把 file 中的内容拷贝进去 cp file file1 # file1 存在，则会用 file 中的内容覆盖 file1 中的内容 cp file dir # 将 file 拷贝到 dir 目录下 cp dir dir1 # dir1 目录不存在，则把 dir 的所有子目录拷贝到 dir1 目录下 rm dir1/* -r cp dir dir1 # dir1 目录存在，则把 dir 整个目录拷贝到 dir1 目录下 cp -r nginx_build/* nginx 22、 mv mv file file1 # file1 不存在，则是将 file 文件改名为 file1 mv file file1 # file1 存在，则用 file 中的内容覆盖 file1 中的内容，并删除 file mv file dir # dir 存在，将 file 移动到 dir 目录下 mv dir dir1 # dir1 不存在，就是将 dir 改名为 dir1 mv dir dir1 # dir1 存在，则将 dir 目录移动到 dir1下 23、 cat 将文件内容打印到终端  适用文件内容较小的情况  23、 more 将文件内容打印到终端  不能向上翻页 Enter 向下滚动一行 空格：向下翻页 退出：q  23、 less 将文件内容打印到终端  Enter 或 ctrl + n : 向下滚动一行 ctrl + p : 向上滚动一行 pgdn : 向下翻页 空格 : 向下翻页 pgup : 向上翻页 q : 退出  23、 head 打印文件内容的前 10 行到终端 24、 tail 打印文件内容的后 10 行到终端 25、 ln 创建软硬链接  创建软链接 ln -s 原文件名 链接名称 创建硬链接（在其他多个目录中管理文件，并且能时时同步修改） ln 文件名 链接名  26、 chmod 修改权限 chmod uo-rw program chmod u+r,g-x program chmod -440 program chmod 777 program 27、 chown 修改所有者或所属组 sudo chown sys program sudo chown rick:sys program 28、 chgrp 所属组 sudo chgrp rick program\n29、 find 查找 find ./ -name \"program\" # 按文件名查找 find ./ -type f # 按文件类型查找（7种） find ./ -size -4k find ./ -size +2k -size -10k # 按文件大小查找 find ./ -ctime -1 # 按日期查找（-ctime、-mtime、-atime） find ./ -type d -exec ls -l {} \\; # 查找指定目录，并列出该目录中文件详细信息 find ./ -type d | xargs ls -l # 利用管道，效率较高 30、 grep 所属组 grep -r \"hello\" ./ -n 31、 写入文件 ls -l  fileinfo\n32、 usermod 修改用户组 # 查看当前用户所属组 groups 用户名 # 一个用户仅仅属于某一个组，而不是同时属于多个组 sudo usermod -g 组名 用户名 # 给一个用户添加一个新的组，同时保留原来的组 sudo usermod -a -G 组名 用户名 33、查看环境变量 env\n34、修改环境变量 修改 ~/.bashrc 文件（当前用户）或 /etc/profile 文件（所有用户）\nexport PATH=\"/mnt/h/wsl/emsdk:/mnt/h/wsl/emsdk/upstream/emscripten:/mnt/h/wsl/emsdk/node/14.18.2_64bit/bin:$PATH\" source ~/.bashrc 35、ldd 列出动态库依赖关系 ldd 是 list, dynamic, dependencies 的缩写\nldd ffmpeg\n36、which 查找文件 which bash\n37、查看进程信息 ps -ef | grep nginx\n38、查看程序占用的端口 netstat -tunlp | grep 80\nlsof -i:80\n39、查看进程 ID（PID） pgrep -l nginx\n39、杀死进程 kill -9 PID\nkill PID1 PID2 PID3\n四、Linux 文件类型          - 普通文件   d 目录   l 符号链接   p 管道   s 套接字   c 字符设备（鼠标、键盘）   b 块设备（U盘、硬盘)    五、用户类型          user 文件所有者（rwx）   group 文件所属组用户（rw-）   other 其他用户（r--）    六、权限          r 读   w 写   x 执行    七、压缩包管理 1. 常见压缩格式  .gz –gzip .bz2 –bzip2  2. 常用压缩命令  gzip file 压缩 gunzip *.gz 解压 tar  .gz 压缩 tar -czvf test.tar.gz aa program .bz2 压缩 tar -cjvf test.tar.bz2 aa program .gz 解压 tar -xzvf test.tar.gz -C /tmp .bz2 解压 tar -xjvf test.tar.bz2 -C /tmp 详细列举归档文件 tar -tvf nginx.tar.gz   rar 需要安装 sudo apt-get install rar\nrar a all aa program\nrar a all aa/ program -r 目录加 -r\nrar x all.rar /tmp zip / unzip 需要安装 sudo apt-get install zip\nzip myzip aa program -r\nunzip myzip.zip -d /tmp  八、软件安装和制作 1. 在线安装 – ubuntu  安装：sudo apt-get(apt) install 安装包名称 卸载：sudo apt-get(apt) remove 软件名称 软件列表更新：sudo apt-get(apt) update 清空缓存：sudo apt-get(apt) clean 缓存路径：/var/cache/apt/archives 中的红色 *.deb 文件  2. 软件包安装  安装：sudo dpkg -i xxx.deb 卸载：sudo dpkg -r 软件名称  3. 源码安装 4. 查看已安装软件 dpkg -l | grep openssh-server\n5. 查看软件安装路径 dpkg -L openssh-server\n九、ubuntu 启用 root 用户 1. 修改 sshd_config 中的 PermitRootLogin sudo vim /etc/ssh/sshd_config\n2. 重启 ssh 守护进程 sudo service ssh restart\n如果终端显示 ssh:unrecognized service，可能是因为服务没开启，通过命令 service ssh status 查看服务状态，可通过命令 sudo /etc/init.d/ssh start 启动服务\n参考  ubuntu下查看用pip安装的包的位置以及dist-packages和site-packages区别 Linux：Ubuntu系统查看软件所有版本，安装指定版本软件 Linux Ubuntu 20.04LTS安装OpenSSL步骤 apt-get安装、卸载、更新、查询软件包 ubuntu18.04中python3安装pip Linux杂记–Ubuntu 将系统编码设置为UTF-8，时区设置为中国上海的方法  ",
+  "wordCount" : "808",
+  "inLanguage": "en",
+  "datePublished": "2022-02-07T08:33:51+08:00",
+  "dateModified": "2022-02-07T08:33:51+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Ubuntu 常用命令
+    </h1>
+    <div class="post-meta"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e7%b3%bb%e7%bb%9f%e7%8e%af%e5%a2%83%e9%85%8d%e7%bd%ae" aria-label="系统环境配置">系统环境配置</a><ul>
+                        
+                <li>
+                    <a href="#1-%e8%ae%be%e7%bd%ae%e7%b3%bb%e7%bb%9f%e8%af%ad%e8%a8%80" aria-label="1. 设置系统语言">1. 设置系统语言</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%80%e6%9b%b4%e6%96%b0%e5%92%8c%e5%8d%87%e7%ba%a7%e5%8c%85" aria-label="一、更新和升级包">一、更新和升级包</a><ul>
+                        
+                <li>
+                    <a href="#1-%e6%9b%b4%e6%96%b0%e5%92%8c%e5%8d%87%e7%ba%a7%e5%8c%85" aria-label="1. 更新和升级包">1. 更新和升级包</a></li>
+                <li>
+                    <a href="#2-%e5%ae%89%e8%a3%85%e5%b8%b8%e7%94%a8%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83" aria-label="2. 安装常用开发环境">2. 安装常用开发环境</a></li>
+                <li>
+                    <a href="#3-%e5%ae%89%e8%a3%85%e8%bd%af%e4%bb%b6" aria-label="3. 安装软件">3. 安装软件</a></li>
+                <li>
+                    <a href="#4-%e5%88%a0%e9%99%a4%e4%b8%8d%e9%9c%80%e8%a6%81%e7%9a%84%e5%8c%85" aria-label="4. 删除不需要的包">4. 删除不需要的包</a></li>
+                <li>
+                    <a href="#5-%e6%9f%a5%e7%9c%8b%e5%b7%b2%e5%ae%89%e8%a3%85%e7%9a%84%e8%bd%af%e4%bb%b6" aria-label="5. 查看已安装的软件">5. 查看已安装的软件</a></li>
+                <li>
+                    <a href="#6-%e6%9f%a5%e7%9c%8b%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85%e7%9a%84%e8%b7%af%e5%be%84" aria-label="6. 查看软件安装的路径">6. 查看软件安装的路径</a></li>
+                <li>
+                    <a href="#7-%e6%9f%a5%e7%9c%8b-apt-%e4%b8%ad%e8%bd%af%e4%bb%b6%e7%9a%84%e7%89%88%e6%9c%ac" aria-label="7. 查看 apt 中软件的版本">7. 查看 <code>apt</code> 中软件的版本</a></li>
+                <li>
+                    <a href="#8-%e5%88%97%e5%87%ba%e5%b7%b2%e5%ae%89%e8%a3%85%e7%9a%84%e8%bd%af%e4%bb%b6" aria-label="8. 列出已安装的软件">8. 列出已安装的软件</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8cpip-%e4%bd%bf%e7%94%a8" aria-label="二、pip 使用">二、pip 使用</a><ul>
+                        
+                <li>
+                    <a href="#1-ubuntu-1804-%e5%ae%89%e8%a3%85-pip" aria-label="1. Ubuntu 1804 安装 pip">1. Ubuntu 1804 安装 pip</a></li>
+                <li>
+                    <a href="#2-%e5%ae%89%e8%a3%85%e8%bd%af%e4%bb%b6" aria-label="2. 安装软件">2. 安装软件</a></li>
+                <li>
+                    <a href="#3-%e5%88%97%e5%87%ba-pip-%e5%b7%b2%e5%ae%89%e8%a3%85%e7%9a%84%e5%8c%85" aria-label="3. 列出 pip 已安装的包">3. 列出 pip 已安装的包</a></li>
+                <li>
+                    <a href="#4%e6%9f%a5%e7%9c%8b%e5%ae%89%e8%a3%85%e5%8c%85%e4%bf%a1%e6%81%af" aria-label="4.查看安装包信息">4.查看安装包信息</a></li>
+                <li>
+                    <a href="#5-%e5%ae%89%e8%a3%85-pip_search" aria-label="5. 安装 pip_search">5. 安装 pip_search</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%89shell-%e6%93%8d%e4%bd%9c%e5%92%8c%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="三、shell 操作和常用命令">三、shell 操作和常用命令</a><ul>
+                        
+                <li>
+                    <a href="#1%e6%9f%a5%e7%9c%8b%e8%be%93%e5%85%a5%e7%9a%84%e5%91%bd%e4%bb%a4%e5%8e%86%e5%8f%b2" aria-label="1、查看输入的命令历史">1、查看输入的命令历史</a></li>
+                <li>
+                    <a href="#2%e5%88%a0%e9%99%a4%e5%85%89%e6%a0%87%e5%89%8d%e9%9d%a2%e7%9a%84%e5%ad%97%e7%ac%a6%e4%b8%b2" aria-label="2、删除光标前面的字符串">2、删除光标前面的字符串</a></li>
+                <li>
+                    <a href="#3%e5%88%a0%e9%99%a4%e5%85%89%e6%a0%87%e5%90%8e%e9%9d%a2%e7%9a%84%e5%ad%97%e7%ac%a6%e4%b8%b2" aria-label="3、删除光标后面的字符串">3、删除光标后面的字符串</a></li>
+                <li>
+                    <a href="#4%e5%85%89%e6%a0%87%e5%ae%9a%e4%bd%8d%e5%88%b0%e5%a4%b4%e9%83%a8" aria-label="4、光标定位到头部">4、光标定位到头部</a></li>
+                <li>
+                    <a href="#5%e5%85%89%e6%a0%87%e5%ae%9a%e4%bd%8d%e5%88%b0%e5%b0%be%e9%83%a8" aria-label="5、光标定位到尾部">5、光标定位到尾部</a></li>
+                <li>
+                    <a href="#6%e5%91%bd%e4%bb%a4%e8%b7%af%e5%be%84%e8%a1%a5%e5%85%a8" aria-label="6、命令、路径补全">6、命令、路径补全</a></li>
+                <li>
+                    <a href="#7%e7%bc%a9%e5%86%99%e5%88%ab%e5%90%8d" aria-label="7、缩写别名">7、缩写别名</a></li>
+                <li>
+                    <a href="#8%e6%9f%a5%e7%9c%8b%e8%af%b4%e6%98%8e" aria-label="8、查看说明">8、查看说明</a></li>
+                <li>
+                    <a href="#9%e5%ae%bf%e4%b8%bb%e7%9b%ae%e5%bd%95" aria-label="9、宿主目录">9、宿主目录</a></li>
+                <li>
+                    <a href="#10%e6%9f%a5%e7%9c%8b%e7%9b%ae%e5%bd%95%e5%86%85%e5%ae%b9" aria-label="10、查看目录内容">10、查看目录内容</a></li>
+                <li>
+                    <a href="#11%e6%89%93%e5%8d%b0%e5%b7%a5%e4%bd%9c%e7%9b%ae%e5%bd%95" aria-label="11、打印工作目录">11、打印工作目录</a></li>
+                <li>
+                    <a href="#12%e8%a1%a8%e7%a4%ba%e5%bd%93%e5%89%8d%e7%94%a8%e6%88%b7%e6%98%af%e6%99%ae%e9%80%9a%e7%94%a8%e6%88%b7-" aria-label="12、表示当前用户是普通用户 $">12、表示当前用户是普通用户 <code>$</code></a></li>
+                <li>
+                    <a href="#13%e8%a1%a8%e7%a4%ba%e5%bd%93%e5%89%8d%e7%94%a8%e6%88%b7%e6%98%af%e8%b6%85%e7%ba%a7%e7%94%a8%e6%88%b7-" aria-label="13、表示当前用户是超级用户 #">13、表示当前用户是超级用户 <code>#</code></a></li>
+                <li>
+                    <a href="#14%e5%88%87%e6%8d%a2%e8%b6%85%e7%ba%a7%e7%94%a8%e6%88%b7" aria-label="14、切换超级用户">14、切换超级用户</a></li>
+                <li>
+                    <a href="#15-%e6%9f%a5%e7%9c%8b%e6%96%87%e4%bb%b6%e5%92%8c%e7%9b%ae%e5%bd%95" aria-label="15、 查看文件和目录">15、 查看文件和目录</a></li>
+                <li>
+                    <a href="#16-cd" aria-label="16、 cd">16、 <code>cd</code></a></li>
+                <li>
+                    <a href="#17-mkdir-%e7%9b%ae%e5%bd%95%e5%90%8d" aria-label="17、 mkdir 目录名">17、 <code>mkdir</code> 目录名</a></li>
+                <li>
+                    <a href="#18-touch-%e6%96%87%e4%bb%b6%e5%90%8d" aria-label="18、 touch 文件名">18、 <code>touch</code> 文件名</a></li>
+                <li>
+                    <a href="#19-rmdir-%e5%88%a0%e9%99%a4%e7%a9%ba%e7%9b%ae%e5%bd%95" aria-label="19、 rmdir 删除空目录">19、 <code>rmdir</code> 删除空目录</a></li>
+                <li>
+                    <a href="#20-rm-%e5%88%a0%e9%99%a4%e7%9b%ae%e5%bd%95%e5%92%8c%e6%96%87%e4%bb%b6" aria-label="20、 rm 删除目录和文件">20、 <code>rm</code> 删除目录和文件</a></li>
+                <li>
+                    <a href="#21-cp-%e6%8b%b7%e8%b4%9d" aria-label="21、 cp 拷贝">21、 <code>cp</code> 拷贝</a></li>
+                <li>
+                    <a href="#22-mv" aria-label="22、 mv">22、 <code>mv</code></a></li>
+                <li>
+                    <a href="#23-cat-%e5%b0%86%e6%96%87%e4%bb%b6%e5%86%85%e5%ae%b9%e6%89%93%e5%8d%b0%e5%88%b0%e7%bb%88%e7%ab%af" aria-label="23、 cat 将文件内容打印到终端">23、 <code>cat</code> 将文件内容打印到终端</a></li>
+                <li>
+                    <a href="#23-more-%e5%b0%86%e6%96%87%e4%bb%b6%e5%86%85%e5%ae%b9%e6%89%93%e5%8d%b0%e5%88%b0%e7%bb%88%e7%ab%af" aria-label="23、 more 将文件内容打印到终端">23、 <code>more</code> 将文件内容打印到终端</a></li>
+                <li>
+                    <a href="#23-less-%e5%b0%86%e6%96%87%e4%bb%b6%e5%86%85%e5%ae%b9%e6%89%93%e5%8d%b0%e5%88%b0%e7%bb%88%e7%ab%af" aria-label="23、 less 将文件内容打印到终端">23、 <code>less</code> 将文件内容打印到终端</a></li>
+                <li>
+                    <a href="#23-head-%e6%89%93%e5%8d%b0%e6%96%87%e4%bb%b6%e5%86%85%e5%ae%b9%e7%9a%84%e5%89%8d-10-%e8%a1%8c%e5%88%b0%e7%bb%88%e7%ab%af" aria-label="23、 head 打印文件内容的前 10 行到终端">23、 <code>head</code> 打印文件内容的前 10 行到终端</a></li>
+                <li>
+                    <a href="#24-tail-%e6%89%93%e5%8d%b0%e6%96%87%e4%bb%b6%e5%86%85%e5%ae%b9%e7%9a%84%e5%90%8e-10-%e8%a1%8c%e5%88%b0%e7%bb%88%e7%ab%af" aria-label="24、 tail 打印文件内容的后 10 行到终端">24、 <code>tail</code> 打印文件内容的后 10 行到终端</a></li>
+                <li>
+                    <a href="#25-ln-%e5%88%9b%e5%bb%ba%e8%bd%af%e7%a1%ac%e9%93%be%e6%8e%a5" aria-label="25、 ln 创建软硬链接">25、 <code>ln</code> 创建软硬链接</a></li>
+                <li>
+                    <a href="#26-chmod-%e4%bf%ae%e6%94%b9%e6%9d%83%e9%99%90" aria-label="26、 chmod 修改权限">26、 <code>chmod</code> 修改权限</a></li>
+                <li>
+                    <a href="#27-chown-%e4%bf%ae%e6%94%b9%e6%89%80%e6%9c%89%e8%80%85%e6%88%96%e6%89%80%e5%b1%9e%e7%bb%84" aria-label="27、 chown 修改所有者或所属组">27、 <code>chown</code> 修改所有者或所属组</a></li>
+                <li>
+                    <a href="#28-chgrp-%e6%89%80%e5%b1%9e%e7%bb%84" aria-label="28、 chgrp 所属组">28、 <code>chgrp</code> 所属组</a></li>
+                <li>
+                    <a href="#29-find-%e6%9f%a5%e6%89%be" aria-label="29、 find 查找">29、 <code>find</code> 查找</a></li>
+                <li>
+                    <a href="#30-grep-%e6%89%80%e5%b1%9e%e7%bb%84" aria-label="30、 grep 所属组">30、 <code>grep</code> 所属组</a></li>
+                <li>
+                    <a href="#31-%e5%86%99%e5%85%a5%e6%96%87%e4%bb%b6" aria-label="31、 写入文件">31、 写入文件</a></li>
+                <li>
+                    <a href="#32-usermod-%e4%bf%ae%e6%94%b9%e7%94%a8%e6%88%b7%e7%bb%84" aria-label="32、 usermod 修改用户组">32、 <code>usermod</code> 修改用户组</a></li>
+                <li>
+                    <a href="#33%e6%9f%a5%e7%9c%8b%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f" aria-label="33、查看环境变量">33、查看环境变量</a></li>
+                <li>
+                    <a href="#34%e4%bf%ae%e6%94%b9%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f" aria-label="34、修改环境变量">34、修改环境变量</a></li>
+                <li>
+                    <a href="#35ldd-%e5%88%97%e5%87%ba%e5%8a%a8%e6%80%81%e5%ba%93%e4%be%9d%e8%b5%96%e5%85%b3%e7%b3%bb" aria-label="35、ldd 列出动态库依赖关系">35、<code>ldd</code> 列出动态库依赖关系</a></li>
+                <li>
+                    <a href="#36which-%e6%9f%a5%e6%89%be%e6%96%87%e4%bb%b6" aria-label="36、which 查找文件">36、<code>which</code> 查找文件</a></li>
+                <li>
+                    <a href="#37%e6%9f%a5%e7%9c%8b%e8%bf%9b%e7%a8%8b%e4%bf%a1%e6%81%af" aria-label="37、查看进程信息">37、查看进程信息</a></li>
+                <li>
+                    <a href="#38%e6%9f%a5%e7%9c%8b%e7%a8%8b%e5%ba%8f%e5%8d%a0%e7%94%a8%e7%9a%84%e7%ab%af%e5%8f%a3" aria-label="38、查看程序占用的端口">38、查看程序占用的端口</a></li>
+                <li>
+                    <a href="#39%e6%9f%a5%e7%9c%8b%e8%bf%9b%e7%a8%8b-idpid" aria-label="39、查看进程 ID（PID）">39、查看进程 ID（PID）</a></li>
+                <li>
+                    <a href="#39%e6%9d%80%e6%ad%bb%e8%bf%9b%e7%a8%8bhttpslinuxcnarticle-2116-1html" aria-label="39、杀死进程">39、<a href="https://linux.cn/article-2116-1.html">杀死进程</a></a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%9b%9blinux-%e6%96%87%e4%bb%b6%e7%b1%bb%e5%9e%8b" aria-label="四、Linux 文件类型">四、Linux 文件类型</a></li>
+                <li>
+                    <a href="#%e4%ba%94%e7%94%a8%e6%88%b7%e7%b1%bb%e5%9e%8b" aria-label="五、用户类型">五、用户类型</a></li>
+                <li>
+                    <a href="#%e5%85%ad%e6%9d%83%e9%99%90" aria-label="六、权限">六、权限</a></li>
+                <li>
+                    <a href="#%e4%b8%83%e5%8e%8b%e7%bc%a9%e5%8c%85%e7%ae%a1%e7%90%86" aria-label="七、压缩包管理">七、压缩包管理</a><ul>
+                        
+                <li>
+                    <a href="#1-%e5%b8%b8%e8%a7%81%e5%8e%8b%e7%bc%a9%e6%a0%bc%e5%bc%8f" aria-label="1. 常见压缩格式">1. 常见压缩格式</a></li>
+                <li>
+                    <a href="#2-%e5%b8%b8%e7%94%a8%e5%8e%8b%e7%bc%a9%e5%91%bd%e4%bb%a4" aria-label="2. 常用压缩命令">2. 常用压缩命令</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%85%ab%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85%e5%92%8c%e5%88%b6%e4%bd%9c" aria-label="八、软件安装和制作">八、软件安装和制作</a><ul>
+                        
+                <li>
+                    <a href="#1-%e5%9c%a8%e7%ba%bf%e5%ae%89%e8%a3%85----ubuntu" aria-label="1. 在线安装 &amp;ndash; ubuntu">1. 在线安装 &ndash; ubuntu</a></li>
+                <li>
+                    <a href="#2-%e8%bd%af%e4%bb%b6%e5%8c%85%e5%ae%89%e8%a3%85" aria-label="2. 软件包安装">2. 软件包安装</a></li>
+                <li>
+                    <a href="#3-%e6%ba%90%e7%a0%81%e5%ae%89%e8%a3%85" aria-label="3. 源码安装">3. 源码安装</a></li>
+                <li>
+                    <a href="#4-%e6%9f%a5%e7%9c%8b%e5%b7%b2%e5%ae%89%e8%a3%85%e8%bd%af%e4%bb%b6" aria-label="4. 查看已安装软件">4. 查看已安装软件</a></li>
+                <li>
+                    <a href="#5-%e6%9f%a5%e7%9c%8b%e8%bd%af%e4%bb%b6%e5%ae%89%e8%a3%85%e8%b7%af%e5%be%84" aria-label="5. 查看软件安装路径">5. 查看软件安装路径</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b9%9dubuntu-%e5%90%af%e7%94%a8-root-%e7%94%a8%e6%88%b7" aria-label="九、ubuntu 启用 root 用户">九、ubuntu 启用 root 用户</a><ul>
+                        
+                <li>
+                    <a href="#1-%e4%bf%ae%e6%94%b9-sshd_config-%e4%b8%ad%e7%9a%84-permitrootlogin" aria-label="1. 修改 sshd_config 中的 PermitRootLogin">1. 修改 sshd_config 中的 PermitRootLogin</a></li>
+                <li>
+                    <a href="#2-%e9%87%8d%e5%90%af-ssh-%e5%ae%88%e6%8a%a4%e8%bf%9b%e7%a8%8b" aria-label="2. 重启 ssh 守护进程">2. 重启 ssh 守护进程</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e5%8f%82%e8%80%83" aria-label="参考">参考</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p><a href="https://www.runoob.com/linux/linux-command-manual.html">Linux 命令大全</a></p>
+<ul>
+<li><!-- raw HTML omitted --><strong>注意</strong><!-- raw HTML omitted -->：需提前配置系统环境，比如系统编码为 <code>UTF-8</code></li>
+</ul>
+<h2 id="系统环境配置">系统环境配置<a hidden class="anchor" aria-hidden="true" href="#系统环境配置">#</a></h2>
+<h3 id="1-设置系统语言">1. 设置系统语言<a hidden class="anchor" aria-hidden="true" href="#1-设置系统语言">#</a></h3>
+<ul>
+<li>
+<p>查看系统支持的字符集：<code>locale</code>、<code>locale -a</code><br>
+<img loading="lazy" style="margin: auto;" src="../img/Ubuntu-locale.jpg" alt="Ubuntu-locale"  />
+</p>
+</li>
+<li>
+<p>查看时间：<code>date</code><br>
+<img loading="lazy" style="margin: auto;" src="../img/Ubuntu-date-en.jpg" alt="Ubuntu-date-en"  />
+</p>
+</li>
+<li>
+<p>安装中文语言包：<code>sudo apt install language-pack-zh-hans</code></p>
+</li>
+<li>
+<p>添加到系统配置文件 <strong>.bashrc</strong><br>
+<code>export LANG=zh_CN.UTF-8</code><br>
+<img loading="lazy" style="margin: auto;" src="../img/Ubuntu-bashrc-LANG.jpg" alt="Ubuntu-bashrc-LANG.jpg"  />
+</p>
+</li>
+<li>
+<p>重新加载：<code>source .bashrc</code>
+<img loading="lazy" style="margin: auto;" src="../img/Ubuntu-locale-result.jpg" alt="Ubuntu-locale-result.jpg"  />
+</p>
+</li>
+</ul>
+<h2 id="一更新和升级包">一、更新和升级包<a hidden class="anchor" aria-hidden="true" href="#一更新和升级包">#</a></h2>
+<h3 id="1-更新和升级包">1. 更新和升级包<a hidden class="anchor" aria-hidden="true" href="#1-更新和升级包">#</a></h3>
+<p><code>sudo apt update &amp;&amp; sudo apt upgrade</code></p>
+<h3 id="2-安装常用开发环境">2. 安装常用开发环境<a hidden class="anchor" aria-hidden="true" href="#2-安装常用开发环境">#</a></h3>
+<p><code>sudo apt-get install build-essential</code></p>
+<h3 id="3-安装软件">3. 安装软件<a hidden class="anchor" aria-hidden="true" href="#3-安装软件">#</a></h3>
+<p><code>sudo apt install tree</code></p>
+<h3 id="4-删除不需要的包">4. 删除不需要的包<a hidden class="anchor" aria-hidden="true" href="#4-删除不需要的包">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt remove gcovr  
+sudo apt autoremove
+</code></pre></div><h3 id="5-查看已安装的软件">5. 查看已安装的软件<a hidden class="anchor" aria-hidden="true" href="#5-查看已安装的软件">#</a></h3>
+<p><code>dpkg -l | grep gcovr</code></p>
+<h3 id="6-查看软件安装的路径">6. 查看软件安装的路径<a hidden class="anchor" aria-hidden="true" href="#6-查看软件安装的路径">#</a></h3>
+<p><code>dpkg -L openssh-server</code><br>
+<code>whereis gdb</code><br>
+<code>which gcovr</code> 需要软件包的路径在环境变量 <code>$PATH</code> 中</p>
+<h3 id="7-查看-apt-中软件的版本">7. 查看 <code>apt</code> 中软件的版本<a hidden class="anchor" aria-hidden="true" href="#7-查看-apt-中软件的版本">#</a></h3>
+<p><code>apt-show-versions -a gcovr</code></p>
+<p><code>apt show gcovr</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-apt-show.jpg" alt="Ubuntu-apt-show"  />
+</p>
+<p><code>sudo apt-cache policy libssl-dev</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-apt-catche.jpg" alt="Ubuntu-apt-catche"  />
+</p>
+<h3 id="8-列出已安装的软件">8. 列出已安装的软件<a hidden class="anchor" aria-hidden="true" href="#8-列出已安装的软件">#</a></h3>
+<p><code>apt list --installed</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-apt-list-installed.jpg" alt="Ubuntu-apt-list-installed"  />
+</p>
+<h2 id="二pip-使用">二、pip 使用<a hidden class="anchor" aria-hidden="true" href="#二pip-使用">#</a></h2>
+<h3 id="1-ubuntu-1804-安装-pip">1. Ubuntu 1804 安装 pip<a hidden class="anchor" aria-hidden="true" href="#1-ubuntu-1804-安装-pip">#</a></h3>
+<p>安装 pip3：<code>sudo apt install python3-pip</code><br>
+安装 pip2：<code>sudo apt install python-pip</code></p>
+<h3 id="2-安装软件">2. 安装软件<a hidden class="anchor" aria-hidden="true" href="#2-安装软件">#</a></h3>
+<p><code>pip3 install -U gcovr</code></p>
+<h3 id="3-列出-pip-已安装的包">3. 列出 pip 已安装的包<a hidden class="anchor" aria-hidden="true" href="#3-列出-pip-已安装的包">#</a></h3>
+<p><code>pip3 list</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-pip3-list.jpg" alt="Ubuntu-pip3-list"  />
+</p>
+<h3 id="4查看安装包信息">4.查看安装包信息<a hidden class="anchor" aria-hidden="true" href="#4查看安装包信息">#</a></h3>
+<p><code>pip3 show gcovr</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-pip3-show.jpg" alt="Ubuntu-pip3-show"  />
+</p>
+<h3 id="5-安装-pip_search">5. 安装 pip_search<a hidden class="anchor" aria-hidden="true" href="#5-安装-pip_search">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip3 install pip_search  
+pip_search gcovr
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/pip_pip_search.jpg" alt="pip_search and pip show package"  />
+</p>
+<h2 id="三shell-操作和常用命令">三、shell 操作和常用命令<a hidden class="anchor" aria-hidden="true" href="#三shell-操作和常用命令">#</a></h2>
+<h3 id="1查看输入的命令历史">1、查看输入的命令历史<a hidden class="anchor" aria-hidden="true" href="#1查看输入的命令历史">#</a></h3>
+<p><code>history</code></p>
+<h3 id="2删除光标前面的字符串">2、删除光标前面的字符串<a hidden class="anchor" aria-hidden="true" href="#2删除光标前面的字符串">#</a></h3>
+<p><code>ctrl + u</code></p>
+<h3 id="3删除光标后面的字符串">3、删除光标后面的字符串<a hidden class="anchor" aria-hidden="true" href="#3删除光标后面的字符串">#</a></h3>
+<p><code>ctrl + k</code></p>
+<h3 id="4光标定位到头部">4、光标定位到头部<a hidden class="anchor" aria-hidden="true" href="#4光标定位到头部">#</a></h3>
+<p><code>ctrl + a</code></p>
+<h3 id="5光标定位到尾部">5、光标定位到尾部<a hidden class="anchor" aria-hidden="true" href="#5光标定位到尾部">#</a></h3>
+<p><code>ctrl + e</code></p>
+<h3 id="6命令路径补全">6、命令、路径补全<a hidden class="anchor" aria-hidden="true" href="#6命令路径补全">#</a></h3>
+<p><code>Tab</code></p>
+<h3 id="7缩写别名">7、缩写别名<a hidden class="anchor" aria-hidden="true" href="#7缩写别名">#</a></h3>
+<p><code>alias</code></p>
+<h3 id="8查看说明">8、查看说明<a hidden class="anchor" aria-hidden="true" href="#8查看说明">#</a></h3>
+<p><code>man 5 passwd</code></p>
+<h3 id="9宿主目录">9、宿主目录<a hidden class="anchor" aria-hidden="true" href="#9宿主目录">#</a></h3>
+<p><code>~</code></p>
+<h3 id="10查看目录内容">10、查看目录内容<a hidden class="anchor" aria-hidden="true" href="#10查看目录内容">#</a></h3>
+<p><code>tree ~</code></p>
+<h3 id="11打印工作目录">11、打印工作目录<a hidden class="anchor" aria-hidden="true" href="#11打印工作目录">#</a></h3>
+<p><code>pwd</code></p>
+<h3 id="12表示当前用户是普通用户-">12、表示当前用户是普通用户 <code>$</code><a hidden class="anchor" aria-hidden="true" href="#12表示当前用户是普通用户-">#</a></h3>
+<h3 id="13表示当前用户是超级用户-">13、表示当前用户是超级用户 <code>#</code><a hidden class="anchor" aria-hidden="true" href="#13表示当前用户是超级用户-">#</a></h3>
+<h3 id="14切换超级用户">14、切换超级用户<a hidden class="anchor" aria-hidden="true" href="#14切换超级用户">#</a></h3>
+<p><code>sudo su</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/%e5%88%87%e6%8d%a2%e8%b6%85%e7%ba%a7%e7%94%a8%e6%88%b7.jpg" alt="切换超级用户"  />
+</p>
+<h3 id="15-查看文件和目录">15、 查看文件和目录<a hidden class="anchor" aria-hidden="true" href="#15-查看文件和目录">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls
+ls -a
+ls -l       <span style="color:#75715e"># -rwxrw-r-- 1 rick rick 0 Feb 12 18:37 test</span>
+ls -lh
+ls -alF     <span style="color:#75715e"># drwxr-xr-x 1 rick rick 4096 Feb 12 18:37 rick/</span>
+ll
+</code></pre></div><h3 id="16-cd">16、 <code>cd</code><a hidden class="anchor" aria-hidden="true" href="#16-cd">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /home/rick
+cd ~
+cd
+cd -    <span style="color:#75715e"># 切换到上一个的历史目录</span>
+</code></pre></div><h3 id="17-mkdir-目录名">17、 <code>mkdir</code> 目录名<a hidden class="anchor" aria-hidden="true" href="#17-mkdir-目录名">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mkdir aa
+mkdir aa/bb
+rm aa -r
+mkdir aa/bb/cc -p
+</code></pre></div><h3 id="18-touch-文件名">18、 <code>touch</code> 文件名<a hidden class="anchor" aria-hidden="true" href="#18-touch-文件名">#</a></h3>
+<ul>
+<li>如果文件不存在，则创建文件</li>
+<li>如果文件存在，更新文件时间</li>
+</ul>
+<h3 id="19-rmdir-删除空目录">19、 <code>rmdir</code> 删除空目录<a hidden class="anchor" aria-hidden="true" href="#19-rmdir-删除空目录">#</a></h3>
+<ul>
+<li>只能删除空目录</li>
+</ul>
+<h3 id="20-rm-删除目录和文件">20、 <code>rm</code> 删除目录和文件<a hidden class="anchor" aria-hidden="true" href="#20-rm-删除目录和文件">#</a></h3>
+<ul>
+<li>删除后很难恢复</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">rm -r       <span style="color:#75715e"># 用递归的方式删除目录</span>
+rm -ri      <span style="color:#75715e"># 提示</span>
+rm aa/* -r  <span style="color:#75715e"># 删除 aa 目录下的所有文件和目录</span>
+</code></pre></div><h3 id="21-cp-拷贝">21、 <code>cp</code> 拷贝<a hidden class="anchor" aria-hidden="true" href="#21-cp-拷贝">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp file file1   <span style="color:#75715e"># file1 不存在，则创建 file1 并把 file 中的内容拷贝进去</span>
+cp file file1   <span style="color:#75715e"># file1 存在，则会用 file 中的内容覆盖 file1 中的内容</span>
+cp file dir     <span style="color:#75715e"># 将 file 拷贝到 dir 目录下</span>
+cp dir dir1     <span style="color:#75715e"># dir1 目录不存在，则把 dir 的所有子目录拷贝到 dir1 目录下</span>
+rm dir1/* -r
+cp dir dir1     <span style="color:#75715e"># dir1 目录存在，则把 dir 整个目录拷贝到 dir1 目录下</span>
+cp -r nginx_build/* nginx
+</code></pre></div><h3 id="22-mv">22、 <code>mv</code><a hidden class="anchor" aria-hidden="true" href="#22-mv">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mv file file1   <span style="color:#75715e"># file1 不存在，则是将 file 文件改名为 file1</span>
+mv file file1   <span style="color:#75715e"># file1 存在，则用 file 中的内容覆盖 file1 中的内容，并删除 file</span>
+mv file dir     <span style="color:#75715e"># dir 存在，将 file 移动到 dir 目录下</span>
+mv dir dir1     <span style="color:#75715e"># dir1 不存在，就是将 dir 改名为 dir1</span>
+mv dir dir1     <span style="color:#75715e"># dir1 存在，则将 dir 目录移动到 dir1下</span>
+</code></pre></div><h3 id="23-cat-将文件内容打印到终端">23、 <code>cat</code> 将文件内容打印到终端<a hidden class="anchor" aria-hidden="true" href="#23-cat-将文件内容打印到终端">#</a></h3>
+<ul>
+<li>适用文件内容较小的情况</li>
+</ul>
+<h3 id="23-more-将文件内容打印到终端">23、 <code>more</code> 将文件内容打印到终端<a hidden class="anchor" aria-hidden="true" href="#23-more-将文件内容打印到终端">#</a></h3>
+<ul>
+<li>不能向上翻页</li>
+<li><code>Enter</code> 向下滚动一行</li>
+<li>空格：向下翻页</li>
+<li>退出：<code>q</code></li>
+</ul>
+<h3 id="23-less-将文件内容打印到终端">23、 <code>less</code> 将文件内容打印到终端<a hidden class="anchor" aria-hidden="true" href="#23-less-将文件内容打印到终端">#</a></h3>
+<ul>
+<li><code>Enter</code> 或 <code>ctrl + n</code> : 向下滚动一行</li>
+<li><code>ctrl + p</code> : 向上滚动一行</li>
+<li><code>pgdn</code> : 向下翻页</li>
+<li><code>空格</code> : 向下翻页</li>
+<li><code>pgup</code> : 向上翻页</li>
+<li><code>q</code> : 退出</li>
+</ul>
+<h3 id="23-head-打印文件内容的前-10-行到终端">23、 <code>head</code> 打印文件内容的前 10 行到终端<a hidden class="anchor" aria-hidden="true" href="#23-head-打印文件内容的前-10-行到终端">#</a></h3>
+<h3 id="24-tail-打印文件内容的后-10-行到终端">24、 <code>tail</code> 打印文件内容的后 10 行到终端<a hidden class="anchor" aria-hidden="true" href="#24-tail-打印文件内容的后-10-行到终端">#</a></h3>
+<h3 id="25-ln-创建软硬链接">25、 <code>ln</code> 创建软硬链接<a hidden class="anchor" aria-hidden="true" href="#25-ln-创建软硬链接">#</a></h3>
+<ol>
+<li>创建软链接 <code>ln -s 原文件名 链接名称</code></li>
+<li>创建硬链接（在其他多个目录中管理文件，并且能时时同步修改） <code>ln 文件名 链接名</code></li>
+</ol>
+<p><img loading="lazy" style="margin: auto;" src="../img/%e7%a1%ac%e9%93%be%e6%8e%a5.jpg" alt="硬链接"  />
+</p>
+<h3 id="26-chmod-修改权限">26、 <code>chmod</code> 修改权限<a hidden class="anchor" aria-hidden="true" href="#26-chmod-修改权限">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">chmod uo-rw program
+chmod u+r,g-x program
+chmod -440 program
+chmod <span style="color:#ae81ff">777</span> program
+</code></pre></div><h3 id="27-chown-修改所有者或所属组">27、 <code>chown</code> 修改所有者或所属组<a hidden class="anchor" aria-hidden="true" href="#27-chown-修改所有者或所属组">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo chown sys program
+sudo chown rick:sys program
+</code></pre></div><h3 id="28-chgrp-所属组">28、 <code>chgrp</code> 所属组<a hidden class="anchor" aria-hidden="true" href="#28-chgrp-所属组">#</a></h3>
+<p><code>sudo chgrp rick program</code></p>
+<h3 id="29-find-查找">29、 <code>find</code> 查找<a hidden class="anchor" aria-hidden="true" href="#29-find-查找">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">find ./ -name <span style="color:#e6db74">&#34;program&#34;</span>           <span style="color:#75715e"># 按文件名查找</span>
+find ./ -type f                   <span style="color:#75715e"># 按文件类型查找（7种）</span>
+find ./ -size -4k
+find ./ -size +2k -size -10k      <span style="color:#75715e"># 按文件大小查找</span>
+find ./ -ctime -1                 <span style="color:#75715e"># 按日期查找（-ctime、-mtime、-atime）</span>
+find ./ -type d -exec ls -l <span style="color:#f92672">{}</span> <span style="color:#ae81ff">\;</span> <span style="color:#75715e"># 查找指定目录，并列出该目录中文件详细信息</span>
+find ./ -type d | xargs ls -l     <span style="color:#75715e"># 利用管道，效率较高</span>
+</code></pre></div><h3 id="30-grep-所属组">30、 <code>grep</code> 所属组<a hidden class="anchor" aria-hidden="true" href="#30-grep-所属组">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">grep -r <span style="color:#e6db74">&#34;hello&#34;</span> ./ -n
+</code></pre></div><h3 id="31-写入文件">31、 写入文件<a hidden class="anchor" aria-hidden="true" href="#31-写入文件">#</a></h3>
+<p><code>ls -l &gt; fileinfo</code></p>
+<h3 id="32-usermod-修改用户组">32、 <code>usermod</code> 修改用户组<a hidden class="anchor" aria-hidden="true" href="#32-usermod-修改用户组">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 查看当前用户所属组</span>
+groups 用户名
+<span style="color:#75715e"># 一个用户仅仅属于某一个组，而不是同时属于多个组</span>
+sudo usermod -g 组名 用户名
+<span style="color:#75715e"># 给一个用户添加一个新的组，同时保留原来的组</span>
+sudo usermod -a -G 组名 用户名
+</code></pre></div><h3 id="33查看环境变量">33、查看环境变量<a hidden class="anchor" aria-hidden="true" href="#33查看环境变量">#</a></h3>
+<p><code>env</code></p>
+<h3 id="34修改环境变量">34、修改环境变量<a hidden class="anchor" aria-hidden="true" href="#34修改环境变量">#</a></h3>
+<p>修改 <code>~/.bashrc</code> 文件（当前用户）或 <code>/etc/profile</code> 文件（所有用户）</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/mnt/h/wsl/emsdk:/mnt/h/wsl/emsdk/upstream/emscripten:/mnt/h/wsl/emsdk/node/14.18.2_64bit/bin:</span>$PATH<span style="color:#e6db74">&#34;</span>
+source ~/.bashrc
+</code></pre></div><h3 id="35ldd-列出动态库依赖关系">35、<code>ldd</code> 列出动态库依赖关系<a hidden class="anchor" aria-hidden="true" href="#35ldd-列出动态库依赖关系">#</a></h3>
+<p><code>ldd</code> 是 <code>list, dynamic, dependencies</code> 的缩写</p>
+<p><code>ldd ffmpeg</code></p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/Linux-ldd.jpg" alt="Linux-ldd"  />
+</p>
+<h3 id="36which-查找文件">36、<code>which</code> 查找文件<a hidden class="anchor" aria-hidden="true" href="#36which-查找文件">#</a></h3>
+<p><code>which bash</code></p>
+<h3 id="37查看进程信息">37、查看进程信息<a hidden class="anchor" aria-hidden="true" href="#37查看进程信息">#</a></h3>
+<p><code>ps -ef | grep nginx</code></p>
+<h3 id="38查看程序占用的端口">38、查看程序占用的端口<a hidden class="anchor" aria-hidden="true" href="#38查看程序占用的端口">#</a></h3>
+<p><code>netstat -tunlp | grep 80</code><br>
+<code>lsof -i:80</code></p>
+<h3 id="39查看进程-idpid">39、查看进程 ID（PID）<a hidden class="anchor" aria-hidden="true" href="#39查看进程-idpid">#</a></h3>
+<p><code>pgrep -l nginx</code></p>
+<h3 id="39杀死进程httpslinuxcnarticle-2116-1html">39、<a href="https://linux.cn/article-2116-1.html">杀死进程</a><a hidden class="anchor" aria-hidden="true" href="#39杀死进程httpslinuxcnarticle-2116-1html">#</a></h3>
+<p><code>kill -9 PID</code><br>
+<code>kill PID1 PID2 PID3</code></p>
+<h2 id="四linux-文件类型">四、Linux 文件类型<a hidden class="anchor" aria-hidden="true" href="#四linux-文件类型">#</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>-</code></td>
+<td style="text-align:left">普通文件</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>d</code></td>
+<td style="text-align:left">目录</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>l</code></td>
+<td style="text-align:left">符号链接</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>p</code></td>
+<td style="text-align:left">管道</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>s</code></td>
+<td style="text-align:left">套接字</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>c</code></td>
+<td style="text-align:left">字符设备（鼠标、键盘）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>b</code></td>
+<td style="text-align:left">块设备（U盘、硬盘)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="五用户类型">五、用户类型<a hidden class="anchor" aria-hidden="true" href="#五用户类型">#</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">user</td>
+<td style="text-align:left">文件所有者（<code>rwx</code>）</td>
+</tr>
+<tr>
+<td style="text-align:left">group</td>
+<td style="text-align:left">文件所属组用户（<code>rw-</code>）</td>
+</tr>
+<tr>
+<td style="text-align:left">other</td>
+<td style="text-align:left">其他用户（<code>r--</code>）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="六权限">六、权限<a hidden class="anchor" aria-hidden="true" href="#六权限">#</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>r</code></td>
+<td style="text-align:left">读</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>w</code></td>
+<td style="text-align:left">写</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>x</code></td>
+<td style="text-align:left">执行</td>
+</tr>
+</tbody>
+</table>
+<h2 id="七压缩包管理">七、压缩包管理<a hidden class="anchor" aria-hidden="true" href="#七压缩包管理">#</a></h2>
+<h3 id="1-常见压缩格式">1. 常见压缩格式<a hidden class="anchor" aria-hidden="true" href="#1-常见压缩格式">#</a></h3>
+<ul>
+<li>.gz       &ndash;gzip</li>
+<li>.bz2      &ndash;bzip2</li>
+</ul>
+<h3 id="2-常用压缩命令">2. 常用压缩命令<a hidden class="anchor" aria-hidden="true" href="#2-常用压缩命令">#</a></h3>
+<ul>
+<li>gzip file     压缩</li>
+<li>gunzip *.gz   解压</li>
+<li>tar
+<ul>
+<li>.gz 压缩      <code>tar -czvf test.tar.gz aa program</code></li>
+<li>.bz2 压缩     <code>tar -cjvf test.tar.bz2 aa program</code></li>
+<li>.gz 解压      <code>tar -xzvf test.tar.gz -C /tmp</code></li>
+<li>.bz2 解压     <code>tar -xjvf test.tar.bz2 -C /tmp</code></li>
+<li>详细列举归档文件 <code>tar -tvf nginx.tar.gz</code></li>
+</ul>
+</li>
+<li>rar           需要安装 <code>sudo apt-get install rar</code><br>
+<code>rar a all aa program</code><br>
+<code>rar a all aa/ program -r</code>  目录加 -r<br>
+<code>rar x all.rar /tmp</code></li>
+<li>zip / unzip   需要安装 <code>sudo apt-get install zip</code><br>
+<code>zip myzip aa program -r</code><br>
+<code>unzip myzip.zip -d /tmp</code></li>
+</ul>
+<h2 id="八软件安装和制作">八、软件安装和制作<a hidden class="anchor" aria-hidden="true" href="#八软件安装和制作">#</a></h2>
+<h3 id="1-在线安装----ubuntu">1. 在线安装 &ndash; ubuntu<a hidden class="anchor" aria-hidden="true" href="#1-在线安装----ubuntu">#</a></h3>
+<ul>
+<li>安装：<code>sudo apt-get(apt) install 安装包名称</code></li>
+<li>卸载：<code>sudo apt-get(apt) remove 软件名称</code></li>
+<li>软件列表更新：<code>sudo apt-get(apt) update</code></li>
+<li>清空缓存：<code>sudo apt-get(apt) clean</code></li>
+<li>缓存路径：<code>/var/cache/apt/archives</code> 中的红色 *.deb 文件</li>
+</ul>
+<h3 id="2-软件包安装">2. 软件包安装<a hidden class="anchor" aria-hidden="true" href="#2-软件包安装">#</a></h3>
+<ul>
+<li>安装：<code>sudo dpkg -i xxx.deb</code></li>
+<li>卸载：<code>sudo dpkg -r 软件名称</code></li>
+</ul>
+<h3 id="3-源码安装">3. 源码安装<a hidden class="anchor" aria-hidden="true" href="#3-源码安装">#</a></h3>
+<h3 id="4-查看已安装软件">4. 查看已安装软件<a hidden class="anchor" aria-hidden="true" href="#4-查看已安装软件">#</a></h3>
+<p><code>dpkg -l | grep openssh-server</code></p>
+<h3 id="5-查看软件安装路径">5. 查看软件安装路径<a hidden class="anchor" aria-hidden="true" href="#5-查看软件安装路径">#</a></h3>
+<p><code>dpkg -L openssh-server</code></p>
+<h2 id="九ubuntu-启用-root-用户">九、ubuntu 启用 root 用户<a hidden class="anchor" aria-hidden="true" href="#九ubuntu-启用-root-用户">#</a></h2>
+<h3 id="1-修改-sshd_config-中的-permitrootlogin">1. 修改 sshd_config 中的 PermitRootLogin<a hidden class="anchor" aria-hidden="true" href="#1-修改-sshd_config-中的-permitrootlogin">#</a></h3>
+<p><code>sudo vim /etc/ssh/sshd_config</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/ubuntu_sshd_config.jpg" alt="ubuntu_sshd_config"  />
+</p>
+<h3 id="2-重启-ssh-守护进程">2. 重启 ssh 守护进程<a hidden class="anchor" aria-hidden="true" href="#2-重启-ssh-守护进程">#</a></h3>
+<p><code>sudo service ssh restart</code></p>
+<p>如果终端显示 <code>ssh:unrecognized service</code>，可能是因为服务没开启，通过命令 <code>service ssh status</code> 查看服务状态，可通过命令 <code>sudo /etc/init.d/ssh start</code> 启动服务</p>
+<h2 id="参考">参考<a hidden class="anchor" aria-hidden="true" href="#参考">#</a></h2>
+<ol>
+<li><a href="https://blog.csdn.net/nyist_yangguang/article/details/106260809">ubuntu下查看用pip安装的包的位置以及dist-packages和site-packages区别</a></li>
+<li><a href="https://blog.csdn.net/weixin_38184741/article/details/106344712">Linux：Ubuntu系统查看软件所有版本，安装指定版本软件</a></li>
+<li><a href="https://blog.csdn.net/wu10188/article/details/124970453">Linux Ubuntu 20.04LTS安装OpenSSL步骤</a></li>
+<li><a href="https://blog.csdn.net/xiaiming0/article/details/123958847">apt-get安装、卸载、更新、查询软件包</a></li>
+<li><a href="https://wenku.csdn.net/answer/630476074b96489fbcc6278bdd0f2a3a">ubuntu18.04中python3安装pip</a></li>
+<li><a href="https://blog.csdn.net/qq_43519779/article/details/116566862">Linux杂记&ndash;Ubuntu 将系统编码设置为UTF-8，时区设置为中国上海的方法</a></li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/linux/">Linux</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>常用的宏定义</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>char* 数组</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

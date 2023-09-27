@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Cesium, Unreal" />
+<meta name="description" content="目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
+参考快速入门，删除【世界大纲试图】中的所有默认的 actors
+  创建持久关卡(Persistent Level)
+在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
+这个关卡就是 Persistent Level，它代表了整个地球。
+  世界场景设置
+打开【世界场景设置】面板，勾选【启用场景合成】
+禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" />
+<meta property="og:description" content="目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
+参考快速入门，删除【世界大纲试图】中的所有默认的 actors
+  创建持久关卡(Persistent Level)
+在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
+这个关卡就是 Persistent Level，它代表了整个地球。
+  世界场景设置
+打开【世界场景设置】面板，勾选【启用场景合成】
+禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-15T13:34:27&#43;08:00" />
+<meta property="article:modified_time" content="2022-04-15T13:34:27&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/185-cesium-unreal-editing-tileset-materials/" /><meta property="og:see_also" content="https://874656645.github.io/posts/184-cesium-unreal-hide-parts-tilesets/" /><meta property="og:see_also" content="https://874656645.github.io/posts/183-cesium-unreal-using-custom-controllers/" /><meta property="og:see_also" content="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/" /><meta property="og:see_also" content="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels"/>
+<meta name="twitter:description" content="目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
+参考快速入门，删除【世界大纲试图】中的所有默认的 actors
+  创建持久关卡(Persistent Level)
+在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
+这个关卡就是 Persistent Level，它代表了整个地球。
+  世界场景设置
+打开【世界场景设置】面板，勾选【启用场景合成】
+禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels",
+      "item": "https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels",
+  "name": "Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels",
+  "description": "目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目\n参考快速入门，删除【世界大纲试图】中的所有默认的 actors\n  创建持久关卡(Persistent Level)\n在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。\n这个关卡就是 Persistent Level，它代表了整个地球。\n  世界场景设置\n打开【世界场景设置】面板，勾选【启用场景合成】\n禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体",
+  "keywords": [
+    "Cesium", "Unreal"
+  ],
+  "articleBody": "目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目\n参考快速入门，删除【世界大纲试图】中的所有默认的 actors\n  创建持久关卡(Persistent Level)\n在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。\n这个关卡就是 Persistent Level，它代表了整个地球。\n  世界场景设置\n打开【世界场景设置】面板，勾选【启用场景合成】\n禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体\n  打开【关卡设置】面板\n  点击【调用世界场景构成】，打开【世界场景构成】面板\n  在【世界场景构成】面板中新建图层，命名 CesiumLayer，并禁用【流送距离】\n  第二步：设置持久关卡 Globe 参考添加数据\n  添加 Cesium World Terrain With Bing Aerial Imagery 地形和影像数据。\n  添加照明 CesiumSunSky，如果看不到影像等数据，去【项目设置】中启用【扩展自动曝光设置中的默认亮度范围】\n  为了建立一些详细的，真实世界的地点并开始构建子关卡，添加 Aerometrex Denver Photogrammetry 和 Nearmap Boston Photogrammetry 的 3D Tilesets 数据。\n  为了绕地球飞行而不迷失方向，添加 DynamicPawn，这个 Actor 在环绕地球飞行时会调整自己的方向，从而能始终保持适当的向上方向。\n  第三步：设置有地理参考的子关卡   将编辑器的世界场景定位到感兴趣的区域，比如 Aerometrex Denver Photogrammetry，然后将编辑器的相机飞行到想要创建子关卡的特定位置，然后将原点放置到这里。\n  然后打开【关卡】面板，创建一个新的 sublevel ，保存到 World 文件夹的 Sublevels 文件夹中\n  在【关卡】面板，双击刚才创建的子关卡，或者右击子关卡，选择【加载】，然后将子关卡指定到创建的 CesiumLayer 图层\n  此时，子关卡被创建，子关卡的中心位置被正确地设置在 CesiumGeoreference actor 上。To georeference the sublevel (i.e., to lock the current alignment of the sublevel with the globe)，勾选【Enabled】\n  现在应该看到一个蓝色的线框球体。球体以子关卡的中心位置为中心(即 georeference )，其半径由数组中子关卡入口的【Load Radius】属性决定。这个球体指定玩家摄像机为了加载关卡必须进入的区域。您可以根据用例的需要自由地扩展或缩小【Load Radius】。\n  第四步：创建多个子关卡 按 Ctrl + Shift + S 保存当前子关卡和持久关卡的所有内容，或者点击【保存所有】。右键单击【关卡】面板中的【子关卡】并选择【卸载】。\n当在 UE 编辑器中工作时，一次只能加载一个 georeferenced 的子关卡。如果具有不同 georeferenced 的多个子关卡同时加载并可见，它们将在编辑器中彼此重叠出现。但是在【运行】的时候没问题。\n然后重复第三步创建子关卡的流程\n注意：如果想编辑某个子关卡，一定要将其设置为当前\n",
+  "wordCount" : "153",
+  "inLanguage": "en",
+  "datePublished": "2022-04-15T13:34:27+08:00",
+  "dateModified": "2022-04-15T13:34:27+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
+    </h1>
+    <div class="post-meta"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e7%9b%ae%e6%a0%87" aria-label="目标">目标</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%b8%80%e6%ad%a5%e6%96%b0%e5%bb%ba%e7%94%b1%e9%a1%b9%e7%9b%ae%e7%bb%84%e6%88%90%e7%9a%84%e4%b8%96%e7%95%8c%e5%9c%ba%e6%99%af" aria-label="第一步：新建由项目组成的世界场景">第一步：新建由项目组成的世界场景</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%ba%8c%e6%ad%a5%e8%ae%be%e7%bd%ae%e6%8c%81%e4%b9%85%e5%85%b3%e5%8d%a1-globe" aria-label="第二步：设置持久关卡 Globe">第二步：设置持久关卡 Globe</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%b8%89%e6%ad%a5%e8%ae%be%e7%bd%ae%e6%9c%89%e5%9c%b0%e7%90%86%e5%8f%82%e8%80%83%e7%9a%84%e5%ad%90%e5%85%b3%e5%8d%a1" aria-label="第三步：设置有地理参考的子关卡">第三步：设置有地理参考的子关卡</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e5%9b%9b%e6%ad%a5%e5%88%9b%e5%bb%ba%e5%a4%9a%e4%b8%aa%e5%ad%90%e5%85%b3%e5%8d%a1" aria-label="第四步：创建多个子关卡">第四步：创建多个子关卡</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="目标">目标<a hidden class="anchor" aria-hidden="true" href="#目标">#</a></h2>
+<ul>
+<li>Create a persistent global level</li>
+<li>Put several local sublevels within the persistent level</li>
+<li>Fill each sublevel with assets and game-logic using your typical Unreal workflow</li>
+<li>Seamlessly fly between sublevels as well as explore the persistent level</li>
+<li>Stay aware of pitfalls along the way</li>
+</ul>
+<h2 id="第一步新建由项目组成的世界场景">第一步：新建由项目组成的世界场景<a hidden class="anchor" aria-hidden="true" href="#第一步新建由项目组成的世界场景">#</a></h2>
+<ol>
+<li>
+<p>新建一个空白的项目</p>
+<p>参考<a href="../178-cesium-unreal-project/">快速入门</a>，删除【世界大纲试图】中的所有默认的 actors</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e7%a9%ba%e7%9a%84%e4%b8%96%e7%95%8c%e5%a4%a7%e7%ba%b2%e8%a7%86%e5%9b%be.jpg" alt="空的世界大纲视图"  />
+</p>
+</li>
+<li>
+<p>创建持久关卡(Persistent Level)</p>
+<p>在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。</p>
+<p>这个关卡就是 Persistent Level，它代表了整个地球。</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/PersistentLevel.jpg" alt="PersistentLevel"  />
+</p>
+</li>
+<li>
+<p>世界场景设置</p>
+<p>打开【世界场景设置】面板，勾选【启用场景合成】</p>
+<p>禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e5%90%af%e7%94%a8%e5%9c%ba%e6%99%af%e5%90%88%e6%88%90%e7%a6%81%e7%94%a8%e8%be%b9%e7%95%8c%e6%a3%80%e6%9f%a5.jpg" alt="启用场景合成禁用边界检查"  />
+</p>
+</li>
+<li>
+<p>打开【关卡设置】面板</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e5%85%b3%e5%8d%a1%e8%ae%be%e7%bd%ae.jpg" alt="关卡设置"  />
+</p>
+</li>
+<li>
+<p>点击【调用世界场景构成】，打开【世界场景构成】面板</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e8%b0%83%e7%94%a8%e4%b8%96%e7%95%8c%e5%9c%ba%e6%99%af%e6%9e%84%e6%88%90.jpg" alt="调用世界场景构成"  />
+</p>
+</li>
+<li>
+<p>在【世界场景构成】面板中新建<strong>图层</strong>，命名 CesiumLayer，并禁用【流送距离】</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/CesiumLayer.jpg" alt="CesiumLayer"  />
+</p>
+</li>
+</ol>
+<h2 id="第二步设置持久关卡-globe">第二步：设置持久关卡 Globe<a hidden class="anchor" aria-hidden="true" href="#第二步设置持久关卡-globe">#</a></h2>
+<p><a href="../179-cesium-unreal-photogrammetry/">参考添加数据</a></p>
+<ol>
+<li>
+<p>添加 <code>Cesium World Terrain With Bing Aerial Imagery</code> 地形和影像数据。</p>
+</li>
+<li>
+<p>添加照明 <code>CesiumSunSky</code>，如果看不到影像等数据，去【项目设置】中启用【扩展自动曝光设置中的默认亮度范围】</p>
+</li>
+<li>
+<p>为了建立一些详细的，真实世界的地点并开始构建子关卡，添加 <code>Aerometrex Denver Photogrammetry</code> 和 <code>Nearmap Boston Photogrammetry</code> 的 3D Tilesets 数据。</p>
+</li>
+<li>
+<p>为了绕地球飞行而不迷失方向，添加 <code>DynamicPawn</code>，这个 Actor 在环绕地球飞行时会调整自己的方向，从而能始终保持适当的向上方向。</p>
+</li>
+</ol>
+<h2 id="第三步设置有地理参考的子关卡">第三步：设置有地理参考的子关卡<a hidden class="anchor" aria-hidden="true" href="#第三步设置有地理参考的子关卡">#</a></h2>
+<ol>
+<li>
+<p>将编辑器的世界场景定位到感兴趣的区域，比如 <code>Aerometrex Denver Photogrammetry</code>，然后将编辑器的相机飞行到想要创建子关卡的特定位置，然后将原点放置到这里。</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/PlaceGeoreferenceOriginHere.jpg" alt="PlaceGeoreferenceOriginHere"  />
+</p>
+</li>
+<li>
+<p>然后打开【关卡】面板，创建一个新的 sublevel ，保存到 World 文件夹的 Sublevels 文件夹中</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e5%88%9b%e5%bb%ba%e5%ad%90%e5%85%b3%e5%8d%a1.jpg" alt="创建子关卡"  />
+</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e4%bf%9d%e5%ad%98%e5%ad%90%e5%85%b3%e5%8d%a1.jpg" alt="保存子关卡"  />
+</p>
+</li>
+<li>
+<p>在【关卡】面板，双击刚才创建的子关卡，或者右击子关卡，选择【加载】，然后<strong>将子关卡指定到创建的 CesiumLayer 图层</strong></p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e5%8a%a0%e8%bd%bd%e5%ad%90%e5%85%b3%e5%8d%a1.jpg" alt="加载子关卡"  />
+</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/SublevelAssignToLayer.jpg" alt="SublevelAssignToLayer"  />
+</p>
+</li>
+<li>
+<p>此时，子关卡被创建，子关卡的中心位置被正确地设置在 CesiumGeoreference actor 上。To georeference the sublevel (i.e., to lock the current alignment of the sublevel with the globe)，勾选【Enabled】</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/GeoreferenceTheSublevel.jpg" alt="GeoreferenceTheSublevel"  />
+</p>
+</li>
+<li>
+<p>现在应该看到一个蓝色的线框球体。球体以子关卡的中心位置为中心(即 georeference )，其半径由数组中子关卡入口的【Load Radius】属性决定。这个球体指定玩家摄像机为了<strong>加载关卡必须进入的区域</strong>。您可以根据用例的需要自由地扩展或缩小【Load Radius】。</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/SublevelBlueWireFrameSphere.jpg" alt="SublevelBlueWireFrameSphere"  />
+</p>
+</li>
+</ol>
+<h2 id="第四步创建多个子关卡">第四步：创建多个子关卡<a hidden class="anchor" aria-hidden="true" href="#第四步创建多个子关卡">#</a></h2>
+<p>按 Ctrl + Shift + S 保存当前子关卡和持久关卡的所有内容，或者点击【保存所有】。右键单击【关卡】面板中的【子关卡】并选择【卸载】。</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e5%8d%b8%e8%bd%bd%e5%bd%93%e5%89%8d%e7%9a%84%e5%ad%90%e5%85%b3%e5%8d%a1.jpg" alt="卸载当前的子关卡"  />
+</p>
+<p>当在 UE 编辑器中工作时，<strong>一次只能加载一个 georeferenced 的子关卡</strong>。如果具有不同 georeferenced 的多个子关卡同时加载并可见，它们将在编辑器中彼此重叠出现。但是在【运行】的时候没问题。</p>
+<p>然后重复第三步创建子关卡的流程</p>
+<p>注意：如果想编辑某个子关卡，一定要将其<strong>设置为当前</strong></p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/%e5%b0%86%e5%ad%90%e5%85%b3%e5%8d%a1%e8%ae%be%e4%b8%ba%e5%bd%93%e5%89%8d.jpg" alt="将子关卡设为当前"  />
+</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/cesium/">Cesium</a></li>
+      <li><a href="https://874656645.github.io/tags/unreal/">Unreal</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Cesium4Unreal——Transition Between Locations</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Cesium4Unreal——Place Objects On Globe</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

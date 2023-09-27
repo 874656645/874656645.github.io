@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>数据结构与算法——队列的应用 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="数据结构与算法" />
+<meta name="description" content="一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构
+ 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）
+ 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
+ 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
+ “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
+ 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status &amp; 0x08) != 0); } bool wolf(int status){ return ((status &amp; 0x04) !">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="数据结构与算法——队列的应用" />
+<meta property="og:description" content="一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构
+ 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）
+ 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
+ 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
+ “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
+ 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status &amp; 0x08) != 0); } bool wolf(int status){ return ((status &amp; 0x04) !" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-06T08:56:06&#43;08:00" />
+<meta property="article:modified_time" content="2022-04-06T08:56:06&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="数据结构与算法——队列的应用"/>
+<meta name="twitter:description" content="一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构
+ 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）
+ 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）
+ 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：
+ “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：
+ 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status &amp; 0x08) != 0); } bool wolf(int status){ return ((status &amp; 0x04) !"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "数据结构与算法——队列的应用",
+      "item": "https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "数据结构与算法——队列的应用",
+  "name": "数据结构与算法——队列的应用",
+  "description": "一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构\n 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）\n 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）\n 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：\n “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：\n 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status \u0026amp; 0x08) != 0); } bool wolf(int status){ return ((status \u0026amp; 0x04) !",
+  "keywords": [
+    "数据结构与算法"
+  ],
+  "articleBody": "一、队列的应用   只要满足先来先服务特性的应用均可采用队列作为其数据组织方式或中间数据结构\n 调度或缓冲  消息缓冲器 邮件缓冲器 计算机硬设备之间的通信也需要队列作为数据缓冲 操作系统的资源管理   宽度优先搜索    广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）\n 树的层次遍历    深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）\n 树的先序、中序、后续遍历    二、农夫过河问题   问题抽象：\n “人狼羊菜”乘船过河 只有人能撑船，船只有两个位置（包括人） 狼羊、羊菜不能在没有人时共处    数据抽象：\n 对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 0110 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态） 用整数 status 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 1000，整数 0x0F 表示的状态 1111 如何从上述状态中得到每个角色所在位置？  bool farmer(int status){ return ((status \u0026 0x08) != 0); } bool wolf(int status){ return ((status \u0026 0x04) != 0); } bool goat(int status){ return ((status \u0026 0x02) != 0); } bool cabbage(int status){ return ((status \u0026 0x01) != 0); }  安全状态判断  bool safe(int status) // 返回 true:安全，false:不安全 { if ((goat(status) == cabbage(status)) \u0026\u0026 (goat(status) != farmer(status))) return(false); // 羊吃白菜  if ((goat(status) == wolf(status)) \u0026\u0026 (goat(status) != farmer(status))) return(false); // 狼吃羊  return(true); // 其它状态为安全 }   问题求解：试探法\n  算法抽象：问题变为从状态 0000（整数0）出发，寻找全部由安全状态构成的状态序列，以状态 1111（整数15）为最终目标。\n 状态序列中每个状态都可以从前一状态通过农夫（可以带一样东西）划船过河的动作到达。 序列中不能出现 重复 状态    算法设计\n 定义一个整数队列 moveTo，它的每个元素表示一个可以安全到达的中间状态 还需要定义一个数据结构 记录已被访问过的各个状态，以及已被发现的能够到达当前这个状态的路径  用顺序表 route 的第 i 个元素记录状态 i 是否已被访问过 若 route[i] 已被访问过，则在这个顺序表元素中记入前驱状态值；-1 表示未被访问 route 的大小（长度）为 16      算法实现\nvoid solve() { int movers, i, location, newlocation; vectorint route(END+1, -1); // 记录已考虑的状态路径  queueint moveTo; // 准备初值  moveTo.push(0x00); route[0]=0; while (!moveTo.empty() \u0026\u0026 route[15] == -1) { // 得到现在的状态  int status = moveTo.front(); moveTo.pop(); for (movers = 1; movers  8; movers  1) { // 农夫总是在移动，随农夫移动的也只能是在农夫同侧的东西  if (farmer(status) == (bool)(status \u0026 movers)) { // 随农夫移动以后的状态  int newstatus = status ^ (0x08 | movers); // 安全的，并且未考虑过的走法  // 确保状态不能重复，重复状态没有意义，还有可能造成死循环  if (safe(newstatus) \u0026\u0026 (route[newstatus] == -1)) { route[newstatus] = status; moveTo.push(newstatus); } } } } // 反向打印出路径  if (route[15] != -1) { cout  \"The reverse path is : \"  endl; for (int status = 15; status = 0; status = route[status]) { cout  \"The status is : \"  bitset4(status)  endl; if (status == 0) break; } } else{ cout  \"No solution.\"  endl; } } 输出：\nThe reverse path is : The status is : 1111 The status is : 0101 The status is : 1101 The status is : 0001 The status is : 1011 The status is : 0010 The status is : 1010 The status is : 0000   总结：这个算法只能输出其中的一种解，这个问题还有另一种路径\n  三、另一个思考题 五人提灯过独木桥：\n 有一盏灯能使用 30 秒，要在灯灭前过这座独木桥 一家五口人，每人过桥的速度不同：哥哥 1 秒，弟弟 3 秒，爸爸 6 秒，妈妈 8 秒，奶奶 12 秒 每次只能过 2 个人，而且天黑，过桥时必须有灯照明  ",
+  "wordCount" : "337",
+  "inLanguage": "en",
+  "datePublished": "2022-04-06T08:56:06+08:00",
+  "dateModified": "2022-04-06T08:56:06+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/165-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%BA%94%E7%94%A8/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      数据结构与算法——队列的应用
+    </h1>
+    <div class="post-meta"><span title='2022-04-06 08:56:06 +0800 CST'>April 6, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e9%98%9f%e5%88%97%e7%9a%84%e5%ba%94%e7%94%a8" aria-label="一、队列的应用">一、队列的应用</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e5%86%9c%e5%a4%ab%e8%bf%87%e6%b2%b3%e9%97%ae%e9%a2%98" aria-label="二、农夫过河问题">二、农夫过河问题</a></li>
+                <li>
+                    <a href="#%e4%b8%89%e5%8f%a6%e4%b8%80%e4%b8%aa%e6%80%9d%e8%80%83%e9%a2%98" aria-label="三、另一个思考题">三、另一个思考题</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="一队列的应用">一、队列的应用<a hidden class="anchor" aria-hidden="true" href="#一队列的应用">#</a></h2>
+<ol>
+<li>
+<p>只要满足<strong>先来先服务</strong>特性的应用均可采用队列作为其数据组织方式或中间数据结构</p>
+<ul>
+<li>调度或缓冲
+<ul>
+<li>消息缓冲器</li>
+<li>邮件缓冲器</li>
+<li>计算机硬设备之间的通信也需要队列作为数据缓冲</li>
+<li>操作系统的资源管理</li>
+</ul>
+</li>
+<li>宽度优先搜索</li>
+</ul>
+</li>
+<li>
+<p>广度优先搜索：搜索该步的所有可能状态，再进一步考虑后面的各种情况；（队列应用）</p>
+<ul>
+<li>树的层次遍历</li>
+</ul>
+</li>
+<li>
+<p>深度优先搜索：沿某一状态走下去，不行再回头。（栈应用）</p>
+<ul>
+<li>树的先序、中序、后续遍历</li>
+</ul>
+<p><img loading="lazy" style="margin: auto;" src="../img/%e5%b9%bf%e5%ba%a6%e4%bc%98%e5%85%88%e6%b7%b1%e5%ba%a6%e4%bc%98%e5%85%88.jpg" alt="广度优先深度优先"  />
+</p>
+</li>
+</ol>
+<h2 id="二农夫过河问题">二、农夫过河问题<a hidden class="anchor" aria-hidden="true" href="#二农夫过河问题">#</a></h2>
+<ol>
+<li>
+<p>问题抽象：</p>
+<ul>
+<li>“人狼羊菜”乘船过河</li>
+<li>只有人能撑船，船只有两个位置（包括人）</li>
+<li>狼羊、羊菜不能在没有人时共处</li>
+</ul>
+</li>
+<li>
+<p>数据抽象：</p>
+<ul>
+<li>对每个角色的位置进行描述，农夫、狼、羊和菜，四个目标依次各用一位，目标在起始岸位置：0，目标岸：1。如 <code>0110</code> 表示农夫、白菜在起始岸，而狼、羊在目标岸（此状态为不安全状态）</li>
+<li>用整数 <code>status</code> 表示上述四位二进制描述的状态，如整数 0x08 表示的状态 <code>1000</code>，整数 0x0F 表示的状态 <code>1111</code></li>
+<li>如何从上述状态中得到每个角色所在位置？</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">farmer</span>(<span style="color:#66d9ef">int</span> status){ 
+    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x08</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
+}
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">wolf</span>(<span style="color:#66d9ef">int</span> status){ 
+    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x04</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
+}
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">goat</span>(<span style="color:#66d9ef">int</span> status){ 
+    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x02</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
+}
+<span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">cabbage</span>(<span style="color:#66d9ef">int</span> status){ 
+    <span style="color:#66d9ef">return</span> ((status <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x01</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>); 
+}
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/%e4%ba%ba%e7%8b%bc%e7%be%8a%e8%8f%9c%e7%8a%b6%e6%80%81.jpg" alt="人狼羊菜状态"  />
+</p>
+<ul>
+<li>安全状态判断</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">safe</span>(<span style="color:#66d9ef">int</span> status) <span style="color:#75715e">// 返回 true:安全，false:不安全
+</span><span style="color:#75715e"></span>{
+    <span style="color:#66d9ef">if</span> ((goat(status) <span style="color:#f92672">==</span> cabbage(status)) <span style="color:#f92672">&amp;&amp;</span> (goat(status) <span style="color:#f92672">!=</span> farmer(status)))
+        <span style="color:#66d9ef">return</span>(false); <span style="color:#75715e">// 羊吃白菜
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> ((goat(status) <span style="color:#f92672">==</span> wolf(status)) <span style="color:#f92672">&amp;&amp;</span> (goat(status) <span style="color:#f92672">!=</span> farmer(status)))
+        <span style="color:#66d9ef">return</span>(false); <span style="color:#75715e">// 狼吃羊
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span>(true); <span style="color:#75715e">// 其它状态为安全
+</span><span style="color:#75715e"></span>}
+</code></pre></div></li>
+<li>
+<p>问题求解：试探法</p>
+<p><img loading="lazy" style="margin: auto;" src="../img/%e4%ba%ba%e7%8b%bc%e7%be%8a%e8%8f%9c%e9%97%ae%e9%a2%98%e6%b1%82%e8%a7%a3.jpg" alt="人狼羊菜问题求解.jpg"  />
+</p>
+</li>
+<li>
+<p>算法抽象：问题变为从状态 <code>0000</code>（整数0）出发，寻找全部由<strong>安全状态</strong>构成的状态序列，以状态 <code>1111</code>（整数15）为最终目标。</p>
+<ul>
+<li>状态序列中每个状态都可以从前一状态通过农夫（可以带一样东西）划船过河的动作到达。</li>
+<li>序列中不能出现 重复 状态</li>
+</ul>
+</li>
+<li>
+<p>算法设计</p>
+<ul>
+<li>定义一个整数<strong>队列</strong> <code>moveTo</code>，它的每个元素表示一个可以安全到达的中间状态</li>
+<li>还需要定义一个数据结构 记录已被访问过的各个状态，以及已被发现的能够到达当前这个状态的路径
+<ul>
+<li>用顺序表 <code>route</code> 的第 i 个元素记录状态 i 是否已被访问过</li>
+<li>若 <code>route[i]</code> 已被访问过，则在这个顺序表元素中记入前驱状态值；<code>-1</code> 表示未被访问</li>
+<li><code>route</code> 的大小（长度）为 16</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>算法实现</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">solve</span>() {
+    <span style="color:#66d9ef">int</span> movers, i, location, newlocation;
+    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> route(END<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// 记录已考虑的状态路径
+</span><span style="color:#75715e"></span>    queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> moveTo;
+    <span style="color:#75715e">// 准备初值
+</span><span style="color:#75715e"></span>    moveTo.push(<span style="color:#ae81ff">0x00</span>);
+    route[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>moveTo.empty() <span style="color:#f92672">&amp;&amp;</span> route[<span style="color:#ae81ff">15</span>] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+        <span style="color:#75715e">// 得到现在的状态
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> status <span style="color:#f92672">=</span> moveTo.front();
+        moveTo.pop();
+        <span style="color:#66d9ef">for</span> (movers <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; movers <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">8</span>; movers <span style="color:#f92672">&lt;&lt;=</span> <span style="color:#ae81ff">1</span>) {
+            <span style="color:#75715e">// 农夫总是在移动，随农夫移动的也只能是在农夫同侧的东西
+</span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (farmer(status) <span style="color:#f92672">==</span> (<span style="color:#66d9ef">bool</span>)(status <span style="color:#f92672">&amp;</span> movers)) {
+                <span style="color:#75715e">// 随农夫移动以后的状态
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">int</span> newstatus <span style="color:#f92672">=</span> status <span style="color:#f92672">^</span> (<span style="color:#ae81ff">0x08</span> <span style="color:#f92672">|</span> movers);
+                <span style="color:#75715e">// 安全的，并且未考虑过的走法
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">// 确保状态不能重复，重复状态没有意义，还有可能造成死循环
+</span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span> (safe(newstatus) <span style="color:#f92672">&amp;&amp;</span> (route[newstatus] <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)) {
+                    route[newstatus] <span style="color:#f92672">=</span> status;
+                    moveTo.push(newstatus); 
+                }
+            }
+        }
+    }
+    <span style="color:#75715e">// 反向打印出路径
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (route[<span style="color:#ae81ff">15</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) { 
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The reverse path is : &#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> status <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>; status <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; status <span style="color:#f92672">=</span> route[status]) {
+            cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The status is : &#34;</span> <span style="color:#f92672">&lt;&lt;</span> bitset<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">4</span><span style="color:#f92672">&gt;</span>(status) <span style="color:#f92672">&lt;&lt;</span> endl;
+            <span style="color:#66d9ef">if</span> (status <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">break</span>;
+        }
+    }
+    <span style="color:#66d9ef">else</span>{
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;No solution.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">The reverse path is : 
+The status is : 1111
+The status is : 0101
+The status is : 1101
+The status is : 0001
+The status is : 1011
+The status is : 0010
+The status is : 1010
+The status is : 0000
+</code></pre></div></li>
+<li>
+<p>总结：这个算法只能输出其中的一种解，这个问题还有另一种路径</p>
+</li>
+</ol>
+<h2 id="三另一个思考题">三、另一个思考题<a hidden class="anchor" aria-hidden="true" href="#三另一个思考题">#</a></h2>
+<p>五人提灯过独木桥：</p>
+<ul>
+<li>有一盏灯能使用 30 秒，要在灯灭前过这座独木桥</li>
+<li>一家五口人，每人过桥的速度不同：哥哥 1 秒，弟弟 3 秒，爸爸 6 秒，妈妈 8 秒，奶奶 12 秒</li>
+<li>每次只能过 2 个人，而且天黑，过桥时必须有灯照明</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/166-c&#43;&#43;11-refcref-%E4%B8%8E-bind/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>C&#43;&#43;11 std::ref, std::cref 与 std::bind</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/164-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>数据结构与算法——队列的实现方式</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

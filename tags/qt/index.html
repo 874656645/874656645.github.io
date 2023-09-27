@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Qt | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="" />
+<meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/tags/qt/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/tags/qt/index.xml">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Qt" />
+<meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://874656645.github.io/tags/qt/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Qt"/>
+<meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
+
+
+</head>
+
+<body class="list dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/tags/">Tags</a></div>
+  <h1>Qt</h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Qt 多线程
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、注意事项：  线程处理类继承于 QObject 线程处理类对象不能有父对象 处理完成后向外发信号 即使 QThread 线程内部的处理对象运行结束了，QThread 线程对象也不会自动释放，需要手动 quit() &#43; wait() 线程处理类对象创建成功后，需要通过 moveToThread() 函数移动到 QThread 对象中 需要通过其他线程发信号来启动另外线程中的处理类对象的处理函数 子线程中不要操作图形界面  二、connect 第五个参数的作用 指定信号和槽的连接方式：自动连接、直接连接、队列连接，多线程时才有意义，默认为 Qt::AutoConnection。
+ Qt::AutoConnection（自动连接）：多线程时是 Qt::QueuedConnection（队列连接），单线程时是 Qt::DirectConnection（直接连接） Qt::QueuedConnection（队列连接）：槽函数所在线程和信号接收者所在线程相同 Qt::DirectConnection（直接连接）：槽函数所在线程和信号发送者所在线程相同  三、代码示例   线程处理类
+class MyThreadPro : public QObject { Q_OBJECT public: explicit MyThreadPro(QObject *parent = nullptr); // 后台处理函数  void startProcessing(); // 是否结束标识位  void setFlag(bool b = false); signals: // 向其他线程发送信号  void myTimeout(); private: bool stopRunning; };   主窗口类...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-18 22:17:00 +0800 CST'>July 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt 多线程" href="https://874656645.github.io/posts/212-qt-%E5%A4%9A%E7%BA%BF%E7%A8%8B/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Qt UDP
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、总结  UDP 就像写信，可能会丢包 Linux UDP 通信过程  Qt UDP 通信过程  支持多路组播：D 类地址
+ 局域网广播 IP： 255.255.255.255  二、每个实例都可以是服务端  只需要一个套接字，绑定到端口号即可  setWindowTitle(QString(&#34;服务器端口为：%1&#34;).arg(port)); udpSocket = new QUdpSocket(this); // 只需要绑定端口号，不用开启监听  udpSocket-&gt;bind(port); connect(udpSocket, &amp;QUdpSocket::readyRead,[=](){ char buf[1024] = {0}; QHostAddress clientAddr; // 发送方 IP  quint16 clientPort; // 发送方 Port  qint64 len = udpSocket-&gt;readDatagram(buf, sizeof (buf), &amp;clientAddr, &amp;clientPort); qDebug() &lt;&lt; &#34;接收到&#34; &lt;&lt; len; if(len &gt; 0){ QString str = QString(&#34;[%1:%2] %3&#34;)....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-15 21:44:52 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt UDP" href="https://874656645.github.io/posts/209-qt-udp/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Qt TCP
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、总结  TCP 就像打电话，安全，不会丢包 Linux TCP 通信  Qt TCP 通信   二、服务器端  TCP 服务器端有两个套接字，一个是监听套接字，一个是通信套接字  tcpServer = nullptr; // 服务监听套接字  tcpSocket = nullptr; // 通信套接字  // 创建tcp服务监听套接字  tcpServer = new QTcpServer(this); // tcp服务开启监听（bind端口号并开启监听）  tcpServer-&gt;listen(QHostAddress::Any, 8008); // 绑定连接成功信号  connect(tcpServer, &amp;QTcpServer::newConnection,[=](){ // 获取通信套接字  tcpSocket = tcpServer-&gt;nextPendingConnection(); // 获取客户端 IP 和 端口  QString ip = tcpSocket-&gt;peerAddress().toString(); quint16 port = tcpSocket-&gt;peerPort(); QString msg = QString(&#34;[%1:%2] 连接成功&#34;)....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-15 21:13:10 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt TCP" href="https://874656645.github.io/posts/208-qt-tcp/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Qt CMake
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>cmake_minimum_required(VERSION 3.5)project(07_TCP LANGUAGES CXX)# 将编译目录包含到Include目录 set(CMAKE_INCLUDE_CURRENT_DIR ON)set(CMAKE_AUTOUIC ON)set(CMAKE_AUTOMOC ON)set(CMAKE_AUTORCC ON)# 根据 Qt 版本的环境变量，设置使用的 Qt 版本 set(CMAKE_PREFIX_PATH $ENV{QTDIR5141_64})set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED ON)# QtCreator supports the following variables for Android, which are identical to qmake Android variables. # Check http://doc.qt.io/qt-5/deployment-android.html for more information. # They need to be set before the find_package(Qt5 ...) call. #if(ANDROID) # set(ANDROID_PACKAGE_SOURCE_DIR &#34;${CMAKE_CURRENT_SOURCE_DIR}/android&#34;) # if (ANDROID_ABI STREQUAL &#34;armeabi-v7a&#34;) # set(ANDROID_EXTRA_LIBS # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so) # endif() #endif() # 工程中会用到的Qt模块 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)if(ANDROID) add_library(07_TCP SHARED main....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-15 16:10:27 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt CMake" href="https://874656645.github.io/posts/207-qt-cmake/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Qt 信号和槽
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 信号函数没有返回值，且只是一个函数声明，必须有 signals: 声明 槽函数的函数标签必须和信号函数相同（相同的返回值类型和形参列表） Qt5 后成员函数也可作为 slots，可以不用 slots: 声明 slots: 声明前要添加访问权限修饰符 信号函数和槽函数其实都可以被重载  // signal 和 slots 都可以重载  // Qt5的方式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow; void(MainWindow::*pSlot1)() = &amp;MainWindow::onShowMainWindow; connect(&amp;sw, pFun1, this, pSlot1); void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow; void(MainWindow::*pSlot2)(int,QString) = &amp;MainWindow::onShowMainWindow; connect(&amp;sw, pFun2, this, pSlot2); // Qt4的方式  // 1. SIGNAL、SLOT宏会把信号和槽转成字符串，所以就不能进行编译期错误检查  // 2. 槽函数前面必须有 slots 标签，否则无法识别为槽函数  connect(&amp;sw, SIGNAL(showMainWindow()), this, SLOT(onShowMainWindow())); connect(&amp;sw, SIGNAL(showMainWindow(int,QString)) , this, SLOT(onShowMainWindow(int,QString))); // Lambda 表达式  void(subWindow::*pFun1)() = &amp;subWindow::showMainWindow; connect(&amp;sw, pFun1, [](){ qDebug()&lt;&lt;&#34;没有参数的信号&#34;; } ); void(subWindow::*pFun2)(int,QString) = &amp;subWindow::showMainWindow; connect(&amp;sw, pFun2, [](int a, QString msg){ qDebug()&lt;&lt;a&lt;&lt;msg; } ); // Lambda 表达式使用注意事项  // 如果b3是局部变量或者成员变量，lambda不要使用引用传值  QPushButton *b3 = new QPushButton(this); b3-&gt;setText(&#34;Lambda&#34;); int a = 10, b = 100; connect(&amp;b2/*b3*/, &amp;QPushButton::clicked, [=](){ // 此处使用 &amp; 传值会有问题  qDebug()&lt;&lt;a&lt;&lt;b; } ); </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-06-14 09:45:15 +0800 CST'>June 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt 信号和槽" href="https://874656645.github.io/posts/193-qt-%E4%BF%A1%E5%8F%B7%E5%92%8C%E6%A7%BD/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://874656645.github.io/tags/qt/page/2/">Next Page »</a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

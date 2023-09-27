@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Cesium, UE5" />
+<meta name="description" content="第一步：创建一个关卡  创建一个空的 Unreal 关卡； 登录 Cesium ion 并添加 Cesium World Terrain 和 CesiumSunSky； 设置 CesiumGeoreference 的坐标为 San Francisco International Airport (SFO)；
+Origin Latitude = 37.61779
+Origin Longitude = -122.390533
+Origin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C&#43;&#43; 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目
+VS 2022 解决方案类似下图：
+  添加下面的代码到 project.Build.cs 文件：
+// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; }); // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/250-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal" />
+<meta property="og:description" content="第一步：创建一个关卡  创建一个空的 Unreal 关卡； 登录 Cesium ion 并添加 Cesium World Terrain 和 CesiumSunSky； 设置 CesiumGeoreference 的坐标为 San Francisco International Airport (SFO)；
+Origin Latitude = 37.61779
+Origin Longitude = -122.390533
+Origin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C&#43;&#43; 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目
+VS 2022 解决方案类似下图：
+  添加下面的代码到 project.Build.cs 文件：
+// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; }); // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/250-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-19T14:25:50&#43;08:00" />
+<meta property="article:modified_time" content="2022-10-19T14:25:50&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/257-unreal-subsystem%E5%AD%90%E7%B3%BB%E7%BB%9F/" /><meta property="og:see_also" content="https://874656645.github.io/posts/256-unreal-%E9%A1%B9%E7%9B%AE%E5%92%8C%E6%8F%92%E4%BB%B6/" /><meta property="og:see_also" content="https://874656645.github.io/posts/252-unreal5-%E5%BC%80%E5%8F%91%E4%BD%BF%E7%94%A8%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/" /><meta property="og:see_also" content="https://874656645.github.io/posts/251-cesium-unreal-importing-quixel-assets/" /><meta property="og:see_also" content="https://874656645.github.io/posts/219-unreal-%E4%BD%BF%E7%94%A8%E8%93%9D%E5%9B%BE%E8%8E%B7%E5%8F%96-uasset-%E8%B5%84%E6%BA%90/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal"/>
+<meta name="twitter:description" content="第一步：创建一个关卡  创建一个空的 Unreal 关卡； 登录 Cesium ion 并添加 Cesium World Terrain 和 CesiumSunSky； 设置 CesiumGeoreference 的坐标为 San Francisco International Airport (SFO)；
+Origin Latitude = 37.61779
+Origin Longitude = -122.390533
+Origin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C&#43;&#43; 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目
+VS 2022 解决方案类似下图：
+  添加下面的代码到 project.Build.cs 文件：
+// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; }); // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal",
+      "item": "https://874656645.github.io/posts/250-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal",
+  "name": "Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal",
+  "description": "第一步：创建一个关卡  创建一个空的 Unreal 关卡； 登录 Cesium ion 并添加 Cesium World Terrain 和 CesiumSunSky； 设置 CesiumGeoreference 的坐标为 San Francisco International Airport (SFO)；\nOrigin Latitude = 37.61779\nOrigin Longitude = -122.390533\nOrigin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C++ 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目\nVS 2022 解决方案类似下图：\n  添加下面的代码到 project.Build.cs 文件：\n// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { \u0026#34;CesiumRuntime\u0026#34; }); // Tell Unreal Engine to use C++17 CppStandard = CppStandardVersion.",
+  "keywords": [
+    "Cesium", "UE5"
+  ],
+  "articleBody": "第一步：创建一个关卡  创建一个空的 Unreal 关卡； 登录 Cesium ion 并添加 Cesium World Terrain 和 CesiumSunSky； 设置 CesiumGeoreference 的坐标为 San Francisco International Airport (SFO)；\nOrigin Latitude = 37.61779\nOrigin Longitude = -122.390533\nOrigin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C++ 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目\nVS 2022 解决方案类似下图：\n  添加下面的代码到 project.Build.cs 文件：\n// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { \"CesiumRuntime\" }); // Tell Unreal Engine to use C++17 CppStandard = CppStandardVersion.Cpp17;   在 PlaneTrack 类中添加一些变量，用来存储数据、样条曲线和坐标转换，并添加必要的头文件：\n... // Add import paths. Make sure they go above the PlaneTrack.generated.h line #include \"Components/SplineComponent.h\"#include \"CesiumGeoreference.h\"#include \"Engine/DataTable.h\"... public: // Spline variable to represent the plane track UPROPERTY(BlueprintReadOnly, Category = \"FlightTracker\") USplineComponent* SplineTrack; // Cesium class that contain many useful coordinate conversion functions UPROPERTY(EditAnywhere, Category = \"FlightTracker\") ACesiumGeoreference* CesiumGeoreference; // An Unreal Engine data table to store the raw flight data UPROPERTY(EditAnywhere, Category = \"FlightTracker\") UDataTable* AircraftsRawDataTable;   打开 PlaneTrack.cpp 文件，在构造函数中初始化 SplineTrack 变量；\nAPlaneTrack::APlaneTrack() { // Set this actor to call Tick() every frame. You can turn this off to improve performance if you don't need it.  PrimaryActorTick.bCanEverTick = true; // Initialize the track  SplineTrack = CreateDefaultSubobjectUSplineComponent(TEXT(\"SplineTrack\")); // This lets us visualize the spline in Play mode  SplineTrack-SetDrawDebug(true); // Set the color of the spline  SplineTrack-SetUnselectedSplineSegmentColor(FLinearColor(1.f, 0.f, 0.f)); } CesiumGeoreference 和 AircraftsRawDataTable 变量将在 Unreal Engine Editor 中进行设置\n  编译\n在 UE4 Editor 中，可以点击【编译】按钮，但是 UE5 Editor 并未找到此工具按钮\nUE5 中可以通过两种方式进行编译：\n 通过 VS 启动本地调试，会打开一个 UE Editor，但停止调试后，UE Editor 也会退出。注意：此时工程不能是被 UE Editor 打开的状态，否则会报如下错误\nUnrealBuildTool : error : Unable to build while Live Coding is active. Exit the editor and game, or press Ctrl+Alt+F11 if iterating on code in the editor or game   通过 Ctrl+Alt+F11 快捷键在 Editor 或 game 中进行代码迭代热编译    第三步：导入真实的飞行数据 下载真实的飞行点位数据\n为了使 PlaneTrack 类能访问数据并执行坐标转换，我们将使用虚幻引擎的 DataTable 来存储项目内部的数据。在这一步中，我们将创建一个数据结构来表示飞行数据的结构。\n  在 PlaneTrack.h 文件中，将下面的代码直接插入到类的外面，用来定义航班数据库结构；\nUSTRUCT(BlueprintType) struct FAircraftRawData : public FTableRowBase { GENERATED_USTRUCT_BODY() public: FAircraftRawData() : Longitude(0.0) , Latitude(0.0) , Height(0.0) {} UPROPERTY(EditAnywhere, Category = \"FlightTracker\") double Longitude; UPROPERTY(EditAnywhere, Category = \"FlightTracker\") double Latitude; UPROPERTY(EditAnywhere, Category = \"FlightTracker\") double Height; }; 该结构包含三个成员变量：Longitude、Latitude和Height。这些变量对应于上面原始数据表中的列名。还要注意，该结构继承自 FTableRowBase\n注意：编译代码\n  将 .csv 数据文件拖放到虚幻引擎内容浏览器中。在【选择DataTable的行类型】下拉菜单中选择 AircraftRawData\n  第四步：在飞行轨迹上添加点位   在 PlaneTrack.h 文件中添加下面的包含文件：\n// Imports should be placed above the PlaneTrack.Generated.h line. ... #include #include \"CesiumGeospatial/Ellipsoid.h\"#include \"CesiumGeospatial/Cartographic.h\"在 APlaneTrack 类的最后添加下面的方法，用来将数据表中的数据添加到样条曲线的点位：\npublic: // Function to parse the data table and create the spline track UFUNCTION(BlueprintCallable, Category = \"FlightTracker\") void LoadSplineTrackPoints();   在 PlaneTrack.cpp 中添加 LoadSplineTrackPoints 方法的函数体；\nvoid APlaneTrack::LoadSplineTrackPoints() { if (this-AircraftsRawDataTable != nullptr \u0026\u0026 this-CesiumGeoreference != nullptr) { int32 PointIndex = 0; for (auto\u0026 row : this-AircraftsRawDataTable-GetRowMap()) { FAircraftRawData* Point = (FAircraftRawData*)row.Value; // Get row data point in lat/long/alt and transform it into UE4 points  double PointLatitude = Point-Latitude; double PointLongitude = Point-Longitude; double PointHeight = Point-Height; // Compute the position in UE coordinates  glm::dvec3 UECoords = this-CesiumGeoreference-TransformLongitudeLatitudeHeightToUnreal(glm::dvec3(PointLongitude, PointLatitude, PointHeight)); FVector SplinePointPosition = FVector(UECoords.x, UECoords.y, UECoords.z); this-SplineTrack-AddSplinePointAtIndex(SplinePointPosition, PointIndex, ESplineCoordinateSpace::World, false); // Get the up vector at the position to orient the aircraft  const CesiumGeospatial::Ellipsoid\u0026 Ellipsoid = CesiumGeospatial::Ellipsoid::WGS84; glm::dvec3 upVector = Ellipsoid.geodeticSurfaceNormal(CesiumGeospatial::Cartographic(FMath::DegreesToRadians(PointLongitude), FMath::DegreesToRadians(PointLatitude), FMath::DegreesToRadians(PointHeight))); // Compute the up vector at each point to correctly orient the plane  glm::dvec4 ecefUp(upVector, 0.0); const GeoTransforms\u0026 geoTransforms = this-CesiumGeoreference-GetGeoTransforms(); const glm::dmat4\u0026 ecefToUnreal = geoTransforms.GetEllipsoidCenteredToAbsoluteUnrealWorldTransform(); glm::dvec4 unrealUp = ecefToUnreal * ecefUp; this-SplineTrack-SetUpVectorAtSplinePoint(PointIndex, FVector(unrealUp.x, unrealUp.y, unrealUp.z), ESplineCoordinateSpace::World, false); PointIndex++; } this-SplineTrack-UpdateSpline(); } } 保存并编译工程\n  在场景中添加 PlaneTrack Actor；\n  选中添加的 PlaneTrack1 Actor，打开【细节】面板，设置 Cesium Georeference 和 Aircrafts Raw Data Table\n  打开【关卡蓝图】,将 PlaneTrack1 Actor 拖入到蓝图中，获取 Spline Track 对象，并添加【清除样条点】节点，当样条第一次添加到场景中时，默认情况下它有两个点。这两个点是任意的，我们不需要，因此可以使用 Clear Spline points 清除它们。\n  添加 Load Spline Track Points 节点，最终蓝图连接如下图：\n由于样条可视化在默认情况下是关闭的，可以通过在控制台命令窗口输入 ShowFlag.Splines 1 命令来打开它，运行后如下图：\n  第五步：添加飞机模型 模型下载网站：\n 波音787 Sketchfab 3D model    导入模型为静态网格模型\n建议每个模型创建一个文件夹，在【内容浏览器】面板新建模型文件夹，然后在新建的文件夹中右击鼠标，在弹出的快捷菜单中选择【导入】\n  添加蓝图类 BP_Aircraft，该类将包含飞机静态网格模型，以及沿着样条曲线路径移动飞机的逻辑\n  在 BP_Aircraft 蓝图类中添加【静态网格体】组件，并指定【静态网格体】为导入的飞机模型\n  在该蓝图类的【事件图表】中添加【自定义事件】并命名为 MoveAircraft\n  在【事件图表】中添加【时间轴】节点并命名为 AircraftMover，这个时间轴将随时间移动飞机模型\n将时间轴的 Alpha 输出引脚提升为变量 Alpha\n  双击时间轴节点，打开【时间轴编辑器】，添加浮点型轨道，添加两个关键帧，时间 = 0，值 = 0，时间 = 1， 值 = 1，勾选【使用最后一个关键帧】\n  添加几个公有变量：\n Duration，float 类型，public 权限，这个变量将用于确定飞机沿路径飞行所需的时间 AircraftStartOffset，float 类型，public 权限，用于确定飞行在时间轴上的哪个位置开始，取值区间为从 0 到 1 PlaneTrack：PlaneTrack 对象引用类型，public 权限，用于存储 PlaneTrack 对象的引用，以检索样条曲线上的点位    如下图连接 MoveAircraft 自定义事件蓝图：\n  通过样条曲线类 PlaneTrack 插值飞机飞行点位，如下图：\n  最后连接到【设置Actor变换】节点：\n  编译保存，并把 BP_Aircraft 蓝图类放入到场景中\n  在关卡蓝图中添加键盘事件，调用 BP_Aircraft 的 MoveAircraft 自定义事件节点\n  在场景中选中 BP_Aircraft Actor，在细节面板中设置 Duration、PlaneTrack、AirplaneOffset\n  第六步：在两个不同的相机视图间切换   在 BP_Aircraft 蓝图类节点下添加两个相机，分别放置在飞机模型的顶部和侧边\n  在关卡蓝图中添加两个快捷键事件，并如下图连接节点\n  参考：\n Build a Flight Tracker with Cesium for Unreal UE-c++代码热编译 设置Visual Studio 编译配置参考 编译游戏项目 使用Datasmith和3ds Max UE4模型整体导入流程  ",
+  "wordCount" : "631",
+  "inLanguage": "en",
+  "datePublished": "2022-10-19T14:25:50+08:00",
+  "dateModified": "2022-10-19T14:25:50+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/250-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal
+    </h1>
+    <div class="post-meta"><span title='2022-10-19 14:25:50 +0800 CST'>October 19, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e7%ac%ac%e4%b8%80%e6%ad%a5%e5%88%9b%e5%bb%ba%e4%b8%80%e4%b8%aa%e5%85%b3%e5%8d%a1" aria-label="第一步：创建一个关卡">第一步：创建一个关卡</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%ba%8c%e6%ad%a5%e6%b7%bb%e5%8a%a0-planetrack-%e7%b1%bb" aria-label="第二步：添加 PlaneTrack 类">第二步：添加 <em>PlaneTrack</em> 类</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%b8%89%e6%ad%a5%e5%af%bc%e5%85%a5%e7%9c%9f%e5%ae%9e%e7%9a%84%e9%a3%9e%e8%a1%8c%e6%95%b0%e6%8d%ae" aria-label="第三步：导入真实的飞行数据">第三步：导入真实的飞行数据</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e5%9b%9b%e6%ad%a5%e5%9c%a8%e9%a3%9e%e8%a1%8c%e8%bd%a8%e8%bf%b9%e4%b8%8a%e6%b7%bb%e5%8a%a0%e7%82%b9%e4%bd%8d" aria-label="第四步：在飞行轨迹上添加点位">第四步：在飞行轨迹上添加点位</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e4%ba%94%e6%ad%a5%e6%b7%bb%e5%8a%a0%e9%a3%9e%e6%9c%ba%e6%a8%a1%e5%9e%8b" aria-label="第五步：添加飞机模型">第五步：添加飞机模型</a></li>
+                <li>
+                    <a href="#%e7%ac%ac%e5%85%ad%e6%ad%a5%e5%9c%a8%e4%b8%a4%e4%b8%aa%e4%b8%8d%e5%90%8c%e7%9a%84%e7%9b%b8%e6%9c%ba%e8%a7%86%e5%9b%be%e9%97%b4%e5%88%87%e6%8d%a2" aria-label="第六步：在两个不同的相机视图间切换">第六步：在两个不同的相机视图间切换</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="第一步创建一个关卡">第一步：创建一个关卡<a hidden class="anchor" aria-hidden="true" href="#第一步创建一个关卡">#</a></h2>
+<ol>
+<li>创建一个空的 <em>Unreal</em> 关卡；</li>
+<li>登录 <em>Cesium ion</em> 并添加 <em>Cesium World Terrain</em> 和 <em>CesiumSunSky</em>；</li>
+<li>设置 <em>CesiumGeoreference</em> 的坐标为 <em>San Francisco International Airport (SFO)</em>；<br>
+Origin Latitude = 37.61779<br>
+Origin Longitude = -122.390533<br>
+Origin Height = 0.0</li>
+</ol>
+<h2 id="第二步添加-planetrack-类">第二步：添加 <em>PlaneTrack</em> 类<a hidden class="anchor" aria-hidden="true" href="#第二步添加-planetrack-类">#</a></h2>
+<ol>
+<li>
+<p>在 <em>UE Editor</em> 中添加 <em>C++</em> 类，选择 <em>Actor</em> 作为父类，点击【下一步】，输入类名 <em>PlaneTrack</em>，点击【创建类】按钮，此时 <em>Visual Studio</em> 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/Cesium%e6%96%b0%e5%bb%baC&#43;&#43;%e7%b1%bb.jpg" alt="Cesium新建C&#43;&#43;类"  />
+</p>
+<p><em>VS 2022</em> 解决方案类似下图：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5%e7%9a%84C&#43;&#43;%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88.jpg" alt="UE5的C&#43;&#43;解决方案"  />
+</p>
+</li>
+<li>
+<p>添加下面的代码到 <em>project.Build.cs</em> 文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// Add Cesium for Unreal plugin dependency path
+</span><span style="color:#75715e"></span>PrivateDependencyModuleNames.AddRange(<span style="color:#66d9ef">new</span> string[] { <span style="color:#e6db74">&#34;CesiumRuntime&#34;</span> });
+
+<span style="color:#75715e">// Tell Unreal Engine to use C++17
+</span><span style="color:#75715e"></span>CppStandard <span style="color:#f92672">=</span> CppStandardVersion.Cpp17;
+</code></pre></div><p><img loading="lazy" style="margin: auto;" src=".././img/Unreal-C&#43;&#43;-Build.cs.jpg" alt="Unreal-C&#43;&#43;-Build.cs"  />
+</p>
+</li>
+<li>
+<p>在 <em>PlaneTrack</em> 类中添加一些变量，用来存储数据、样条曲线和坐标转换，并添加必要的头文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">...
+<span style="color:#75715e">// Add import paths. Make sure they go above the PlaneTrack.generated.h line
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/SplineComponent.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CesiumGeoreference.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Engine/DataTable.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>...
+
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span> 
+<span style="color:#75715e">// Spline variable to represent the plane track
+</span><span style="color:#75715e"></span>UPROPERTY(BlueprintReadOnly, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FlightTracker&#34;</span>)
+    USplineComponent<span style="color:#f92672">*</span> SplineTrack;
+
+<span style="color:#75715e">// Cesium class that contain many useful  coordinate conversion functions
+</span><span style="color:#75715e"></span>UPROPERTY(EditAnywhere, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FlightTracker&#34;</span>)
+    ACesiumGeoreference<span style="color:#f92672">*</span> CesiumGeoreference;
+
+<span style="color:#75715e">// An Unreal Engine data table to store the raw flight data
+</span><span style="color:#75715e"></span>UPROPERTY(EditAnywhere, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FlightTracker&#34;</span>)
+    UDataTable<span style="color:#f92672">*</span> AircraftsRawDataTable;
+</code></pre></div></li>
+<li>
+<p>打开 <em>PlaneTrack.cpp</em> 文件，在构造函数中初始化 <em>SplineTrack</em> 变量；</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">APlaneTrack<span style="color:#f92672">::</span>APlaneTrack()
+{
+    <span style="color:#75715e">// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
+</span><span style="color:#75715e"></span>    PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
+
+    <span style="color:#75715e">// Initialize the track
+</span><span style="color:#75715e"></span>    SplineTrack <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>USplineComponent<span style="color:#f92672">&gt;</span>(TEXT(<span style="color:#e6db74">&#34;SplineTrack&#34;</span>));
+    <span style="color:#75715e">// This lets us visualize the spline in Play mode
+</span><span style="color:#75715e"></span>    SplineTrack<span style="color:#f92672">-&gt;</span>SetDrawDebug(true);                                            
+    <span style="color:#75715e">// Set the color of the spline
+</span><span style="color:#75715e"></span>    SplineTrack<span style="color:#f92672">-&gt;</span>SetUnselectedSplineSegmentColor(FLinearColor(<span style="color:#ae81ff">1.f</span>, <span style="color:#ae81ff">0.f</span>, <span style="color:#ae81ff">0.f</span>));                              
+}
+</code></pre></div><p><em>CesiumGeoreference</em> 和 <em>AircraftsRawDataTable</em> 变量将在 <em>Unreal Engine Editor</em> 中进行设置</p>
+</li>
+<li>
+<p>编译</p>
+<p>在 <em>UE4 Editor</em> 中，可以点击【编译】按钮，但是 <em>UE5 Editor</em> 并未找到此工具按钮</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE4%e7%bc%96%e8%af%91%e6%8c%89%e9%92%ae.jpg" alt="UE4编译按钮"  />
+</p>
+<p><em>UE5</em> 中可以通过两种方式进行编译：</p>
+<ul>
+<li>通过 <em>VS</em> 启动本地调试，会打开一个 <em>UE Editor</em>，但停止调试后，<em>UE Editor</em> 也会退出。<strong>注意：此时工程不能是被 <em>UE Editor</em> 打开的状态，否则会报如下错误</strong><br>
+<code>UnrealBuildTool : error : Unable to build while Live Coding is active. Exit the editor and game, or press Ctrl+Alt+F11 if iterating on code in the editor or game</code></li>
+</ul>
+<p><img loading="lazy" style="margin: auto;" src=".././img/VS%e5%90%af%e5%8a%a8UE%e9%a1%b9%e7%9b%ae.jpg" alt="VS启动UE项目"  />
+</p>
+<ul>
+<li>通过 <em>Ctrl+Alt+F11</em> 快捷键在 <em>Editor</em> 或 <em>game</em> 中进行代码迭代热编译</li>
+</ul>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-LiveCoding%e5%af%b9%e8%af%9d%e6%a1%86.jpg" alt="UE5-LiveCoding对话框"  />
+</p>
+</li>
+</ol>
+<h2 id="第三步导入真实的飞行数据">第三步：导入真实的飞行数据<a hidden class="anchor" aria-hidden="true" href="#第三步导入真实的飞行数据">#</a></h2>
+<p>下载真实的<a href="../SFO_to_CPH_flight_data_WGS84.csv">飞行点位数据</a></p>
+<p>为了使 <em>PlaneTrack</em> 类能访问数据并执行坐标转换，我们将使用虚幻引擎的 <a href="https://docs.unrealengine.com/5.0/zh-CN/data-driven-gameplay-elements-in-unreal-engine/"><em>DataTable</em></a> 来存储项目内部的数据。在这一步中，我们将创建一个数据结构来表示飞行数据的结构。</p>
+<ol>
+<li>
+<p>在 <em>PlaneTrack.h</em> 文件中，将下面的代码直接插入到类的外面，用来定义航班数据库结构；</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">USTRUCT(BlueprintType)
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">FAircraftRawData</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> FTableRowBase
+{
+GENERATED_USTRUCT_BODY()
+
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    FAircraftRawData()
+    <span style="color:#f92672">:</span> Longitude(<span style="color:#ae81ff">0.0</span>)
+    , Latitude(<span style="color:#ae81ff">0.0</span>)
+    , Height(<span style="color:#ae81ff">0.0</span>)
+    {}
+
+UPROPERTY(EditAnywhere, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FlightTracker&#34;</span>)
+    <span style="color:#66d9ef">double</span> Longitude;
+UPROPERTY(EditAnywhere, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FlightTracker&#34;</span>)
+    <span style="color:#66d9ef">double</span> Latitude;
+UPROPERTY(EditAnywhere, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FlightTracker&#34;</span>)
+    <span style="color:#66d9ef">double</span> Height;
+};
+</code></pre></div><p>该结构包含三个成员变量：<em>Longitude、Latitude和Height</em>。这些变量对应于上面原始数据表中的列名。还要注意，该结构继承自 <a href="https://docs.unrealengine.com/5.0/en-US/API/Runtime/Engine/Engine/FTableRowBase/"><em>FTableRowBase</em></a></p>
+<p><strong>注意：编译代码</strong></p>
+</li>
+<li>
+<p>将 <em>.csv</em> 数据文件拖放到虚幻引擎内容浏览器中。在【选择DataTable的行类型】下拉菜单中选择 <em>AircraftRawData</em></p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-%e5%af%bc%e5%85%a5DataTable.jpg" alt="UE5-导入DataTable"  />
+</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-DataTable.jpg" alt="UE5-DataTable"  />
+</p>
+</li>
+</ol>
+<h2 id="第四步在飞行轨迹上添加点位">第四步：在飞行轨迹上添加点位<a hidden class="anchor" aria-hidden="true" href="#第四步在飞行轨迹上添加点位">#</a></h2>
+<ol>
+<li>
+<p>在 <em>PlaneTrack.h</em> 文件中添加下面的包含文件：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// Imports should be placed above the PlaneTrack.Generated.h line. 
+</span><span style="color:#75715e"></span>...
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;glm/vec3.hpp&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CesiumGeospatial/Ellipsoid.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CesiumGeospatial/Cartographic.h&#34;</span><span style="color:#75715e">
+</span></code></pre></div><p>在 <em>APlaneTrack</em> 类的最后添加下面的方法，用来将数据表中的数据添加到样条曲线的点位：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++">
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<span style="color:#75715e">// Function to parse the data table and create the spline track
+</span><span style="color:#75715e"></span>UFUNCTION(BlueprintCallable, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;FlightTracker&#34;</span>)
+    <span style="color:#66d9ef">void</span> LoadSplineTrackPoints();
+</code></pre></div></li>
+<li>
+<p>在 <em>PlaneTrack.cpp</em> 中添加 <em>LoadSplineTrackPoints</em> 方法的函数体；</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> APlaneTrack<span style="color:#f92672">::</span>LoadSplineTrackPoints()
+{
+    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>AircraftsRawDataTable <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>CesiumGeoreference <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>)
+    {
+    int32 PointIndex <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> row : <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>AircraftsRawDataTable<span style="color:#f92672">-&gt;</span>GetRowMap())
+    {
+        FAircraftRawData<span style="color:#f92672">*</span> Point <span style="color:#f92672">=</span> (FAircraftRawData<span style="color:#f92672">*</span>)row.Value;
+        <span style="color:#75715e">// Get row data point in lat/long/alt and transform it into UE4 points
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">double</span> PointLatitude <span style="color:#f92672">=</span> Point<span style="color:#f92672">-&gt;</span>Latitude;
+        <span style="color:#66d9ef">double</span> PointLongitude <span style="color:#f92672">=</span> Point<span style="color:#f92672">-&gt;</span>Longitude;
+        <span style="color:#66d9ef">double</span> PointHeight <span style="color:#f92672">=</span> Point<span style="color:#f92672">-&gt;</span>Height;
+
+        <span style="color:#75715e">// Compute the position in UE coordinates
+</span><span style="color:#75715e"></span>        glm<span style="color:#f92672">::</span>dvec3 UECoords <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>CesiumGeoreference<span style="color:#f92672">-&gt;</span>TransformLongitudeLatitudeHeightToUnreal(glm<span style="color:#f92672">::</span>dvec3(PointLongitude, PointLatitude, PointHeight));
+        FVector SplinePointPosition <span style="color:#f92672">=</span> FVector(UECoords.x, UECoords.y, UECoords.z);
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>SplineTrack<span style="color:#f92672">-&gt;</span>AddSplinePointAtIndex(SplinePointPosition, PointIndex, ESplineCoordinateSpace<span style="color:#f92672">::</span>World, false);
+
+        <span style="color:#75715e">// Get the up vector at the position to orient the aircraft
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> CesiumGeospatial<span style="color:#f92672">::</span>Ellipsoid<span style="color:#f92672">&amp;</span> Ellipsoid <span style="color:#f92672">=</span> CesiumGeospatial<span style="color:#f92672">::</span>Ellipsoid<span style="color:#f92672">::</span>WGS84;
+        glm<span style="color:#f92672">::</span>dvec3 upVector <span style="color:#f92672">=</span> Ellipsoid.geodeticSurfaceNormal(CesiumGeospatial<span style="color:#f92672">::</span>Cartographic(FMath<span style="color:#f92672">::</span>DegreesToRadians(PointLongitude), FMath<span style="color:#f92672">::</span>DegreesToRadians(PointLatitude), FMath<span style="color:#f92672">::</span>DegreesToRadians(PointHeight)));
+
+        <span style="color:#75715e">// Compute the up vector at each point to correctly orient the plane
+</span><span style="color:#75715e"></span>        glm<span style="color:#f92672">::</span>dvec4 ecefUp(upVector, <span style="color:#ae81ff">0.0</span>);
+        <span style="color:#66d9ef">const</span> GeoTransforms<span style="color:#f92672">&amp;</span> geoTransforms <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>CesiumGeoreference<span style="color:#f92672">-&gt;</span>GetGeoTransforms();
+        <span style="color:#66d9ef">const</span> glm<span style="color:#f92672">::</span>dmat4<span style="color:#f92672">&amp;</span> ecefToUnreal <span style="color:#f92672">=</span> geoTransforms.GetEllipsoidCenteredToAbsoluteUnrealWorldTransform();
+        glm<span style="color:#f92672">::</span>dvec4 unrealUp <span style="color:#f92672">=</span> ecefToUnreal <span style="color:#f92672">*</span> ecefUp;
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>SplineTrack<span style="color:#f92672">-&gt;</span>SetUpVectorAtSplinePoint(PointIndex, FVector(unrealUp.x, unrealUp.y, unrealUp.z), ESplineCoordinateSpace<span style="color:#f92672">::</span>World, false);
+
+        PointIndex<span style="color:#f92672">++</span>;
+    }
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>SplineTrack<span style="color:#f92672">-&gt;</span>UpdateSpline();
+    }
+}
+</code></pre></div><p>保存并编译工程</p>
+</li>
+<li>
+<p>在场景中添加 <em>PlaneTrack</em> Actor；</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-%e5%86%85%e5%ae%b9%e6%b5%8f%e8%a7%88%e5%99%a8-C&#43;&#43;%e7%b1%bb.jpg" alt="UE5-内容浏览器-C&#43;&#43;类"  />
+</p>
+</li>
+<li>
+<p>选中添加的 <em>PlaneTrack1</em> Actor，打开【细节】面板，设置 <em>Cesium Georeference</em> 和 <em>Aircrafts Raw Data Table</em></p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/PlaneTrack%e7%bb%86%e8%8a%82%e9%9d%a2%e6%9d%bf%e8%ae%be%e7%bd%ae.jpg" alt="PlaneTrack细节面板设置"  />
+</p>
+</li>
+<li>
+<p>打开【关卡蓝图】,将 <em>PlaneTrack1 Actor</em> 拖入到蓝图中，获取 <em>Spline Track</em> 对象，并添加【清除样条点】节点，当样条第一次添加到场景中时，默认情况下它有两个点。这两个点是任意的，我们不需要，因此可以使用 Clear Spline points 清除它们。</p>
+</li>
+<li>
+<p>添加 <em>Load Spline Track Points</em> 节点，最终蓝图连接如下图：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-Cesium-PlaneTrack-%e6%a0%b7%e6%9d%a1%e6%9b%b2%e7%ba%bf%e5%85%b3%e5%8d%a1%e8%93%9d%e5%9b%be.jpg" alt="UE5-Cesium-PlaneTrack-样条曲线关卡蓝图.jpg"  />
+</p>
+<p>由于样条可视化在默认情况下是关闭的，可以通过在控制台命令窗口输入 <code>ShowFlag.Splines 1</code> 命令来打开它，运行后如下图：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-Cesium-PlaneTrace-%e6%95%88%e6%9e%9c%e5%9b%be.jpg" alt="UE5-Cesium-PlaneTrace-效果图"  />
+</p>
+</li>
+</ol>
+<h2 id="第五步添加飞机模型">第五步：添加飞机模型<a hidden class="anchor" aria-hidden="true" href="#第五步添加飞机模型">#</a></h2>
+<p>模型下载网站：</p>
+<ul>
+<li><a href="https://www.turbosquid.com/3d-models/free-boeing-787-8-1-3d-model/858876#">波音787</a></li>
+<li><a href="https://sketchfab.com/feed">Sketchfab 3D model</a></li>
+</ul>
+<ol>
+<li>
+<p>导入模型为静态网格模型</p>
+<p>建议每个模型创建一个文件夹，在【内容浏览器】面板新建模型文件夹，然后在新建的文件夹中右击鼠标，在弹出的快捷菜单中选择【导入】</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-%e5%af%bc%e5%85%a5%e9%9d%99%e6%80%81%e6%a8%a1%e5%9e%8b.jpg" alt="UE5-导入静态模型"  />
+</p>
+</li>
+<li>
+<p>添加蓝图类 <em>BP_Aircraft</em>，该类将包含飞机静态网格模型，以及沿着样条曲线路径移动飞机的逻辑</p>
+</li>
+<li>
+<p>在 <em>BP_Aircraft</em> 蓝图类中添加【静态网格体】组件，并指定【静态网格体】为导入的飞机模型</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-%e8%93%9d%e5%9b%be%e7%b1%bb%e6%b7%bb%e5%8a%a0%e9%9d%99%e6%80%81%e7%bd%91%e6%a0%bc%e4%bd%93%e7%bb%84%e4%bb%b6.jpg" alt="UE5-蓝图类添加静态网格体组件"  />
+</p>
+</li>
+<li>
+<p>在该蓝图类的【事件图表】中添加【自定义事件】并命名为 <em>MoveAircraft</em></p>
+</li>
+<li>
+<p>在【事件图表】中添加【时间轴】节点并命名为 <em>AircraftMover</em>，这个时间轴将随时间移动飞机模型</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-%e6%97%b6%e9%97%b4%e8%bd%b4%e8%8a%82%e7%82%b9.jpg" alt="UE5-时间轴节点"  />
+</p>
+<p>将时间轴的 <em>Alpha</em> 输出引脚提升为变量 <em>Alpha</em></p>
+</li>
+<li>
+<p>双击时间轴节点，打开【时间轴编辑器】，添加浮点型轨道，添加两个关键帧，时间 = 0，值 = 0，时间 = 1， 值 = 1，勾选【使用最后一个关键帧】</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-%e6%97%b6%e9%97%b4%e8%bd%b4%e8%8a%82%e7%82%b9-%e6%b7%bb%e5%8a%a0%e6%b5%ae%e7%82%b9%e5%9e%8b%e8%bd%a8%e9%81%93.jpg" alt="UE5-时间轴节点-添加浮点型轨道"  />
+</p>
+</li>
+<li>
+<p>添加几个公有变量：</p>
+<ul>
+<li><em>Duration</em>，float 类型，public 权限，这个变量将用于确定飞机沿路径飞行所需的时间</li>
+<li><em>AircraftStartOffset</em>，float 类型，public 权限，用于确定飞行在时间轴上的哪个位置开始，取值区间为从 0 到 1</li>
+<li><em>PlaneTrack</em>：<code>PlaneTrack</code> 对象引用类型，public 权限，用于存储 PlaneTrack 对象的引用，以检索样条曲线上的点位</li>
+</ul>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-%e8%93%9d%e5%9b%be%e5%8f%98%e9%87%8f.jpg" alt="UE5-蓝图变量"  />
+</p>
+</li>
+<li>
+<p>如下图连接 <em>MoveAircraft</em> 自定义事件蓝图：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-%e9%a3%9e%e8%a1%8c%e8%bd%a8%e8%bf%b9%e8%93%9d%e5%9b%be-Move-Aircraft.jpg" alt="UE5-飞行轨迹蓝图-Move-Aircraft"  />
+</p>
+</li>
+<li>
+<p>通过样条曲线类 <em>PlaneTrack</em> 插值飞机飞行点位，如下图：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-PlaneTrack-%e6%a0%b7%e6%9d%a1%e6%9b%b2%e7%ba%bf%e6%8f%92%e5%80%bc.jpg" alt="UE5-PlaneTrack-样条曲线插值"  />
+</p>
+</li>
+<li>
+<p>最后连接到【设置Actor变换】节点：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-PlaneTrack-BP-Aircraft.jpg" alt="UE5-PlaneTrack-BP-Aircraft"  />
+</p>
+</li>
+<li>
+<p>编译保存，并把 <em>BP_Aircraft</em> 蓝图类放入到场景中</p>
+</li>
+<li>
+<p>在关卡蓝图中添加键盘事件，调用 <em>BP_Aircraft</em> 的 <em>MoveAircraft</em> 自定义事件节点</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-M-MoveAircraft.jpg" alt="UE5-M-MoveAircraft"  />
+</p>
+</li>
+<li>
+<p>在场景中选中 <em>BP_Aircraft Actor</em>，在细节面板中设置 <em>Duration、PlaneTrack、AirplaneOffset</em></p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-BP-Aircraft-%e5%8f%82%e6%95%b0%e8%ae%be%e7%bd%ae.jpg" alt="UE5-BP-Aircraft-参数设置"  />
+</p>
+</li>
+</ol>
+<h2 id="第六步在两个不同的相机视图间切换">第六步：在两个不同的相机视图间切换<a hidden class="anchor" aria-hidden="true" href="#第六步在两个不同的相机视图间切换">#</a></h2>
+<ol>
+<li>
+<p>在 <em>BP_Aircraft</em> 蓝图类节点下添加两个相机，分别放置在飞机模型的顶部和侧边</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-BP-Aircraft-SwitchCamera.jpg" alt="UE5-BP-Aircraft-SwitchCamera"  />
+</p>
+</li>
+<li>
+<p>在关卡蓝图中添加两个快捷键事件，并如下图连接节点</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/UE5-BP-Aircraft-SwitchCamera-%e5%88%87%e6%8d%a2%e8%93%9d%e5%9b%be.jpg" alt="UE5-BP-Aircraft-SwitchCamera-切换蓝图"  />
+</p>
+</li>
+</ol>
+<p>参考：</p>
+<ol>
+<li><a href="https://cesium.com/learn/unreal/unreal-flight-tracker/">Build a Flight Tracker with Cesium for Unreal</a></li>
+<li><a href="https://blog.csdn.net/m0_51819222/article/details/119064198">UE-c++代码热编译</a></li>
+<li><a href="https://docs.unrealengine.com/5.0/zh-CN/setting-up-visual-studio-development-environment-for-cplusplus-projects-in-unreal-engine/">设置Visual Studio</a></li>
+<li><a href="https://docs.unrealengine.com/5.0/zh-CN/build-configurations-reference-for-unreal-engine/">编译配置参考</a></li>
+<li><a href="https://docs.unrealengine.com/5.0/zh-CN/compiling-game-projects-in-unreal-engine-using-cplusplus/">编译游戏项目</a></li>
+<li><a href="https://docs.unrealengine.com/4.27/zh-CN/WorkingWithContent/Importing/Datasmith/SoftwareInteropGuides/3dsMax/">使用Datasmith和3ds Max</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/291074204">UE4模型整体导入流程</a></li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/cesium/">Cesium</a></li>
+      <li><a href="https://874656645.github.io/tags/ue5/">UE5</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/251-cesium-unreal-importing-quixel-assets/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Cesium4Unreal——Importing Quixel Assets</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/249-c&#43;&#43;-malloc-calloc-realloc-%E6%8C%87%E9%92%88%E6%9D%82%E8%AE%B0/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>C&#43;&#43;——malloc、calloc、realloc、指针杂记</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

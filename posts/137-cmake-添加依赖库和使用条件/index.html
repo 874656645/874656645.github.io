@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>CMake 添加依赖库和使用条件 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="CMake" />
+<meta name="description" content="添加依赖库和使用条件 CMakeLists.txt  注意编译选项、生成配置文件和条件编译三部分的顺序  # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions) list(APPEND EXTRA_INCLUDES &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; ${EXTRA_INCLUDES} )子模块（库）的 CMakeLists.txt 文件 add_library(MathFunctions mysqrt.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/137-cmake-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="CMake 添加依赖库和使用条件" />
+<meta property="og:description" content="添加依赖库和使用条件 CMakeLists.txt  注意编译选项、生成配置文件和条件编译三部分的顺序  # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions) list(APPEND EXTRA_INCLUDES &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; ${EXTRA_INCLUDES} )子模块（库）的 CMakeLists.txt 文件 add_library(MathFunctions mysqrt." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/137-cmake-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-27T14:30:39&#43;08:00" />
+<meta property="article:modified_time" content="2022-02-27T14:30:39&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/146-cmake-%E6%89%93%E5%8C%85-debug-%E5%92%8C-release/" /><meta property="og:see_also" content="https://874656645.github.io/posts/145-cmake-%E6%B7%BB%E5%8A%A0%E5%AF%BC%E5%87%BA%E9%85%8D%E7%BD%AE/" /><meta property="og:see_also" content="https://874656645.github.io/posts/144-cmake-%E6%B7%BB%E5%8A%A0%E7%94%9F%E6%88%90%E5%99%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F/" /><meta property="og:see_also" content="https://874656645.github.io/posts/143-cmake-%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8/" /><meta property="og:see_also" content="https://874656645.github.io/posts/142-cmake-%E6%B7%BB%E5%8A%A0%E5%AF%B9%E6%B5%8B%E8%AF%95%E4%BB%AA%E8%A1%A8%E6%9D%BF%E7%9A%84%E6%94%AF%E6%8C%81/" /><meta property="og:see_also" content="https://874656645.github.io/posts/141-cmake-%E6%89%93%E5%8C%85%E5%8F%AF%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="CMake 添加依赖库和使用条件"/>
+<meta name="twitter:description" content="添加依赖库和使用条件 CMakeLists.txt  注意编译选项、生成配置文件和条件编译三部分的顺序  # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH &#34;Use tutorial provided math implementation&#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions) list(APPEND EXTRA_INCLUDES &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # &#34;${PROJECT_BINARY_DIR}&#34; # &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34; # ) target_include_directories(Tutorial PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; ${EXTRA_INCLUDES} )子模块（库）的 CMakeLists.txt 文件 add_library(MathFunctions mysqrt."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "CMake 添加依赖库和使用条件",
+      "item": "https://874656645.github.io/posts/137-cmake-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CMake 添加依赖库和使用条件",
+  "name": "CMake 添加依赖库和使用条件",
+  "description": "添加依赖库和使用条件 CMakeLists.txt  注意编译选项、生成配置文件和条件编译三部分的顺序  # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH \u0026#34;Use tutorial provided math implementation\u0026#34; ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions) list(APPEND EXTRA_INCLUDES \u0026#34;${PROJECT_SOURCE_DIR}/MathFunctions\u0026#34;)endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # \u0026#34;${PROJECT_BINARY_DIR}\u0026#34; # \u0026#34;${PROJECT_SOURCE_DIR}/MathFunctions\u0026#34; # ) target_include_directories(Tutorial PUBLIC \u0026#34;${PROJECT_BINARY_DIR}\u0026#34; ${EXTRA_INCLUDES} )子模块（库）的 CMakeLists.txt 文件 add_library(MathFunctions mysqrt.",
+  "keywords": [
+    "CMake"
+  ],
+  "articleBody": "添加依赖库和使用条件 CMakeLists.txt  注意编译选项、生成配置文件和条件编译三部分的顺序  # 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 project(Tutorial VERSION 3.1)# 指定 C++ 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 设置编译选项 option(USE_MYMATH \"Use tutorial provided math implementation\" ON)# 生成一个头文件，传递 CMake 的一些设置到源代码 configure_file(TutorialConfig.h.in TutorialConfig.h)# 添加 MathFunctions library # add_subdirectory(MathFunctions) if(USE_MYMATH) add_subdirectory(MathFunctions) list(APPEND EXTRA_LIBS MathFunctions) list(APPEND EXTRA_INCLUDES \"${PROJECT_SOURCE_DIR}/MathFunctions\")endif()# 添加源码文件和生成的目标文件的名称 add_executable(Tutorial main.cpp)# target_link_libraries(Tutorial PUBLIC MathFunctions) target_link_libraries(Tutorial PUBLIC ${EXTRA_LIBS})# 添加头文件查找路径 # target_include_directories(Tutorial PUBLIC # \"${PROJECT_BINARY_DIR}\" # \"${PROJECT_SOURCE_DIR}/MathFunctions\" # ) target_include_directories(Tutorial PUBLIC \"${PROJECT_BINARY_DIR}\" ${EXTRA_INCLUDES} )子模块（库）的 CMakeLists.txt 文件 add_library(MathFunctions mysqrt.cxx)TutorialConfig.h.in // 版本号配置信息 #define TUTORIAL_VERSION_MAJOR @Tutorial_VERSION_MAJOR@ #define TUTORIAL_VERSION_MINOR @Tutorial_VERSION_MINOR@ // 程序中使用到的宏定义 #cmakedefine USE_MYMATH 程序中的宏定义使用 #ifdef USE_MYMATH #include \"MathFunctions.h\"#endif  ... ... #ifdef USE_MYMATH  const double outputValue = mysqrt(inputValue); #else  const double outputValue = sqrt(inputValue); #endif 添加库的使用需求   在子模块（库）的 CMakeLists.txt 文件末尾添加\nadd_library(MathFunctions mysqrt.cxx)target_include_directories(MathFunctions INTERFACE ${CMAKE_CURRENT_SOURCE_DIR} ) INTERFACE means things that consumers require but the producer doesn’t    在上层 CMakeLists.txt 文件中就可以不添加 EXTRA_INCLUDES 了\n... ... if(USE_MYMATH)add_subdirectory(MathFunctions)list(APPEND EXTRA_LIBS MathFunctions)# list(APPEND EXTRA_INCLUDES \"${PROJECT_SOURCE_DIR}/MathFunctions\") endif()... ... target_include_directories(Tutorial PUBLIC \"${PROJECT_BINARY_DIR}\" )  ",
+  "wordCount" : "142",
+  "inLanguage": "en",
+  "datePublished": "2022-02-27T14:30:39+08:00",
+  "dateModified": "2022-02-27T14:30:39+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/137-cmake-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      CMake 添加依赖库和使用条件
+    </h1>
+    <div class="post-meta"><span title='2022-02-27 14:30:39 +0800 CST'>February 27, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e6%b7%bb%e5%8a%a0%e4%be%9d%e8%b5%96%e5%ba%93%e5%92%8c%e4%bd%bf%e7%94%a8%e6%9d%a1%e4%bb%b6" aria-label="添加依赖库和使用条件">添加依赖库和使用条件</a><ul>
+                        
+                <li>
+                    <a href="#cmakeliststxt" aria-label="CMakeLists.txt">CMakeLists.txt</a></li>
+                <li>
+                    <a href="#%e5%ad%90%e6%a8%a1%e5%9d%97%e5%ba%93%e7%9a%84-cmakeliststxt-%e6%96%87%e4%bb%b6" aria-label="子模块（库）的 CMakeLists.txt 文件">子模块（库）的 CMakeLists.txt 文件</a></li>
+                <li>
+                    <a href="#tutorialconfighin" aria-label="TutorialConfig.h.in">TutorialConfig.h.in</a></li>
+                <li>
+                    <a href="#%e7%a8%8b%e5%ba%8f%e4%b8%ad%e7%9a%84%e5%ae%8f%e5%ae%9a%e4%b9%89%e4%bd%bf%e7%94%a8" aria-label="程序中的宏定义使用">程序中的宏定义使用</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e6%b7%bb%e5%8a%a0%e5%ba%93%e7%9a%84%e4%bd%bf%e7%94%a8%e9%9c%80%e6%b1%82" aria-label="添加库的使用需求">添加库的使用需求</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="添加依赖库和使用条件">添加依赖库和使用条件<a hidden class="anchor" aria-hidden="true" href="#添加依赖库和使用条件">#</a></h2>
+<h3 id="cmakeliststxt">CMakeLists.txt<a hidden class="anchor" aria-hidden="true" href="#cmakeliststxt">#</a></h3>
+<ul>
+<li>注意编译选项、生成配置文件和条件编译三部分的顺序</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-CMake" data-lang="CMake"><span style="color:#75715e"># 设置CMake版本最低要求
+</span><span style="color:#75715e"></span>cmake_minimum_required(<span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.10</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置项目名称和版本
+</span><span style="color:#75715e"></span>project(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">VERSION</span> <span style="color:#e6db74">3.1</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 指定 C++ 标准
+</span><span style="color:#75715e"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD</span> <span style="color:#e6db74">11</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>set(<span style="color:#e6db74">CMAKE_CXX_STANDARD_REQUIRED</span> <span style="color:#e6db74">True</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 设置编译选项
+</span><span style="color:#75715e"></span>option(<span style="color:#e6db74">USE_MYMATH</span> <span style="color:#e6db74">&#34;Use tutorial provided math implementation&#34;</span> <span style="color:#e6db74">ON</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 生成一个头文件，传递 CMake 的一些设置到源代码
+</span><span style="color:#75715e"></span>configure_file(<span style="color:#e6db74">TutorialConfig.h.in</span> <span style="color:#e6db74">TutorialConfig.h</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加 MathFunctions library
+</span><span style="color:#75715e"># add_subdirectory(MathFunctions)
+</span><span style="color:#75715e"></span>if(<span style="color:#e6db74">USE_MYMATH</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  add_subdirectory(<span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  list(<span style="color:#e6db74">APPEND</span> <span style="color:#e6db74">EXTRA_LIBS</span> <span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  list(<span style="color:#e6db74">APPEND</span> <span style="color:#e6db74">EXTRA_INCLUDES</span> <span style="color:#e6db74">&#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>endif()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加源码文件和生成的目标文件的名称
+</span><span style="color:#75715e"></span>add_executable(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">main.cpp</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># target_link_libraries(Tutorial PUBLIC MathFunctions)
+</span><span style="color:#75715e"></span>target_link_libraries(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> <span style="color:#f92672">${</span>EXTRA_LIBS<span style="color:#f92672">}</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># 添加头文件查找路径
+</span><span style="color:#75715e"># target_include_directories(Tutorial PUBLIC 
+</span><span style="color:#75715e">#                             &#34;${PROJECT_BINARY_DIR}&#34;
+</span><span style="color:#75715e">#                             &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;
+</span><span style="color:#75715e"># )
+</span><span style="color:#75715e"></span>target_include_directories(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> 
+                            <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>
+                            <span style="color:#f92672">${</span>EXTRA_INCLUDES<span style="color:#f92672">}</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><h3 id="子模块库的-cmakeliststxt-文件">子模块（库）的 CMakeLists.txt 文件<a hidden class="anchor" aria-hidden="true" href="#子模块库的-cmakeliststxt-文件">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-CMake" data-lang="CMake">add_library(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">mysqrt.cxx</span>)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><h3 id="tutorialconfighin">TutorialConfig.h.in<a hidden class="anchor" aria-hidden="true" href="#tutorialconfighin">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 版本号配置信息
+</span><span style="color:#75715e"></span><span style="color:#75715e">#define TUTORIAL_VERSION_MAJOR @Tutorial_VERSION_MAJOR@
+</span><span style="color:#75715e">#define TUTORIAL_VERSION_MINOR @Tutorial_VERSION_MINOR@
+</span><span style="color:#75715e"></span><span style="color:#75715e">// 程序中使用到的宏定义
+</span><span style="color:#75715e"></span><span style="color:#75715e">#cmakedefine USE_MYMATH
+</span></code></pre></div><h3 id="程序中的宏定义使用">程序中的宏定义使用<a hidden class="anchor" aria-hidden="true" href="#程序中的宏定义使用">#</a></h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#ifdef USE_MYMATH
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;MathFunctions.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span>
+... ...
+
+<span style="color:#75715e">#ifdef USE_MYMATH
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">double</span> outputValue <span style="color:#f92672">=</span> mysqrt(inputValue);
+<span style="color:#75715e">#else
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">double</span> outputValue <span style="color:#f92672">=</span> sqrt(inputValue);
+<span style="color:#75715e">#endif
+</span></code></pre></div><h2 id="添加库的使用需求">添加库的使用需求<a hidden class="anchor" aria-hidden="true" href="#添加库的使用需求">#</a></h2>
+<ol>
+<li>
+<p>在子模块（库）的 CMakeLists.txt 文件末尾添加</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-CMake" data-lang="CMake">add_library(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">mysqrt.cxx</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>target_include_directories(<span style="color:#e6db74">MathFunctions</span> <span style="color:#e6db74">INTERFACE</span> 
+                            <span style="color:#f92672">${</span>CMAKE_CURRENT_SOURCE_DIR<span style="color:#f92672">}</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div><ul>
+<li><code>INTERFACE</code> means things that consumers require but the producer doesn&rsquo;t</li>
+</ul>
+</li>
+<li>
+<p>在上层 CMakeLists.txt 文件中就可以不添加 <code>EXTRA_INCLUDES</code> 了</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-CMake" data-lang="CMake"><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">...</span> <span style="color:#960050;background-color:#1e0010">...
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>if(<span style="color:#e6db74">USE_MYMATH</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>add_subdirectory(<span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>list(<span style="color:#e6db74">APPEND</span> <span style="color:#e6db74">EXTRA_LIBS</span> <span style="color:#e6db74">MathFunctions</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># list(APPEND EXTRA_INCLUDES &#34;${PROJECT_SOURCE_DIR}/MathFunctions&#34;)
+</span><span style="color:#75715e"></span>endif()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">...</span> <span style="color:#960050;background-color:#1e0010">...
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>target_include_directories(<span style="color:#e6db74">Tutorial</span> <span style="color:#e6db74">PUBLIC</span> 
+                            <span style="color:#e6db74">&#34;${PROJECT_BINARY_DIR}&#34;</span>
+)<span style="color:#960050;background-color:#1e0010">
+</span></code></pre></div></li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/cmake/">CMake</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/138-cmake-%E5%AE%89%E8%A3%85%E5%92%8C%E6%B5%8B%E8%AF%95/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>CMake 安装和测试</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/136-cmake-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%BC%A0%E9%80%92%E8%AE%BE%E7%BD%AE%E4%BF%A1%E6%81%AF/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>CMake 配置文件传递设置信息</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

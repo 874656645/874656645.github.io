@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>GeoServer | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="" />
+<meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/tags/geoserver/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/tags/geoserver/index.xml">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="GeoServer" />
+<meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://874656645.github.io/tags/geoserver/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="GeoServer"/>
+<meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
+
+
+</head>
+
+<body class="list dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
+<header class="page-header"><div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/tags/">Tags</a></div>
+  <h1>GeoServer</h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>GIS——GeoServer 发布 ArcGIS 切片的 WMTS 服务
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、部署环境和软件版本 操作系统 版本 win10 JDK 版本 OpenJDK11U-jdk_x64_windows_hotspot_11.0.16.1_1 GeoServer 版本 2.21.1 GeoWebCache 版本 1.21.1 二、说明  安装 JDK，配置 java 环境。 Windows 平台可安装 GeoServer Exe 安装包。 也可以通过 Tomcat 起动服务，需要下载 GeoServer 和 GeoWebCache 的 war 包，并放到 tomcat/webapps 目录下，如果只是发布切片服务，配置 GeoWebCache 即可。  三、软件下载  下载 GeoServer 也可GeoServer 官网下载 下载 GeoWebCache，解压待用  四、配置 GeoServer  将 GeoWebCache 中的 jar 包 \geowebcache\WEB-INF\lib\gwc-arcgiscache-1.21.1.jar 拷贝到 GeoServer 安装目录 \webapps\geoserver\WEB-INF\lib。 解压 GeoServer 安装目录下的 jar 包 \webapps\geoserver\WEB-INF\lib\gs-gwc-2.21.1.jar 到 gs-gwc-2.21.1 文件夹，将 GeoWebCache 中的 \geowebcache\WEB-INF\geowebcache-arcgiscache-context....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-31 11:19:28 +0800 CST'>August 31, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to GIS——GeoServer 发布 ArcGIS 切片的 WMTS 服务" href="https://874656645.github.io/posts/226-gis-geoserver-%E5%8F%91%E5%B8%83-arcgis-%E5%88%87%E7%89%87%E7%9A%84-wmts-%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>GIS——GeoServer 地图服务
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>GeoServer Version 2.21.1 一、WMS 服务   获取服务能力元数据：
+  可在网址中指定 version=1.1.0 和 service=WMS 参数
+  获取整个 geoserver 的服务能力，默认 WMS_Capabilities 的 version 是 1.3.0 的
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities
+http://172.16.17.127:8066/geoserver/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中不包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中不包含工作空间的 1.3.0 版本的 xml 样例
+  获取其中某个工作空间的服务能力，需要在 geoserver 后面添加工作空间名称
+http://172.16.17.127:8066/geoserver/cite/wms?request=getCapabilities&amp;version=1.1.0
+请求网址中包含工作空间的 1.1.1 版本的 xml 样例
+请求网址中包含工作空间的 1.3.0 版本的 xml 样例
+  注意：
+ 1.3.0 版本的空间参考标签为 &lt;CRS&gt;，而 1.1.0 版本的空间参考标签为 &lt;SRS&gt; 如果请求的网址指定了工作空间，图层名中就不需要有工作空间名了（比如：cite:hl_2017 和 hl_2017） 1.1.0 版本的图层中包含 geoserver 以图层组方式发布的服务图层，而 1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-23 10:34:42 +0800 CST'>August 23, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to GIS——GeoServer 地图服务" href="https://874656645.github.io/posts/223-gis-geoserver-%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

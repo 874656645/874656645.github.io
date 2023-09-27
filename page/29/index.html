@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head>
+	<meta name="generator" content="Hugo 0.91.2" /><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Blog, Code, C&#43;&#43;" />
+<meta name="description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="https://874656645.github.io/index.xml">
+<link rel="alternate" type="application/json" href="https://874656645.github.io/index.json">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Slow is Smooth and Smooth is Fast" />
+<meta property="og:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://874656645.github.io/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Slow is Smooth and Smooth is Fast"/>
+<meta name="twitter:description" content="&#34;Take time for all things: great haste makes great waste.&#34; – Benjamin Franklin"/>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Slow is Smooth and Smooth is Fast",
+  "url": "https://874656645.github.io",
+  "description": "\u0026#34;Take time for all things: great haste makes great waste.\u0026#34; – Benjamin Franklin",
+  "thumbnailUrl": "https://874656645.github.io/favicon.ico",
+  "sameAs": [
+      "https://twitter.com/", "https://stackoverflow.com", "https://github.com/"
+  ]
+}
+</script>
+
+</head>
+
+<body class="list dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ]
+        });
+    });
+</script> 
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Windows 10 中的 Linux 子系统
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>WSL 的基本命令
+一、自动安装 满足 Win10 系统版本要求的（ Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11）可以使用这种方式
+查看方式，Win &#43; R 打开运行窗口，输入 winver 查看
+  安装 WSL
+wsl --install
+  查看可用的 Linux 发行版
+wsl -l -o
+  查看已安装的 Linux 分发版
+wsl -l -v
+  注销 Linux 发行版
+wsl --unregister Ubuntu
+  可以直接从官网下载 Linux 发行版的安装包，然后将 appx 扩展名改为 zip，解压到想要放置的目录，双击 ubuntu.exe 启动，参考手动安装
+  二、手动安装  注意：以下命令都是在以管理员权限运行的 PowerShell 中完成   启用 “适用于 Linux 的 Windows 子系统” 可选功能...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-13 11:01:34 +0800 CST'>February 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Windows 10 中的 Linux 子系统" href="https://874656645.github.io/posts/121-windows-10-%E4%B8%AD%E7%9A%84-linux-%E5%AD%90%E7%B3%BB%E7%BB%9F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Linux 目录介绍
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>         bin 二进制文件，可执行文件   boot 系统开机启动项   dev device 设备（硬盘、显卡、显示器 一切皆文件）   lib 动态库   mnt 手动挂载目录   media 外设自动挂载目录   root 超级用户的家目录   usr unix system resource 头文件include、源文件src、用户安装程序/usr/local   etc 配置文件   opt 安装第三方应用程序   home Linux 所有用户的家目录（操作系统的家目录）   tmp 临时文件目录，系统重启后会被清空    </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-10 21:39:52 +0800 CST'>February 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 目录介绍" href="https://874656645.github.io/posts/120-linux-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>递归与递归树
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>逆序打印字符串
+void printReverseString(const char* str){ if(*str == &#39;\0&#39;){ return; } printReverseString(str &#43; 1); printf(&#34;%c&#34;, *str); } int main() { const char* str = &#34;Hello World&#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
+struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&gt;next); printf(&#34;%d\n&#34;, header-&gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&gt;data = 10; node1-&gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&gt;data = 20; node2-&gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&gt;data = 30; node3-&gt;next = NULL; header-&gt;next = node1; node1-&gt;next = node2; node2-&gt;next = node3; printReverseLinkNode(header-&gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>常用的宏定义
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>int main() { printf(&#34;%s\n&#34;, __FILE__); // main.c  printf(&#34;%d\n&#34;, __LINE__); // 14  printf(&#34;%s\n&#34;, __DATE__); // Feb 7 2022  printf(&#34;%s\n&#34;, __TIME__); // 01:59:37  return 0; } // func1.h #ifdef __cplusplus extern &#34;C&#34;{ #endif  void func1(); #ifdef __cplusplus } #endif  // main.h extern &#34;C&#34;{ include &#34;func1.h&#34; } extern &#34;C&#34;{ extern void func1(); } int main() { func1(); return 0; } </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-07 10:11:16 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 常用的宏定义" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Ubuntu 常用命令
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Linux 命令大全
+ 注意：需提前配置系统环境，比如系统编码为 UTF-8  系统环境配置 1. 设置系统语言   查看系统支持的字符集：locale、locale -a
+  查看时间：date
+  安装中文语言包：sudo apt install language-pack-zh-hans
+  添加到系统配置文件 .bashrc
+export LANG=zh_CN.UTF-8
+  重新加载：source .bashrc   一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
+</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="prev" href="https://874656645.github.io/page/28/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/page/30/">Next Page »</a>
+  </nav>
+</footer>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

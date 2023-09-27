@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>C&#43;&#43;11 左值、右值和移动语义 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;" />
+<meta name="description" content="一、结论  C 中将数据类型分为左值和右值，在 C&#43;&#43;11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C&#43;&#43;11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;&amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
+const int &amp;ref_a = 5; int a = 5; int &amp;ref_a = a; // 左值引用指向左值，编译通过 int &amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 &amp;&amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值
+int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="C&#43;&#43;11 左值、右值和移动语义" />
+<meta property="og:description" content="一、结论  C 中将数据类型分为左值和右值，在 C&#43;&#43;11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C&#43;&#43;11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;&amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
+const int &amp;ref_a = 5; int a = 5; int &amp;ref_a = a; // 左值引用指向左值，编译通过 int &amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 &amp;&amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值
+int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-23T22:19:35&#43;08:00" />
+<meta property="article:modified_time" content="2022-02-23T22:19:35&#43;08:00" />
+<meta property="og:see_also" content="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/" /><meta property="og:see_also" content="https://874656645.github.io/posts/195-c-%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/" /><meta property="og:see_also" content="https://874656645.github.io/posts/190-c&#43;&#43;11-%E7%BB%A7%E6%89%BF%E6%9E%84%E9%80%A0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/189-c&#43;&#43;11-%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0/" /><meta property="og:see_also" content="https://874656645.github.io/posts/186-c&#43;&#43;11-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90-alignof-alignas-max_align_t/" /><meta property="og:see_also" content="https://874656645.github.io/posts/170-c&#43;&#43;11-constexpr/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="C&#43;&#43;11 左值、右值和移动语义"/>
+<meta name="twitter:description" content="一、结论  C 中将数据类型分为左值和右值，在 C&#43;&#43;11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C&#43;&#43;11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;&amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
+const int &amp;ref_a = 5; int a = 5; int &amp;ref_a = a; // 左值引用指向左值，编译通过 int &amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 &amp;&amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值
+int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "C++11 左值、右值和移动语义",
+      "item": "https://874656645.github.io/posts/133-c++11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C++11 左值、右值和移动语义",
+  "name": "C\u002b\u002b11 左值、右值和移动语义",
+  "description": "一、结论  C 中将数据类型分为左值和右值，在 C++11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C++11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T\u0026amp;\u0026amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的\nconst int \u0026amp;ref_a = 5; int a = 5; int \u0026amp;ref_a = a; // 左值引用指向左值，编译通过 int \u0026amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 \u0026amp;\u0026amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值\nint\u0026amp;\u0026amp; ref_a_right = 5; // ok int a = 5; int\u0026amp;\u0026amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast\u0026lt;T\u0026amp;\u0026amp;\u0026gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。",
+  "keywords": [
+    "C++"
+  ],
+  "articleBody": "一、结论  C 中将数据类型分为左值和右值，在 C++11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C++11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T\u0026\u0026 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的\nconst int \u0026ref_a = 5; int a = 5; int \u0026ref_a = a; // 左值引用指向左值，编译通过 int \u0026ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 \u0026\u0026，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值\nint\u0026\u0026 ref_a_right = 5; // ok int a = 5; int\u0026\u0026 ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。\n案例一：\nint a = 5; // a是个左值 int \u0026ref_a_left = a; // 左值引用指向左值 int \u0026\u0026ref_a_right = std::move(a); // 通过std::move将左值转化为右值，可以被右值引用指向 cout  a  endl; // 打印结果：5 ref_a_right = 10; cout  a  endl; // 打印结果：10 ref_a_left = 20; cout  a  endl; // 打印结果：20 // 这三个变量的地址都相同 案例二：\nclass Person{ public: int m_age{20}; }; void test(Person\u0026\u0026 p){ cout  __func__  \" \"  \u0026p  endl; } void test1(Person\u0026 p){ cout  __func__  \" \"  \u0026p  endl; } int main() { Person pp; cout  __func__  \" \"  \u0026pp  endl; test(move(pp)); cout  pp.m_age  endl; test1(pp); return 0; } 输出： main 0x7ffc06f34444 test 0x7ffc06f34444 20 test1 0x7ffc06f34444   被声明出来的左、右值引用都是左值。因为被声明出的左右值引用是有地址的，也位于等号左边。\n// 形参是个右值引用 void change(int\u0026\u0026 right_value) { right_value = 8; } int main() { int a = 5; // a是个左值  int \u0026ref_a_left = a; // ref_a_left是个左值引用  int \u0026\u0026ref_a_right = std::move(a); // ref_a_right是个右值引用  cout  \u0026a  ' '; cout  \u0026ref_a_left  ' '; cout  \u0026ref_a_right; // 打印这三个左值的地址，都是一样的  // error: cannot bind rvalue reference of type ‘int\u0026\u0026’ to lvalue of type ‘int’  // change(a); // 编译不过，a是左值，change参数要求右值  // change(ref_a_left); // 编译不过，左值引用ref_a_left本身也是个左值  // change(ref_a_right); // 编译不过，右值引用ref_a_right本身也是个左值  change(std::move(a)); // 编译通过  change(std::move(ref_a_right)); // 编译通过  change(std::move(ref_a_left)); // 编译通过  change(5); // 当然可以直接接右值，编译通过 }   右值引用既可以是左值也可以是右值，如果有名称则为左值，否则是右值。\n  三、std::forward std::forward(u) 有两个参数：T 与 u\n a. 当 T 显示为左值引用类型时，u 将被转换为 T 类型的左值； b. 否则 u 将被转换为 T 类型右值  void change2(int\u0026\u0026 ref_r) { ref_r = 1; } void change3(int\u0026 ref_l) { ref_l = 1; } // change的入参是右值引用 // 有名字的右值引用是 左值，因此ref_r是左值 void change(int\u0026\u0026 ref_r) { // error: cannot bind rvalue reference of type ‘int\u0026\u0026’ to lvalue of type ‘int’  // change2(ref_r); // 错误，change2的入参是右值引用，需要接右值，ref_r是左值，编译失败  change2(std::move(ref_r)); // ok，std::move把左值转为右值，编译通过  change2(std::forwardint\u0026\u0026(ref_r)); // ok，std::forward的T是右值引用类型(int \u0026\u0026)，符合条件b，因此u(ref_r)会被转换为右值，编译通过  change2(std::forwardint(ref_r)); // ok，std::forward的T是int类型，属于条件b，因此会把ref_r转为右值  change3(ref_r); // ok，change3的入参是左值引用，需要接左值，ref_r是左值，编译通过  change3(std::forwardint\u0026(ref_r)); // ok，std::forward的T是左值引用类型(int \u0026)，符合条件a，因此u(ref_r)会被转换为左值，编译通过  // 可见，forward可以把值转换为左值或者右值 } int main() { int a = 5; change(std::move(a)); } 四、自定义类支持移动语义 编译器会默认在用户自定义的 class 和 struct 中生成移动语义函数，但前提是符合用户类默认的移动构造/移动赋值的启用条件，系统默认的移动语义函数更像是一种引用（原始变量的别名）。\nif (定义了 拷贝构造函数 、 拷贝赋值运算符 或 析构函数) { 不会合成移动构造函数和移动赋值运算符。此时会使用对应 拷贝 操作来代替 移动 } else if (类的所有成员都可以移动) { 则会为类合成移动构造函数或移动赋值运算符。 } else { 合成拷贝构造函数和拷贝复制运算符。 } C++11 对于特殊成员函数处理的规则如下：\n 默认构造函数：和 C++98 规则相同。仅当类不存在用户声明的构造函数时才自动生成。 析构函数：基本上和 C++98 相同；稍微不同的是现在析构默认 noexcept。和 C++98 一样，仅当基类析构为虚函数时该类析构才为虚函数。 拷贝构造函数：和 C++98 运行时行为一样：逐成员拷贝 non-static 数据。仅当类没有用户定义的拷贝构造时才生成。如果类声明了移动操作它就是 delete 的。当用户声明了拷贝赋值或者析构，该函数自动生成已被废弃。 拷贝赋值运算符：和 C++98 运行时行为一样：逐成员拷贝赋值 non-static 数据。仅当类没有用户定义的拷贝赋值时才生成。如果类声明了移动操作它就是 delete 的。当用户声明了拷贝构造或者析构，该函数自动生成已被废弃。 移动构造函数和移动赋值运算符：都对非 static 数据执行逐成员移动。仅当类没有用户定义的拷贝操作，移动操作或析构时才自动生成。  class Person{ public: Person():m_age(new int(20)){ cout  \"Construct: \"  ++n_cstr  endl; } ~Person(){ delete m_age; cout  \"Destruct: \"  ++n_dstr  endl; } Person(const Person\u0026 p):m_age(new int(*p.m_age)){ cout  \"Copy construct: \"  ++n_cptr  endl; } Person(Person\u0026\u0026 p){ m_age = std::exchange(p.m_age, nullptr); cout  \"Move construct: \"  ++n_mvtr  endl; } Person\u0026 operator=(const Person\u0026 p){ *m_age = *p.m_age; cout  \"operator=(const Person\u0026 p)...\"  endl; return *this; } Person\u0026 operator=(Person\u0026\u0026 p){ if(m_age) delete m_age; m_age = std::exchange(p.m_age, nullptr); cout  \"operator=(Person\u0026\u0026 p)...\"  endl; return *this; } int* m_age{nullptr}; static int n_cstr; static int n_dstr; static int n_cptr; static int n_mvtr; }; int Person::n_cstr = 0; int Person::n_dstr = 0; int Person::n_cptr = 0; int Person::n_mvtr = 0; Person GetPerson(){ Person p; cout  *p.m_age  endl; cout  \"Resource from \"  __func__  \": \"  p.m_age  endl; return p; } int main(int argc, const char* argv[]){ Person p = GetPerson(); cout  *p.m_age  endl; cout  \"Resource from \"  __func__  \": \"  p.m_age  endl; return 0; } 输出：\nConstruct: 1 20 Resource from GetPerson: 000001D5C8D85990 Move construct: 1 Destruct: 1 20 Resource from main: 000001D5C8D85990 Destruct: 2 参考：\n 认识 C++ 移动语义与右值引用 一文读懂 C++ 右值引用和 std::move  ",
+  "wordCount" : "646",
+  "inLanguage": "en",
+  "datePublished": "2022-02-23T22:19:35+08:00",
+  "dateModified": "2022-02-23T22:19:35+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/133-c++11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      C&#43;&#43;11 左值、右值和移动语义
+    </h1>
+    <div class="post-meta"><span title='2022-02-23 22:19:35 +0800 CST'>February 23, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e4%b8%80%e7%bb%93%e8%ae%ba" aria-label="一、结论">一、结论</a></li>
+                <li>
+                    <a href="#%e4%ba%8c%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" aria-label="二、注意事项">二、注意事项</a></li>
+                <li>
+                    <a href="#%e4%b8%89stdforward" aria-label="三、std::forward">三、std::forward</a></li>
+                <li>
+                    <a href="#%e5%9b%9b%e8%87%aa%e5%ae%9a%e4%b9%89%e7%b1%bb%e6%94%af%e6%8c%81%e7%a7%bb%e5%8a%a8%e8%af%ad%e4%b9%89" aria-label="四、自定义类支持移动语义">四、自定义类支持移动语义</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="一结论">一、结论<a hidden class="anchor" aria-hidden="true" href="#一结论">#</a></h2>
+<ol>
+<li><code>C</code> 中将数据类型分为<strong>左值和右值</strong>，在 <code>C++11</code> 中又将右值概念更为细致的分为<strong>将亡值（xvalue）和纯右值（prvalue）</strong>。</li>
+<li>将亡值是 <code>C++11</code> 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 <code>T&amp;&amp;</code> 的函数返回值、<code>std::move</code> 的返回值。</li>
+<li>从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。</li>
+<li>右值引用可以直接指向右值，也可以通过 <code>std::move</code> 指向左值；而左值引用只能指向左值（<strong>const左值引用也能指向右值</strong>）。</li>
+<li>作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。</li>
+<li>可移动对象在<strong>需要拷贝且被拷贝者之后不再被需要的场景</strong>，建议使用 <code>std::move</code> 触发移动语义，提升性能。</li>
+<li>我们可以在自己的类中实现移动语义，<strong>避免深拷贝</strong>，充分利用右值引用和 <code>std::move</code> 的语言特性。</li>
+<li><code>std::move</code> 本身只做类型转换，对性能无影响。</li>
+<li><code>std::forward</code> 同样也是做类型转换且更强大，<code>move</code> 只能转出来右值，<code>forward</code> 既可以转成右值，又可以转成左值。</li>
+<li>函数最好不要返回函数体内局部变量的左值引用或右值引用。</li>
+</ol>
+<h2 id="二注意事项">二、注意事项<a hidden class="anchor" aria-hidden="true" href="#二注意事项">#</a></h2>
+<ul>
+<li>左值引用是具名变量值的别名</li>
+<li>右值引用是不具名（匿名）变量的别名</li>
+</ul>
+<ol>
+<li>
+<p>引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，<strong>const左值引用</strong>是可以指向右值的</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>ref_a <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+<span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>ref_a <span style="color:#f92672">=</span> a; <span style="color:#75715e">// 左值引用指向左值，编译通过
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>ref_a <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">// 左值引用指向了右值，会编译失败
+</span></code></pre></div></li>
+<li>
+<p>右值引用的标志是 <code>&amp;&amp;</code>，顾名思义，右值引用专门为右值而生，可以指向右值，<strong>不能指向左值</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&amp;</span> ref_a_right <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">// ok
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&amp;</span> ref_a_left <span style="color:#f92672">=</span> a; <span style="color:#75715e">// 编译不过，右值引用不可以指向左值
+</span><span style="color:#75715e"></span>
+ref_a_right <span style="color:#f92672">=</span> <span style="color:#ae81ff">6</span>; <span style="color:#75715e">// 右值引用的用途：可以修改右值
+</span></code></pre></div></li>
+<li>
+<p>事实上 <code>std::move</code> 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：<code>static_cast&lt;T&amp;&amp;&gt;(lvalue)</code>。 所以，<strong>单纯的 <code>std::move(xxx)</code> 不会有性能提升</strong>，从这个角度来讲，<strong>右值引用和左值引用的功能相似，都是原始变量的别名</strong>，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。</p>
+<p>案例一：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">// a是个左值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>ref_a_left <span style="color:#f92672">=</span> a; <span style="color:#75715e">// 左值引用指向左值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;&amp;</span>ref_a_right <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>move(a); <span style="color:#75715e">// 通过std::move将左值转化为右值，可以被右值引用指向
+</span><span style="color:#75715e"></span>cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// 打印结果：5
+</span><span style="color:#75715e"></span>ref_a_right <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>; 
+cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// 打印结果：10
+</span><span style="color:#75715e"></span>ref_a_left <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// 打印结果：20
+</span><span style="color:#75715e">// 这三个变量的地址都相同
+</span></code></pre></div><p>案例二：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">int</span> m_age{<span style="color:#ae81ff">20</span>};
+};
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test</span>(Person<span style="color:#f92672">&amp;&amp;</span> p){
+    cout <span style="color:#f92672">&lt;&lt;</span> __func__ <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;</span>p <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test1</span>(Person<span style="color:#f92672">&amp;</span> p){
+    cout <span style="color:#f92672">&lt;&lt;</span> __func__ <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;</span>p <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    Person pp;
+    cout <span style="color:#f92672">&lt;&lt;</span> __func__ <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;</span>pp <span style="color:#f92672">&lt;&lt;</span> endl;
+    test(move(pp));
+    cout <span style="color:#f92672">&lt;&lt;</span> pp.m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    test1(pp);
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+
+<span style="color:#960050;background-color:#1e0010">输出：</span>
+main <span style="color:#ae81ff">0x7ffc06f34444</span>
+test <span style="color:#ae81ff">0x7ffc06f34444</span>
+<span style="color:#ae81ff">20</span>
+test1 <span style="color:#ae81ff">0x7ffc06f34444</span>
+</code></pre></div></li>
+<li>
+<p>被声明出来的左、右值引用<strong>都是左值</strong>。因为被声明出的左右值引用是有地址的，也位于等号左边。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">// 形参是个右值引用
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">change</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&amp;</span> right_value) {
+    right_value <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>; <span style="color:#75715e">// a是个左值
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>ref_a_left <span style="color:#f92672">=</span> a; <span style="color:#75715e">// ref_a_left是个左值引用
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;&amp;</span>ref_a_right <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>move(a); <span style="color:#75715e">// ref_a_right是个右值引用
+</span><span style="color:#75715e"></span>
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;</span>a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;</span>ref_a_left <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39; &#39;</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">&amp;</span>ref_a_right;
+    <span style="color:#75715e">// 打印这三个左值的地址，都是一样的
+</span><span style="color:#75715e"></span>
+    <span style="color:#75715e">// error: cannot bind rvalue reference of type ‘int&amp;&amp;’ to lvalue of type ‘int’
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// change(a); // 编译不过，a是左值，change参数要求右值
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// change(ref_a_left); //  编译不过，左值引用ref_a_left本身也是个左值
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// change(ref_a_right); // 编译不过，右值引用ref_a_right本身也是个左值
+</span><span style="color:#75715e"></span>
+    change(std<span style="color:#f92672">::</span>move(a)); <span style="color:#75715e">// 编译通过
+</span><span style="color:#75715e"></span>    change(std<span style="color:#f92672">::</span>move(ref_a_right)); <span style="color:#75715e">// 编译通过
+</span><span style="color:#75715e"></span>    change(std<span style="color:#f92672">::</span>move(ref_a_left)); <span style="color:#75715e">// 编译通过
+</span><span style="color:#75715e"></span>
+    change(<span style="color:#ae81ff">5</span>); <span style="color:#75715e">// 当然可以直接接右值，编译通过
+</span><span style="color:#75715e"></span>}
+</code></pre></div></li>
+<li>
+<p>右值引用既可以是左值也可以是右值，如果有名称则为左值，否则是右值。</p>
+</li>
+</ol>
+<h2 id="三stdforward">三、std::forward<a hidden class="anchor" aria-hidden="true" href="#三stdforward">#</a></h2>
+<p><code>std::forward&lt;T&gt;(u)</code> 有两个参数：<code>T</code> 与 <code>u</code></p>
+<ul>
+<li>a. 当 <code>T</code> 显示为左值引用类型时，<code>u</code> 将被转换为 <code>T</code> 类型的左值；</li>
+<li>b. 否则 <code>u</code> 将被转换为 <code>T</code> 类型右值</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">change2</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&amp;</span> ref_r) {
+    ref_r <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+}
+ 
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">change3</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> ref_l) {
+    ref_l <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+}
+ 
+<span style="color:#75715e">// change的入参是右值引用
+</span><span style="color:#75715e">// 有名字的右值引用是 左值，因此ref_r是左值
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">change</span>(<span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&amp;</span> ref_r) {
+    
+    <span style="color:#75715e">// error: cannot bind rvalue reference of type ‘int&amp;&amp;’ to lvalue of type ‘int’
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// change2(ref_r);  // 错误，change2的入参是右值引用，需要接右值，ref_r是左值，编译失败
+</span><span style="color:#75715e"></span>     
+    change2(std<span style="color:#f92672">::</span>move(ref_r)); <span style="color:#75715e">// ok，std::move把左值转为右值，编译通过
+</span><span style="color:#75715e"></span>    change2(std<span style="color:#f92672">::</span>forward<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&amp;&gt;</span>(ref_r));  <span style="color:#75715e">// ok，std::forward的T是右值引用类型(int &amp;&amp;)，符合条件b，因此u(ref_r)会被转换为右值，编译通过
+</span><span style="color:#75715e"></span>    change2(std<span style="color:#f92672">::</span>forward<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(ref_r));  <span style="color:#75715e">// ok，std::forward的T是int类型，属于条件b，因此会把ref_r转为右值
+</span><span style="color:#75715e"></span>    
+    change3(ref_r); <span style="color:#75715e">// ok，change3的入参是左值引用，需要接左值，ref_r是左值，编译通过
+</span><span style="color:#75715e"></span>    change3(std<span style="color:#f92672">::</span>forward<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;&gt;</span>(ref_r)); <span style="color:#75715e">// ok，std::forward的T是左值引用类型(int &amp;)，符合条件a，因此u(ref_r)会被转换为左值，编译通过
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 可见，forward可以把值转换为左值或者右值
+</span><span style="color:#75715e"></span>}
+ 
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+    <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>;
+    change(std<span style="color:#f92672">::</span>move(a));
+}
+</code></pre></div><h2 id="四自定义类支持移动语义">四、自定义类支持移动语义<a hidden class="anchor" aria-hidden="true" href="#四自定义类支持移动语义">#</a></h2>
+<p>编译器会默认在用户自定义的 <code>class</code> 和 <code>struct</code> 中生成移动语义函数，但前提是符合<a href="https://www.licc.tech/article?id=75">用户类默认的移动构造/移动赋值的启用条件</a>，<strong>系统默认的移动语义函数更像是一种引用（原始变量的别名）</strong>。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">if (定义了 拷贝构造函数 、 拷贝赋值运算符 或 析构函数) {
+    不会合成移动构造函数和移动赋值运算符。此时会使用对应 拷贝 操作来代替 移动
+}
+else if (类的所有成员都可以移动) {
+    则会为类合成移动构造函数或移动赋值运算符。
+}
+else {
+    合成拷贝构造函数和拷贝复制运算符。
+}
+</code></pre></div><p><strong>C++11 对于特殊成员函数处理的规则如下：</strong></p>
+<ul>
+<li><strong>默认构造函数</strong>：和 C++98 规则相同。仅当类不存在用户声明的构造函数时才自动生成。</li>
+<li><strong>析构函数</strong>：基本上和 C++98 相同；稍微不同的是现在析构默认 <code>noexcept</code>。和 C++98 一样，仅当基类析构为虚函数时该类析构才为虚函数。</li>
+<li><strong>拷贝构造函数</strong>：和 C++98 运行时行为一样：逐成员拷贝 <code>non-static</code> 数据。仅当类没有用户定义的拷贝构造时才生成。<strong>如果类声明了移动操作它就是 <code>delete</code> 的</strong>。当用户声明了拷贝赋值或者析构，该函数自动生成已被废弃。</li>
+<li><strong>拷贝赋值运算符</strong>：和 C++98 运行时行为一样：逐成员拷贝赋值 <code>non-static</code> 数据。仅当类没有用户定义的拷贝赋值时才生成。<strong>如果类声明了移动操作它就是 <code>delete</code> 的</strong>。当用户声明了拷贝构造或者析构，该函数自动生成已被废弃。</li>
+<li><strong>移动构造函数和移动赋值运算符</strong>：都对非 <code>static</code> 数据执行逐成员移动。仅当类没有用户定义的拷贝操作，移动操作或析构时才自动生成。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    Person()<span style="color:#f92672">:</span>m_age(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>(<span style="color:#ae81ff">20</span>)){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Construct: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">++</span>n_cstr <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    <span style="color:#f92672">~</span>Person(){
+        <span style="color:#66d9ef">delete</span> m_age;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Destruct: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">++</span>n_dstr <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    Person(<span style="color:#66d9ef">const</span> Person<span style="color:#f92672">&amp;</span> p)<span style="color:#f92672">:</span>m_age(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>(<span style="color:#f92672">*</span>p.m_age)){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Copy construct: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">++</span>n_cptr <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    Person(Person<span style="color:#f92672">&amp;&amp;</span> p){
+        m_age <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>exchange(p.m_age, <span style="color:#66d9ef">nullptr</span>);
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Move construct: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">++</span>n_mvtr <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+    Person<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> Person<span style="color:#f92672">&amp;</span> p){
+        <span style="color:#f92672">*</span>m_age <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>p.m_age;
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;operator=(const Person&amp; p)...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+    }
+    Person<span style="color:#f92672">&amp;</span> <span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(Person<span style="color:#f92672">&amp;&amp;</span> p){
+        <span style="color:#66d9ef">if</span>(m_age) <span style="color:#66d9ef">delete</span> m_age;
+        m_age <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>exchange(p.m_age, <span style="color:#66d9ef">nullptr</span>);
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;operator=(Person&amp;&amp; p)...&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+    }
+
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> m_age{<span style="color:#66d9ef">nullptr</span>};
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> n_cstr;
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> n_dstr;
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> n_cptr;
+    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span> n_mvtr;
+};
+<span style="color:#66d9ef">int</span> Person<span style="color:#f92672">::</span>n_cstr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#66d9ef">int</span> Person<span style="color:#f92672">::</span>n_dstr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#66d9ef">int</span> Person<span style="color:#f92672">::</span>n_cptr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<span style="color:#66d9ef">int</span> Person<span style="color:#f92672">::</span>n_mvtr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+
+Person <span style="color:#a6e22e">GetPerson</span>(){
+    Person p;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>p.m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Resource from &#34;</span> <span style="color:#f92672">&lt;&lt;</span> __func__ <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> p.m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> p;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> argv[]){
+    Person p <span style="color:#f92672">=</span> GetPerson();
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#f92672">*</span>p.m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Resource from &#34;</span> <span style="color:#f92672">&lt;&lt;</span> __func__ <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> p.m_age <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Construct: 1
+20
+Resource from GetPerson: 000001D5C8D85990
+Move construct: 1
+Destruct: 1
+20
+Resource from main: 000001D5C8D85990
+Destruct: 2
+</code></pre></div><p><strong>参考：</strong></p>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/347977300">认识 C++ 移动语义与右值引用</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/335994370">一文读懂 C++ 右值引用和 std::move</a></li>
+</ol>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/134-%E5%93%88%E5%B8%8C%E6%B3%95%E4%B8%8E%E5%86%B2%E7%AA%81%E5%A4%84%E7%90%86/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>哈希法与冲突处理</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/131-c&#43;&#43;11-auto_ptr-%E8%A2%AB%E5%BA%9F%E5%BC%83%E4%B8%8E-unique_ptr/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
