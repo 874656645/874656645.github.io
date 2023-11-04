@@ -126,8 +126,8 @@ sudo apt install gcovr
   "keywords": [
     "Ubuntu"
   ],
-  "articleBody": "  下载 Build Wrapper：\n{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip\n  下载 SonarScanner：\nhttps://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file\n  配置环境变量：\nexport PATH=\"/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH\"\n注意：\n 配置的 build-wrapper-linux-x86 和 sonar-scanner-5.0.1.3006-linux 文件夹要有 可执行权限 sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限    安装 CMake\nsudo apt install cmake\n  安装 gcovr（计算 gtest 单元测试分支覆盖率）\nsudo apt install gcovr\n注意：\n Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr   安装 gtest 库\n  6.1. 获取 gtest 源码\nsudo apt-get install libgtest-dev\n  6.2. 查看源码文件\nls /usr/src\n  6.3. 编译生成动态库\ncd /usr/src/gtest sudo mkdir build cd build sudo cmake .. sudo make   6.4. 将编译生成好的库拷贝到系统目录下\nsudo cp libgtest*.a /usr/local/lib\n  6.5. 测试验证\n编写 gtest.cpp\n#include int add(int a,int b) { return a+b; } TEST(testCase,test0) { EXPECT_EQ(add(2,3),5); } int main(int argc,char **argv) { testing::InitGoogleTest(\u0026argc,argv); return RUN_ALL_TESTS(); } 编译\ng++ gtest.cpp -lgtest -lpthread\n运行\na.out\n    Ubuntu 系统中已包含 curl、ssl、crypto、pthread 等库，可通过创建所需版本的软连接实现，安装路径在 /usr/lib/x86_64-linux-gnu/，可通过以下命令查看已有版本\n  ls -l libssl* ls -l libcrypto* ls -l libcurl* ls -l libpthread* ssl 报错  undefined reference to 'sk_num' undefined reference to 'sk_value' undefined reference to 'sk_pop_free' 可降低 ssl 库的版本，需注意 ssl、crypto 版本要匹配\n查看 curl、openssl 版本  curl --versioin\n安装旧版的 ssl crypto  wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.20_amd64.deb\n或者\ncurl http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb -o libssl1.0.0\nsudo dpkg -i libssl1.0.0\n进入下面的网站，可以查找所需的组件自行下载安装，下载时注意 i386（x86） 和 amd64（x64） 的区别\nhttp://security.ubuntu.com/ubuntu/pool/main/o/openssl1.0/\nhttp://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb\n构建  cmake -B build -G \"Unix Makefiles\" -DMAPBAR_COMPILE_FOR_STD=1 -DCMAKE_BUILD_TYPE=Release -DMAPBAR_PLATFORM=\"linux_x64\" -DMBMAKE_BUILD_TEST=1\n编译  build-wrapper-linux-x86-64 --out-dir reports cmake --build build/ --config Release\n运行可执行文件  编译完后需运行一下 test 工程的可执行文件，再执行下面的命令\n分析单元测试覆盖率  gcovr --sonarqube -o reports/coverage.xml\n添加配置文件  在项目根目录创建文件 sonar-project.properties 并添加如下文本内容\nsonar.projectKey=test sonar.login=sqp_7f7b3255b802865006af3b0a61bbef19fe209641 sonar.scm.disabled=true sonar.sources=src sonar.test=test sonar.cfamily.build-wrapper-output=reports sonar.coverageReportPaths=reports/coverage.xml sonar.host.url={SonarQube URL} 扫描并将结果上传到网站  sonar-scanner\n参考\n ubuntu 下安装 Gtest 和测试 Ubuntu 安装 OpenGL 【OpenGL】Ubuntu 20.04 配置 OpenGL 环境 解决Ubuntu22.04缺少libssl.so.1.1问题 ubuntu 安装 openssl 1.1 Ubuntu20.04 安装curl3和curl4 在 Ubuntu Linux 上安装 Deb 文件的 3 种方法 | Linux 中国 SonarSource sample C and C++ projects with SonarCloud or SonarQube analysis configured linux-cmake-gcovr-gh-actions-sc  ",
-  "wordCount" : "281",
+  "articleBody": "  下载 Build Wrapper：\n{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip\n  下载 SonarScanner：\nhttps://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file\n  配置环境变量：\nexport PATH=\"/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH\"\n注意：\n 配置的 build-wrapper-linux-x86 和 sonar-scanner-5.0.1.3006-linux 文件夹要有 可执行权限 sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限    安装 CMake\nsudo apt install cmake\n  安装 gcovr（计算 gtest 单元测试分支覆盖率）\nsudo apt install gcovr\n注意：\n Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr   安装 gtest 库\n  6.1. 获取 gtest 源码\nsudo apt-get install libgtest-dev\n  6.2. 查看源码文件\nls /usr/src\n  6.3. 编译生成动态库\ncd /usr/src/gtest sudo mkdir build cd build sudo cmake .. sudo make   6.4. 将编译生成好的库拷贝到系统目录下\nsudo cp libgtest*.a /usr/local/lib\n  6.5. 测试验证\n编写 gtest.cpp\n#include int add(int a,int b) { return a+b; } TEST(testCase,test0) { EXPECT_EQ(add(2,3),5); } int main(int argc,char **argv) { testing::InitGoogleTest(\u0026argc,argv); return RUN_ALL_TESTS(); } 编译\ng++ gtest.cpp -lgtest -lpthread\n运行\na.out\n    Ubuntu 系统中已包含 curl、ssl、crypto、pthread 等库，可通过创建所需版本的软连接实现，安装路径在 /usr/lib/x86_64-linux-gnu/，可通过以下命令查看已有版本\nls -l libssl* ls -l libcrypto* ls -l libcurl* ls -l libpthread* 如果没有可通过 apt 自行安装：sudo apt install curl\n  ssl 报错\nundefined reference to 'sk_num' undefined reference to 'sk_value' undefined reference to 'sk_pop_free' 可降低 ssl 库的版本，需注意 ssl、crypto 版本要匹配（可编译低版本的 OpenSSL 库）\n  查看 curl、openssl 版本\ncurl --versioin\n  安装旧版的 ssl crypto（也可以自己编译低版本的 OpenSSL 库）\nwget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.20_amd64.deb\n或者\ncurl http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb -o libssl1.0.0\nsudo dpkg -i libssl1.0.0\n进入下面的网站，可以查找所需的组件自行下载安装，下载时注意 i386（x86） 和 amd64（x64） 的区别\nhttp://security.ubuntu.com/ubuntu/pool/main/o/openssl1.0/\nhttp://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb\n  构建\ncmake ..\n  编译\nbuild-wrapper-linux-x86-64 --out-dir reports cmake --build build/ --config Release\n  运行可执行文件\n编译完后需运行一下 test 工程的可执行文件，再执行下面的命令\n  分析单元测试覆盖率\ngcovr --sonarqube -o reports/coverage.xml\n  添加配置文件\n在项目根目录创建文件 sonar-project.properties 并添加如下文本内容\nsonar.projectKey=test sonar.login=sqp_7f7b3255b802865006af3b0a61bbef19fe209641 sonar.scm.disabled=true sonar.sources=src sonar.test=test sonar.cfamily.build-wrapper-output=reports sonar.coverageReportPaths=reports/coverage.xml sonar.host.url={SonarQube URL}   扫描并将结果上传到网站\nsonar-scanner\n  参考\n ubuntu 下安装 Gtest 和测试 Ubuntu 安装 OpenGL 【OpenGL】Ubuntu 20.04 配置 OpenGL 环境 解决Ubuntu22.04缺少libssl.so.1.1问题 ubuntu 安装 openssl 1.1 Ubuntu20.04 安装curl3和curl4 在 Ubuntu Linux 上安装 Deb 文件的 3 种方法 | Linux 中国 SonarSource sample C and C++ projects with SonarCloud or SonarQube analysis configured linux-cmake-gcovr-gh-actions-sc googletest-gmock使用示例 gtest/gmock 安装和使用 Google Mock(Gmock)简单使用和源码分析——简单使用 GoogleC++单元测试框架GoogleTest—Google Mock简介-概念万及基础语法  ",
+  "wordCount" : "290",
   "inLanguage": "en",
   "datePublished": "2023-09-11T09:34:47+08:00",
   "dateModified": "2023-09-11T09:34:47+08:00",
@@ -324,58 +324,59 @@ TEST(testCase,test0)
 </li>
 <li>
 <p>Ubuntu 系统中已包含 <code>curl</code>、<code>ssl</code>、<code>crypto</code>、<code>pthread</code> 等库，可通过创建所需版本的软连接实现，安装路径在 <code>/usr/lib/x86_64-linux-gnu/</code>，可通过以下命令查看已有版本</p>
-</li>
-</ol>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ls -l libssl*  
 ls -l libcrypto*  
 ls -l libcurl*  
 ls -l libpthread*
 </code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/ls-l-libcurl-libssl-libcrypto.jpg" alt="ls-l-libcurl-libssl-libcrypto"  />
 </p>
-<ol start="8">
-<li>ssl 报错</li>
-</ol>
+<p>如果没有可通过 <code>apt</code> 自行安装：<code>sudo apt install curl</code></p>
+<p><img loading="lazy" style="margin: auto;" src="../img/Ubuntu-apt-curl.jpg" alt="Ubuntu-apt-curl.jpg"  />
+</p>
+</li>
+<li>
+<p>ssl 报错</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">undefined reference to <span style="color:#e6db74">&#39;sk_num&#39;</span> 
 undefined reference to <span style="color:#e6db74">&#39;sk_value&#39;</span> 
 undefined reference to <span style="color:#e6db74">&#39;sk_pop_free&#39;</span>
 </code></pre></div><p><img loading="lazy" style="margin: auto;" src="../img/ssl-error.jpg" alt="ssl-error.jpg"  />
 </p>
-<p>可降低 <code>ssl</code> 库的版本，需注意 <code>ssl</code>、<code>crypto</code> 版本要匹配</p>
-<ol start="9">
-<li>查看 <code>curl、openssl</code> 版本</li>
-</ol>
+<p>可降低 <code>ssl</code> 库的版本，需注意 <code>ssl</code>、<code>crypto</code> 版本要匹配（可编译低版本的 <code>OpenSSL</code> 库）</p>
+</li>
+<li>
+<p>查看 <code>curl、openssl</code> 版本</p>
 <p><code>curl --versioin</code></p>
 <p><img loading="lazy" style="margin: auto;" src="../img/curl-version.jpg" alt="curl-version"  />
 </p>
-<ol start="10">
-<li>安装旧版的 <code>ssl crypto</code></li>
-</ol>
+</li>
+<li>
+<p>安装旧版的 <code>ssl crypto</code>（也可以<a href="../266-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-openssl-%E5%BA%93/">自己编译低版本的 <code>OpenSSL</code> 库</a>）</p>
 <p><code>wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1-1ubuntu2.1~18.04.20_amd64.deb</code><br>
 或者<br>
-<code>curl http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb -o libssl1.0.0</code></p>
-<p><code>sudo dpkg -i libssl1.0.0</code></p>
+<code>curl http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb -o libssl1.0.0</code><br>
+<code>sudo dpkg -i libssl1.0.0</code></p>
 <p>进入下面的网站，可以查找所需的组件自行下载安装，下载时注意 <strong>i386（x86）</strong> 和 <strong>amd64（x64）</strong> 的区别</p>
 <p><a href="http://security.ubuntu.com/ubuntu/pool/main/o/openssl1.0/">http://security.ubuntu.com/ubuntu/pool/main/o/openssl1.0/</a></p>
 <p><a href="http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb">http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.0.0_1.0.2g-1ubuntu4_amd64.deb</a></p>
-<ol start="11">
-<li>构建</li>
-</ol>
-<p><code>cmake -B build -G &quot;Unix Makefiles&quot; -DMAPBAR_COMPILE_FOR_STD=1 -DCMAKE_BUILD_TYPE=Release -DMAPBAR_PLATFORM=&quot;linux_x64&quot; -DMBMAKE_BUILD_TEST=1</code></p>
-<ol start="12">
-<li>编译</li>
-</ol>
+</li>
+<li>
+<p>构建</p>
+<p><code>cmake ..</code></p>
+</li>
+<li>
+<p>编译</p>
 <p><code>build-wrapper-linux-x86-64 --out-dir reports cmake --build build/ --config Release</code></p>
-<ol start="13">
-<li>运行可执行文件</li>
-</ol>
+</li>
+<li>
+<p>运行可执行文件</p>
 <p>编译完后需运行一下 test 工程的可执行文件，再执行下面的命令</p>
-<ol start="14">
-<li>分析单元测试覆盖率</li>
-</ol>
+</li>
+<li>
+<p>分析单元测试覆盖率</p>
 <p><code>gcovr --sonarqube -o reports/coverage.xml</code></p>
-<ol start="15">
-<li>添加配置文件</li>
-</ol>
+</li>
+<li>
+<p>添加配置文件</p>
 <p>在项目根目录创建文件 <code>sonar-project.properties</code> 并添加如下文本内容</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">sonar.projectKey=test
 sonar.login=sqp_7f7b3255b802865006af3b0a61bbef19fe209641
@@ -385,10 +386,12 @@ sonar.test=test
 sonar.cfamily.build-wrapper-output=reports
 sonar.coverageReportPaths=reports/coverage.xml
 sonar.host.url={SonarQube URL}
-</code></pre></div><ol start="16">
-<li>扫描并将结果上传到网站</li>
-</ol>
+</code></pre></div></li>
+<li>
+<p>扫描并将结果上传到网站</p>
 <p><code>sonar-scanner</code></p>
+</li>
+</ol>
 <p>参考</p>
 <ol>
 <li><a href="https://blog.csdn.net/Swallow_he/article/details/120065786">ubuntu 下安装 Gtest 和测试</a></li>
@@ -400,6 +403,10 @@ sonar.host.url={SonarQube URL}
 <li><a href="https://zhuanlan.zhihu.com/p/339632982">在 Ubuntu Linux 上安装 Deb 文件的 3 种方法 | Linux 中国</a></li>
 <li><a href="https://github.com/sonarsource-cfamily-examples">SonarSource sample C and C++ projects with SonarCloud or SonarQube analysis configured</a></li>
 <li><a href="https://github.com/sonarsource-cfamily-examples/linux-cmake-gcovr-gh-actions-sc/tree/main">linux-cmake-gcovr-gh-actions-sc</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/101906555">googletest-gmock使用示例</a></li>
+<li><a href="https://blog.csdn.net/qq_36614557/article/details/120263863">gtest/gmock 安装和使用</a></li>
+<li><a href="https://blog.csdn.net/breaksoftware/article/details/51384083">Google Mock(Gmock)简单使用和源码分析——简单使用</a></li>
+<li><a href="https://blog.csdn.net/breaksoftware/article/details/51384083">GoogleC++单元测试框架GoogleTest&mdash;Google Mock简介-概念万及基础语法</a></li>
 </ol>
 
 
@@ -410,6 +417,11 @@ sonar.host.url={SonarQube URL}
       <li><a href="https://874656645.github.io/tags/ubuntu/">Ubuntu</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/264-android-studio-build-%E7%AA%97%E5%8F%A3%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Android Studio Build 窗口中文乱码</span>
+  </a>
   <a class="next" href="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/">
     <span class="title">Next Page »</span>
     <br>

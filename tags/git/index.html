@@ -201,10 +201,13 @@ git config --global user.name &#34;Git账号&#34; git config --global user.email
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、Git 常用命令 1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick  如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件  git clone https://github.com/adityatelange/hugo-PaperMod.git
- 克隆含有子仓库的代码  git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
- 克隆某一个分支  git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
-2、更新远程仓库代码到本地 git pull blog master
+    <p>一、Git 常用命令 1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick   如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件
+git clone https://github.com/adityatelange/hugo-PaperMod.git
+  克隆含有子仓库的代码
+git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
+  克隆某一个分支
+git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
+  2、更新远程仓库代码到本地 git pull blog master
 3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
 git commit -am &#34;update&#34;
 4、push推送到远程仓库 git push blog master

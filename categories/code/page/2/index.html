@@ -145,6 +145,77 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>WSL Ubuntu_2204 使用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>WSL 中使用 Ubuntu_2204 参考：Windows 10 中的 Linux 子系统
+配置开发环境   Linux 常用命令参考
+  安装常用开发环境
+sudo apt-get install build-essential
+  安装 python 2.7  注意：Ubuntu_2204 中自带 python3，所以 python2 需要进行手动安装和配置。    查看已安装的版本
+ls /usr/bin/python*
+  安装 python2
+sudo apt-get install python2
+  设置默认版本
+sudo update-alternatives --list python
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
+sudo update-alternatives --config python...</p>
+  </section>
+  <footer class="entry-footer"><span title='2023-09-10 14:55:17 +0800 CST'>September 10, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to WSL Ubuntu_2204 使用" href="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——打印枚举常量字符串
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>#include &lt;stdio.h&gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(&#34;%s\n&#34;, STR(MyType_One)); printf(&#34;%s\n&#34;, STR(HELLO_WORLD)); printf(&#34;%s\n&#34;, STR(MY_INT)); printf(&#34;%s\n&#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：
+MyType_One HELLO_WORLD MY_INT 7777 参考：
+ c&#43;&#43;中#与##的作用  </p>
+  </section>
+  <footer class="entry-footer"><span title='2023-04-12 22:02:53 +0800 CST'>April 12, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——打印枚举常量字符串" href="https://874656645.github.io/posts/261-c&#43;&#43;-%E6%89%93%E5%8D%B0%E6%9E%9A%E4%B8%BE%E5%B8%B8%E9%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Git——TortoiseGit 分支相关操作
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Git  git 命令相关操作参考这里 【Git】如何进行分支合并  TortoiseGit   clone
+克隆远程仓库或指定分支   切换本地分支
+  pull 分支
+如果本地是 dev 分支，pull 远程的 master 分支，会与本地的 dev 分支合并   push 分支
+  </p>
+  </section>
+  <footer class="entry-footer"><span title='2023-02-24 13:45:59 +0800 CST'>February 24, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Git——TortoiseGit 分支相关操作" href="https://874656645.github.io/posts/260-git-tortoisegit-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Git——Windows TortoiseGit 配置 SSH 
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、设置本地git的账户邮箱和用户名   查看是否设置了邮箱和用户名
+git config user.name git config user.email   设置邮箱和用户名
+git config --global user.name &#34;Git账号&#34; git config --global user.email &#34;Git邮箱&#34;   二、生成 SSH 密钥 在 git bash 中输入命令 ssh-keygen -t rsa -C &#34;你的Git邮箱&#34;，敲三次回车，就会在目录 我的电脑—&gt;C盘—&gt;用户—&gt;你自己的用户 目录下生成 .ssh 文件夹
+三、将 SSH 公钥添加到 GitLab 账户   在 .ssh 文件夹下，使用记事本打开 id_rsa.pub 公钥文件，复制里面的内容
+  打开 gitlab 网站的 SSH keys，将复制的文本粘贴进去即可
+  四、TortoiseGit 使用 git SSH 密钥 打开 TortoiseGit setting 指定 SSH client 为 git 的 ssh....</p>
+  </section>
+  <footer class="entry-footer"><span title='2023-02-22 20:09:10 +0800 CST'>February 22, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Git——Windows TortoiseGit 配置 SSH " href="https://874656645.github.io/posts/259-git-tortoisegit-%E9%85%8D%E7%BD%AE-ssh-/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Git——stash TortoiseGit 将一个分支上的修改转移到另一个分支上
     </h2>
   </header>
@@ -160,64 +231,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2023-02-22 17:10:24 +0800 CST'>February 22, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Git——stash TortoiseGit 将一个分支上的修改转移到另一个分支上" href="https://874656645.github.io/posts/258-git-stash-%E5%B0%86%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A%E7%9A%84%E4%BF%AE%E6%94%B9%E8%BD%AC%E7%A7%BB%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——二叉树遍历
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>先序遍历
-template&lt;typename T&gt; void PreOrder(BinaryTreeNode&lt;T&gt;* root){ stack&lt;BinaryTreeNode&lt;T&gt;*&gt; aStack; BinaryTreeNode&lt;T&gt;* pointer = root; aStack.push(nullptr); // 栈底监视哨  while(pointer){ // 或者 !aStack.empty()  Visit(pointer); // 访问当前结点  if(pointer-&gt;rightchild() != nullptr){ // 右孩子入栈  aStack.push(pointer-&gt;rightchild()); } if(pointer-&gt;leftchild() != nullptr){ // 左路下降  pointer = pointer-&gt;leftchild(); }else{ // 左子树访问完毕，转向访问右子树  pointer = aStack.top(); aStack.pop(); } } }   中序遍历
-template&lt;typename T&gt; void InOrder(BinaryTreeNode&lt;T&gt;* root){ stack&lt;BinaryTreeNode&lt;T&gt;*&gt; aStack; BinaryTreeNode&lt;T&gt;* pointer = root; while(!aStack.empty() || pointer){ if(pointer){ // Visit(pointer); // 前序访问点  aStack....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-11-13 19:46:40 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树遍历" href="https://874656645.github.io/posts/255-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——二叉树
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、相关概念   结点：根节、叶节点、分支结点、兄弟结点、父子结点
-  边、路径
-  结点深度、高度、层数
- 根节点为第 0 层 深度指从根节点到该节点的边的数量 高度指从此节点到叶节点的结点数量    满二叉树、完全二叉树
- 满二叉树指除了度为 0 的叶节点就是度为 2 的分支节点 完全二叉树指只有最下面的两层度是小于 2 的，且最下面的结点都集中在左侧    扩充二叉树
-  二叉树性质
-  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-11-13 17:58:17 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树" href="https://874656645.github.io/posts/254-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——KMP 字符串匹配算法
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  模式串 next 向量计算：
-  字符串比较
-int mystrcmp(const char* str1, const char* str2){ int i = 0; while(str1[i] == str2[i] &amp;&amp; str1[i] != &#39;\0&#39;){ i&#43;&#43;; } return str1[i] - str2[i]; }   </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-11-13 14:56:36 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——KMP 字符串匹配算法" href="https://874656645.github.io/posts/253-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95kmp-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——malloc、calloc、realloc、指针杂记
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>void printArr(int *A, int size){ printf(&#34;Elements of array: &#34;); for(int i = 0; i &lt; size; &#43;&#43;i){ printf(&#34;%d\t&#34;, A[i]); } printf(&#34;\n&#34;); } int main() { int C[3][2][2] = {{{1,2},{3,4}},{{5,6},{7,8}},{{9,10},{11,12}}}; // 虽然地址相同，但代表的意义却不相同  printf(&#34;%p\t%p\t%p\t%p\t%p\t%p \n&#34;, C, *C, C[0], C[0][0], &amp;C[0][0], &amp;C[0][0][0]); printf(&#34;%p\t%p\t%p\n&#34;, *C&#43;1, C[0]&#43;1, C[0][1]); printf(&#34;%p\t%p\n&#34;, C, C[0][0] &#43; 1); printf(&#34;%p\t%p\n&#34;, C, &amp;C[0][0] &#43; 1); // 分配空间，但不会对元素进行初始化  int *A = (int*)malloc(3 * sizeof(int)); for(int i = 0; i &lt; 3; &#43;&#43;i){ A[i] = i&#43;1; } printArr(A, 3); // 分配空间，并将元素初始化为0  int *B = (int*)calloc(3, sizeof(int)); printArr(B, 3); // 重新分配一块空间（新空间可大可小）  // 并把原来的数据拷贝过来  // 如果新空间首地址与原来空间地址不同，会将原来的内存空间释放  // ，注意：此时不能再继续访问原来的地址，虽然原来的指针并未置空  int *D = (int*)realloc(A, 10 * sizeof(int)); printf(&#34;%p\t%p\n&#34;, A, D); printArr(A, 3); // 此时不能访问 A 了，这是危险的行为  printArr(D, 10); // 等同于重新分配了空间  D = (int*)realloc(NULL, 3 * sizeof(int)); // int *D = (int*)malloc(3 * sizeof(int));  printf(&#34;%p\t%p\n&#34;, A, D); printArr(D, 3); // 等同于释放了内存空间并将指针置为空值  D = (int*)realloc(D, 0); // free(D);D = nullptr;  printf(&#34;%p\n&#34;, D); return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-10-02 22:18:02 +0800 CST'>October 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——malloc、calloc、realloc、指针杂记" href="https://874656645.github.io/posts/249-c&#43;&#43;-malloc-calloc-realloc-%E6%8C%87%E9%92%88%E6%9D%82%E8%AE%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

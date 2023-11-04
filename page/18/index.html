@@ -157,6 +157,95 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Cesium4Unreal——Transition Between Locations
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>目标 学习使用虚幻引擎的蓝图系统编程，实现在地球上的两个位置之间平稳飞行。
+ 在虚幻引擎中使用地图坐标 在感兴趣的位置创建 viewpoints 创建一个蓝图，使位置的切换变得平滑  第一步：创建一个关卡 参考前面的步骤创关卡，并定位到澳大利亚悉尼
+Origin Latitude = -33.871799 Origin Longitude = 151.206696 Origin Height = 3000.0
+第二步：添加 DynamicPawn actor 第三步：在蓝图中设置转换   打开关卡蓝图
+  蓝图联接图
+  创建墨尔本经纬度向量
+longitude = 144.9631
+latitude = -37.8136
+height = 2000
+第四步：自定义飞行过渡 设置飞行曲线：
+ Fly To Altitude Profile Curve Fly to Maximum Altitude Curve Fly to Progress Curve  添加 Fly To Curves actor，这是一个UCurveFloat，这个函数用来控制计算从源头到目的地的路径插值。
+  在【内容】面板右击，选择【其他】【曲线】，选择【CurveFloat】，并命名...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-15 16:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Transition Between Locations" href="https://874656645.github.io/posts/182-cesium-unreal-transition-between-locations/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>目标  Create a persistent global level Put several local sublevels within the persistent level Fill each sublevel with assets and game-logic using your typical Unreal workflow Seamlessly fly between sublevels as well as explore the persistent level Stay aware of pitfalls along the way  第一步：新建由项目组成的世界场景   新建一个空白的项目
+参考快速入门，删除【世界大纲试图】中的所有默认的 actors
+  创建持久关卡(Persistent Level)
+在内容浏览器新建 World 文件夹，把当前的空关卡命名为 Globe 并保存到此文件夹中。
+这个关卡就是 Persistent Level，它代表了整个地球。
+  世界场景设置
+打开【世界场景设置】面板，勾选【启用场景合成】
+禁用【启用场景边界检查】，在全球尺度的世界中，物体可以移动非常远的距离，禁用此设置 Unreal 就不会删除远离原点的物体...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-15 13:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Building Global Scenes with Georeferenced Sublevels" href="https://874656645.github.io/posts/181-cesium-unreal-georeferenced-sublevels/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Cesium4Unreal——Place Objects On Globe
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、添加静态风格体（static meshes） 二、真实世界椭球与游戏世界坐标系 由于地球曲率的影响，距离 CesiumGeoreference 原点越远，铅垂线的方向误差越大，每一公里方向偏差大概 0.01 度。当我们从地球的一端到对面的一端时，重力的方向就转了 180 度。
+可以从以下几方面解决（由易到难）：
+ 待在一个相对较小的区域内，大概100公里左右； 在地球的每个部分设置独立的子关卡，每个子关卡都有自己的 CesiumGeoreference； 使用 CesiumGlobeAnchor 为 actor 添加有限的真实世界信息参考(参见下面的“我们可以将动态对象转换为地理引用对象”); 手动扩展你的游戏对象，以充分考虑真实椭圆地球影响。  三、一般的虚幻引擎对象的位置问题 一般的虚幻引擎对象是固定在游戏世界，而不固定在真实世界的位置
+当 CesiumGeoreference 原点改变时，整个虚幻引擎世界将移动到地球上的一个新位置，包括其中的所有对象
+开始放置的地方：
+修改 CesiumGeoreference 原点后：
+四、将动态对象转换为具有地理坐标参考的对象 1. 修改对象为可移动的 2. 添加 Cesium Globe Anchor 组件 通过添加 Cesium Globe Anchor 组件，就将这个 actor 对象转换为具有地理位置参考的对象了。
+现在，我们可以更改 Cesium Globe Anchor 的原点，那么该物体将完全保持在地球上的位置。我们还可以直接指定 Longitude / Latitude / Height 或者 Earth-Centered, Earth-Fixed 的坐标，以将物体与精确的数值坐标放置在一起。
+需要注意两点：
+ 只能将 Cesium Globe Anchor 组件添加到可移动的 actor 上； 并不能解决所有的问题，尤其是重力方向的问题；  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-15 10:34:27 +0800 CST'>April 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Place Objects On Globe" href="https://874656645.github.io/posts/180-cesium-unreal-placeobjectonglobe/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Cesium4Unreal——Photogrammetry 倾斜摄影
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>第一步：新建空白关卡 第二步：添加倾斜摄影数据 去网站将数据资产添加到自己的账户
+第三步：以倾斜摄影数据为中心 看起来怪怪的是因为球心坐标系与游戏的坐标系统有所不同， 虚幻编辑器的摄像机 Z 方向是向上的。在地球上（与大多数游戏不同）以地球为中心的坐标系统的向上方向取决于你在世界的位置。
+通过点击 CesiumGeoreference 的 Place Georeference Origin Here 按钮快速设置场景坐标原点到当前相机位置
+此按钮将重新定位虚幻引擎当前关卡的坐标系统，使其中心点(0,0,0)准确地位于摄像机之前的位置，并对齐虚幻引擎的坐标轴，使&#43;X指向东方，&#43;Y指向南方，&#43;Z指向上方
+第四步：添加光照 CesiumSunSky 添加照明并调整时区和时间
+第五步：添加地球影像地形 修改摄影测量数据的位置
+第六步：从本地目录添加 3D Tileset 1. 在场景中添加了一个新的空白 Cesium3DTileset Actor 2. 设置本地 Tileset 文件路径 定位到添加的 tileset actor，场景和数据朝向很可能是错误的
+这是因为 CesiumGeoreference actor 的原点距离 LocalTileset actor 很远。
+3. 重新设置原点 修改 3D Tileset 数据的 Z 值
+影像地形数据 可以通过在本场发布数据服务的方式，类似这种 http://localhost:portNumber/terrainAsset
+经度和时区 摘自知乎
+经度与纬度组成了一个坐标系统，称为地理坐标系统。通过经纬度表示地球上的任何一个位置。
+国际上规定以通过英国伦敦近郊的格林尼治天文台旧址的经线作为计算经度的起点，即经度零度零分零秒，也称“本初子午线”。在它东面的为东经，共180度；在它西面的为西经，共180度。因为地球是圆的，所以东经180度和西经180度的经线是同一条经线。各国公定180度经线为“国际日期变更线”。为了避免同一地区使用两个不同的日期，国际日期变线在遇陆地时略有偏离。
+地球自西向东转，东边时间就要比西边早。规定将全球分为24时区，东西各12时区，每个时区跨经度15度，以英国格林尼治天文台旧址为零时区，两个相邻时区之间相差1小时。
+不同时区的时间按照同减异加、东加西减的原则计算。比如，北京位于东8区，纽约在西5区，北京时间要比纽约早13个小时。</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-04-14 15:34:27 +0800 CST'>April 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Cesium4Unreal——Photogrammetry 倾斜摄影" href="https://874656645.github.io/posts/179-cesium-unreal-photogrammetry/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Cesium4Unreal——Hello Cesium for UE
     </h2>
   </header>
@@ -171,60 +260,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-04-14 10:34:27 +0800 CST'>April 14, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Cesium4Unreal——Hello Cesium for UE" href="https://874656645.github.io/posts/178-cesium-unreal-project/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 折叠表达式
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一元折叠表达式
- ( pack op ... ) : 一元右折叠  (E op ...) 展开后： (E1 op (... op (EN-1 op EN)))   ( ... op pack ) ：一元左折叠  (... op E) 展开后： (((E1 op E2) op ...) op EN)      二元折叠表达式
- ( pack op ... op init ) ：二元右折叠  (E op ... op I) 展开后： (E1 op (... op (EN−1 op (EN op I))))   ( init op ....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-13 16:50:15 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 折叠表达式" href="https://874656645.github.io/posts/177-c&#43;&#43;17-%E6%8A%98%E5%8F%A0%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 变长参数模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>任意个数、任意类别的模板参数
-template&lt;typename... Ts&gt; class Magic; // 计算参数的个数 template&lt;typename... Ts&gt; void magic(Ts... args) { std::cout &lt;&lt; sizeof...(args) &lt;&lt; std::endl; }   递归解包：
- C&#43;&#43;17 之前  template&lt;typename T0&gt; void my_printf(T0 value) { std::cout &lt;&lt; value &lt;&lt; std::endl; } template&lt;typename T, typename... Ts&gt; void my_printf(T value, Ts... args) { std::cout &lt;&lt; value &lt;&lt; std::endl; my_printf(args...); } int main() { my_printf(1, 2.2, &#34;abc&#34;, &#39;a&#39;); return 0; }  C&#43;&#43;17 变参模板展开：  template&lt;typename T, typename....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-13 10:49:20 +0800 CST'>April 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 变长参数模板" href="https://874656645.github.io/posts/176-c&#43;&#43;17-%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 使用结构化绑定来解包绑定的返回值
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>注意：使用结构化绑定时，就不能再使用 std::tie 创建虚拟变量了，所以我们不得不绑定所有值到命名过的变量上。对部分成员进行绑定的做法是高效的，因为编译器可以很容易的对未绑定的变量进行优化
-std::pair&lt;int,int&gt; divide_remainder(int dividend, int divisor){ int f = dividend / divisor; int s = dividend % divisor; return {f, s}; } int main() { auto [dividend, remainder] = divide_remainder(16, 3); std::cout &lt;&lt; &#34;16 / 3 is &#34; &lt;&lt; dividend &lt;&lt; &#34; with a remainder of &#34; &lt;&lt; remainder &lt;&lt; &#39;\n&#39;; // 之前的写法  int remainder1; std::tie(std::ignore, remainder1) = divide_remainder(16, 5); std::cout &lt;&lt; &#34;16 % 5 is &#34; &lt;&lt; remainder1 &lt;&lt; &#39;\n&#39;; return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-12 19:02:36 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 使用结构化绑定来解包绑定的返回值" href="https://874656645.github.io/posts/175-c&#43;&#43;17-%E4%BD%BF%E7%94%A8%E7%BB%93%E6%9E%84%E5%8C%96%E7%BB%91%E5%AE%9A%E6%9D%A5%E8%A7%A3%E5%8C%85%E7%BB%91%E5%AE%9A%E7%9A%84%E8%BF%94%E5%9B%9E%E5%80%BC/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;17 大括号初始化
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>( expression-list )：优先调用非聚合初始化，且会存在隐式转换 = expression： { initializer-list }：如果有聚合初始化（initializer_list&lt;&gt;），就调用聚合初始化，没有的话就调用符合条件的非聚合初始化 = { initializer-list }：同上 使用 auto 声明的变量括号初始化，只允许一个参数的情况 {} 与 () 调用构造函数初始化的方式，不同点在于 {} 没有类型的隐式转换，比如 int x(1.2); 和 int x = 1.2; 通过隐式的对浮点值进行向下取整，然后将其转换为整型，从而将 x 的值初始化为 1。相反的， int x{1.2}; 将会遇到编译错误，初始化列表中的初始值，需要与变量声明的类型完全匹配。  测试代码一：
-// #define AGGREGATE_INIT class Test{ public: Test(int a, float b, char* c){ cout &lt;&lt; &#34;int float char* initialize...&#34; &lt;&lt; endl; } Test(int a, int b, int c){ cout &lt;&lt; &#34;int int int initialize....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-12 18:51:42 +0800 CST'>April 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;17 大括号初始化" href="https://874656645.github.io/posts/174-c&#43;&#43;17-%E5%A4%A7%E6%8B%AC%E5%8F%B7%E5%88%9D%E5%A7%8B%E5%8C%96/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

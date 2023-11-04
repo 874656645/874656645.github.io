@@ -145,6 +145,61 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>多态总结
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1. C&#43;&#43; 多态分类及实现  重载多态（Ad-hoc Polymorphism，编译期）：函数重载、运算符重载（静态多态、静态编译） 子类多态（Subtype Polymorphism，运行期）：虚函数（动态多态、动态编译） 参数多态（Parametric Polymorphism，编译期）：类模板（泛型）、函数模板（函数指针） 强制多态（Coercion Polymorphism，编译期/运行期）：基本类型转换、自定义类型转换  2. 虚表指针、虚函数指针、虚函数表  虚表指针：在含有虚函数的类的对象中，指向虚函数表的指针，在运行时确定 虚函数指针：指向虚函数的地址的指针 {vfptr} 虚函数表：在程序只读数据段，存放虚函数指针，如果派生类实现了基类的某个虚函数，则在虚函数表中覆盖原本基类的那个虚函数指针，在编译时根据类的声明创建 Shape::$vftable@  class Shape { public: virtual ~Shape(){ cout &lt;&lt; &#34;~Shape()&#34; &lt;&lt; endl; } }; class Point { public: ~Point(){ cout &lt;&lt; &#34;~Point()&#34; &lt;&lt; endl; } private: int m_x{0}; int m_y{0}; char m_c; }; class Circle : public Shape { public: ~Circle(){ cout &lt;&lt; &#34;~Circle()&#34; &lt;&lt; endl; } private: Point m_p; }; int main( ) { // 8 类中存有指向虚函数表的指针  cout &lt;&lt; sizeof(Shape) &lt;&lt; endl; // 16 类中存有指向虚函数表的指针  // 以及Point对象的大小（此时Point类中不包含任何变量），虽然真实大小是 8 &#43; 1  // 但是额外多的1个字节导致内存大小扩增了 8(每次扩增的最小数值是8 &lt;alignment member&gt; (size=7))  cout &lt;&lt; sizeof(Circle) &lt;&lt; endl; // 8 类中的int占4个字节，char占1个字节  // 但每次扩增的最小数值是4(&lt;alignment member&gt; (size=3))  cout &lt;&lt; sizeof(Point) &lt;&lt; endl; Circle c; return 0; } Start 8 24 12 ~Circle() ~Point() ~Shape() 0 Finish Shape 类...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-27 10:34:27 +0800 CST'>December 27, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 多态总结" href="https://874656645.github.io/posts/43-%E5%A4%9A%E6%80%81%E6%80%BB%E7%BB%93/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>函数默认参数和占位参数
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1. 函数默认参数和占位参数（亚元） 形参中的占位参数又叫亚元，并没有什么实际意义，只在函数重载中起到作用
+// 亚元，设置了默认值所以调用时可以不传参数 // 否则就必须传入两个参数 void foo(int a, int = 0){ cout &lt;&lt; &#34;a = &#34; &lt;&lt; a &lt;&lt; endl; } int main() { foo(20); return 0; } 2. 函数重载  函数名相同，形参列表不同（形参个数、类型、顺序） 函数返回值不起作用 函数重载和默认参数不要同时使用（函数调用时容易产生二义性） 倾轧技术（name mangling），底层会将函数名进行编译  用 v c i f l d 表示 void char int float long double 及其引用 int fun(int) =&gt; fun_i
+int fun(int, char, double) =&gt; fun_icd   重载函数匹配顺序  如果能够严格匹配，则调用完全匹配的 如果没有完全匹配的，则调用隐式转换的 都匹配不上，编译失败    3....</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-26 15:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 函数默认参数和占位参数" href="https://874656645.github.io/posts/42-%E5%87%BD%E6%95%B0%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0%E5%92%8C%E5%8D%A0%E4%BD%8D%E5%8F%82%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>内存区间划分
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、程序运行前  代码区（只读的、共享） 数据区（全局变量和静态变量）  二、程序运行后  栈区 堆区 全局静态区（全局变量、静态变量、常量） 代码区  Linux程序运行内存虚拟地址空间：
+三、全局变量与静态变量的区别 作用域不同
+全局变量默认是 extern 的
+静态变量是文件作用域
+C/C&#43;&#43; 中 extern 关键字详解</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-26 14:34:27 +0800 CST'>December 26, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 内存区间划分" href="https://874656645.github.io/posts/41-%E5%86%85%E5%AD%98%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>指针引用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>指针也是一种变量，作为函数形参和返回值的时候也是值拷贝（拷贝的是一个地址） 使用指针引用的方式，代码更加简洁，逻辑更加清晰 释放掉指针指向的空间后，一定记得把指针置空 声明指针时就进行初始化或将其指向 NULL 是个好习惯  指针值拷贝：
+void test(int * a){ a = new int(20); //*a = 20;  cout &lt;&lt; &#34;test point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;test:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; } int main() { int *a = new int(10); cout &lt;&lt; &#34;main point a = &#34; &lt;&lt; &amp;a &lt;&lt; endl; cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; test(a); cout &lt;&lt; &#34;main:&#34; &lt;&lt; a &lt;&lt; &#34;\ta = &#34; &lt;&lt; *a &lt;&lt; endl; return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2021-12-25 21:34:27 +0800 CST'>December 25, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 指针引用" href="https://874656645.github.io/posts/40-%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>抽象、封装、继承、多态
     </h2>
   </header>
@@ -163,62 +218,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2021-12-24 15:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 抽象、封装、继承、多态" href="https://874656645.github.io/posts/39-%E6%8A%BD%E8%B1%A1%E5%B0%81%E8%A3%85%E7%BB%A7%E6%89%BF%E5%A4%9A%E6%80%81/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>类的静态成员
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>使用 static 关键字来把类成员定义为静态的。静态成员在类的所有对象中是共享的，当我们声明类的成员为静态时，这意味着无论创建多少个类的对象，静态成员都只有一个副本 如果不存在其他的初始化语句，在创建第一个对象时，所有的静态数据都会被初始化为零 不能把静态成员的初始化放置在类的定义中，但是可以在类的外部通过使用范围解析运算符 :: 来重新声明静态变量从而对它进行初始化 如果把函数成员声明为静态的，就可以把函数与类的任何特定对象独立开来。静态成员函数即使在类对象不存在的情况下也能被调用，静态函数只要使用类名加范围解析运算符 :: 就可以访问 静态成员函数没有 this 指针，只能访问静态成员（包括静态成员变量和静态成员函数） 普通成员函数有 this 指针，可以访问类中的任意成员；  class A { string name {&#34;C&#43;&#43;&#34;}; int id {1024}; static int objCount; public: A(); friend void printA(const A &amp;a); void printA(); static void printC(); }; // 静态成员类外初始化 int A::objCount = 0; A::A(){ objCount&#43;&#43;; } void A::printA(){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; &#34;\tname = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } void A::printC(){ // 静态函数内没有this指针  cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; objCount &lt;&lt; endl; // error: &#39;this&#39; is unavailable for static member functions  // cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; this-&gt;objCount &lt;&lt; endl; } void printA(const A &amp;a){ cout &lt;&lt; &#34;objCount = &#34; &lt;&lt; a....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-24 13:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类的静态成员" href="https://874656645.github.io/posts/38-%E7%B1%BB%E7%9A%84%E9%9D%99%E6%80%81%E6%88%90%E5%91%98/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>友元函数与友元类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>友元利弊：
-友元不是类的成员但能访问类中的私有成员。友元的作用在于提高程序的运行效率，但也破坏了类的封装。
-  注意事项：
-（1）友元关系不能被继承；
-（2）友元关系是单向的，不具有交换性；
-（3）友元关系不具有传递性；
-  一、友元函数  类的友元函数是定义在类外部，但有权访问类的所有私有（private）成员和保护（protected）成员 尽管友元函数的原型有在类的定义中出现过，但是 友元函数并不是成员函数 this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象 友元函数没有 this 指针，因为友元不是类的成员。只有成员函数才有 this 指针  1. 友元函数是全局函数
-class A { friend void printA(const A &amp;a); public: void printA(); private: string name {&#34;C&#43;&#43;&#34;}; int id {1024}; }; void A::printA(){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; this-&gt;name &lt;&lt; &#34;\tid = &#34; &lt;&lt; this-&gt;id &lt;&lt; endl; } // 请注意：printA() 不是任何类的成员函数 void printA(const A &amp;a){ cout &lt;&lt; &#34;name = &#34; &lt;&lt; a....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-24 12:34:27 +0800 CST'>December 24, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 友元函数与友元类" href="https://874656645.github.io/posts/37-%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%8B%E5%85%83%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>构造、拷贝构造、赋值构造
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>结论：
- 拷贝构造函数是函数，赋值运算符是运算符的重载； 拷贝构造函数会生成新的类对象，赋值运算符不会； 拷贝构造函数是用一个已存在的对象去构造一个不存在的对象；而赋值运算符重载函数是用一个存在的对象去给另一个已存在并初始化过的对象进行赋值; 若接受返回值的对象已经初始化过，则会调用赋值运算符，且该对象还会调用析构函数，当对象中包含指针时，会使该指针失效，因此需要重载赋值运算符，使用类似深拷贝或移动构造函数的方法赋值，才能避免指针失效。 如果只有显示的构造函数，系统会提供默认的拷贝构造； 如果显示提供了拷贝构造，系统就不会提供默认的无参构造了，用户必需显示提供构造函数； 当既没有显式的构造函数，也没有拷贝构造时，系统才会提供默认的无参构造； 显示提供拷贝构造就必需显示提供构造函数； 显示提供赋值运算符重载就必需显示提供拷贝构造；  成员初始化列表  使用成员变量初始化列表，少了一次调用默认构造函数的过程，提高效率 常量成员，因为常量只能初始化不能赋值，所以必须放在初始化列表里面 引用类型，引用必须在定义的时候初始化，并且不能重新赋值，所以也要写在初始化列表里面 成员变量初始化的顺序跟在初始化列表的顺序无关，与变量声明的顺序有关  测试类 class A { public: A(){ cout &lt;&lt; &#34;default constructor&#34; &lt;&lt; endl; cout &lt;&lt; &#34;adrres: &#34; &lt;&lt; this &lt;&lt; &#34;\tpoint x: &#34; &lt;&lt; x &lt;&lt; &#34;\ty: &#34; &lt;&lt; y &lt;&lt; endl; } A(int t){ x = new int(0); y = t; cout &lt;&lt; &#34;second constructor&#34; &lt;&lt; endl; cout &lt;&lt; &#34;adrres: &#34; &lt;&lt; this &lt;&lt; &#34;\tpoint x: &#34; &lt;&lt; x &lt;&lt; &#34;\ty: &#34; &lt;&lt; y &lt;&lt; endl; } A(const A &amp;a){ cout &lt;&lt; &#34;const copy constructor&#34; &lt;&lt; endl; cout &lt;&lt; &#34;adrres: &#34; &lt;&lt; this &lt;&lt; &#34;\tpoint x: &#34; &lt;&lt; x &lt;&lt; &#34;\ty: &#34; &lt;&lt; y &lt;&lt; endl; this-&gt;x = a....</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-23 14:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 构造、拷贝构造、赋值构造" href="https://874656645.github.io/posts/36-%E6%9E%84%E9%80%A0%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E8%B5%8B%E5%80%BC%E6%9E%84%E9%80%A0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>函数重载、重写、隐藏、模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写（覆盖）： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写或覆盖； 重定义： 派生类中函数与基类中的函数同名（形参没有要求），但是这个函数在基类中并没有被定义为虚函数 隐藏： 派生类中重定义了父类的函数，此时基类的函数会被隐藏； 模板： 函数模板是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public: A(int a){ m_a = a; } void print(){ cout &lt;&lt; &#34;print()&#34; &lt;&lt; &#34;m_a = &#34; &lt;&lt; m_a &lt;&lt; endl; } void freeP(A ** p){ if(p == NULL){ return; } if(*p != NULL){ free(*p); *p = NULL; } } void freeP(A * p){ if(p != NULL){ free(p); p = NULL; } } static void printS(){ cout &lt;&lt; &#34;printS() s_a = &#34; &lt;&lt; s_a &lt;&lt; endl; } static void printS(int s){ cout &lt;&lt; &#34;printS(int s) &#34; &lt;&lt; s_a * s &lt;&lt; endl; } static void printS(void *p, int s){ cout &lt;&lt; &#34;printS(void *p, int s) &#34; &lt;&lt; ((A*)p)-&gt;m_a * s &lt;&lt; endl; } static int s_a; private: int m_a; }; int A::s_a = 0; int main( ) { A *a = new A(1); a-&gt;printS(a, 20); a-&gt;print(); A::s_a = 10; a-&gt;printS(); a-&gt;printS(10); a-&gt;freeP(a); if(a == NULL){ cout &lt;&lt; &#34;*a is not valid&#34; &lt;&lt; endl; return 0; } cout &lt;&lt; &#34;*a is valid&#34; &lt;&lt; endl; a-&gt;print(); return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2021-12-23 12:34:27 +0800 CST'>December 23, 2021</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数重载、重写、隐藏、模板" href="https://874656645.github.io/posts/35-%E5%87%BD%E6%95%B0%E9%87%8D%E8%BD%BD%E9%87%8D%E5%86%99%E9%9A%90%E8%97%8F%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -9,7 +9,89 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 11 Sep 2023 09:34:47 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Nov 2023 18:18:30 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu 编译指定版本的 curl 库</title>
+      <link>https://874656645.github.io/posts/267-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-curl-%E5%BA%93/</link>
+      <pubDate>Fri, 03 Nov 2023 18:18:30 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/267-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-curl-%E5%BA%93/</guid>
+      <description>  卸载原有版本的 curl
+apt-get --purge remove curl
+  下载所需版本的 curl
+wget https://curl.se/download/curl-7.47.1.tar.gz
+  解压并编译
+tar -zxvf curl-7.47.1.tar.gz cd curl-7.47.1 ./configure shared make make install   编译好的可执行文件在 /usr/local/bin 目录下
+编译好的动态库和静态库在 /usr/local/lib 目录下
+  创建可执行文件和动态链接库的软连接
+  参考：
+ curl download archive ubuntu卸载安装curl Linux下更新curl版本  </description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 编译指定版本的 OpenSSL 库</title>
+      <link>https://874656645.github.io/posts/266-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-openssl-%E5%BA%93/</link>
+      <pubDate>Thu, 02 Nov 2023 20:50:41 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/266-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-openssl-%E5%BA%93/</guid>
+      <description>  重命名原有的 openssl 可执行文件
+mv -f /usr/bin/openssl /usr/bin/openssl.old
+  下载所需版本的 openssl
+wget http://www.openssl.org/source/openssl-1.0.0s.tar.gz
+  解压并编译
+tar zxvf openssl-1.0.0s.tar.gz cd openssl-1.0.0s ./config shared --prefix=/usr/local/openssl1.0 make &amp;amp;&amp;amp; make install   生成的可执行文件在 /usr/local/openssl1.0/bin 目录下
+  生成的动态链接库在 /usr/local/openssl1.0/lib 目录下
+  在 /usr/bin 目录下创建可执行文件的软连接
+  在 /usr/lib/x86_64-linux-gnu/ 目录下创建动态链接库的软连接
+  参考：
+ OpenSSL Old Releases Linux openssl 升级、降级 openssl动态库生成以及交叉编译  </description>
+    </item>
+    
+    <item>
+      <title>Docker Ubuntu 16.04 Sonnar</title>
+      <link>https://874656645.github.io/posts/265-docker-ubuntu-16.04-sonnar/</link>
+      <pubDate>Mon, 30 Oct 2023 21:47:38 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/265-docker-ubuntu-16.04-sonnar/</guid>
+      <description>一、安装 Docker Desktop 下载 Dockers Desktop
+二、下载并运行 Ubuntu 镜像 创建容器并运行（Ubuntu 版本 16.04），如果本地没有相应版本的镜像，则会自动下载
+docker run -it --name ubuntu16.04_sonar -v /D/Work/sonar:/data ubuntu:16.04
+运行已安装的容器
+docker start -i ubuntu16.04_sonar
+三、配置 Ubuntu 环境 apt update &amp;amp;&amp;amp; apt upgrade
+apt-get install build-essential
+apt install software-properties-common
+apt install vim
+指定编码：C.UTF-8
+locale
+locale -a
+cd ~ &amp;amp;&amp;amp; vim .bashrc
+export LANG=C.UTF-8
+source .bashrc
+安装 python 2.7 pip2
+python -V
+apt install python (python2)
+apt install python-pip
+安装 python3</description>
+    </item>
+    
+    <item>
+      <title>Android Studio Build 窗口中文乱码</title>
+      <link>https://874656645.github.io/posts/264-android-studio-build-%E7%AA%97%E5%8F%A3%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</link>
+      <pubDate>Mon, 30 Oct 2023 17:17:34 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/264-android-studio-build-%E7%AA%97%E5%8F%A3%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</guid>
+      <description>中文乱码
+Android Studio Version 4.2.1
+打开 Android studio 全局搜索 双击 shift
+搜索 Edit Custom VM Options，双击第一个
+打开或者生成文件 studio64.exe.vmoptions
+在文件后面添加 -Dfile.encoding=UTF-8 (要注意不能有空格，否则 studio 可能打不开)
+直接保存，重启 Android Studio
+参考：
+ Android Studio Build窗口出现中文乱码问题  </description>
+    </item>
+    
     <item>
       <title>WSL Ubuntu 使用 SonarQube</title>
       <link>https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/</link>
