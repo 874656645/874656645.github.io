@@ -90,8 +90,8 @@ if (!doNotTrack) {
   "keywords": [
     "C++"
   ],
-  "articleBody": " 重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写（覆盖）： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写或覆盖； 重定义： 派生类中函数与基类中的函数同名（形参没有要求），但是这个函数在基类中并没有被定义为虚函数 隐藏： 派生类中重定义了父类的函数，此时基类的函数会被隐藏； 模板： 函数模板是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public: A(int a){ m_a = a; } void print(){ cout  \"print()\"  \"m_a = \"  m_a  endl; } void freeP(A ** p){ if(p == NULL){ return; } if(*p != NULL){ free(*p); *p = NULL; } } void freeP(A * p){ if(p != NULL){ free(p); p = NULL; } } static void printS(){ cout  \"printS() s_a = \"  s_a  endl; } static void printS(int s){ cout  \"printS(int s) \"  s_a * s  endl; } static void printS(void *p, int s){ cout  \"printS(void *p, int s) \"  ((A*)p)-m_a * s  endl; } static int s_a; private: int m_a; }; int A::s_a = 0; int main( ) { A *a = new A(1); a-printS(a, 20); a-print(); A::s_a = 10; a-printS(); a-printS(10); a-freeP(a); if(a == NULL){ cout  \"*a is not valid\"  endl; return 0; } cout  \"*a is valid\"  endl; a-print(); return 0; } 输出：\nStart printS(void *p, int s) 20 print()m_a = 1 printS() s_a = 10 printS(int s) 100 *a is valid print()m_a = 0 0 Finish 重写（覆盖）与重定义（隐藏）  struct B{ virtual void print(){ cout  \"B::print\"  endl; } void printT(){ cout  \"B::printT\"  endl; } }; struct D:B{ void print() override{ cout  \"D::print\"  endl; } void printT(int a){ cout  \"D::printT\"  endl; } }; int main() { D* d = new D; d-print(); d-printT(0); B* b = static_castB*(d); b-print(); b-printT(); return 0; } 输出：\nD::print D::printT D::print B::printT ",
-  "wordCount" : "266",
+  "articleBody": " 重载： 在同一作用域中，两个函数名相同，但是参数列表不同（个数、类型、顺序），返回值类型没有要求； 重写（覆盖）： 子类继承了父类，父类中的函数是虚函数，在子类中重新定义了这个虚函数，这种情况是重写或覆盖； 重定义： 派生类中函数与基类中的函数同名（形参没有要求），但是这个函数在基类中并没有被定义为虚函数 隐藏： 派生类中重定义了父类的函数，此时基类的函数会被隐藏； 模板： 函数模板是一个通用函数，函数的类型和形参不直接指定而用虚拟类型来代表，只适用于 参数个数相同而类型不同 的函数。 构造函数可以被重载，析构函数不可以被重载。因为构造函数可以有多个且可以带参数， 而析构函数只能有一个，且不能带参数  1、重载  类的静态函数也可以重载； 形参中一级指针和二级指针被认为是不同类型的参数；  class A{ public: A(int a){ m_a = a; } void print(){ cout  \"print()\"  \"m_a = \"  m_a  endl; } void freeP(A ** p){ if(p == NULL){ return; } if(*p != NULL){ free(*p); *p = NULL; } } void freeP(A * p){ if(p != NULL){ free(p); p = NULL; } } static void printS(){ cout  \"printS() s_a = \"  s_a  endl; } static void printS(int s){ cout  \"printS(int s) \"  s_a * s  endl; } static void printS(void *p, int s){ cout  \"printS(void *p, int s) \"  ((A*)p)-m_a * s  endl; } static int s_a; private: int m_a; }; int A::s_a = 0; int main( ) { A *a = new A(1); a-printS(a, 20); a-print(); A::s_a = 10; a-printS(); a-printS(10); a-freeP(a); if(a == NULL){ cout  \"*a is not valid\"  endl; return 0; } cout  \"*a is valid\"  endl; a-print(); return 0; } 输出：\nStart printS(void *p, int s) 20 print()m_a = 1 printS() s_a = 10 printS(int s) 100 *a is valid print()m_a = 0 0 Finish 重写（覆盖）与重定义（隐藏）  struct B{ virtual void print(){ cout  \"B::print\"  endl; } void printT(){ cout  \"B::printT\"  endl; } }; struct D:B{ void print() override{ cout  \"D::print\"  endl; } void printT(int a){ cout  \"D::printT\"  endl; } }; int main() { D* d = new D; d-print(); d-printT(0); B* b = static_castB*(d); b-print(); b-printT(); return 0; } 输出：\nD::print D::printT D::print B::printT #include using namespace std; class A{ public: virtual void f(){ cout  \"A::f\\n\"; } void g(){ cout  \"A::g\\n\"; } }; // 隐藏和覆盖 class B: protected A{ // 通过非 public 继承，隐藏父类函数 public: // using A::g;  void g(){ // 覆盖父类的 g(), 但并未隐藏  cout  \"B::g\\n\"; } void f()override{ // 通过虚函数覆盖父类函数  cout  \"B::f\\n\"; } A getA(){ return *this; } }; int main() { B b; A* p = (A*)\u0026b; // b.A::f(); // error: ‘class A A::A’ is inaccessible within this context  // 父类 g() 被隐藏  p-A::f(); // A::f  p-f(); // B::f  b.f(); // B::f  b.g(); // B::g  p-g(); // A::g  A aa = b.getA(); aa.g(); // A::g  aa.f(); // A::f  return 0; } ",
+  "wordCount" : "378",
   "inLanguage": "en",
   "datePublished": "2021-12-23T12:34:27+08:00",
   "dateModified": "2021-12-23T12:34:27+08:00",
@@ -319,6 +319,48 @@ Finish
 D::printT
 D::print
 B::printT
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span>{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> f(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A::f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">g</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A::g</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+};
+<span style="color:#75715e">// 隐藏和覆盖
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">protected</span> A{ <span style="color:#75715e">// 通过非 public 继承，隐藏父类函数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// using A::g;      
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> g(){           <span style="color:#75715e">// 覆盖父类的 g(), 但并未隐藏
+</span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::g</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>()<span style="color:#66d9ef">override</span>{   <span style="color:#75715e">// 通过虚函数覆盖父类函数
+</span><span style="color:#75715e"></span>        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::f</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+    A <span style="color:#a6e22e">getA</span>(){
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">*</span><span style="color:#66d9ef">this</span>;
+    }
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    B b;
+    A<span style="color:#f92672">*</span> p <span style="color:#f92672">=</span> (A<span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>b;   
+    <span style="color:#75715e">// b.A::f();    // error: ‘class A A::A’ is inaccessible within this context
+</span><span style="color:#75715e"></span>                    <span style="color:#75715e">// 父类 g() 被隐藏
+</span><span style="color:#75715e"></span>    p<span style="color:#f92672">-&gt;</span>A<span style="color:#f92672">::</span>f();      <span style="color:#75715e">// A::f
+</span><span style="color:#75715e"></span>    p<span style="color:#f92672">-&gt;</span>f();         <span style="color:#75715e">// B::f
+</span><span style="color:#75715e"></span>    b.f();          <span style="color:#75715e">// B::f
+</span><span style="color:#75715e"></span>    b.g();          <span style="color:#75715e">// B::g 
+</span><span style="color:#75715e"></span>    p<span style="color:#f92672">-&gt;</span>g();         <span style="color:#75715e">// A::g
+</span><span style="color:#75715e"></span>    A aa <span style="color:#f92672">=</span> b.getA();
+    aa.g();         <span style="color:#75715e">// A::g
+</span><span style="color:#75715e"></span>    aa.f();         <span style="color:#75715e">// A::f
+</span><span style="color:#75715e"></span>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
 </code></pre></div>
 
   </div>
@@ -346,7 +388,7 @@ B::printT
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

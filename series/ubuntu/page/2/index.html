@@ -145,6 +145,23 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Git——Windows TortoiseGit 配置 SSH 
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、设置本地git的账户邮箱和用户名   查看是否设置了邮箱和用户名
+git config user.name git config user.email   设置邮箱和用户名
+git config --global user.name &#34;Git账号&#34; git config --global user.email &#34;Git邮箱&#34;   二、生成 SSH 密钥 在 git bash 中输入命令 ssh-keygen -t rsa -C &#34;你的Git邮箱&#34;，敲三次回车，就会在目录 我的电脑—&gt;C盘—&gt;用户—&gt;你自己的用户 目录下生成 .ssh 文件夹
+三、将 SSH 公钥添加到 GitLab 账户   在 .ssh 文件夹下，使用记事本打开 id_rsa.pub 公钥文件，复制里面的内容
+  打开 gitlab 网站的 SSH keys，将复制的文本粘贴进去即可
+  四、TortoiseGit 使用 git SSH 密钥 打开 TortoiseGit setting 指定 SSH client 为 git 的 ssh....</p>
+  </section>
+  <footer class="entry-footer"><span title='2023-02-22 20:09:10 +0800 CST'>February 22, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Git——Windows TortoiseGit 配置 SSH " href="https://874656645.github.io/posts/259-git-tortoisegit-%E9%85%8D%E7%BD%AE-ssh-/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Git——stash TortoiseGit 将一个分支上的修改转移到另一个分支上
     </h2>
   </header>
@@ -218,19 +235,6 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
   <footer class="entry-footer"><span title='2022-02-19 16:36:47 +0800 CST'>February 19, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Makefile 使用" href="https://874656645.github.io/posts/126-makefile-%E4%BD%BF%E7%94%A8/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Linux 静态库与动态库
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、库是什么 库是二进制格式的源代码（二进制加密）
-二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-17 22:25:34 +0800 CST'>February 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Linux 静态库与动态库" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/series/ubuntu/">« Prev Page</a>
@@ -241,7 +245,7 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

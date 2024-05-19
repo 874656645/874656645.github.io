@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>安卓 on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/series/%E5%AE%89%E5%8D%93/</link>
+    <description>Recent content in 安卓 on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 23 Dec 2023 11:59:04 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/%E5%AE%89%E5%8D%93/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>adb 与安卓使用</title>
+      <link>https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 23 Dec 2023 11:59:04 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/</guid>
+      <description>查看包名
+adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
+adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
+adb shell pm path com.xxx.xxx.xxx
+  卸载程序
+adb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]
+adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi.</description>
+    </item>
+    
+  </channel>
+</rss>

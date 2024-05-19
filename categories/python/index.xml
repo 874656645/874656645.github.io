@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Python on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/categories/python/</link>
+    <description>Recent content in Python on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 04 Jan 2024 19:18:20 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python Conda GDAL 环境搭建</title>
+      <link>https://874656645.github.io/posts/269-python-conda-gdal-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 04 Jan 2024 19:18:20 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/269-python-conda-gdal-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>  安装 miniconda，conda 命令使用可参考这里;
+注意：
+ 安装包的时候，conda install 和 pip install 最好不要混用，优先使用 pip 查看 python 包路径 python -m site
+    安装 GDAL 通过命令 pip install gdal 安装一般会报错，推荐下载 whl 安装包进行安装，可从这里下载   import gdal from osgeo import gdal 报错 在 python 安装各种环境包的文件夹下，如：D:**\python3.9.12\Lib\site-packages\ 文件夹下，新建 gdal.py 文件，将以下代码复制进去：
+# import osgeo.gdal as a convenience from osgeo.gdal import deprecation_warn deprecation_warn(&amp;#39;gdal&amp;#39;) from osgeo.gdal import *   参考：
+ GDAL 安装教程（Python） 解决 import gdal 导入失败的问题，但 from osgeo import gdal 导入成功  </description>
+    </item>
+    
+    <item>
+      <title>Conda Learn</title>
+      <link>https://874656645.github.io/posts/14-conda-learn/</link>
+      <pubDate>Tue, 04 Jun 2019 10:16:11 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/14-conda-learn/</guid>
+      <description>miniconda包管理器常用命令 0、指定conda的工作平台 set CONDA_FORCE_32BIT=1 // 指定 conda 的工作平台为 win-32
+set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
+1、指定conda的资源镜像 # 推荐使用中科大的 conda config --add channels https://mirrors.ustc.edu.cn/anaconda/pkgs/free # 清华的镜像好像用不了了 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free # 设置搜索时显示通道地址 conda config --set show_channel_urls yes 执行此命令后会在当前的用户文件夹下生成一个 .condarc 的配置文件
+2、搜索某个库的所有版本 conda search gdal
+3、查看当前环境下已安装的包 conda list
+4、创建一个虚拟环境 conda create --name python34 python=3.4
+5、激活某个环境 conda activate python34 // for windows
+source conda activate python34 // for Linux &amp;amp; Mac</description>
+    </item>
+    
+  </channel>
+</rss>

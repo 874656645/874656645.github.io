@@ -160,65 +160,62 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——运算符重载
+    <h2>C&#43;&#43;——类模板
     </h2>
   </header>
   <section class="entry-content">
     <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-14 17:38:55 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——运算符重载" href="https://874656645.github.io/posts/237-c&#43;&#43;-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
+  <footer class="entry-footer"><span title='2022-09-18 18:07:48 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——类模板" href="https://874656645.github.io/posts/244-c&#43;&#43;-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——异常的使用
+    <h2>C&#43;&#43;——函数模板
     </h2>
   </header>
   <section class="entry-content">
-    <p>普通函数、lambda表达式、函数模板和模板实例函数都可以定义异常接口 指针和引用类型的异常都可以支持多态 catch 的子类异常一定要写在父类异常的上面，catch 执行后就不会再执行后面的 catch 语句了 对于指针异常，如果不打算向上抛出，一定要记得 delete const volatile void * 可以捕获抛出的任何指针异常 ... 可以捕获抛出的任何异常 不引发任何异常，在函数后面添加 throw()、throw(void)、noexcept 建议将 noexcept 应用到任何绝不允许异常传播到调用堆栈的函数，当函数被声明为 noexcept 时，它使编译器可以在多种不同的上下文中生成更高效的代码  Exception.h
-struct A { int a = 1; virtual int getA()const { return a; } }; struct B : A { int a = 2; int getA()const override { return a; } }; #define cout cout&lt;&lt;__FILE__&lt;&lt;&#34;:&#34;&lt;&lt;__LINE__&lt;&lt;&#34;: Exception: &#34;  void testException() { try { // 抛出子类指针类型的异常 	//throw new B;  // 抛出子类对象类型的异常 	throw B(); } catch (const A e) { cout &lt;&lt; e....</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-14 11:08:56 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——异常的使用" href="https://874656645.github.io/posts/236-c&#43;&#43;-%E5%BC%82%E5%B8%B8%E7%9A%84%E4%BD%BF%E7%94%A8/"></a>
+  <footer class="entry-footer"><span title='2022-09-18 17:28:56 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——函数模板" href="https://874656645.github.io/posts/243-c&#43;&#43;-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——多继承与虚基类
+    <h2>C&#43;&#43;——变量模板
     </h2>
   </header>
   <section class="entry-content">
-    <p>案例一：
-class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(int x) :A(x) {	// 这里初始化的是派生树中正常的基类 A  } }; class C { public: C() { } }; class D : virtual public A, public C { public: D(int x) :A(x) { } }; class E : /*public A,*/ public B, public D { // 不允许存在直接基类和间接虚基类的情况 public: E(int x) : A(x), B(x &#43; 5), D(x &#43; 10) {	// error C2385: 对“A”的访问不明确  // 所以要使用 B::A(x) 或者 D::A(x)  // 此时初始化的都是派生树中虚基类 A  } }; int main(){ E e(0); //cout &lt;&lt; e....</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-12 16:00:03 +0800 CST'>September 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——多继承与虚基类" href="https://874656645.github.io/posts/235-c&#43;&#43;-%E5%A4%9A%E7%BB%A7%E6%89%BF%E4%B8%8E%E8%99%9A%E5%9F%BA%E7%B1%BB/"></a>
+  <footer class="entry-footer"><span title='2022-09-18 14:38:58 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——变量模板" href="https://874656645.github.io/posts/242-c&#43;&#43;-%E5%8F%98%E9%87%8F%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——虚函数表与多态（派生类内存布局）
+    <h2>C&#43;&#43;——Lambda表达式
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &lt;&lt; &#34;Construct A\n&#34;; } virtual void d() { cout &lt;&lt; &#34;Deconstruct A\n&#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &lt;&lt; &#34;Construct B\n&#34;; } void d()override { cout &lt;&lt; &#34;Deconstruct B\n&#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 参考：...</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-11 20:34:53 +0800 CST'>September 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——虚函数表与多态（派生类内存布局）" href="https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"></a>
+  <footer class="entry-footer"><span title='2022-09-18 10:38:31 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——Lambda表达式" href="https://874656645.github.io/posts/241-c&#43;&#43;-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——作用域和可访问性
+    <h2>C&#43;&#43;——类型推导杂记
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、 命名空间   嵌套命名空间
-namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){ cout &lt;&lt; &#34;B::C::g(long)\n&#34;; } }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{ int y = 1; int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;; } void g(void){ cout &lt;&lt; &#34;B::C::g(void)\n&#34;; } }; static int xx = 1; class A{ public: int xx; A(int xx){ A::xx = xx; } }; int main() { static int xx = 2; A a(3); cout &lt;&lt; a....</p>
+    <p></p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-09 17:35:34 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——作用域和可访问性" href="https://874656645.github.io/posts/233-c&#43;&#43;-%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/"></a>
+  <footer class="entry-footer"><span title='2022-09-16 11:38:55 +0800 CST'>September 16, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——类型推导杂记" href="https://874656645.github.io/posts/240-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC%E6%9D%82%E8%AE%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
@@ -230,7 +227,7 @@ namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明�
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

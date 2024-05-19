@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Linux 静态库与动态库
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、库是什么 库是二进制格式的源代码（二进制加密）
+二、库的使用  头文件 制作的库文件  三、静态库的制作和使用  命名规则 libxxx.a 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c *.c 将 .o 文件打包（archive） ar rcs libxxx.a *.o 查看 lib 文件 nm libxxx.a   库的使用 gcc main.c -I./include -L ./lib -lmyCalc -o app  -L: 库的路径 -l: 库的名称（去掉 lib 前缀和 .a 后缀）    四、动态库的制作和使用  命名规则 libxxx.so 制作步骤  准备源代码文件 将源代码文件生成 .o 文件 gcc -c -fpic *.c 或者 gcc -c -fPIC *....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-17 22:25:34 +0800 CST'>February 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 静态库与动态库" href="https://874656645.github.io/posts/125-linux-%E9%9D%99%E6%80%81%E5%BA%93%E4%B8%8E%E5%8A%A8%E6%80%81%E5%BA%93/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>gcc 相关
     </h2>
   </header>
@@ -204,39 +217,17 @@ export LANG=zh_CN.UTF-8
   <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Ubuntu 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Git Commands
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、Git 常用命令 1、初始化本地仓库  适合远程仓库是空仓库  cd public git init git remote add blog https://github.com/874656645/rick   如果新建的仓库有东西，最好先克隆到本地，再向里面添加文件
-git clone https://github.com/adityatelange/hugo-PaperMod.git
-  克隆含有子仓库的代码
-git clone -b exampleSite --recursive https://github.com/adityatelange/hugo-PaperMod.git
-  克隆某一个分支
-git clone -b exampleSite https://github.com/adityatelange/hugo-PaperMod.git
-  2、更新远程仓库代码到本地 git pull blog master
-3、将变化提交到本地仓库 git commit -m &#34;delete all files&#34;
-git commit -am &#34;update&#34;
-4、push推送到远程仓库 git push blog master
-5、添加远程仓库别名和网址 git remote add blog https://github.com/874656645/rick
-6、删除配置的远程仓库别名 git remote remove blog...</p>
-  </section>
-  <footer class="entry-footer"><span title='2018-12-15 22:45:47 +0800 CST'>December 15, 2018</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git Commands" href="https://874656645.github.io/posts/3-git-command/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/series/ubuntu/page/2/">« Prev Page</a>
+    <a class="next" href="https://874656645.github.io/series/ubuntu/page/4/">Next Page »</a>
   </nav>
 </footer>
     </main>
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

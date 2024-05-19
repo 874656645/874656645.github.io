@@ -145,6 +145,33 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Ubuntu 升级 GCC 版本
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>GCC 源码网址 https://ftp.gnu.org/gnu/gcc/
+源码安装参考这里
+  添加相应的源
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+如果提示 add-apt-repository: command not found，需要安装 sudo apt-get install software-properties-common
+  更新软件源
+sudo apt-get update
+  安装指定版本的 gcc
+sudo apt-get install gcc-9
+查看 gcc
+find / -name &#34;gcc*&#34;
+dpkg -l | grep gcc
+  指定默认使用的 gcc 版本
+通过 update-alternatives 建立文件关联，如果安装了同一个软件的不同版本，可以使用 update-alternatives 命令设置默认使用哪个
+首先要让系统知道我们安装了多个版本的 gcc
+# 命令最后的 20 和 50 是优先级，如果使用 auto 选择模式，系统将默认使用优先级高的 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 20 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 50   查看 gcc 版本...</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-01-08 18:35:40 +0800 CST'>January 8, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 升级 GCC 版本" href="https://874656645.github.io/posts/271-ubuntu-%E5%8D%87%E7%BA%A7-gcc-%E7%89%88%E6%9C%AC/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>gdb 调试使用
     </h2>
   </header>
@@ -199,23 +226,6 @@ app:main.o add.o sub.o gcc main.o add.o sub.o -I ./ -o app main....</p>
   <footer class="entry-footer"><span title='2022-02-16 21:44:06 +0800 CST'>February 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to gcc 相关" href="https://874656645.github.io/posts/124-gcc-%E7%9B%B8%E5%85%B3/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>vim 使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、使用教程   vimtutor
-  显示行号:
-vim ~/.vimrc 在文件的最后一行输入 set number 并保存退出   二、vim 三种工作模式  命令模式 编辑模式 末行模式
-  三、命令模式下的相关操作  保存退出
-ZZ 代码格式化
-gg=G 光标移动：  左下上右：H J K L 移动到行首：0 移动到行尾：$ 移动到文件首部：gg 移动到文件尾部：G 跳转到第20行：20 &#43; G 从当前位置向下移动 n 行：n &#43; enter   删除命令：  删除光标后的一个字符：x（小写） 删除光标前的一个字符：X（大写） 删除一个单词：dw 删除光标前的所有字符：d0 删除光标后的所有字符：d$ 或者 D 删除光标所在行：dd 删除多行：ndd 删除光标所在行以及下面 n 行 删除光标所在行到文件首部的字符：dgg 删除光标所在行到文件尾部的字符：dG   撤销与反撤销：  撤销：u 反撤销：ctrl &#43; r   复制粘贴：  复制一行：yy 复制多行：nyy 粘贴到光标下一行：p 粘贴到光标上一行：P(大写)   字符可视模式：v  移动光标 复制：y 删除：d 粘贴：p(小写 光标之后) P(大写 光标之前)   行可视模式：V  增加缩进：&gt; 减少缩进：&lt;   块可视模式：ctrl &#43; V  o：将光标在块的左上角和右下角切换 O：将光标移动到所在行的对角 nl：将光标向右移动 n 个字符 nj：将光标向下移动 n 行 I：插入，按两次 ESC 退出（例如：多行注释操作）   替换操作：  r：替换光标后的字符 R：替换光标后的多个字符   查找操作：  /xxx ?...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-13 19:38:16 +0800 CST'>February 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to vim 使用" href="https://874656645.github.io/posts/122-vim-%E4%BD%BF%E7%94%A8/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="next" href="https://874656645.github.io/tags/linux/page/2/">Next Page »</a>
@@ -225,7 +235,7 @@ gg=G 光标移动：  左下上右：H J K L 移动到行首：0 移动到行尾
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

@@ -145,6 +145,61 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>set multiset 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>关联式容器 底层结构使用红黑树实现（二叉树-&gt;二叉搜索树-&gt;平衡二叉树-&gt;红黑树） 自动排序 不可以修改值，可以通过删除再插入的方式实现  自定义数据类型：
+class Person{ public: Person(string name, int age, int height){ this-&gt;m_name = name; this-&gt;m_age = age; this-&gt;m_height = height; } bool operator&lt;(const Person &amp;p2) const{ // 注意：函数和形参都要添加 const 修饰符  if(this-&gt;m_age == p2.m_age){ return this-&gt;m_height &gt; p2.m_height; } return this-&gt;m_age &lt; p2.m_age; } void printPerson()const{ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { set&lt;Person&gt; lp; lp....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-18 21:20:48 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to set multiset 容器" href="https://874656645.github.io/posts/87-set-multiset-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>list 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>注意事项  双向循环链表 不支持随机访问 因为不支持随机访问，所以也不能用全局的排序算法 sort 一般不支持随机访问的容器会自己提供 sort 方法 自定义类型要指定排序规则  排序案例 案例描述：将 Person 自定义数据类型进行排序，Person 中属性有姓名、年龄、身高
+排序规则：按照年龄进行升序，如果年龄相同按照身高进行降序
+class Person{ public: Person(string name, int age, int height){ this-&gt;m_name = name; this-&gt;m_age = age; this-&gt;m_height = height; } bool operator&lt;(const Person &amp;p2){ if(this-&gt;m_age == p2.m_age){ return this-&gt;m_height &gt; p2.m_height; } return this-&gt;m_age &lt; p2.m_age; } void printPerson()const{ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; this-&gt;m_name &lt;&lt; &#34; 年龄：&#34; &lt;&lt; this-&gt;m_age &lt;&lt; &#34; 身高：&#34; &lt;&lt; this-&gt;m_height &lt;&lt; endl; } private: string m_name; int m_age; int m_height; }; int main() { list&lt;Person&gt; lp; lp....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-18 20:26:45 +0800 CST'>January 18, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to list 容器" href="https://874656645.github.io/posts/86-list-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>queue 队列容器适配器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>先进先出 不允许遍历元素  queue 队列操作：
+size()
+empty()</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-17 19:41:48 +0800 CST'>January 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to queue 队列容器适配器" href="https://874656645.github.io/posts/85-queue-%E9%98%9F%E5%88%97%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>stack 栈容器适配器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>先进后出 栈不允许遍历元素 不能随机存取  stack 栈操作:
+size()
+empty()</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-16 22:17:43 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to stack 栈容器适配器" href="https://874656645.github.io/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>评委打分案例
     </h2>
   </header>
@@ -156,54 +211,6 @@ if (!doNotTrack) {
   <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>生成随机数
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>#include &lt;ctime&gt;using namespace std; int main() { srand((unsigned int)time(NULL)); cout &lt;&lt; rand() % 40 &lt;&lt; endl; return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:02:33 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 生成随机数" href="https://874656645.github.io/posts/82-%E7%94%9F%E6%88%90%E9%9A%8F%E6%9C%BA%E6%95%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>deque 容器
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>deque 容器的空间不用手动收缩，类内部会自动处理</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 20:38:31 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to deque 容器" href="https://874656645.github.io/posts/81-deque-%E5%AE%B9%E5%99%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>巧妙收缩 vector 空间
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>resize() 或者 erase() 后 vector 的空间大小不会自动减小  int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 100000; &#43;&#43;i){ v.push_back(i); } cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; v.resize(10); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v.size() &lt;&lt; endl; cout &lt;&lt; &#34;capacity: &#34; &lt;&lt; v.capacity() &lt;&lt; endl; cout &lt;&lt; &#34;-----------------------&#34; &lt;&lt; endl; vector&lt;int&gt;(v).swap(v); cout &lt;&lt; &#34;size: &#34; &lt;&lt; v....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 19:52:12 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 巧妙收缩 vector 空间" href="https://874656645.github.io/posts/80-%E5%B7%A7%E5%A6%99%E6%94%B6%E7%BC%A9-vector-%E7%A9%BA%E9%97%B4/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>vector 中的元素存放在堆上还是栈上
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>结论  allocator 分配器是定义内存模型的类，用于标准库的某些部分，尤其是 STL 容器，如果所有标准容器的最后一个(可选)模板参数没有指定，那么它将使用这个分配器，并且它是标准库中唯一一个预定义的分配器 vector 中存放的如果是对象类型，则会通过 allocator 在堆上开辟足够的空间来存放和管理集合中的对象 vector 中存放指针类型，一定要记得手动释放内存  存放对象 class Person{ public: Person(int age, int id){ m_age = age; m_id = id; cout &lt;&lt; &#34;Person(int, int)...&#34; &lt;&lt; endl; } Person(const Person&amp; p){ m_age = p.m_age; m_id = p.m_id; cout &lt;&lt; &#34;Person(const Person&amp; p)...&#34; &lt;&lt; endl; } ~Person(){ cout &lt;&lt; &#34;~Person()...&#34; &lt;&lt; endl; } void* operator new(size_t size){ void* p = malloc(size); cout &lt;&lt; &#34;new()...&#34; &lt;&lt; endl; return p; } void operator delete(void *p){ cout &lt;&lt; &#34;delete()....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 15:50:29 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to vector 中的元素存放在堆上还是栈上" href="https://874656645.github.io/posts/79-vector-%E4%B8%AD%E7%9A%84%E5%85%83%E7%B4%A0%E5%AD%98%E6%94%BE%E5%9C%A8%E5%A0%86%E4%B8%8A%E8%BF%98%E6%98%AF%E6%A0%88%E4%B8%8A/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/tags/c&#43;&#43;/page/19/">« Prev Page</a>
@@ -214,7 +221,7 @@ if (!doNotTrack) {
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

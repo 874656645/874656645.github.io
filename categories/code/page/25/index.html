@@ -145,65 +145,73 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>装饰器模式
+    <h2>Linux 目录介绍
     </h2>
   </header>
   <section class="entry-content">
-    <p>装饰模式又叫包装模式，通过一种对客户端透明的方式来扩展对象功能，是继承关系的一种替代。
-装饰模式可以动态给一个类增加功能</p>
+    <p>         bin 二进制文件，可执行文件   boot 系统开机启动项   dev device 设备（硬盘、显卡、显示器 一切皆文件）   lib 动态库   mnt 手动挂载目录   media 外设自动挂载目录   root 超级用户的家目录   usr unix system resource 头文件include、源文件src、用户安装程序/usr/local   etc 配置文件   opt 安装第三方应用程序   home Linux 所有用户的家目录（操作系统的家目录）   tmp 临时文件目录，系统重启后会被清空    </p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-10 21:39:52 +0800 CST'>February 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Linux 目录介绍" href="https://874656645.github.io/posts/120-linux-%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>观察者模式
+    <h2>递归与递归树
     </h2>
   </header>
   <section class="entry-content">
-    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
+    <p>逆序打印字符串
+void printReverseString(const char* str){ if(*str == &#39;\0&#39;){ return; } printReverseString(str &#43; 1); printf(&#34;%c&#34;, *str); } int main() { const char* str = &#34;Hello World&#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
+struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&gt;next); printf(&#34;%d\n&#34;, header-&gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&gt;data = 10; node1-&gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&gt;data = 20; node2-&gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&gt;data = 30; node3-&gt;next = NULL; header-&gt;next = node1; node1-&gt;next = node2; node2-&gt;next = node3; printReverseLinkNode(header-&gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>命令模式
+    <h2>常用的宏定义
     </h2>
   </header>
   <section class="entry-content">
-    <p>将一个请求封闭为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。
-命令模式可以将请求者和接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求</p>
+    <p>int main() { printf(&#34;%s\n&#34;, __FILE__); // main.c  printf(&#34;%d\n&#34;, __LINE__); // 14  printf(&#34;%s\n&#34;, __DATE__); // Feb 7 2022  printf(&#34;%s\n&#34;, __TIME__); // 01:59:37  return 0; } // func1.h #ifdef __cplusplus extern &#34;C&#34;{ #endif  void func1(); #ifdef __cplusplus } #endif  // main.h extern &#34;C&#34;{ include &#34;func1.h&#34; } extern &#34;C&#34;{ extern void func1(); } int main() { func1(); return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-07 10:11:16 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 常用的宏定义" href="https://874656645.github.io/posts/118-%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%8F%E5%AE%9A%E4%B9%89/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>策略模式
+    <h2>Ubuntu 常用命令
     </h2>
   </header>
   <section class="entry-content">
-    <p>策略模式定义了一系列的算法，并将每个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
+    <p>Linux 命令大全
+ 注意：需提前配置系统环境，比如系统编码为 UTF-8  系统环境配置 1. 设置系统语言   查看系统支持的字符集：locale、locale -a
+  查看时间：date
+  安装中文语言包：sudo apt install language-pack-zh-hans
+  添加到系统配置文件 .bashrc
+export LANG=zh_CN.UTF-8
+  重新加载：source .bashrc   一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:59:42 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 策略模式" href="https://874656645.github.io/posts/112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>模板方法模式
+    <h2>char* 数组
     </h2>
   </header>
   <section class="entry-content">
-    <p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
-class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬....</p>
+    <p>void printArr(const char ** p, int len){ for(int i = 0; i &lt; len; &#43;&#43;i){ cout &lt;&lt; p[i] &lt;&lt; endl; } } void sortSelect(const char ** p, int len){ for(int i = 0; i &lt; len - 1; &#43;&#43;i){ int max = i; for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){ if(p[j] &gt; p[max]){ max = j; } } // 交换  if(i != max){ const char* tmp = p[i]; p[i] = p[max]; p[max] = tmp; } } } int main() { const char* arr[] = {&#34;aa&#34;, &#34;bb&#34;, &#34;cc&#34;, &#34;dd&#34;, &#34;ee&#34;}; int len = sizeof(arr) / sizeof(char*); cout &lt;&lt; len &lt;&lt; endl; printArr(arr, len); sortSelect(arr, len); cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printArr(arr, len); return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:41:35 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板方法模式" href="https://874656645.github.io/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
@@ -215,7 +223,7 @@ class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() =
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

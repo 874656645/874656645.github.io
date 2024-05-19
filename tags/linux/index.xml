@@ -9,7 +9,31 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 20 Feb 2022 08:53:26 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Jan 2024 18:35:40 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Ubuntu 升级 GCC 版本</title>
+      <link>https://874656645.github.io/posts/271-ubuntu-%E5%8D%87%E7%BA%A7-gcc-%E7%89%88%E6%9C%AC/</link>
+      <pubDate>Mon, 08 Jan 2024 18:35:40 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/271-ubuntu-%E5%8D%87%E7%BA%A7-gcc-%E7%89%88%E6%9C%AC/</guid>
+      <description>GCC 源码网址 https://ftp.gnu.org/gnu/gcc/
+源码安装参考这里
+  添加相应的源
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+如果提示 add-apt-repository: command not found，需要安装 sudo apt-get install software-properties-common
+  更新软件源
+sudo apt-get update
+  安装指定版本的 gcc
+sudo apt-get install gcc-9
+查看 gcc
+find / -name &amp;quot;gcc*&amp;quot;
+dpkg -l | grep gcc
+  指定默认使用的 gcc 版本
+通过 update-alternatives 建立文件关联，如果安装了同一个软件的不同版本，可以使用 update-alternatives 命令设置默认使用哪个
+首先要让系统知道我们安装了多个版本的 gcc
+# 命令最后的 20 和 50 是优先级，如果使用 auto 选择模式，系统将默认使用优先级高的 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 20 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 50   查看 gcc 版本</description>
+    </item>
+    
     <item>
       <title>gdb 调试使用</title>
       <link>https://874656645.github.io/posts/127-gdb-%E8%B0%83%E8%AF%95%E4%BD%BF%E7%94%A8/</link>

@@ -7,7 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>C&#43;&#43;——虚函数表与多态（派生类内存布局） | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;" />
-<meta name="description" content="一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &lt;&lt; &#34;Construct A\n&#34;; } virtual void d() { cout &lt;&lt; &#34;Deconstruct A\n&#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &lt;&lt; &#34;Construct B\n&#34;; } void d()override { cout &lt;&lt; &#34;Deconstruct B\n&#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 参考：">
+<meta name="description" content="一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &lt;&lt; &#34;Construct A\n&#34;; } virtual void d() { cout &lt;&lt; &#34;Deconstruct A\n&#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &lt;&lt; &#34;Construct B\n&#34;; } void d()override { cout &lt;&lt; &#34;Deconstruct B\n&#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 Linux 布局参考这里">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -46,7 +46,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="C&#43;&#43;——虚函数表与多态（派生类内存布局）" />
-<meta property="og:description" content="一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &lt;&lt; &#34;Construct A\n&#34;; } virtual void d() { cout &lt;&lt; &#34;Deconstruct A\n&#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &lt;&lt; &#34;Construct B\n&#34;; } void d()override { cout &lt;&lt; &#34;Deconstruct B\n&#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 参考：" />
+<meta property="og:description" content="一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &lt;&lt; &#34;Construct A\n&#34;; } virtual void d() { cout &lt;&lt; &#34;Deconstruct A\n&#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &lt;&lt; &#34;Construct B\n&#34;; } void d()override { cout &lt;&lt; &#34;Deconstruct B\n&#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 Linux 布局参考这里" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-09-11T20:34:53&#43;08:00" />
@@ -57,7 +57,7 @@ if (!doNotTrack) {
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="C&#43;&#43;——虚函数表与多态（派生类内存布局）"/>
-<meta name="twitter:description" content="一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &lt;&lt; &#34;Construct A\n&#34;; } virtual void d() { cout &lt;&lt; &#34;Deconstruct A\n&#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &lt;&lt; &#34;Construct B\n&#34;; } void d()override { cout &lt;&lt; &#34;Deconstruct B\n&#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 参考："/>
+<meta name="twitter:description" content="一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &lt;&lt; &#34;Construct A\n&#34;; } virtual void d() { cout &lt;&lt; &#34;Deconstruct A\n&#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &lt;&lt; &#34;Construct B\n&#34;; } void d()override { cout &lt;&lt; &#34;Deconstruct B\n&#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 Linux 布局参考这里"/>
 
 
 <script type="application/ld+json">
@@ -86,12 +86,12 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "C++——虚函数表与多态（派生类内存布局）",
   "name": "C\u002b\u002b——虚函数表与多态（派生类内存布局）",
-  "description": "一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout \u0026lt;\u0026lt; \u0026#34;Construct A\\n\u0026#34;; } virtual void d() { cout \u0026lt;\u0026lt; \u0026#34;Deconstruct A\\n\u0026#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} \tc(); } ~B() { d(); } void c()override { cout \u0026lt;\u0026lt; \u0026#34;Construct B\\n\u0026#34;; } void d()override { cout \u0026lt;\u0026lt; \u0026#34;Deconstruct B\\n\u0026#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 参考：",
+  "description": "一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout \u0026lt;\u0026lt; \u0026#34;Construct A\\n\u0026#34;; } virtual void d() { cout \u0026lt;\u0026lt; \u0026#34;Deconstruct A\\n\u0026#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} \tc(); } ~B() { d(); } void c()override { cout \u0026lt;\u0026lt; \u0026#34;Construct B\\n\u0026#34;; } void d()override { cout \u0026lt;\u0026lt; \u0026#34;Deconstruct B\\n\u0026#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 Linux 布局参考这里",
   "keywords": [
     "C++"
   ],
-  "articleBody": "一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout  \"Construct A\\n\"; } virtual void d() { cout  \"Deconstruct A\\n\"; } }; class B : public A { public: B() { // 等价于 B() : A(){} \tc(); } ~B() { d(); } void c()override { cout  \"Construct B\\n\"; } void d()override { cout  \"Deconstruct B\\n\"; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 参考：\n Memory Layout of C++ Object in Different Scenarios All About Virtual Keyword in C++: How Does Virtual Function Works Internally? All About Virtual Keyword in C++: How Does Virtual Base Class Works Internally?  ",
-  "wordCount" : "121",
+  "articleBody": "一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout  \"Construct A\\n\"; } virtual void d() { cout  \"Deconstruct A\\n\"; } }; class B : public A { public: B() { // 等价于 B() : A(){} \tc(); } ~B() { d(); } void c()override { cout  \"Construct B\\n\"; } void d()override { cout  \"Deconstruct B\\n\"; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 Linux 布局参考这里\n参考：\n Memory Layout of C++ Object in Different Scenarios All About Virtual Keyword in C++: How Does Virtual Function Works Internally? All About Virtual Keyword in C++: How Does Virtual Base Class Works Internally?  ",
+  "wordCount" : "123",
   "inLanguage": "en",
   "datePublished": "2022-09-11T20:34:53+08:00",
   "dateModified": "2022-09-11T20:34:53+08:00",
@@ -254,6 +254,7 @@ Construct B
 Deconstruct B
 Deconstruct A
 </code></pre></div><h2 id="二有虚继承">二、有虚继承<a hidden class="anchor" aria-hidden="true" href="#二有虚继承">#</a></h2>
+<p>Linux 布局参考<a href="../274-c++-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/">这里</a></p>
 <p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-%e8%99%9a%e7%bb%a7%e6%89%bf%e5%ad%98%e5%82%a8%e7%a9%ba%e9%97%b4.jpg" alt="C&#43;&#43;-虚继承存储空间"  />
 </p>
 <p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-%e8%99%9a%e7%bb%a7%e6%89%bf%e5%ad%98%e5%82%a8%e7%a9%ba%e9%97%b41.jpg" alt="C&#43;&#43;-虚继承存储空间1"  />
@@ -293,7 +294,7 @@ Deconstruct A
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

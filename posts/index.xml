@@ -9,7 +9,106 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 03 Nov 2023 18:18:30 +0800</lastBuildDate><atom:link href="https://874656645.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 May 2024 17:44:54 +0800</lastBuildDate><atom:link href="https://874656645.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43; 类的内存布局</title>
+      <link>https://874656645.github.io/posts/274-c&#43;&#43;-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</link>
+      <pubDate>Sat, 18 May 2024 17:44:54 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/274-c&#43;&#43;-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</guid>
+      <description>测试代码：
+#include &amp;lt;iostream&amp;gt; using namespace std; struct A{ long long a = 10; virtual void fa(){ cout &amp;lt;&amp;lt; &amp;#34;A::fa()\n&amp;#34;; } virtual void faa(){ cout &amp;lt;&amp;lt; &amp;#34;A::faa()\n&amp;#34;; } }; // 如果是虚继承，虚基类被放在了派生类的后面，每个基类都有自己的虚函数表指针存储单元，如果虚基类没有虚函数，则虚基类的虚函数表指针为 0 // 如果是非虚继承，基类在派生类的前面，每个基类都有自己的虚函数表指针存储单元，除了第一个基类（派生类与第一个基类共用一个存储单元） struct E: virtual A{ long long e = 2; virtual void fa(){ cout &amp;lt;&amp;lt; &amp;#34;E::fa()\n&amp;#34;; } virtual void fe(){ cout &amp;lt;&amp;lt; &amp;#34;E::fe()\n&amp;#34;; } }; int main() { typedef void(*FUNC)(); E e; cout &amp;lt;&amp;lt; sizeof(e) &amp;lt;&amp;lt; endl; long long* addr = (long long*)&amp;amp;e; long long* vfptre = (long long*)*(addr + 0); int eval = (int)*(addr + 1); cout &amp;lt;&amp;lt; eval &amp;lt;&amp;lt; endl; long long* vfptra = (long long*)*(addr + 2); int aval = (int)*(addr + 3); cout &amp;lt;&amp;lt; aval &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;---------------\n&amp;#34;; long long* faptr = (long long*)*(vfptre + 0); (FUNC(faptr))(); long long* feptr = (long long*)*(vfptre + 1); (FUNC(feptr))(); cout &amp;lt;&amp;lt; &amp;#34;---------------\n&amp;#34;; long long* faptra = (long long*)*(vfptra + 0); // (FUNC(faptra))(); // 如果虚基类的虚函数被重写，此处则无法再如此执行  long long* faaptra = (long long*)*(vfptra + 1); (FUNC(faaptra))(); return 0; } 输出：</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;——统计代码行数</title>
+      <link>https://874656645.github.io/posts/273-c&#43;&#43;-%E7%BB%9F%E8%AE%A1%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/</link>
+      <pubDate>Tue, 02 Apr 2024 18:27:04 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/273-c&#43;&#43;-%E7%BB%9F%E8%AE%A1%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/</guid>
+      <description>cloc 下载地址
+加入到环境变量
+执行命令
+参考：
+ 好用的源码行数统计工具——cloc Win10 代码行数统计工具CLOC的安装和使用  </description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;——Function Style Cast 有歧义</title>
+      <link>https://874656645.github.io/posts/272-c&#43;&#43;-function-style-cast-%E6%9C%89%E6%AD%A7%E4%B9%89/</link>
+      <pubDate>Wed, 21 Feb 2024 09:35:58 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/272-c&#43;&#43;-function-style-cast-%E6%9C%89%E6%AD%A7%E4%B9%89/</guid>
+      <description>#include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;using namespace std; struct Print { template&amp;lt;typename T&amp;gt; Print(T t){ cout&amp;lt;&amp;lt;(t+=10); } }; struct S { S(int a){ cout &amp;lt;&amp;lt; a &amp;lt;&amp;lt; endl; }; }; void foo(double a) { S w(int(a)); // function declaration // S x(int()); // function declaration  S y((int(a))); // object declaration  S yy((int)a); // object declaration  S z = int(a); // object declaration } template &amp;lt;class T&amp;gt; struct X {}; template &amp;lt;int N&amp;gt; struct Y {}; X&amp;lt;int()&amp;gt; a; // type-id X&amp;lt;int(1)&amp;gt; b; // expression (ill-formed) Y&amp;lt;int()&amp;gt; c; // type-id (ill-formed) Y&amp;lt;int(1)&amp;gt; d; // expression void foo(signed char a) { sizeof(int()); // type-id (ill-formed)  sizeof(int(a)); // expression  sizeof(int(unsigned(a))); // type-id (ill-formed)  (int())+1; // type-id (ill-formed)  (int(a))+1; // expression  (int(unsigned(a)))+1; // type-id (ill-formed)  } int main() { // 这句为什么是一句函数声明而不是变量创建？  double a = 3.</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 升级 GCC 版本</title>
+      <link>https://874656645.github.io/posts/271-ubuntu-%E5%8D%87%E7%BA%A7-gcc-%E7%89%88%E6%9C%AC/</link>
+      <pubDate>Mon, 08 Jan 2024 18:35:40 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/271-ubuntu-%E5%8D%87%E7%BA%A7-gcc-%E7%89%88%E6%9C%AC/</guid>
+      <description>GCC 源码网址 https://ftp.gnu.org/gnu/gcc/
+源码安装参考这里
+  添加相应的源
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+如果提示 add-apt-repository: command not found，需要安装 sudo apt-get install software-properties-common
+  更新软件源
+sudo apt-get update
+  安装指定版本的 gcc
+sudo apt-get install gcc-9
+查看 gcc
+find / -name &amp;quot;gcc*&amp;quot;
+dpkg -l | grep gcc
+  指定默认使用的 gcc 版本
+通过 update-alternatives 建立文件关联，如果安装了同一个软件的不同版本，可以使用 update-alternatives 命令设置默认使用哪个
+首先要让系统知道我们安装了多个版本的 gcc
+# 命令最后的 20 和 50 是优先级，如果使用 auto 选择模式，系统将默认使用优先级高的 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 20 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 50   查看 gcc 版本</description>
+    </item>
+    
+    <item>
+      <title>Windows Cmd 设置临时和永久环境变量</title>
+      <link>https://874656645.github.io/posts/270-windows-cmd-%E8%AE%BE%E7%BD%AE%E4%B8%B4%E6%97%B6%E5%92%8C%E6%B0%B8%E4%B9%85%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</link>
+      <pubDate>Fri, 05 Jan 2024 12:21:35 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/270-windows-cmd-%E8%AE%BE%E7%BD%AE%E4%B8%B4%E6%97%B6%E5%92%8C%E6%B0%B8%E4%B9%85%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</guid>
+      <description>  打开 cmd 命令提示符（Win11）
+  查看所有环境变量：输入 set
+  查看 path：输入 set path
+  设置临时环境变量：set path=D:\Work\dem\Python39;%PATH%
+  设置永久环境变量：setx path=D:\Work\dem\Python39;%PATH%
+  </description>
+    </item>
+    
+    <item>
+      <title>Python Conda GDAL 环境搭建</title>
+      <link>https://874656645.github.io/posts/269-python-conda-gdal-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
+      <pubDate>Thu, 04 Jan 2024 19:18:20 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/269-python-conda-gdal-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</guid>
+      <description>  安装 miniconda，conda 命令使用可参考这里;
+注意：
+ 安装包的时候，conda install 和 pip install 最好不要混用，优先使用 pip 查看 python 包路径 python -m site
+    安装 GDAL 通过命令 pip install gdal 安装一般会报错，推荐下载 whl 安装包进行安装，可从这里下载   import gdal from osgeo import gdal 报错 在 python 安装各种环境包的文件夹下，如：D:**\python3.9.12\Lib\site-packages\ 文件夹下，新建 gdal.py 文件，将以下代码复制进去：
+# import osgeo.gdal as a convenience from osgeo.gdal import deprecation_warn deprecation_warn(&amp;#39;gdal&amp;#39;) from osgeo.gdal import *   参考：
+ GDAL 安装教程（Python） 解决 import gdal 导入失败的问题，但 from osgeo import gdal 导入成功  </description>
+    </item>
+    
+    <item>
+      <title>adb 与安卓使用</title>
+      <link>https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 23 Dec 2023 11:59:04 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/</guid>
+      <description>查看包名
+adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
+adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
+adb shell pm path com.xxx.xxx.xxx
+  卸载程序
+adb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]
+adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi.</description>
+    </item>
+    
     <item>
       <title>Ubuntu 编译指定版本的 curl 库</title>
       <link>https://874656645.github.io/posts/267-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-curl-%E5%BA%93/</link>
@@ -432,7 +531,7 @@ class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(in
       <pubDate>Sun, 11 Sep 2022 20:34:53 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</guid>
-      <description>一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &amp;lt;&amp;lt; &amp;#34;Construct A\n&amp;#34;; } virtual void d() { cout &amp;lt;&amp;lt; &amp;#34;Deconstruct A\n&amp;#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &amp;lt;&amp;lt; &amp;#34;Construct B\n&amp;#34;; } void d()override { cout &amp;lt;&amp;lt; &amp;#34;Deconstruct B\n&amp;#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 参考：</description>
+      <description>一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &amp;lt;&amp;lt; &amp;#34;Construct A\n&amp;#34;; } virtual void d() { cout &amp;lt;&amp;lt; &amp;#34;Deconstruct A\n&amp;#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &amp;lt;&amp;lt; &amp;#34;Construct B\n&amp;#34;; } void d()override { cout &amp;lt;&amp;lt; &amp;#34;Deconstruct B\n&amp;#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 Linux 布局参考这里</description>
     </item>
     
     <item>
@@ -463,7 +562,7 @@ namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明�
       <pubDate>Tue, 06 Sep 2022 22:28:34 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/</guid>
-      <description>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;amp;&amp;amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  class A { int x, y; public: virtual ~A() { cout &amp;lt;&amp;lt; &amp;#34;~A()\n&amp;#34;; } int getx() { return x; } virtual int vf() const { return 1; } protected: int gety() { return y; } }; class B : protected A { friend int main(); bool visible; public: ~B() { cout &amp;lt;&amp;lt; &amp;#34;~B()\n&amp;#34;; } using A::gety; A* getFather(){ return this; } private: virtual int vf() const { // 子类内部不受继承方式的影响 	const A *pa = this; // 将子类指针赋值给父类指针 	const A&amp;amp; ra = *this; // 将父类引用指向子类对象 	A a = *this; // 将子类对象赋值给父类对象 	// 父类对象 a 生命期在函数结束后结束 	// 输出：~A() 	cout &amp;lt;&amp;lt; &amp;#34;in B::vf() A::vf()：&amp;#34; &amp;lt;&amp;lt; A::vf() &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; &amp;#34;in B::vf() a.</description>
+      <description>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;amp;&amp;amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  #include &amp;lt;iostream&amp;gt;using namespace std; class A{ public: ~A() = default; //1)  // A(){} //2)  virtual void f(){ cout &amp;lt;&amp;lt; &amp;#34;A::f()\n&amp;#34;; } }; class B: A{ friend void friendFun(); void f(){ cout &amp;lt;&amp;lt; &amp;#34;B::f()\n&amp;#34;; } public: A* getA(){ // 派生类内部函数可构成父子关系  return this; } }; void friendFun(){ // 派生类友元函数内可构成父子关系  A* p = new B; p-&amp;gt;f(); } int main() { // A* p = new B; // error: ‘A’ is an inaccessible base of ‘B’  A* p = (A*)new B; // right  B b; A* pp = b.</description>
     </item>
     
     <item>
@@ -2856,7 +2955,7 @@ C 主要是面向过程，C++ 是面向对象，面向过程是函数驱动，�
       <guid>https://874656645.github.io/posts/30-%E6%8C%87%E9%92%88-&#43;1/</guid>
       <description>1. 32 位和 64 位程序指针是多少位 32位指针大小为4个字节，64位指针大小位8个字节
 2. 指针加 1，是对该指针增加 1 个储存单位 “存储单位”，指的是指针指向的数据类型所占的内存的字节数。不同类型的指针加1后，增加的大小不同。
-int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]；  // &amp;amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）  // 但是prt与(&amp;amp;a+1)类型是不一样的(这点很重要，prt指向的是整形)，所以prt-1只会减去sizeof(int)  int *ptr = (int*)(&amp;amp;a + 1); cout &amp;lt;&amp;lt; *(a + 1) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; *(ptr - 1) &amp;lt;&amp;lt; endl; return 0; } 输出：
+int main() { int a[] = {1, 2, 3, 4, 5}; // &amp;amp;a是数组指针，其类型为 int (*)[5]，a是长度为5的int数组指针，所以要加 5*sizeof(int)，所以ptr实际是a[5]；  // &amp;amp;a+1不是首地址+1，系统会认为加一个a数组的偏移，是偏移了一个数组的大小（本例是5个int）  // 但是prt与(&amp;amp;a+1)类型是不一样的(这点很重要，ptr指向的是整形)，所以prt-1只会减去sizeof(int)  int *ptr = (int*)(&amp;amp;a + 1); cout &amp;lt;&amp;lt; *(a + 1) &amp;lt;&amp;lt; endl; cout &amp;lt;&amp;lt; *(ptr - 1) &amp;lt;&amp;lt; endl; return 0; } 输出：
 2 5 注： a，&amp;amp;a的地址是一样的，但意思不一样：
  a是数组首地址，也就是a[0]的地址，a+1是数组下一元素的地址，即a[1] &amp;amp;a是对象（整个数组作为一个对象）首地址，而&amp;amp;a+1是下一个对象的地址，即a[5].  </description>
     </item>
@@ -3029,9 +3128,8 @@ set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
 2、搜索某个库的所有版本 conda search gdal
 3、查看当前环境下已安装的包 conda list
 4、创建一个虚拟环境 conda create --name python34 python=3.4
-5、激活某个环境 activate python34 // for windows
-source activate python34 // for Linux &amp;amp; Mac
-6、取消激活 conda deactivate // for windows</description>
+5、激活某个环境 conda activate python34 // for windows
+source conda activate python34 // for Linux &amp;amp; Mac</description>
     </item>
     
     <item>

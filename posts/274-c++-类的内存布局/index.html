@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>C&#43;&#43; 类的内存布局 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="C&#43;&#43;" />
+<meta name="description" content="测试代码：
+#include &lt;iostream&gt; using namespace std; struct A{ long long a = 10; virtual void fa(){ cout &lt;&lt; &#34;A::fa()\n&#34;; } virtual void faa(){ cout &lt;&lt; &#34;A::faa()\n&#34;; } }; // 如果是虚继承，虚基类被放在了派生类的后面，每个基类都有自己的虚函数表指针存储单元，如果虚基类没有虚函数，则虚基类的虚函数表指针为 0 // 如果是非虚继承，基类在派生类的前面，每个基类都有自己的虚函数表指针存储单元，除了第一个基类（派生类与第一个基类共用一个存储单元） struct E: virtual A{ long long e = 2; virtual void fa(){ cout &lt;&lt; &#34;E::fa()\n&#34;; } virtual void fe(){ cout &lt;&lt; &#34;E::fe()\n&#34;; } }; int main() { typedef void(*FUNC)(); E e; cout &lt;&lt; sizeof(e) &lt;&lt; endl; long long* addr = (long long*)&amp;e; long long* vfptre = (long long*)*(addr &#43; 0); int eval = (int)*(addr &#43; 1); cout &lt;&lt; eval &lt;&lt; endl; long long* vfptra = (long long*)*(addr &#43; 2); int aval = (int)*(addr &#43; 3); cout &lt;&lt; aval &lt;&lt; endl; cout &lt;&lt; &#34;---------------\n&#34;; long long* faptr = (long long*)*(vfptre &#43; 0); (FUNC(faptr))(); long long* feptr = (long long*)*(vfptre &#43; 1); (FUNC(feptr))(); cout &lt;&lt; &#34;---------------\n&#34;; long long* faptra = (long long*)*(vfptra &#43; 0); // (FUNC(faptra))(); // 如果虚基类的虚函数被重写，此处则无法再如此执行  long long* faaptra = (long long*)*(vfptra &#43; 1); (FUNC(faaptra))(); return 0; } 输出：">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/274-c&#43;&#43;-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="C&#43;&#43; 类的内存布局" />
+<meta property="og:description" content="测试代码：
+#include &lt;iostream&gt; using namespace std; struct A{ long long a = 10; virtual void fa(){ cout &lt;&lt; &#34;A::fa()\n&#34;; } virtual void faa(){ cout &lt;&lt; &#34;A::faa()\n&#34;; } }; // 如果是虚继承，虚基类被放在了派生类的后面，每个基类都有自己的虚函数表指针存储单元，如果虚基类没有虚函数，则虚基类的虚函数表指针为 0 // 如果是非虚继承，基类在派生类的前面，每个基类都有自己的虚函数表指针存储单元，除了第一个基类（派生类与第一个基类共用一个存储单元） struct E: virtual A{ long long e = 2; virtual void fa(){ cout &lt;&lt; &#34;E::fa()\n&#34;; } virtual void fe(){ cout &lt;&lt; &#34;E::fe()\n&#34;; } }; int main() { typedef void(*FUNC)(); E e; cout &lt;&lt; sizeof(e) &lt;&lt; endl; long long* addr = (long long*)&amp;e; long long* vfptre = (long long*)*(addr &#43; 0); int eval = (int)*(addr &#43; 1); cout &lt;&lt; eval &lt;&lt; endl; long long* vfptra = (long long*)*(addr &#43; 2); int aval = (int)*(addr &#43; 3); cout &lt;&lt; aval &lt;&lt; endl; cout &lt;&lt; &#34;---------------\n&#34;; long long* faptr = (long long*)*(vfptre &#43; 0); (FUNC(faptr))(); long long* feptr = (long long*)*(vfptre &#43; 1); (FUNC(feptr))(); cout &lt;&lt; &#34;---------------\n&#34;; long long* faptra = (long long*)*(vfptra &#43; 0); // (FUNC(faptra))(); // 如果虚基类的虚函数被重写，此处则无法再如此执行  long long* faaptra = (long long*)*(vfptra &#43; 1); (FUNC(faaptra))(); return 0; } 输出：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/274-c&#43;&#43;-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-05-18T17:44:54&#43;08:00" />
+<meta property="article:modified_time" content="2024-05-18T17:44:54&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="C&#43;&#43; 类的内存布局"/>
+<meta name="twitter:description" content="测试代码：
+#include &lt;iostream&gt; using namespace std; struct A{ long long a = 10; virtual void fa(){ cout &lt;&lt; &#34;A::fa()\n&#34;; } virtual void faa(){ cout &lt;&lt; &#34;A::faa()\n&#34;; } }; // 如果是虚继承，虚基类被放在了派生类的后面，每个基类都有自己的虚函数表指针存储单元，如果虚基类没有虚函数，则虚基类的虚函数表指针为 0 // 如果是非虚继承，基类在派生类的前面，每个基类都有自己的虚函数表指针存储单元，除了第一个基类（派生类与第一个基类共用一个存储单元） struct E: virtual A{ long long e = 2; virtual void fa(){ cout &lt;&lt; &#34;E::fa()\n&#34;; } virtual void fe(){ cout &lt;&lt; &#34;E::fe()\n&#34;; } }; int main() { typedef void(*FUNC)(); E e; cout &lt;&lt; sizeof(e) &lt;&lt; endl; long long* addr = (long long*)&amp;e; long long* vfptre = (long long*)*(addr &#43; 0); int eval = (int)*(addr &#43; 1); cout &lt;&lt; eval &lt;&lt; endl; long long* vfptra = (long long*)*(addr &#43; 2); int aval = (int)*(addr &#43; 3); cout &lt;&lt; aval &lt;&lt; endl; cout &lt;&lt; &#34;---------------\n&#34;; long long* faptr = (long long*)*(vfptre &#43; 0); (FUNC(faptr))(); long long* feptr = (long long*)*(vfptre &#43; 1); (FUNC(feptr))(); cout &lt;&lt; &#34;---------------\n&#34;; long long* faptra = (long long*)*(vfptra &#43; 0); // (FUNC(faptra))(); // 如果虚基类的虚函数被重写，此处则无法再如此执行  long long* faaptra = (long long*)*(vfptra &#43; 1); (FUNC(faaptra))(); return 0; } 输出："/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "C++ 类的内存布局",
+      "item": "https://874656645.github.io/posts/274-c++-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C++ 类的内存布局",
+  "name": "C\u002b\u002b 类的内存布局",
+  "description": "测试代码：\n#include \u0026lt;iostream\u0026gt; using namespace std; struct A{ long long a = 10; virtual void fa(){ cout \u0026lt;\u0026lt; \u0026#34;A::fa()\\n\u0026#34;; } virtual void faa(){ cout \u0026lt;\u0026lt; \u0026#34;A::faa()\\n\u0026#34;; } }; // 如果是虚继承，虚基类被放在了派生类的后面，每个基类都有自己的虚函数表指针存储单元，如果虚基类没有虚函数，则虚基类的虚函数表指针为 0 // 如果是非虚继承，基类在派生类的前面，每个基类都有自己的虚函数表指针存储单元，除了第一个基类（派生类与第一个基类共用一个存储单元） struct E: virtual A{ long long e = 2; virtual void fa(){ cout \u0026lt;\u0026lt; \u0026#34;E::fa()\\n\u0026#34;; } virtual void fe(){ cout \u0026lt;\u0026lt; \u0026#34;E::fe()\\n\u0026#34;; } }; int main() { typedef void(*FUNC)(); E e; cout \u0026lt;\u0026lt; sizeof(e) \u0026lt;\u0026lt; endl; long long* addr = (long long*)\u0026amp;e; long long* vfptre = (long long*)*(addr + 0); int eval = (int)*(addr + 1); cout \u0026lt;\u0026lt; eval \u0026lt;\u0026lt; endl; long long* vfptra = (long long*)*(addr + 2); int aval = (int)*(addr + 3); cout \u0026lt;\u0026lt; aval \u0026lt;\u0026lt; endl; cout \u0026lt;\u0026lt; \u0026#34;---------------\\n\u0026#34;; long long* faptr = (long long*)*(vfptre + 0); (FUNC(faptr))(); long long* feptr = (long long*)*(vfptre + 1); (FUNC(feptr))(); cout \u0026lt;\u0026lt; \u0026#34;---------------\\n\u0026#34;; long long* faptra = (long long*)*(vfptra + 0); // (FUNC(faptra))(); // 如果虚基类的虚函数被重写，此处则无法再如此执行  long long* faaptra = (long long*)*(vfptra + 1); (FUNC(faaptra))(); return 0; } 输出：",
+  "keywords": [
+    "C++"
+  ],
+  "articleBody": "测试代码：\n#include  using namespace std; struct A{ long long a = 10; virtual void fa(){ cout  \"A::fa()\\n\"; } virtual void faa(){ cout  \"A::faa()\\n\"; } }; // 如果是虚继承，虚基类被放在了派生类的后面，每个基类都有自己的虚函数表指针存储单元，如果虚基类没有虚函数，则虚基类的虚函数表指针为 0 // 如果是非虚继承，基类在派生类的前面，每个基类都有自己的虚函数表指针存储单元，除了第一个基类（派生类与第一个基类共用一个存储单元） struct E: virtual A{ long long e = 2; virtual void fa(){ cout  \"E::fa()\\n\"; } virtual void fe(){ cout  \"E::fe()\\n\"; } }; int main() { typedef void(*FUNC)(); E e; cout  sizeof(e)  endl; long long* addr = (long long*)\u0026e; long long* vfptre = (long long*)*(addr + 0); int eval = (int)*(addr + 1); cout  eval  endl; long long* vfptra = (long long*)*(addr + 2); int aval = (int)*(addr + 3); cout  aval  endl; cout  \"---------------\\n\"; long long* faptr = (long long*)*(vfptre + 0); (FUNC(faptr))(); long long* feptr = (long long*)*(vfptre + 1); (FUNC(feptr))(); cout  \"---------------\\n\"; long long* faptra = (long long*)*(vfptra + 0); // (FUNC(faptra))(); // 如果虚基类的虚函数被重写，此处则无法再如此执行  long long* faaptra = (long long*)*(vfptra + 1); (FUNC(faaptra))(); return 0; } 输出：\n32 2 10 --------------- E::fa() E::fe() --------------- A::faa() #include  using namespace std; class B { public: B() : _ib(10), _cb('0') {} virtual void f() { cout  \"B::f()\"  endl; } virtual void Bf() { cout  \"B::Bf()\"  endl; } private: long long _ib; char _cb; }; class B1 : virtual public B { public: B1() : _ib1(100), _cb1('1') {} virtual void f() { cout  \"B1::f()\"  endl; } #if 1 \tvirtual void f1() { cout  \"B1::f1()\"  endl; } virtual void Bf1() { cout  \"B1::Bf1()\"  endl; } #endif  private: long long _ib1; char _cb1; }; class B2 : virtual public B { public: B2() : _ib2(1000), _cb2('2') {} virtual void f() { cout  \"B2::f()\"  endl; } #if 1 \tvirtual void f2() { cout  \"B2::f2()\"  endl; } virtual void Bf2() { cout  \"B2::Bf2()\"  endl; } #endif private: long long _ib2; char _cb2; }; class D : public B1, public B2 { public: D() : _id(10000), _cd('3') {} virtual void f() { cout  \"D::f()\"  endl; } #if 1 \tvirtual void f1() { cout  \"D::f1()\"  endl; } virtual void f2() { cout  \"D::f2()\"  endl; } virtual void Df() { cout  \"D::Df()\"  endl; } #endif private: long long _id; char _cd; }; int main() { // Test_3 \tD d; long long*dAddress = (long long*)\u0026d; typedef void(*FUNC)(); cout  sizeof(d)  endl; // 1. 获取对象的内存布局信息 \t// 虚表地址一 \tlong long*vtptr1 = (long long*)*(dAddress + 0); int base1mem1 = (int)*(dAddress + 1); int base1mem2 = (int)*(dAddress + 2); long long*vtptr2 = (long long*)*(dAddress + 3); int base2mem1 = (int)*(dAddress + 4); int base2mem2 = (int)*(dAddress + 5); // long long*vtptr3 = (long long*)*(dAddress + 6); // int base3mem = (int)*(dAddress + 3);  int Dmem1 = (int)*(dAddress + 6); int Dmem2 = (int)*(dAddress + 7); long long*vtptr3 = (long long*)*(dAddress + 8); int Bmem1 = (int)*(dAddress + 9); int Bmem2 = (int)*(dAddress + 10); // int imem1 = (int)*(dAddress + 7); \tcout  base1mem1  endl; cout  base1mem2  endl; cout  base2mem1  endl; cout  base2mem2  endl; cout  Dmem1  endl; cout  Dmem2  endl; cout  Bmem1  endl; cout  Bmem2  endl; cout  \"----------------\\n\"; // 2. 输出对象的内存布局信息 \tlong long*pBase1Func1 = (long long*)*(vtptr1 + 0); long long*pBase1Func2 = (long long*)*(vtptr1 + 1); long long*pBase1Func3 = (long long*)*(vtptr1 + 2); long long*pBase1Func4 = (long long*)*(vtptr1 + 3); long long*pBase1Func5 = (long long*)*(vtptr1 + 4); (FUNC(pBase1Func1))(); (FUNC(pBase1Func2))(); (FUNC(pBase1Func3))(); (FUNC(pBase1Func4))(); (FUNC(pBase1Func5))(); cout  \"----------------\\n\"; // .... 后面省略若干输出内容，可自行补充 \tlong long*pBase2Func1 = (long long*)*(vtptr2 + 0); long long*pBase2Func2 = (long long*)*(vtptr2 + 1); long long*pBase2Func3 = (long long*)*(vtptr2 + 2); (FUNC(pBase2Func1))(); (FUNC(pBase2Func2))(); (FUNC(pBase2Func3))(); cout  \"----------------\\n\"; long long*pBaseFunc1 = (long long*)*(vtptr3 + 0); long long*pBaseFunc2 = (long long*)*(vtptr3 + 1); // (FUNC(pBaseFunc1))(); \t(FUNC(pBaseFunc2))(); cout  \"----------------\\n\"; B* pb = \u0026d; pb-f(); pb-Bf(); return 0; } 输出：(64 位操作系统)\n88 100 49 1000 50 10000 51 10 48 ---------------- D::f() D::f1() B1::Bf1() D::f2() D::Df() ---------------- D::f() D::f2() B2::Bf2() ---------------- B::Bf() ---------------- D::f() B::Bf() 类似内存布局结构：\n参考：\n浅析C++类的内存布局\n",
+  "wordCount" : "673",
+  "inLanguage": "en",
+  "datePublished": "2024-05-18T17:44:54+08:00",
+  "dateModified": "2024-05-18T17:44:54+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/274-c++-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      C&#43;&#43; 类的内存布局
+    </h1>
+    <div class="post-meta"><span title='2024-05-18 17:44:54 +0800 CST'>May 18, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><p>测试代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">A</span>{
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fa</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A::fa()</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">faa</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;A::faa()</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+};
+<span style="color:#75715e">// 如果是虚继承，虚基类被放在了派生类的后面，每个基类都有自己的虚函数表指针存储单元，如果虚基类没有虚函数，则虚基类的虚函数表指针为 0 
+</span><span style="color:#75715e">// 如果是非虚继承，基类在派生类的前面，每个基类都有自己的虚函数表指针存储单元，除了第一个基类（派生类与第一个基类共用一个存储单元）
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">E</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">virtual</span> A{
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> e <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fa</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;E::fa()</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fe</span>(){
+        cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;E::fe()</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    }
+};
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    <span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">void</span>(<span style="color:#f92672">*</span>FUNC)();
+    E e;
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(e) <span style="color:#f92672">&lt;&lt;</span> endl;
+    
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span> addr <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>e;
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span> vfptre <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(addr <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>);
+    <span style="color:#66d9ef">int</span> eval <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(addr <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+    cout <span style="color:#f92672">&lt;&lt;</span> eval <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span> vfptra <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(addr <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>);
+    <span style="color:#66d9ef">int</span> aval <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(addr <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>);
+    cout <span style="color:#f92672">&lt;&lt;</span> aval <span style="color:#f92672">&lt;&lt;</span> endl;
+    
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;---------------</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span> faptr <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vfptre <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>);
+    (FUNC(faptr))();
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span> feptr <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vfptre <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+    (FUNC(feptr))();
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;---------------</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span> faptra <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vfptra <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>);
+    <span style="color:#75715e">// (FUNC(faptra))(); // 如果虚基类的虚函数被重写，此处则无法再如此执行
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span> faaptra <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vfptra <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+    (FUNC(faaptra))(); 
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">32
+2
+10
+---------------
+E::fa()
+E::fe()
+---------------
+A::faa()
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span>
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	B() <span style="color:#f92672">:</span> _ib(<span style="color:#ae81ff">10</span>), _cb(<span style="color:#e6db74">&#39;0&#39;</span>) {}
+
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::f()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Bf</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B::Bf()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> _ib;
+	<span style="color:#66d9ef">char</span> _cb;
+};
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B1</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">public</span> B
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	B1() <span style="color:#f92672">:</span> _ib1(<span style="color:#ae81ff">100</span>), _cb1(<span style="color:#e6db74">&#39;1&#39;</span>) {}
+
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B1::f()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+
+<span style="color:#75715e">#if 1
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f1</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B1::f1()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Bf1</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B1::Bf1()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+<span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> _ib1;
+	<span style="color:#66d9ef">char</span> _cb1;
+};
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B2</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">public</span> B
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	B2() <span style="color:#f92672">:</span> _ib2(<span style="color:#ae81ff">1000</span>), _cb2(<span style="color:#e6db74">&#39;2&#39;</span>) {}
+
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B2::f()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+<span style="color:#75715e">#if 1
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f2</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B2::f2()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Bf2</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;B2::Bf2()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+<span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> _ib2;
+	<span style="color:#66d9ef">char</span> _cb2;
+};
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">D</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> B1, <span style="color:#66d9ef">public</span> B2
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	D() <span style="color:#f92672">:</span> _id(<span style="color:#ae81ff">10000</span>), _cd(<span style="color:#e6db74">&#39;3&#39;</span>) {}
+
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D::f()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+
+<span style="color:#75715e">#if 1
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f1</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D::f1()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f2</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D::f2()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">Df</span>()
+	{
+		cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;D::Df()&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+	}
+<span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> _id;
+	<span style="color:#66d9ef">char</span> _cd;
+};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+{
+    
+	<span style="color:#75715e">// Test_3
+</span><span style="color:#75715e"></span>	D d;
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>dAddress <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>d;
+	<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">void</span>(<span style="color:#f92672">*</span>FUNC)();
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#66d9ef">sizeof</span>(d) <span style="color:#f92672">&lt;&lt;</span> endl;
+
+	<span style="color:#75715e">// 1. 获取对象的内存布局信息
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 虚表地址一
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>vtptr1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>);
+	<span style="color:#66d9ef">int</span> base1mem1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+	<span style="color:#66d9ef">int</span> base1mem2 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>);
+
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>vtptr2 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>);
+	<span style="color:#66d9ef">int</span> base2mem1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>);
+	<span style="color:#66d9ef">int</span> base2mem2 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span>);
+
+<span style="color:#75715e">// 	long long*vtptr3 = (long long*)*(dAddress + 6);
+</span><span style="color:#75715e">// 	int base3mem = (int)*(dAddress + 3);
+</span><span style="color:#75715e"></span>
+	<span style="color:#66d9ef">int</span> Dmem1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">6</span>);
+	<span style="color:#66d9ef">int</span> Dmem2 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>);
+
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>vtptr3 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">8</span>);
+	<span style="color:#66d9ef">int</span> Bmem1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">9</span>);
+	<span style="color:#66d9ef">int</span> Bmem2 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>)<span style="color:#f92672">*</span>(dAddress <span style="color:#f92672">+</span> <span style="color:#ae81ff">10</span>);
+
+<span style="color:#75715e">// 	int imem1 = (int)*(dAddress + 7);
+</span><span style="color:#75715e"></span>	cout <span style="color:#f92672">&lt;&lt;</span> base1mem1 <span style="color:#f92672">&lt;&lt;</span> endl;
+	cout <span style="color:#f92672">&lt;&lt;</span> base1mem2 <span style="color:#f92672">&lt;&lt;</span> endl;
+	cout <span style="color:#f92672">&lt;&lt;</span> base2mem1 <span style="color:#f92672">&lt;&lt;</span> endl;
+	cout <span style="color:#f92672">&lt;&lt;</span> base2mem2 <span style="color:#f92672">&lt;&lt;</span> endl;
+	cout <span style="color:#f92672">&lt;&lt;</span> Dmem1 <span style="color:#f92672">&lt;&lt;</span> endl;
+	cout <span style="color:#f92672">&lt;&lt;</span> Dmem2 <span style="color:#f92672">&lt;&lt;</span> endl;
+	cout <span style="color:#f92672">&lt;&lt;</span> Bmem1 <span style="color:#f92672">&lt;&lt;</span> endl;
+	cout <span style="color:#f92672">&lt;&lt;</span> Bmem2 <span style="color:#f92672">&lt;&lt;</span> endl;
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;----------------</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+
+	<span style="color:#75715e">// 2. 输出对象的内存布局信息
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBase1Func1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>);
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBase1Func2 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBase1Func3 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>);
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBase1Func4 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>);
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBase1Func5 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">4</span>);
+	(FUNC(pBase1Func1))();
+	(FUNC(pBase1Func2))();
+	(FUNC(pBase1Func3))();
+	(FUNC(pBase1Func4))();
+	(FUNC(pBase1Func5))();
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;----------------</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+	<span style="color:#75715e">// .... 后面省略若干输出内容，可自行补充
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBase2Func1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>);
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBase2Func2 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBase2Func3 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>);
+	(FUNC(pBase2Func1))();
+	(FUNC(pBase2Func2))();
+	(FUNC(pBase2Func3))();
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;----------------</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+	
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBaseFunc1 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr3 <span style="color:#f92672">+</span> <span style="color:#ae81ff">0</span>);
+	<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>pBaseFunc2 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">*</span>)<span style="color:#f92672">*</span>(vtptr3 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+<span style="color:#75715e">// 	(FUNC(pBaseFunc1))();
+</span><span style="color:#75715e"></span>	(FUNC(pBaseFunc2))();
+	cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;----------------</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+	
+	B<span style="color:#f92672">*</span> pb <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>d;
+	pb<span style="color:#f92672">-&gt;</span>f();
+	pb<span style="color:#f92672">-&gt;</span>Bf();
+	<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>输出：(64 位操作系统)</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">88
+100
+49
+1000
+50
+10000
+51
+10
+48
+----------------
+D::f()
+D::f1()
+B1::Bf1()
+D::f2()
+D::Df()
+----------------
+D::f()
+D::f2()
+B2::Bf2()
+----------------
+B::Bf()
+----------------
+D::f()
+B::Bf()
+</code></pre></div><p>类似内存布局结构：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/C&#43;&#43;-%e7%b1%bb%e7%9a%84%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80.jpg" alt="内存布局"  />
+</p>
+<p>参考：</p>
+<p><a href="https://www.zhihu.com/tardis/zm/art/380147337">浅析C++类的内存布局</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/c&#43;&#43;/">C&#43;&#43;</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://874656645.github.io/posts/273-c&#43;&#43;-%E7%BB%9F%E8%AE%A1%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>C&#43;&#43;——统计代码行数</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

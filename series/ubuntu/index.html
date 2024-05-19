@@ -145,6 +145,33 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Ubuntu 升级 GCC 版本
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>GCC 源码网址 https://ftp.gnu.org/gnu/gcc/
+源码安装参考这里
+  添加相应的源
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+如果提示 add-apt-repository: command not found，需要安装 sudo apt-get install software-properties-common
+  更新软件源
+sudo apt-get update
+  安装指定版本的 gcc
+sudo apt-get install gcc-9
+查看 gcc
+find / -name &#34;gcc*&#34;
+dpkg -l | grep gcc
+  指定默认使用的 gcc 版本
+通过 update-alternatives 建立文件关联，如果安装了同一个软件的不同版本，可以使用 update-alternatives 命令设置默认使用哪个
+首先要让系统知道我们安装了多个版本的 gcc
+# 命令最后的 20 和 50 是优先级，如果使用 auto 选择模式，系统将默认使用优先级高的 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 20 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 50   查看 gcc 版本...</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-01-08 18:35:40 +0800 CST'>January 8, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 升级 GCC 版本" href="https://874656645.github.io/posts/271-ubuntu-%E5%8D%87%E7%BA%A7-gcc-%E7%89%88%E6%9C%AC/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Ubuntu 编译指定版本的 curl 库
     </h2>
   </header>
@@ -232,23 +259,6 @@ apt install python-pip
   <footer class="entry-footer"><span title='2023-02-24 13:45:59 +0800 CST'>February 24, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Git——TortoiseGit 分支相关操作" href="https://874656645.github.io/posts/260-git-tortoisegit-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Git——Windows TortoiseGit 配置 SSH 
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、设置本地git的账户邮箱和用户名   查看是否设置了邮箱和用户名
-git config user.name git config user.email   设置邮箱和用户名
-git config --global user.name &#34;Git账号&#34; git config --global user.email &#34;Git邮箱&#34;   二、生成 SSH 密钥 在 git bash 中输入命令 ssh-keygen -t rsa -C &#34;你的Git邮箱&#34;，敲三次回车，就会在目录 我的电脑—&gt;C盘—&gt;用户—&gt;你自己的用户 目录下生成 .ssh 文件夹
-三、将 SSH 公钥添加到 GitLab 账户   在 .ssh 文件夹下，使用记事本打开 id_rsa.pub 公钥文件，复制里面的内容
-  打开 gitlab 网站的 SSH keys，将复制的文本粘贴进去即可
-  四、TortoiseGit 使用 git SSH 密钥 打开 TortoiseGit setting 指定 SSH client 为 git 的 ssh....</p>
-  </section>
-  <footer class="entry-footer"><span title='2023-02-22 20:09:10 +0800 CST'>February 22, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git——Windows TortoiseGit 配置 SSH " href="https://874656645.github.io/posts/259-git-tortoisegit-%E9%85%8D%E7%BD%AE-ssh-/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="next" href="https://874656645.github.io/series/ubuntu/page/2/">Next Page »</a>
@@ -258,7 +268,7 @@ git config --global user.name &#34;Git账号&#34; git config --global user.email
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

@@ -157,92 +157,111 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>WSL Ubuntu_2204 使用
+    <h2>Python Conda GDAL 环境搭建
     </h2>
   </header>
   <section class="entry-content">
-    <p>WSL 中使用 Ubuntu_2204 参考：Windows 10 中的 Linux 子系统
-配置开发环境   Linux 常用命令参考
-  安装常用开发环境
-sudo apt-get install build-essential
-  安装 python 2.7  注意：Ubuntu_2204 中自带 python3，所以 python2 需要进行手动安装和配置。    查看已安装的版本
-ls /usr/bin/python*
-  安装 python2
-sudo apt-get install python2
-  设置默认版本
-sudo update-alternatives --list python
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
-sudo update-alternatives --config python...</p>
+    <p>  安装 miniconda，conda 命令使用可参考这里;
+注意：
+ 安装包的时候，conda install 和 pip install 最好不要混用，优先使用 pip 查看 python 包路径 python -m site
+    安装 GDAL 通过命令 pip install gdal 安装一般会报错，推荐下载 whl 安装包进行安装，可从这里下载   import gdal from osgeo import gdal 报错 在 python 安装各种环境包的文件夹下，如：D:**\python3.9.12\Lib\site-packages\ 文件夹下，新建 gdal.py 文件，将以下代码复制进去：
+# import osgeo.gdal as a convenience from osgeo.gdal import deprecation_warn deprecation_warn(&#39;gdal&#39;) from osgeo.gdal import *   参考：
+ GDAL 安装教程（Python） 解决 import gdal 导入失败的问题，但 from osgeo import gdal 导入成功  </p>
   </section>
-  <footer class="entry-footer"><span title='2023-09-10 14:55:17 +0800 CST'>September 10, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to WSL Ubuntu_2204 使用" href="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/"></a>
+  <footer class="entry-footer"><span title='2024-01-04 19:18:20 +0800 CST'>January 4, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Python Conda GDAL 环境搭建" href="https://874656645.github.io/posts/269-python-conda-gdal-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——打印枚举常量字符串
+    <h2>adb 与安卓使用
     </h2>
   </header>
   <section class="entry-content">
-    <p>#include &lt;stdio.h&gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(&#34;%s\n&#34;, STR(MyType_One)); printf(&#34;%s\n&#34;, STR(HELLO_WORLD)); printf(&#34;%s\n&#34;, STR(MY_INT)); printf(&#34;%s\n&#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：
-MyType_One HELLO_WORLD MY_INT 7777 参考：
- c&#43;&#43;中#与##的作用  </p>
+    <p>查看包名
+adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
+adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
+adb shell pm path com.xxx.xxx.xxx
+  卸载程序
+adb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]
+adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi....</p>
   </section>
-  <footer class="entry-footer"><span title='2023-04-12 22:02:53 +0800 CST'>April 12, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——打印枚举常量字符串" href="https://874656645.github.io/posts/261-c&#43;&#43;-%E6%89%93%E5%8D%B0%E6%9E%9A%E4%B8%BE%E5%B8%B8%E9%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/"></a>
+  <footer class="entry-footer"><span title='2023-12-23 11:59:04 +0800 CST'>December 23, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to adb 与安卓使用" href="https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Git——TortoiseGit 分支相关操作
+    <h2>Ubuntu 编译指定版本的 curl 库
     </h2>
   </header>
   <section class="entry-content">
-    <p>Git  git 命令相关操作参考这里 【Git】如何进行分支合并  TortoiseGit   clone
-克隆远程仓库或指定分支   切换本地分支
-  pull 分支
-如果本地是 dev 分支，pull 远程的 master 分支，会与本地的 dev 分支合并   push 分支
-  </p>
-  </section>
-  <footer class="entry-footer"><span title='2023-02-24 13:45:59 +0800 CST'>February 24, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git——TortoiseGit 分支相关操作" href="https://874656645.github.io/posts/260-git-tortoisegit-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Git——Windows TortoiseGit 配置 SSH 
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、设置本地git的账户邮箱和用户名   查看是否设置了邮箱和用户名
-git config user.name git config user.email   设置邮箱和用户名
-git config --global user.name &#34;Git账号&#34; git config --global user.email &#34;Git邮箱&#34;   二、生成 SSH 密钥 在 git bash 中输入命令 ssh-keygen -t rsa -C &#34;你的Git邮箱&#34;，敲三次回车，就会在目录 我的电脑—&gt;C盘—&gt;用户—&gt;你自己的用户 目录下生成 .ssh 文件夹
-三、将 SSH 公钥添加到 GitLab 账户   在 .ssh 文件夹下，使用记事本打开 id_rsa.pub 公钥文件，复制里面的内容
-  打开 gitlab 网站的 SSH keys，将复制的文本粘贴进去即可
-  四、TortoiseGit 使用 git SSH 密钥 打开 TortoiseGit setting 指定 SSH client 为 git 的 ssh....</p>
-  </section>
-  <footer class="entry-footer"><span title='2023-02-22 20:09:10 +0800 CST'>February 22, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git——Windows TortoiseGit 配置 SSH " href="https://874656645.github.io/posts/259-git-tortoisegit-%E9%85%8D%E7%BD%AE-ssh-/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Git——stash TortoiseGit 将一个分支上的修改转移到另一个分支上
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> 通过 git status 查看当前改动的状态  一、commit 操作之前 git stash //把修改的内容暂存起来 git checkout dev //切换到正确的分支 git stash pop //将存储的修改取出来 二、已经 commit git reset HEAD^ // 撤回到刚刚 commit 之前的状态
-然后执行第一种情况的操作
-三、使用 TortoiseGit   stash changes
-  弹出对话框，点击 OK 按钮
-  切换分支
-  stash pop
+    <p>  卸载原有版本的 curl
+apt-get --purge remove curl
+  下载所需版本的 curl
+wget https://curl.se/download/curl-7.47.1.tar.gz
+  解压并编译
+tar -zxvf curl-7.47.1.tar.gz cd curl-7.47.1 ./configure shared make make install   编译好的可执行文件在 /usr/local/bin 目录下
+编译好的动态库和静态库在 /usr/local/lib 目录下
+  创建可执行文件和动态链接库的软连接
   参考：
- Git如何将一个分支上的修改转移到另一个分支上 在 TortoiseGit 中使用 stash 操作  </p>
+ curl download archive ubuntu卸载安装curl Linux下更新curl版本  </p>
   </section>
-  <footer class="entry-footer"><span title='2023-02-22 17:10:24 +0800 CST'>February 22, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git——stash TortoiseGit 将一个分支上的修改转移到另一个分支上" href="https://874656645.github.io/posts/258-git-stash-%E5%B0%86%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A%E7%9A%84%E4%BF%AE%E6%94%B9%E8%BD%AC%E7%A7%BB%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A/"></a>
+  <footer class="entry-footer"><span title='2023-11-03 18:18:30 +0800 CST'>November 3, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 编译指定版本的 curl 库" href="https://874656645.github.io/posts/267-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-curl-%E5%BA%93/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Ubuntu 编译指定版本的 OpenSSL 库
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  重命名原有的 openssl 可执行文件
+mv -f /usr/bin/openssl /usr/bin/openssl.old
+  下载所需版本的 openssl
+wget http://www.openssl.org/source/openssl-1.0.0s.tar.gz
+  解压并编译
+tar zxvf openssl-1.0.0s.tar.gz cd openssl-1.0.0s ./config shared --prefix=/usr/local/openssl1.0 make &amp;&amp; make install   生成的可执行文件在 /usr/local/openssl1.0/bin 目录下
+  生成的动态链接库在 /usr/local/openssl1.0/lib 目录下
+  在 /usr/bin 目录下创建可执行文件的软连接
+  在 /usr/lib/x86_64-linux-gnu/ 目录下创建动态链接库的软连接
+  参考：
+ OpenSSL Old Releases Linux openssl 升级、降级 openssl动态库生成以及交叉编译  </p>
+  </section>
+  <footer class="entry-footer"><span title='2023-11-02 20:50:41 +0800 CST'>November 2, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 编译指定版本的 OpenSSL 库" href="https://874656645.github.io/posts/266-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-openssl-%E5%BA%93/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Docker Ubuntu 16.04 Sonnar
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、安装 Docker Desktop 下载 Dockers Desktop
+二、下载并运行 Ubuntu 镜像 创建容器并运行（Ubuntu 版本 16.04），如果本地没有相应版本的镜像，则会自动下载
+docker run -it --name ubuntu16.04_sonar -v /D/Work/sonar:/data ubuntu:16.04
+运行已安装的容器
+docker start -i ubuntu16.04_sonar
+三、配置 Ubuntu 环境 apt update &amp;&amp; apt upgrade
+apt-get install build-essential
+apt install software-properties-common
+apt install vim
+指定编码：C.UTF-8
+locale
+locale -a
+cd ~ &amp;&amp; vim .bashrc
+export LANG=C.UTF-8
+source .bashrc
+安装 python 2.7 pip2
+python -V
+apt install python (python2)
+apt install python-pip
+安装 python3...</p>
+  </section>
+  <footer class="entry-footer"><span title='2023-10-30 21:47:38 +0800 CST'>October 30, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Docker Ubuntu 16.04 Sonnar" href="https://874656645.github.io/posts/265-docker-ubuntu-16.04-sonnar/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
@@ -254,7 +273,7 @@ git config --global user.name &#34;Git账号&#34; git config --global user.email
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

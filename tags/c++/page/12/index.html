@@ -145,6 +145,77 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Emscripten——使用 CMake 构建并用 Make 编译
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>使用 CMake 构建   在源文件目录添加 CMakeList.txt 文件
+# 设置CMake版本最低要求 cmake_minimum_required(VERSION 3.10)# 设置项目名称和版本 set(MyTarget hello)project(${MyTarget} VERSION 1.0)# 指定 C&#43;&#43; 标准 set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED True)# 编译生成.html文件 set(CMAKE_EXECUTABLE_SUFFIX &#34;.html&#34;)# 添加源码文件和生成的目标文件的名称 # file(GLOB_RECURSE SRC_MAIN ./*.cpp) aux_source_directory(./ SRC_MAIN)aux_source_directory(./thirdParty/ SRC_MAIN)add_executable(${MyTarget} ${SRC_MAIN})# add_executable(${MyTarget} main.cpp) # 设置Emscripten的编译链接参数 set_target_properties(${MyTarget} PROPERTIES LINK_FLAGS &#34; \ -s EXIT_RUNTIME=0 \ -gsource-map \ -s EXPORTED_FUNCTIONS=_main,_sayHello1,_jsonParse,_jsonParse1 \ -s EXPORTED_RUNTIME_METHODS=ccall,cwrap,addFunction \ -s NO_DISABLE_EXCEPTION_CATCHING \ &#34;)# 添加第三方库路径 # target_link_directories(${MyTarget} # PUBLIC &#34;${PROJECT_BINARY_DIR}&#34; # ) # 将第三方库与主程序进行链接 # set(LIBS cjson) # target_link_libraries(sample ${LIBS}) # 添加头文件查找路径 target_include_directories(${MyTarget} PUBLIC &#34;${CMAKE_CURRENT_SOURCE_DIR}&#34; )  创建 build 文件夹，并在 build 文件夹内执行命令 emcmake cmake ....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-24 17:45:14 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——使用 CMake 构建并用 Make 编译" href="https://874656645.github.io/posts/156-emscripten-%E4%BD%BF%E7%94%A8-cmake-%E6%9E%84%E5%BB%BA%E5%B9%B6%E7%94%A8-make-%E7%BC%96%E8%AF%91/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Emscripten——C&#43;&#43; 函数导出
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>导出 C&#43;&#43; 函数到 js 有多种方式：
+  方式一：在编译的时候指定
+在编译命令中添加 -sEXPORTED_FUNCTIONS 参数，例如：-s EXPORTED_FUNCTIONS=_myFunction,_sayHello1
+  方式二：修改 C&#43;&#43; 函数
+在 C&#43;&#43; 代码中需要导出的函数声明前添加 EMSCRIPTEN_KEEPALIVE 宏定义
+#include &lt;emscripten.h&gt; extern &#34;C&#34; int EMSCRIPTEN_KEEPALIVE myFunction(int argc, char ** argv) { printf(&#34;我的函数已被调用\n&#34;); return 0; } #ifdef __cplusplus extern &#34;C&#34; { #endif  int EMSCRIPTEN_KEEPALIVE sayHello(){ cout &lt;&lt; &#34;hello from sayHello!&#34; &lt;&lt; endl; return 0; } int sayHello1() { Person p; cout &lt;&lt; p.printInfo() &lt;&lt; endl; return 0; } #ifdef __cplusplus } #endif   方式三：WebIDL Binder...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-24 17:31:30 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——C&#43;&#43; 函数导出" href="https://874656645.github.io/posts/155-emscripten-c&#43;&#43;-%E5%87%BD%E6%95%B0%E5%AF%BC%E5%87%BA/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Emscripten——Hello World
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>编译   新建 main.cpp 文件
+#include &lt;iostream&gt;using namespace std; int main(){ cout &lt;&lt; &#34;hello world!&#34; &lt;&lt; endl; return 0; }   使用 emcc 或 em&#43;&#43; 编译 C&#43;&#43; 文件
+执行命令 em&#43;&#43; main.cpp，会在同级目录下生成 a.out.js 和 a.out.wasm 两个文件。
+  使用 node 测试
+测试命令 node a.out.js，会在控制台输出 cout 的内容
+  使用 html 页面 测试
+执行命令 em&#43;&#43; main.cpp -o hello.html，会在同级目录下生成三个文件：
+ hello.html：测试网页 hello.js：相关的胶水代码，包括加载 WASM 文件并执行调用等相关逻辑 hello.wasm：编译得到的核心 WebAssembly执行文件
+在本地启动一个静态网站服务器，就可以在浏览器中访问生成的网页了    编译带有 调试 信息的测试页面...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-24 17:03:19 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——Hello World" href="https://874656645.github.io/posts/154-emscripten-hello-world/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Emscripten——安装
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>启用 Linux 环境 这里使用的是 WSL（Windows Subsystem Linux）环境，环境配置参考这里
+Linux 安装 Emscripten Download and install
+  安装 python3
+sudo apt install python3
+  安装 git
+sudo apt install git
+  创建目录并 clone emsdk
+sudo git clone https://github.com/emscripten-core/emsdk.git
+  更新 emsdk 并激活
+cd emsdk git pull # Download and install the latest SDK tools. ./emsdk install latest # Make the &#34;latest&#34; SDK &#34;active&#34; for the current user. (writes .emscripten file) ....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-03-24 16:41:50 +0800 CST'>March 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Emscripten——安装" href="https://874656645.github.io/posts/153-emscripten-%E5%AE%89%E8%A3%85/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 左值、右值和移动语义
     </h2>
   </header>
@@ -156,63 +227,6 @@ int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; //
   <footer class="entry-footer"><span title='2022-02-23 22:19:35 +0800 CST'>February 23, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 左值、右值和移动语义" href="https://874656645.github.io/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、auto_ptr 特点  支持拷贝构造 支持赋值拷贝 支持 operator-&gt;/operator* 解引用 支持指针变量重置 保证指针持有者唯一（涉及所有权转移）  二、问题一：使用数组存储 auto_ptr std::vector&lt;std::auto_ptr&lt;People&gt;&gt; peoples; // 这里实例化多个people并保存到数组中 ... std::auto_ptr&lt;People&gt; one = peoples[5]; ... std::cout &lt;&lt; peoples[5]-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr 支持 operator=，为了确保指针所有者唯一，这里转移了所有权，people[5] 变成了 null
-三、问题二、函数传参 auto_ptr 类型 void do_somthing(std::auto_ptr&lt;People&gt; people){ // 该函数内不对people变量执行各种隐式/显示的所有权转移和释放  ... } std::auto_ptr&lt;People&gt; people(new People(&#34;jony&#34;)); do_something(people); ... std::cout &lt;&lt; people-&gt;get_name() &lt;&lt; std::endl; 原因在于 std::auto_ptr支持拷贝构造，为了确保指针所有者唯一，这里转移了所有权
-四、unique_ptr 在11中，可以支持右值以及移动语义了，此时可以完全匹配auto_ptr的所有权管理，新增了 std::unique_ptr。std::unique_ptr 不仅加入了移动语义的支持，同时也关闭了左值拷贝构造和左值赋值功能！杜绝了上述场景的出现！但是，此时，需要使用其他的方案了。比如场景一中，std::unique_ptr类型变量不能使用vector保存了！
-所以 std::auto_ptr 废弃了，由 std::unique_ptr 代替！
-class Person{ public: int getAge()const{ return m_age; } void setAge(int age){ m_age = age; } private: int m_age{20}; }; unique_ptr&lt;Person&gt; Change(unique_ptr&lt;Person&gt; p){ p-&gt;setAge(30); return p; } int main() { unique_ptr&lt;Person&gt; pP(new Person); cout &lt;&lt; pP-&gt;getAge() &lt;&lt; endl; // unique_ptr&lt;Person&gt; pP2 = Change(pP); // error： unique_ptr 删除了拷贝构造，所以需要使用 move 关键字转移所有权  unique_ptr&lt;Person&gt; pP2 = Change(move(pP)); // pP = pP2; // error：unique_ptr 删除了 = 赋值构造  cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; cout &lt;&lt; pP2-&gt;getAge() &lt;&lt; endl; cout &lt;&lt; &#34;-------------&#34; &lt;&lt; endl; if(pP == nullptr){ cout &lt;&lt; &#34;pP 变量已失效&#34; &lt;&lt; endl; } return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr" href="https://874656645.github.io/posts/131-c&#43;&#43;11-auto_ptr-%E8%A2%AB%E5%BA%9F%E5%BC%83%E4%B8%8E-unique_ptr/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 mutable 关键字
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、修饰类成员变量 此关键字只能应用于类的非静态和非常量数据成员，mutable 是为了让 const 对象的某些数据成员可以被修改。static 是类的成员，不属于对象，常对象和常函数只会限制类的成员变量修改，所以类的 static 数据成员不需要 mutable 修饰，在常对象和常函数中也能被修改。
-class Person{ public: int getAge() const{ m_count&#43;&#43;; s_count&#43;&#43;; return m_age; } int getCount()const{ return m_count; } private: int m_age{20}; mutable int m_count{0}; public: static int s_count; }; int Person::s_count = 0; int main() { Person p; p.getAge(); p.getAge(); p.getAge(); cout &lt;&lt; p.getCount() &lt;&lt; endl; // 3  cout &lt;&lt; p.s_count &lt;&lt; endl; // 3  return 0; } 二、修饰匿名函数 表示可以修改按值传入的变量的副本（不是值本身），类似于不带 const 关键字的形参。使用 mutable 关键字后对按值传入的变量进行的修改，不会将改变传递到 Lambda 表达式之外。如果不加 mutable 关键字，按值传入的变量是只读的，即使在 Lambda 表达式内部也不可修改...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-22 22:18:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 mutable 关键字" href="https://874656645.github.io/posts/132-c&#43;&#43;11-mutable-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;11 auto 与 decltype 关键字
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、进行自动类型推导  auto 的自动类型推断发生在编译期，所以使用 auto 并不会造成程序运行时效率的降低。 而是否会造成编译期的时间消耗，我认为是不会的，在未使用 auto 时，编译器也需要得知右操作数的类型，再与左操作数的类型进行比较，检查是否可以发生相应的转化，是否需要进行隐式类型转换。 auto 属于类类型推导 decltype 是包含声明修饰符的声明类型推导  int main() { int a = 10; auto val = a; cout &lt;&lt; typeid(val).name() &lt;&lt; endl; // i  return 0; } 二、在定义函数模板时，用于声明依赖模板参数的变量类型 不到编译的时候，x * y 的真正类型很难确定
-template &lt;class _Tx,class _Ty&gt; void Multiply(_Tx x, _Ty y) { auto v = x * y; std::cout &lt;&lt; v; } int main() { int a = 10; double b = 1....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-22 20:30:33 +0800 CST'>February 22, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;11 auto 与 decltype 关键字" href="https://874656645.github.io/posts/130-c&#43;&#43;11-auto-%E4%B8%8E-decltype-%E5%85%B3%E9%94%AE%E5%AD%97/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>2022-02-14 杂记
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>NULL，0，&#39;\0&#39;，‘0’
-int main() { char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48}; printf(&#34;%c\n&#34;, arr[0]); printf(&#34;%c\n&#34;, arr[1]); printf(&#34;%c\n&#34;, arr[2]); printf(&#34;%c\n&#34;, arr[3]); printf(&#34;---------------\n&#34;); printf(&#34;%d\n&#34;, arr[0]); printf(&#34;%d\n&#34;, arr[1]); printf(&#34;%d\n&#34;, arr[2]); printf(&#34;%d\n&#34;, arr[3]); return 0; } 输出：
-0 0 --------------- 0 0 48 48   UTF-8 向下兼容 ASCII 编码，UTF-8 编码中，一个英文字为一个字节，一个中文一般为三个字节（ASCII、Unicode、UTF-8）
- 0xxxxxxx：单字节编码形式，这和 ASCII 编码完全一样，因此 UTF-8 是兼容 ASCII 的； 110xxxxx 10xxxxxx：双字节编码形式； 1110xxxx 10xxxxxx 10xxxxxx：三字节编码形式； 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx：四字节编码形式； UTF-8：每字 1 ~ 6 字节 Unicode（UCS-2）：每字都是 2 bytes UTF-16：每字 2 ~ 4 字节 UTF-32（UCS-4）：每字都是 4 bytes    float 单精度，浮点数在内存中是按科学计数法来存储的，小数点后6位能确定表示，float 是由 1 bit 符号位，8 bit 指数位和 23 bit 尾数位组成，精度是由尾数位决定的（2^23 = 8388608）...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-15 15:29:35 +0800 CST'>February 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 2022-02-14 杂记" href="https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/"></a>
-</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="https://874656645.github.io/tags/c&#43;&#43;/page/11/">« Prev Page</a>
@@ -223,7 +237,7 @@ int main() { char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48}; printf(&#34;%c\n&#
     
 <footer class="footer">
     <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
-    <span>&copy; 2023 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
     
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
