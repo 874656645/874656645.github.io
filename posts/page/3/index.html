@@ -160,6 +160,80 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Ubuntu 编译指定版本的 curl 库
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  卸载原有版本的 curl
+apt-get --purge remove curl
+  下载所需版本的 curl
+wget https://curl.se/download/curl-7.47.1.tar.gz
+  解压并编译
+tar -zxvf curl-7.47.1.tar.gz cd curl-7.47.1 ./configure shared make make install   编译好的可执行文件在 /usr/local/bin 目录下
+编译好的动态库和静态库在 /usr/local/lib 目录下
+  创建可执行文件和动态链接库的软连接
+  参考：
+ curl download archive ubuntu卸载安装curl Linux下更新curl版本  </p>
+  </section>
+  <footer class="entry-footer"><span title='2023-11-03 18:18:30 +0800 CST'>November 3, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 编译指定版本的 curl 库" href="https://874656645.github.io/posts/267-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-curl-%E5%BA%93/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Ubuntu 编译指定版本的 OpenSSL 库
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  重命名原有的 openssl 可执行文件
+mv -f /usr/bin/openssl /usr/bin/openssl.old
+  下载所需版本的 openssl
+wget http://www.openssl.org/source/openssl-1.0.0s.tar.gz
+  解压并编译
+tar zxvf openssl-1.0.0s.tar.gz cd openssl-1.0.0s ./config shared --prefix=/usr/local/openssl1.0 make &amp;&amp; make install   生成的可执行文件在 /usr/local/openssl1.0/bin 目录下
+  生成的动态链接库在 /usr/local/openssl1.0/lib 目录下
+  在 /usr/bin 目录下创建可执行文件的软连接
+  在 /usr/lib/x86_64-linux-gnu/ 目录下创建动态链接库的软连接
+  参考：
+ OpenSSL Old Releases Linux openssl 升级、降级 openssl动态库生成以及交叉编译  </p>
+  </section>
+  <footer class="entry-footer"><span title='2023-11-02 20:50:41 +0800 CST'>November 2, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 编译指定版本的 OpenSSL 库" href="https://874656645.github.io/posts/266-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-openssl-%E5%BA%93/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Docker Ubuntu 16.04 Sonnar
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、安装 Docker Desktop 下载 Dockers Desktop
+二、下载并运行 Ubuntu 镜像 创建容器并运行（Ubuntu 版本 16.04），如果本地没有相应版本的镜像，则会自动下载
+docker run -it --name ubuntu16.04_sonar -v /D/Work/sonar:/data ubuntu:16.04
+运行已安装的容器
+docker start -i ubuntu16.04_sonar
+三、配置 Ubuntu 环境 apt update &amp;&amp; apt upgrade
+apt-get install build-essential
+apt install software-properties-common
+apt install vim
+指定编码：C.UTF-8
+locale
+locale -a
+cd ~ &amp;&amp; vim .bashrc
+export LANG=C.UTF-8
+source .bashrc
+安装 python 2.7 pip2
+python -V
+apt install python (python2)
+apt install python-pip
+安装 python3...</p>
+  </section>
+  <footer class="entry-footer"><span title='2023-10-30 21:47:38 +0800 CST'>October 30, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Docker Ubuntu 16.04 Sonnar" href="https://874656645.github.io/posts/265-docker-ubuntu-16.04-sonnar/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Android Studio Build 窗口中文乱码
     </h2>
   </header>
@@ -200,60 +274,6 @@ sudo apt install gcovr
   </section>
   <footer class="entry-footer"><span title='2023-09-11 09:34:47 +0800 CST'>September 11, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to WSL Ubuntu 使用 SonarQube" href="https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>WSL Ubuntu_2204 使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>WSL 中使用 Ubuntu_2204 参考：Windows 10 中的 Linux 子系统
-配置开发环境   Linux 常用命令参考
-  安装常用开发环境
-sudo apt-get install build-essential
-  安装 python 2.7  注意：Ubuntu_2204 中自带 python3，所以 python2 需要进行手动安装和配置。    查看已安装的版本
-ls /usr/bin/python*
-  安装 python2
-sudo apt-get install python2
-  设置默认版本
-sudo update-alternatives --list python
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
-sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 2
-sudo update-alternatives --config python...</p>
-  </section>
-  <footer class="entry-footer"><span title='2023-09-10 14:55:17 +0800 CST'>September 10, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to WSL Ubuntu_2204 使用" href="https://874656645.github.io/posts/262-wsl-ubuntu_2204-%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——打印枚举常量字符串
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>#include &lt;stdio.h&gt;#define MY_INT 7777 #define STR(R) #R #define STR2(R) STR(R)  enum MyType{ MyType_NULL, MyType_One, MyType_Two }; int main() { printf(&#34;%s\n&#34;, STR(MyType_One)); printf(&#34;%s\n&#34;, STR(HELLO_WORLD)); printf(&#34;%s\n&#34;, STR(MY_INT)); printf(&#34;%s\n&#34;, STR2(MY_INT)); const int arr[] = {1,2,3}; arr[1] = 4; // error: assignment of read-only location ‘arr[1]’  return 0; } 输出：
-MyType_One HELLO_WORLD MY_INT 7777 参考：
- c&#43;&#43;中#与##的作用  </p>
-  </section>
-  <footer class="entry-footer"><span title='2023-04-12 22:02:53 +0800 CST'>April 12, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——打印枚举常量字符串" href="https://874656645.github.io/posts/261-c&#43;&#43;-%E6%89%93%E5%8D%B0%E6%9E%9A%E4%B8%BE%E5%B8%B8%E9%87%8F%E5%AD%97%E7%AC%A6%E4%B8%B2/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Git——TortoiseGit 分支相关操作
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Git  git 命令相关操作参考这里 【Git】如何进行分支合并  TortoiseGit   clone
-克隆远程仓库或指定分支   切换本地分支
-  pull 分支
-如果本地是 dev 分支，pull 远程的 master 分支，会与本地的 dev 分支合并   push 分支
-  </p>
-  </section>
-  <footer class="entry-footer"><span title='2023-02-24 13:45:59 +0800 CST'>February 24, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git——TortoiseGit 分支相关操作" href="https://874656645.github.io/posts/260-git-tortoisegit-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

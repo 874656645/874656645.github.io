@@ -145,6 +145,23 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——Permutation a String
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>state space tree
+back tracking
+brute force
+recursion
+算法一：
+#include &lt;iostream&gt;using namespace std; void permutation(char S[], int k){ static int A[10] = {0}; static char res[10] = {0}; if(S[k] == &#39;\0&#39;){ res[k] = &#39;\0&#39;; printf(&#34;%s\n&#34;, res); } else{ for(int i = 0; S[i] != &#39;\0&#39;; &#43;&#43;i){ if(A[i] == 0){ A[i] = 1; res[k] = S[i]; permutation(S, k&#43;1); A[i] = 0; } } } } int main() { char S[] = &#34;ABC&#34;; permutation(S, 0); return 0; } output:...</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-09-27 22:06:51 +0800 CST'>September 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——Permutation a String" href="https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43; 沉思录笔记
     </h2>
   </header>

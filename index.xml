@@ -9,7 +9,39 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 18 May 2024 17:44:54 +0800</lastBuildDate><atom:link href="https://874656645.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Sep 2024 22:06:51 +0800</lastBuildDate><atom:link href="https://874656645.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据结构与算法——Permutation a String</title>
+      <link>https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/</link>
+      <pubDate>Fri, 27 Sep 2024 22:06:51 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/</guid>
+      <description>state space tree
+back tracking
+brute force
+recursion
+算法一：
+#include &amp;lt;iostream&amp;gt;using namespace std; void permutation(char S[], int k){ static int A[10] = {0}; static char res[10] = {0}; if(S[k] == &amp;#39;\0&amp;#39;){ res[k] = &amp;#39;\0&amp;#39;; printf(&amp;#34;%s\n&amp;#34;, res); } else{ for(int i = 0; S[i] != &amp;#39;\0&amp;#39;; ++i){ if(A[i] == 0){ A[i] = 1; res[k] = S[i]; permutation(S, k+1); A[i] = 0; } } } } int main() { char S[] = &amp;#34;ABC&amp;#34;; permutation(S, 0); return 0; } output:</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——Shell Sort</title>
+      <link>https://874656645.github.io/posts/276-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-shell-sort/</link>
+      <pubDate>Fri, 21 Jun 2024 21:40:45 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/276-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-shell-sort/</guid>
+      <description>#include &amp;lt;iostream&amp;gt; void shellSort(int A[], int n){ int gap, i, j, temp; for(gap = n/2; gap &amp;gt;= 1; gap /= 2){ for(i = gap; i &amp;lt; n; ++i){ temp = A[i]; j = i - gap; while(j &amp;gt;= 0 &amp;amp;&amp;amp; A[j] &amp;gt; temp){ A[j+gap] = A[j]; j = j - gap; } A[j + gap] = temp; } } } int main() { int A[] = {8, 3, 7, 4, 9, 2, 6, 5, 1, 11, 10}; int n = 11; shellSort(A, n); for(int i = 0; i &amp;lt; n; ++i){ std::cout&amp;lt;&amp;lt;A[i] &amp;lt;&amp;lt; &amp;#34; &amp;#34;; } return 0; } </description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——Merge Sort</title>
+      <link>https://874656645.github.io/posts/275-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-merge-sort/</link>
+      <pubDate>Tue, 18 Jun 2024 21:37:23 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/275-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-merge-sort/</guid>
+      <description>#include &amp;lt;iostream&amp;gt; void Merge(int A[], int l, int mid, int h){ int i, j, k; i = l; j = mid + 1; k = l; int B[h+1]; while(i &amp;lt;= mid &amp;amp;&amp;amp; j &amp;lt;= h){ if(A[i] &amp;lt; A[j]){ B[k++] = A[i++]; } else{ B[k++] = A[j++]; } } for(; i &amp;lt;= mid; i++){ B[k++] = A[i]; } for(; j &amp;lt;= h; j++){ B[k++] = A[j]; } for(i = l; i &amp;lt;= h; i++){ A[i] = B[i]; } } // 迭代 void IMergeSort(int A[], int n) { int p, i, l, mid, h; for(p = 2; p &amp;lt;= n; p = p * 2){ for(i = 0; i + p - 1 &amp;lt; n; i = i + p){ l = i; h = i + p -1; mid = (l + h) / 2; Merge(A, l, mid, h); } if(i &amp;lt; n){ l = i; h = n-1; mid = (l+h)/2; Merge(A,l,mid,h); } for(int i = 0; i &amp;lt; n; ++i){ std::cout&amp;lt;&amp;lt;A[i] &amp;lt;&amp;lt; &amp;#34; &amp;#34;; } std::cout &amp;lt;&amp;lt; &amp;#34;\n&amp;#34;; } if(p/2 &amp;lt; n){ Merge(A, 0, p/2-1, n-1); } } // 递归 void MergeSort(int A[], int l, int h){ int mid; if(l &amp;lt; h){ mid = (l + h) / 2; MergeSort(A, l, mid); MergeSort(A, mid+1, h); Merge(A, l, mid, h); } } int main() { int A[] = {8, 3, 7, 4, 9, 2, 6, 5, 1, 11, 10}; int n = 11; IMergeSort(A, n); for(int i = 0; i &amp;lt; n; ++i){ std::cout&amp;lt;&amp;lt;A[i] &amp;lt;&amp;lt; &amp;#34; &amp;#34;; } return 0; } 输出：</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43; 类的内存布局</title>
       <link>https://874656645.github.io/posts/274-c&#43;&#43;-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</link>
@@ -104,9 +136,12 @@ dpkg -l | grep gcc
 adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
 adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
 adb shell pm path com.xxx.xxx.xxx
-  卸载程序
-adb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]
-adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi.</description>
+  获取系统应用
+adb shell pm list packages -s
+  获取第三方应用
+adb shell pm list packages -3
+  启动指定 activity
+adb shell am start -n com.</description>
     </item>
     
     <item>

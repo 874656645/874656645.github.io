@@ -157,6 +157,52 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Qt CMake
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>cmake_minimum_required(VERSION 3.5)project(07_TCP LANGUAGES CXX)# 将编译目录包含到Include目录 set(CMAKE_INCLUDE_CURRENT_DIR ON)set(CMAKE_AUTOUIC ON)set(CMAKE_AUTOMOC ON)set(CMAKE_AUTORCC ON)# 根据 Qt 版本的环境变量，设置使用的 Qt 版本 set(CMAKE_PREFIX_PATH $ENV{QTDIR5141_64})set(CMAKE_CXX_STANDARD 11)set(CMAKE_CXX_STANDARD_REQUIRED ON)# QtCreator supports the following variables for Android, which are identical to qmake Android variables. # Check http://doc.qt.io/qt-5/deployment-android.html for more information. # They need to be set before the find_package(Qt5 ...) call. #if(ANDROID) # set(ANDROID_PACKAGE_SOURCE_DIR &#34;${CMAKE_CURRENT_SOURCE_DIR}/android&#34;) # if (ANDROID_ABI STREQUAL &#34;armeabi-v7a&#34;) # set(ANDROID_EXTRA_LIBS # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libcrypto.so # ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so) # endif() #endif() # 工程中会用到的Qt模块 find_package(Qt5 COMPONENTS Widgets Network REQUIRED)if(ANDROID) add_library(07_TCP SHARED main....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-15 16:10:27 +0800 CST'>July 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Qt CMake" href="https://874656645.github.io/posts/207-qt-cmake/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>OpenGL Shading Frequencies
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p></p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-10 19:54:49 +0800 CST'>July 10, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to OpenGL Shading Frequencies" href="https://874656645.github.io/posts/206-opengl-shading-frequencies/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>OpenGL 纹理采样
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>有两个不同的概念：像素（Pixel）和纹素（Texel）
+  在纹理上查询纹素有两种方式：
+ 点查（Point Query）：小纹理，而要对纹理放大 范围查（Range Query）：动态生成 Mipmap    小纹理：低分辨率纹理应用到高分辨率设备，会产生马赛克问题
+ Nearest：邻近点
+ Bilinear：双线性插值
+ Bicubic：     大纹理：高分辨率纹理应用到低分辨率设备，会有 锯齿（Jaggies） 和 摩尔纹（Moire） 等 走样（Aliasing） 的问题
+ 多重采样（supersampling）    面采样求平均值
+  Mipmap：图像金字塔
+ 具有速度快、只是近似值且只能是方形范围的特点 会额外占用 1/3 的原始纹理显存空间，总共 4/3 的显存占用    三线性插值（Trilinear interpolation）:
+ 先在相邻两层 Mipmap 中分别进行 Bilinear 插值，再在结果之上进行线性插值 局限性：会存在 overblur 的问题    各项异性过滤（Anisotropic Filtering）（Ripmap）：
+ 对于平行于坐标轴的矩形区域查询有较好的表现，但是对于非矩形区域仍是效果不佳 会额外占用 3 倍的显存空间   纹理映射的不规则区域    EWA Filtering:...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-10 09:47:35 +0800 CST'>July 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to OpenGL 纹理采样" href="https://874656645.github.io/posts/205-opengl-%E7%BA%B9%E7%90%86%E9%87%87%E6%A0%B7/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>OpenGL 重心坐标与插值
     </h2>
   </header>
@@ -185,53 +231,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-07-08 17:50:31 +0800 CST'>July 8, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——像素流送播放器页面与 UE 通信" href="https://874656645.github.io/posts/203-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81%E6%92%AD%E6%94%BE%E5%99%A8%E9%A1%B5%E9%9D%A2%E4%B8%8E-ue-%E9%80%9A%E4%BF%A1/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——像素流送
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>有两种方式启动三维渲染服务器  一、方式一：使用 UE Editor 作为渲染服务器  启用像素流送插件
-【Pixel Streaming】 启用触控设备输入（可选）
-【编辑（Edit）】 &gt; 【项目设置（Project Settings）】 &gt; 【引擎（Engine）】 &gt; 【输入（Input category）】 下启用 【固定显示触控界面（Always Show Touch Interface）】 设置 设置额外启动参数
-【编辑（Edit）】 &gt; 【编辑器偏好（Editor Preferences…）】 &gt; 【关卡编辑器（Level Editor）】 &gt; 【播放（Play）】 &gt; 【额外启动参数（Additional Launch Parameters）】中添加参数 -AudioMixer -PixelStreamingIP=localhost -PixelStreamingPort=8888 -AllowPixelStreamingCommands 启动游戏
-通过独立进程游戏的模式启动游戏
-  二、方式二：通过打包的程序  打包前对 UE Editor 进行配置，参照方式一的前两步 启动【打包项目】
- 设置启动程序的命令行标签  按住 Alt 键并拖动 .exe 文件即可在相同文件夹中（或在其他任意处）新建一个快捷方式 右键点击快捷方式并从上下文菜单中选择 属性（Properties） 在 快捷方式属性（Shortcut Properties） 窗口的 快捷方式（Shortcut） 选项卡中，在 目标（Target） 域的末尾附加文本 -AudioMixer -PixelStreamingIP=localhost -PixelStreamingPort=8888 -RenderOffScreen 并点击 确认    三、启动服务器 启动一个服务，在虚幻引擎应用程序和客户端浏览器间建立点对点的连接（WebRTC）...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-08 15:50:34 +0800 CST'>July 8, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——像素流送" href="https://874656645.github.io/posts/202-unreal-%E5%83%8F%E7%B4%A0%E6%B5%81%E9%80%81/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal Engine 5 打包
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>UE5 打包：
-如果平台前面有感叹号表示缺少 SDK 环境
- 注意： 安装完 SDK 后要重启电脑   Windows SDK 18362 or Newer .NET Core 3.1  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-07 10:23:08 +0800 CST'>July 7, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal Engine 5 打包" href="https://874656645.github.io/posts/201-unreal-engine-5-%E6%89%93%E5%8C%85/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>PowerShell 修改脚本执行策略
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> 参考asdfasdfabout_Execution_Policies    get-executionpolicy 命令查看
- Restricted 执行策略不允许任何脚本运行 RemoteSigned    执行策略修改
-以管理员身份打开 PowerShell， 输入 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser 修改执行策略
-  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-07-06 17:49:14 +0800 CST'>July 6, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to PowerShell 修改脚本执行策略" href="https://874656645.github.io/posts/200-powershell-%E4%BF%AE%E6%94%B9%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C%E7%AD%96%E7%95%A5/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

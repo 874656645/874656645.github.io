@@ -11,9 +11,12 @@
 adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
 adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
 adb shell pm path com.xxx.xxx.xxx
-  卸载程序
-adb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]
-adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi.">
+  获取系统应用
+adb shell pm list packages -s
+  获取第三方应用
+adb shell pm list packages -3
+  启动指定 activity
+adb shell am start -n com.">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
@@ -56,9 +59,12 @@ if (!doNotTrack) {
 adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
 adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
 adb shell pm path com.xxx.xxx.xxx
-  卸载程序
-adb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]
-adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi." />
+  获取系统应用
+adb shell pm list packages -s
+  获取第三方应用
+adb shell pm list packages -3
+  启动指定 activity
+adb shell am start -n com." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-23T11:59:04&#43;08:00" />
@@ -73,9 +79,12 @@ adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 
 adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
 adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
 adb shell pm path com.xxx.xxx.xxx
-  卸载程序
-adb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]
-adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi."/>
+  获取系统应用
+adb shell pm list packages -s
+  获取第三方应用
+adb shell pm list packages -3
+  启动指定 activity
+adb shell am start -n com."/>
 
 
 <script type="application/ld+json">
@@ -104,12 +113,12 @@ adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 
   "@type": "BlogPosting",
   "headline": "adb 与安卓使用",
   "name": "adb 与安卓使用",
-  "description": "查看包名\nadb shell pm list package adb shell pm list package | findstr xxx   查看包的信息\nadb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径\nadb shell pm path com.xxx.xxx.xxx\n  卸载程序\nadb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]\nadb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi.",
+  "description": "查看包名\nadb shell pm list package adb shell pm list package | findstr xxx   查看包的信息\nadb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径\nadb shell pm path com.xxx.xxx.xxx\n  获取系统应用\nadb shell pm list packages -s\n  获取第三方应用\nadb shell pm list packages -3\n  启动指定 activity\nadb shell am start -n com.",
   "keywords": [
     "C++"
   ],
-  "articleBody": "  查看包名\nadb shell pm list package adb shell pm list package | findstr xxx   查看包的信息\nadb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径\nadb shell pm path com.xxx.xxx.xxx\n  卸载程序\nadb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]\nadb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi.apk // 删除包 adb reboot // 重启   安装程序\nadb install [path of package]\n  关闭程序\nadb shell am force-stop com.xxx.xxx.xxx\n  启动程序\nadb shell am start com.xxx.xxx.xxx\n  关闭走行（如果统一按钮无法点击）\nadb shell am broadcast -a SET_DISPLAY_UX_RESTRICTION_OFF\n  串口输入，然后重启机器\nchmod 660 /dev/block/by-name/factoryparam echo 123456789012345678901234567890008210011210789ABC  /dev/block/by-name/factoryparam adb reboot   adb 连接 MUMU 模拟器\nadb connect 127.0.0.1:16384 adb shell 注：查看 MUMU 模拟器端口号   参考：\n adb-connect-to-mumu  ",
-  "wordCount" : "127",
+  "articleBody": "  查看包名\nadb shell pm list package adb shell pm list package | findstr xxx   查看包的信息\nadb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径\nadb shell pm path com.xxx.xxx.xxx\n  获取系统应用\nadb shell pm list packages -s\n  获取第三方应用\nadb shell pm list packages -3\n  启动指定 activity\nadb shell am start -n com.example.myapplication/.MainActivity\n  查看应用详情\nadb shell dumpsys package com.example.myapplication\n  获取日志输出到本地\nadb logcat -v time - D:/log.txt //输出日志文件到D盘 log.txt文件中\n  查看当前界面所在的activity\nadb shell dumpsys window | grep mCurrentFocus\n  查看手机型号\nadb shell getprop ro.product.model\n  查看电池状况\nadb shell dumpsys battery\n其中 scale 代表最大电量，level 代表当前电量。上面的输出表示还剩下 50% 的电量。\n  查看分辨率\nadb shell wm size\n  查看屏幕密度\nadb shell wm density\n  查看显示屏参数\nadb shell dumpsys window displays\n  查看android_id\nadb shell settings get secure android_id\n  查看 Android 系统版本\nadb shell getprop ro.build.version.release\n  查看IP地址，网卡相关\nadb shell ifconfig\n  查看Mac地址\nadb shell cat /sys/class/net/网卡/address 例如：网卡是 eth0 也可以用下面的命令查看 adb shell netcfg   查看CPU信息\nadb shell cat /proc/cpuinfo\n  查看内存信息\nadb shell cat /proc/meminfo\n  查看硬件与系统属性\n查看所有属性\nadb shell cat /system/build.prop\n单独查看属性\nadb shell getprop \n常用属性列表   OpenGL ES 版本查看方法\nadb shell getprop ro.opengles.version\n参数说明:\nOf OpenGL ES version android:glEsVersion ro.opengles.version OpenGL ES 1.0 0x00010000 65536 OpenGL ES 1.1 0x00010001 65537 OpenGL ES 2.0 0x00020000 131072 OpenGL ES 3.0 0x00030000 196608 OpenGL ES 3.1 0x00030001 196609 OpenGL ES 3.2 0x00030002 196610   获取Root权限\nadb root\n  获取GPU算力\nadb shell cat /sys/class/kgsl/kgsl-3d0/gpu_busy_percentage adb shell cat /sys/class/kgsl/kgsl-3d0/gpubusy   卸载程序\nadb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]\nadb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi.apk // 删除包 adb reboot // 重启   安装程序\nadb install [path of package]\n  关闭程序\nadb shell am force-stop com.xxx.xxx.xxx\n  启动程序\nadb shell am start com.xxx.xxx.xxx\n  关闭走行（如果统一按钮无法点击）\nadb shell am broadcast -a SET_DISPLAY_UX_RESTRICTION_OFF\n  串口输入，然后重启机器\nchmod 660 /dev/block/by-name/factoryparam echo 123456789012345678901234567890008210011210789ABC  /dev/block/by-name/factoryparam adb reboot   adb 连接 MUMU 模拟器\nadb connect 127.0.0.1:16384 adb shell 注：查看 MUMU 模拟器端口号   参考：\n adb-connect-to-mumu  ",
+  "wordCount" : "311",
   "inLanguage": "en",
   "datePublished": "2023-12-23T11:59:04+08:00",
   "dateModified": "2023-12-23T11:59:04+08:00",
@@ -206,7 +215,7 @@ adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 
     <h1 class="post-title">
       adb 与安卓使用
     </h1>
-    <div class="post-meta"><span title='2023-12-23 11:59:04 +0800 CST'>December 23, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+    <div class="post-meta"><span title='2023-12-23 11:59:04 +0800 CST'>December 23, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui
 
 </div>
   </header> 
@@ -226,6 +235,129 @@ adb shell dumpsys package com.xxx.xxx.xxx | findstr version
 <p>查看包的路径</p>
 <p><code>adb shell pm path com.xxx.xxx.xxx</code></p>
 </li>
+<li>
+<p>获取系统应用</p>
+<p><code>adb shell pm list packages -s</code></p>
+</li>
+<li>
+<p>获取第三方应用</p>
+<p><code>adb shell pm list packages -3</code></p>
+</li>
+<li>
+<p>启动指定 activity</p>
+<p><code>adb shell am start -n com.example.myapplication/.MainActivity</code></p>
+</li>
+<li>
+<p>查看应用详情</p>
+<p><code>adb shell dumpsys package com.example.myapplication</code></p>
+</li>
+<li>
+<p>获取日志输出到本地</p>
+<p><code>adb logcat -v time -&gt; D:/log.txt //输出日志文件到D盘 log.txt文件中</code></p>
+</li>
+<li>
+<p>查看当前界面所在的activity</p>
+<p><code>adb shell dumpsys window | grep  mCurrentFocus</code></p>
+</li>
+<li>
+<p>查看手机型号</p>
+<p><code>adb shell getprop ro.product.model</code></p>
+</li>
+<li>
+<p>查看电池状况</p>
+<p><code>adb shell dumpsys battery</code><br>
+其中 scale 代表最大电量，level 代表当前电量。上面的输出表示还剩下 50% 的电量。</p>
+</li>
+<li>
+<p>查看分辨率</p>
+<p><code>adb shell wm size</code></p>
+</li>
+<li>
+<p>查看屏幕密度</p>
+<p><code>adb shell wm density</code></p>
+</li>
+<li>
+<p>查看显示屏参数</p>
+<p><code>adb shell dumpsys window displays</code></p>
+</li>
+<li>
+<p>查看android_id</p>
+<p><code>adb shell settings get secure android_id</code></p>
+</li>
+<li>
+<p>查看 Android 系统版本</p>
+<p><code>adb shell getprop ro.build.version.release</code></p>
+</li>
+<li>
+<p>查看IP地址，网卡相关</p>
+<p><code>adb shell ifconfig</code></p>
+</li>
+<li>
+<p>查看Mac地址</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    adb shell cat /sys/class/net/网卡/address
+    例如：网卡是 eth0
+    也可以用下面的命令查看
+    adb shell netcfg
+</code></pre></div></li>
+<li>
+<p>查看CPU信息</p>
+<p><code>adb shell cat /proc/cpuinfo</code></p>
+</li>
+<li>
+<p>查看内存信息</p>
+<p><code>adb shell cat /proc/meminfo</code></p>
+</li>
+<li>
+<p>查看硬件与系统属性</p>
+<p>查看所有属性</p>
+<p><code>adb shell cat /system/build.prop</code></p>
+<p>单独查看属性</p>
+<p><code>adb shell getprop &lt;属性名&gt;</code></p>
+<p>常用属性列表
+<img loading="lazy" style="margin: auto;" src="../img/adb-properties.jpg" alt="adb-properties"  />
+</p>
+</li>
+<li>
+<p>OpenGL ES 版本查看方法</p>
+<p><code>adb shell getprop ro.opengles.version</code></p>
+<p>参数说明:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Of OpenGL ES version
+android:glEsVersion
+ro.opengles.version
+
+OpenGL ES 1.0
+0x00010000
+65536
+
+OpenGL ES 1.1
+0x00010001
+65537
+
+OpenGL ES 2.0
+0x00020000
+131072
+
+OpenGL ES 3.0
+0x00030000
+196608
+
+OpenGL ES 3.1
+0x00030001
+196609
+
+OpenGL ES 3.2
+0x00030002
+196610
+</code></pre></div></li>
+<li>
+<p>获取Root权限</p>
+<p><code>adb root</code></p>
+</li>
+<li>
+<p>获取GPU算力</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">adb shell cat /sys/class/kgsl/kgsl-3d0/gpu_busy_percentage
+adb shell cat /sys/class/kgsl/kgsl-3d0/gpubusy
+</code></pre></div></li>
 <li>
 <p>卸载程序</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">adb uninstall com.xxx.xxx.xxx

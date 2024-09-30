@@ -145,6 +145,18 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——成员指针
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: int a; // 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; // C&#43;&#43;17 支持 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; static int num; public: Crowd(); Crowd(int x); ~Crowd(); // 类体内函数定义 	// 会被内联处理 	int f() { b&#43;&#43;; cout &lt;&lt; &#34;F()\n&#34;; return b; } // const this 指针，参数类型不同，所以可被重载 	int f()const { cout &lt;&lt; &#34;const F()\n&#34;; return b; } static int getNum(); static Crowd&amp; dec(Crowd&amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { a = 0; b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd()\n&#34;; } Crowd::Crowd(int x): a(x) { b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd(int)\n&#34;; } Crowd::~Crowd() { Crowd::num--; } int Crowd::getNum() { return Crowd::num; } Crowd&amp; Crowd::dec(Crowd&amp; a) { a....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-03 16:44:14 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——成员指针" href="https://874656645.github.io/posts/228-c&#43;&#43;-%E6%88%90%E5%91%98%E6%8C%87%E9%92%88/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
     </h2>
   </header>
@@ -192,18 +204,6 @@ static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部�
   </section>
   <footer class="entry-footer"><span title='2022-06-11 20:48:22 +0800 CST'>June 11, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;11 关于右值引用、左值引用和通用引用的思考" href="https://874656645.github.io/posts/192-c&#43;&#43;11-%E5%85%B3%E4%BA%8E%E5%8F%B3%E5%80%BC%E5%BC%95%E7%94%A8%E5%B7%A6%E5%80%BC%E5%BC%95%E7%94%A8%E5%92%8C%E9%80%9A%E7%94%A8%E5%BC%95%E7%94%A8%E7%9A%84%E6%80%9D%E8%80%83/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C 实现继承和多态
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>C中的继承和多态</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-05-24 09:15:13 +0800 CST'>May 24, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C 实现继承和多态" href="https://874656645.github.io/posts/195-c-%E5%AE%9E%E7%8E%B0%E7%BB%A7%E6%89%BF%E5%92%8C%E5%A4%9A%E6%80%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -145,6 +145,23 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——Permutation a String
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>state space tree
+back tracking
+brute force
+recursion
+算法一：
+#include &lt;iostream&gt;using namespace std; void permutation(char S[], int k){ static int A[10] = {0}; static char res[10] = {0}; if(S[k] == &#39;\0&#39;){ res[k] = &#39;\0&#39;; printf(&#34;%s\n&#34;, res); } else{ for(int i = 0; S[i] != &#39;\0&#39;; &#43;&#43;i){ if(A[i] == 0){ A[i] = 1; res[k] = S[i]; permutation(S, k&#43;1); A[i] = 0; } } } } int main() { char S[] = &#34;ABC&#34;; permutation(S, 0); return 0; } output:...</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-09-27 22:06:51 +0800 CST'>September 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——Permutation a String" href="https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43; 类的内存布局
     </h2>
   </header>
@@ -194,33 +211,15 @@ if (!doNotTrack) {
 adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
 adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
 adb shell pm path com.xxx.xxx.xxx
-  卸载程序
-adb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]
-adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi....</p>
+  获取系统应用
+adb shell pm list packages -s
+  获取第三方应用
+adb shell pm list packages -3
+  启动指定 activity
+adb shell am start -n com....</p>
   </section>
-  <footer class="entry-footer"><span title='2023-12-23 11:59:04 +0800 CST'>December 23, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <footer class="entry-footer"><span title='2023-12-23 11:59:04 +0800 CST'>December 23, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to adb 与安卓使用" href="https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Ubuntu 编译指定版本的 curl 库
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  卸载原有版本的 curl
-apt-get --purge remove curl
-  下载所需版本的 curl
-wget https://curl.se/download/curl-7.47.1.tar.gz
-  解压并编译
-tar -zxvf curl-7.47.1.tar.gz cd curl-7.47.1 ./configure shared make make install   编译好的可执行文件在 /usr/local/bin 目录下
-编译好的动态库和静态库在 /usr/local/lib 目录下
-  创建可执行文件和动态链接库的软连接
-  参考：
- curl download archive ubuntu卸载安装curl Linux下更新curl版本  </p>
-  </section>
-  <footer class="entry-footer"><span title='2023-11-03 18:18:30 +0800 CST'>November 3, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Ubuntu 编译指定版本的 curl 库" href="https://874656645.github.io/posts/267-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-curl-%E5%BA%93/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

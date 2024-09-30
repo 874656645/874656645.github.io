@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>map multimap 容器
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>特点  所有元素都会根据元素的键值自动排序 默认排序规则是从小到大，可以通过仿函数指定排序规则 map / multimap 属于关联式容器，底层结构是用红黑树实现 不可以修改键值，可以通过删除再插入的方式实现 可以根据 key 值快速找到 value 值 可以通过下标 [] 的方式快速查找、插入和更新对应的 value  案例  公司今天招聘了10个员工（ABCDEFGHIJ），10 名员工进入公司之后，需要指派员工在哪个部门工作 员工信息有: 姓名 工资组成；部门分为：策划、美术、研发 随机给 10 名员工分配部门和工资 通过 multimap 进行信息的插入 key(部门编号) value(员工) 分部门显示员工信息  思路：
+ 创建 10 名员工，放到 vector 中 遍历 vector 容器，取出每个员工，进行随机分组 分组后，将员工部门编号作为 key，具体员工作为 value，放入到 multimap 容器中 分部门显示员工信息  class Worker{ public: Worker(string name, int salary){ m_name = name; m_salary = salary; } void printWorker(){ cout &lt;&lt; &#34;姓名：&#34; &lt;&lt; m_name &lt;&lt; &#34; 工资：&#34; &lt;&lt; m_salary &lt;&lt; endl; } private: string m_name; int m_salary; }; void createWorkers(vector&lt;Worker&gt; &amp;v){ string nameSeed = &#34;ABCDEFGHIJ&#34;; for(int i = 0; i &lt; nameSeed....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-20 20:18:25 +0800 CST'>January 20, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to map multimap 容器" href="https://874656645.github.io/posts/88-map-multimap-%E5%AE%B9%E5%99%A8/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>set multiset 容器
     </h2>
   </header>
@@ -196,20 +209,6 @@ empty()</p>
   </section>
   <footer class="entry-footer"><span title='2022-01-16 22:17:43 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to stack 栈容器适配器" href="https://874656645.github.io/posts/84-stack-%E6%A0%88%E5%AE%B9%E5%99%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>评委打分案例
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>有 5 名选手：选手 ABCDE，10 个评委分别对每一名选手打分，去除最高分，去除评委中最低分，取平均分。
-分析：
- 创建五名选手，放到 vector 中 遍历 vector 容器，取出来每一个选手，执行 for 循环，可以把 10 个评委打分存到 deque 容器中 sort 算法对 deque 容器中分数排序，去除最高和最低分 deque 容器遍历一遍，累加总分 获取平均分  class Player{ public: Player(string name){ m_name = name; m_avgScore = 0; } void setAvgScore(int v){ m_avgScore = v; } void printInfo()const{ cout &lt;&lt; m_name &lt;&lt; &#34;的平均分为：&#34; &lt;&lt; m_avgScore &lt;&lt; endl; } private: string m_name; int m_avgScore; }; void createPlayers(vector&lt;Player&gt; &amp;v){ string nameSeed = &#34;ABCDE&#34;; for(int i = 0; i &lt; nameSeed....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-16 22:10:49 +0800 CST'>January 16, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 评委打分案例" href="https://874656645.github.io/posts/83-%E8%AF%84%E5%A7%94%E6%89%93%E5%88%86%E6%A1%88%E4%BE%8B/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

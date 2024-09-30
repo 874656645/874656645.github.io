@@ -145,6 +145,20 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;11 左值、右值和移动语义
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、结论  C 中将数据类型分为左值和右值，在 C&#43;&#43;11 中又将右值概念更为细致的分为将亡值（xvalue）和纯右值（prvalue）。 将亡值是 C&#43;&#43;11 新增的跟右值引用相关的表达式，通常是将要被移动的对象（移为他用），比如返回右值引用 T&amp;&amp; 的函数返回值、std::move 的返回值。 从性能上讲，左右值引用没有区别，传参使用左右值引用都可以避免拷贝。 右值引用可以直接指向右值，也可以通过 std::move 指向左值；而左值引用只能指向左值（const左值引用也能指向右值）。 作为函数形参时，右值引用更灵活。虽然 const 左值引用也可以做到左右值都接受，但它无法修改，有一定局限性。 可移动对象在需要拷贝且被拷贝者之后不再被需要的场景，建议使用 std::move 触发移动语义，提升性能。 我们可以在自己的类中实现移动语义，避免深拷贝，充分利用右值引用和 std::move 的语言特性。 std::move 本身只做类型转换，对性能无影响。 std::forward 同样也是做类型转换且更强大，move 只能转出来右值，forward 既可以转成右值，又可以转成左值。 函数最好不要返回函数体内局部变量的左值引用或右值引用。  二、注意事项  左值引用是具名变量值的别名 右值引用是不具名（匿名）变量的别名    引用是变量的别名，由于右值没有地址，没法被修改，所以左值引用无法指向右值，但是，const左值引用是可以指向右值的
+const int &amp;ref_a = 5; int a = 5; int &amp;ref_a = a; // 左值引用指向左值，编译通过 int &amp;ref_a = 5; // 左值引用指向了右值，会编译失败   右值引用的标志是 &amp;&amp;，顾名思义，右值引用专门为右值而生，可以指向右值，不能指向左值
+int&amp;&amp; ref_a_right = 5; // ok int a = 5; int&amp;&amp; ref_a_left = a; // 编译不过，右值引用不可以指向左值  ref_a_right = 6; // 右值引用的用途：可以修改右值   事实上 std::move 移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的 std::move(xxx) 不会有性能提升，从这个角度来讲，右值引用和左值引用的功能相似，都是原始变量的别名，至于移动后原始变量是否可用，取决于被移动的数据类型对于移动语义的具体实现。...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-02-23 22:19:35 +0800 CST'>February 23, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;11 左值、右值和移动语义" href="https://874656645.github.io/posts/133-c&#43;&#43;11-%E5%B7%A6%E5%80%BC%E5%8F%B3%E5%80%BC%E5%92%8C%E7%A7%BB%E5%8A%A8%E8%AF%AD%E4%B9%89/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;11 auto_ptr 被废弃与 unique_ptr
     </h2>
   </header>
@@ -198,20 +212,6 @@ int main() { char arr[] = {0, &#39;\0&#39;, &#39;0&#39;, 48}; printf(&#34;%c\n&#
   </section>
   <footer class="entry-footer"><span title='2022-02-15 15:29:35 +0800 CST'>February 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 2022-02-14 杂记" href="https://874656645.github.io/posts/123-2022-02-14%E6%9D%82%E8%AE%B0/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>递归与递归树
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>逆序打印字符串
-void printReverseString(const char* str){ if(*str == &#39;\0&#39;){ return; } printReverseString(str &#43; 1); printf(&#34;%c&#34;, *str); } int main() { const char* str = &#34;Hello World&#34;; printReverseString(str); // dlroW olleH  return 0; }   逆序输出链表
-struct LinkNode{ int data; struct LinkNode* next; }; void printReverseLinkNode(struct LinkNode* header){ if(header == NULL){ return; } printReverseLinkNode(header-&gt;next); printf(&#34;%d\n&#34;, header-&gt;data); } int main() { struct LinkNode* header = malloc(sizeof(struct LinkNode)); struct LinkNode* node1 = malloc(sizeof(struct LinkNode)); node1-&gt;data = 10; node1-&gt;next = NULL; struct LinkNode* node2 = malloc(sizeof(struct LinkNode)); node2-&gt;data = 20; node2-&gt;next = NULL; struct LinkNode* node3 = malloc(sizeof(struct LinkNode)); node3-&gt;data = 30; node3-&gt;next = NULL; header-&gt;next = node1; node1-&gt;next = node2; node2-&gt;next = node3; printReverseLinkNode(header-&gt;next); return 0; }   递归实现给出一个数 8793，依次打印千位数 8、百位数 7、十位数 9、个位数 3...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-02-07 21:38:53 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 递归与递归树" href="https://874656645.github.io/posts/119-%E9%80%92%E5%BD%92%E4%B8%8E%E9%80%92%E5%BD%92%E6%A0%91/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -9,7 +9,21 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 18 May 2024 17:44:54 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 27 Sep 2024 22:06:51 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据结构与算法——Permutation a String</title>
+      <link>https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/</link>
+      <pubDate>Fri, 27 Sep 2024 22:06:51 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/</guid>
+      <description>state space tree
+back tracking
+brute force
+recursion
+算法一：
+#include &amp;lt;iostream&amp;gt;using namespace std; void permutation(char S[], int k){ static int A[10] = {0}; static char res[10] = {0}; if(S[k] == &amp;#39;\0&amp;#39;){ res[k] = &amp;#39;\0&amp;#39;; printf(&amp;#34;%s\n&amp;#34;, res); } else{ for(int i = 0; S[i] != &amp;#39;\0&amp;#39;; ++i){ if(A[i] == 0){ A[i] = 1; res[k] = S[i]; permutation(S, k+1); A[i] = 0; } } } } int main() { char S[] = &amp;#34;ABC&amp;#34;; permutation(S, 0); return 0; } output:</description>
+    </item>
+    
     <item>
       <title>C&#43;&#43; 类的内存布局</title>
       <link>https://874656645.github.io/posts/274-c&#43;&#43;-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</link>
@@ -52,9 +66,12 @@
 adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
 adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
 adb shell pm path com.xxx.xxx.xxx
-  卸载程序
-adb uninstall com.xxx.xxx.xxx // 卸载 render doc adb uninstall org.renderdoc.renderdoccmd.arm64   卸载程序时弹出 Failure [DELETE_FAILED_INTERNAL_ERROR]
-adb shell pm path com.xxx.xxx.xxx // 获取要卸载的包的路径 adb root // 获取 root 权限 adb remount // 重新挂载系统权限 adb shell rm /system/product/app/autoai_navi/autoai_navi.</description>
+  获取系统应用
+adb shell pm list packages -s
+  获取第三方应用
+adb shell pm list packages -3
+  启动指定 activity
+adb shell am start -n com.</description>
     </item>
     
     <item>

@@ -160,6 +160,56 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Compile Nginx on CentOS
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>安装相关依赖
+yum install -y perl-ExtUtils-Embed \ readline-devel zlib-devel pam-devel \ libxml2-devel libxslt-devel openldap-devel \ python-devel openssl-devel cmakepcre-develnanowget \ gcc gcc-c&#43;&#43; ncurses-devel perl git `
+  编译命令：
+mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/winshining/nginx-http-flv-module.git curl -O -L http://hg.nginx.org/nginx/archive/stable-1.22.tar.gz # 其他版本 http://hg.nginx.org/nginx/archive/release-1.23.1.zip tar xzvf stable-1.22.tar.gz cd nginx-stable-1.22 ./auto/configure --prefix=&#34;$HOME/nginx&#34; --sbin-path=&#34;$HOME/nginx&#34; \ --with-select_module \ --with-poll_module \ --with-file-aio \ --with-http_ssl_module \ --with-http_realip_module \ --with-http_sub_module \ --with-http_flv_module \ --add-module=&#34;../nginx-http-flv-module&#34; \ --with-http_mp4_module \ --with-http_gzip_static_module \ --with-http_secure_link_module \ --with-http_stub_status_module \ --with-http_perl_module \ --with-ld-opt=&#34;-Wl,-E&#34; make make install   注意事项：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-17 14:33:56 +0800 CST'>August 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Compile Nginx on CentOS" href="https://874656645.github.io/posts/222-compile-nginx-on-centos/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43; 杂记
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
+#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
+static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Compile FFmpeg on CentOS
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>0. 编译的版本  ffmpeg-4.4 nasm-2.14.02 yasm-1.3.0 H.264 H.265 fdk-aac-2.0.0  1. Get the Dependencies   需要 superuser 或者 root 用户
+# yum install autoconf automake bzip2 bzip2-devel cmake freetype-devel gcc gcc-c&#43;&#43; git libtool make pkgconfig zlib-devel
+  新建 ffmpeg_sources 文件夹，把需要的源代码都放到这个文件夹中
+mkdir ~/ffmpeg_sources
+  新建 ffmpeg_build 文件夹，把构建的项目文件都放到这个文件夹中
+mkdir ~/ffmpeg_build
+  新建 bin 文件夹，把编译生成的文件都放到这个文件夹中
+mkdir ~/bin
+  2. Install NASM assembler 一些库使用的汇编程序。强烈建议这样做，否则构建可能会非常缓慢。
+cd ~/ffmpeg_sources curl -O -L https://www....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-15 14:55:49 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Compile FFmpeg on CentOS" href="https://874656645.github.io/posts/220-compile-ffmpeg-on-centos/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Unreal——使用蓝图获取 uasset 资源
     </h2>
   </header>
@@ -194,67 +244,6 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-08-10 11:27:36 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——蓝图接口" href="https://874656645.github.io/posts/218-unreal-%E8%93%9D%E5%9B%BE%E6%8E%A5%E5%8F%A3/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——Actor 蓝图类
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  所有可以放入关卡的对象都是 Actor，比如摄像机、静态网格体、玩家起始位置。
-  Actor支持三维变换，例如平移、旋转和缩放。
-  可以通过游戏逻辑代码（C&#43;&#43;或蓝图）创建（在蓝图中使用 从类生成Actor 节点）或 销毁Actor。
-  每一个 Actor 均有一个 DefaultSceneRoot 组件，它是默认情况下的场景组件（SceneComponent），该组件不支持可视化，在场景中是看不到的，也不可分配网格，只是 Actor 的默认场景根。
-  Actor 必须有一个默认场景根。可以使用其他的组件替换默认场景根，但是只要删除所有的其他组件，场景默认根（DefaultSceneRoot）就会自动显示，这个变量名是系统保留，不能用来命名他组件。
-  当设置Actor的位置、旋转、缩放时，同时也在设置默认场景根的位置、旋转、缩放。
-  注意：
- Actor 不直接保存变换（位置、旋转和缩放）数据，只是一个可以挂载Component的类而已 在某种意义上，Actor 可被视为包含特殊类型 对象（称作组件 Component）的容器 如果 Actor 的根组件存在，则使用它的变换数据    参考：
- Actors UE4-Actor  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-10 11:23:12 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——Actor 蓝图类" href="https://874656645.github.io/posts/217-unreal-actor-%E8%93%9D%E5%9B%BE%E7%B1%BB/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——通用基类（Actor、Pawn、Character等）
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>Actor
-  Actor 是可以放到关卡中的任何对象，例如摄像机、静态网格体或玩家出生点位置
-  Actor 支持 3D 变换，例如转换、旋转和缩放
-  Actor 在 UE 中是只是一个可以挂载 Component的类而已。所以，需要挂载组件的时候，才应该继承自 Actor 类。很多时候，写一个 Manager 或者一个 Data 又或者只是解析一个Config，只需要写一个 C&#43;&#43; 类就可以了
-  可以通过 gameplay 代码（C&#43;&#43; 或蓝图）创建（生成）或销毁 Actor，在蓝图中使用 从类生成Actor 节点，生成后就自动添加到场景中并能在场景中看到
-    Pawn
-Pawn 是 Actor 的子类，作为游戏内的形象或人像（例如游戏中的角色）。玩家或游戏的 AI 可以控制 Pawn，将其作为非玩家角色（NPC），可以理解为在游戏中的肉体。
-  Character
- 角色（Character） 是计划用作玩家角色的 Pawn Actor 的子类。角色子类包括碰撞设置、双足运动的输入绑定以及用于玩家控制动作的其他代码 相比于 Pawn 类，Character 类提供了一个Movement 组件，这个组件提供了角色移动基本逻辑功能，包括角色的移动和跳跃，还可以依据需求扩展出不同的移动状态，比如爬行、蹲伏 当对象逻辑简单、不需要过多的逻辑动作（比如方块、飞船）那么可以选择继承 Pawn 而不是继承 Character 类    Controller...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-10 10:02:42 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——通用基类（Actor、Pawn、Character等）" href="https://874656645.github.io/posts/216-unreal-%E9%80%9A%E7%94%A8%E5%9F%BA%E7%B1%BBactorpawncharacter%E7%AD%89/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Unreal——蓝图函数、事件和宏
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  函数调用会等待函数执行结果，事件调用只是触发但不会等待
-事件是异步执行，触发后，会在新的线程中执行，所以可以使用 Delay，函数和宏的调用是同步执行，是单线程的，所以在函数中不能使用 Timeline、Delay 和 Http 请求 等操作。
-  事件没有返回值，函数和宏可以有返回值
-  函数和事件可以跨蓝图类访问，而宏只可以在定义的蓝图类内访问（宏库可以跨蓝图类访问）
-  函数可以用局部变量，事件没有局部变量
-  因为函数执行顺序有保证，所以优先使用函数
-  函数可以被继承，而宏不可以被继承，子类无法使用父类的宏
-  没有返回值的函数，在被子类 Overide 时，会变成事件
-  参考：
- UE4蓝图之函数、事件、宏的区别 【UE4笔记】Event&amp;Function事件和函数的区别 [UE4]函数和事件的区别  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-09 19:38:55 +0800 CST'>August 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Unreal——蓝图函数、事件和宏" href="https://874656645.github.io/posts/215-unreal-%E8%93%9D%E5%9B%BE%E5%87%BD%E6%95%B0%E4%BA%8B%E4%BB%B6%E5%92%8C%E5%AE%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
