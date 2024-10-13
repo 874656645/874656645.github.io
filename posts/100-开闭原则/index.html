@@ -7,8 +7,7 @@
 <meta name="robots" content="index, follow">
 <title>开闭原则 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="C&#43;&#43;, 设计模式" />
-<meta name="description" content="对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码
-如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
+<meta name="description" content=" 对扩展开放，对修改关闭 类模块应该是可扩展的，但是不可修改源代码  如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
 class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a &#43; m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; return 0; } ">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/rick" />
@@ -48,8 +47,7 @@ if (!doNotTrack) {
 	ga('send', 'pageview');
 }
 </script><meta property="og:title" content="开闭原则" />
-<meta property="og:description" content="对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码
-如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
+<meta property="og:description" content=" 对扩展开放，对修改关闭 类模块应该是可扩展的，但是不可修改源代码  如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
 class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a &#43; m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; return 0; } " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/100-%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
@@ -61,8 +59,7 @@ class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0;
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
 <meta name="twitter:title" content="开闭原则"/>
-<meta name="twitter:description" content="对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码
-如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
+<meta name="twitter:description" content=" 对扩展开放，对修改关闭 类模块应该是可扩展的，但是不可修改源代码  如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类
 class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a &#43; m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-&gt;setOperatorNum(10, 20); cout &lt;&lt; calculator-&gt;getResult() &lt;&lt; endl; delete calculator; calculator = nullptr; return 0; } "/>
 
 
@@ -92,12 +89,12 @@ class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0;
   "@type": "BlogPosting",
   "headline": "开闭原则",
   "name": "开闭原则",
-  "description": "对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码\n如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类\nclass AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a + m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-\u0026gt;setOperatorNum(10, 20); cout \u0026lt;\u0026lt; calculator-\u0026gt;getResult() \u0026lt;\u0026lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-\u0026gt;setOperatorNum(10, 20); cout \u0026lt;\u0026lt; calculator-\u0026gt;getResult() \u0026lt;\u0026lt; endl; delete calculator; calculator = nullptr; return 0; } ",
+  "description": " 对扩展开放，对修改关闭 类模块应该是可扩展的，但是不可修改源代码  如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类\nclass AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a + m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-\u0026gt;setOperatorNum(10, 20); cout \u0026lt;\u0026lt; calculator-\u0026gt;getResult() \u0026lt;\u0026lt; endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-\u0026gt;setOperatorNum(10, 20); cout \u0026lt;\u0026lt; calculator-\u0026gt;getResult() \u0026lt;\u0026lt; endl; delete calculator; calculator = nullptr; return 0; } ",
   "keywords": [
     "C++", "设计模式"
   ],
-  "articleBody": "对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码\n如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类\nclass AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a + m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-setOperatorNum(10, 20); cout  calculator-getResult()  endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-setOperatorNum(10, 20); cout  calculator-getResult()  endl; delete calculator; calculator = nullptr; return 0; } ",
-  "wordCount" : "116",
+  "articleBody": " 对扩展开放，对修改关闭 类模块应该是可扩展的，但是不可修改源代码  如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类\nclass AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0; virtual int getResult() = 0; }; class PlusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a + m_b; } private: int m_a{0}; int m_b{0}; }; class MinusCalculator:public AbstractCalculator{ public: void setOperatorNum(int a, int b)override{ m_a = a; m_b = b; } int getResult()override{ return m_a - m_b; } private: int m_a{0}; int m_b{0}; }; int main() { AbstractCalculator* calculator = new PlusCalculator; calculator-setOperatorNum(10, 20); cout  calculator-getResult()  endl; delete calculator; calculator = nullptr; calculator = new MinusCalculator; calculator-setOperatorNum(10, 20); cout  calculator-getResult()  endl; delete calculator; calculator = nullptr; return 0; } ",
+  "wordCount" : "117",
   "inLanguage": "en",
   "datePublished": "2022-01-30T20:05:30+08:00",
   "dateModified": "2022-01-30T20:05:30+08:00",
@@ -199,7 +196,10 @@ class AbstractCalculator{ public: virtual void setOperatorNum(int a, int b) = 0;
 </div>
   </header> 
 
-  <div class="post-content"><p>对扩展开放，对修改关闭，类的改动是通过增加代码进行的，而不是修改源代码</p>
+  <div class="post-content"><ul>
+<li>对扩展开放，对修改关闭</li>
+<li>类模块应该是可扩展的，但是不可修改源代码</li>
+</ul>
 <p>如下所示，如果想要扩展乘法、除法、取模等算法，就不用修改原码，只需增加新类</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractCalculator</span>{
 <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>

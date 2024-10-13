@@ -145,6 +145,37 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——Hamiltonian Cycles
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>BackTracking（DFS &#43; BoundingFunction）
+#include &lt;iostream&gt; using namespace std; int n = 5; int x[6] = {0,1}; int G[6][6] = { {0,0,0,0,0,0}, {0,0,1,1,0,1}, {0,1,0,1,1,1}, {0,1,1,0,1,0}, {0,0,1,1,0,1}, {0,1,1,0,1,0} }; void NextVetex(int k){ do { x[k] = (x[k] &#43; 1) % (n &#43; 1); if(x[k] == 0){ return; } // 确保和前一个节点联通  if(G[x[k - 1]][x[k]] != 0){ int j = 1; // 确保节点不会重复  for(; j &lt; k; &#43;&#43;j){ if(x[j] == x[k]){ break; } } if(j == k){ // 如果不是最后一个节点  // 或者是最后一个节点，并且最后一个节点和第一个节点是联通的  if((k &lt; n) || (k == n &amp;&amp; G[x[n]][x[1]] !...</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-10-12 20:41:33 +0800 CST'>October 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——Hamiltonian Cycles" href="https://874656645.github.io/posts/278-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-hamiltonian-cycles/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>数据结构与算法——Permutation a String
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>state space tree
+Back Tracking (DFS)
+brute force
+recursion
+Branch and Bound (BFS)
+算法一：
+#include &lt;iostream&gt;using namespace std; void permutation(char S[], int k){ static int A[10] = {0}; static char res[10] = {0}; if(S[k] == &#39;\0&#39;){ res[k] = &#39;\0&#39;; printf(&#34;%s\n&#34;, res); } else{ for(int i = 0; S[i] != &#39;\0&#39;; &#43;&#43;i){ if(A[i] == 0){ A[i] = 1; res[k] = S[i]; permutation(S, k&#43;1); A[i] = 0; } } } } int main() { char S[] = &#34;ABC&#34;; permutation(S, 0); return 0; } output:...</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-09-27 22:06:51 +0800 CST'>September 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——Permutation a String" href="https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——Shell Sort
     </h2>
   </header>
@@ -179,38 +210,6 @@ template&lt;typename T&gt; void InOrder(BinaryTreeNode&lt;T&gt;* root){ stack&lt
   </section>
   <footer class="entry-footer"><span title='2022-11-13 19:46:40 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树遍历" href="https://874656645.github.io/posts/255-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——二叉树
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、相关概念   结点：根节、叶节点、分支结点、兄弟结点、父子结点
-  边、路径
-  结点深度、高度、层数
- 根节点为第 0 层 深度指从根节点到该节点的边的数量 高度指从此节点到叶节点的结点数量    满二叉树、完全二叉树
- 满二叉树指除了度为 0 的叶节点就是度为 2 的分支节点 完全二叉树指只有最下面的两层度是小于 2 的，且最下面的结点都集中在左侧    扩充二叉树
-  二叉树性质
-  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-11-13 17:58:17 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树" href="https://874656645.github.io/posts/254-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——KMP 字符串匹配算法
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  模式串 next 向量计算：
-  字符串比较
-int mystrcmp(const char* str1, const char* str2){ int i = 0; while(str1[i] == str2[i] &amp;&amp; str1[i] != &#39;\0&#39;){ i&#43;&#43;; } return str1[i] - str2[i]; }   </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-11-13 14:56:36 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——KMP 字符串匹配算法" href="https://874656645.github.io/posts/253-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95kmp-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D%E7%AE%97%E6%B3%95/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

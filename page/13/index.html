@@ -157,6 +157,24 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Unreal——蓝图接口
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  蓝图接口（Blueprint Interface） 是一个或多个函数的集合——只有名称，没有实现。
+  由于接口函数没有实现，作为设计人员，所能做的就是指定一系列类型化输入和输出。
+  蓝图接口也有一定的局限性：
+ 不能包含变量 不能编辑图表 不能添加组件    其他蓝图类 Actor 实现蓝图接口：
+在 类设置 中添加接口
+  参考：
+ 蓝图接口 【教程】UE4中接口的使用–蓝图篇（一）  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-08-10 11:27:36 +0800 CST'>August 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Unreal——蓝图接口" href="https://874656645.github.io/posts/218-unreal-%E8%93%9D%E5%9B%BE%E6%8E%A5%E5%8F%A3/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Unreal——Actor 蓝图类
     </h2>
   </header>
@@ -229,24 +247,6 @@ RHI 是 Render Hardware Interface 的缩写，虚幻引擎通过 RHI 把各个�
   </section>
   <footer class="entry-footer"><span title='2022-08-04 14:57:18 +0800 CST'>August 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Unreal——DefaultGraphicsRHI" href="https://874656645.github.io/posts/214-unreal-defaultgraphicsrhi/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>判断点是否在多边形内部
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  射线法：不需考虑精度误差和多边形点给出的顺序。
-  转角法：要求多边形是有顺序的，按照多边形顶点逆时针顺序，从 P 点到顶点 Vi 分别做连线，其中 αi 为 Vi 和 Vi&#43;1 之间的夹角。其中 α 角度逆时针为正，顺时针为负，这样所有到顶点做连线之间夹角和为(环绕数)0，这点P在多边形外部，否则在内部。
-  射线法改进：针对有方向的多边形，通过判断射线穿过的边和点的位置（比如点在线的左侧为正，右侧为负），和为 0 则点在外部。
-  叉积法：适用凸多边形，如果一个点在多边形所有有向边的左边，那么这个点一定在多边形内部。
-  面积法：类似叉积法，适用凸多边形。如果点在多边形内部或者边上，那么点与多边形所有边组成的三角形面积和等于多边形面积。
-  参考：
- 详谈判断点在多边形内的七种方法（最全面） hdu1756 hrbust1429 为例  </p>
-  </section>
-  <footer class="entry-footer"><span title='2022-08-02 17:43:53 +0800 CST'>August 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 判断点是否在多边形内部" href="https://874656645.github.io/posts/213-%E5%88%A4%E6%96%AD%E7%82%B9%E6%98%AF%E5%90%A6%E5%9C%A8%E5%A4%9A%E8%BE%B9%E5%BD%A2%E5%86%85%E9%83%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

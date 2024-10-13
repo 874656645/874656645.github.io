@@ -157,6 +157,26 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Power Shell ExecutionPolicy
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Power shell执行策略 原文网址
+1、查看当前的安全策略 Get-ExecutionPolicy
+2、修改执行策略 ps:这种方法会将执行策略保存到注册表
+Set-ExecutionPolicy UnRestricted
+or
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+3、查看所有支持的执行策略 [System.Enum]::GetNames([Microsoft.PowerShell.ExecutionPolicy])
+4、获取影响当前会话的所有执行策略 Get-ExecutionPolicy -List
+6、为当前 Windows PowerShell 会话设置执行策略 PowerShell.exe -ExecutionPolicy RemoteSigned</p>
+  </section>
+  <footer class="entry-footer"><span title='2019-02-28 17:01:31 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Power Shell ExecutionPolicy" href="https://874656645.github.io/posts/10-power-shell-executionpolicy/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Crawl Pictures From Website
     </h2>
   </header>
@@ -217,29 +237,6 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def sta
   </section>
   <footer class="entry-footer"><span title='2019-01-31 17:36:00 +0800 CST'>January 31, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Npm Commond Learning" href="https://874656645.github.io/posts/6-npm-commond-learning/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Learn Electron
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1. Use npm run example 1.1 Clone repository git clone https://github.com/electron/electron-quick-start
-1.2 Go into the repository cd electron-quick-start
-1.3 Install dependencies PS:为了加快下载依赖模块的速度，通过修改镜像源ELECTRON_MIRROR=https://npm.taobao.org/mirrors/electron/ npm install
-或者是
-npm install --registry=https://registry.npm.taobao.org
-1.4 Run the app npm start
-2. Use yarn create a electron program 2.1 Create a program folder md electron-yarn-cz
-进入项目文件夹
-cd electron-yarn-cz
-2.2 Create a program config file yarn init
-2.3 Instal electron environment yarn add electron --dev --registry=https://registry.npm.taobao.org
-2.4 Add main....</p>
-  </section>
-  <footer class="entry-footer"><span title='2019-01-31 15:44:09 +0800 CST'>January 31, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Learn Electron" href="https://874656645.github.io/posts/5-learn-electron/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

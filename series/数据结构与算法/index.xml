@@ -9,7 +9,32 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 21 Jun 2024 21:40:45 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Oct 2024 20:41:33 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据结构与算法——Hamiltonian Cycles</title>
+      <link>https://874656645.github.io/posts/278-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-hamiltonian-cycles/</link>
+      <pubDate>Sat, 12 Oct 2024 20:41:33 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/278-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-hamiltonian-cycles/</guid>
+      <description>BackTracking（DFS + BoundingFunction）
+#include &amp;lt;iostream&amp;gt; using namespace std; int n = 5; int x[6] = {0,1}; int G[6][6] = { {0,0,0,0,0,0}, {0,0,1,1,0,1}, {0,1,0,1,1,1}, {0,1,1,0,1,0}, {0,0,1,1,0,1}, {0,1,1,0,1,0} }; void NextVetex(int k){ do { x[k] = (x[k] + 1) % (n + 1); if(x[k] == 0){ return; } // 确保和前一个节点联通  if(G[x[k - 1]][x[k]] != 0){ int j = 1; // 确保节点不会重复  for(; j &amp;lt; k; ++j){ if(x[j] == x[k]){ break; } } if(j == k){ // 如果不是最后一个节点  // 或者是最后一个节点，并且最后一个节点和第一个节点是联通的  if((k &amp;lt; n) || (k == n &amp;amp;&amp;amp; G[x[n]][x[1]] !</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——Permutation a String</title>
+      <link>https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/</link>
+      <pubDate>Fri, 27 Sep 2024 22:06:51 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/</guid>
+      <description>state space tree
+Back Tracking (DFS)
+brute force
+recursion
+Branch and Bound (BFS)
+算法一：
+#include &amp;lt;iostream&amp;gt;using namespace std; void permutation(char S[], int k){ static int A[10] = {0}; static char res[10] = {0}; if(S[k] == &amp;#39;\0&amp;#39;){ res[k] = &amp;#39;\0&amp;#39;; printf(&amp;#34;%s\n&amp;#34;, res); } else{ for(int i = 0; S[i] != &amp;#39;\0&amp;#39;; ++i){ if(A[i] == 0){ A[i] = 1; res[k] = S[i]; permutation(S, k+1); A[i] = 0; } } } } int main() { char S[] = &amp;#34;ABC&amp;#34;; permutation(S, 0); return 0; } output:</description>
+    </item>
+    
     <item>
       <title>数据结构与算法——Shell Sort</title>
       <link>https://874656645.github.io/posts/276-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-shell-sort/</link>

@@ -145,6 +145,24 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——二叉树
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、相关概念   结点：根节、叶节点、分支结点、兄弟结点、父子结点
+  边、路径
+  结点深度、高度、层数
+ 根节点为第 0 层 深度指从根节点到该节点的边的数量 高度指从此节点到叶节点的结点数量    满二叉树、完全二叉树
+ 满二叉树指除了度为 0 的叶节点就是度为 2 的分支节点 完全二叉树指只有最下面的两层度是小于 2 的，且最下面的结点都集中在左侧    扩充二叉树
+  二叉树性质
+  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-11-13 17:58:17 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树" href="https://874656645.github.io/posts/254-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——KMP 字符串匹配算法
     </h2>
   </header>
@@ -200,19 +218,6 @@ string s; s = s &#43; &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 正确
   </section>
   <footer class="entry-footer"><span title='2022-09-23 16:30:43 +0800 CST'>September 23, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——旋转骰子问题" href="https://874656645.github.io/posts/247-c&#43;&#43;-%E6%97%8B%E8%BD%AC%E9%AA%B0%E5%AD%90%E9%97%AE%E9%A2%98/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——List、strcpy_s、strtok_s 使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>目标 对输入的字符串中的单词，把给定的索引区间中的单词逆序
-方法一  通过 strtok（strtok_s、strtok_r） 分割字符串 使用 list 容器存储各个单词 可以通过前插的方式反转指定区间的单词 也可以通过前后交换的方式反转指定区间的单词 顺序输出 list 中的单词  int main(){ string str = &#34;I am a developer&#34;; char *cArr = new char[str.size()&#43;1]{0}; strcpy_s(cArr, str.size()&#43;1, str.c_str());	// 注意：第二个参数，要拷贝的字符串的长度包括结尾的 &#39;\0&#39; 	char *w = nullptr, *rest = nullptr; list&lt;string&gt; wordList; w = strtok_s(cArr, &#34; &#34;, &amp;rest); while (w) { wordList.push_back(w); w = strtok_s(nullptr, &#34; &#34;, &amp;rest); } int startIndex = 0, endIndex = 0; cin &gt;&gt; startIndex &gt;&gt; endIndex; int len = wordList....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-22 16:52:07 +0800 CST'>September 22, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——List、strcpy_s、strtok_s 使用" href="https://874656645.github.io/posts/246-c&#43;&#43;-liststrcpy_sstrtok_s-%E4%BD%BF%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

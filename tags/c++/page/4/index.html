@@ -145,18 +145,6 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——类模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-18 18:07:48 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——类模板" href="https://874656645.github.io/posts/244-c&#43;&#43;-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
     <h2>C&#43;&#43;——函数模板
     </h2>
   </header>
@@ -201,6 +189,18 @@ if (!doNotTrack) {
   </section>
   <footer class="entry-footer"><span title='2022-09-16 11:38:55 +0800 CST'>September 16, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——类型推导杂记" href="https://874656645.github.io/posts/240-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E6%8E%A8%E5%AF%BC%E6%9D%82%E8%AE%B0/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——类型转换杂记
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>const_cast 和 static_cast int x = 65536; (short &amp;)x = 65535; cout&lt;&lt;x; int main() { const int x = 0; *(int*)&amp;x = 2; cout &lt;&lt; &#34;x = &#34; &lt;&lt; x &lt;&lt; endl; // x = 0  (int&amp;)x = 3; int y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  const_cast&lt;int&amp;&gt;(x) = 10; y = x; cout &lt;&lt; &#34;y = &#34; &lt;&lt; y &lt;&lt; endl; // y = 0  return 0; } struct T{ int x = 0; const int y = 0; int q() const{ *(int*)&amp;y = y &#43; 1; return y; } }; int main() { T m; const T n; int x = m....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-15 11:13:34 +0800 CST'>September 15, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——类型转换杂记" href="https://874656645.github.io/posts/239-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E6%9D%82%E8%AE%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

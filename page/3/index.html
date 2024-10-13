@@ -157,6 +157,27 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>adb 与安卓使用
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>查看包名
+adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
+adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
+adb shell pm path com.xxx.xxx.xxx
+  获取系统应用
+adb shell pm list packages -s
+  获取第三方应用
+adb shell pm list packages -3
+  启动指定 activity
+adb shell am start -n com....</p>
+  </section>
+  <footer class="entry-footer"><span title='2023-12-23 11:59:04 +0800 CST'>December 23, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to adb 与安卓使用" href="https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>Ubuntu 编译指定版本的 curl 库
     </h2>
   </header>
@@ -247,30 +268,6 @@ Android Studio Version 4.2.1
   </section>
   <footer class="entry-footer"><span title='2023-10-30 17:17:34 +0800 CST'>October 30, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Android Studio Build 窗口中文乱码" href="https://874656645.github.io/posts/264-android-studio-build-%E7%AA%97%E5%8F%A3%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>WSL Ubuntu 使用 SonarQube
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>下载 Build Wrapper：
-{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip
-  下载 SonarScanner：
-https://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file
-  配置环境变量：
-export PATH=&#34;/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH&#34;
-注意：
- 配置的 build-wrapper-linux-x86 和 sonar-scanner-5.0.1.3006-linux 文件夹要有 可执行权限 sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限    安装 CMake
-sudo apt install cmake
-  安装 gcovr（计算 gtest 单元测试分支覆盖率）
-sudo apt install gcovr
-注意：
- Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr   安装 gtest 库...</p>
-  </section>
-  <footer class="entry-footer"><span title='2023-09-11 09:34:47 +0800 CST'>September 11, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to WSL Ubuntu 使用 SonarQube" href="https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
