@@ -160,6 +160,79 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——Function Style Cast 有歧义
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>#include &lt;iostream&gt;#include &lt;string&gt;using namespace std; struct Print { template&lt;typename T&gt; Print(T t){ cout&lt;&lt;(t&#43;=10); } }; struct S { S(int a){ cout &lt;&lt; a &lt;&lt; endl; }; }; void foo(double a) { S w(int(a)); // function declaration // S x(int()); // function declaration  S y((int(a))); // object declaration  S yy((int)a); // object declaration  S z = int(a); // object declaration } template &lt;class T&gt; struct X {}; template &lt;int N&gt; struct Y {}; X&lt;int()&gt; a; // type-id X&lt;int(1)&gt; b; // expression (ill-formed) Y&lt;int()&gt; c; // type-id (ill-formed) Y&lt;int(1)&gt; d; // expression void foo(signed char a) { sizeof(int()); // type-id (ill-formed)  sizeof(int(a)); // expression  sizeof(int(unsigned(a))); // type-id (ill-formed)  (int())&#43;1; // type-id (ill-formed)  (int(a))&#43;1; // expression  (int(unsigned(a)))&#43;1; // type-id (ill-formed)  } int main() { // 这句为什么是一句函数声明而不是变量创建？  double a = 3....</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-02-21 09:35:58 +0800 CST'>February 21, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——Function Style Cast 有歧义" href="https://874656645.github.io/posts/272-c&#43;&#43;-function-style-cast-%E6%9C%89%E6%AD%A7%E4%B9%89/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Ubuntu 升级 GCC 版本
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>GCC 源码网址 https://ftp.gnu.org/gnu/gcc/
+源码安装参考这里
+  添加相应的源
+sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+如果提示 add-apt-repository: command not found，需要安装 sudo apt-get install software-properties-common
+  更新软件源
+sudo apt-get update
+  安装指定版本的 gcc
+sudo apt-get install gcc-9
+查看 gcc
+find / -name &#34;gcc*&#34;
+dpkg -l | grep gcc
+  指定默认使用的 gcc 版本
+通过 update-alternatives 建立文件关联，如果安装了同一个软件的不同版本，可以使用 update-alternatives 命令设置默认使用哪个
+首先要让系统知道我们安装了多个版本的 gcc
+# 命令最后的 20 和 50 是优先级，如果使用 auto 选择模式，系统将默认使用优先级高的 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 20 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 50   查看 gcc 版本...</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-01-08 18:35:40 +0800 CST'>January 8, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 升级 GCC 版本" href="https://874656645.github.io/posts/271-ubuntu-%E5%8D%87%E7%BA%A7-gcc-%E7%89%88%E6%9C%AC/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Windows Cmd 设置临时和永久环境变量
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  打开 cmd 命令提示符（Win11）
+  查看所有环境变量：输入 set
+  查看 path：输入 set path
+  设置临时环境变量：set path=D:\Work\dem\Python39;%PATH%
+  设置永久环境变量：setx path=D:\Work\dem\Python39;%PATH%
+  </p>
+  </section>
+  <footer class="entry-footer"><span title='2024-01-05 12:21:35 +0800 CST'>January 5, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Windows Cmd 设置临时和永久环境变量" href="https://874656645.github.io/posts/270-windows-cmd-%E8%AE%BE%E7%BD%AE%E4%B8%B4%E6%97%B6%E5%92%8C%E6%B0%B8%E4%B9%85%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>Python Conda GDAL 环境搭建
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  安装 miniconda，conda 命令使用可参考这里;
+注意：
+ 安装包的时候，conda install 和 pip install 最好不要混用，优先使用 pip 查看 python 包路径 python -m site
+    安装 GDAL 通过命令 pip install gdal 安装一般会报错，推荐下载 whl 安装包进行安装，可从这里下载   import gdal from osgeo import gdal 报错 在 python 安装各种环境包的文件夹下，如：D:**\python3.9.12\Lib\site-packages\ 文件夹下，新建 gdal.py 文件，将以下代码复制进去：
+# import osgeo.gdal as a convenience from osgeo.gdal import deprecation_warn deprecation_warn(&#39;gdal&#39;) from osgeo.gdal import *   参考：
+ GDAL 安装教程（Python） 解决 import gdal 导入失败的问题，但 from osgeo import gdal 导入成功  </p>
+  </section>
+  <footer class="entry-footer"><span title='2024-01-04 19:18:20 +0800 CST'>January 4, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Python Conda GDAL 环境搭建" href="https://874656645.github.io/posts/269-python-conda-gdal-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>adb 与安卓使用
     </h2>
   </header>
@@ -177,100 +250,6 @@ adb shell am start -n com....</p>
   </section>
   <footer class="entry-footer"><span title='2023-12-23 11:59:04 +0800 CST'>December 23, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to adb 与安卓使用" href="https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Ubuntu 编译指定版本的 curl 库
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  卸载原有版本的 curl
-apt-get --purge remove curl
-  下载所需版本的 curl
-wget https://curl.se/download/curl-7.47.1.tar.gz
-  解压并编译
-tar -zxvf curl-7.47.1.tar.gz cd curl-7.47.1 ./configure shared make make install   编译好的可执行文件在 /usr/local/bin 目录下
-编译好的动态库和静态库在 /usr/local/lib 目录下
-  创建可执行文件和动态链接库的软连接
-  参考：
- curl download archive ubuntu卸载安装curl Linux下更新curl版本  </p>
-  </section>
-  <footer class="entry-footer"><span title='2023-11-03 18:18:30 +0800 CST'>November 3, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Ubuntu 编译指定版本的 curl 库" href="https://874656645.github.io/posts/267-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-curl-%E5%BA%93/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Ubuntu 编译指定版本的 OpenSSL 库
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  重命名原有的 openssl 可执行文件
-mv -f /usr/bin/openssl /usr/bin/openssl.old
-  下载所需版本的 openssl
-wget http://www.openssl.org/source/openssl-1.0.0s.tar.gz
-  解压并编译
-tar zxvf openssl-1.0.0s.tar.gz cd openssl-1.0.0s ./config shared --prefix=/usr/local/openssl1.0 make &amp;&amp; make install   生成的可执行文件在 /usr/local/openssl1.0/bin 目录下
-  生成的动态链接库在 /usr/local/openssl1.0/lib 目录下
-  在 /usr/bin 目录下创建可执行文件的软连接
-  在 /usr/lib/x86_64-linux-gnu/ 目录下创建动态链接库的软连接
-  参考：
- OpenSSL Old Releases Linux openssl 升级、降级 openssl动态库生成以及交叉编译  </p>
-  </section>
-  <footer class="entry-footer"><span title='2023-11-02 20:50:41 +0800 CST'>November 2, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Ubuntu 编译指定版本的 OpenSSL 库" href="https://874656645.github.io/posts/266-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-openssl-%E5%BA%93/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Docker Ubuntu 16.04 Sonnar
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、安装 Docker Desktop 下载 Dockers Desktop
-二、下载并运行 Ubuntu 镜像 创建容器并运行（Ubuntu 版本 16.04），如果本地没有相应版本的镜像，则会自动下载
-docker run -it --name ubuntu16.04_sonar -v /D/Work/sonar:/data ubuntu:16.04
-运行已安装的容器
-docker start -i ubuntu16.04_sonar
-三、配置 Ubuntu 环境 apt update &amp;&amp; apt upgrade
-apt-get install build-essential
-apt install software-properties-common
-apt install vim
-指定编码：C.UTF-8
-locale
-locale -a
-cd ~ &amp;&amp; vim .bashrc
-export LANG=C.UTF-8
-source .bashrc
-安装 python 2.7 pip2
-python -V
-apt install python (python2)
-apt install python-pip
-安装 python3...</p>
-  </section>
-  <footer class="entry-footer"><span title='2023-10-30 21:47:38 +0800 CST'>October 30, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Docker Ubuntu 16.04 Sonnar" href="https://874656645.github.io/posts/265-docker-ubuntu-16.04-sonnar/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Android Studio Build 窗口中文乱码
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>中文乱码
-Android Studio Version 4.2.1
-打开 Android studio 全局搜索 双击 shift
-搜索 Edit Custom VM Options，双击第一个
-打开或者生成文件 studio64.exe.vmoptions
-在文件后面添加 -Dfile.encoding=UTF-8 (要注意不能有空格，否则 studio 可能打不开)
-直接保存，重启 Android Studio
-参考：
- Android Studio Build窗口出现中文乱码问题  </p>
-  </section>
-  <footer class="entry-footer"><span title='2023-10-30 17:17:34 +0800 CST'>October 30, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Android Studio Build 窗口中文乱码" href="https://874656645.github.io/posts/264-android-studio-build-%E7%AA%97%E5%8F%A3%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

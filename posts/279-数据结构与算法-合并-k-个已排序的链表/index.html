@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>数据结构与算法——合并 K 个已排序的链表 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="数据结构与算法" />
+<meta name="description" content="问题链接
+要求：时间复杂度 O(nlogn)
+思路：分治法，归并排序的思想
+注意：空集合的情况
+/** * struct ListNode { *	int val; *	struct ListNode *next; *	ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { ListNode* mergeList(vector&lt;ListNode*&gt;&amp; lists, int l, int h){ if(l &gt;= h) return lists[l]; int mid = (l &#43; h) / 2; ListNode* left = mergeList(lists, l, mid); ListNode* right = mergeList(lists, mid&#43;1, h); ListNode* head = new ListNode(0); auto tmp = head; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left ?">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="数据结构与算法——合并 K 个已排序的链表" />
+<meta property="og:description" content="问题链接
+要求：时间复杂度 O(nlogn)
+思路：分治法，归并排序的思想
+注意：空集合的情况
+/** * struct ListNode { *	int val; *	struct ListNode *next; *	ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { ListNode* mergeList(vector&lt;ListNode*&gt;&amp; lists, int l, int h){ if(l &gt;= h) return lists[l]; int mid = (l &#43; h) / 2; ListNode* left = mergeList(lists, l, mid); ListNode* right = mergeList(lists, mid&#43;1, h); ListNode* head = new ListNode(0); auto tmp = head; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left ?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-12-12T20:41:48&#43;08:00" />
+<meta property="article:modified_time" content="2024-12-12T20:41:48&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="数据结构与算法——合并 K 个已排序的链表"/>
+<meta name="twitter:description" content="问题链接
+要求：时间复杂度 O(nlogn)
+思路：分治法，归并排序的思想
+注意：空集合的情况
+/** * struct ListNode { *	int val; *	struct ListNode *next; *	ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { ListNode* mergeList(vector&lt;ListNode*&gt;&amp; lists, int l, int h){ if(l &gt;= h) return lists[l]; int mid = (l &#43; h) / 2; ListNode* left = mergeList(lists, l, mid); ListNode* right = mergeList(lists, mid&#43;1, h); ListNode* head = new ListNode(0); auto tmp = head; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left ?"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "数据结构与算法——合并 K 个已排序的链表",
+      "item": "https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "数据结构与算法——合并 K 个已排序的链表",
+  "name": "数据结构与算法——合并 K 个已排序的链表",
+  "description": "问题链接\n要求：时间复杂度 O(nlogn)\n思路：分治法，归并排序的思想\n注意：空集合的情况\n/** * struct ListNode { *\tint val; *\tstruct ListNode *next; *\tListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { ListNode* mergeList(vector\u0026lt;ListNode*\u0026gt;\u0026amp; lists, int l, int h){ if(l \u0026gt;= h) return lists[l]; int mid = (l + h) / 2; ListNode* left = mergeList(lists, l, mid); ListNode* right = mergeList(lists, mid+1, h); ListNode* head = new ListNode(0); auto tmp = head; while(left \u0026amp;\u0026amp; right){ if(left-\u0026gt;val \u0026lt; right-\u0026gt;val){ tmp-\u0026gt;next = left; left = left-\u0026gt;next; }else{ tmp-\u0026gt;next = right; right = right-\u0026gt;next; } tmp = tmp-\u0026gt;next; } tmp-\u0026gt;next = left ?",
+  "keywords": [
+    "数据结构与算法"
+  ],
+  "articleBody": "问题链接\n要求：时间复杂度 O(nlogn)\n思路：分治法，归并排序的思想\n注意：空集合的情况\n/** * struct ListNode { *\tint val; *\tstruct ListNode *next; *\tListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { ListNode* mergeList(vectorListNode*\u0026 lists, int l, int h){ if(l = h) return lists[l]; int mid = (l + h) / 2; ListNode* left = mergeList(lists, l, mid); ListNode* right = mergeList(lists, mid+1, h); ListNode* head = new ListNode(0); auto tmp = head; while(left \u0026\u0026 right){ if(left-val  right-val){ tmp-next = left; left = left-next; }else{ tmp-next = right; right = right-next; } tmp = tmp-next; } tmp-next = left ? left : right; tmp = head-next; head-next = nullptr; delete head; return tmp; } public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param lists ListNode类vector * @return ListNode类 */ ListNode* mergeKLists(vectorListNode*\u0026 lists) { // write code here  if(lists.empty()) return nullptr; int l = 0; int h = lists.size()-1; ListNode* head = mergeList(lists, l, h); return head; } }; ",
+  "wordCount" : "156",
+  "inLanguage": "en",
+  "datePublished": "2024-12-12T20:41:48+08:00",
+  "dateModified": "2024-12-12T20:41:48+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      数据结构与算法——合并 K 个已排序的链表
+    </h1>
+    <div class="post-meta"><span title='2024-12-12 20:41:48 +0800 CST'>December 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><p><a href="https://www.nowcoder.com/practice/65cfde9e5b9b4cf2b6bafa5f3ef33fa6?tpId=295&amp;tqId=724&amp;ru=%2Fpractice%2Ff23604257af94d939848729b1a5cda08&amp;qru=%2Fta%2Fformat-top101%2Fquestion-ranking&amp;sourceUrl=">问题链接</a></p>
+<p>要求：时间复杂度 O(nlogn)</p>
+<p>思路：分治法，归并排序的思想</p>
+<p>注意：空集合的情况</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">/**
+</span><span style="color:#75715e"> * struct ListNode {
+</span><span style="color:#75715e"> *	int val;
+</span><span style="color:#75715e"> *	struct ListNode *next;
+</span><span style="color:#75715e"> *	ListNode(int x) : val(x), next(nullptr) {}
+</span><span style="color:#75715e"> * };
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+    ListNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">mergeList</span>(vector<span style="color:#f92672">&lt;</span>ListNode<span style="color:#f92672">*&gt;&amp;</span> lists, <span style="color:#66d9ef">int</span> l, <span style="color:#66d9ef">int</span> h){
+        <span style="color:#66d9ef">if</span>(l <span style="color:#f92672">&gt;=</span> h) <span style="color:#66d9ef">return</span> lists[l];
+        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> (l <span style="color:#f92672">+</span> h) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+        ListNode<span style="color:#f92672">*</span> left <span style="color:#f92672">=</span> mergeList(lists, l, mid);
+        ListNode<span style="color:#f92672">*</span> right <span style="color:#f92672">=</span> mergeList(lists, mid<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, h);
+        ListNode<span style="color:#f92672">*</span> head <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(<span style="color:#ae81ff">0</span>);
+        <span style="color:#66d9ef">auto</span> tmp <span style="color:#f92672">=</span> head;
+        <span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&amp;&amp;</span> right){
+            <span style="color:#66d9ef">if</span>(left<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> right<span style="color:#f92672">-&gt;</span>val){
+                tmp<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> left;
+                left <span style="color:#f92672">=</span> left<span style="color:#f92672">-&gt;</span>next;
+            }<span style="color:#66d9ef">else</span>{
+                tmp<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> right;
+                right <span style="color:#f92672">=</span> right<span style="color:#f92672">-&gt;</span>next;
+            }
+            tmp <span style="color:#f92672">=</span> tmp<span style="color:#f92672">-&gt;</span>next;
+        }
+        tmp<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> left <span style="color:#f92672">?</span> left : right;
+        tmp <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next;
+        head<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+        <span style="color:#66d9ef">delete</span> head;
+        <span style="color:#66d9ef">return</span> tmp;
+    }
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可
+</span><span style="color:#75715e">     *
+</span><span style="color:#75715e">     * 
+</span><span style="color:#75715e">     * @param lists ListNode类vector 
+</span><span style="color:#75715e">     * @return ListNode类
+</span><span style="color:#75715e">     */</span>
+    ListNode<span style="color:#f92672">*</span> mergeKLists(vector<span style="color:#f92672">&lt;</span>ListNode<span style="color:#f92672">*&gt;&amp;</span> lists) {
+        <span style="color:#75715e">// write code here
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(lists.empty()) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+        
+        <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> lists.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+
+        ListNode<span style="color:#f92672">*</span> head <span style="color:#f92672">=</span> mergeList(lists, l, h);
+
+        <span style="color:#66d9ef">return</span> head;
+    }
+};
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/280-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8E%92%E5%BA%8F/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>数据结构与算法——单链表的排序</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/278-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-hamiltonian-cycles/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>数据结构与算法——Hamiltonian Cycles</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

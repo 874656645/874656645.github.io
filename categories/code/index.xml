@@ -9,7 +9,54 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 12 Oct 2024 20:41:33 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Dec 2024 21:35:49 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>数据结构与算法——括号生成</title>
+      <link>https://874656645.github.io/posts/282-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</link>
+      <pubDate>Thu, 12 Dec 2024 21:35:49 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/282-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</guid>
+      <description>问题链接
+思路：递归的使用 左边括号数量小于总数 右边括号数量比左边括号数量少
+class Solution { int sn; public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param n int整型 * @return string字符串vector */ vector&amp;lt;string&amp;gt; generateParenthesis(int n) { // write code here  vector&amp;lt;string&amp;gt; res; string tmp; sn = n; genP(0, 0, tmp, res); return res; } void genP(int left, int right, string tmp, vector&amp;lt;string&amp;gt;&amp;amp; res){ if (left == sn &amp;amp;&amp;amp; right == sn) { res.push_back(tmp); return; } if (left &amp;lt; sn) { genP(left+1, right, tmp+&amp;#39;(&amp;#39;, res); } if (right &amp;lt; left) { genP(left, right+1, tmp+&amp;#39;)&amp;#39;, res); } } }; </description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——矩阵的最小路径和</title>
+      <link>https://874656645.github.io/posts/281-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%9F%A9%E9%98%B5%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</link>
+      <pubDate>Thu, 12 Dec 2024 21:27:26 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/281-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%9F%A9%E9%98%B5%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description>问题链接
+思路：动态规划
+#include &amp;lt;climits&amp;gt;class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param matrix int整型vector&amp;lt;vector&amp;lt;&amp;gt;&amp;gt; the matrix * @return int整型 */ int minPathSum(vector&amp;lt;vector&amp;lt;int&amp;gt; &amp;gt;&amp;amp; matrix) { // write code here  auto rowNum = matrix.size(); auto colNum = matrix[0].size(); vector&amp;lt;vector&amp;lt;int&amp;gt;&amp;gt; sumMat(rowNum, vector&amp;lt;int&amp;gt;(colNum)); sumMat[0][0] = matrix[0][0]; // 初始化首行  for (auto i = 1; i != colNum; ++i) { sumMat[0][i] = sumMat[0][i - 1] + matrix[0][i]; } // 初始化首列  for (auto i = 1; i !</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——单链表的排序</title>
+      <link>https://874656645.github.io/posts/280-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Thu, 12 Dec 2024 21:11:55 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/280-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8E%92%E5%BA%8F/</guid>
+      <description>问题链接
+要求：时间复杂度 O(nlogn)
+思路：分治，归并排序思想 快慢指针，计算链表的中间节点 或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表
+/** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-&amp;gt;next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f &amp;amp;&amp;amp; f-&amp;gt;next &amp;amp;&amp;amp; f-&amp;gt;next-&amp;gt;next)  // 如果 f = head-&amp;gt;next（链表中有偶数个元素）  // while(f &amp;amp;&amp;amp; f-&amp;gt;next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f &amp;amp;&amp;amp; f-&amp;gt;next &amp;amp;&amp;amp; f-&amp;gt;next-&amp;gt;next){ s = s-&amp;gt;next; f = f-&amp;gt;next-&amp;gt;next; } */ ListNode* s = head, * f = head-&amp;gt;next; // 偶数个元素  while(f &amp;amp;&amp;amp; f-&amp;gt;next){ s = s-&amp;gt;next; f = f-&amp;gt;next-&amp;gt;next; } ListNode* mid = s-&amp;gt;next; s-&amp;gt;next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left &amp;amp;&amp;amp; right){ if(left-&amp;gt;val &amp;lt; right-&amp;gt;val){ tmp-&amp;gt;next = left; left = left-&amp;gt;next; }else{ tmp-&amp;gt;next = right; right = right-&amp;gt;next; } tmp = tmp-&amp;gt;next; } tmp-&amp;gt;next = left == nullptr ?</description>
+    </item>
+    
+    <item>
+      <title>数据结构与算法——合并 K 个已排序的链表</title>
+      <link>https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Thu, 12 Dec 2024 20:41:48 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/</guid>
+      <description>问题链接
+要求：时间复杂度 O(nlogn)
+思路：分治法，归并排序的思想
+注意：空集合的情况
+/** * struct ListNode { *	int val; *	struct ListNode *next; *	ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { ListNode* mergeList(vector&amp;lt;ListNode*&amp;gt;&amp;amp; lists, int l, int h){ if(l &amp;gt;= h) return lists[l]; int mid = (l + h) / 2; ListNode* left = mergeList(lists, l, mid); ListNode* right = mergeList(lists, mid+1, h); ListNode* head = new ListNode(0); auto tmp = head; while(left &amp;amp;&amp;amp; right){ if(left-&amp;gt;val &amp;lt; right-&amp;gt;val){ tmp-&amp;gt;next = left; left = left-&amp;gt;next; }else{ tmp-&amp;gt;next = right; right = right-&amp;gt;next; } tmp = tmp-&amp;gt;next; } tmp-&amp;gt;next = left ?</description>
+    </item>
+    
     <item>
       <title>数据结构与算法——Hamiltonian Cycles</title>
       <link>https://874656645.github.io/posts/278-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-hamiltonian-cycles/</link>
