@@ -160,6 +160,35 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43; 类的内存布局
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>测试代码：
+#include &lt;iostream&gt; using namespace std; struct A{ long long a = 10; virtual void fa(){ cout &lt;&lt; &#34;A::fa()\n&#34;; } virtual void faa(){ cout &lt;&lt; &#34;A::faa()\n&#34;; } }; // 如果是虚继承，虚基类被放在了派生类的后面，每个基类都有自己的虚函数表指针存储单元，如果虚基类没有虚函数，则虚基类的虚函数表指针为 0 // 如果是非虚继承，基类在派生类的前面，每个基类都有自己的虚函数表指针存储单元，除了第一个基类（派生类与第一个基类共用一个存储单元） struct E: virtual A{ long long e = 2; virtual void fa(){ cout &lt;&lt; &#34;E::fa()\n&#34;; } virtual void fe(){ cout &lt;&lt; &#34;E::fe()\n&#34;; } }; int main() { typedef void(*FUNC)(); E e; cout &lt;&lt; sizeof(e) &lt;&lt; endl; long long* addr = (long long*)&amp;e; long long* vfptre = (long long*)*(addr &#43; 0); int eval = (int)*(addr &#43; 1); cout &lt;&lt; eval &lt;&lt; endl; long long* vfptra = (long long*)*(addr &#43; 2); int aval = (int)*(addr &#43; 3); cout &lt;&lt; aval &lt;&lt; endl; cout &lt;&lt; &#34;---------------\n&#34;; long long* faptr = (long long*)*(vfptre &#43; 0); (FUNC(faptr))(); long long* feptr = (long long*)*(vfptre &#43; 1); (FUNC(feptr))(); cout &lt;&lt; &#34;---------------\n&#34;; long long* faptra = (long long*)*(vfptra &#43; 0); // (FUNC(faptra))(); // 如果虚基类的虚函数被重写，此处则无法再如此执行  long long* faaptra = (long long*)*(vfptra &#43; 1); (FUNC(faaptra))(); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-05-18 17:44:54 +0800 CST'>May 18, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43; 类的内存布局" href="https://874656645.github.io/posts/274-c&#43;&#43;-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——统计代码行数
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>cloc 下载地址
+加入到环境变量
+执行命令
+参考：
+ 好用的源码行数统计工具——cloc Win10 代码行数统计工具CLOC的安装和使用  </p>
+  </section>
+  <footer class="entry-footer"><span title='2024-04-02 18:27:04 +0800 CST'>April 2, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——统计代码行数" href="https://874656645.github.io/posts/273-c&#43;&#43;-%E7%BB%9F%E8%AE%A1%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——Function Style Cast 有歧义
     </h2>
   </header>
@@ -212,44 +241,6 @@ dpkg -l | grep gcc
   </section>
   <footer class="entry-footer"><span title='2024-01-05 12:21:35 +0800 CST'>January 5, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Windows Cmd 设置临时和永久环境变量" href="https://874656645.github.io/posts/270-windows-cmd-%E8%AE%BE%E7%BD%AE%E4%B8%B4%E6%97%B6%E5%92%8C%E6%B0%B8%E4%B9%85%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Python Conda GDAL 环境搭建
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>  安装 miniconda，conda 命令使用可参考这里;
-注意：
- 安装包的时候，conda install 和 pip install 最好不要混用，优先使用 pip 查看 python 包路径 python -m site
-    安装 GDAL 通过命令 pip install gdal 安装一般会报错，推荐下载 whl 安装包进行安装，可从这里下载   import gdal from osgeo import gdal 报错 在 python 安装各种环境包的文件夹下，如：D:**\python3.9.12\Lib\site-packages\ 文件夹下，新建 gdal.py 文件，将以下代码复制进去：
-# import osgeo.gdal as a convenience from osgeo.gdal import deprecation_warn deprecation_warn(&#39;gdal&#39;) from osgeo.gdal import *   参考：
- GDAL 安装教程（Python） 解决 import gdal 导入失败的问题，但 from osgeo import gdal 导入成功  </p>
-  </section>
-  <footer class="entry-footer"><span title='2024-01-04 19:18:20 +0800 CST'>January 4, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Python Conda GDAL 环境搭建" href="https://874656645.github.io/posts/269-python-conda-gdal-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>adb 与安卓使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>查看包名
-adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
-adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
-adb shell pm path com.xxx.xxx.xxx
-  获取系统应用
-adb shell pm list packages -s
-  获取第三方应用
-adb shell pm list packages -3
-  启动指定 activity
-adb shell am start -n com....</p>
-  </section>
-  <footer class="entry-footer"><span title='2023-12-23 11:59:04 +0800 CST'>December 23, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to adb 与安卓使用" href="https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

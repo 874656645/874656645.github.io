@@ -160,6 +160,36 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>C&#43;&#43;——malloc、calloc、realloc、指针杂记
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>void printArr(int *A, int size){ printf(&#34;Elements of array: &#34;); for(int i = 0; i &lt; size; &#43;&#43;i){ printf(&#34;%d\t&#34;, A[i]); } printf(&#34;\n&#34;); } int main() { int C[3][2][2] = {{{1,2},{3,4}},{{5,6},{7,8}},{{9,10},{11,12}}}; // 虽然地址相同，但代表的意义却不相同  printf(&#34;%p\t%p\t%p\t%p\t%p\t%p \n&#34;, C, *C, C[0], C[0][0], &amp;C[0][0], &amp;C[0][0][0]); printf(&#34;%p\t%p\t%p\n&#34;, *C&#43;1, C[0]&#43;1, C[0][1]); printf(&#34;%p\t%p\n&#34;, C, C[0][0] &#43; 1); printf(&#34;%p\t%p\n&#34;, C, &amp;C[0][0] &#43; 1); // 分配空间，但不会对元素进行初始化  int *A = (int*)malloc(3 * sizeof(int)); for(int i = 0; i &lt; 3; &#43;&#43;i){ A[i] = i&#43;1; } printArr(A, 3); // 分配空间，并将元素初始化为0  int *B = (int*)calloc(3, sizeof(int)); printArr(B, 3); // 重新分配一块空间（新空间可大可小）  // 并把原来的数据拷贝过来  // 如果新空间首地址与原来空间地址不同，会将原来的内存空间释放  // ，注意：此时不能再继续访问原来的地址，虽然原来的指针并未置空  int *D = (int*)realloc(A, 10 * sizeof(int)); printf(&#34;%p\t%p\n&#34;, A, D); printArr(A, 3); // 此时不能访问 A 了，这是危险的行为  printArr(D, 10); // 等同于重新分配了空间  D = (int*)realloc(NULL, 3 * sizeof(int)); // int *D = (int*)malloc(3 * sizeof(int));  printf(&#34;%p\t%p\n&#34;, A, D); printArr(D, 3); // 等同于释放了内存空间并将指针置为空值  D = (int*)realloc(D, 0); // free(D);D = nullptr;  printf(&#34;%p\n&#34;, D); return 0; } 输出：...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-10-02 22:18:02 +0800 CST'>October 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——malloc、calloc、realloc、指针杂记" href="https://874656645.github.io/posts/249-c&#43;&#43;-malloc-calloc-realloc-%E6%8C%87%E9%92%88%E6%9D%82%E8%AE%B0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——计算最大和子矩阵问题
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>描述 计算矩阵中，最大和的子矩阵，并输出最大的和
+测试用例 用例一：
+$$\begin{equation} \begin{bmatrix*}[c] -3 &amp; -5 &amp; -1 &amp; 5 \newline 2 &amp; -4 &amp; -2 &amp; 4 \newline -1 &amp; 3 &amp; -1 &amp; 3 \end{bmatrix*} \end{equation}$$
+用例二：
+$$\begin{equation} \begin{bmatrix*}[c] -3 &amp; -5 &amp; -1 &amp; 5 \newline 9 &amp; -4 &amp; -2 &amp; 4 \newline -1 &amp; 3 &amp; -1 &amp; 3 \end{bmatrix*} \end{equation}$$
+用例三：
+$$\begin{equation} \begin{bmatrix*}[c] -3 &amp; -5 &amp; -1 &amp; 5 \newline 7 &amp; -4 &amp; -2 &amp; 4 \newline -1 &amp; 3 &amp; -1 &amp; 3 \end{bmatrix*} \end{equation}$$...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-27 18:42:52 +0800 CST'>September 27, 2022</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——计算最大和子矩阵问题" href="https://874656645.github.io/posts/248-c&#43;&#43;-%E8%AE%A1%E7%AE%97%E6%9C%80%E5%A4%A7%E5%92%8C%E7%9F%A9%E9%98%B5%E9%97%AE%E9%A2%98/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>C&#43;&#43;——旋转骰子问题
     </h2>
   </header>
@@ -196,30 +226,6 @@ string s; s = s &#43; &#39;a&#39; &#43; &#39;b&#39; &#43; &#39;c&#39;;	// 正确
   </section>
   <footer class="entry-footer"><span title='2022-09-20 22:14:24 +0800 CST'>September 20, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——类模板双栈模拟队列" href="https://874656645.github.io/posts/245-c&#43;&#43;-%E7%B1%BB%E6%A8%A1%E6%9D%BF%E5%8F%8C%E6%A0%88%E6%A8%A1%E6%8B%9F%E9%98%9F%E5%88%97/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——类模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-18 18:07:48 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——类模板" href="https://874656645.github.io/posts/244-c&#43;&#43;-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——函数模板
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-18 17:28:56 +0800 CST'>September 18, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——函数模板" href="https://874656645.github.io/posts/243-c&#43;&#43;-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -160,6 +160,50 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>Android Studio Build 窗口中文乱码
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>中文乱码
+Android Studio Version 4.2.1
+打开 Android studio 全局搜索 双击 shift
+搜索 Edit Custom VM Options，双击第一个
+打开或者生成文件 studio64.exe.vmoptions
+在文件后面添加 -Dfile.encoding=UTF-8 (要注意不能有空格，否则 studio 可能打不开)
+直接保存，重启 Android Studio
+参考：
+ Android Studio Build窗口出现中文乱码问题  </p>
+  </section>
+  <footer class="entry-footer"><span title='2023-10-30 17:17:34 +0800 CST'>October 30, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Android Studio Build 窗口中文乱码" href="https://874656645.github.io/posts/264-android-studio-build-%E7%AA%97%E5%8F%A3%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>WSL Ubuntu 使用 SonarQube
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>下载 Build Wrapper：
+{SonarQube URL}/static/cpp/build-wrapper-linux-x86.zip
+  下载 SonarScanner：
+https://docs.sonarqube.org/latest//analyzing-source-code/scanners/sonarscanner/#running-from-zip-file
+  配置环境变量：
+export PATH=&#34;/home/rick/sonar/build-wrapper-linux-x86:/home/rick/sonar/sonar-scanner-5.0.1.3006-linux/bin:$PATH&#34;
+注意：
+ 配置的 build-wrapper-linux-x86 和 sonar-scanner-5.0.1.3006-linux 文件夹要有 可执行权限 sonar-scanner-5.0.1.3006-linux 中有 jre 环境，不用再安装 jre 了，但文件夹也要有可执行权限    安装 CMake
+sudo apt install cmake
+  安装 gcovr（计算 gtest 单元测试分支覆盖率）
+sudo apt install gcovr
+注意：
+ Ubuntu 1804 系统中通过 apt 安装的 gcovr 版本太低，不支持参数 --sonarqube，可通过 pip3 安装 5.0 版本  pip3 install pip_search pip_search gcovr pip3 install -U gcovr pip3 show gcovr   安装 gtest 库...</p>
+  </section>
+  <footer class="entry-footer"><span title='2023-09-11 09:34:47 +0800 CST'>September 11, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to WSL Ubuntu 使用 SonarQube" href="https://874656645.github.io/posts/263-wsl-ubuntu_%E4%BD%BF%E7%94%A8-sonarqube/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>WSL Ubuntu_2204 使用
     </h2>
   </header>
@@ -210,42 +254,6 @@ MyType_One HELLO_WORLD MY_INT 7777 参考：
   </section>
   <footer class="entry-footer"><span title='2023-02-24 13:45:59 +0800 CST'>February 24, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Git——TortoiseGit 分支相关操作" href="https://874656645.github.io/posts/260-git-tortoisegit-%E5%88%86%E6%94%AF%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Git——Windows TortoiseGit 配置 SSH 
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、设置本地git的账户邮箱和用户名   查看是否设置了邮箱和用户名
-git config user.name git config user.email   设置邮箱和用户名
-git config --global user.name &#34;Git账号&#34; git config --global user.email &#34;Git邮箱&#34;   二、生成 SSH 密钥 在 git bash 中输入命令 ssh-keygen -t rsa -C &#34;你的Git邮箱&#34;，敲三次回车，就会在目录 我的电脑—&gt;C盘—&gt;用户—&gt;你自己的用户 目录下生成 .ssh 文件夹
-三、将 SSH 公钥添加到 GitLab 账户   在 .ssh 文件夹下，使用记事本打开 id_rsa.pub 公钥文件，复制里面的内容
-  打开 gitlab 网站的 SSH keys，将复制的文本粘贴进去即可
-  四、TortoiseGit 使用 git SSH 密钥 打开 TortoiseGit setting 指定 SSH client 为 git 的 ssh....</p>
-  </section>
-  <footer class="entry-footer"><span title='2023-02-22 20:09:10 +0800 CST'>February 22, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git——Windows TortoiseGit 配置 SSH " href="https://874656645.github.io/posts/259-git-tortoisegit-%E9%85%8D%E7%BD%AE-ssh-/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>Git——stash TortoiseGit 将一个分支上的修改转移到另一个分支上
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p> 通过 git status 查看当前改动的状态  一、commit 操作之前 git stash //把修改的内容暂存起来 git checkout dev //切换到正确的分支 git stash pop //将存储的修改取出来 二、已经 commit git reset HEAD^ // 撤回到刚刚 commit 之前的状态
-然后执行第一种情况的操作
-三、使用 TortoiseGit   stash changes
-  弹出对话框，点击 OK 按钮
-  切换分支
-  stash pop
-  参考：
- Git如何将一个分支上的修改转移到另一个分支上 在 TortoiseGit 中使用 stash 操作  </p>
-  </section>
-  <footer class="entry-footer"><span title='2023-02-22 17:10:24 +0800 CST'>February 22, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Git——stash TortoiseGit 将一个分支上的修改转移到另一个分支上" href="https://874656645.github.io/posts/258-git-stash-%E5%B0%86%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A%E7%9A%84%E4%BF%AE%E6%94%B9%E8%BD%AC%E7%A7%BB%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%88%86%E6%94%AF%E4%B8%8A/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

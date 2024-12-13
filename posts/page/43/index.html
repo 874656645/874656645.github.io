@@ -160,6 +160,30 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
+    <h2>类型转换
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>1. static_cast&lt;&gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&lt;&gt;  // 1. 内置对象  int a = 97; char c = static_cast&lt;char&gt;(a); // OK  cout &lt;&lt; c &lt;&lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;a;  // char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &lt;&lt; pc &lt;&lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-15 15:55:28 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类型转换" href="https://874656645.github.io/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>自定义数组实现
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>要求  可以对内置数据类型以及自定义数据类型的数据进行存储 将数组中的数据存储到堆区 构造函数中可以传入数组的容量 提供对应的拷贝构造函数以及 operator= 防止浅拷贝问题 提供尾插法和尾删法对数组中的数据进行增加和删除 可以通过下标的方式访问数组中的元素 可以获取数组中当前元素个数和数组的容量  实现 template&lt;class T&gt; class MyArray{ public: MyArray(int capacity){ this-&gt;m_capacity = capacity; this-&gt;m_size = 0; this-&gt;m_addr = new T[this-&gt;m_capacity]; } MyArray(const MyArray&amp; arr){ if(arr.m_addr == NULL){ return; } // 深拷贝  this-&gt;m_capacity = arr.m_capacity; this-&gt;m_size = arr.m_size; this-&gt;m_addr = new T[this-&gt;m_capacity]; for(int i = 0; i &lt; m_size; &#43;&#43;i){ // T 类型是可拷贝的，= 运算符也是深拷贝  this-&gt;m_addr[i] = arr.m_addr[i]; } } MyArray&amp; operator=(const MyArray&amp; arr){ if(this == &amp;arr){ return *this; } if(this-&gt;m_addr !...</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-01-15 13:36:04 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 自定义数组实现" href="https://874656645.github.io/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
     <h2>类模板
     </h2>
   </header>
@@ -201,39 +225,6 @@ g&#43;&#43; main.s -o main  </p>
   </section>
   <footer class="entry-footer"><span title='2022-01-11 21:40:09 +0800 CST'>January 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 函数模板" href="https://874656645.github.io/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>C 语言面向接口编程
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>通过函数指针实现多态，注册回调函数的方式
-void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char* arrStart = (char*)arr; for(int i = 0; i &lt; len; &#43;&#43;i){ char* eleStart = arrStart &#43; i * eleSize; myPrint(eleStart); } printf(&#34;\n&#34;); } void printInt(void* data){ int* ele = (int*)data; printf(&#34;%d &#34;, *ele); } struct Person{ char name[64]; int age; }; void printPerson(void* data){ struct Person* ele = (struct Person*)data; printf(&#34;Name: %s, Age: %d \n&#34;, ele-&gt;name, ele-&gt;age); } int main() { int arr[] = {1, 2, 3, 4, 5}; printAllArray(arr, sizeof(int), 5, printInt); struct Person personArr[] = { {&#34;aaa&#34;, 20}, {&#34;bbb&#34;, 30}, {&#34;ccc&#34;, 40}, {&#34;ddd&#34;, 50}, {&#34;eee&#34;, 60}, }; printAllArray(personArr, sizeof(struct Person), 5, printPerson); return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-10 22:23:34 +0800 CST'>January 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C 语言面向接口编程" href="https://874656645.github.io/posts/68-c-%E8%AF%AD%E8%A8%80%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>面向抽象类编程
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>三层架构：业务逻辑层、抽象层、实现层
-原则：依赖倒转
-案例一：动物园 设计实现：
- 抽象层：Animal
-提供接口 voice 实现层：Dog、Cat
-分别实现 voice ，发出不同的声音 业务层：main 函数调用，只通过 Animal 的指针统一实现业务  案例二：编写一个 C&#43;&#43; 程序, 计算程序员( programmer )工资  要求能计算出初级程序员( junior_programmer ) 中级程序员 ( mid_programmer )高级程序员( adv_programmer )的工资 要求利用抽象类统一界面，方便程序的扩展，比如:新增，计算架构师( architect ) 的工资  设计实现：
- 抽象层：Programmer
-提供计算工资的接口 实现层：JuniorProgrammer、MidProgrammer、AdvProgrammer
-分别对计算工资接口进行实现 业务层：通过 Programmer 类统一管理，实现业务逻辑，同时业务的可扩展性更强，如新增架构师类型  案例三：电脑组装，面向抽象层编程  组装电脑有 3 个抽象类，抽象的 cpu，抽象的显卡，抽象的内存。 现在要求组装两台电脑，一台是 Intel 的 CPU，Intel 的显卡和 Intel 的内存。另一台是 Intel 的 CPU、Nvidia 的显卡和 Kingston 的内存条。 针对抽象层编程。  设计实现：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-01-09 19:12:37 +0800 CST'>January 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 面向抽象类编程" href="https://874656645.github.io/posts/67-%E9%9D%A2%E5%90%91%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%BC%96%E7%A8%8B/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

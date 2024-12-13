@@ -8,8 +8,10 @@
 <title>数据结构与算法——单链表的排序 | Slow is Smooth and Smooth is Fast</title>
 <meta name="keywords" content="数据结构与算法" />
 <meta name="description" content="问题链接
-要求：时间复杂度 O(nlogn)
-思路：分治，归并排序思想 快慢指针，计算链表的中间节点 或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表
+要求： 时间复杂度 O(nlogn)
+思路： 分治，归并排序思想
+快慢指针，计算链表的中间节点
+或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表
 /** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-&gt;next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next)  // 如果 f = head-&gt;next（链表中有偶数个元素）  // while(f &amp;&amp; f-&gt;next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } */ ListNode* s = head, * f = head-&gt;next; // 偶数个元素  while(f &amp;&amp; f-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } ListNode* mid = s-&gt;next; s-&gt;next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left == nullptr ?">
 <meta name="author" content="Rick Cui">
 <link rel="canonical" href="https://874656645.github.io/posts/280-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8E%92%E5%BA%8F/" />
@@ -50,8 +52,10 @@ if (!doNotTrack) {
 }
 </script><meta property="og:title" content="数据结构与算法——单链表的排序" />
 <meta property="og:description" content="问题链接
-要求：时间复杂度 O(nlogn)
-思路：分治，归并排序思想 快慢指针，计算链表的中间节点 或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表
+要求： 时间复杂度 O(nlogn)
+思路： 分治，归并排序思想
+快慢指针，计算链表的中间节点
+或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表
 /** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-&gt;next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next)  // 如果 f = head-&gt;next（链表中有偶数个元素）  // while(f &amp;&amp; f-&gt;next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } */ ListNode* s = head, * f = head-&gt;next; // 偶数个元素  while(f &amp;&amp; f-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } ListNode* mid = s-&gt;next; s-&gt;next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left == nullptr ?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://874656645.github.io/posts/280-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8E%92%E5%BA%8F/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
@@ -64,8 +68,10 @@ if (!doNotTrack) {
 
 <meta name="twitter:title" content="数据结构与算法——单链表的排序"/>
 <meta name="twitter:description" content="问题链接
-要求：时间复杂度 O(nlogn)
-思路：分治，归并排序思想 快慢指针，计算链表的中间节点 或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表
+要求： 时间复杂度 O(nlogn)
+思路： 分治，归并排序思想
+快慢指针，计算链表的中间节点
+或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表
 /** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-&gt;next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next)  // 如果 f = head-&gt;next（链表中有偶数个元素）  // while(f &amp;&amp; f-&gt;next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } */ ListNode* s = head, * f = head-&gt;next; // 偶数个元素  while(f &amp;&amp; f-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } ListNode* mid = s-&gt;next; s-&gt;next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left == nullptr ?"/>
 
 
@@ -95,12 +101,12 @@ if (!doNotTrack) {
   "@type": "BlogPosting",
   "headline": "数据结构与算法——单链表的排序",
   "name": "数据结构与算法——单链表的排序",
-  "description": "问题链接\n要求：时间复杂度 O(nlogn)\n思路：分治，归并排序思想 快慢指针，计算链表的中间节点 或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表\n/** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-\u0026gt;next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f \u0026amp;\u0026amp; f-\u0026gt;next \u0026amp;\u0026amp; f-\u0026gt;next-\u0026gt;next)  // 如果 f = head-\u0026gt;next（链表中有偶数个元素）  // while(f \u0026amp;\u0026amp; f-\u0026gt;next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f \u0026amp;\u0026amp; f-\u0026gt;next \u0026amp;\u0026amp; f-\u0026gt;next-\u0026gt;next){ s = s-\u0026gt;next; f = f-\u0026gt;next-\u0026gt;next; } */ ListNode* s = head, * f = head-\u0026gt;next; // 偶数个元素  while(f \u0026amp;\u0026amp; f-\u0026gt;next){ s = s-\u0026gt;next; f = f-\u0026gt;next-\u0026gt;next; } ListNode* mid = s-\u0026gt;next; s-\u0026gt;next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left \u0026amp;\u0026amp; right){ if(left-\u0026gt;val \u0026lt; right-\u0026gt;val){ tmp-\u0026gt;next = left; left = left-\u0026gt;next; }else{ tmp-\u0026gt;next = right; right = right-\u0026gt;next; } tmp = tmp-\u0026gt;next; } tmp-\u0026gt;next = left == nullptr ?",
+  "description": "问题链接\n要求： 时间复杂度 O(nlogn)\n思路： 分治，归并排序思想\n快慢指针，计算链表的中间节点\n或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表\n/** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-\u0026gt;next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f \u0026amp;\u0026amp; f-\u0026gt;next \u0026amp;\u0026amp; f-\u0026gt;next-\u0026gt;next)  // 如果 f = head-\u0026gt;next（链表中有偶数个元素）  // while(f \u0026amp;\u0026amp; f-\u0026gt;next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f \u0026amp;\u0026amp; f-\u0026gt;next \u0026amp;\u0026amp; f-\u0026gt;next-\u0026gt;next){ s = s-\u0026gt;next; f = f-\u0026gt;next-\u0026gt;next; } */ ListNode* s = head, * f = head-\u0026gt;next; // 偶数个元素  while(f \u0026amp;\u0026amp; f-\u0026gt;next){ s = s-\u0026gt;next; f = f-\u0026gt;next-\u0026gt;next; } ListNode* mid = s-\u0026gt;next; s-\u0026gt;next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left \u0026amp;\u0026amp; right){ if(left-\u0026gt;val \u0026lt; right-\u0026gt;val){ tmp-\u0026gt;next = left; left = left-\u0026gt;next; }else{ tmp-\u0026gt;next = right; right = right-\u0026gt;next; } tmp = tmp-\u0026gt;next; } tmp-\u0026gt;next = left == nullptr ?",
   "keywords": [
     "数据结构与算法"
   ],
-  "articleBody": "问题链接\n要求：时间复杂度 O(nlogn)\n思路：分治，归并排序思想 快慢指针，计算链表的中间节点 或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表\n/** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f \u0026\u0026 f-next \u0026\u0026 f-next-next)  // 如果 f = head-next（链表中有偶数个元素）  // while(f \u0026\u0026 f-next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f \u0026\u0026 f-next \u0026\u0026 f-next-next){ s = s-next; f = f-next-next; } */ ListNode* s = head, * f = head-next; // 偶数个元素  while(f \u0026\u0026 f-next){ s = s-next; f = f-next-next; } ListNode* mid = s-next; s-next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left \u0026\u0026 right){ if(left-val  right-val){ tmp-next = left; left = left-next; }else{ tmp-next = right; right = right-next; } tmp = tmp-next; } tmp-next = left == nullptr ? right : left; ListNode* res = newHead-next; newHead-next = nullptr; delete newHead; return res; } }; ",
-  "wordCount" : "204",
+  "articleBody": "问题链接\n要求： 时间复杂度 O(nlogn)\n思路： 分治，归并排序思想\n快慢指针，计算链表的中间节点\n或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表\n/** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f \u0026\u0026 f-next \u0026\u0026 f-next-next)  // 如果 f = head-next（链表中有偶数个元素）  // while(f \u0026\u0026 f-next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f \u0026\u0026 f-next \u0026\u0026 f-next-next){ s = s-next; f = f-next-next; } */ ListNode* s = head, * f = head-next; // 偶数个元素  while(f \u0026\u0026 f-next){ s = s-next; f = f-next-next; } ListNode* mid = s-next; s-next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left \u0026\u0026 right){ if(left-val  right-val){ tmp-next = left; left = left-next; }else{ tmp-next = right; right = right-next; } tmp = tmp-next; } tmp-next = left == nullptr ? right : left; ListNode* res = newHead-next; newHead-next = nullptr; delete newHead; return res; } }; ",
+  "wordCount" : "206",
   "inLanguage": "en",
   "datePublished": "2024-12-12T21:11:55+08:00",
   "dateModified": "2024-12-12T21:11:55+08:00",
@@ -203,9 +209,9 @@ if (!doNotTrack) {
   </header> 
 
   <div class="post-content"><p><a href="https://www.nowcoder.com/practice/f23604257af94d939848729b1a5cda08?tpId=295&amp;tqId=1008897">问题链接</a></p>
-<p>要求：时间复杂度 O(nlogn)</p>
-<p>思路：分治，归并排序思想
-快慢指针，计算链表的中间节点
+<p><strong>要求：</strong> 时间复杂度 O(nlogn)</p>
+<p><strong>思路：</strong> 分治，归并排序思想<br>
+快慢指针，计算链表的中间节点<br>
 或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#75715e">/**
 </span><span style="color:#75715e"> * struct ListNode {
@@ -279,10 +285,10 @@ if (!doNotTrack) {
       <li><a href="https://874656645.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="https://874656645.github.io/posts/281-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%9F%A9%E9%98%B5%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/">
+  <a class="prev" href="https://874656645.github.io/posts/281-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/">
     <span class="title">« Prev Page</span>
     <br>
-    <span>数据结构与算法——矩阵的最小路径和</span>
+    <span>数据结构与算法——数组中的逆序对</span>
   </a>
   <a class="next" href="https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/">
     <span class="title">Next Page »</span>

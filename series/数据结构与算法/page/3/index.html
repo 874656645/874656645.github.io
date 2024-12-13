@@ -145,6 +145,38 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>数据结构与算法——二叉树遍历
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>先序遍历
+template&lt;typename T&gt; void PreOrder(BinaryTreeNode&lt;T&gt;* root){ stack&lt;BinaryTreeNode&lt;T&gt;*&gt; aStack; BinaryTreeNode&lt;T&gt;* pointer = root; aStack.push(nullptr); // 栈底监视哨  while(pointer){ // 或者 !aStack.empty()  Visit(pointer); // 访问当前结点  if(pointer-&gt;rightchild() != nullptr){ // 右孩子入栈  aStack.push(pointer-&gt;rightchild()); } if(pointer-&gt;leftchild() != nullptr){ // 左路下降  pointer = pointer-&gt;leftchild(); }else{ // 左子树访问完毕，转向访问右子树  pointer = aStack.top(); aStack.pop(); } } }   中序遍历
+template&lt;typename T&gt; void InOrder(BinaryTreeNode&lt;T&gt;* root){ stack&lt;BinaryTreeNode&lt;T&gt;*&gt; aStack; BinaryTreeNode&lt;T&gt;* pointer = root; while(!aStack.empty() || pointer){ if(pointer){ // Visit(pointer); // 前序访问点  aStack....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-11-13 19:46:40 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树遍历" href="https://874656645.github.io/posts/255-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>数据结构与算法——二叉树
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、相关概念   结点：根节、叶节点、分支结点、兄弟结点、父子结点
+  边、路径
+  结点深度、高度、层数
+ 根节点为第 0 层 深度指从根节点到该节点的边的数量 高度指从此节点到叶节点的结点数量    满二叉树、完全二叉树
+ 满二叉树指除了度为 0 的叶节点就是度为 2 的分支节点 完全二叉树指只有最下面的两层度是小于 2 的，且最下面的结点都集中在左侧    扩充二叉树
+  二叉树性质
+  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-11-13 17:58:17 +0800 CST'>November 13, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——二叉树" href="https://874656645.github.io/posts/254-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%BA%8C%E5%8F%89%E6%A0%91/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——KMP 字符串匹配算法
     </h2>
   </header>
@@ -189,38 +221,6 @@ int mystrcmp(const char* str1, const char* str2){ int i = 0; while(str1[i] == st
   </section>
   <footer class="entry-footer"><span title='2022-04-05 12:22:44 +0800 CST'>April 5, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——队列的实现方式" href="https://874656645.github.io/posts/164-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——队列
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>一、队列   队列特点
- 访问受限的线性表 先进先出 插入在一端进行，删除在另一端进行    主要元素
- 队头 队尾    主要操作
- 入队列 出队列 取队首元素 判断队列是否为空    二、队列的抽象数据类型 template &lt;class T&gt; class Queue { // 队列的运算集 public: // 变为空队列  void clear(); // 将item插入队尾，成功则返回真，否则返回假  bool enQueue(const T item); // 返回队头元素并将其从队列中删除，成功则返回真  bool deQueue(T &amp; item); // 返回队头元素，但不删除，成功则返回真  bool getFront(T &amp; item); // 返回真，若队列已空  bool isEmpty(); // 返回真，若队列已满  bool isFull(); }; 三、队列的实现方式 队列的物理实现又分为顺序队列和链式队列</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-05 09:03:06 +0800 CST'>April 5, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——队列" href="https://874656645.github.io/posts/163-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E9%98%9F%E5%88%97/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——栈的应用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>栈的特点是后进先出，所以常用来处理具有递归结构的数据
- 深度优先搜索 表达式求值 子程序 / 函数调用的管理 消除递归    表达式的递归定义
- 基本符号集：${0，1，…，9，&#43;，-，*，/，（，）}$ 语法成分集：{&lt;表达式&gt; , &lt;项&gt; , &lt;因子&gt; , &lt;常数&gt;, &lt;数字&gt; } 中缀表达式：$23\ &#43;\ (34\ *\ 45)\ /\ (5\ &#43;\ 6\ &#43;\ 7)$  后缀表达式：$23\ 34\ 45\ *\ 5\ 6\ &#43;\ 7\ &#43;\ /\ &#43;$
-    中缀表达式
- 运算符在中间 需要括号改变优先级  例如：$4\ *\ x\ *\ (2\ *\ x\ &#43;\ a)\ –\ c$
-  后缀表达式...</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-04-04 14:12:42 +0800 CST'>April 4, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——栈的应用" href="https://874656645.github.io/posts/162-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%A0%88%E7%9A%84%E5%BA%94%E7%94%A8/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
