@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>adb on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/series/adb/</link>
+    <description>Recent content in adb on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 23 Dec 2023 11:59:04 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/adb/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>adb 常用命令</title>
+      <link>https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Sat, 23 Dec 2023 11:59:04 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/</guid>
+      <description>查看包名
+adb shell pm list packages adb shell pm list packages | findstr com.xxx adb shell pm list packages | adb shell grep com.xxx   查看包的信息
+adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
+adb shell pm path com.xxx.xxx.xxx
+  获取系统应用
+adb shell pm list packages -s
+  获取第三方应用
+adb shell pm list packages -3</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -186,27 +186,6 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>adb 与安卓使用
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>查看包名
-adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
-adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
-adb shell pm path com.xxx.xxx.xxx
-  获取系统应用
-adb shell pm list packages -s
-  获取第三方应用
-adb shell pm list packages -3
-  启动指定 activity
-adb shell am start -n com....</p>
-  </section>
-  <footer class="entry-footer"><span title='2023-12-23 11:59:04 +0800 CST'>December 23, 2023</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to adb 与安卓使用" href="https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
     <h2>Ubuntu 编译指定版本的 curl 库
     </h2>
   </header>
@@ -224,6 +203,28 @@ tar -zxvf curl-7.47.1.tar.gz cd curl-7.47.1 ./configure shared make make install
   </section>
   <footer class="entry-footer"><span title='2023-11-03 18:18:30 +0800 CST'>November 3, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Ubuntu 编译指定版本的 curl 库" href="https://874656645.github.io/posts/267-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-curl-%E5%BA%93/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Ubuntu 编译指定版本的 OpenSSL 库
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>  重命名原有的 openssl 可执行文件
+mv -f /usr/bin/openssl /usr/bin/openssl.old
+  下载所需版本的 openssl
+wget http://www.openssl.org/source/openssl-1.0.0s.tar.gz
+  解压并编译
+tar zxvf openssl-1.0.0s.tar.gz cd openssl-1.0.0s ./config shared --prefix=/usr/local/openssl1.0 make &amp;&amp; make install   生成的可执行文件在 /usr/local/openssl1.0/bin 目录下
+  生成的动态链接库在 /usr/local/openssl1.0/lib 目录下
+  在 /usr/bin 目录下创建可执行文件的软连接
+  在 /usr/lib/x86_64-linux-gnu/ 目录下创建动态链接库的软连接
+  参考：
+ OpenSSL Old Releases Linux openssl 升级、降级 openssl动态库生成以及交叉编译  </p>
+  </section>
+  <footer class="entry-footer"><span title='2023-11-02 20:50:41 +0800 CST'>November 2, 2023</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 编译指定版本的 OpenSSL 库" href="https://874656645.github.io/posts/266-ubuntu-%E7%BC%96%E8%AF%91%E6%8C%87%E5%AE%9A%E7%89%88%E6%9C%AC%E7%9A%84-openssl-%E5%BA%93/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -145,6 +145,22 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>SDF 生成有向距离场图片
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>Dead Reckoning算法生成有向距离场
+例如原图：
+效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度
+C&#43;&#43; 代码：
+class SDFTexture { public: SDFTexture(rs::Texture*, float pixelDist); ~SDFTexture(); void generateSDFTex(); private: rs::Texture* m_SDFTex; int32 m_width, m_height; float m_pixelDist; std::vector&lt;std::vector&lt;PixelType&gt; &gt; m_pixelMap; std::vector&lt;std::vector&lt;float&gt; &gt; m_distanceMap; std::vector&lt;std::vector&lt;Point16&gt; &gt; m_positionMap; }; SDFTexture::SDFTexture(rs::Texture* tex, float pixelDist) { m_SDFTex = tex; m_width = m_SDFTex-&gt;width(); m_height = m_SDFTex-&gt;height(); m_pixelDist = pixelDist; m_distanceMap = std::vector&lt;std::vector&lt;float&gt; &gt;(m_height &#43; 2, std::vector&lt;float&gt;(m_width &#43; 2, FLT_MAX)); m_positionMap = std::vector&lt;std::vector&lt;Point16&gt; &gt;(m_height &#43; 2, std::vector&lt;Point16&gt;(m_width &#43; 2, { INT16_MAX, INT16_MAX })); m_pixelMap = std::vector&lt;std::vector&lt;PixelType&gt; &gt;(m_height &#43; 2, std::vector&lt;PixelType&gt;(m_width &#43; 2, Pixel_fromA8R8G8B8(0x0))); } SDFTexture::~SDFTexture() { m_SDFTex = NULL; } void SDFTexture::generateSDFTex() { // 1....</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-15 16:43:15 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to SDF 生成有向距离场图片" href="https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>数据结构与算法——括号生成
     </h2>
   </header>
@@ -204,19 +220,6 @@ class Solution { int sn; public: /** * 代码中的类名、方法名、参数�
   </section>
   <footer class="entry-footer"><span title='2024-12-12 20:41:48 +0800 CST'>December 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to 数据结构与算法——合并 K 个已排序的链表" href="https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——Hamiltonian Cycles
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>BackTracking（DFS &#43; BoundingFunction）
-#include &lt;iostream&gt; using namespace std; int n = 5; int x[6] = {0,1}; int G[6][6] = { {0,0,0,0,0,0}, {0,0,1,1,0,1}, {0,1,0,1,1,1}, {0,1,1,0,1,0}, {0,0,1,1,0,1}, {0,1,1,0,1,0} }; void NextVetex(int k){ do { x[k] = (x[k] &#43; 1) % (n &#43; 1); if(x[k] == 0){ return; } // 确保和前一个节点联通  if(G[x[k - 1]][x[k]] != 0){ int j = 1; // 确保节点不会重复  for(; j &lt; k; &#43;&#43;j){ if(x[j] == x[k]){ break; } } if(j == k){ // 如果不是最后一个节点  // 或者是最后一个节点，并且最后一个节点和第一个节点是联通的  if((k &lt; n) || (k == n &amp;&amp; G[x[n]][x[1]] !...</p>
-  </section>
-  <footer class="entry-footer"><span title='2024-10-12 20:41:33 +0800 CST'>October 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——Hamiltonian Cycles" href="https://874656645.github.io/posts/278-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-hamiltonian-cycles/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

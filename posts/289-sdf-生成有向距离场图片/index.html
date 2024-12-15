@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>SDF 生成有向距离场图片 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="OpenGL" />
+<meta name="description" content="Dead Reckoning算法生成有向距离场
+例如原图：
+效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度
+C&#43;&#43; 代码：
+class SDFTexture { public: SDFTexture(rs::Texture*, float pixelDist); ~SDFTexture(); void generateSDFTex(); private: rs::Texture* m_SDFTex; int32 m_width, m_height; float m_pixelDist; std::vector&lt;std::vector&lt;PixelType&gt; &gt; m_pixelMap; std::vector&lt;std::vector&lt;float&gt; &gt; m_distanceMap; std::vector&lt;std::vector&lt;Point16&gt; &gt; m_positionMap; }; SDFTexture::SDFTexture(rs::Texture* tex, float pixelDist) { m_SDFTex = tex; m_width = m_SDFTex-&gt;width(); m_height = m_SDFTex-&gt;height(); m_pixelDist = pixelDist; m_distanceMap = std::vector&lt;std::vector&lt;float&gt; &gt;(m_height &#43; 2, std::vector&lt;float&gt;(m_width &#43; 2, FLT_MAX)); m_positionMap = std::vector&lt;std::vector&lt;Point16&gt; &gt;(m_height &#43; 2, std::vector&lt;Point16&gt;(m_width &#43; 2, { INT16_MAX, INT16_MAX })); m_pixelMap = std::vector&lt;std::vector&lt;PixelType&gt; &gt;(m_height &#43; 2, std::vector&lt;PixelType&gt;(m_width &#43; 2, Pixel_fromA8R8G8B8(0x0))); } SDFTexture::~SDFTexture() { m_SDFTex = NULL; } void SDFTexture::generateSDFTex() { // 1.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="SDF 生成有向距离场图片" />
+<meta property="og:description" content="Dead Reckoning算法生成有向距离场
+例如原图：
+效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度
+C&#43;&#43; 代码：
+class SDFTexture { public: SDFTexture(rs::Texture*, float pixelDist); ~SDFTexture(); void generateSDFTex(); private: rs::Texture* m_SDFTex; int32 m_width, m_height; float m_pixelDist; std::vector&lt;std::vector&lt;PixelType&gt; &gt; m_pixelMap; std::vector&lt;std::vector&lt;float&gt; &gt; m_distanceMap; std::vector&lt;std::vector&lt;Point16&gt; &gt; m_positionMap; }; SDFTexture::SDFTexture(rs::Texture* tex, float pixelDist) { m_SDFTex = tex; m_width = m_SDFTex-&gt;width(); m_height = m_SDFTex-&gt;height(); m_pixelDist = pixelDist; m_distanceMap = std::vector&lt;std::vector&lt;float&gt; &gt;(m_height &#43; 2, std::vector&lt;float&gt;(m_width &#43; 2, FLT_MAX)); m_positionMap = std::vector&lt;std::vector&lt;Point16&gt; &gt;(m_height &#43; 2, std::vector&lt;Point16&gt;(m_width &#43; 2, { INT16_MAX, INT16_MAX })); m_pixelMap = std::vector&lt;std::vector&lt;PixelType&gt; &gt;(m_height &#43; 2, std::vector&lt;PixelType&gt;(m_width &#43; 2, Pixel_fromA8R8G8B8(0x0))); } SDFTexture::~SDFTexture() { m_SDFTex = NULL; } void SDFTexture::generateSDFTex() { // 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-12-15T16:43:15&#43;08:00" />
+<meta property="article:modified_time" content="2024-12-15T16:43:15&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="SDF 生成有向距离场图片"/>
+<meta name="twitter:description" content="Dead Reckoning算法生成有向距离场
+例如原图：
+效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度
+C&#43;&#43; 代码：
+class SDFTexture { public: SDFTexture(rs::Texture*, float pixelDist); ~SDFTexture(); void generateSDFTex(); private: rs::Texture* m_SDFTex; int32 m_width, m_height; float m_pixelDist; std::vector&lt;std::vector&lt;PixelType&gt; &gt; m_pixelMap; std::vector&lt;std::vector&lt;float&gt; &gt; m_distanceMap; std::vector&lt;std::vector&lt;Point16&gt; &gt; m_positionMap; }; SDFTexture::SDFTexture(rs::Texture* tex, float pixelDist) { m_SDFTex = tex; m_width = m_SDFTex-&gt;width(); m_height = m_SDFTex-&gt;height(); m_pixelDist = pixelDist; m_distanceMap = std::vector&lt;std::vector&lt;float&gt; &gt;(m_height &#43; 2, std::vector&lt;float&gt;(m_width &#43; 2, FLT_MAX)); m_positionMap = std::vector&lt;std::vector&lt;Point16&gt; &gt;(m_height &#43; 2, std::vector&lt;Point16&gt;(m_width &#43; 2, { INT16_MAX, INT16_MAX })); m_pixelMap = std::vector&lt;std::vector&lt;PixelType&gt; &gt;(m_height &#43; 2, std::vector&lt;PixelType&gt;(m_width &#43; 2, Pixel_fromA8R8G8B8(0x0))); } SDFTexture::~SDFTexture() { m_SDFTex = NULL; } void SDFTexture::generateSDFTex() { // 1."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "SDF 生成有向距离场图片",
+      "item": "https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SDF 生成有向距离场图片",
+  "name": "SDF 生成有向距离场图片",
+  "description": "Dead Reckoning算法生成有向距离场\n例如原图：\n效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度\nC++ 代码：\nclass SDFTexture { public: SDFTexture(rs::Texture*, float pixelDist); ~SDFTexture(); void generateSDFTex(); private: rs::Texture* m_SDFTex; int32 m_width, m_height; float m_pixelDist; std::vector\u0026lt;std::vector\u0026lt;PixelType\u0026gt; \u0026gt; m_pixelMap; std::vector\u0026lt;std::vector\u0026lt;float\u0026gt; \u0026gt; m_distanceMap; std::vector\u0026lt;std::vector\u0026lt;Point16\u0026gt; \u0026gt; m_positionMap; }; SDFTexture::SDFTexture(rs::Texture* tex, float pixelDist) { m_SDFTex = tex; m_width = m_SDFTex-\u0026gt;width(); m_height = m_SDFTex-\u0026gt;height(); m_pixelDist = pixelDist; m_distanceMap = std::vector\u0026lt;std::vector\u0026lt;float\u0026gt; \u0026gt;(m_height + 2, std::vector\u0026lt;float\u0026gt;(m_width + 2, FLT_MAX)); m_positionMap = std::vector\u0026lt;std::vector\u0026lt;Point16\u0026gt; \u0026gt;(m_height + 2, std::vector\u0026lt;Point16\u0026gt;(m_width + 2, { INT16_MAX, INT16_MAX })); m_pixelMap = std::vector\u0026lt;std::vector\u0026lt;PixelType\u0026gt; \u0026gt;(m_height + 2, std::vector\u0026lt;PixelType\u0026gt;(m_width + 2, Pixel_fromA8R8G8B8(0x0))); } SDFTexture::~SDFTexture() { m_SDFTex = NULL; } void SDFTexture::generateSDFTex() { // 1.",
+  "keywords": [
+    "OpenGL"
+  ],
+  "articleBody": "Dead Reckoning算法生成有向距离场\n例如原图：\n效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度\nC++ 代码：\nclass SDFTexture { public: SDFTexture(rs::Texture*, float pixelDist); ~SDFTexture(); void generateSDFTex(); private: rs::Texture* m_SDFTex; int32 m_width, m_height; float m_pixelDist; std::vectorstd::vectorPixelType  m_pixelMap; std::vectorstd::vectorfloat  m_distanceMap; std::vectorstd::vectorPoint16  m_positionMap; }; SDFTexture::SDFTexture(rs::Texture* tex, float pixelDist) { m_SDFTex = tex; m_width = m_SDFTex-width(); m_height = m_SDFTex-height(); m_pixelDist = pixelDist; m_distanceMap = std::vectorstd::vectorfloat (m_height + 2, std::vectorfloat(m_width + 2, FLT_MAX)); m_positionMap = std::vectorstd::vectorPoint16 (m_height + 2, std::vectorPoint16(m_width + 2, { INT16_MAX, INT16_MAX })); m_pixelMap = std::vectorstd::vectorPixelType (m_height + 2, std::vectorPixelType(m_width + 2, Pixel_fromA8R8G8B8(0x0))); } SDFTexture::~SDFTexture() { m_SDFTex = NULL; } void SDFTexture::generateSDFTex() { // 1. 从显存中初始化位图 \tunsigned char* picData = m_SDFTex-newPixelDataInCPU(); for (int32 row = 1; row  m_height; ++row) { for (int32 col = 1; col  m_width; ++col) { // 当前像素索引 \tint32 curPixIndex = ((row - 1) * m_width + (col - 1)) * 4; m_pixelMap[row][col] = Pixel_assemblePixel4(picData[curPixIndex], picData[curPixIndex + 1], picData[curPixIndex + 2], picData[curPixIndex + 3]); } } m_SDFTex-freePixelDataInCPU(picData); // 2. 计算图形边界 \tfor (int32 row = 1; row  m_height; ++row) { for (int32 col = 1; col  m_width; ++col) { // 当前像素不是完全透明并且与上下左右其中一个像素值不同 \tif (m_pixelMap[row][col] != 0 \u0026\u0026 (m_pixelMap[row][col] != m_pixelMap[row - 1][col] || m_pixelMap[row][col] != m_pixelMap[row + 1][col] || m_pixelMap[row][col] != m_pixelMap[row][col - 1] || m_pixelMap[row][col] != m_pixelMap[row][col + 1])) { // 更新 m_distanceMap 和 m_positionMap \tm_distanceMap[row][col] = 0; m_positionMap[row][col] = { int16(col), int16(row) }; } } } // 3. 计算每个像素到轮廓的最近距离 \t// 3.1 正向遍历 \tfor (int32 row = 1; row  m_height; ++row) { for (int32 col = 1; col  m_width; ++col) { float curr_d = m_distanceMap[row][col]; Point16 curr_p = m_positionMap[row][col]; Vector2 curPixel = vec2(col, row); // 检查正左方像素 \tif (m_distanceMap[row][col - 1] + 1  curr_d) { curr_p = m_positionMap[row][col - 1]; Vector2 edgePixel = vec2(curr_p.x, curr_p.y); curr_d = (curPixel - edgePixel).length(); } // 检查左上方像素 \tif (m_distanceMap[row - 1][col - 1] + 1.414  curr_d) { curr_p = m_positionMap[row - 1][col - 1]; Vector2 edgePixel = vec2(curr_p.x, curr_p.y); curr_d = (curPixel - edgePixel).length(); } // 检查正上方像素 \tif (m_distanceMap[row - 1][col] + 1  curr_d) { curr_p = m_positionMap[row - 1][col]; Vector2 edgePixel = vec2(curr_p.x, curr_p.y); curr_d = (curPixel - edgePixel).length(); } // 检查右上方像素 \tif (m_distanceMap[row - 1][col + 1] + 1.414  curr_d) { curr_p = m_positionMap[row - 1][col + 1]; Vector2 edgePixel = vec2(curr_p.x, curr_p.y); curr_d = (curPixel - edgePixel).length(); } m_distanceMap[row][col] = curr_d; m_positionMap[row][col] = curr_p; } } // 3.2 反向遍历 \tfor (int32 row = m_height; row = 1; --row) { for (int32 col = m_width; col = 1; --col) { float curr_d = m_distanceMap[row][col]; Point16 curr_p = m_positionMap[row][col]; Vector2 curPixel = vec2(col, row); // 检查正右方像素 \tif (m_distanceMap[row][col + 1] + 1  curr_d) { curr_p = m_positionMap[row][col + 1]; Vector2 edgePixel = vec2(curr_p.x, curr_p.y); curr_d = (curPixel - edgePixel).length(); } // 检查右下方像素 \tif (m_distanceMap[row + 1][col + 1] + 1.414  curr_d) { curr_p = m_positionMap[row + 1][col + 1]; Vector2 edgePixel = vec2(curr_p.x, curr_p.y); curr_d = (curPixel - edgePixel).length(); } // 检查正下方像素 \tif (m_distanceMap[row + 1][col] + 1  curr_d) { curr_p = m_positionMap[row + 1][col]; Vector2 edgePixel = vec2(curr_p.x, curr_p.y); curr_d = (curPixel - edgePixel).length(); } // 检查左下方像素 \tif (m_distanceMap[row + 1][col - 1] + 1.414  curr_d) { curr_p = m_positionMap[row + 1][col - 1]; Vector2 edgePixel = vec2(curr_p.x, curr_p.y); curr_d = (curPixel - edgePixel).length(); } m_distanceMap[row][col] = curr_d; m_positionMap[row][col] = curr_p; } } // 3.3 将图形内部的距离改为负值 \tfor (int32 row = 1; row  m_height; ++row) { for (int32 col = 1; col  m_width; ++col) { if (m_pixelMap[row][col] != 0) { m_distanceMap[row][col] *= -1; } } } // 4 根据多边形内部像素到最近边界的距离，修改像素的透明度 \tfor (int32 row = 1; row  m_height; ++row) { for (int32 col = 1; col  m_width; ++col) { float dist = m_distanceMap[row][col]; if (dist  0) { PixelType curColor = m_pixelMap[row][col]; uint32 srcAlpha = Pixel_getA(curColor); float absDist = fabs(dist); float alpha = srcAlpha * (1.f - absDist / m_pixelDist); alpha = alpha  0 ? 0 : alpha; alpha = alpha  255 ? 255 : alpha; PixelType afterColor = Pixel_combineAlpha(curColor, int(alpha)); m_pixelMap[row][col] = afterColor; } } } // 5 更新 Texture \tPixelType* updateData = new PixelType[m_width * m_height]; for (int32 row = 1; row  m_height; ++row) { for (int32 col = 1; col  m_width; ++col) { int32 index = (row - 1) * m_width + col - 1; updateData[index] = m_pixelMap[row][col]; } } Rect area = { 0, 0, m_width, m_height }; m_SDFTex-update(\u0026area, updateData); delete[] updateData; } ",
+  "wordCount" : "726",
+  "inLanguage": "en",
+  "datePublished": "2024-12-15T16:43:15+08:00",
+  "dateModified": "2024-12-15T16:43:15+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      SDF 生成有向距离场图片
+    </h1>
+    <div class="post-meta"><span title='2024-12-15 16:43:15 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><p><a href="https://segmentfault.com/a/1190000041250697">Dead Reckoning算法生成有向距离场</a></p>
+<p>例如原图：</p>
+<p><img loading="lazy" style="margin: auto;" src=".././img/opengl-sdf-1.png" alt="sdf原图"  />
+</p>
+<p>效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度</p>
+<p>C++ 代码：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C++" data-lang="C++"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SDFTexture</span>
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	SDFTexture(rs<span style="color:#f92672">::</span>Texture<span style="color:#f92672">*</span>, <span style="color:#66d9ef">float</span> pixelDist);
+	<span style="color:#f92672">~</span>SDFTexture();
+
+	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">generateSDFTex</span>();
+<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+
+	rs<span style="color:#f92672">::</span>Texture<span style="color:#f92672">*</span> m_SDFTex;
+	int32 m_width, m_height;
+	<span style="color:#66d9ef">float</span> m_pixelDist;
+	std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>PixelType<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> m_pixelMap;
+	std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> m_distanceMap;
+	std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Point16<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span> m_positionMap;
+};
+
+SDFTexture<span style="color:#f92672">::</span>SDFTexture(rs<span style="color:#f92672">::</span>Texture<span style="color:#f92672">*</span> tex, <span style="color:#66d9ef">float</span> pixelDist)
+{
+	m_SDFTex <span style="color:#f92672">=</span> tex;
+	m_width <span style="color:#f92672">=</span> m_SDFTex<span style="color:#f92672">-&gt;</span>width();
+	m_height <span style="color:#f92672">=</span> m_SDFTex<span style="color:#f92672">-&gt;</span>height();
+	m_pixelDist <span style="color:#f92672">=</span> pixelDist;
+	m_distanceMap <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>(m_height <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">float</span><span style="color:#f92672">&gt;</span>(m_width <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, FLT_MAX));
+	m_positionMap <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Point16<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>(m_height <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>Point16<span style="color:#f92672">&gt;</span>(m_width <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, { INT16_MAX, INT16_MAX }));
+	m_pixelMap <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>PixelType<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&gt;</span>(m_height <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, std<span style="color:#f92672">::</span>vector<span style="color:#f92672">&lt;</span>PixelType<span style="color:#f92672">&gt;</span>(m_width <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, Pixel_fromA8R8G8B8(<span style="color:#ae81ff">0x0</span>)));
+}
+
+SDFTexture<span style="color:#f92672">::~</span>SDFTexture()
+{
+	m_SDFTex <span style="color:#f92672">=</span> NULL;
+}
+
+<span style="color:#66d9ef">void</span> SDFTexture<span style="color:#f92672">::</span>generateSDFTex()
+{
+	<span style="color:#75715e">// 1. 从显存中初始化位图
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">*</span> picData <span style="color:#f92672">=</span> m_SDFTex<span style="color:#f92672">-&gt;</span>newPixelDataInCPU();
+	<span style="color:#66d9ef">for</span> (int32 row <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; row <span style="color:#f92672">&lt;=</span> m_height; <span style="color:#f92672">++</span>row)
+	{
+		<span style="color:#66d9ef">for</span> (int32 col <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; col <span style="color:#f92672">&lt;=</span> m_width; <span style="color:#f92672">++</span>col)
+		{
+			<span style="color:#75715e">// 当前像素索引
+</span><span style="color:#75715e"></span>			int32 curPixIndex <span style="color:#f92672">=</span> ((row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> m_width <span style="color:#f92672">+</span> (col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">*</span> <span style="color:#ae81ff">4</span>;
+			m_pixelMap[row][col] <span style="color:#f92672">=</span> Pixel_assemblePixel4(picData[curPixIndex], picData[curPixIndex <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], picData[curPixIndex <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>], picData[curPixIndex <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>]);
+		}
+	}
+	m_SDFTex<span style="color:#f92672">-&gt;</span>freePixelDataInCPU(picData);
+
+	<span style="color:#75715e">// 2. 计算图形边界
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> (int32 row <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; row <span style="color:#f92672">&lt;=</span> m_height; <span style="color:#f92672">++</span>row)
+	{
+		<span style="color:#66d9ef">for</span> (int32 col <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; col <span style="color:#f92672">&lt;=</span> m_width; <span style="color:#f92672">++</span>col)
+		{
+			<span style="color:#75715e">// 当前像素不是完全透明并且与上下左右其中一个像素值不同
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_pixelMap[row][col] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>
+				<span style="color:#f92672">&amp;&amp;</span> (m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][col]
+				<span style="color:#f92672">||</span> m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col]
+				<span style="color:#f92672">||</span> m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row][col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
+				<span style="color:#f92672">||</span> m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]))
+			{
+				<span style="color:#75715e">// 更新 m_distanceMap 和 m_positionMap
+</span><span style="color:#75715e"></span>				m_distanceMap[row][col] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+				m_positionMap[row][col] <span style="color:#f92672">=</span> { int16(col), int16(row) };
+			}
+		}
+	}
+
+	<span style="color:#75715e">// 3. 计算每个像素到轮廓的最近距离
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">// 3.1 正向遍历
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> (int32 row <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; row <span style="color:#f92672">&lt;=</span> m_height; <span style="color:#f92672">++</span>row)
+	{
+		<span style="color:#66d9ef">for</span> (int32 col <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; col <span style="color:#f92672">&lt;=</span> m_width; <span style="color:#f92672">++</span>col)
+		{
+			<span style="color:#66d9ef">float</span> curr_d <span style="color:#f92672">=</span> m_distanceMap[row][col];
+			Point16 curr_p <span style="color:#f92672">=</span> m_positionMap[row][col];
+			Vector2 curPixel <span style="color:#f92672">=</span> vec2(col, row);
+			<span style="color:#75715e">// 检查正左方像素
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_distanceMap[row][col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> curr_d)
+			{
+				curr_p <span style="color:#f92672">=</span> m_positionMap[row][col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+				Vector2 edgePixel <span style="color:#f92672">=</span> vec2(curr_p.x, curr_p.y);
+				curr_d <span style="color:#f92672">=</span> (curPixel <span style="color:#f92672">-</span> edgePixel).length();
+			}
+			<span style="color:#75715e">// 检查左上方像素
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_distanceMap[row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.414</span> <span style="color:#f92672">&lt;</span> curr_d)
+			{
+				curr_p <span style="color:#f92672">=</span> m_positionMap[row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+				Vector2 edgePixel <span style="color:#f92672">=</span> vec2(curr_p.x, curr_p.y);
+				curr_d <span style="color:#f92672">=</span> (curPixel <span style="color:#f92672">-</span> edgePixel).length();
+			}
+			<span style="color:#75715e">// 检查正上方像素
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_distanceMap[row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][col] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> curr_d)
+			{
+				curr_p <span style="color:#f92672">=</span> m_positionMap[row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][col];
+				Vector2 edgePixel <span style="color:#f92672">=</span> vec2(curr_p.x, curr_p.y);
+				curr_d <span style="color:#f92672">=</span> (curPixel <span style="color:#f92672">-</span> edgePixel).length();
+			}
+			<span style="color:#75715e">// 检查右上方像素
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_distanceMap[row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.414</span> <span style="color:#f92672">&lt;</span> curr_d)
+			{
+				curr_p <span style="color:#f92672">=</span> m_positionMap[row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+				Vector2 edgePixel <span style="color:#f92672">=</span> vec2(curr_p.x, curr_p.y);
+				curr_d <span style="color:#f92672">=</span> (curPixel <span style="color:#f92672">-</span> edgePixel).length();
+			}
+			m_distanceMap[row][col] <span style="color:#f92672">=</span> curr_d;
+			m_positionMap[row][col] <span style="color:#f92672">=</span> curr_p;
+		}
+	}
+	<span style="color:#75715e">// 3.2 反向遍历
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> (int32 row <span style="color:#f92672">=</span> m_height; row <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">--</span>row)
+	{
+		<span style="color:#66d9ef">for</span> (int32 col <span style="color:#f92672">=</span> m_width; col <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span>; <span style="color:#f92672">--</span>col)
+		{
+			<span style="color:#66d9ef">float</span> curr_d <span style="color:#f92672">=</span> m_distanceMap[row][col];
+			Point16 curr_p <span style="color:#f92672">=</span> m_positionMap[row][col];
+			Vector2 curPixel <span style="color:#f92672">=</span> vec2(col, row);
+			<span style="color:#75715e">// 检查正右方像素
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_distanceMap[row][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> curr_d)
+			{
+				curr_p <span style="color:#f92672">=</span> m_positionMap[row][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+				Vector2 edgePixel <span style="color:#f92672">=</span> vec2(curr_p.x, curr_p.y);
+				curr_d <span style="color:#f92672">=</span> (curPixel <span style="color:#f92672">-</span> edgePixel).length();
+			}
+			<span style="color:#75715e">// 检查右下方像素
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_distanceMap[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.414</span> <span style="color:#f92672">&lt;</span> curr_d)
+			{
+				curr_p <span style="color:#f92672">=</span> m_positionMap[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+				Vector2 edgePixel <span style="color:#f92672">=</span> vec2(curr_p.x, curr_p.y);
+				curr_d <span style="color:#f92672">=</span> (curPixel <span style="color:#f92672">-</span> edgePixel).length();
+			}
+			<span style="color:#75715e">// 检查正下方像素
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_distanceMap[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> curr_d)
+			{
+				curr_p <span style="color:#f92672">=</span> m_positionMap[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col];
+				Vector2 edgePixel <span style="color:#f92672">=</span> vec2(curr_p.x, curr_p.y);
+				curr_d <span style="color:#f92672">=</span> (curPixel <span style="color:#f92672">-</span> edgePixel).length();
+			}
+			<span style="color:#75715e">// 检查左下方像素
+</span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_distanceMap[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1.414</span> <span style="color:#f92672">&lt;</span> curr_d)
+			{
+				curr_p <span style="color:#f92672">=</span> m_positionMap[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+				Vector2 edgePixel <span style="color:#f92672">=</span> vec2(curr_p.x, curr_p.y);
+				curr_d <span style="color:#f92672">=</span> (curPixel <span style="color:#f92672">-</span> edgePixel).length();
+			}
+			m_distanceMap[row][col] <span style="color:#f92672">=</span> curr_d;
+			m_positionMap[row][col] <span style="color:#f92672">=</span> curr_p;
+		}
+	}
+	<span style="color:#75715e">// 3.3 将图形内部的距离改为负值
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> (int32 row <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; row <span style="color:#f92672">&lt;=</span> m_height; <span style="color:#f92672">++</span>row)
+	{
+		<span style="color:#66d9ef">for</span> (int32 col <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; col <span style="color:#f92672">&lt;=</span> m_width; <span style="color:#f92672">++</span>col)
+		{
+			<span style="color:#66d9ef">if</span> (m_pixelMap[row][col] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>)
+			{
+				m_distanceMap[row][col] <span style="color:#f92672">*=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+			}
+		}
+	}
+
+	<span style="color:#75715e">// 4 根据多边形内部像素到最近边界的距离，修改像素的透明度
+</span><span style="color:#75715e"></span>	<span style="color:#66d9ef">for</span> (int32 row <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; row <span style="color:#f92672">&lt;=</span> m_height; <span style="color:#f92672">++</span>row)
+	{
+		<span style="color:#66d9ef">for</span> (int32 col <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; col <span style="color:#f92672">&lt;=</span> m_width; <span style="color:#f92672">++</span>col)
+		{
+			<span style="color:#66d9ef">float</span> dist <span style="color:#f92672">=</span> m_distanceMap[row][col];
+			<span style="color:#66d9ef">if</span> (dist <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>)
+			{
+				PixelType curColor <span style="color:#f92672">=</span> m_pixelMap[row][col];
+				uint32 srcAlpha <span style="color:#f92672">=</span> Pixel_getA(curColor);
+				<span style="color:#66d9ef">float</span> absDist <span style="color:#f92672">=</span> fabs(dist);
+				<span style="color:#66d9ef">float</span> alpha <span style="color:#f92672">=</span> srcAlpha <span style="color:#f92672">*</span> (<span style="color:#ae81ff">1.f</span> <span style="color:#f92672">-</span> absDist <span style="color:#f92672">/</span> m_pixelDist);
+				alpha <span style="color:#f92672">=</span> alpha <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> alpha; 
+				alpha <span style="color:#f92672">=</span> alpha <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">255</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">255</span> <span style="color:#f92672">:</span> alpha;
+				PixelType afterColor <span style="color:#f92672">=</span> Pixel_combineAlpha(curColor, <span style="color:#66d9ef">int</span>(alpha));
+				
+				m_pixelMap[row][col] <span style="color:#f92672">=</span> afterColor;
+			}
+		}
+	}
+
+	<span style="color:#75715e">// 5 更新 Texture 
+</span><span style="color:#75715e"></span>	PixelType<span style="color:#f92672">*</span> updateData <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> PixelType[m_width <span style="color:#f92672">*</span> m_height];
+	<span style="color:#66d9ef">for</span> (int32 row <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; row <span style="color:#f92672">&lt;=</span> m_height; <span style="color:#f92672">++</span>row)
+	{
+		<span style="color:#66d9ef">for</span> (int32 col <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; col <span style="color:#f92672">&lt;=</span> m_width; <span style="color:#f92672">++</span>col)
+		{
+			int32 index <span style="color:#f92672">=</span> (row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> m_width <span style="color:#f92672">+</span> col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+			updateData[index] <span style="color:#f92672">=</span> m_pixelMap[row][col];
+		}
+	}
+	Rect area <span style="color:#f92672">=</span> { <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, m_width, m_height };
+	m_SDFTex<span style="color:#f92672">-&gt;</span>update(<span style="color:#f92672">&amp;</span>area, updateData);
+	<span style="color:#66d9ef">delete</span>[] updateData;
+}
+</code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/opengl/">OpenGL</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="https://874656645.github.io/posts/288-python-loop-%E8%BF%90%E8%A1%8C-command-%E8%84%9A%E6%9C%AC/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Python Loop 运行 Command 脚本</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

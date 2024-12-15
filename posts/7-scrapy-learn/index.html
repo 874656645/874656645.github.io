@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
 <title>Scrapy Learn | Slow is Smooth and Smooth is Fast</title>
-<meta name="keywords" content="" />
+<meta name="keywords" content="Conda, Python" />
 <meta name="description" content="原文网址
 1. Using a virtual environment (recommended) pip install virtualenv
 详细操作
@@ -14,7 +14,7 @@
 3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
 import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def start_requests(self): urls = [ &#39;http://quotes.toscrape.com/page/1/&#39;, &#39;http://quotes.toscrape.com/page/2/&#39;, ] for url in urls: yield scrapy.">
 <meta name="author" content="Rick Cui">
-<link rel="canonical" href="https://874656645.github.io/posts/7-scrapy-learn/" />
+<link rel="canonical" href="https://874656645.github.io/rick" />
 <meta name="google-site-verification" content="XYZabc" />
 <meta name="yandex-verification" content="XYZabc" />
 <meta name="msvalidate.01" content="XYZabc" />
@@ -62,6 +62,7 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def sta
 <meta property="article:published_time" content="2019-02-15T15:40:48&#43;08:00" />
 <meta property="article:modified_time" content="2019-02-15T15:40:48&#43;08:00" />
 
+
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
 
@@ -102,7 +103,7 @@ import scrapy class QuotesSpider(scrapy.Spider): name = &#34;quotes&#34; def sta
   "name": "Scrapy Learn",
   "description": "原文网址\n1. Using a virtual environment (recommended) pip install virtualenv\n详细操作\n2. Creating a new Scrapy project scrapy startproject tutorial\n3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:\nimport scrapy class QuotesSpider(scrapy.Spider): name = \u0026#34;quotes\u0026#34; def start_requests(self): urls = [ \u0026#39;http://quotes.toscrape.com/page/1/\u0026#39;, \u0026#39;http://quotes.toscrape.com/page/2/\u0026#39;, ] for url in urls: yield scrapy.",
   "keywords": [
-    
+    "Conda", "Python"
   ],
   "articleBody": "原文网址\n1. Using a virtual environment (recommended) pip install virtualenv\n详细操作\n2. Creating a new Scrapy project scrapy startproject tutorial\n3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:\nimport scrapy class QuotesSpider(scrapy.Spider): name = \"quotes\" def start_requests(self): urls = [ 'http://quotes.toscrape.com/page/1/', 'http://quotes.toscrape.com/page/2/', ] for url in urls: yield scrapy.Request(url=url, callback=self.parse) def parse(self, response): page = response.url.split(\"/\")[-2] filename = 'quotes-%s.html' % page with open(filename, 'wb') as f: f.write(response.body) self.log('Saved file %s' % filename) 3.1 Extracting data in our spider import scrapy class QuotesSpider(scrapy.Spider): name = \"quotes\" start_urls = [ 'http://quotes.toscrape.com/page/1/', 'http://quotes.toscrape.com/page/2/', ] def parse(self, response): for quote in response.css('div.quote'): yield { 'text': quote.css('span.text::text').get(), 'author': quote.css('small.author::text').get(), 'tags': quote.css('div.tags a.tag::text').getall(), } 3.2 Storing the scraped data scrapy crawl quotes -o quotes.json\nor\nscrapy crawl quotes -o quotes.jl\n4. Exporting the scraped data using the command line scrapy crawl quotes\n5. Changing spider to recursively follow links import scrapy class QuotesSpider(scrapy.Spider): name = \"quotes\" start_urls = [ 'http://quotes.toscrape.com/page/1/', ] def parse(self, response): for quote in response.css('div.quote'): yield { 'text': quote.css('span.text::text').get(), 'author': quote.css('small.author::text').get(), 'tags': quote.css('div.tags a.tag::text').getall(), } next_page = response.css('li.next a::attr(href)').get() if next_page is not None: next_page = response.urljoin(next_page) yield scrapy.Request(next_page, callback=self.parse) 5.1 A shortcut for creating Requests import scrapy class QuotesSpider(scrapy.Spider): name = \"quotes\" start_urls = [ 'http://quotes.toscrape.com/page/1/', ] def parse(self, response): for quote in response.css('div.quote'): yield { 'text': quote.css('span.text::text').get(), 'author': quote.css('span small::text').get(), 'tags': quote.css('div.tags a.tag::text').getall(), } next_page = response.css('li.next a::attr(href)').get() if next_page is not None: yield response.follow(next_page, callback=self.parse) 6. Using spider arguments scrapy crawl quotes -o quotes-humor.json -a tag=humor\nimport scrapy class QuotesSpider(scrapy.Spider): name = \"quotes\" def start_requests(self): url = 'http://quotes.toscrape.com/' tag = getattr(self, 'tag', None) if tag is not None: url = url + 'tag/' + tag yield scrapy.Request(url, self.parse) def parse(self, response): for quote in response.css('div.quote'): yield { 'text': quote.css('span.text::text').get(), 'author': quote.css('small.author::text').get(), } next_page = response.css('li.next a::attr(href)').get() if next_page is not None: yield response.follow(next_page, self.parse) ",
   "wordCount" : "329",
@@ -361,6 +362,10 @@ or<br>
   </div>
 
   <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/conda/">Conda</a></li>
+      <li><a href="https://874656645.github.io/tags/python/">Python</a></li>
+    </ul>
 <nav class="paginav">
   <a class="prev" href="https://874656645.github.io/posts/8-python-virtualenv/">
     <span class="title">« Prev Page</span>

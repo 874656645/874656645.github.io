@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>OpenGL 重心坐标与插值
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p> 重心坐标在投影下不是不变的，所以如果要获取光栅化后三角形内部像素点的深度，不能使用光栅化后三角形的重心坐标进行插值，而是要先找到像素点中心位置对应的三维世界的三维坐标，在三维世界中进行深度插值计算。  参考：
+ 利用重心坐标平滑插值三角形顶点的任何属性 GAMES101-现代计算机图形学入门-闫令琪  </p>
+  </section>
+  <footer class="entry-footer"><span title='2022-07-09 21:22:21 +0800 CST'>July 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to OpenGL 重心坐标与插值" href="https://874656645.github.io/posts/204-opengl-%E9%87%8D%E5%BF%83%E5%9D%90%E6%A0%87%E4%B8%8E%E6%8F%92%E5%80%BC/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>OpenGL 相机 LookAt 矩阵计算
     </h2>
   </header>

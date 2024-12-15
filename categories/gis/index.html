@@ -145,6 +145,19 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>clip-tif-by-China-polygon
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>利用 QGIS，通过 Python 脚本批量实现根据矢量面数据对 Tiff 栅格数据进行裁切
+import os,sys,json # import gdal # from osgeo import gdal import concurrent.futures from multiprocessing import cpu_count MAX_WORKERS = cpu_count() # * 0.75 # 线程池的最大线程数 # gdal 命令 # &#34;C:\Program Files\QGIS 3.28.10\bin\gdalwarp.exe&#34; -overwrite -s_srs EPSG:4326 -t_srs EPSG:4326 -of GTiff -cutline D:/Work/dem/23M6版本国界/国界面.MIF -cl 国界面 -dstnodata -1000.0 D:/Work/dem/Quanguo_DEM_TIF_300/Quanguo300/quanguo300_06_37.tif D:/Work/dem/Quanguo_DEM_TIF_300/test.tif # 获得当前工作目录 current_path = os.path.abspath(__file__) current_dir = os.path.dirname(current_path) mask_layer_file = r&#34;{}/23M6版本国界/国界面.MIF&#34;.format(current_dir) if os.path.exists(mask_layer_file) == False: msg = &#34;ERROR: {}does not exit....</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-15 11:58:55 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to clip-tif-by-China-polygon" href="https://874656645.github.io/posts/285-clip-tif-by-china-polygon/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Unreal——Subsystem（子系统）
     </h2>
   </header>
@@ -208,24 +221,6 @@ VS Code: Ctrl &#43; Shift &#43; B
   </section>
   <footer class="entry-footer"><span title='2022-10-25 09:48:36 +0800 CST'>October 25, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Cesium4Unreal——Importing Quixel Assets" href="https://874656645.github.io/posts/251-cesium-unreal-importing-quixel-assets/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>第一步：创建一个关卡  创建一个空的 Unreal 关卡； 登录 Cesium ion 并添加 Cesium World Terrain 和 CesiumSunSky； 设置 CesiumGeoreference 的坐标为 San Francisco International Airport (SFO)；
-Origin Latitude = 37.61779
-Origin Longitude = -122.390533
-Origin Height = 0.0  第二步：添加 PlaneTrack 类   在 UE Editor 中添加 C&#43;&#43; 类，选择 Actor 作为父类，点击【下一步】，输入类名 PlaneTrack，点击【创建类】按钮，此时 Visual Studio 会自动打开，如果没有打开，可以通过【工具】——【打开Visual Studio】手动打开项目
-VS 2022 解决方案类似下图：
-  添加下面的代码到 project.Build.cs 文件：
-// Add Cesium for Unreal plugin dependency path PrivateDependencyModuleNames.AddRange(new string[] { &#34;CesiumRuntime&#34; }); // Tell Unreal Engine to use C&#43;&#43;17 CppStandard = CppStandardVersion....</p>
-  </section>
-  <footer class="entry-footer"><span title='2022-10-19 14:25:50 +0800 CST'>October 19, 2022</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Cesium4Unreal——Build a Flight Tracker With Cesium for Unreal" href="https://874656645.github.io/posts/250-cesium-unreal-build-a-flight-tracker-with-cesium-for-unreal/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

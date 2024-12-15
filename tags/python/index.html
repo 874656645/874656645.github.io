@@ -145,6 +145,47 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Python Loop 运行 Command 脚本
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>import sys import os from threading import Timer import datetime print(sys.version) file_name = &#34;D:/gpu.txt&#34; def printHello(): with open(file_name,&#39;a&#39;) as f1: command=&#39;adb shell &#34;cat /sys/kernel/debug/pvr/status | grep GPU&#34;&#39; tt=os.popen(command) tmp=tt.read() res = f&#39;{datetime.datetime.now()}{tmp}&#39;.replace(&#39;\r&#39;,&#39;&#39;).replace(&#39;\n&#39;,&#39;&#39;) print(res) f1.write(res&#43;&#39;\n&#39;) def loop_func(func, second): while True: timer = Timer(second, func) timer.start() timer.join() loop_func(printHello, 1) </p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-15 15:38:34 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Python Loop 运行 Command 脚本" href="https://874656645.github.io/posts/288-python-loop-%E8%BF%90%E8%A1%8C-command-%E8%84%9A%E6%9C%AC/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Python 脚本生成火焰图
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>首先下载脚本代码。
+  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。
+  将 Python 脚本放到 FlameGraph-master 目录下运行。
+  python 脚本：
+import argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding=&#39;gb2312&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}.&#39;) else: print(ret.stderr) print(f&#39;command executed failed: {cmd}.&#39;) return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, &#39;w&#39;) as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding=&#39;utf-8&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}....</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-15 14:54:27 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Python 脚本生成火焰图" href="https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>clip-tif-by-China-polygon
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>利用 QGIS，通过 Python 脚本批量实现根据矢量面数据对 Tiff 栅格数据进行裁切
+import os,sys,json # import gdal # from osgeo import gdal import concurrent.futures from multiprocessing import cpu_count MAX_WORKERS = cpu_count() # * 0.75 # 线程池的最大线程数 # gdal 命令 # &#34;C:\Program Files\QGIS 3.28.10\bin\gdalwarp.exe&#34; -overwrite -s_srs EPSG:4326 -t_srs EPSG:4326 -of GTiff -cutline D:/Work/dem/23M6版本国界/国界面.MIF -cl 国界面 -dstnodata -1000.0 D:/Work/dem/Quanguo_DEM_TIF_300/Quanguo300/quanguo300_06_37.tif D:/Work/dem/Quanguo_DEM_TIF_300/test.tif # 获得当前工作目录 current_path = os.path.abspath(__file__) current_dir = os.path.dirname(current_path) mask_layer_file = r&#34;{}/23M6版本国界/国界面.MIF&#34;.format(current_dir) if os.path.exists(mask_layer_file) == False: msg = &#34;ERROR: {}does not exit....</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-15 11:58:55 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to clip-tif-by-China-polygon" href="https://874656645.github.io/posts/285-clip-tif-by-china-polygon/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Python Conda GDAL 环境搭建
     </h2>
   </header>
@@ -178,38 +219,11 @@ source conda activate python34 // for Linux &amp; Mac...</p>
   <footer class="entry-footer"><span title='2019-06-04 10:16:11 +0800 CST'>June 4, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Conda Learn" href="https://874656645.github.io/posts/14-conda-learn/"></a>
 </article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Crawl Pictures From Website
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &#34;dmd&#34; save_path = &#39;E:/python/manhuadao/pics/&#39; __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {&#39;User-Agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&#39;} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath(&#39;//div[@class=&#34;read-bottom&#34;]//a[@class=&#34;next&#34;]/@href&#39;) # print(next) for href in next_urls: nexturl = href....</p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-28 15:00:16 +0800 CST'>February 28, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Crawl Pictures From Website" href="https://874656645.github.io/posts/9-crawl-pictures-from-website/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>Python Virtualenv
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>原文网址
-在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell1、使用pip安装 pip install virtualenv
-2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv 3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env
-或者
-virtualenv env
-此命令会在当前目录下创建一个env目录
-4、启动虚拟环境 env\Scripts\activate
-5、离开虚拟环境 deactivate
-6、删除env文件夹即可 </p>
-  </section>
-  <footer class="entry-footer"><span title='2019-02-16 11:20:20 +0800 CST'>February 16, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Python Virtualenv" href="https://874656645.github.io/posts/8-python-virtualenv/"></a>
-</article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://874656645.github.io/tags/python/page/2/">Next Page »</a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">

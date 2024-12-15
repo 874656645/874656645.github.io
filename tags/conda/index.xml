@@ -40,5 +40,19 @@ set CONDA_FORCE_32BIT= // 指定 conda 的工作平台为 x64
 source conda activate python34 // for Linux &amp;amp; Mac</description>
     </item>
     
+    <item>
+      <title>Scrapy Learn</title>
+      <link>https://874656645.github.io/posts/7-scrapy-learn/</link>
+      <pubDate>Fri, 15 Feb 2019 15:40:48 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/7-scrapy-learn/</guid>
+      <description>原文网址
+1. Using a virtual environment (recommended) pip install virtualenv
+详细操作
+2. Creating a new Scrapy project scrapy startproject tutorial
+3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
+import scrapy class QuotesSpider(scrapy.Spider): name = &amp;#34;quotes&amp;#34; def start_requests(self): urls = [ &amp;#39;http://quotes.toscrape.com/page/1/&amp;#39;, &amp;#39;http://quotes.toscrape.com/page/2/&amp;#39;, ] for url in urls: yield scrapy.</description>
+    </item>
+    
   </channel>
 </rss>

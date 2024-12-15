@@ -160,73 +160,81 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>数据结构与算法——合并 K 个已排序的链表
+    <h2>数据结构与算法——括号生成
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>问题链接
+思路： 递归的使用
+左边括号数量小于总数
+右边括号数量比左边括号数量少
+class Solution { int sn; public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param n int整型 * @return string字符串vector */ vector&lt;string&gt; generateParenthesis(int n) { // write code here  vector&lt;string&gt; res; string tmp; sn = n; genP(0, 0, tmp, res); return res; } void genP(int left, int right, string tmp, vector&lt;string&gt;&amp; res){ if (left == sn &amp;&amp; right == sn) { res.push_back(tmp); return; } if (left &lt; sn) { genP(left&#43;1, right, tmp&#43;&#39;(&#39;, res); } if (right &lt; left) { genP(left, right&#43;1, tmp&#43;&#39;)&#39;, res); } } }; </p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-13 14:52:14 +0800 CST'>December 13, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——括号生成" href="https://874656645.github.io/posts/284-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>数据结构与算法——矩阵的最小路径和
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>问题链接
+思路： 动态规划
+#include &lt;climits&gt;class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param matrix int整型vector&lt;vector&lt;&gt;&gt; the matrix * @return int整型 */ int minPathSum(vector&lt;vector&lt;int&gt; &gt;&amp; matrix) { // write code here  auto rowNum = matrix.size(); auto colNum = matrix[0].size(); vector&lt;vector&lt;int&gt;&gt; sumMat(rowNum, vector&lt;int&gt;(colNum)); sumMat[0][0] = matrix[0][0]; // 初始化首行  for (auto i = 1; i != colNum; &#43;&#43;i) { sumMat[0][i] = sumMat[0][i - 1] &#43; matrix[0][i]; } // 初始化首列  for (auto i = 1; i !...</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-13 14:33:39 +0800 CST'>December 13, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——矩阵的最小路径和" href="https://874656645.github.io/posts/283-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%9F%A9%E9%98%B5%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>数据结构与算法——旋转数组的最小数字
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>问题链接
+要求： 空间复杂度：O(1) ，时间复杂度：O(logn)
+思路： 分治
+方法一：二分查找，如果左半边没有找到 nums[i] &gt; nums[i&#43;1] 的逆序对，则查找右半边的部分，如果都没找到，说明序列是有序的，直接返回索引 0 即可，空间复杂度：O(logn) ，时间复杂度：O(logn)
+方法二：二分查找，如果 nums[mid] &gt; nums[high] 则向右半边查找，如果 nums[mid] &lt; nums[high] 则在左半边查找，如果相等则 high - 1 逐个判断
+class Solution { // 方案一  int calRotateIndex(vector&lt;int&gt;&amp; nums, int l, int h) { if(l &gt;= h) return -1; int mid = (l &#43; h) / 2; if (nums[mid] &gt; nums[mid&#43;1]) { return mid&#43;1; } int res = calRotateIndex(nums, l, mid); if (res == -1) { res = calRotateIndex(nums, mid &#43; 1, h); } return res; } // 方案二  int calRotateIndex2(vector&lt;int&gt;&amp; nums, int l, int h) { while (l &lt; h) { int mid = (l &#43; h) / 2; if (nums[mid] &lt; nums[h]) { h = mid; } else if (nums[mid] &gt; nums[h]) { l = mid &#43; 1; } else { h -= 1; } } return l; } public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param nums int整型vector * @return int整型 */ int minNumberInRotateArray(vector&lt;int&gt;&amp; nums) { // write code here  int l = 0, h = nums....</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-12 21:35:49 +0800 CST'>December 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——旋转数组的最小数字" href="https://874656645.github.io/posts/282-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>数据结构与算法——数组中的逆序对
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>问题链接
+要求： 空间复杂度 O(n)，时间复杂度 O(nlogn)
+思路： 归并排序，在合并的阶段统计逆序对个数
+#include &lt;vector&gt;class Solution { int count{0}; void mergeSort(vector&lt;int&gt;&amp; nums, int l, int h){ if(l &gt;= h) return; int mid = l &#43; (h - l) / 2; mergeSort(nums, l, mid); mergeSort(nums, mid&#43;1, h); merge(nums, l, mid, h); } void merge(vector&lt;int&gt;&amp; nums, int l, int mid, int h){ vector&lt;int&gt; tmp(h - l &#43; 1); int s = l; int i = 0; int j = mid &#43; 1; while (l &lt;= mid &amp;&amp; j &lt;= h) { if(nums[l] &lt;= nums[j]){ tmp[i] = nums[l]; l&#43;&#43;; i&#43;&#43;; }else{ tmp[i] = nums[j]; j&#43;&#43;; i&#43;&#43;; // 统计逆序对  count &#43;= mid - l &#43; 1; count %= 1000000007; } } while (l &lt;= mid) { tmp[i&#43;&#43;] = nums[l&#43;&#43;]; } while (j &lt;= h) { tmp[i&#43;&#43;] = nums[j&#43;&#43;]; } for (auto it : tmp) { nums[s&#43;&#43;] = it; } } public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param nums int整型vector * @return int整型 */ int InversePairs(vector&lt;int&gt;&amp; nums) { // write code here  if(nums....</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-12 21:27:26 +0800 CST'>December 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——数组中的逆序对" href="https://874656645.github.io/posts/281-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2>数据结构与算法——单链表的排序
     </h2>
   </header>
   <section class="entry-content">
     <p>问题链接
 要求： 时间复杂度 O(nlogn)
-思路： 分治法，归并排序的思想
-注意： 空集合的情况
-/** * struct ListNode { *	int val; *	struct ListNode *next; *	ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { ListNode* mergeList(vector&lt;ListNode*&gt;&amp; lists, int l, int h){ if(l &gt;= h) return lists[l]; int mid = (l &#43; h) / 2; ListNode* left = mergeList(lists, l, mid); ListNode* right = mergeList(lists, mid&#43;1, h); ListNode* head = new ListNode(0); auto tmp = head; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left ?...</p>
+思路： 分治，归并排序思想
+快慢指针，计算链表的中间节点
+或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表
+/** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-&gt;next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next)  // 如果 f = head-&gt;next（链表中有偶数个元素）  // while(f &amp;&amp; f-&gt;next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } */ ListNode* s = head, * f = head-&gt;next; // 偶数个元素  while(f &amp;&amp; f-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } ListNode* mid = s-&gt;next; s-&gt;next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left == nullptr ?...</p>
   </section>
-  <footer class="entry-footer"><span title='2024-12-12 20:41:48 +0800 CST'>December 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——合并 K 个已排序的链表" href="https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——Hamiltonian Cycles
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>BackTracking（DFS &#43; BoundingFunction）
-#include &lt;iostream&gt; using namespace std; int n = 5; int x[6] = {0,1}; int G[6][6] = { {0,0,0,0,0,0}, {0,0,1,1,0,1}, {0,1,0,1,1,1}, {0,1,1,0,1,0}, {0,0,1,1,0,1}, {0,1,1,0,1,0} }; void NextVetex(int k){ do { x[k] = (x[k] &#43; 1) % (n &#43; 1); if(x[k] == 0){ return; } // 确保和前一个节点联通  if(G[x[k - 1]][x[k]] != 0){ int j = 1; // 确保节点不会重复  for(; j &lt; k; &#43;&#43;j){ if(x[j] == x[k]){ break; } } if(j == k){ // 如果不是最后一个节点  // 或者是最后一个节点，并且最后一个节点和第一个节点是联通的  if((k &lt; n) || (k == n &amp;&amp; G[x[n]][x[1]] !...</p>
-  </section>
-  <footer class="entry-footer"><span title='2024-10-12 20:41:33 +0800 CST'>October 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——Hamiltonian Cycles" href="https://874656645.github.io/posts/278-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-hamiltonian-cycles/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——Permutation a String
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>state space tree
-Back Tracking (DFS)
-brute force
-recursion
-Branch and Bound (BFS)
-算法一：
-#include &lt;iostream&gt;using namespace std; void permutation(char S[], int k){ static int A[10] = {0}; static char res[10] = {0}; if(S[k] == &#39;\0&#39;){ res[k] = &#39;\0&#39;; printf(&#34;%s\n&#34;, res); } else{ for(int i = 0; S[i] != &#39;\0&#39;; &#43;&#43;i){ if(A[i] == 0){ A[i] = 1; res[k] = S[i]; permutation(S, k&#43;1); A[i] = 0; } } } } int main() { char S[] = &#34;ABC&#34;; permutation(S, 0); return 0; } output:...</p>
-  </section>
-  <footer class="entry-footer"><span title='2024-09-27 22:06:51 +0800 CST'>September 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——Permutation a String" href="https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——Shell Sort
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>#include &lt;iostream&gt; void shellSort(int A[], int n){ int gap, i, j, temp; for(gap = n/2; gap &gt;= 1; gap /= 2){ for(i = gap; i &lt; n; &#43;&#43;i){ temp = A[i]; j = i - gap; while(j &gt;= 0 &amp;&amp; A[j] &gt; temp){ A[j&#43;gap] = A[j]; j = j - gap; } A[j &#43; gap] = temp; } } } int main() { int A[] = {8, 3, 7, 4, 9, 2, 6, 5, 1, 11, 10}; int n = 11; shellSort(A, n); for(int i = 0; i &lt; n; &#43;&#43;i){ std::cout&lt;&lt;A[i] &lt;&lt; &#34; &#34;; } return 0; } </p>
-  </section>
-  <footer class="entry-footer"><span title='2024-06-21 21:40:45 +0800 CST'>June 21, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——Shell Sort" href="https://874656645.github.io/posts/276-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-shell-sort/"></a>
-</article>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2>数据结构与算法——Merge Sort
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p>#include &lt;iostream&gt; void Merge(int A[], int l, int mid, int h){ int i, j, k; i = l; j = mid &#43; 1; k = l; int B[h&#43;1]; while(i &lt;= mid &amp;&amp; j &lt;= h){ if(A[i] &lt; A[j]){ B[k&#43;&#43;] = A[i&#43;&#43;]; } else{ B[k&#43;&#43;] = A[j&#43;&#43;]; } } for(; i &lt;= mid; i&#43;&#43;){ B[k&#43;&#43;] = A[i]; } for(; j &lt;= h; j&#43;&#43;){ B[k&#43;&#43;] = A[j]; } for(i = l; i &lt;= h; i&#43;&#43;){ A[i] = B[i]; } } // 迭代 void IMergeSort(int A[], int n) { int p, i, l, mid, h; for(p = 2; p &lt;= n; p = p * 2){ for(i = 0; i &#43; p - 1 &lt; n; i = i &#43; p){ l = i; h = i &#43; p -1; mid = (l &#43; h) / 2; Merge(A, l, mid, h); } if(i &lt; n){ l = i; h = n-1; mid = (l&#43;h)/2; Merge(A,l,mid,h); } for(int i = 0; i &lt; n; &#43;&#43;i){ std::cout&lt;&lt;A[i] &lt;&lt; &#34; &#34;; } std::cout &lt;&lt; &#34;\n&#34;; } if(p/2 &lt; n){ Merge(A, 0, p/2-1, n-1); } } // 递归 void MergeSort(int A[], int l, int h){ int mid; if(l &lt; h){ mid = (l &#43; h) / 2; MergeSort(A, l, mid); MergeSort(A, mid&#43;1, h); Merge(A, l, mid, h); } } int main() { int A[] = {8, 3, 7, 4, 9, 2, 6, 5, 1, 11, 10}; int n = 11; IMergeSort(A, n); for(int i = 0; i &lt; n; &#43;&#43;i){ std::cout&lt;&lt;A[i] &lt;&lt; &#34; &#34;; } return 0; } 输出：...</p>
-  </section>
-  <footer class="entry-footer"><span title='2024-06-18 21:37:23 +0800 CST'>June 18, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——Merge Sort" href="https://874656645.github.io/posts/275-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-merge-sort/"></a>
+  <footer class="entry-footer"><span title='2024-12-12 21:11:55 +0800 CST'>December 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——单链表的排序" href="https://874656645.github.io/posts/280-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8E%92%E5%BA%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

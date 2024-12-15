@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>FlameGraph on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/tags/flamegraph/</link>
+    <description>Recent content in FlameGraph on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 15 Dec 2024 14:54:27 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/flamegraph/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python 脚本生成火焰图</title>
+      <link>https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/</link>
+      <pubDate>Sun, 15 Dec 2024 14:54:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/</guid>
+      <description>首先下载脚本代码。
+  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。
+  将 Python 脚本放到 FlameGraph-master 目录下运行。
+  python 脚本：
+import argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding=&amp;#39;gb2312&amp;#39;) if ret.returncode == 0: print(f&amp;#39;command executed successfully: {cmd}.&amp;#39;) else: print(ret.stderr) print(f&amp;#39;command executed failed: {cmd}.&amp;#39;) return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, &amp;#39;w&amp;#39;) as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding=&amp;#39;utf-8&amp;#39;) if ret.returncode == 0: print(f&amp;#39;command executed successfully: {cmd}.</description>
+    </item>
+    
+  </channel>
+</rss>

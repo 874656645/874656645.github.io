@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Python 脚本生成火焰图 | Slow is Smooth and Smooth is Fast</title>
+<meta name="keywords" content="Python, FlameGraph" />
+<meta name="description" content="首先下载脚本代码。
+  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。
+  将 Python 脚本放到 FlameGraph-master 目录下运行。
+  python 脚本：
+import argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding=&#39;gb2312&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}.&#39;) else: print(ret.stderr) print(f&#39;command executed failed: {cmd}.&#39;) return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, &#39;w&#39;) as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding=&#39;utf-8&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}.">
+<meta name="author" content="Rick Cui">
+<link rel="canonical" href="https://874656645.github.io/rick" />
+<meta name="google-site-verification" content="XYZabc" />
+<meta name="yandex-verification" content="XYZabc" />
+<meta name="msvalidate.01" content="XYZabc" />
+
+<script defer src="https://hm.baidu.com/hm.js?c4f60a311141f59e46a3c3223ff62c0b"></script>
+<link crossorigin="anonymous" href="/assets/css/stylesheet.min.a8d96e9fdcfb04de6ce842f2e3dc4f0df9ca7b9e31b230fd17e775ab09b8c508.css" integrity="sha256-qNlun9z7BN5s6ELy49xPDfnKe54xsjD9F&#43;d1qwm4xQg=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.min.7680afc38aa6b15ddf158a4f3780b7b1f7dde7e91d26f073e6229bb7a0793c92.js" integrity="sha256-doCvw4qmsV3fFYpPN4C3sffd5&#43;kdJvBz5iKbt6B5PJI="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://874656645.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://874656645.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://874656645.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://874656645.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://874656645.github.io/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-123-45', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script><meta property="og:title" content="Python 脚本生成火焰图" />
+<meta property="og:description" content="首先下载脚本代码。
+  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。
+  将 Python 脚本放到 FlameGraph-master 目录下运行。
+  python 脚本：
+import argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding=&#39;gb2312&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}.&#39;) else: print(ret.stderr) print(f&#39;command executed failed: {cmd}.&#39;) return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, &#39;w&#39;) as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding=&#39;utf-8&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/" /><meta property="og:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-12-15T14:54:27&#43;08:00" />
+<meta property="article:modified_time" content="2024-12-15T14:54:27&#43;08:00" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E"/>
+
+<meta name="twitter:title" content="Python 脚本生成火焰图"/>
+<meta name="twitter:description" content="首先下载脚本代码。
+  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。
+  将 Python 脚本放到 FlameGraph-master 目录下运行。
+  python 脚本：
+import argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding=&#39;gb2312&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}.&#39;) else: print(ret.stderr) print(f&#39;command executed failed: {cmd}.&#39;) return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, &#39;w&#39;) as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding=&#39;utf-8&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Posts",
+      "item": "https://874656645.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Python 脚本生成火焰图",
+      "item": "https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Python 脚本生成火焰图",
+  "name": "Python 脚本生成火焰图",
+  "description": "首先下载脚本代码。\n  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。\n  将 Python 脚本放到 FlameGraph-master 目录下运行。\n  python 脚本：\nimport argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding=\u0026#39;gb2312\u0026#39;) if ret.returncode == 0: print(f\u0026#39;command executed successfully: {cmd}.\u0026#39;) else: print(ret.stderr) print(f\u0026#39;command executed failed: {cmd}.\u0026#39;) return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, \u0026#39;w\u0026#39;) as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding=\u0026#39;utf-8\u0026#39;) if ret.returncode == 0: print(f\u0026#39;command executed successfully: {cmd}.",
+  "keywords": [
+    "Python", "FlameGraph"
+  ],
+  "articleBody": "  首先下载脚本代码。\n  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。\n  将 Python 脚本放到 FlameGraph-master 目录下运行。\n  python 脚本：\nimport argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding='gb2312') if ret.returncode == 0: print(f'command executed successfully: {cmd}.') else: print(ret.stderr) print(f'command executed failed: {cmd}.') return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, 'w') as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding='utf-8') if ret.returncode == 0: print(f'command executed successfully: {cmd}.') else: print(ret.stderr) print(f'command executed failed: {cmd}.') return ret def push_simpleperf_to_device(ndk_path): simpleperf_path_on_device = '/data/local/tmp/simpleperf' adb_command = f'adb shell ls -l {simpleperf_path_on_device}' ret = execute_cmd(adb_command) if ret.returncode == 0: print(f'{simpleperf_path_on_device}exists') else: simpleperf_path = f'{ndk_path}/simpleperf/bin/android/arm64/simpleperf' if os.path.exists(simpleperf_path): adb_command = f'adb push {simpleperf_path}{simpleperf_path_on_device}' ret = execute_cmd(adb_command) if ret.returncode == 0: print(f'{simpleperf_path}pushed to {simpleperf_path_on_device}') else: print(f'{simpleperf_path}push failed') exit() else: print(f'{simpleperf_path}not exists') exit() # 根据焦点的 app 获取包名和 activity def get_package_name_and_activity(): adb_command = 'adb shell \"dumpsys window | grep mCurrentFocus\"' ret = execute_cmd(adb_command) print(f'CurrentFocus APP window is {ret.stdout}') if ret.returncode != 0: print(ret.stderr) print('get package name and activity failed.') exit() package_name_and_activity = ret.stdout.split(' ')[-1] package_name = package_name_and_activity.split('/')[0] activity_name = package_name_and_activity.split('/')[1][:-2] return package_name, activity_name # 根据 perf.data 生成火焰图 def generate_flame_graph_by_perf_data(ndk_path): if not os.path.exists('perf.data'): print('perf.data not exists') exit() adb_command = f'python {ndk_path}/simpleperf/report_sample.py' file_name = '2.perf' ret = execute_cmd_redirect_to_file(adb_command, file_name) if ret.returncode == 0: print(f'{file_name}generated successfully.') else: print(ret.stderr) print(f'{file_name}generated failed.') exit() adb_command = 'perl stackcollapse-perf.pl 2.perf' file_name = '3.fold' ret = execute_cmd_redirect_to_file(adb_command, file_name) if ret.returncode == 0: print(f'{file_name}generated successfully.') else: print(ret.stderr) print(f'{file_name}generated failed.') exit() adb_command = 'perl flamegraph.pl 3.fold' file_name = '4.svg' ret = execute_cmd_redirect_to_file(adb_command, file_name) if ret.returncode == 0: print(f'{file_name}generated successfully.') print('Flame graph generated successfully.') else: print(ret.stderr) print(f'{file_name}generated failed.') print('Flame graph generated failed.') exit() def generate_perf_data_by_pid(args): # 获取应用的 pid adb_command = f'adb shell pidof {args.app}' ret = execute_cmd(adb_command) if ret.returncode != 0: print(ret.stderr) print(f'get the pid of {args.app}failed.') exit() pid = int(ret.stdout) print(f'the pid of {args.app}is {pid}') script = f'{args.ndk_path}/simpleperf/app_profiler.py' adb_command = f'python {script}--pid {pid}-r \"-e task-clock:u -f 100 -g --duration {args.duration}\" --ndk_path {args.ndk_path}' ret = execute_cmd(adb_command) if ret.returncode == 0: print(f'perf.data generated successfully based on app pid {args.app}.') else: print(ret.stderr) print(f'perf.data generated failed based on app pid {pid}.') def generate_perf_data_by_app_name(args): # 根据当前焦点的 app 获取包名和 activity package_name, activity_name = get_package_name_and_activity() print(package_name, activity_name) script = f'{args.ndk_path}/simpleperf/app_profiler.py' adb_command = f'python {script}-p {package_name}-a {activity_name}-r \"-e task-clock:u -f 100 -g --duration {args.duration}\" --ndk_path {args.ndk_path}' ret = execute_cmd(adb_command) if ret.returncode == 0: print('perf.data generated successfully based on package name and activity.') else: print(ret.stderr) print('perf.data generated failed based on package name and activity.') if __name__ == \"__main__\": parser = argparse.ArgumentParser() parser.add_argument('-p', '--app', type=str, default = None, help=\"\"\"Profile an Android app, given the package name. Like `-p com.example.android.myapp`.\"\"\") parser.add_argument('-d', '--duration', type=int, default = 60, help=\"\"\"Profile an Android app, given the duration in seconds. Like `-d 180`.\"\"\") parser.add_argument('-np', '--ndk_path', type=str, default = None, help=\"\"\"Set the path of a ndk release. app_profiler.py needs some tools in ndk, like readelf.\"\"\") args = parser.parse_args() print(args.app) print(args.duration) print(args.ndk_path) if args.app is None: print('Please input the package name.') exit() if os.path.exists('perf.data'): os.remove('perf.data') if os.path.exists('2.perf'): os.remove('2.perf') if os.path.exists('3.fold'): os.remove('3.fold') if os.path.exists('4.svg'): os.remove('4.svg') # 尝试 root 并 remount adb_root = True adb_command = 'adb root' ret = execute_cmd(adb_command) if ret.stdout.find('adbd cannot run as root') != -1: print('adb root failed.') adb_root = False if adb_root: adb_command = 'adb remount' ret = execute_cmd(adb_command) # 判断 /data/local/tmp/simpleperf 文件是否存在 # 如果不存在，则将电脑本地的 simpleperf 拷贝到设备上 push_simpleperf_to_device(args.ndk_path) if adb_root: generate_perf_data_by_pid(args) else: generate_perf_data_by_app_name(args) # 根据 perf.data 生成火焰图 generate_flame_graph_by_perf_data(args.ndk_path) 注意： 需要 Android Studio 中 simpleperf 的支持，也可将 simpleperf 目录拷贝到 FlameGraph-master 目录，然后进入 simpleperf 文件夹下通过 cmd 命令执行以下步骤：\n  记录数据 python app_profiler.py -p com.xxx.xxx -a com.xxx.xxx.MainActivity -r \"-e task-clock:u -f 100 -g --duration 600\"\n  执行 python report_sample.py ../2.perf 转换数据\n  进入 FlameGraph-master 文件夹下通过 cmd 命令进入命令行\n  执行 perl stackcollapse-perf.pl 2.perf 3.fold 转换数据\n  数据转换完成执行 perl flamegraph.pl 3.fold 4.svg 生成火焰图\n  ",
+  "wordCount" : "595",
+  "inLanguage": "en",
+  "datePublished": "2024-12-15T14:54:27+08:00",
+  "dateModified": "2024-12-15T14:54:27+08:00",
+  "author":{
+    "@type": "Person",
+    "name": "Rick Cui"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Slow is Smooth and Smooth is Fast",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://874656645.github.io/favicon.ico"
+    }
+  }
+}
+</script>
+
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://874656645.github.io" accesskey="h" title="Welcome Aboard (Alt + H)">Welcome Aboard</a>
+            <span class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </span>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://874656645.github.io/archives" title="Archive">
+                    <span>Archive</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/categories" title="Categories">
+                    <span>Categories</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/search/" title="Search (Alt &#43; /)" accesskey=/>
+                    <span>Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/series" title="Series">
+                    <span>Series</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://874656645.github.io/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://874656645.github.io">Home</a>&nbsp;»&nbsp;<a href="https://874656645.github.io/posts/">Posts</a></div>
+    <h1 class="post-title">
+      Python 脚本生成火焰图
+    </h1>
+    <div class="post-meta"><span title='2024-12-15 14:54:27 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui
+
+</div>
+  </header> 
+
+  <div class="post-content"><ol>
+<li>
+<p>首先<a href="https://github.com/brendangregg/FlameGraph">下载</a>脚本代码。</p>
+</li>
+<li>
+<p>安装 <code>ActivePerl_5.16.2.3010812913.msi</code> 并配置环境变量。</p>
+</li>
+<li>
+<p>将 <code>Python</code> 脚本放到 <code>FlameGraph-master</code> 目录下运行。</p>
+</li>
+</ol>
+<p>python 脚本：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> argparse
+<span style="color:#f92672">import</span> subprocess
+<span style="color:#f92672">import</span> sys
+<span style="color:#f92672">import</span> os
+
+print(sys<span style="color:#f92672">.</span>version)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute_cmd</span>(cmd):
+    ret <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>run(cmd, capture_output<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, shell<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gb2312&#39;</span>)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;command executed successfully: </span><span style="color:#e6db74">{</span>cmd<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        print(ret<span style="color:#f92672">.</span>stderr)
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;command executed failed: </span><span style="color:#e6db74">{</span>cmd<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#39;</span>)
+    <span style="color:#66d9ef">return</span> ret
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute_cmd_redirect_to_file</span>(cmd, file_name):
+    <span style="color:#66d9ef">with</span> open(file_name, <span style="color:#e6db74">&#39;w&#39;</span>) <span style="color:#66d9ef">as</span> f:
+        ret <span style="color:#f92672">=</span> subprocess<span style="color:#f92672">.</span>run(cmd, text<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, stdout<span style="color:#f92672">=</span>f, shell<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;command executed successfully: </span><span style="color:#e6db74">{</span>cmd<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        print(ret<span style="color:#f92672">.</span>stderr)
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;command executed failed: </span><span style="color:#e6db74">{</span>cmd<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#39;</span>)
+    <span style="color:#66d9ef">return</span> ret
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">push_simpleperf_to_device</span>(ndk_path):
+    simpleperf_path_on_device <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/data/local/tmp/simpleperf&#39;</span>
+    adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;adb shell ls -l </span><span style="color:#e6db74">{</span>simpleperf_path_on_device<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+    ret <span style="color:#f92672">=</span> execute_cmd(adb_command)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>simpleperf_path_on_device<span style="color:#e6db74">}</span><span style="color:#e6db74"> exists&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        simpleperf_path <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>ndk_path<span style="color:#e6db74">}</span><span style="color:#e6db74">/simpleperf/bin/android/arm64/simpleperf&#39;</span>
+        <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(simpleperf_path):
+            adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;adb push </span><span style="color:#e6db74">{</span>simpleperf_path<span style="color:#e6db74">}</span><span style="color:#e6db74"> </span><span style="color:#e6db74">{</span>simpleperf_path_on_device<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+            ret <span style="color:#f92672">=</span> execute_cmd(adb_command)
+            <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>simpleperf_path<span style="color:#e6db74">}</span><span style="color:#e6db74"> pushed to </span><span style="color:#e6db74">{</span>simpleperf_path_on_device<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+            <span style="color:#66d9ef">else</span>:
+                print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>simpleperf_path<span style="color:#e6db74">}</span><span style="color:#e6db74"> push failed&#39;</span>)
+                exit()
+        <span style="color:#66d9ef">else</span>:
+            print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>simpleperf_path<span style="color:#e6db74">}</span><span style="color:#e6db74"> not exists&#39;</span>)
+            exit()
+<span style="color:#75715e"># 根据焦点的 app 获取包名和 activity</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_package_name_and_activity</span>():
+    adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;adb shell &#34;dumpsys window | grep mCurrentFocus&#34;&#39;</span>
+    ret <span style="color:#f92672">=</span> execute_cmd(adb_command)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;CurrentFocus APP window is </span><span style="color:#e6db74">{</span>ret<span style="color:#f92672">.</span>stdout<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+        print(ret<span style="color:#f92672">.</span>stderr)
+        print(<span style="color:#e6db74">&#39;get package name and activity failed.&#39;</span>)
+        exit()
+    package_name_and_activity <span style="color:#f92672">=</span> ret<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)[<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]
+    package_name <span style="color:#f92672">=</span> package_name_and_activity<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;/&#39;</span>)[<span style="color:#ae81ff">0</span>]
+    activity_name <span style="color:#f92672">=</span> package_name_and_activity<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;/&#39;</span>)[<span style="color:#ae81ff">1</span>][:<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>]
+    <span style="color:#66d9ef">return</span> package_name, activity_name
+
+<span style="color:#75715e"># 根据 perf.data 生成火焰图</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_flame_graph_by_perf_data</span>(ndk_path):
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;perf.data&#39;</span>):
+        print(<span style="color:#e6db74">&#39;perf.data not exists&#39;</span>)
+        exit()
+    
+    adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;python </span><span style="color:#e6db74">{</span>ndk_path<span style="color:#e6db74">}</span><span style="color:#e6db74">/simpleperf/report_sample.py&#39;</span>
+    file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;2.perf&#39;</span>
+    ret <span style="color:#f92672">=</span> execute_cmd_redirect_to_file(adb_command, file_name)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>file_name<span style="color:#e6db74">}</span><span style="color:#e6db74"> generated successfully.&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        print(ret<span style="color:#f92672">.</span>stderr)
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>file_name<span style="color:#e6db74">}</span><span style="color:#e6db74"> generated failed.&#39;</span>)
+        exit()
+    adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;perl stackcollapse-perf.pl 2.perf&#39;</span>
+    file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;3.fold&#39;</span>
+    ret <span style="color:#f92672">=</span> execute_cmd_redirect_to_file(adb_command, file_name)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>file_name<span style="color:#e6db74">}</span><span style="color:#e6db74"> generated successfully.&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        print(ret<span style="color:#f92672">.</span>stderr)
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>file_name<span style="color:#e6db74">}</span><span style="color:#e6db74"> generated failed.&#39;</span>)
+        exit()
+    adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;perl flamegraph.pl 3.fold&#39;</span>
+    file_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;4.svg&#39;</span>
+    ret <span style="color:#f92672">=</span> execute_cmd_redirect_to_file(adb_command, file_name)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>file_name<span style="color:#e6db74">}</span><span style="color:#e6db74"> generated successfully.&#39;</span>)
+        print(<span style="color:#e6db74">&#39;Flame graph generated successfully.&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        print(ret<span style="color:#f92672">.</span>stderr)
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>file_name<span style="color:#e6db74">}</span><span style="color:#e6db74"> generated failed.&#39;</span>)
+        print(<span style="color:#e6db74">&#39;Flame graph generated failed.&#39;</span>)
+        exit()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_perf_data_by_pid</span>(args):
+    <span style="color:#75715e"># 获取应用的 pid</span>
+    adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;adb shell pidof </span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>app<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+    ret <span style="color:#f92672">=</span> execute_cmd(adb_command)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>:
+        print(ret<span style="color:#f92672">.</span>stderr)
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;get the pid of </span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>app<span style="color:#e6db74">}</span><span style="color:#e6db74"> failed.&#39;</span>)
+        exit()
+    pid <span style="color:#f92672">=</span> int(ret<span style="color:#f92672">.</span>stdout)
+    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;the pid of </span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>app<span style="color:#e6db74">}</span><span style="color:#e6db74"> is </span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)
+    script <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>ndk_path<span style="color:#e6db74">}</span><span style="color:#e6db74">/simpleperf/app_profiler.py&#39;</span>
+    adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;python </span><span style="color:#e6db74">{</span>script<span style="color:#e6db74">}</span><span style="color:#e6db74"> --pid </span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74"> -r &#34;-e task-clock:u -f 100 -g --duration </span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>duration<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; --ndk_path </span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>ndk_path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+    ret <span style="color:#f92672">=</span> execute_cmd(adb_command)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;perf.data generated successfully based on app pid </span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>app<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        print(ret<span style="color:#f92672">.</span>stderr)
+        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;perf.data generated failed based on app pid </span><span style="color:#e6db74">{</span>pid<span style="color:#e6db74">}</span><span style="color:#e6db74">.&#39;</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">generate_perf_data_by_app_name</span>(args):
+    <span style="color:#75715e"># 根据当前焦点的 app 获取包名和 activity</span>
+    package_name, activity_name <span style="color:#f92672">=</span> get_package_name_and_activity()
+    print(package_name, activity_name)
+    script <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>ndk_path<span style="color:#e6db74">}</span><span style="color:#e6db74">/simpleperf/app_profiler.py&#39;</span>
+    adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;python </span><span style="color:#e6db74">{</span>script<span style="color:#e6db74">}</span><span style="color:#e6db74"> -p </span><span style="color:#e6db74">{</span>package_name<span style="color:#e6db74">}</span><span style="color:#e6db74"> -a </span><span style="color:#e6db74">{</span>activity_name<span style="color:#e6db74">}</span><span style="color:#e6db74"> -r &#34;-e task-clock:u -f 100 -g --duration </span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>duration<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34; --ndk_path </span><span style="color:#e6db74">{</span>args<span style="color:#f92672">.</span>ndk_path<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>
+    ret <span style="color:#f92672">=</span> execute_cmd(adb_command)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>returncode <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+        print(<span style="color:#e6db74">&#39;perf.data generated successfully based on package name and activity.&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+        print(ret<span style="color:#f92672">.</span>stderr)
+        print(<span style="color:#e6db74">&#39;perf.data generated failed based on package name and activity.&#39;</span>)
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    parser <span style="color:#f92672">=</span> argparse<span style="color:#f92672">.</span>ArgumentParser()
+    parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#39;-p&#39;</span>, <span style="color:#e6db74">&#39;--app&#39;</span>, type<span style="color:#f92672">=</span>str, default <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>, help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;Profile an Android app, given the package name.
+</span><span style="color:#e6db74">                              Like `-p com.example.android.myapp`.&#34;&#34;&#34;</span>)
+    parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#39;-d&#39;</span>, <span style="color:#e6db74">&#39;--duration&#39;</span>, type<span style="color:#f92672">=</span>int, default <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span>, help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;Profile an Android app, given the duration in seconds.
+</span><span style="color:#e6db74">                              Like `-d 180`.&#34;&#34;&#34;</span>)
+    parser<span style="color:#f92672">.</span>add_argument(<span style="color:#e6db74">&#39;-np&#39;</span>, <span style="color:#e6db74">&#39;--ndk_path&#39;</span>, type<span style="color:#f92672">=</span>str, default <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>,
+                             help<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;&#34;Set the path of a ndk release. app_profiler.py needs some
+</span><span style="color:#e6db74">                                     tools in ndk, like readelf.&#34;&#34;&#34;</span>)
+    args <span style="color:#f92672">=</span> parser<span style="color:#f92672">.</span>parse_args()
+    print(args<span style="color:#f92672">.</span>app)
+    print(args<span style="color:#f92672">.</span>duration)
+    print(args<span style="color:#f92672">.</span>ndk_path)
+
+    <span style="color:#66d9ef">if</span> args<span style="color:#f92672">.</span>app <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
+        print(<span style="color:#e6db74">&#39;Please input the package name.&#39;</span>)
+        exit()
+
+    <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;perf.data&#39;</span>):
+        os<span style="color:#f92672">.</span>remove(<span style="color:#e6db74">&#39;perf.data&#39;</span>)
+    <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;2.perf&#39;</span>):
+        os<span style="color:#f92672">.</span>remove(<span style="color:#e6db74">&#39;2.perf&#39;</span>)
+    <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;3.fold&#39;</span>):
+        os<span style="color:#f92672">.</span>remove(<span style="color:#e6db74">&#39;3.fold&#39;</span>)
+    <span style="color:#66d9ef">if</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>exists(<span style="color:#e6db74">&#39;4.svg&#39;</span>):
+        os<span style="color:#f92672">.</span>remove(<span style="color:#e6db74">&#39;4.svg&#39;</span>)
+        
+    <span style="color:#75715e"># 尝试 root 并 remount</span>
+    adb_root <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+    adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;adb root&#39;</span>
+    ret <span style="color:#f92672">=</span> execute_cmd(adb_command)
+    <span style="color:#66d9ef">if</span> ret<span style="color:#f92672">.</span>stdout<span style="color:#f92672">.</span>find(<span style="color:#e6db74">&#39;adbd cannot run as root&#39;</span>) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>:
+        print(<span style="color:#e6db74">&#39;adb root failed.&#39;</span>)
+        adb_root <span style="color:#f92672">=</span> <span style="color:#66d9ef">False</span>
+    <span style="color:#66d9ef">if</span> adb_root:
+        adb_command <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;adb remount&#39;</span>
+        ret <span style="color:#f92672">=</span> execute_cmd(adb_command)
+
+    <span style="color:#75715e"># 判断 /data/local/tmp/simpleperf 文件是否存在</span>
+    <span style="color:#75715e"># 如果不存在，则将电脑本地的 simpleperf 拷贝到设备上</span>
+    push_simpleperf_to_device(args<span style="color:#f92672">.</span>ndk_path)
+
+    <span style="color:#66d9ef">if</span> adb_root:
+        generate_perf_data_by_pid(args)
+    <span style="color:#66d9ef">else</span>:
+        generate_perf_data_by_app_name(args)
+        
+    <span style="color:#75715e"># 根据 perf.data 生成火焰图</span>
+    generate_flame_graph_by_perf_data(args<span style="color:#f92672">.</span>ndk_path)
+</code></pre></div><p><strong>注意：</strong> 需要 <code>Android Studio</code> 中 <code>simpleperf</code> 的支持，也可将 <code>simpleperf</code> 目录拷贝到 <code>FlameGraph-master</code> 目录，然后进入 simpleperf 文件夹下通过 cmd 命令执行以下步骤：</p>
+<ul>
+<li>
+<p>记录数据 <code>python app_profiler.py -p com.xxx.xxx -a com.xxx.xxx.MainActivity -r &quot;-e task-clock:u -f 100 -g --duration 600&quot;</code></p>
+</li>
+<li>
+<p>执行 <code>python report_sample.py &gt;../2.perf</code> 转换数据</p>
+</li>
+<li>
+<p>进入 <code>FlameGraph-master</code> 文件夹下通过 cmd 命令进入命令行</p>
+</li>
+<li>
+<p>执行 <code>perl stackcollapse-perf.pl 2.perf  &gt;3.fold</code> 转换数据</p>
+</li>
+<li>
+<p>数据转换完成执行 <code>perl flamegraph.pl 3.fold &gt;4.svg</code> 生成火焰图</p>
+</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://874656645.github.io/tags/python/">Python</a></li>
+      <li><a href="https://874656645.github.io/tags/flamegraph/">FlameGraph</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/288-python-loop-%E8%BF%90%E8%A1%8C-command-%E8%84%9A%E6%9C%AC/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>Python Loop 运行 Command 脚本</span>
+  </a>
+  <a class="next" href="https://874656645.github.io/posts/286-python-tkinter-%E7%95%8C%E9%9D%A2%E5%BA%93/">
+    <span class="title">Next Page »</span>
+    <br>
+    <span>Python——tkinter 界面库</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>"Take time for all things: great haste makes great waste." – Benjamin Franklin</span><br/>
+    <span>&copy; 2024 <a href="https://874656645.github.io">Slow is Smooth and Smooth is Fast</a></span>
+    
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerText = 'copy';
+
+        function copyingDone() {
+            copybutton.innerText = 'copied!';
+            setTimeout(() => {
+                copybutton.innerText = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

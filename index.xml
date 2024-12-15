@@ -9,7 +9,65 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 13 Dec 2024 14:52:14 +0800</lastBuildDate><atom:link href="https://874656645.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Dec 2024 16:43:15 +0800</lastBuildDate><atom:link href="https://874656645.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SDF 生成有向距离场图片</title>
+      <link>https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/</link>
+      <pubDate>Sun, 15 Dec 2024 16:43:15 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/</guid>
+      <description>Dead Reckoning算法生成有向距离场
+例如原图：
+效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度
+C++ 代码：
+class SDFTexture { public: SDFTexture(rs::Texture*, float pixelDist); ~SDFTexture(); void generateSDFTex(); private: rs::Texture* m_SDFTex; int32 m_width, m_height; float m_pixelDist; std::vector&amp;lt;std::vector&amp;lt;PixelType&amp;gt; &amp;gt; m_pixelMap; std::vector&amp;lt;std::vector&amp;lt;float&amp;gt; &amp;gt; m_distanceMap; std::vector&amp;lt;std::vector&amp;lt;Point16&amp;gt; &amp;gt; m_positionMap; }; SDFTexture::SDFTexture(rs::Texture* tex, float pixelDist) { m_SDFTex = tex; m_width = m_SDFTex-&amp;gt;width(); m_height = m_SDFTex-&amp;gt;height(); m_pixelDist = pixelDist; m_distanceMap = std::vector&amp;lt;std::vector&amp;lt;float&amp;gt; &amp;gt;(m_height + 2, std::vector&amp;lt;float&amp;gt;(m_width + 2, FLT_MAX)); m_positionMap = std::vector&amp;lt;std::vector&amp;lt;Point16&amp;gt; &amp;gt;(m_height + 2, std::vector&amp;lt;Point16&amp;gt;(m_width + 2, { INT16_MAX, INT16_MAX })); m_pixelMap = std::vector&amp;lt;std::vector&amp;lt;PixelType&amp;gt; &amp;gt;(m_height + 2, std::vector&amp;lt;PixelType&amp;gt;(m_width + 2, Pixel_fromA8R8G8B8(0x0))); } SDFTexture::~SDFTexture() { m_SDFTex = NULL; } void SDFTexture::generateSDFTex() { // 1.</description>
+    </item>
+    
+    <item>
+      <title>Python Loop 运行 Command 脚本</title>
+      <link>https://874656645.github.io/posts/288-python-loop-%E8%BF%90%E8%A1%8C-command-%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Sun, 15 Dec 2024 15:38:34 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/288-python-loop-%E8%BF%90%E8%A1%8C-command-%E8%84%9A%E6%9C%AC/</guid>
+      <description>import sys import os from threading import Timer import datetime print(sys.version) file_name = &amp;#34;D:/gpu.txt&amp;#34; def printHello(): with open(file_name,&amp;#39;a&amp;#39;) as f1: command=&amp;#39;adb shell &amp;#34;cat /sys/kernel/debug/pvr/status | grep GPU&amp;#34;&amp;#39; tt=os.popen(command) tmp=tt.read() res = f&amp;#39;{datetime.datetime.now()}{tmp}&amp;#39;.replace(&amp;#39;\r&amp;#39;,&amp;#39;&amp;#39;).replace(&amp;#39;\n&amp;#39;,&amp;#39;&amp;#39;) print(res) f1.write(res+&amp;#39;\n&amp;#39;) def loop_func(func, second): while True: timer = Timer(second, func) timer.start() timer.join() loop_func(printHello, 1) </description>
+    </item>
+    
+    <item>
+      <title>Python 脚本生成火焰图</title>
+      <link>https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/</link>
+      <pubDate>Sun, 15 Dec 2024 14:54:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/</guid>
+      <description>首先下载脚本代码。
+  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。
+  将 Python 脚本放到 FlameGraph-master 目录下运行。
+  python 脚本：
+import argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding=&amp;#39;gb2312&amp;#39;) if ret.returncode == 0: print(f&amp;#39;command executed successfully: {cmd}.&amp;#39;) else: print(ret.stderr) print(f&amp;#39;command executed failed: {cmd}.&amp;#39;) return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, &amp;#39;w&amp;#39;) as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding=&amp;#39;utf-8&amp;#39;) if ret.returncode == 0: print(f&amp;#39;command executed successfully: {cmd}.</description>
+    </item>
+    
+    <item>
+      <title>Python——tkinter 界面库</title>
+      <link>https://874656645.github.io/posts/286-python-tkinter-%E7%95%8C%E9%9D%A2%E5%BA%93/</link>
+      <pubDate>Sun, 15 Dec 2024 12:46:31 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/286-python-tkinter-%E7%95%8C%E9%9D%A2%E5%BA%93/</guid>
+      <description>现在的 python 安装包中集成了 tkinter 库，无需单独安装。
+检查 tkinter 是否已安装
+测试脚本一：
+import tkinter as tk tk._test() 测试脚本二：
+import tkinter as tk # 创建一个简单的Tkinter窗口 root = tk.Tk() root.title(&amp;#34;Tkinter检查&amp;#34;) # 添加一个标签 label = tk.Label(root, text=&amp;#34;Tkinter已安装！&amp;#34;) label.pack() # 启动主事件循环 root.mainloop() </description>
+    </item>
+    
+    <item>
+      <title>clip-tif-by-China-polygon</title>
+      <link>https://874656645.github.io/posts/285-clip-tif-by-china-polygon/</link>
+      <pubDate>Sun, 15 Dec 2024 11:58:55 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/285-clip-tif-by-china-polygon/</guid>
+      <description>利用 QGIS，通过 Python 脚本批量实现根据矢量面数据对 Tiff 栅格数据进行裁切
+import os,sys,json # import gdal # from osgeo import gdal import concurrent.futures from multiprocessing import cpu_count MAX_WORKERS = cpu_count() # * 0.75 # 线程池的最大线程数 # gdal 命令 # &amp;#34;C:\Program Files\QGIS 3.28.10\bin\gdalwarp.exe&amp;#34; -overwrite -s_srs EPSG:4326 -t_srs EPSG:4326 -of GTiff -cutline D:/Work/dem/23M6版本国界/国界面.MIF -cl 国界面 -dstnodata -1000.0 D:/Work/dem/Quanguo_DEM_TIF_300/Quanguo300/quanguo300_06_37.tif D:/Work/dem/Quanguo_DEM_TIF_300/test.tif # 获得当前工作目录 current_path = os.path.abspath(__file__) current_dir = os.path.dirname(current_path) mask_layer_file = r&amp;#34;{}/23M6版本国界/国界面.MIF&amp;#34;.format(current_dir) if os.path.exists(mask_layer_file) == False: msg = &amp;#34;ERROR: {}does not exit.</description>
+    </item>
+    
     <item>
       <title>数据结构与算法——括号生成</title>
       <link>https://874656645.github.io/posts/284-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/</link>
@@ -215,21 +273,19 @@ dpkg -l | grep gcc
     </item>
     
     <item>
-      <title>adb 与安卓使用</title>
+      <title>adb 常用命令</title>
       <link>https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Sat, 23 Dec 2023 11:59:04 +0800</pubDate>
       
       <guid>https://874656645.github.io/posts/268-adb-%E4%B8%8E%E5%AE%89%E5%8D%93%E4%BD%BF%E7%94%A8/</guid>
       <description>查看包名
-adb shell pm list package adb shell pm list package | findstr xxx   查看包的信息
+adb shell pm list packages adb shell pm list packages | findstr com.xxx adb shell pm list packages | adb shell grep com.xxx   查看包的信息
 adb shell pm dump com.xxx.xxx.xxx | findstr version adb shell dumpsys package com.xxx.xxx.xxx | findstr version   查看包的路径
 adb shell pm path com.xxx.xxx.xxx
   获取系统应用
 adb shell pm list packages -s
   获取第三方应用
-adb shell pm list packages -3
-  启动指定 activity
-adb shell am start -n com.</description>
+adb shell pm list packages -3</description>
     </item>
     
     <item>

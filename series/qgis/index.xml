@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>QGIS on Slow is Smooth and Smooth is Fast</title>
+    <link>https://874656645.github.io/series/qgis/</link>
+    <description>Recent content in QGIS on Slow is Smooth and Smooth is Fast</description>
+    <image>
+      <url>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
+      <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
+    </image>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 15 Dec 2024 11:58:55 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/qgis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>clip-tif-by-China-polygon</title>
+      <link>https://874656645.github.io/posts/285-clip-tif-by-china-polygon/</link>
+      <pubDate>Sun, 15 Dec 2024 11:58:55 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/285-clip-tif-by-china-polygon/</guid>
+      <description>利用 QGIS，通过 Python 脚本批量实现根据矢量面数据对 Tiff 栅格数据进行裁切
+import os,sys,json # import gdal # from osgeo import gdal import concurrent.futures from multiprocessing import cpu_count MAX_WORKERS = cpu_count() # * 0.75 # 线程池的最大线程数 # gdal 命令 # &amp;#34;C:\Program Files\QGIS 3.28.10\bin\gdalwarp.exe&amp;#34; -overwrite -s_srs EPSG:4326 -t_srs EPSG:4326 -of GTiff -cutline D:/Work/dem/23M6版本国界/国界面.MIF -cl 国界面 -dstnodata -1000.0 D:/Work/dem/Quanguo_DEM_TIF_300/Quanguo300/quanguo300_06_37.tif D:/Work/dem/Quanguo_DEM_TIF_300/test.tif # 获得当前工作目录 current_path = os.path.abspath(__file__) current_dir = os.path.dirname(current_path) mask_layer_file = r&amp;#34;{}/23M6版本国界/国界面.MIF&amp;#34;.format(current_dir) if os.path.exists(mask_layer_file) == False: msg = &amp;#34;ERROR: {}does not exit.</description>
+    </item>
+    
+  </channel>
+</rss>

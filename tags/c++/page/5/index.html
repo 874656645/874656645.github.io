@@ -145,30 +145,6 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——类型转换
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-14 22:02:50 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——类型转换" href="https://874656645.github.io/posts/238-c&#43;&#43;-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
-    <h2>C&#43;&#43;——运算符重载
-    </h2>
-  </header>
-  <section class="entry-content">
-    <p></p>
-  </section>
-  <footer class="entry-footer"><span title='2022-09-14 17:38:55 +0800 CST'>September 14, 2022</span>&nbsp;·&nbsp;0 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——运算符重载" href="https://874656645.github.io/posts/237-c&#43;&#43;-%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/"></a>
-</article>
-
-<article class="post-entry tag-entry"> 
-  <header class="entry-header">
     <h2>C&#43;&#43;——异常的使用
     </h2>
   </header>
@@ -203,6 +179,31 @@ class A { public: int a; A(int x) :a(x) { } }; class B : public A { public: B(in
   </section>
   <footer class="entry-footer"><span title='2022-09-11 20:34:53 +0800 CST'>September 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to C&#43;&#43;——虚函数表与多态（派生类内存布局）" href="https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——作用域和可访问性
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>一、 命名空间   嵌套命名空间
+namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){ cout &lt;&lt; &#34;B::C::g(long)\n&#34;; } }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{ int y = 1; int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;; } void g(void){ cout &lt;&lt; &#34;B::C::g(void)\n&#34;; } }; static int xx = 1; class A{ public: int xx; A(int xx){ A::xx = xx; } }; int main() { static int xx = 2; A a(3); cout &lt;&lt; a....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-09 17:35:34 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——作用域和可访问性" href="https://874656645.github.io/posts/233-c&#43;&#43;-%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>C&#43;&#43;——父类与子类、基类与派生类
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;&amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  #include &lt;iostream&gt;using namespace std; class A{ public: ~A() = default; //1)  // A(){} //2)  virtual void f(){ cout &lt;&lt; &#34;A::f()\n&#34;; } }; class B: A{ friend void friendFun(); void f(){ cout &lt;&lt; &#34;B::f()\n&#34;; } public: A* getA(){ // 派生类内部函数可构成父子关系  return this; } }; void friendFun(){ // 派生类友元函数内可构成父子关系  A* p = new B; p-&gt;f(); } int main() { // A* p = new B; // error: ‘A’ is an inaccessible base of ‘B’  A* p = (A*)new B; // right  B b; A* pp = b....</p>
+  </section>
+  <footer class="entry-footer"><span title='2022-09-06 22:28:34 +0800 CST'>September 6, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——父类与子类、基类与派生类" href="https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

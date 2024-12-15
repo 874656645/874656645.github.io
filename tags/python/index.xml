@@ -9,7 +9,39 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Thu, 04 Jan 2024 19:18:20 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Dec 2024 15:38:34 +0800</lastBuildDate><atom:link href="https://874656645.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Python Loop 运行 Command 脚本</title>
+      <link>https://874656645.github.io/posts/288-python-loop-%E8%BF%90%E8%A1%8C-command-%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Sun, 15 Dec 2024 15:38:34 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/288-python-loop-%E8%BF%90%E8%A1%8C-command-%E8%84%9A%E6%9C%AC/</guid>
+      <description>import sys import os from threading import Timer import datetime print(sys.version) file_name = &amp;#34;D:/gpu.txt&amp;#34; def printHello(): with open(file_name,&amp;#39;a&amp;#39;) as f1: command=&amp;#39;adb shell &amp;#34;cat /sys/kernel/debug/pvr/status | grep GPU&amp;#34;&amp;#39; tt=os.popen(command) tmp=tt.read() res = f&amp;#39;{datetime.datetime.now()}{tmp}&amp;#39;.replace(&amp;#39;\r&amp;#39;,&amp;#39;&amp;#39;).replace(&amp;#39;\n&amp;#39;,&amp;#39;&amp;#39;) print(res) f1.write(res+&amp;#39;\n&amp;#39;) def loop_func(func, second): while True: timer = Timer(second, func) timer.start() timer.join() loop_func(printHello, 1) </description>
+    </item>
+    
+    <item>
+      <title>Python 脚本生成火焰图</title>
+      <link>https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/</link>
+      <pubDate>Sun, 15 Dec 2024 14:54:27 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/</guid>
+      <description>首先下载脚本代码。
+  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。
+  将 Python 脚本放到 FlameGraph-master 目录下运行。
+  python 脚本：
+import argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding=&amp;#39;gb2312&amp;#39;) if ret.returncode == 0: print(f&amp;#39;command executed successfully: {cmd}.&amp;#39;) else: print(ret.stderr) print(f&amp;#39;command executed failed: {cmd}.&amp;#39;) return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, &amp;#39;w&amp;#39;) as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding=&amp;#39;utf-8&amp;#39;) if ret.returncode == 0: print(f&amp;#39;command executed successfully: {cmd}.</description>
+    </item>
+    
+    <item>
+      <title>clip-tif-by-China-polygon</title>
+      <link>https://874656645.github.io/posts/285-clip-tif-by-china-polygon/</link>
+      <pubDate>Sun, 15 Dec 2024 11:58:55 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/285-clip-tif-by-china-polygon/</guid>
+      <description>利用 QGIS，通过 Python 脚本批量实现根据矢量面数据对 Tiff 栅格数据进行裁切
+import os,sys,json # import gdal # from osgeo import gdal import concurrent.futures from multiprocessing import cpu_count MAX_WORKERS = cpu_count() # * 0.75 # 线程池的最大线程数 # gdal 命令 # &amp;#34;C:\Program Files\QGIS 3.28.10\bin\gdalwarp.exe&amp;#34; -overwrite -s_srs EPSG:4326 -t_srs EPSG:4326 -of GTiff -cutline D:/Work/dem/23M6版本国界/国界面.MIF -cl 国界面 -dstnodata -1000.0 D:/Work/dem/Quanguo_DEM_TIF_300/Quanguo300/quanguo300_06_37.tif D:/Work/dem/Quanguo_DEM_TIF_300/test.tif # 获得当前工作目录 current_path = os.path.abspath(__file__) current_dir = os.path.dirname(current_path) mask_layer_file = r&amp;#34;{}/23M6版本国界/国界面.MIF&amp;#34;.format(current_dir) if os.path.exists(mask_layer_file) == False: msg = &amp;#34;ERROR: {}does not exit.</description>
+    </item>
+    
     <item>
       <title>Python Conda GDAL 环境搭建</title>
       <link>https://874656645.github.io/posts/269-python-conda-gdal-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/</link>
@@ -41,29 +73,17 @@ source conda activate python34 // for Linux &amp;amp; Mac</description>
     </item>
     
     <item>
-      <title>Crawl Pictures From Website</title>
-      <link>https://874656645.github.io/posts/9-crawl-pictures-from-website/</link>
-      <pubDate>Thu, 28 Feb 2019 15:00:16 +0800</pubDate>
+      <title>Scrapy Learn</title>
+      <link>https://874656645.github.io/posts/7-scrapy-learn/</link>
+      <pubDate>Fri, 15 Feb 2019 15:40:48 +0800</pubDate>
       
-      <guid>https://874656645.github.io/posts/9-crawl-pictures-from-website/</guid>
-      <description>1、使用requests库访问网址 2、使用xpath技术提取网页目标图片网址 3、通过os库保存图片到本地 #coding = utf-8 import requests import os from lxml import etree from urllib.parse import quote,unquote # import urllib.request class DmdSpider(object): name = &amp;#34;dmd&amp;#34; save_path = &amp;#39;E:/python/manhuadao/pics/&amp;#39; __picNo = 0 # 访问漫画岛网页 def start_request(self, url): header = {&amp;#39;User-Agent&amp;#39;: &amp;#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36&amp;#39;} r = requests.get(url, params=header) # print(r.text) self.__get_imgs(r) # 自动跳转下一页 html = etree.HTML(r.text) next_urls = html.xpath(&amp;#39;//div[@class=&amp;#34;read-bottom&amp;#34;]//a[@class=&amp;#34;next&amp;#34;]/@href&amp;#39;) # print(next) for href in next_urls: nexturl = href.</description>
-    </item>
-    
-    <item>
-      <title>Python Virtualenv</title>
-      <link>https://874656645.github.io/posts/8-python-virtualenv/</link>
-      <pubDate>Sat, 16 Feb 2019 11:20:20 +0800</pubDate>
-      
-      <guid>https://874656645.github.io/posts/8-python-virtualenv/</guid>
+      <guid>https://874656645.github.io/posts/7-scrapy-learn/</guid>
       <description>原文网址
-在python中使用virtualenv创建虚拟环境 注意：要使用cmd命令行，不能使用Power Shell1、使用pip安装 pip install virtualenv
-2、创建项目目录并用cd进入 mkdir E:\python\Virtualenv cd E:\python\Virtualenv 3、创建虚拟环境 virtualenv -p c:\Python36\python.exe env
-或者
-virtualenv env
-此命令会在当前目录下创建一个env目录
-4、启动虚拟环境 env\Scripts\activate
-5、离开虚拟环境 deactivate
-6、删除env文件夹即可 </description>
+1. Using a virtual environment (recommended) pip install virtualenv
+详细操作
+2. Creating a new Scrapy project scrapy startproject tutorial
+3. Writing a spider to crawl a site and extract data This is the code for our first Spider. Save it in a file named quotes_spider.py under the tutorial/spiders directory in your project:
+import scrapy class QuotesSpider(scrapy.Spider): name = &amp;#34;quotes&amp;#34; def start_requests(self): urls = [ &amp;#39;http://quotes.toscrape.com/page/1/&amp;#39;, &amp;#39;http://quotes.toscrape.com/page/2/&amp;#39;, ] for url in urls: yield scrapy.</description>
     </item>
     
   </channel>

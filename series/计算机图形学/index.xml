@@ -9,7 +9,20 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 18 Jul 2022 16:06:56 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Dec 2024 16:43:15 +0800</lastBuildDate><atom:link href="https://874656645.github.io/series/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SDF 生成有向距离场图片</title>
+      <link>https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/</link>
+      <pubDate>Sun, 15 Dec 2024 16:43:15 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/</guid>
+      <description>Dead Reckoning算法生成有向距离场
+例如原图：
+效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度
+C++ 代码：
+class SDFTexture { public: SDFTexture(rs::Texture*, float pixelDist); ~SDFTexture(); void generateSDFTex(); private: rs::Texture* m_SDFTex; int32 m_width, m_height; float m_pixelDist; std::vector&amp;lt;std::vector&amp;lt;PixelType&amp;gt; &amp;gt; m_pixelMap; std::vector&amp;lt;std::vector&amp;lt;float&amp;gt; &amp;gt; m_distanceMap; std::vector&amp;lt;std::vector&amp;lt;Point16&amp;gt; &amp;gt; m_positionMap; }; SDFTexture::SDFTexture(rs::Texture* tex, float pixelDist) { m_SDFTex = tex; m_width = m_SDFTex-&amp;gt;width(); m_height = m_SDFTex-&amp;gt;height(); m_pixelDist = pixelDist; m_distanceMap = std::vector&amp;lt;std::vector&amp;lt;float&amp;gt; &amp;gt;(m_height + 2, std::vector&amp;lt;float&amp;gt;(m_width + 2, FLT_MAX)); m_positionMap = std::vector&amp;lt;std::vector&amp;lt;Point16&amp;gt; &amp;gt;(m_height + 2, std::vector&amp;lt;Point16&amp;gt;(m_width + 2, { INT16_MAX, INT16_MAX })); m_pixelMap = std::vector&amp;lt;std::vector&amp;lt;PixelType&amp;gt; &amp;gt;(m_height + 2, std::vector&amp;lt;PixelType&amp;gt;(m_width + 2, Pixel_fromA8R8G8B8(0x0))); } SDFTexture::~SDFTexture() { m_SDFTex = NULL; } void SDFTexture::generateSDFTex() { // 1.</description>
+    </item>
+    
     <item>
       <title>OpenGL 视差贴图（Parallax Mapping）</title>
       <link>https://874656645.github.io/posts/211-opengl-%E8%A7%86%E5%B7%AE%E8%B4%B4%E5%9B%BEparallax-mapping/</link>

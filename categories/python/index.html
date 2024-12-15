@@ -145,6 +145,50 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
+    <h2>Python Loop 运行 Command 脚本
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>import sys import os from threading import Timer import datetime print(sys.version) file_name = &#34;D:/gpu.txt&#34; def printHello(): with open(file_name,&#39;a&#39;) as f1: command=&#39;adb shell &#34;cat /sys/kernel/debug/pvr/status | grep GPU&#34;&#39; tt=os.popen(command) tmp=tt.read() res = f&#39;{datetime.datetime.now()}{tmp}&#39;.replace(&#39;\r&#39;,&#39;&#39;).replace(&#39;\n&#39;,&#39;&#39;) print(res) f1.write(res&#43;&#39;\n&#39;) def loop_func(func, second): while True: timer = Timer(second, func) timer.start() timer.join() loop_func(printHello, 1) </p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-15 15:38:34 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Python Loop 运行 Command 脚本" href="https://874656645.github.io/posts/288-python-loop-%E8%BF%90%E8%A1%8C-command-%E8%84%9A%E6%9C%AC/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Python 脚本生成火焰图
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>首先下载脚本代码。
+  安装 ActivePerl_5.16.2.3010812913.msi 并配置环境变量。
+  将 Python 脚本放到 FlameGraph-master 目录下运行。
+  python 脚本：
+import argparse import subprocess import sys import os print(sys.version) def execute_cmd(cmd): ret = subprocess.run(cmd, capture_output=True, shell=True, encoding=&#39;gb2312&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}.&#39;) else: print(ret.stderr) print(f&#39;command executed failed: {cmd}.&#39;) return ret def execute_cmd_redirect_to_file(cmd, file_name): with open(file_name, &#39;w&#39;) as f: ret = subprocess.run(cmd, text=True, stdout=f, shell=True, encoding=&#39;utf-8&#39;) if ret.returncode == 0: print(f&#39;command executed successfully: {cmd}....</p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-15 14:54:27 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Python 脚本生成火焰图" href="https://874656645.github.io/posts/287-python-%E8%84%9A%E6%9C%AC%E7%94%9F%E6%88%90%E7%81%AB%E7%84%B0%E5%9B%BE/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2>Python——tkinter 界面库
+    </h2>
+  </header>
+  <section class="entry-content">
+    <p>现在的 python 安装包中集成了 tkinter 库，无需单独安装。
+检查 tkinter 是否已安装
+测试脚本一：
+import tkinter as tk tk._test() 测试脚本二：
+import tkinter as tk # 创建一个简单的Tkinter窗口 root = tk.Tk() root.title(&#34;Tkinter检查&#34;) # 添加一个标签 label = tk.Label(root, text=&#34;Tkinter已安装！&#34;) label.pack() # 启动主事件循环 root.mainloop() </p>
+  </section>
+  <footer class="entry-footer"><span title='2024-12-15 12:46:31 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Python——tkinter 界面库" href="https://874656645.github.io/posts/286-python-tkinter-%E7%95%8C%E9%9D%A2%E5%BA%93/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
     <h2>Python Conda GDAL 环境搭建
     </h2>
   </header>
@@ -178,6 +222,11 @@ source conda activate python34 // for Linux &amp; Mac...</p>
   <footer class="entry-footer"><span title='2019-06-04 10:16:11 +0800 CST'>June 4, 2019</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
   <a class="entry-link" aria-label="post link to Conda Learn" href="https://874656645.github.io/posts/14-conda-learn/"></a>
 </article>
+<footer class="page-footer">
+  <nav class="pagination">
+    <a class="next" href="https://874656645.github.io/categories/python/page/2/">Next Page »</a>
+  </nav>
+</footer>
     </main>
     
 <footer class="footer">
