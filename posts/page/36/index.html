@@ -160,66 +160,73 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>策略模式
+    <h2>Ubuntu 常用命令
     </h2>
   </header>
   <section class="entry-content">
-    <p>策略模式定义了一系列的算法，并将每个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
+    <p>Linux 命令大全
+ 注意：需提前配置系统环境，比如系统编码为 UTF-8  系统环境配置 1. 设置系统语言   查看系统支持的字符集：locale、locale -a
+  查看时间：date
+  安装中文语言包：sudo apt install language-pack-zh-hans
+  添加到系统配置文件 .bashrc
+export LANG=zh_CN.UTF-8
+  重新加载：source .bashrc   一、更新和升级包 1. 更新和升级包 sudo apt update &amp;&amp; sudo apt upgrade
+2. 安装常用开发环境 sudo apt-get install build-essential
+3. 安装软件 sudo apt install tree
+4. 删除不需要的包 sudo apt remove gcovr sudo apt autoremove 5. 查看已安装的软件 dpkg -l | grep gcovr...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:59:42 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 策略模式" href="https://874656645.github.io/posts/112-%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-07 08:33:51 +0800 CST'>February 7, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to Ubuntu 常用命令" href="https://874656645.github.io/posts/117-ubuntu-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>模板方法模式
+    <h2>char* 数组
     </h2>
   </header>
   <section class="entry-content">
-    <p>定义一个操作中算法的框架，而将一些步骤延迟到子类中。模板方法模式使得子类可以不改变一个算法的结构即可重定义该算法的某些特定步骤。
-class TemplateDrink{ public: virtual void boilWater() = 0; virtual void drew() = 0; virtual void pourCup() = 0; virtual void addSomething() = 0; void make(){ boilWater(); drew(); pourCup(); addSomething(); } }; class Tea : public TemplateDrink{ public: void boilWater() override{ cout &lt;&lt; &#34;煮山泉水...&#34; &lt;&lt; endl; } void drew() override{ cout &lt;&lt; &#34;冲龙井茶...&#34; &lt;&lt; endl; } void pourCup() override{ cout &lt;&lt; &#34;倒入茶杯中...&#34; &lt;&lt; endl; } void addSomething() override{ cout &lt;&lt; &#34;加点柠檬....</p>
+    <p>void printArr(const char ** p, int len){ for(int i = 0; i &lt; len; &#43;&#43;i){ cout &lt;&lt; p[i] &lt;&lt; endl; } } void sortSelect(const char ** p, int len){ for(int i = 0; i &lt; len - 1; &#43;&#43;i){ int max = i; for(int j = i &#43; 1; j &lt; len; &#43;&#43;j){ if(p[j] &gt; p[max]){ max = j; } } // 交换  if(i != max){ const char* tmp = p[i]; p[i] = p[max]; p[max] = tmp; } } } int main() { const char* arr[] = {&#34;aa&#34;, &#34;bb&#34;, &#34;cc&#34;, &#34;dd&#34;, &#34;ee&#34;}; int len = sizeof(arr) / sizeof(char*); cout &lt;&lt; len &lt;&lt; endl; printArr(arr, len); sortSelect(arr, len); cout &lt;&lt; &#34;----------------&#34; &lt;&lt; endl; printArr(arr, len); return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:41:35 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 模板方法模式" href="https://874656645.github.io/posts/111-%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-03 20:29:17 +0800 CST'>February 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to char* 数组" href="https://874656645.github.io/posts/116-char-%E6%98%9F%E6%95%B0%E7%BB%84/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>适配器模式
+    <h2>装饰器模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>有一个已经写好的接口，但是不符合需求，适配器就是将已有的接口转化为需要的形式
-class MyPrint{ public: void operator()(int a, int b){ cout &lt;&lt; a &#43; b &lt;&lt; endl; } }; class TargetInterface{ public: virtual void operator()(int v) = 0; }; class MyAdaptor : public TargetInterface{ public: MyAdaptor(int param):param(param){} void operator()(int v){ print(v, param); } private: MyPrint print; int param; }; MyAdaptor myBind2nd(int v){ return MyAdaptor(v); } int main() { vector&lt;int&gt; v; for(int i = 0; i &lt; 10; &#43;&#43;i){ v.push_back(i); } for_each(v.begin(), v....</p>
+    <p>装饰模式又叫包装模式，通过一种对客户端透明的方式来扩展对象功能，是继承关系的一种替代。
+装饰模式可以动态给一个类增加功能</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 16:07:36 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 适配器模式" href="https://874656645.github.io/posts/110-%E9%80%82%E9%85%8D%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-02 16:59:08 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 装饰器模式" href="https://874656645.github.io/posts/115-%E8%A3%85%E9%A5%B0%E5%99%A8%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>外观模式
+    <h2>观察者模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>将复杂的子系统抽象到同一个接口进行管理，外界只需要通过此接口与子类系统进行交互，而不必直接与复杂的子类系统进行交互
-案例：家庭影院外观模式 实现KTV模式：电视打开，灯关掉，音响打开，麦克风打开，DVD打开
-实现游戏模式：电视打开，音响打开，游戏机打开</p>
+    <p>观察者模式是用于建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应作出反应。在观察者模式中，发生改变的对象称为观察目标，而被通知的对象称为观察者。</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 15:32:38 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 外观模式" href="https://874656645.github.io/posts/109-%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-02 16:11:14 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 观察者模式" href="https://874656645.github.io/posts/114-%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>代理模式
+    <h2>命令模式
     </h2>
   </header>
   <section class="entry-content">
-    <p>为其他对象提供一种代理以控制对这个对象的访问。在某些情况下，一个对象不适合或者不能直接引用另一个对象，而代理对象可以在客户端和目标对象之间起到中介的作用。</p>
+    <p>将一个请求封闭为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录日志，以及支持可撤销的操作。命令模式是一种对象行为型模式，其别名为动作（Action）模式或事务（Transaction）模式。
+命令模式可以将请求者和接收者完全解耦，发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求</p>
   </section>
-  <footer class="entry-footer"><span title='2022-02-01 07:28:53 +0800 CST'>February 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 代理模式" href="https://874656645.github.io/posts/108-%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/"></a>
+  <footer class="entry-footer"><span title='2022-02-02 15:45:50 +0800 CST'>February 2, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 命令模式" href="https://874656645.github.io/posts/113-%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

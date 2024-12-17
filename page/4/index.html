@@ -157,87 +157,73 @@ if (!doNotTrack) {
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43; 类的内存布局
+    <h2>数据结构与算法——合并 K 个已排序的链表
     </h2>
   </header>
   <section class="entry-content">
-    <p>测试代码：
-#include &lt;iostream&gt; using namespace std; struct A{ long long a = 10; virtual void fa(){ cout &lt;&lt; &#34;A::fa()\n&#34;; } virtual void faa(){ cout &lt;&lt; &#34;A::faa()\n&#34;; } }; // 如果是虚继承，虚基类被放在了派生类的后面，每个基类都有自己的虚函数表指针存储单元，如果虚基类没有虚函数，则虚基类的虚函数表指针为 0 // 如果是非虚继承，基类在派生类的前面，每个基类都有自己的虚函数表指针存储单元，除了第一个基类（派生类与第一个基类共用一个存储单元） struct E: virtual A{ long long e = 2; virtual void fa(){ cout &lt;&lt; &#34;E::fa()\n&#34;; } virtual void fe(){ cout &lt;&lt; &#34;E::fe()\n&#34;; } }; int main() { typedef void(*FUNC)(); E e; cout &lt;&lt; sizeof(e) &lt;&lt; endl; long long* addr = (long long*)&amp;e; long long* vfptre = (long long*)*(addr &#43; 0); int eval = (int)*(addr &#43; 1); cout &lt;&lt; eval &lt;&lt; endl; long long* vfptra = (long long*)*(addr &#43; 2); int aval = (int)*(addr &#43; 3); cout &lt;&lt; aval &lt;&lt; endl; cout &lt;&lt; &#34;---------------\n&#34;; long long* faptr = (long long*)*(vfptre &#43; 0); (FUNC(faptr))(); long long* feptr = (long long*)*(vfptre &#43; 1); (FUNC(feptr))(); cout &lt;&lt; &#34;---------------\n&#34;; long long* faptra = (long long*)*(vfptra &#43; 0); // (FUNC(faptra))(); // 如果虚基类的虚函数被重写，此处则无法再如此执行  long long* faaptra = (long long*)*(vfptra &#43; 1); (FUNC(faaptra))(); return 0; } 输出：...</p>
+    <p>问题链接
+要求： 时间复杂度 O(nlogn)
+思路： 分治法，归并排序的思想
+注意： 空集合的情况
+/** * struct ListNode { *	int val; *	struct ListNode *next; *	ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { ListNode* mergeList(vector&lt;ListNode*&gt;&amp; lists, int l, int h){ if(l &gt;= h) return lists[l]; int mid = (l &#43; h) / 2; ListNode* left = mergeList(lists, l, mid); ListNode* right = mergeList(lists, mid&#43;1, h); ListNode* head = new ListNode(0); auto tmp = head; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left ?...</p>
   </section>
-  <footer class="entry-footer"><span title='2024-05-18 17:44:54 +0800 CST'>May 18, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 类的内存布局" href="https://874656645.github.io/posts/274-c&#43;&#43;-%E7%B1%BB%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"></a>
+  <footer class="entry-footer"><span title='2024-12-12 20:41:48 +0800 CST'>December 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——合并 K 个已排序的链表" href="https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——统计代码行数
+    <h2>数据结构与算法——Hamiltonian Cycles
     </h2>
   </header>
   <section class="entry-content">
-    <p>cloc 下载地址
-加入到环境变量
-执行命令
-参考：
- 好用的源码行数统计工具——cloc Win10 代码行数统计工具CLOC的安装和使用  </p>
+    <p>BackTracking（DFS &#43; BoundingFunction）
+#include &lt;iostream&gt; using namespace std; int n = 5; int x[6] = {0,1}; int G[6][6] = { {0,0,0,0,0,0}, {0,0,1,1,0,1}, {0,1,0,1,1,1}, {0,1,1,0,1,0}, {0,0,1,1,0,1}, {0,1,1,0,1,0} }; void NextVetex(int k){ do { x[k] = (x[k] &#43; 1) % (n &#43; 1); if(x[k] == 0){ return; } // 确保和前一个节点联通  if(G[x[k - 1]][x[k]] != 0){ int j = 1; // 确保节点不会重复  for(; j &lt; k; &#43;&#43;j){ if(x[j] == x[k]){ break; } } if(j == k){ // 如果不是最后一个节点  // 或者是最后一个节点，并且最后一个节点和第一个节点是联通的  if((k &lt; n) || (k == n &amp;&amp; G[x[n]][x[1]] !...</p>
   </section>
-  <footer class="entry-footer"><span title='2024-04-02 18:27:04 +0800 CST'>April 2, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——统计代码行数" href="https://874656645.github.io/posts/273-c&#43;&#43;-%E7%BB%9F%E8%AE%A1%E4%BB%A3%E7%A0%81%E8%A1%8C%E6%95%B0/"></a>
+  <footer class="entry-footer"><span title='2024-10-12 20:41:33 +0800 CST'>October 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——Hamiltonian Cycles" href="https://874656645.github.io/posts/278-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-hamiltonian-cycles/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——Function Style Cast 有歧义
+    <h2>数据结构与算法——Permutation a String
     </h2>
   </header>
   <section class="entry-content">
-    <p>#include &lt;iostream&gt;#include &lt;string&gt;using namespace std; struct Print { template&lt;typename T&gt; Print(T t){ cout&lt;&lt;(t&#43;=10); } }; struct S { S(int a){ cout &lt;&lt; a &lt;&lt; endl; }; }; void foo(double a) { S w(int(a)); // function declaration // S x(int()); // function declaration  S y((int(a))); // object declaration  S yy((int)a); // object declaration  S z = int(a); // object declaration } template &lt;class T&gt; struct X {}; template &lt;int N&gt; struct Y {}; X&lt;int()&gt; a; // type-id X&lt;int(1)&gt; b; // expression (ill-formed) Y&lt;int()&gt; c; // type-id (ill-formed) Y&lt;int(1)&gt; d; // expression void foo(signed char a) { sizeof(int()); // type-id (ill-formed)  sizeof(int(a)); // expression  sizeof(int(unsigned(a))); // type-id (ill-formed)  (int())&#43;1; // type-id (ill-formed)  (int(a))&#43;1; // expression  (int(unsigned(a)))&#43;1; // type-id (ill-formed)  } int main() { // 这句为什么是一句函数声明而不是变量创建？  double a = 3....</p>
+    <p>state space tree
+Back Tracking (DFS)
+brute force
+recursion
+Branch and Bound (BFS)
+算法一：
+#include &lt;iostream&gt;using namespace std; void permutation(char S[], int k){ static int A[10] = {0}; static char res[10] = {0}; if(S[k] == &#39;\0&#39;){ res[k] = &#39;\0&#39;; printf(&#34;%s\n&#34;, res); } else{ for(int i = 0; S[i] != &#39;\0&#39;; &#43;&#43;i){ if(A[i] == 0){ A[i] = 1; res[k] = S[i]; permutation(S, k&#43;1); A[i] = 0; } } } } int main() { char S[] = &#34;ABC&#34;; permutation(S, 0); return 0; } output:...</p>
   </section>
-  <footer class="entry-footer"><span title='2024-02-21 09:35:58 +0800 CST'>February 21, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——Function Style Cast 有歧义" href="https://874656645.github.io/posts/272-c&#43;&#43;-function-style-cast-%E6%9C%89%E6%AD%A7%E4%B9%89/"></a>
+  <footer class="entry-footer"><span title='2024-09-27 22:06:51 +0800 CST'>September 27, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——Permutation a String" href="https://874656645.github.io/posts/277-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-permutation-a-string/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Ubuntu 升级 GCC 版本
+    <h2>数据结构与算法——Shell Sort
     </h2>
   </header>
   <section class="entry-content">
-    <p>GCC 源码网址 https://ftp.gnu.org/gnu/gcc/
-源码安装参考这里
-  添加相应的源
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-如果提示 add-apt-repository: command not found，需要安装 sudo apt-get install software-properties-common
-  更新软件源
-sudo apt-get update
-  安装指定版本的 gcc
-sudo apt-get install gcc-9
-查看 gcc
-find / -name &#34;gcc*&#34;
-dpkg -l | grep gcc
-  指定默认使用的 gcc 版本
-通过 update-alternatives 建立文件关联，如果安装了同一个软件的不同版本，可以使用 update-alternatives 命令设置默认使用哪个
-首先要让系统知道我们安装了多个版本的 gcc
-# 命令最后的 20 和 50 是优先级，如果使用 auto 选择模式，系统将默认使用优先级高的 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 20 sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 50   查看 gcc 版本...</p>
+    <p>#include &lt;iostream&gt; void shellSort(int A[], int n){ int gap, i, j, temp; for(gap = n/2; gap &gt;= 1; gap /= 2){ for(i = gap; i &lt; n; &#43;&#43;i){ temp = A[i]; j = i - gap; while(j &gt;= 0 &amp;&amp; A[j] &gt; temp){ A[j&#43;gap] = A[j]; j = j - gap; } A[j &#43; gap] = temp; } } } int main() { int A[] = {8, 3, 7, 4, 9, 2, 6, 5, 1, 11, 10}; int n = 11; shellSort(A, n); for(int i = 0; i &lt; n; &#43;&#43;i){ std::cout&lt;&lt;A[i] &lt;&lt; &#34; &#34;; } return 0; } </p>
   </section>
-  <footer class="entry-footer"><span title='2024-01-08 18:35:40 +0800 CST'>January 8, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Ubuntu 升级 GCC 版本" href="https://874656645.github.io/posts/271-ubuntu-%E5%8D%87%E7%BA%A7-gcc-%E7%89%88%E6%9C%AC/"></a>
+  <footer class="entry-footer"><span title='2024-06-21 21:40:45 +0800 CST'>June 21, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——Shell Sort" href="https://874656645.github.io/posts/276-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-shell-sort/"></a>
 </article>
 
 <article class="post-entry"> 
   <header class="entry-header">
-    <h2>Windows Cmd 设置临时和永久环境变量
+    <h2>数据结构与算法——Merge Sort
     </h2>
   </header>
   <section class="entry-content">
-    <p>  打开 cmd 命令提示符（Win11）
-  查看所有环境变量：输入 set
-  查看 path：输入 set path
-  设置临时环境变量：set path=D:\Work\dem\Python39;%PATH%
-  设置永久环境变量：setx path=D:\Work\dem\Python39;%PATH%
-  </p>
+    <p>#include &lt;iostream&gt; void Merge(int A[], int l, int mid, int h){ int i, j, k; i = l; j = mid &#43; 1; k = l; int B[h&#43;1]; while(i &lt;= mid &amp;&amp; j &lt;= h){ if(A[i] &lt; A[j]){ B[k&#43;&#43;] = A[i&#43;&#43;]; } else{ B[k&#43;&#43;] = A[j&#43;&#43;]; } } for(; i &lt;= mid; i&#43;&#43;){ B[k&#43;&#43;] = A[i]; } for(; j &lt;= h; j&#43;&#43;){ B[k&#43;&#43;] = A[j]; } for(i = l; i &lt;= h; i&#43;&#43;){ A[i] = B[i]; } } // 迭代 void IMergeSort(int A[], int n) { int p, i, l, mid, h; for(p = 2; p &lt;= n; p = p * 2){ for(i = 0; i &#43; p - 1 &lt; n; i = i &#43; p){ l = i; h = i &#43; p -1; mid = (l &#43; h) / 2; Merge(A, l, mid, h); } if(i &lt; n){ l = i; h = n-1; mid = (l&#43;h)/2; Merge(A,l,mid,h); } for(int i = 0; i &lt; n; &#43;&#43;i){ std::cout&lt;&lt;A[i] &lt;&lt; &#34; &#34;; } std::cout &lt;&lt; &#34;\n&#34;; } if(p/2 &lt; n){ Merge(A, 0, p/2-1, n-1); } } // 递归 void MergeSort(int A[], int l, int h){ int mid; if(l &lt; h){ mid = (l &#43; h) / 2; MergeSort(A, l, mid); MergeSort(A, mid&#43;1, h); Merge(A, l, mid, h); } } int main() { int A[] = {8, 3, 7, 4, 9, 2, 6, 5, 1, 11, 10}; int n = 11; IMergeSort(A, n); for(int i = 0; i &lt; n; &#43;&#43;i){ std::cout&lt;&lt;A[i] &lt;&lt; &#34; &#34;; } return 0; } 输出：...</p>
   </section>
-  <footer class="entry-footer"><span title='2024-01-05 12:21:35 +0800 CST'>January 5, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Windows Cmd 设置临时和永久环境变量" href="https://874656645.github.io/posts/270-windows-cmd-%E8%AE%BE%E7%BD%AE%E4%B8%B4%E6%97%B6%E5%92%8C%E6%B0%B8%E4%B9%85%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"></a>
+  <footer class="entry-footer"><span title='2024-06-18 21:37:23 +0800 CST'>June 18, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 数据结构与算法——Merge Sort" href="https://874656645.github.io/posts/275-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-merge-sort/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -145,68 +145,65 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——成员指针
+    <h2>C&#43;&#43;——虚函数表与多态（派生类内存布局）
     </h2>
   </header>
   <section class="entry-content">
-    <p>实例成员指针  实例成员指针是指向实例成员的指针，可分为实例数据成员指针和实例函数成员指针 构造函数不能被显式调用且只能执行一次，所以不能有指向构造函数的实例成员指针 运算符为 .* 和 -&gt;* 实例成员指针是成员相对于对象首地址的偏移，不是真正代表地址的指针 实例成员指针不能移动 实例成员指针不能转换类型  静态成员指针  静态成员指针前不用加类作用域 静态数据成员指针与普通的变量指针相同 静态函数成员指针与普通的函数指针相同  案例  静态成员指针存放成员地址，实例成员指针存放成员偏移 静态成员指针可以移动，实例成员指针不能移动 静态成员指针可以强制类型转换，实例成员指针不能强制转换类型  class Crowd { public: int a; // 表示在本类中不会修改此变量 	// 但其它进程有可能会修改，表示会有多进程并发 	volatile int b; // C&#43;&#43;17 支持 	// 使用 inline、const 修饰 static 变量可在类体内进行初始化 	const static int j = 3; static int num; public: Crowd(); Crowd(int x); ~Crowd(); // 类体内函数定义 	// 会被内联处理 	int f() { b&#43;&#43;; cout &lt;&lt; &#34;F()\n&#34;; return b; } // const this 指针，参数类型不同，所以可被重载 	int f()const { cout &lt;&lt; &#34;const F()\n&#34;; return b; } static int getNum(); static Crowd&amp; dec(Crowd&amp; a); }; // 静态成员变量类体外初始化 int Crowd::num = 0; Crowd::Crowd() { a = 0; b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd()\n&#34;; } Crowd::Crowd(int x): a(x) { b = 0; Crowd::num&#43;&#43;; cout &lt;&lt; &#34;Crowd(int)\n&#34;; } Crowd::~Crowd() { Crowd::num--; } int Crowd::getNum() { return Crowd::num; } Crowd&amp; Crowd::dec(Crowd&amp; a) { a....</p>
+    <p>一、基类中有虚函数但不是虚继承 class A { public: A() { c(); } virtual ~A() { d(); } virtual void c() { cout &lt;&lt; &#34;Construct A\n&#34;; } virtual void d() { cout &lt;&lt; &#34;Deconstruct A\n&#34;; } }; class B : public A { public: B() { // 等价于 B() : A(){} 	c(); } ~B() { d(); } void c()override { cout &lt;&lt; &#34;Construct B\n&#34;; } void d()override { cout &lt;&lt; &#34;Deconstruct B\n&#34;; } }; int main() { B b; return 0; } Construct A Construct B Deconstruct B Deconstruct A 二、有虚继承 Linux 布局参考这里...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-03 16:44:14 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——成员指针" href="https://874656645.github.io/posts/228-c&#43;&#43;-%E6%88%90%E5%91%98%E6%8C%87%E9%92%88/"></a>
+  <footer class="entry-footer"><span title='2022-09-11 20:34:53 +0800 CST'>September 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——虚函数表与多态（派生类内存布局）" href="https://874656645.github.io/posts/234-c&#43;&#43;-%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E4%B8%8E%E5%A4%9A%E6%80%81%E6%B4%BE%E7%94%9F%E7%B1%BB%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43;——volatile、const、constexpr、inline、static
+    <h2>C&#43;&#43;——作用域和可访问性
     </h2>
   </header>
   <section class="entry-content">
-    <p> volatile 和 const 修饰的变量说明该变量在本程序内不应被修改，但其它程序是可以修改的 volatile 修饰变量，告诉编译器不要优化该变量，每次取值都重新从内存中获取 constexpr 和 inline 修饰的变量，编译器都会进行编译期优化 当对 inline 修饰变量进行取地址操作时，优化会失效 inline 修饰函数相当于 static，只能在当前文件中访问 inline 修饰的变量可以用任意表达式初始化，但这样不保证被优化 inline 其它介绍 static 限制修饰的变量和函数的可见作用域（模块内部），其它的都是副本  </p>
+    <p>一、 命名空间   嵌套命名空间
+namespace B{ namespace C{ extern int x; // 声明变量  void g(int); // 声明函数原型  void g(long){ cout &lt;&lt; &#34;B::C::g(long)\n&#34;; } }; }; using B::C::x; // 声明引用变量 x，把它引入到当前作用域  // 就不能在当前作用域定义同名变量了 using namespace B; // 引用命名空间，但不会把函数和变量引入到当前作用域  // 在当前作用域中仍然可以定义同名的变量和函数 using B::C::g; // 声明引用 void g(int) 和 void g(long)  // 将函数名为 g 的所有函数都引入到当前作用域  namespace B::C{ int y = 1; int x = 2; // 定义变量 x  void g(int a){ // 定义函数 void g(int)  cout &lt;&lt; &#34;B::C::g(int)\n&#34;; } void g(void){ cout &lt;&lt; &#34;B::C::g(void)\n&#34;; } }; static int xx = 1; class A{ public: int xx; A(int xx){ A::xx = xx; } }; int main() { static int xx = 2; A a(3); cout &lt;&lt; a....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-09-01 22:41:07 +0800 CST'>September 1, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43;——volatile、const、constexpr、inline、static" href="https://874656645.github.io/posts/227-c&#43;&#43;-const-volatile-constexpr-inline-static/"></a>
+  <footer class="entry-footer"><span title='2022-09-09 17:35:34 +0800 CST'>September 9, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——作用域和可访问性" href="https://874656645.github.io/posts/233-c&#43;&#43;-%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E5%8F%AF%E8%AE%BF%E9%97%AE%E6%80%A7/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>STL——map 排序相关
+    <h2>C&#43;&#43;——父类与子类、基类与派生类
     </h2>
   </header>
   <section class="entry-content">
-    <p>声明变量时指定排序规则  通过指定模板的第三个参数，对象类型，C&#43;&#43; 2a 支持 lambda 对象
-struct MyCom{ bool operator()(const string key1, const string key2)const{ return key1 &gt; key2; } }; int main() { // lambda 表达式对象  auto cmp = [](const auto&amp; key1, const auto&amp; key2){return key1 &lt; key2;}; map&lt;string, int, decltype(cmp)&gt; myMap1 = {{&#34;RAM&#34;, 20}, {&#34;GPU&#34;, 15}, {&#34;CPU&#34;, 10} }; // 函数对象  map&lt;string, int, MyCom&gt; myMap2 = {{&#34;CPU&#34;, 10}, {&#34;GPU&#34;, 15}, {&#34;RAM&#34;, 20}}; for(const auto&amp; item : myMap1){ cout &lt;&lt; item....</p>
+    <p>public 继承的派生类和基类具有父子关系 具有父子关系的派生类指针或对象可以不用进行强制类型转换，直接赋值给基类指针或引用 非 public 继承的 派生类指针 要通过强制类型转换（reinterpret_cast 或者 (Base*)）的方式才能赋值给 父类指针 在 派生类内部和派生类的友元函数 中可以用 父类指针 或 父类引用 直接指向 子类指针或对象，也可以直接将 子类对象赋值给父类对象 在其它地方，不能将 非 public 继承 的 派生类对象 赋值给父类对象或引用，提示 不可访问的基类，但可以通过 (Base&amp;&amp;) 这种强制类型转换的方式将派生类对象转换为基类的右值引用，且支持多态（VS 无法编译通过） 父类的析构函数必须是虚函数 即使父类的析构函数不是虚函数，在栈上定义的子类对象销毁时也会调用父类的析构函数 指针、右值引用、左值引用都支持多态 对象间赋值转换不支持多态  #include &lt;iostream&gt;using namespace std; class A{ public: ~A() = default; //1)  // A(){} //2)  virtual void f(){ cout &lt;&lt; &#34;A::f()\n&#34;; } }; class B: A{ friend void friendFun(); void f(){ cout &lt;&lt; &#34;B::f()\n&#34;; } public: A* getA(){ // 派生类内部函数可构成父子关系  return this; } }; void friendFun(){ // 派生类友元函数内可构成父子关系  A* p = new B; p-&gt;f(); } int main() { // A* p = new B; // error: ‘A’ is an inaccessible base of ‘B’  A* p = (A*)new B; // right  B b; A* pp = b....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-08-30 14:22:02 +0800 CST'>August 30, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to STL——map 排序相关" href="https://874656645.github.io/posts/225-stl-map-%E6%8E%92%E5%BA%8F%E7%9B%B8%E5%85%B3/"></a>
+  <footer class="entry-footer"><span title='2022-09-06 22:28:34 +0800 CST'>September 6, 2022</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——父类与子类、基类与派生类" href="https://874656645.github.io/posts/231-c&#43;&#43;-%E7%88%B6%E7%B1%BB%E4%B8%8E%E5%AD%90%E7%B1%BB%E5%9F%BA%E7%B1%BB%E4%B8%8E%E6%B4%BE%E7%94%9F%E7%B1%BB/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>Compile Nginx on CentOS
+    <h2>C&#43;&#43;——派生类修改基类成员的访问权限
     </h2>
   </header>
   <section class="entry-content">
-    <p>安装相关依赖
-yum install -y perl-ExtUtils-Embed \ readline-devel zlib-devel pam-devel \ libxml2-devel libxslt-devel openldap-devel \ python-devel openssl-devel cmakepcre-develnanowget \ gcc gcc-c&#43;&#43; ncurses-devel perl git `
-  编译命令：
-mkdir ~/nginx_sources ~/nginx cd ~/nginx_sources git clone https://github.com/winshining/nginx-http-flv-module.git curl -O -L http://hg.nginx.org/nginx/archive/stable-1.22.tar.gz # 其他版本 http://hg.nginx.org/nginx/archive/release-1.23.1.zip tar xzvf stable-1.22.tar.gz cd nginx-stable-1.22 ./auto/configure --prefix=&#34;$HOME/nginx&#34; --sbin-path=&#34;$HOME/nginx&#34; \ --with-select_module \ --with-poll_module \ --with-file-aio \ --with-http_ssl_module \ --with-http_realip_module \ --with-http_sub_module \ --with-http_flv_module \ --add-module=&#34;../nginx-http-flv-module&#34; \ --with-http_mp4_module \ --with-http_gzip_static_module \ --with-http_secure_link_module \ --with-http_stub_status_module \ --with-http_perl_module \ --with-ld-opt=&#34;-Wl,-E&#34; make make install   注意事项：...</p>
+    <p>案例一：
+class A { int x, y; public: int getx() { return x; } protected: int gety() { return y; } }; class B : private A /* public A */ /* protected A */{ bool visible; public: using A::getx; A::gety;	// deprecated }; 案例二：
+class MyList { struct Node { int v; Node* next; Node(int v, Node* n) { this-&gt;v = v; next = n; } ~Node() { cout &lt;&lt; &#34;~Node()\n&#34;; delete next; next = nullptr; } } *head; public: MyList() { head = nullptr; } ~MyList() { if (head !...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-08-17 14:33:56 +0800 CST'>August 17, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to Compile Nginx on CentOS" href="https://874656645.github.io/posts/222-compile-nginx-on-centos/"></a>
+  <footer class="entry-footer"><span title='2022-09-04 20:45:58 +0800 CST'>September 4, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——派生类修改基类成员的访问权限" href="https://874656645.github.io/posts/230-c&#43;&#43;-%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%BF%AE%E6%94%B9%E5%9F%BA%E7%B1%BB%E6%88%90%E5%91%98%E7%9A%84%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C&#43;&#43; 杂记
+    <h2>C&#43;&#43;——Const、volatile、mutable
     </h2>
   </header>
   <section class="entry-content">
-    <p>应用程序内存空间（局部内存堆），程序进程结束时，会被统一都回收释放 公共内存区（全局内存堆）（写设备驱动程序时会使用），使用不当会造成内存泄漏 extern 不能修饰其他模块的静态变量 函数内用 extern 修饰的变量要么来自全局变量，要么来自本身模块的静态变量 extern 只能修饰外部变量（就近原则），不能修饰局部变量  test.cpp：
-#include &lt;iostream&gt; int etn = 3;	// 全局变量 static int s_m;	// 模块静态变量  void layout() { std::cout &lt;&lt; &#34;test.cpp\tetn=&#34; &lt;&lt; etn &lt;&lt; std::endl; } another.cpp：
-static int etn = 4; // 模块静态变量 void myFunc(){ int etn = 5; // 局部自动变量 	{ extern int etn; int x = etn;// x 是 4 而不是 5 	} } charTest....</p>
+    <p> 含有私有 const 实例数据成员的类必须定义构造函数，且该实例数据成员必须通过构造函数参数列表初始化 虽然 this 是隐含参数，也可以通过添加 const、volatile 修饰符实现函数重载 成员变量的类型会随着对象实例的类型变化而变化，比如一个 volatile int 类型的成员变量，如果对象实例为 const 的，则此时成员变量的类型为 const volatile int 经实验，mutable 不可以和 static、const 一起使用，但可以与 volatile 搭配使用  </p>
   </section>
-  <footer class="entry-footer"><span title='2022-08-15 21:45:13 +0800 CST'>August 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C&#43;&#43; 杂记" href="https://874656645.github.io/posts/221-c&#43;&#43;-%E6%9D%82%E8%AE%B0/"></a>
+  <footer class="entry-footer"><span title='2022-09-03 19:54:33 +0800 CST'>September 3, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——Const、volatile、mutable" href="https://874656645.github.io/posts/229-c&#43;&#43;-constvolatilemutable/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

@@ -9,7 +9,52 @@
       <link>https://874656645.github.io/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 15 Dec 2024 16:43:15 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 17 Dec 2024 22:10:14 +0800</lastBuildDate><atom:link href="https://874656645.github.io/categories/code/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;——Multithreading Concurrency</title>
+      <link>https://874656645.github.io/posts/294-c&#43;&#43;-multithreading-concurrency/</link>
+      <pubDate>Tue, 17 Dec 2024 22:10:14 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/294-c&#43;&#43;-multithreading-concurrency/</guid>
+      <description>注意 join() 与 detach() 的区别  condition_variable #include &amp;lt;iostream&amp;gt;#include &amp;lt;fstream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;queue&amp;gt;#include &amp;lt;thread&amp;gt;#include &amp;lt;mutex&amp;gt;#include &amp;lt;condition_variable&amp;gt;#include &amp;lt;chrono&amp;gt;#include &amp;lt;algorithm&amp;gt; using namespace std; queue&amp;lt;string&amp;gt; mqueue; condition_variable mcond; mutex mmutex; void consumer() { while (true) { unique_lock&amp;lt;mutex&amp;gt; lck{ mmutex }; // acquire mmutex 	mcond.wait(lck); /* do nothing */ // release lck and wait; 	// re-acquire lck upon wakeup  cout &amp;lt;&amp;lt; &amp;#34;queue size: &amp;#34; &amp;lt;&amp;lt; mqueue.size() &amp;lt;&amp;lt; endl; auto m = mqueue.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;——use algorithm sort with C array</title>
+      <link>https://874656645.github.io/posts/293-c&#43;&#43;-use-algorithm-sort-with-c-array/</link>
+      <pubDate>Tue, 17 Dec 2024 21:33:17 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/293-c&#43;&#43;-use-algorithm-sort-with-c-array/</guid>
+      <description>注意数组形参的声明  #include &amp;lt;iostream&amp;gt;#include &amp;lt;algorithm&amp;gt; using namespace std; template&amp;lt;typename T, size_t N&amp;gt; T* begin(T (*arr)[N]){ return arr; } template&amp;lt;typename T, size_t N&amp;gt; T* end(T (*arr)[N]){ return arr + N; } int main() { int arr[]{9,8,7,6,5,4,3,2,1}; // auto n = sizeof(arr) / sizeof(arr[0]);  // sort(arr, arr + n);  // for(auto i = 0; i &amp;lt; n; ++i)  // cout &amp;lt;&amp;lt; arr[i] &amp;lt;&amp;lt; &amp;#34; &amp;#34;;  sort(begin(arr), end(arr)); for(auto&amp;amp; it : arr) cout &amp;lt;&amp;lt; it &amp;lt;&amp;lt; &amp;#34; &amp;#34;; return 0; } 参考：</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;——template iterator-find_all</title>
+      <link>https://874656645.github.io/posts/292-c&#43;&#43;-template-iterator-find-all/</link>
+      <pubDate>Tue, 17 Dec 2024 21:05:56 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/292-c&#43;&#43;-template-iterator-find-all/</guid>
+      <description>声明迭代器别名，typename 表示后面的内容为一种类型  #include &amp;lt;iostream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;list&amp;gt;#include &amp;lt;memory&amp;gt;using namespace std; template&amp;lt;typename T&amp;gt; using Iter = typename T::iterator; // 迭代器别名  template&amp;lt;typename C, typename V&amp;gt; vector&amp;lt;Iter&amp;lt;C&amp;gt;&amp;gt; find_all(C&amp;amp; c, V v) // find all occurrences of v in c { vector&amp;lt;Iter&amp;lt;C&amp;gt;&amp;gt; res; for (auto p = c.begin(); p!=c.end(); ++p) if (*p==v) res.push_back(p); return res; } int main() { string m {&amp;#34;Mary had a little lamb&amp;#34;}; for (auto p : find_all(m,&amp;#39;a&amp;#39;)) // p is a string::iterator  if (*p!</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;——stream iterator and unique copy</title>
+      <link>https://874656645.github.io/posts/291-c&#43;&#43;-stream-iterator-and-unique-copy/</link>
+      <pubDate>Tue, 17 Dec 2024 20:19:06 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/291-c&#43;&#43;-stream-iterator-and-unique-copy/</guid>
+      <description>unique_copy 被拷贝序列需要是有序的  #include &amp;lt;iostream&amp;gt;#include &amp;lt;fstream&amp;gt;#include &amp;lt;string&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;set&amp;gt;#include &amp;lt;algorithm&amp;gt; using namespace std; int main() try { //ostream_iterator&amp;lt;string&amp;gt; oo{ cout }; 	//*oo = &amp;#34;hello &amp;#34;; 	//++oo; 	//*oo = &amp;#34;world!\n&amp;#34;;  // 效果等于 cout &amp;lt;&amp;lt; &amp;#34;hello world!\n&amp;#34;;  // C:\Users\cui_z\source\repos\Practices\Debug\from.txt 	// C:\Users\cui_z\source\repos\Practices\Debug\to.txt 	//string from, to; 	//cin &amp;gt;&amp;gt; from &amp;gt;&amp;gt; to;	// get source and target file names 	//ifstream is{ from };	// input stream for file &amp;#34;from&amp;#34; 	//istream_iterator&amp;lt;string&amp;gt; ii{ is };	// input iterator for stream 	//istream_iterator&amp;lt;string&amp;gt; eos{};	// input sentinel 	//ofstream os{ to };	// output stream for file &amp;#34;to&amp;#34; 	//ostream_iterator&amp;lt;string&amp;gt; oo{ os,&amp;#34;\n&amp;#34; };	// output iterator for stream.</description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;——std equal range</title>
+      <link>https://874656645.github.io/posts/290-c&#43;&#43;-std-equal-range-/</link>
+      <pubDate>Tue, 17 Dec 2024 19:35:26 +0800</pubDate>
+      
+      <guid>https://874656645.github.io/posts/290-c&#43;&#43;-std-equal-range-/</guid>
+      <description>函数操作的序列需是一个有序的，返回与目标值相等的序列（左闭右开） 算法通过实现 &amp;lt; 操作符实现判断 = 的效果（交换前后两个操作数）  #include &amp;lt;iostream&amp;gt;#include &amp;lt;vector&amp;gt;#include &amp;lt;algorithm&amp;gt;#include &amp;lt;type_traits&amp;gt;#include &amp;lt;exception&amp;gt; using namespace std; struct S { int number; char name; // note: name is ignored by this comparison operator  bool operator&amp;lt;(const S&amp;amp; s) const { return number &amp;lt; s.number; } }; struct Comp { bool operator()(const S&amp;amp; s, int i) const { return s.number &amp;lt; i; } bool operator()(int i, const S&amp;amp; s) const { return i &amp;lt; s.</description>
+    </item>
+    
     <item>
       <title>SDF 生成有向距离场图片</title>
       <link>https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/</link>

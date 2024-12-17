@@ -145,80 +145,66 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>类模板
+    <h2>异常接口声明
     </h2>
   </header>
   <section class="entry-content">
-    <p>一、类模板写法 1. 声明和定义写在一起 template&lt;class T&gt; class Person{ public: Person(T age){ this-&gt;m_age = age; } void Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } private: T m_age; }; int main() { Person&lt;int&gt; p(20); p.Show(); cout &lt;&lt; p &lt;&lt; endl; printP(p); return 0; } 2. 声明和定义分开写，但在同一文件中 template&lt;class T&gt; class Person{ public: Person(T age); void Show(); private: T m_age; }; template&lt;class T&gt; Person&lt;T&gt;::Person(T age){ this-&gt;m_age = age; } template&lt;class T&gt; void Person&lt;T&gt;::Show(){ cout &lt;&lt; this-&gt;m_age &lt;&lt; endl; } int main() { Person&lt;int&gt; p(20); p....</p>
+    <p>C&#43;&#43; 异常
+ C&#43;&#43;11 不再建议使用异常规范  // 异常规范 只能抛出 int float char 三种类型的异常 C&#43;&#43;11以后不再建议使用 void func1() throw(int, float, char){ throw &#34;string&#34;; // terminate called after throwing an instance of &#39;char const*&#39; } // 不能抛出任何类型的异常 OK void func2() throw(){ throw -1; // terminate called after throwing an instance of &#39;int&#39; } // 可以抛出任何类型的异常 void func3(){ throw &#34;error&#34;; } int main() { try{ func1(); } catch(char const * e){ cout &lt;&lt; e &lt;&lt; endl; } catch(....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-12 22:47:51 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 类模板" href="https://874656645.github.io/posts/71-%E7%B1%BB%E6%A8%A1%E6%9D%BF/"></a>
+  <footer class="entry-footer"><span title='2022-01-15 18:26:49 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 异常接口声明" href="https://874656645.github.io/posts/75-%E5%BC%82%E5%B8%B8%E6%8E%A5%E5%8F%A3%E5%A3%B0%E6%98%8E/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>编译过程
+    <h2>栈解旋 Unwinding
     </h2>
   </header>
   <section class="entry-content">
-    <p>各个 .cpp 文件是独立编译的，如果有其它的类和函数会先在本 .o 文件中生成符号，由最后的链接器去其它 .o 文件找具体的函数定义
- .c .cpp 文件经过 预编译器拷贝头文件、宏展开 生成 .i 文件（文本文件）
-g&#43;&#43; -E main.cpp -o main.i .i 文件经过 编译器 生成汇编程序 .s（文本文件）
-g&#43;&#43; -S main.i -o main.s .s 文件经过 汇编器 生成可定位目标文件 .o （二进制）
-Windows:
-g&#43;&#43; -c main.s -o main.obj
-Linux:
-g&#43;&#43; -c main.s -o main.o .o 文件经过 链接器 生成可执行目标文件 .exe .dll
-g&#43;&#43; main.s -o main  </p>
+    <p>异常被抛出后，从进入 try 块起到异常被抛出前，这期间在栈上构造的所有对象都会被自动析构，析构的顺序与构造的顺序相反。
+与 return 类似
+class Test{ public: Test(string name){ m_name = name; cout &lt;&lt; m_name &lt;&lt; &#34;被构造了&#34; &lt;&lt; endl; } ~Test(){ cout &lt;&lt; m_name &lt;&lt; &#34;被析构了&#34; &lt;&lt; endl; } private: string m_name; }; double func1(int x, int y){ Test t1(&#34;t1&#34;), t2(&#34;t2&#34;); if(y == 0){ throw y; } return x / y; } int main() { try{ Test t3(&#34;t3&#34;), t4(&#34;t4&#34;); func1(10, 0); } catch(int e){ cout &lt;&lt; &#34;除数为 &#34; &lt;&lt; e &lt;&lt; endl; } return 0; } t3被构造了 t4被构造了 t1被构造了 t2被构造了 t2被析构了 t1被析构了 t4被析构了 t3被析构了 除数为 0 </p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-12 20:12:00 +0800 CST'>January 12, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 编译过程" href="https://874656645.github.io/posts/70-%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-15 18:07:46 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 栈解旋 Unwinding" href="https://874656645.github.io/posts/74-%E6%A0%88%E8%A7%A3%E6%97%8B-unwinding/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>函数模板
+    <h2>异常
     </h2>
   </header>
   <section class="entry-content">
-    <p>函数模板必须严格类型匹配，普通函数则可以进行数据类型隐式转换 对于内置数据类型，函数模板可进行推导，自定义类型不可以 函数模板可被重载 C&#43;&#43; 编译器优先考虑普通函数 可以通过空模板实参列表的语法限定编译器只能通过模板匹配 如果函数模板可以产生一个更好的匹配，就选择模板 编译器根据函数模板调用情况，从函数模板和具体类型产生不同的函数
-编译器会对函数模板进行两次编译  在声明的地方对模板代码本身进行编译； 在调用的地方对参数替换后的代码进行编译    template&lt;class T&gt; T MyAdd(T a, T b){ return a &#43; b; } // 函数一 int MyAdd(int a, int b){ return a &#43; b; } // 函数二 int MyAdd(int a, char c){ return a &#43; c; } int main() { cout &lt;&lt; MyAdd(1, 2) &lt;&lt; endl; // 优先调用普通函数  cout &lt;&lt; MyAdd&lt;&gt;(1, 2) &lt;&lt; endl; // 强制调用模板函数  cout &lt;&lt; MyAdd(1....</p>
+    <p>一、try、catch、throw  可以使用 throw 语句在代码块中的任何地方抛出异常。throw 语句的操作数可以是任意的表达式，表达式的结果的类型决定了抛出的异常的类型 C&#43;&#43; 异常机制是跨函数的，且是必须处理的。如果中间函数没有处理就一直抛到最顶层，如果 main 函数也不处理，程序就会挂掉  int main( ) { try{ throw &#34;exception&#34;; }catch(const char * e){ cout &lt;&lt; e &lt;&lt; endl; }catch(...){ // 捕获所有异常  cout &lt;&lt; &#34;...&#34; &lt;&lt; endl; } { cout &lt;&lt; &#34;finally&#34; &lt;&lt; endl; } return 0; } 输出：
+Start exception finally 0 Finish 二、std::exception class exception { public: exception() throw(); exception(const exception&amp; rhs) throw(); exception&amp; operator=(const exception&amp; rhs) throw(); virtual ~exception() throw(); virtual const char *what() const throw(); }; 派生了两个异常类：...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-11 21:40:09 +0800 CST'>January 11, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 函数模板" href="https://874656645.github.io/posts/69-%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF/"></a>
+  <footer class="entry-footer"><span title='2022-01-15 17:34:27 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 异常" href="https://874656645.github.io/posts/57-%E5%BC%82%E5%B8%B8/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>C 语言面向接口编程
+    <h2>类型转换
     </h2>
   </header>
   <section class="entry-content">
-    <p>通过函数指针实现多态，注册回调函数的方式
-void printAllArray(void* arr, int eleSize, int len, void(*myPrint)(void*)){ char* arrStart = (char*)arr; for(int i = 0; i &lt; len; &#43;&#43;i){ char* eleStart = arrStart &#43; i * eleSize; myPrint(eleStart); } printf(&#34;\n&#34;); } void printInt(void* data){ int* ele = (int*)data; printf(&#34;%d &#34;, *ele); } struct Person{ char name[64]; int age; }; void printPerson(void* data){ struct Person* ele = (struct Person*)data; printf(&#34;Name: %s, Age: %d \n&#34;, ele-&gt;name, ele-&gt;age); } int main() { int arr[] = {1, 2, 3, 4, 5}; printAllArray(arr, sizeof(int), 5, printInt); struct Person personArr[] = { {&#34;aaa&#34;, 20}, {&#34;bbb&#34;, 30}, {&#34;ccc&#34;, 40}, {&#34;ddd&#34;, 50}, {&#34;eee&#34;, 60}, }; printAllArray(personArr, sizeof(struct Person), 5, printPerson); return 0; } 输出：...</p>
+    <p>1. static_cast&lt;&gt;  可以转换内置数据类型； 不可以转换没有关系的指针或引用； 可以转换有继承关系的指针或引用（父类转子类或子类转父类都可以）；  // static_cast&lt;&gt;  // 1. 内置对象  int a = 97; char c = static_cast&lt;char&gt;(a); // OK  cout &lt;&lt; c &lt;&lt; endl; // 2. 自定义类型对象  // Building bb;  // Animal aa = static_cast&lt;Animal&gt;(bb); // error: no matching function for call to ‘Animal::Animal(Building&amp;)’  // 3. 不同类型的指针转换  // int *p = &amp;a;  // char *pc = static_cast&lt;char*&gt;(p); // error: invalid static_cast from type ‘int*’ to type ‘char*’  // cout &lt;&lt; pc &lt;&lt; endl;  // Animal * pa = NULL;  // Building *pb = static_cast&lt;Building*&gt;(pa); // error: invalid static_cast from type ‘Animal*’ to type ‘Building*’  // 4....</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-10 22:23:34 +0800 CST'>January 10, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to C 语言面向接口编程" href="https://874656645.github.io/posts/68-c-%E8%AF%AD%E8%A8%80%E9%9D%A2%E5%90%91%E6%8E%A5%E5%8F%A3%E7%BC%96%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-15 15:55:28 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 类型转换" href="https://874656645.github.io/posts/73-%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>面向抽象类编程
+    <h2>自定义数组实现
     </h2>
   </header>
   <section class="entry-content">
-    <p>三层架构：业务逻辑层、抽象层、实现层
-原则：依赖倒转
-案例一：动物园 设计实现：
- 抽象层：Animal
-提供接口 voice 实现层：Dog、Cat
-分别实现 voice ，发出不同的声音 业务层：main 函数调用，只通过 Animal 的指针统一实现业务  案例二：编写一个 C&#43;&#43; 程序, 计算程序员( programmer )工资  要求能计算出初级程序员( junior_programmer ) 中级程序员 ( mid_programmer )高级程序员( adv_programmer )的工资 要求利用抽象类统一界面，方便程序的扩展，比如:新增，计算架构师( architect ) 的工资  设计实现：
- 抽象层：Programmer
-提供计算工资的接口 实现层：JuniorProgrammer、MidProgrammer、AdvProgrammer
-分别对计算工资接口进行实现 业务层：通过 Programmer 类统一管理，实现业务逻辑，同时业务的可扩展性更强，如新增架构师类型  案例三：电脑组装，面向抽象层编程  组装电脑有 3 个抽象类，抽象的 cpu，抽象的显卡，抽象的内存。 现在要求组装两台电脑，一台是 Intel 的 CPU，Intel 的显卡和 Intel 的内存。另一台是 Intel 的 CPU、Nvidia 的显卡和 Kingston 的内存条。 针对抽象层编程。  设计实现：...</p>
+    <p>要求  可以对内置数据类型以及自定义数据类型的数据进行存储 将数组中的数据存储到堆区 构造函数中可以传入数组的容量 提供对应的拷贝构造函数以及 operator= 防止浅拷贝问题 提供尾插法和尾删法对数组中的数据进行增加和删除 可以通过下标的方式访问数组中的元素 可以获取数组中当前元素个数和数组的容量  实现 template&lt;class T&gt; class MyArray{ public: MyArray(int capacity){ this-&gt;m_capacity = capacity; this-&gt;m_size = 0; this-&gt;m_addr = new T[this-&gt;m_capacity]; } MyArray(const MyArray&amp; arr){ if(arr.m_addr == NULL){ return; } // 深拷贝  this-&gt;m_capacity = arr.m_capacity; this-&gt;m_size = arr.m_size; this-&gt;m_addr = new T[this-&gt;m_capacity]; for(int i = 0; i &lt; m_size; &#43;&#43;i){ // T 类型是可拷贝的，= 运算符也是深拷贝  this-&gt;m_addr[i] = arr.m_addr[i]; } } MyArray&amp; operator=(const MyArray&amp; arr){ if(this == &amp;arr){ return *this; } if(this-&gt;m_addr !...</p>
   </section>
-  <footer class="entry-footer"><span title='2022-01-09 19:12:37 +0800 CST'>January 9, 2022</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 面向抽象类编程" href="https://874656645.github.io/posts/67-%E9%9D%A2%E5%90%91%E6%8A%BD%E8%B1%A1%E7%B1%BB%E7%BC%96%E7%A8%8B/"></a>
+  <footer class="entry-footer"><span title='2022-01-15 13:36:04 +0800 CST'>January 15, 2022</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to 自定义数组实现" href="https://874656645.github.io/posts/72-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E7%BB%84%E5%AE%9E%E7%8E%B0/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">

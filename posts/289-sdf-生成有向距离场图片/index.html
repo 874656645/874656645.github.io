@@ -267,9 +267,9 @@ SDFTexture<span style="color:#f92672">::~</span>SDFTexture()
 			<span style="color:#75715e">// 当前像素不是完全透明并且与上下左右其中一个像素值不同
 </span><span style="color:#75715e"></span>			<span style="color:#66d9ef">if</span> (m_pixelMap[row][col] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>
 				<span style="color:#f92672">&amp;&amp;</span> (m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][col]
-				<span style="color:#f92672">||</span> m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col]
-				<span style="color:#f92672">||</span> m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row][col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
-				<span style="color:#f92672">||</span> m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]))
+                    <span style="color:#f92672">||</span> m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col]
+                    <span style="color:#f92672">||</span> m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row][col <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
+                    <span style="color:#f92672">||</span> m_pixelMap[row][col] <span style="color:#f92672">!=</span> m_pixelMap[row][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]))
 			{
 				<span style="color:#75715e">// 更新 m_distanceMap 和 m_positionMap
 </span><span style="color:#75715e"></span>				m_distanceMap[row][col] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
@@ -415,6 +415,11 @@ SDFTexture<span style="color:#f92672">::~</span>SDFTexture()
       <li><a href="https://874656645.github.io/tags/opengl/">OpenGL</a></li>
     </ul>
 <nav class="paginav">
+  <a class="prev" href="https://874656645.github.io/posts/290-c&#43;&#43;-std-equal-range-/">
+    <span class="title">« Prev Page</span>
+    <br>
+    <span>C&#43;&#43;——std equal range</span>
+  </a>
   <a class="next" href="https://874656645.github.io/posts/288-python-loop-%E8%BF%90%E8%A1%8C-command-%E8%84%9A%E6%9C%AC/">
     <span class="title">Next Page »</span>
     <br>

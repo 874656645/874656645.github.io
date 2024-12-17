@@ -145,81 +145,62 @@ if (!doNotTrack) {
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>SDF 生成有向距离场图片
+    <h2>C&#43;&#43;——Multithreading Concurrency
     </h2>
   </header>
   <section class="entry-content">
-    <p>Dead Reckoning算法生成有向距离场
-例如原图：
-效果：根据距离边界像素的距离与给定的透明像素距离（m_pixelDist）修改圆形内部像素的透明度
-C&#43;&#43; 代码：
-class SDFTexture { public: SDFTexture(rs::Texture*, float pixelDist); ~SDFTexture(); void generateSDFTex(); private: rs::Texture* m_SDFTex; int32 m_width, m_height; float m_pixelDist; std::vector&lt;std::vector&lt;PixelType&gt; &gt; m_pixelMap; std::vector&lt;std::vector&lt;float&gt; &gt; m_distanceMap; std::vector&lt;std::vector&lt;Point16&gt; &gt; m_positionMap; }; SDFTexture::SDFTexture(rs::Texture* tex, float pixelDist) { m_SDFTex = tex; m_width = m_SDFTex-&gt;width(); m_height = m_SDFTex-&gt;height(); m_pixelDist = pixelDist; m_distanceMap = std::vector&lt;std::vector&lt;float&gt; &gt;(m_height &#43; 2, std::vector&lt;float&gt;(m_width &#43; 2, FLT_MAX)); m_positionMap = std::vector&lt;std::vector&lt;Point16&gt; &gt;(m_height &#43; 2, std::vector&lt;Point16&gt;(m_width &#43; 2, { INT16_MAX, INT16_MAX })); m_pixelMap = std::vector&lt;std::vector&lt;PixelType&gt; &gt;(m_height &#43; 2, std::vector&lt;PixelType&gt;(m_width &#43; 2, Pixel_fromA8R8G8B8(0x0))); } SDFTexture::~SDFTexture() { m_SDFTex = NULL; } void SDFTexture::generateSDFTex() { // 1....</p>
+    <p>注意 join() 与 detach() 的区别  condition_variable #include &lt;iostream&gt;#include &lt;fstream&gt;#include &lt;string&gt;#include &lt;vector&gt;#include &lt;set&gt;#include &lt;queue&gt;#include &lt;thread&gt;#include &lt;mutex&gt;#include &lt;condition_variable&gt;#include &lt;chrono&gt;#include &lt;algorithm&gt; using namespace std; queue&lt;string&gt; mqueue; condition_variable mcond; mutex mmutex; void consumer() { while (true) { unique_lock&lt;mutex&gt; lck{ mmutex }; // acquire mmutex 	mcond.wait(lck); /* do nothing */ // release lck and wait; 	// re-acquire lck upon wakeup  cout &lt;&lt; &#34;queue size: &#34; &lt;&lt; mqueue.size() &lt;&lt; endl; auto m = mqueue....</p>
   </section>
-  <footer class="entry-footer"><span title='2024-12-15 16:43:15 +0800 CST'>December 15, 2024</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to SDF 生成有向距离场图片" href="https://874656645.github.io/posts/289-sdf-%E7%94%9F%E6%88%90%E6%9C%89%E5%90%91%E8%B7%9D%E7%A6%BB%E5%9C%BA%E5%9B%BE%E7%89%87/"></a>
+  <footer class="entry-footer"><span title='2024-12-17 22:10:14 +0800 CST'>December 17, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——Multithreading Concurrency" href="https://874656645.github.io/posts/294-c&#43;&#43;-multithreading-concurrency/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>数据结构与算法——括号生成
+    <h2>C&#43;&#43;——use algorithm sort with C array
     </h2>
   </header>
   <section class="entry-content">
-    <p>问题链接
-思路： 递归的使用
-左边括号数量小于总数
-右边括号数量比左边括号数量少
-class Solution { int sn; public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param n int整型 * @return string字符串vector */ vector&lt;string&gt; generateParenthesis(int n) { // write code here  vector&lt;string&gt; res; string tmp; sn = n; genP(0, 0, tmp, res); return res; } void genP(int left, int right, string tmp, vector&lt;string&gt;&amp; res){ if (left == sn &amp;&amp; right == sn) { res.push_back(tmp); return; } if (left &lt; sn) { genP(left&#43;1, right, tmp&#43;&#39;(&#39;, res); } if (right &lt; left) { genP(left, right&#43;1, tmp&#43;&#39;)&#39;, res); } } }; </p>
+    <p>注意数组形参的声明  #include &lt;iostream&gt;#include &lt;algorithm&gt; using namespace std; template&lt;typename T, size_t N&gt; T* begin(T (*arr)[N]){ return arr; } template&lt;typename T, size_t N&gt; T* end(T (*arr)[N]){ return arr &#43; N; } int main() { int arr[]{9,8,7,6,5,4,3,2,1}; // auto n = sizeof(arr) / sizeof(arr[0]);  // sort(arr, arr &#43; n);  // for(auto i = 0; i &lt; n; &#43;&#43;i)  // cout &lt;&lt; arr[i] &lt;&lt; &#34; &#34;;  sort(begin(arr), end(arr)); for(auto&amp; it : arr) cout &lt;&lt; it &lt;&lt; &#34; &#34;; return 0; } 参考：...</p>
   </section>
-  <footer class="entry-footer"><span title='2024-12-13 14:52:14 +0800 CST'>December 13, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——括号生成" href="https://874656645.github.io/posts/284-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E6%8B%AC%E5%8F%B7%E7%94%9F%E6%88%90/"></a>
+  <footer class="entry-footer"><span title='2024-12-17 21:33:17 +0800 CST'>December 17, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——use algorithm sort with C array" href="https://874656645.github.io/posts/293-c&#43;&#43;-use-algorithm-sort-with-c-array/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>数据结构与算法——矩阵的最小路径和
+    <h2>C&#43;&#43;——template iterator-find_all
     </h2>
   </header>
   <section class="entry-content">
-    <p>问题链接
-思路： 动态规划
-#include &lt;climits&gt;class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param matrix int整型vector&lt;vector&lt;&gt;&gt; the matrix * @return int整型 */ int minPathSum(vector&lt;vector&lt;int&gt; &gt;&amp; matrix) { // write code here  auto rowNum = matrix.size(); auto colNum = matrix[0].size(); vector&lt;vector&lt;int&gt;&gt; sumMat(rowNum, vector&lt;int&gt;(colNum)); sumMat[0][0] = matrix[0][0]; // 初始化首行  for (auto i = 1; i != colNum; &#43;&#43;i) { sumMat[0][i] = sumMat[0][i - 1] &#43; matrix[0][i]; } // 初始化首列  for (auto i = 1; i !...</p>
+    <p>声明迭代器别名，typename 表示后面的内容为一种类型  #include &lt;iostream&gt;#include &lt;string&gt;#include &lt;vector&gt;#include &lt;list&gt;#include &lt;memory&gt;using namespace std; template&lt;typename T&gt; using Iter = typename T::iterator; // 迭代器别名  template&lt;typename C, typename V&gt; vector&lt;Iter&lt;C&gt;&gt; find_all(C&amp; c, V v) // find all occurrences of v in c { vector&lt;Iter&lt;C&gt;&gt; res; for (auto p = c.begin(); p!=c.end(); &#43;&#43;p) if (*p==v) res.push_back(p); return res; } int main() { string m {&#34;Mary had a little lamb&#34;}; for (auto p : find_all(m,&#39;a&#39;)) // p is a string::iterator  if (*p!...</p>
   </section>
-  <footer class="entry-footer"><span title='2024-12-13 14:33:39 +0800 CST'>December 13, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——矩阵的最小路径和" href="https://874656645.github.io/posts/283-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E7%9F%A9%E9%98%B5%E7%9A%84%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/"></a>
+  <footer class="entry-footer"><span title='2024-12-17 21:05:56 +0800 CST'>December 17, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——template iterator-find_all" href="https://874656645.github.io/posts/292-c&#43;&#43;-template-iterator-find-all/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>数据结构与算法——单链表的排序
+    <h2>C&#43;&#43;——stream iterator and unique copy
     </h2>
   </header>
   <section class="entry-content">
-    <p>问题链接
-要求： 时间复杂度 O(nlogn)
-思路： 分治，归并排序思想
-快慢指针，计算链表的中间节点
-或者将链表节点放入到数组中，使用 sort 算法，最后再组成新的链表
-/** * struct ListNode { * int val; * struct ListNode *next; * ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { public: /** * 代码中的类名、方法名、参数名已经指定，请勿修改，直接返回方法规定的值即可 * * * @param head ListNode类 the head node * @return ListNode类 */ ListNode* sortInList(ListNode* head) { // write code here  if(head == nullptr || head-&gt;next == nullptr){ return head; } // 注意：如果 f = head（链表中有奇数个元素）  // while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next)  // 如果 f = head-&gt;next（链表中有偶数个元素）  // while(f &amp;&amp; f-&gt;next)  /* ListNode* s = head, * f = head; // 奇数个元素 while(f &amp;&amp; f-&gt;next &amp;&amp; f-&gt;next-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } */ ListNode* s = head, * f = head-&gt;next; // 偶数个元素  while(f &amp;&amp; f-&gt;next){ s = s-&gt;next; f = f-&gt;next-&gt;next; } ListNode* mid = s-&gt;next; s-&gt;next = nullptr; ListNode* left = sortInList(head); ListNode* right = sortInList(mid); // 合并  ListNode* newHead = new ListNode(0); ListNode* tmp = newHead; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left == nullptr ?...</p>
+    <p>unique_copy 被拷贝序列需要是有序的  #include &lt;iostream&gt;#include &lt;fstream&gt;#include &lt;string&gt;#include &lt;vector&gt;#include &lt;set&gt;#include &lt;algorithm&gt; using namespace std; int main() try { //ostream_iterator&lt;string&gt; oo{ cout }; 	//*oo = &#34;hello &#34;; 	//&#43;&#43;oo; 	//*oo = &#34;world!\n&#34;;  // 效果等于 cout &lt;&lt; &#34;hello world!\n&#34;;  // C:\Users\cui_z\source\repos\Practices\Debug\from.txt 	// C:\Users\cui_z\source\repos\Practices\Debug\to.txt 	//string from, to; 	//cin &gt;&gt; from &gt;&gt; to;	// get source and target file names 	//ifstream is{ from };	// input stream for file &#34;from&#34; 	//istream_iterator&lt;string&gt; ii{ is };	// input iterator for stream 	//istream_iterator&lt;string&gt; eos{};	// input sentinel 	//ofstream os{ to };	// output stream for file &#34;to&#34; 	//ostream_iterator&lt;string&gt; oo{ os,&#34;\n&#34; };	// output iterator for stream....</p>
   </section>
-  <footer class="entry-footer"><span title='2024-12-12 21:11:55 +0800 CST'>December 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——单链表的排序" href="https://874656645.github.io/posts/280-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%8D%95%E9%93%BE%E8%A1%A8%E7%9A%84%E6%8E%92%E5%BA%8F/"></a>
+  <footer class="entry-footer"><span title='2024-12-17 20:19:06 +0800 CST'>December 17, 2024</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——stream iterator and unique copy" href="https://874656645.github.io/posts/291-c&#43;&#43;-stream-iterator-and-unique-copy/"></a>
 </article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">
-    <h2>数据结构与算法——合并 K 个已排序的链表
+    <h2>C&#43;&#43;——std equal range
     </h2>
   </header>
   <section class="entry-content">
-    <p>问题链接
-要求： 时间复杂度 O(nlogn)
-思路： 分治法，归并排序的思想
-注意： 空集合的情况
-/** * struct ListNode { *	int val; *	struct ListNode *next; *	ListNode(int x) : val(x), next(nullptr) {} * }; */ class Solution { ListNode* mergeList(vector&lt;ListNode*&gt;&amp; lists, int l, int h){ if(l &gt;= h) return lists[l]; int mid = (l &#43; h) / 2; ListNode* left = mergeList(lists, l, mid); ListNode* right = mergeList(lists, mid&#43;1, h); ListNode* head = new ListNode(0); auto tmp = head; while(left &amp;&amp; right){ if(left-&gt;val &lt; right-&gt;val){ tmp-&gt;next = left; left = left-&gt;next; }else{ tmp-&gt;next = right; right = right-&gt;next; } tmp = tmp-&gt;next; } tmp-&gt;next = left ?...</p>
+    <p>函数操作的序列需是一个有序的，返回与目标值相等的序列（左闭右开） 算法通过实现 &lt; 操作符实现判断 = 的效果（交换前后两个操作数）  #include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;algorithm&gt;#include &lt;type_traits&gt;#include &lt;exception&gt; using namespace std; struct S { int number; char name; // note: name is ignored by this comparison operator  bool operator&lt;(const S&amp; s) const { return number &lt; s.number; } }; struct Comp { bool operator()(const S&amp; s, int i) const { return s.number &lt; i; } bool operator()(int i, const S&amp; s) const { return i &lt; s....</p>
   </section>
-  <footer class="entry-footer"><span title='2024-12-12 20:41:48 +0800 CST'>December 12, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
-  <a class="entry-link" aria-label="post link to 数据结构与算法——合并 K 个已排序的链表" href="https://874656645.github.io/posts/279-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95-%E5%90%88%E5%B9%B6-k-%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/"></a>
+  <footer class="entry-footer"><span title='2024-12-17 19:35:26 +0800 CST'>December 17, 2024</span>&nbsp;·&nbsp;1 min&nbsp;·&nbsp;Rick Cui</footer>
+  <a class="entry-link" aria-label="post link to C&#43;&#43;——std equal range" href="https://874656645.github.io/posts/290-c&#43;&#43;-std-equal-range-/"></a>
 </article>
 <footer class="page-footer">
   <nav class="pagination">
